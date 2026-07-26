@@ -1,0 +1,63 @@
+{
+    "id": "2026-07-22_Beyond3Baje_TestLiveLogger",
+    "name": "Test Live Logger",
+    "brand": "Beyond3Baje",
+    "workflow_name": "beyond3baje_documentary",
+    "status": "active",
+    "current_step": "Shot List",
+    "created_at": "2026-07-22T02:43:31.527981",
+    "updated_at": "2026-07-22T02:49:12.528199",
+    "metadata": {},
+    "steps_history": [
+        {
+            "step_name": "Research",
+            "agent_name": "ResearchAgent",
+            "status": "completed",
+            "started_at": "2026-07-22T02:43:38.964152",
+            "completed_at": "2026-07-22T02:47:04.623884",
+            "output_files": {
+                "research": "research/summary.md"
+            },
+            "logs": [
+                "Successfully executed step 'Research' via agent 'ResearchAgent'.",
+                "AUDIT TRAIL - workflow_id=beyond3baje_documentary agent=ResearchAgent status=paused_for_approval input_refs=[] output_refs=research/summary.md elapsed_ms=62047"
+            ],
+            "human_feedback": null
+        },
+        {
+            "step_name": "Scripting",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-07-22T02:47:06.953560",
+            "completed_at": "2026-07-22T02:48:21.796191",
+            "output_files": {
+                "script": "script/draft.md"
+            },
+            "logs": [
+                "Successfully executed step 'Scripting' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=beyond3baje_documentary agent=WriterAgent status=paused_for_approval input_refs=['research'] output_refs=script/draft.md elapsed_ms=57480"
+            ],
+            "human_feedback": null
+        },
+        {
+            "step_name": "Scene Breakdown",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-07-22T02:48:23.760092",
+            "completed_at": "2026-07-22T02:49:12.527892",
+            "output_files": {
+                "scene_breakdown": "production/scenes.json"
+            },
+            "logs": [
+                "Successfully executed step 'Scene Breakdown' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=beyond3baje_documentary agent=WriterAgent status=completed input_refs=['script'] output_refs=production/scenes.json elapsed_ms=48767"
+            ],
+            "human_feedback": null
+        }
+    ],
+    "assets": {
+        "research": "research/summary.md",
+        "script": "script/draft.md",
+        "scene_breakdown": "production/scenes.json"
+    }
+}

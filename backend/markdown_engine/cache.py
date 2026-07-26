@@ -1,0 +1,3 @@
+
+class SpecificationCache(dict):
+    pass

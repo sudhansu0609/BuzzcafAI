@@ -1,0 +1,1 @@
+class YouTubeClient: pass

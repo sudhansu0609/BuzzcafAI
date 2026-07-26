@@ -1,0 +1,9 @@
+
+[project]
+name = "buzzcaf-ai"
+version = "0.1.0"
+description = "Buzzcaf AI Operating System"
+requires-python = ">=3.11"
+
+[tool.black]
+line-length = 100

@@ -1,0 +1,2 @@
+class JWTManager:
+    pass

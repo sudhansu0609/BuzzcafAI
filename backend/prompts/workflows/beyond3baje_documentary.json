@@ -1,0 +1,111 @@
+{
+    "id": "beyond3baje_documentary",
+    "name": "Beyond3Baje Documentary Production",
+    "description": "Premium 13-stage documentary pipeline from deep historical research to script breakdown, shot lists, voice recording, edit plans, and analytics.",
+    "steps": [
+        {
+            "name": "Research",
+            "agent_role": "ResearchAgent",
+            "description": "Perform deep historical/factual research and gather story hooks and reference sources.",
+            "requires_approval": true,
+            "input_assets": [],
+            "output_asset_type": "research"
+        },
+        {
+            "name": "Scripting",
+            "agent_role": "WriterAgent",
+            "description": "Draft the full script containing narration V.O. and detailed scene structures.",
+            "requires_approval": true,
+            "input_assets": ["research"],
+            "output_asset_type": "script"
+        },
+        {
+            "name": "Scene Breakdown",
+            "agent_role": "WriterAgent",
+            "description": "Deconstruct the script into discrete production scenes with timing estimates.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "scene_breakdown"
+        },
+        {
+            "name": "Shot List",
+            "agent_role": "CreativeDirectorAgent",
+            "description": "Create a detailed visual shot list detailing camera motions and framing for every scene.",
+            "requires_approval": false,
+            "input_assets": ["scene_breakdown"],
+            "output_asset_type": "shot_list"
+        },
+        {
+            "name": "Clip Planning",
+            "agent_role": "CreativeDirectorAgent",
+            "description": "Search asset library and identify matching stock footage or animation styles.",
+            "requires_approval": false,
+            "input_assets": ["shot_list"],
+            "output_asset_type": "clip_plan"
+        },
+        {
+            "name": "AI Image Planning",
+            "agent_role": "CreativeDirectorAgent",
+            "description": "Formulate descriptive AI generation prompts for Midjourney/Stable Diffusion for missing clips.",
+            "requires_approval": false,
+            "input_assets": ["clip_plan"],
+            "output_asset_type": "image_plan"
+        },
+        {
+            "name": "Asset Collection",
+            "agent_role": "CreativeDirectorAgent",
+            "description": "Consolidate visual footage clips, icons, animations, and image files.",
+            "requires_approval": false,
+            "input_assets": ["image_plan"],
+            "output_asset_type": "assets_collected"
+        },
+        {
+            "name": "Voice Recording",
+            "agent_role": "WriterAgent",
+            "description": "Generate or plan voiceover narration transcripts and audio requirements.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "voice_over"
+        },
+        {
+            "name": "Editing",
+            "agent_role": "EditorAgent",
+            "description": "Formulate detailed video editing instructions (timing, LUT overlays, music beats, transition templates).",
+            "requires_approval": false,
+            "input_assets": ["assets_collected", "voice_over"],
+            "output_asset_type": "edit_plan"
+        },
+        {
+            "name": "Review",
+            "agent_role": "EditorAgent",
+            "description": "Fact-check the edit draft and verify that it matches the brand channel style guide.",
+            "requires_approval": true,
+            "input_assets": ["edit_plan", "script"],
+            "output_asset_type": "review_report"
+        },
+        {
+            "name": "SEO Setup",
+            "agent_role": "SEOManagerAgent",
+            "description": "Generate high-CTR titles, optimized search tags, description hooks, and hashtags.",
+            "requires_approval": true,
+            "input_assets": ["script", "edit_plan"],
+            "output_asset_type": "seo_package"
+        },
+        {
+            "name": "Publishing",
+            "agent_role": "SEOManagerAgent",
+            "description": "Run metadata checks and plan release schedule.",
+            "requires_approval": false,
+            "input_assets": ["seo_package"],
+            "output_asset_type": "publish_details"
+        },
+        {
+            "name": "Analytics",
+            "agent_role": "CEO",
+            "description": "Conduct performance reviews and extract audience feedback insights for knowledge archives.",
+            "requires_approval": false,
+            "input_assets": ["publish_details"],
+            "output_asset_type": "analytics_report"
+        }
+    ]
+}

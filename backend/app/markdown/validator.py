@@ -1,0 +1,1 @@
+class SpecificationValidator: pass

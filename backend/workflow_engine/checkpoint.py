@@ -1,0 +1,2 @@
+class CheckpointManager:
+    pass

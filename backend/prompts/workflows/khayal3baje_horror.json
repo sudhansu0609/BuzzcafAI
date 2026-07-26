@@ -1,0 +1,55 @@
+{
+    "id": "khayal3baje_horror",
+    "name": "Khayal3Baje Animated Horror Story",
+    "description": "Storytelling and animation production workflow for supernatural Hindi horror stories.",
+    "steps": [
+        {
+            "name": "Folklore Research",
+            "agent_role": "ResearchAgent",
+            "description": "Gather urban legends, local ghost stories, or paranormal accounts for the video topic.",
+            "requires_approval": true,
+            "input_assets": [],
+            "output_asset_type": "research"
+        },
+        {
+            "name": "Horror Script",
+            "agent_role": "WriterAgent",
+            "description": "Write the full narrative draft, prioritizing suspense building, pacing, and creaking auditory effects.",
+            "requires_approval": true,
+            "input_assets": ["research"],
+            "output_asset_type": "script"
+        },
+        {
+            "name": "Character Design",
+            "agent_role": "CreativeDirectorAgent",
+            "description": "Design visual characters, outfits, and facial features for AI image prompts.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "character_plan"
+        },
+        {
+            "name": "V.O. Audio Narration",
+            "agent_role": "WriterAgent",
+            "description": "Format voiceover scripts optimized for deep whispery voices and atmospheric timing.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "voice_over"
+        },
+        {
+            "name": "Animation Editing Blueprint",
+            "agent_role": "EditorAgent",
+            "description": "Assemble image timelines and overlay animations, mapping edits to music beats.",
+            "requires_approval": true,
+            "input_assets": ["character_plan", "voice_over"],
+            "output_asset_type": "edit_plan"
+        },
+        {
+            "name": "SEO & Publishing Pack",
+            "agent_role": "SEOManagerAgent",
+            "description": "Create suspenseful CTR-friendly titles, descriptions, and hashtags.",
+            "requires_approval": true,
+            "input_assets": ["script", "edit_plan"],
+            "output_asset_type": "seo_package"
+        }
+    ]
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spilled Coffee AI Studio | Buzzcaf Media</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-mug-hot logo-icon"></i>
+                    <span class="logo-text">Spilled Coffee <span class="logo-sub">AI Studio</span></span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-tab="projects">
+                    <i class="fa-solid fa-folder-open"></i> Projects
+                </a>
+                <a href="#" class="nav-item" data-tab="settings">
+                    <i class="fa-solid fa-sliders"></i> LLM Settings
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="user-info">
+                        <span class="username">Producer</span>
+                        <span class="role">Buzzcaf Media</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-search">
+                    <h1 id="page-title">Media Production Dashboard</h1>
+                </div>
+                <div class="system-status-indicator">
+                    <span class="status-dot green"></span>
+                    <span class="status-label">Engine Idle</span>
+                </div>
+            </header>
+
+            <!-- Tab: Dashboard -->
+            <section id="tab-dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fa-solid fa-folder"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-total-projects">0</span>
+                            <span class="stat-label">Total Projects</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold"><i class="fa-solid fa-rotate"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-active-projects">0</span>
+                            <span class="stat-label">Active Pipelines</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value" id="stat-completed-projects">0</span>
+                            <span class="stat-label">Completed Productions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-split">
+                    <!-- Quick Project Creator -->
+                    <div class="content-card creator-card">
+                        <h2><i class="fa-solid fa-plus-circle"></i> Create New Project</h2>
+                        <form id="create-project-form" class="project-form">
+                            <div class="form-group">
+                                <label for="proj-name">Project Name</label>
+                                <input type="text" id="proj-name" placeholder="e.g. The Alchemy of Isaac Newton" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="proj-brand">Target Brand Channel</label>
+                                <select id="proj-brand" required>
+                                    <!-- Dynamic populated -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="proj-workflow">Workflow Engine Template</label>
+                                <select id="proj-workflow" required>
+                                    <!-- Dynamic populated -->
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> Launch Production Engine</button>
+                        </form>
+                    </div>
+
+                    <!-- Recent Projects List -->
+                    <div class="content-card recent-projects-card">
+                        <h2><i class="fa-solid fa-list-check"></i> Recent Activity</h2>
+                        <div class="recent-list-container" id="recent-projects-list">
+                            <!-- Populated dynamically -->
+                            <div class="empty-state">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i> Loading pipelines...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Projects -->
+            <section id="tab-projects" class="tab-content">
+                <div class="projects-layout">
+                    <!-- Left Sidebar Project list -->
+                    <div class="projects-list-sidebar">
+                        <div class="sidebar-search-bar">
+                            <input type="text" id="project-search-input" placeholder="Search projects...">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="projects-sidebar-list" id="projects-sidebar-list">
+                            <!-- Dynamic items -->
+                        </div>
+                    </div>
+
+                    <!-- Right Main Workspace details -->
+                    <div class="project-workspace-details" id="project-workspace">
+                        <div class="empty-workspace">
+                            <i class="fa-solid fa-folder-open large-icon"></i>
+                            <h3>Select a project from the sidebar to inspect the pipeline</h3>
+                            <p>You can execute workflow steps, review outlines/scripts, write feedback revision notes, and check SEO parameters here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Settings -->
+            <section id="tab-settings" class="tab-content">
+                <div class="content-card settings-card">
+                    <h2><i class="fa-solid fa-gear"></i> Configuration & LLM Connectors</h2>
+                    <p class="settings-desc">Manage API credentials and fallback models. Spilled Coffee AI Studio will attempt the Google Gemini API first, falling back to local LM Studio if limits are exceeded.</p>
+                    
+                    <form id="settings-form">
+                        <div class="settings-section">
+                            <h3><i class="fa-brands fa-google"></i> Primary: Google Gemini API</h3>
+                            <div class="form-group">
+                                <label for="settings-gemini-key">Gemini API Key</label>
+                                <input type="password" id="settings-gemini-key" placeholder="Enter your GEMINI_API_KEY (stored locally)">
+                                <span class="input-helper">Required for generating rich transcripts, descriptions, and scene structures.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-gemini-model">Gemini Model</label>
+                                <input type="text" id="settings-gemini-model" value="gemini-1.5-flash">
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3><i class="fa-solid fa-server"></i> Secondary Fallback: Local LM Studio</h3>
+                            <div class="form-group">
+                                <label for="settings-lms-url">LM Studio Local Server URL</label>
+                                <input type="text" id="settings-lms-url" value="http://localhost:1234/v1">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-lms-model">Active LM Studio Model Name</label>
+                                <input type="text" id="settings-lms-model" placeholder="e.g. meta-llama-3-8b-instruct">
+                                <span class="input-helper">Specify the exact model identifier loaded in your local LM Studio instance.</span>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3><i class="fa-solid fa-code-fork"></i> Routing Preferences</h3>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="settings-prefer-gemini" checked>
+                                <label for="settings-prefer-gemini">Prefer Gemini API when API Key is available</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Save Configuration</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-viewer" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Asset Viewer</h2>
+            <div id="modal-body-content" class="modal-body"></div>
+        </div>
+    </div>
+</body>
+</html>

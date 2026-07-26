@@ -1,0 +1,2 @@
+class SessionMemory:
+    pass

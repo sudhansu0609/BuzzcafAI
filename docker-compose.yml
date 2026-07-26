@@ -1,0 +1,17 @@
+
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    ports: ["8000:8000"]
+    depends_on: [db]
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: buzzcaf
+      POSTGRES_USER: buzzcaf
+      POSTGRES_PASSWORD: buzzcaf
+    ports: ["5432:5432"]

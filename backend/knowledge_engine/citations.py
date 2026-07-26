@@ -1,0 +1,2 @@
+class CitationManager:
+    pass

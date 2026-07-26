@@ -1,0 +1,1 @@
+class MarkdownLoader: pass

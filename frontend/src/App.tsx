@@ -41,8 +41,12 @@ import {
   Sliders
 } from 'lucide-react';
 
+import AgentCreatorStudio from './pages/ai/AgentCreatorStudio';
+import AgentsGroupChat from './pages/ai/AgentsGroupChat';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [selectedGroupChatAgentIds, setSelectedGroupChatAgentIds] = useState<string[]>([]);
   const [projects, setProjects] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -1825,8 +1829,13 @@ export default function App() {
           </div>
         </div>
 
-        <div className="sidebar-section-title">Administration</div>
+        <div className="sidebar-section-title">Administration & Local AI</div>
         <div className="sidebar-menu">
+          <div className={`menu-item ${activeTab === 'agent_creator_studio' || activeTab === 'agents_group_chat' ? 'active' : ''}`} onClick={() => setActiveTab('agent_creator_studio')}>
+            <Bot size={18} style={{ color: '#a78bfa' }} />
+            <span>Agents Studio & Voice Chat</span>
+          </div>
+
           <div className={`menu-item ${activeTab === 'ai_workforce' ? 'active' : ''}`} onClick={() => setActiveTab('ai_workforce')}>
             <Users size={18} />
             <span>AI Workforce ({registeredAgents.length || 115} Agents)</span>
@@ -1948,6 +1957,24 @@ export default function App() {
         </div>
 
         <div className="main-content">
+          {/* Tab: Agent Creator Studio & Voice Workbench */}
+          {activeTab === 'agent_creator_studio' && (
+            <AgentCreatorStudio
+              onLaunchGroupChat={(selectedIds) => {
+                setSelectedGroupChatAgentIds(selectedIds);
+                setActiveTab('agents_group_chat');
+              }}
+            />
+          )}
+
+          {/* Tab: Agents Group Chat & 1-on-1 Studio */}
+          {activeTab === 'agents_group_chat' && (
+            <AgentsGroupChat
+              selectedAgentIds={selectedGroupChatAgentIds}
+              onBackToStudio={() => setActiveTab('agent_creator_studio')}
+            />
+          )}
+
           {error && (
             <div style={{ backgroundColor: '#2d141b', border: '1px solid #7f1d1d', borderRadius: '8px', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '10px', color: '#fca5a5', marginBottom: '24px' }}>
               <AlertCircle size={20} />
@@ -2723,7 +2750,7 @@ export default function App() {
                     cursor: 'col-resize',
                     display: 'flex',
                     alignItems: 'center',
-                    justify: 'center',
+                    justifyContent: 'center',
                     backgroundColor: isDraggingSplitter ? '#f43f5e' : '#161923',
                     border: '1px solid #232738',
                     borderRadius: '6px',
@@ -2811,7 +2838,7 @@ export default function App() {
                           fontSize: '0.82rem', 
                           fontWeight: 700, 
                           display: 'flex', 
-                          justify: 'center', 
+                          justifyContent: 'center', 
                           alignItems: 'center', 
                           gap: '6px',
                           overflow: 'hidden',

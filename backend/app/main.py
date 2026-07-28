@@ -17,7 +17,9 @@ from knowledge.assets import AssetService
 app = FastAPI(title="Buzzcaf AI Studio Dashboard")
 
 from app.api.auth import router as auth_router
+from app.api.agents_api import router as agents_router
 app.include_router(auth_router)
+app.include_router(agents_router)
 
 # Enable CORS for local development
 app.add_middleware(

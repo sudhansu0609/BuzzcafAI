@@ -48,7 +48,7 @@ export default function AgentsGroupChat({
       setMessages([
         {
           id: 'welcome-01',
-          sender: 'Buzzcaf AI Group Chat Room',
+          sender: 'MidnightBuzz Group Chat Room',
           text: `Welcome! Active agents: ${active.map((a: any) => a.name).join(', ')}. Ask a question or speak your continuous voice command to begin multi-agent project planning!`,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           avatarColor: '#7c3aed'

@@ -1853,7 +1853,7 @@ export default function App() {
         </div>
 
         <div className="sidebar-footer">
-          <p>Buzzcaf AI Studio</p>
+          <p>MidnightBuzz AI Studio</p>
           <p>© 2026 Production</p>
         </div>
       </div>

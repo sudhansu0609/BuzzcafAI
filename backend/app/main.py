@@ -14,7 +14,7 @@ from runtime.workflow import WorkflowEngine
 from integrations.llm import load_config, save_config
 from knowledge.assets import AssetService
 
-app = FastAPI(title="Buzzcaf AI Studio Dashboard")
+app = FastAPI(title="MidnightBuzz AI Studio")
 
 from app.api.auth import router as auth_router
 from app.api.agents_api import router as agents_router
@@ -35,7 +35,7 @@ engine = WorkflowEngine()
 asset_service = AssetService()
 
 import logging
-logger = logging.getLogger("buzzcaf_ai")
+logger = logging.getLogger("midnight_buzz")
 from collections import defaultdict
 
 class InMemoryLogHandler(logging.Handler):

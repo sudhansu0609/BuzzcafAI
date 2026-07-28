@@ -39,7 +39,7 @@ export default function AgentsGroupChat({
 
   const fetchActiveAgents = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/agents-workbench/agents');
+      const res = await fetch('/api/agents-workbench/agents');
       const data = await res.json();
       const active = (data.agents || []).filter((a: any) => selectedAgentIds.includes(a.id));
       setAgents(active);
@@ -125,7 +125,7 @@ export default function AgentsGroupChat({
         conversationHistory: messages.map(m => ({ sender: m.isUser ? 'user' : 'assistant', text: m.text }))
       };
 
-      const res = await fetch('http://localhost:8000/api/agents-workbench/chat/group-chat', {
+      const res = await fetch('/api/agents-workbench/chat/group-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

@@ -1776,8 +1776,8 @@ export default function App() {
       {/* Sidebar navigation */}
       <div className="sidebar">
         <div className="sidebar-brand">
-          <Database size={24} />
-          <span>Buzzcaf AI v1</span>
+          <Database size={24} style={{ color: '#a78bfa' }} />
+          <span>MidnightBuzz AI</span>
         </div>
         
         <div className="sidebar-section-title">Core Studio</div>

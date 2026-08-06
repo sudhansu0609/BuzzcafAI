@@ -485,7 +485,15 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}>
-          {agents.map((ag) => {
+          {agents.length === 0 ? (
+            <div style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', border: '1px dashed #cbd5e1', textAlign: 'center', color: '#64748b', fontSize: '12px' }}>
+              ✨ <strong>Clean Workspace Slate</strong>
+              <div style={{ marginTop: '6px', fontSize: '11px', lineHeight: 1.4 }}>
+                No custom agents in your workspace yet. Use the form to build your first private voice agent!
+              </div>
+            </div>
+          ) : (
+            agents.map((ag) => {
             const isSelected = selectedAgentId === ag.id;
             return (
               <div
@@ -557,7 +565,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
                 </button>
               </div>
             );
-          })}
+          }))}
         </div>
       </div>
 

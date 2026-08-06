@@ -28,7 +28,8 @@ DEFAULT_AGENTS = [
             "cloned": True,
             "clonedVoiceBase": "en-IN-PrabhatNeural"
         },
-        "createdAt": "2026-07-29T22:00:00Z"
+        "createdAt": "2026-07-29T22:00:00Z",
+        "ownerId": "user-sudhanshu"
     },
     {
         "id": "agent-aarav-witty",
@@ -52,7 +53,8 @@ DEFAULT_AGENTS = [
             "cloned": False,
             "clonedVoiceBase": "en-IN-PrabhatNeural"
         },
-        "createdAt": "2026-07-29T22:00:00Z"
+        "createdAt": "2026-07-29T22:00:00Z",
+        "ownerId": "user-sudhanshu"
     },
     {
         "id": "agent-ananya-companion",
@@ -76,7 +78,8 @@ DEFAULT_AGENTS = [
             "cloned": False,
             "clonedVoiceBase": "en-IN-NeerjaNeural"
         },
-        "createdAt": "2026-07-29T22:00:00Z"
+        "createdAt": "2026-07-29T22:00:00Z",
+        "ownerId": "user-sudhanshu"
     },
     {
         "id": "agent-vikram-tech",
@@ -100,7 +103,8 @@ DEFAULT_AGENTS = [
             "cloned": False,
             "clonedVoiceBase": "en-IN-PrabhatNeural"
         },
-        "createdAt": "2026-07-29T22:00:00Z"
+        "createdAt": "2026-07-29T22:00:00Z",
+        "ownerId": "user-sudhanshu"
     }
 ]
 
@@ -124,21 +128,25 @@ class AgentsRegistry:
     def get_all_agents(self, owner_id: str = "user-default") -> List[Dict[str, Any]]:
         agents = self._load_agents()
         filtered = []
+        is_sudhanshu = owner_id in ["user-sudhanshu", "user-default", "admin"]
         for a in agents:
-            ag_owner = a.get("ownerId", "system")
-            if ag_owner in ["system", "all", "default", None] or ag_owner == owner_id:
-                filtered.append(a)
+            ag_owner = a.get("ownerId", "user-sudhanshu")
+            if is_sudhanshu:
+                if ag_owner in ["user-sudhanshu", "user-default", "system"]:
+                    filtered.append(a)
+            else:
+                if ag_owner == owner_id:
+                    filtered.append(a)
         return filtered
 
     def get_agent_by_id(self, agent_id: str, owner_id: str = "user-default") -> Optional[Dict[str, Any]]:
         agents = self._load_agents()
+        is_sudhanshu = owner_id in ["user-sudhanshu", "user-default", "admin"]
         for a in agents:
-            ag_owner = a.get("ownerId", "system")
-            if a["id"] == agent_id and (ag_owner in ["system", "all", "default", None] or ag_owner == owner_id or owner_id == "all"):
-                return a
-        for a in agents:
+            ag_owner = a.get("ownerId", "user-sudhanshu")
             if a["id"] == agent_id:
-                return a
+                if is_sudhanshu or ag_owner == owner_id:
+                    return a
         return None
 
     def save_agent(self, agent_data: Dict[str, Any], owner_id: str = "user-default") -> Dict[str, Any]:

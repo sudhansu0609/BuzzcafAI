@@ -95,18 +95,36 @@ class ToggleAuthRequest(BaseModel):
     authEnabled: bool
 
 @router.get("/users")
-def get_users():
+def get_users(x_user_id: Optional[str] = Header(None)):
     config = _get_auth_config()
     users_list = []
+    
+    is_master_admin = (x_user_id in ["user-sudhanshu", "user-default"])
+    
     for u in config.get("users", []):
-        users_list.append({
-            "id": u["id"],
-            "name": u["name"],
-            "role": u.get("role", "User"),
-            "avatarIcon": u.get("avatarIcon", "👤"),
-            "badgeColor": u.get("badgeColor", "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)"),
-            "hasPassword": u.get("passwordHash") is not None
-        })
+        # Master Admin can view all users. Regular users can ONLY view their own user account.
+        if is_master_admin or (x_user_id and u["id"] == x_user_id):
+            users_list.append({
+                "id": u["id"],
+                "name": u["name"],
+                "role": u.get("role", "User"),
+                "avatarIcon": u.get("avatarIcon", "👤"),
+                "badgeColor": u.get("badgeColor", "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)"),
+                "hasPassword": u.get("passwordHash") is not None
+            })
+            
+    # If unauthenticated or initial state, exclude Master Admin (user-sudhanshu) from guest view
+    if not users_list and not is_master_admin:
+        for u in config.get("users", []):
+            if u["id"] != "user-sudhanshu":
+                users_list.append({
+                    "id": u["id"],
+                    "name": u["name"],
+                    "role": u.get("role", "User"),
+                    "avatarIcon": u.get("avatarIcon", "👤"),
+                    "badgeColor": u.get("badgeColor", "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)"),
+                    "hasPassword": u.get("passwordHash") is not None
+                })
     return users_list
 
 @router.get("/status")

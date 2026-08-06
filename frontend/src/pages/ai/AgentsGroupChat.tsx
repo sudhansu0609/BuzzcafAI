@@ -656,34 +656,43 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
           <div>
             <h3 style={{ fontSize: '14px', color: 'var(--text-main)', marginBottom: '12px' }}>Select Agent Partner</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {agents.map((ag) => (
-                <div
-                  key={ag.id}
-                  onClick={() => setSelectedAgentId(ag.id)}
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: selectedAgentId === ag.id ? 'rgba(79, 70, 229, 0.1)' : '#f8fafc',
-                    border: selectedAgentId === ag.id ? '1px solid var(--accent-primary)' : '1px solid var(--bg-card-border)',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px'
-                  }}
-                >
-                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: ag.avatar, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
-                    {ag.avatarImage ? (
-                      <img src={ag.avatarImage} alt={ag.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      ag.avatarIcon || '🤖'
-                    )}
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 600 }}>{ag.name}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{ag.personaTag}</div>
+              {agents.length === 0 ? (
+                <div style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', border: '1px dashed #cbd5e1', color: '#64748b', fontSize: '12px', textAlign: 'center' }}>
+                  🎙️ <strong>No Voice Agents Active</strong>
+                  <div style={{ marginTop: '6px', fontSize: '11px', lineHeight: 1.4 }}>
+                    Switch to <strong>Agent Creator</strong> to build your first private voice agent!
                   </div>
                 </div>
-              ))}
+              ) : (
+                agents.map((ag) => (
+                  <div
+                    key={ag.id}
+                    onClick={() => setSelectedAgentId(ag.id)}
+                    style={{
+                      padding: '10px 12px',
+                      borderRadius: '10px',
+                      background: selectedAgentId === ag.id ? 'rgba(79, 70, 229, 0.1)' : '#f8fafc',
+                      border: selectedAgentId === ag.id ? '1px solid var(--accent-primary)' : '1px solid var(--bg-card-border)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px'
+                    }}
+                  >
+                    <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: ag.avatar, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+                      {ag.avatarImage ? (
+                        <img src={ag.avatarImage} alt={ag.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        ag.avatarIcon || '🤖'
+                      )}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: 600 }}>{ag.name}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{ag.personaTag}</div>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         ) : (

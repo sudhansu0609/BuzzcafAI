@@ -1,1 +1,0 @@
-class Indexer: pass

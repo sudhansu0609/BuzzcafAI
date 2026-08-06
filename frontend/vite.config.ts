@@ -3,25 +3,27 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'allow-all-hosts',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          req.headers.host = 'localhost:3005';
+          next();
+        });
+      }
+    }
+  ],
   server: {
-    port: 3000,
-    host: true,
+    port: 3005,
+    host: '0.0.0.0',
+    strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8090',
+        target: 'http://localhost:8095',
         changeOrigin: true,
-        secure: false
-      },
-      '/projects': {
-        target: 'http://127.0.0.1:8090',
-        changeOrigin: true,
-        secure: false
-      },
-      '/health': {
-        target: 'http://127.0.0.1:8090',
-        changeOrigin: true,
-        secure: false
+        secure: false,
       }
     }
   }

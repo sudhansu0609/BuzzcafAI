@@ -1,1 +1,0 @@
-class CitationEngine: pass

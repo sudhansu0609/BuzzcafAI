@@ -1,0 +1,33 @@
+{
+  "authEnabled": true,
+  "passwordHash": "311ea8bf021df26383437d0019cfa7cb8ce33d9c7db87b716e1262936d158154",
+  "activeTokens": {
+    "768721a6703093cc48f84e5b71bae29b572052cfa41e79035b0a4cc9dcf3b629": "user-sudhanshu"
+  },
+  "users": [
+    {
+      "id": "user-sudhanshu",
+      "name": "Sudhanshu",
+      "role": "Master Admin / Creator",
+      "avatarIcon": "\ud83d\udc51",
+      "badgeColor": "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
+      "passwordHash": null
+    },
+    {
+      "id": "user-guest1",
+      "name": "Guest Workspace 1",
+      "role": "Standard User",
+      "avatarIcon": "\ud83d\udc64",
+      "badgeColor": "linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)",
+      "passwordHash": null
+    },
+    {
+      "id": "user-team",
+      "name": "Media Team Member",
+      "role": "Content Producer",
+      "avatarIcon": "\ud83c\udfac",
+      "badgeColor": "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+      "passwordHash": null
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+Traceback (most recent call last):
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\app\services\xtts_server.py", line 51, in <module>
+    from TTS.api import TTS
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\api.py", line 11, in <module>
+    from TTS.utils.synthesizer import Synthesizer
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\utils\synthesizer.py", line 11, in <module>
+    from TTS.tts.configs.vits_config import VitsConfig
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\configs\vits_config.py", line 5, in <module>
+    from TTS.tts.models.vits import VitsArgs, VitsAudioConfig
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\models\vits.py", line 22, in <module>
+    from TTS.tts.datasets.dataset import TTSDataset, _parse_sample
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\datasets\__init__.py", line 10, in <module>
+    from TTS.tts.datasets.formatters import *
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\datasets\formatters.py", line 8, in <module>
+    import pandas as pd
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\compat\__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\compat\numpy\__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\util\__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\util\_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\_libs\__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas\_libs\interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Synthesizing: 'hi mera nam sudhansu hai aur main ek voice agent hu. main de' with speaker: norm_voice-2b80ff45_clean.wav
+ > Text splitted to sentences.
+['hi mera nam sudhansu hai aur main ek voice agent hu.', 'main dekhna chahta hu ki voice cloning kitni achi hui hai']
+ > Processing time: 17.405991077423096
+ > Real-time factor: 1.3957658241343944
+[XTTS Server] ✅ Done — 549996 bytes
+[XTTS Server] Synthesizing: 'hi mera nam sudhansu hai aur main ek voice agent hu. main de' with speaker: norm_voice-d051192f_clean.wav
+ > Text splitted to sentences.
+['hi mera nam sudhansu hai aur main ek voice agent hu.', 'main dekhna chahta hu ki voice cloning kitni achi hui hai']
+ > Processing time: 25.75710916519165
+ > Real-time factor: 2.2383980368444787
+[XTTS Server] ✅ Done — 507500 bytes
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Synthesizing: 'हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना ' with speaker: norm_60sec_ref_12s.wav
+ > Text splitted to sentences.
+['हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना चाहता हूं कि वॉइस क्लोनिंग कितनी अच्छी हुई है।']
+ > Processing time: 12.981582164764404
+ > Real-time factor: 1.3454345281504057
+[XTTS Server] ✅ Done — 425548 bytes
+[XTTS Server] Synthesizing: 'हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना ' with speaker: norm_60sec_ref_12s.wav
+ > Text splitted to sentences.
+['हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना चाहता हूं कि वॉइस क्लोनिंग कितनी अच्छी हुई है।']
+ > Processing time: 10.97383189201355
+ > Real-time factor: 1.1682743975419987
+[XTTS Server] ✅ Done — 414284 bytes
+[XTTS Server] Synthesizing: 'हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना ' with speaker: norm_voice-d4aea5db_clean.wav
+ > Text splitted to sentences.
+['हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना चाहता हूं कि वॉइस क्लोनिंग कितनी अच्छी हुई है।']
+ > Processing time: 19.454764366149902
+ > Real-time factor: 2.20178181342698
+[XTTS Server] ✅ Done — 389708 bytes
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Synthesizing: 'hi mera nam sudhansu hai aur main ek voice agent hu. main de' with speaker: norm_voice-fb50ad16_clean.wav
+ > Text splitted to sentences.
+['hi mera nam sudhansu hai aur main ek voice agent hu.', 'main dekhna chahta hu ki voice cloning kitni achi hui hai']
+ > Processing time: 16.605919361114502
+ > Real-time factor: 1.36986906617598
+[XTTS Server] ✅ Done — 534636 bytes
+[XTTS Server] Loading XTTS v2 model — this takes ~20s once...
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Synthesizing: 'hi mera nam sudhansu hai aur main ek voice agent hu. main de' with speaker: norm_voice-f8bba701_clean.wav
+ > Text splitted to sentences.
+['hi mera nam sudhansu hai aur main ek voice agent hu.', 'main dekhna chahta hu ki voice cloning kitni achi hui hai']
+ > Processing time: 17.73082709312439
+ > Real-time factor: 1.4570838454211121
+[XTTS Server] ✅ Done — 536684 bytes
+[XTTS Server] Synthesizing: 'हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना ' with speaker: norm_voice-289874df_clean.wav
+ > Text splitted to sentences.
+['हाय मेरा नाम सुधांशु है और मैं एक वॉइस एजेंट हूं। मैं देखना चाहता हूं कि वॉइस क्लोनिंग कितनी अच्छी हुई है।']
+ > Processing time: 19.142688035964966
+ > Real-time factor: 2.0948953346751544
+[XTTS Server] ✅ Done — 403020 bytes
+[XTTS Server] Loading XTTS v2 model (GPU=True)...
+B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\api.py:70: UserWarning: `gpu` will be deprecated. Please use `tts.to(device)` instead.
+  warnings.warn("`gpu` will be deprecated. Please use `tts.to(device)` instead.")
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096
+[XTTS Server] Loading XTTS v2 model (GPU=True)...
+Traceback (most recent call last):
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\app\services\xtts_server.py", line 52, in <module>
+    from TTS.api import TTS
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\api.py", line 11, in <module>
+    from TTS.utils.synthesizer import Synthesizer
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\utils\synthesizer.py", line 11, in <module>
+    from TTS.tts.configs.vits_config import VitsConfig
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\configs\vits_config.py", line 5, in <module>
+    from TTS.tts.models.vits import VitsArgs, VitsAudioConfig
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\models\vits.py", line 22, in <module>
+    from TTS.tts.datasets.dataset import TTSDataset, _parse_sample
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\datasets\__init__.py", line 10, in <module>
+    from TTS.tts.datasets.formatters import *
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\tts\datasets\formatters.py", line 8, in <module>
+    import pandas as pd
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\compat\__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\compat\numpy\__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\util\__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\util\_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "B:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\pandas\_libs\__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas\_libs\interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+[XTTS Server] Loading XTTS v2 model (GPU=True)...
+b:\youtubeProjects\Buzzcaf Media\MidnightBuzz\backend\voice_env\Lib\site-packages\TTS\api.py:70: UserWarning: `gpu` will be deprecated. Please use `tts.to(device)` instead.
+  warnings.warn("`gpu` will be deprecated. Please use `tts.to(device)` instead.")
+ > tts_models/multilingual/multi-dataset/xtts_v2 is already downloaded.
+ > Using model: xtts
+[XTTS Server] ✅ Model loaded! Listening on port 8096
+[XTTS Server] Running at http://localhost:8096

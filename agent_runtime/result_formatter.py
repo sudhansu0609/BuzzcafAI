@@ -1,2 +1,0 @@
-class ResultFormatter:
-    pass

@@ -1,37 +1,25 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.venv/
-venv/
-ENV/
-env/
-*.egg-info/
-.coverage
-htmlcov/
-
-# Node / Frontend
+# Dependencies
 node_modules/
 frontend/node_modules/
-frontend/dist/
-frontend/build/
-.next/
+backend/voice_env/
+voice_env/
 
-# Environment & Config Secrets
-.env
-.env.local
-.env.development.local
-.env.production.local
-backend/config/config.json
-
-# Logs & Temporary Files
-logs/
+# Python cache & logs
+__pycache__/
+*.pyc
 *.log
-*.tmp
-.cache/
-dist/
-build/
+*.onnx
+*.bin
+
+# Temp & audio builds
+frontend/dist/
+backend/uploads/
+backend/processed/
+*.wav
+*.mp3
+
+# IDE / OS files
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/

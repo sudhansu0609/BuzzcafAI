@@ -1,1 +1,0 @@
-class OllamaIntegration: pass

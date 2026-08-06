@@ -1,1 +1,0 @@
-class KnowledgeLibrary: pass

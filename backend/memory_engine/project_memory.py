@@ -1,2 +1,0 @@
-class ProjectMemory:
-    pass

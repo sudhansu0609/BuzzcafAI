@@ -1,1 +1,0 @@
-Warning, Error and Critical alert definitions.

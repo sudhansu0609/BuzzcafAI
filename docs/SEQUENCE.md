@@ -1,1 +1,0 @@
-Project -> Publish -> YouTube -> Analytics -> Notion Sync

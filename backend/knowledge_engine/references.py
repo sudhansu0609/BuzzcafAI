@@ -1,2 +1,0 @@
-class ReferenceResolver:
-    pass

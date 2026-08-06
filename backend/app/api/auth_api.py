@@ -150,15 +150,15 @@ def login(req: LoginRequest):
     if not target_user:
         raise HTTPException(status_code=404, detail="User account not found")
 
-    # Check user password or global password
+    # Check user profile password or global password
     user_hash = target_user.get("passwordHash")
     global_hash = config.get("globalPasswordHash")
+    expected_hash = user_hash if user_hash is not None else global_hash
     
-    if config.get("authEnabled", False) or user_hash:
+    if config.get("authEnabled", False) or expected_hash is not None:
         check_password = req.password or ""
-        expected_hash = user_hash or global_hash
-        if expected_hash and _hash_password(check_password) != expected_hash:
-            raise HTTPException(status_code=401, detail="Incorrect password for user profile")
+        if not check_password or _hash_password(check_password) != expected_hash:
+            raise HTTPException(status_code=401, detail=f"Incorrect or missing password for profile '{target_user['name']}'")
 
     new_token = secrets.token_hex(32)
     config["activeTokens"][new_token] = target_user["id"]
@@ -170,7 +170,7 @@ def login(req: LoginRequest):
         "role": target_user.get("role", "User"),
         "avatarIcon": target_user.get("avatarIcon", "👤"),
         "badgeColor": target_user.get("badgeColor", "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)"),
-        "hasPassword": user_hash is not None
+        "hasPassword": user_hash is not None or global_hash is not None
     }
     
     return {
@@ -254,7 +254,8 @@ def set_password(req: SetPasswordRequest, x_user_id: Optional[str] = Header(None
 
     new_hash = _hash_password(req.newPassword.strip())
     target_user["passwordHash"] = new_hash
-    config["globalPasswordHash"] = new_hash
+    if target_user["id"] == "user-sudhanshu":
+        config["globalPasswordHash"] = new_hash
     
     if req.authEnabled is not None:
         config["authEnabled"] = req.authEnabled
@@ -263,7 +264,7 @@ def set_password(req: SetPasswordRequest, x_user_id: Optional[str] = Header(None
     config["activeTokens"][new_token] = user_id
     _save_auth_config(config)
 
-    return {"success": True, "token": new_token, "message": "Password updated successfully"}
+    return {"success": True, "token": new_token, "message": f"Password updated for {target_user['name']}"}
 
 @router.post("/toggle")
 def toggle_auth(req: ToggleAuthRequest):

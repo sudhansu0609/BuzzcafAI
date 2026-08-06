@@ -85,11 +85,13 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({ onClose,
       zIndex: 9999,
       padding: '20px'
     }}>
-      <div style={{
+      <div className="modal-card-responsive" style={{
         background: '#ffffff',
         borderRadius: '24px',
         width: '100%',
         maxWidth: '520px',
+        maxHeight: '90vh',
+        overflowY: 'auto',
         padding: '28px',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         border: '1px solid rgba(226, 232, 240, 0.8)'

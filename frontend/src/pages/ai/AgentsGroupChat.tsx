@@ -606,10 +606,10 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
   const activeAgent = agents.find(a => a.id === selectedAgentId) || agents[0];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '24px', height: 'calc(100vh - 120px)' }}>
+    <div className="chat-workspace-grid">
       
       {/* LEFT COLUMN: Mode Switcher & Agent Participant Selector */}
-      <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div className="glass-panel chat-workspace-sidebar" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div>
           <h3 style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '12px' }}>Chatroom Mode</h3>
           <div style={{ display: 'flex', background: '#f1f5f9', padding: '4px', borderRadius: '10px', border: '1px solid var(--bg-card-border)' }}>
@@ -774,7 +774,7 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
       </div>
 
       {/* RIGHT COLUMN: Chat Feed & Controls */}
-      <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div className="glass-panel chat-feed-container" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         
         {/* Chatroom Top Banner */}
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-card-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#ffffff' }}>
@@ -1026,7 +1026,7 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
 
         {/* Input Bar & Voice Controls */}
         <div style={{ padding: '16px 20px', borderTop: '1px solid var(--bg-card-border)', background: '#ffffff' }}>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div className="chat-input-toolbar" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <button
               onClick={toggleListening}
               style={{

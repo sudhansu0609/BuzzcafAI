@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="brand-title">MidnightBuzz</span>
             <span className="brand-badge">Agent Studio</span>
           </div>
-          <span style={{ fontSize: '12px', color: 'var(--text-dim)' }}>
+          <span className="brand-subtitle" style={{ fontSize: '12px', color: 'var(--text-dim)' }}>
             100% Local AI Models & Zero-Shot Voice Cloning
           </span>
         </div>
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
           id="nav-creator-btn"
         >
           <Sparkles size={18} />
-          Agent Creator Studio
+          <span>Agent Creator</span>
         </button>
         <button
           className={`nav-btn ${activeTab === 'chat' ? 'active' : ''}`}
@@ -57,11 +57,11 @@ export const Header: React.FC<HeaderProps> = ({
           id="nav-chat-btn"
         >
           <MessageSquare size={18} />
-          Voice Chatroom Workspace
+          <span>Voice Chatroom</span>
         </button>
       </nav>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div className="header-actions-group">
         {/* User Account Dashboard Pill */}
         <button
           type="button"
@@ -84,7 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <span style={{ fontSize: '15px' }}>{activeUser.avatarIcon || '👤'}</span>
           <span>{activeUser.name}</span>
-          <span style={{ fontSize: '10px', background: 'rgba(99, 102, 241, 0.3)', color: '#c7d2fe', padding: '1px 6px', borderRadius: '6px' }}>Switch User / Login</span>
+          <span style={{ fontSize: '10px', background: 'rgba(99, 102, 241, 0.3)', color: '#c7d2fe', padding: '1px 6px', borderRadius: '6px' }}>Switch Account</span>
         </button>
 
         {onOpenAuthSettings && (
@@ -107,16 +107,16 @@ export const Header: React.FC<HeaderProps> = ({
             title="Password & Access Security Settings"
           >
             {isProtected ? <Lock size={14} color="#38bdf8" /> : <ShieldCheck size={14} />}
-            {isProtected ? 'Password Protected' : 'Security Lock'}
+            <span className="engine-status-text">{isProtected ? 'Protected' : 'Security Lock'}</span>
           </button>
         )}
 
         <div className="engine-status-pill">
           <Cpu size={16} color="var(--accent-secondary)" />
-          <span>Local Models:</span>
+          <span className="engine-status-text">Models:</span>
           <span className={`status-dot ${isOnline ? 'online' : 'offline'}`} />
           <span style={{ color: isOnline ? 'var(--accent-green)' : 'var(--accent-amber)' }}>
-            {isOnline ? 'LM Studio Connected' : 'Preset Standalone Mode'}
+            {isOnline ? 'LM Studio' : 'Preset Mode'}
           </span>
         </div>
       </div>

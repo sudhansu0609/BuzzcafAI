@@ -456,7 +456,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
   const activeModel = HIGH_FIDELITY_VOICE_MODELS.find(v => v.id === selectedVoiceModel) || HIGH_FIDELITY_VOICE_MODELS[0];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr 320px', gap: '20px' }}>
+    <div className="creator-studio-grid">
       
       {/* LEFT COLUMN: Registered Agents List */}
       <div className="glass-panel" style={{ padding: '20px', background: '#ffffff', border: '1px solid var(--bg-card-border)' }}>
@@ -896,7 +896,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
               style={{ width: '100%', marginBottom: '12px', resize: 'vertical' }}
             />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px' }}>
               <div>
                 <label style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Temp: {temperature}</label>
                 <input
@@ -1156,7 +1156,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
             )}
 
             {/* Dynamic Pitch & Speed Sliders & Test Button */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', background: 'rgba(0,0,0,0.2)', padding: '12px', borderRadius: '10px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px', background: 'rgba(0,0,0,0.05)', padding: '12px', borderRadius: '10px' }}>
               <div>
                 <label style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
                   Pitch: {pitch}x
@@ -1261,7 +1261,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
       </div>
 
       {/* RIGHT COLUMN: Open WebUI Interactive Live Sandbox & Modelfile Presets */}
-      <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', background: '#ffffff', border: '1px solid var(--bg-card-border)' }}>
+      <div className="glass-panel creator-studio-sidebar-right" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', background: '#ffffff', border: '1px solid var(--bg-card-border)' }}>
         <div>
           <h3 style={{ fontSize: '16px', fontWeight: 800, marginBottom: '6px', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Sparkles size={18} color="#0f172a" /> Open WebUI Modelfile Presets

@@ -146,10 +146,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ mode, authStatus, onSucces
         justifyContent: 'center',
         padding: '20px'
       }}>
-        <div style={{
+        <div className="modal-card-responsive" style={{
           background: '#ffffff',
           width: '100%',
           maxWidth: '460px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
           borderRadius: '24px',
           padding: '32px',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',

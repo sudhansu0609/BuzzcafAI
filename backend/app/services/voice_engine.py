@@ -409,6 +409,51 @@ class VoiceEngineService:
             return False
 
     @staticmethod
+    def _resolve_clone_reference(sample_path: str) -> Optional[str]:
+        """Map an agent's samplePath to the actual reference WAV XTTS clones
+        from (the cleaned norm2_ copy, generated on first use)."""
+        clean_filename = os.path.basename(sample_path)
+        speaker_wav_path = os.path.join(VOICES_DIR, clean_filename)
+        if not os.path.exists(speaker_wav_path):
+            return None
+        # "norm2_" cache key forces regeneration of references that were
+        # normalized by the older (uncleaned) logic.
+        normalized_path = os.path.join(VOICES_DIR, f"norm2_{clean_filename}")
+        if not os.path.exists(normalized_path):
+            VoiceEngineService._normalize_audio_to_pcm_wav(speaker_wav_path, normalized_path)
+        return normalized_path if os.path.exists(normalized_path) else speaker_wav_path
+
+    @staticmethod
+    def warm_xtts_for_sample(sample_path: Optional[str]) -> None:
+        """Fire-and-forget: heat the XTTS pipeline for this voice while the LLM
+        is still generating the first sentence.
+
+        The first inference after the GPU has idled costs ~2x the ones after it
+        (measured RTF 1.26 vs 0.53), and a chat reply spends several seconds in
+        the LLM before any text reaches TTS — dead time this call hides the
+        warmup (and, if the XTTS server died, its relaunch) inside.
+        """
+        if not sample_path:
+            return
+
+        def _work():
+            try:
+                target = VoiceEngineService._resolve_clone_reference(sample_path)
+                if not target or not _ensure_xtts_ready():
+                    return
+                body = json.dumps({"speaker_wav": target}).encode()
+                req = urllib.request.Request(
+                    f"{XTTS_SERVER_URL}/warmup", data=body,
+                    headers={"Content-Type": "application/json"}, method="POST"
+                )
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    resp.read()
+            except Exception as e:
+                print(f"[VoiceEngine] XTTS warmup notice: {e}")
+
+        threading.Thread(target=_work, daemon=True).start()
+
+    @staticmethod
     def process_voice_sample(filename: str, audio_bytes: bytes) -> Dict[str, Any]:
         voice_id = f"voice-{uuid.uuid4().hex[:8]}"
         temp_filename = f"raw_{voice_id}_{filename}"
@@ -839,13 +884,7 @@ class VoiceEngineService:
         if has_custom_sample:
             clean_filename = os.path.basename(sample_path)
             try:
-                speaker_wav_path = os.path.join(VOICES_DIR, clean_filename)
-                # "norm2_" cache key forces regeneration of references that were
-                # normalized by the older (uncleaned) logic.
-                normalized_path = os.path.join(VOICES_DIR, f"norm2_{clean_filename}")
-                if not os.path.exists(normalized_path):
-                    VoiceEngineService._normalize_audio_to_pcm_wav(speaker_wav_path, normalized_path)
-                target_wav = normalized_path if os.path.exists(normalized_path) else speaker_wav_path
+                target_wav = VoiceEngineService._resolve_clone_reference(sample_path)
 
                 xtts_lang = VoiceEngineService.detect_tts_language(text)
                 # Use the clean-text preparer (no injected "hehe/haaah/mmm"

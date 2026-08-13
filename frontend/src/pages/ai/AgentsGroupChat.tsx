@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Agent, ChatMessage } from '../../types/agent';
 import { sendChatMessage, getAudioStreamUrl, getAuthHeaders, updateAgent, streamChat } from '../../services/api';
+import AnimatedAvatar from '../../components/AnimatedAvatar';
+import PhotoAvatar from '../../components/PhotoAvatar';
 import { Mic, Send, Users, User, Volume2, VolumeX, Square, Play, RefreshCw, Radio, Trash2, Languages } from 'lucide-react';
 
 interface AgentsGroupChatProps {
@@ -67,6 +69,8 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
   // Which engine actually spoke last — 'xtts-clone' means the real clone, any
   // other value means the backend had to substitute a stock voice.
   const [lastVoiceEngine, setLastVoiceEngine] = useState<string | null>(null);
+  // Floating animated-persona stage (single-agent mode)
+  const [showAvatarStage, setShowAvatarStage] = useState(true);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -79,71 +83,153 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
 
   // Streaming state: accumulate tokens in real-time, queue audio chunks for playback
   const streamingTextRef = useRef<string>('');
-  const audioQueueRef = useRef<Array<{ base64: string, mediaType: string }>>([]);
-  const isPlayingChunkRef = useRef<boolean>(false);
   const isStreamingRef = useRef<boolean>(false);
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
   const [streamingText, setStreamingText] = useState<string>('');
 
-  // Sequential audio chunk player: plays base64 WAV chunks one after another
-  const playNextChunk = (messageId?: string) => {
-    if (audioQueueRef.current.length === 0) {
-      isPlayingChunkRef.current = false;
-      setPlayingMessageId(null);
-      isAgentSpeakingRef.current = false;
-      if (isListeningRef.current) {
-        setTimeout(() => safeRestartListening(), 300);
-      }
-      return;
+  // ── Gapless streaming playback ────────────────────────────────────────────
+  // Each sentence chunk is decoded once and scheduled on a shared AudioContext
+  // timeline, so consecutive chunks butt up against each other sample-accurately.
+  // Playing them as separate <audio> elements paid a full load+decode cycle at
+  // every boundary, which is what made the voice stop and start mid-reply.
+  //
+  // Adaptive jitter buffer: the backend renders roughly 0.5x-1.3x realtime
+  // (the first chunk of a reply is the slow one — measured RTF 1.26 vs 0.53
+  // after), so the pipeline never builds a lead on its own and any hiccup
+  // lands as a stall mid-reply. A fixed pre-buffer would fix that but delay
+  // the first word of every reply, and the voice already feels slow — so
+  // instead the first chunk plays the moment it arrives, and slack is added
+  // only after an actual underrun. The one pause that does happen then buys
+  // enough cushion that the rest of the reply coasts through gap-free,
+  // turning stop-start-stop into at most one hold per reply.
+  const UNDERRUN_CUSHION_S = 1.75;
+  const MAX_CUSHION_S = 4.5;
+  // Learned per session, not per reply: synthesis pace is a property of the
+  // backend, so the slack earned by one reply's underrun should protect the
+  // next reply too (it never delays a reply's first chunk, only boundaries).
+  const cushionRef = useRef<number>(0);
+
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const nextStartTimeRef = useRef<number>(0);
+  const activeSourcesRef = useRef<AudioBufferSourceNode[]>([]);
+  const decodeChainRef = useRef<Promise<void>>(Promise.resolve());
+  const pendingChunksRef = useRef<number>(0);
+  // Bumped on every stop/new reply so in-flight decodes from the previous one
+  // cannot schedule themselves onto the timeline after the fact.
+  const playbackGenerationRef = useRef<number>(0);
+  // audioSpeed is read inside async decode callbacks — mirror it in a ref so
+  // they don't capture a stale value from an earlier render.
+  const audioSpeedRef = useRef<number>(audioSpeed);
+  useEffect(() => { audioSpeedRef.current = audioSpeed; }, [audioSpeed]);
+
+  // Analyser sits between the scheduled chunks and the speakers so the
+  // animated avatar can read live amplitude and move its mouth in sync.
+  const analyserRef = useRef<AnalyserNode | null>(null);
+
+  const getAudioContext = (): AudioContext => {
+    if (!audioCtxRef.current) {
+      const Ctor = window.AudioContext || (window as any).webkitAudioContext;
+      audioCtxRef.current = new Ctor();
+      const analyser = audioCtxRef.current.createAnalyser();
+      analyser.fftSize = 512;
+      analyser.smoothingTimeConstant = 0.6;
+      analyser.connect(audioCtxRef.current.destination);
+      analyserRef.current = analyser;
     }
+    return audioCtxRef.current;
+  };
 
-    isPlayingChunkRef.current = true;
-    const chunk = audioQueueRef.current.shift()!;
-    try {
-      const byteString = atob(chunk.base64);
-      const byteArray = new Uint8Array(byteString.length);
-      for (let i = 0; i < byteString.length; i++) byteArray[i] = byteString.charCodeAt(i);
-      const blob = new Blob([byteArray], { type: chunk.mediaType || 'audio/wav' });
-      
-      // Skip tiny silent WAVs (< 100 bytes)
-      if (blob.size < 100) {
-        playNextChunk(messageId);
-        return;
-      }
-      
-      const blobUrl = URL.createObjectURL(blob);
-      const audio = new Audio(blobUrl);
-      audio.playbackRate = audioSpeed;
-      audioRef.current = audio;
+  const stopScheduledAudio = () => {
+    playbackGenerationRef.current += 1;
+    activeSourcesRef.current.forEach(src => {
+      try { src.onended = null; src.stop(); } catch (e) {}
+    });
+    activeSourcesRef.current = [];
+    pendingChunksRef.current = 0;
+    nextStartTimeRef.current = 0;
+  };
 
-      audio.onended = () => {
-        URL.revokeObjectURL(blobUrl);
-        playNextChunk(messageId);
-      };
-      audio.onerror = () => {
-        URL.revokeObjectURL(blobUrl);
-        playNextChunk(messageId);
-      };
-      audio.play().catch(() => {
-        URL.revokeObjectURL(blobUrl);
-        playNextChunk(messageId);
-      });
-    } catch (e) {
-      playNextChunk(messageId);
+  const finishSpeaking = () => {
+    setPlayingMessageId(null);
+    isAgentSpeakingRef.current = false;
+    if (isListeningRef.current) {
+      setTimeout(() => safeRestartListening(), 300);
     }
   };
 
+  // Only truly done when the stream is closed, nothing is still decoding, and
+  // no scheduled chunk is still playing — otherwise a momentary gap while the
+  // backend renders the next sentence would hand the mic back mid-reply.
+  const maybeFinishSpeaking = (generation: number) => {
+    if (generation !== playbackGenerationRef.current) return;
+    if (isStreamingRef.current) return;
+    if (pendingChunksRef.current > 0) return;
+    if (activeSourcesRef.current.length > 0) return;
+    finishSpeaking();
+  };
+
   const enqueueAudioChunk = (base64: string, _text: string, mediaType: string, messageId?: string) => {
-    audioQueueRef.current.push({ base64, mediaType });
     if (messageId) setPlayingMessageId(messageId);
     isAgentSpeakingRef.current = true;
     if (recognitionRef.current) {
       try { recognitionRef.current.abort(); } catch(e) {}
     }
-    // If not currently playing, start the queue
-    if (!isPlayingChunkRef.current) {
-      playNextChunk(messageId);
-    }
+
+    const generation = playbackGenerationRef.current;
+    pendingChunksRef.current += 1;
+
+    // Decode strictly in arrival order: decodeAudioData resolves out of order
+    // for differently-sized chunks, which would shuffle the sentences.
+    decodeChainRef.current = decodeChainRef.current.then(async () => {
+      try {
+        if (generation !== playbackGenerationRef.current) return;
+
+        const byteString = atob(base64);
+        const bytes = new Uint8Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) bytes[i] = byteString.charCodeAt(i);
+        if (bytes.byteLength < 100) return;  // silent placeholder WAV
+
+        const ctx = getAudioContext();
+        if (ctx.state === 'suspended') await ctx.resume();
+        const buffer = await ctx.decodeAudioData(bytes.buffer);
+        if (generation !== playbackGenerationRef.current) return;
+
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.playbackRate.value = audioSpeedRef.current;
+        source.connect(analyserRef.current ?? ctx.destination);
+
+        // Butt this chunk against the end of the previous one, sample-accurate.
+        const now = ctx.currentTime;
+        let startAt: number;
+        if (nextStartTimeRef.current === 0) {
+          // First chunk of the reply: speak immediately, no pre-buffer.
+          startAt = now + 0.05;
+        } else if (now + 0.02 >= nextStartTimeRef.current) {
+          // Underrun: the previous chunk already finished playing — synthesis
+          // fell behind. Resume with extra cushion so the boundaries after
+          // this one coast instead of stalling again.
+          cushionRef.current = Math.min(cushionRef.current + UNDERRUN_CUSHION_S, MAX_CUSHION_S);
+          startAt = now + cushionRef.current;
+        } else {
+          startAt = nextStartTimeRef.current;
+        }
+        source.start(startAt);
+        nextStartTimeRef.current = startAt + buffer.duration / source.playbackRate.value;
+
+        activeSourcesRef.current.push(source);
+        source.onended = () => {
+          activeSourcesRef.current = activeSourcesRef.current.filter(s => s !== source);
+          maybeFinishSpeaking(generation);
+        };
+      } catch (e) {
+        console.error('Audio chunk decode/schedule failed:', e);
+      } finally {
+        // Decrement before the finish check, or the last chunk never settles.
+        pendingChunksRef.current = Math.max(0, pendingChunksRef.current - 1);
+        maybeFinishSpeaking(generation);
+      }
+    });
   };
 
   useEffect(() => {
@@ -365,6 +451,7 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+    stopScheduledAudio();
     setPlayingMessageId(null);
   };
 
@@ -413,47 +500,6 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
     // Render text bubble immediately so streaming text populates it live
     setMessages(prev => [...prev, agentMsg]);
 
-    const audioQueue: { blobUrl: string }[] = [];
-    let isPlayingAudioQueue = false;
-
-    const processAudioQueue = async () => {
-      if (isPlayingAudioQueue || audioQueue.length === 0 || isMuted || mainAgent?.voiceEnabled === false) return;
-      isPlayingAudioQueue = true;
-      const nextChunk = audioQueue.shift()!;
-      
-      setPlayingMessageId(agentMsgId);
-      isAgentSpeakingRef.current = true;
-      if (recognitionRef.current) {
-        try { recognitionRef.current.abort(); } catch(e) {}
-      }
-
-      const audio = new Audio(nextChunk.blobUrl);
-      audio.playbackRate = audioSpeed;
-      audioRef.current = audio;
-
-      const finishChunk = () => {
-        isPlayingAudioQueue = false;
-        URL.revokeObjectURL(nextChunk.blobUrl);
-        if (audioQueue.length > 0) {
-          processAudioQueue();
-        } else {
-          setPlayingMessageId(null);
-          isAgentSpeakingRef.current = false;
-          if (isListeningRef.current) {
-            setTimeout(() => safeRestartListening(), 300);
-          }
-        }
-      };
-
-      audio.onended = finishChunk;
-      audio.onerror = finishChunk;
-      try {
-        await audio.play();
-      } catch(e) {
-        finishChunk();
-      }
-    };
-
     let accumulatedText = '';
     let updateScheduled = false;
 
@@ -466,9 +512,10 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
     const rate = mainAgent?.voiceProfile?.rate || 1.0;
 
     try {
-      // Clear any leftover audio queue from previous messages
-      audioQueueRef.current = [];
-      isPlayingChunkRef.current = false;
+      // Drop any audio still scheduled from the previous reply, and mark the
+      // stream open so a gap between sentences isn't mistaken for the end.
+      stopScheduledAudio();
+      isStreamingRef.current = true;
 
       await streamChat(
         targetAgentId,
@@ -490,7 +537,7 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
             enqueueAudioChunk(base64, text, mediaType, agentMsgId);
           }
         },
-        // onDone: finalize text, audio queue will drain itself
+        // onDone: finalize text; scheduled audio keeps playing to the end
         (fullText?: string) => {
           flushTextUpdate();
           setIsLoading(false);
@@ -507,6 +554,11 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
     } finally {
       flushTextUpdate();
       setIsLoading(false);
+      // The backend sends every audio chunk before closing the stream, so once
+      // we get here nothing more is coming — let the last chunk settle the
+      // speaking state (or settle it now if playback already drained).
+      isStreamingRef.current = false;
+      maybeFinishSpeaking(playbackGenerationRef.current);
     }
   };
 
@@ -790,13 +842,21 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
       </div>
 
       {/* RIGHT COLUMN: Chat Feed & Controls */}
-      <div className="glass-panel chat-feed-container" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        
+      <div className="glass-panel chat-feed-container" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}>
+
         {/* Chatroom Top Banner */}
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-card-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#ffffff' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: activeAgent?.avatar, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', overflow: 'hidden', flexShrink: 0 }}>
-              {activeAgent?.avatarImage ? (
+            <div
+              onClick={() => activeAgent?.avatarConfig && setShowAvatarStage(v => !v)}
+              title={activeAgent?.avatarConfig ? 'Toggle animated avatar' : undefined}
+              style={{ width: '40px', height: '40px', borderRadius: '10px', background: activeAgent?.avatar, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', overflow: 'hidden', flexShrink: 0, cursor: activeAgent?.avatarConfig ? 'pointer' : 'default' }}
+            >
+              {activeAgent?.avatarConfig?.mode === 'photo' && activeAgent.avatarConfig.photoUrl ? (
+                <PhotoAvatar photoUrl={activeAgent.avatarConfig.photoUrl} landmarks={activeAgent.avatarConfig.landmarks} size={40} talking={!!playingMessageId} analyser={analyserRef} motion={{ mouth: activeAgent.avatarConfig.mouthMotion, head: activeAgent.avatarConfig.headMotion, expr: activeAgent.avatarConfig.exprMotion }} style={{ borderRadius: '10px' }} />
+              ) : activeAgent?.avatarConfig ? (
+                <AnimatedAvatar config={activeAgent.avatarConfig} size={40} talking={!!playingMessageId} analyser={analyserRef} style={{ borderRadius: '10px' }} />
+              ) : activeAgent?.avatarImage ? (
                 <img src={activeAgent.avatarImage} alt={activeAgent.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               ) : (
                 activeAgent?.avatarIcon || '🎙️'
@@ -934,6 +994,47 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
             </span>
           </div>
         </div>
+
+        {/* Floating Animated Persona Stage — the agent as a moving, talking person */}
+        {chatMode === 'single' && activeAgent?.avatarConfig && showAvatarStage && (
+          <div style={{
+            position: 'absolute', top: '86px', right: '18px', zIndex: 20,
+            background: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(8px)',
+            borderRadius: '16px', border: playingMessageId ? '2px solid #a78bfa' : '1px solid rgba(139, 92, 246, 0.35)',
+            padding: '10px 10px 8px', textAlign: 'center',
+            boxShadow: playingMessageId ? '0 0 24px rgba(139, 92, 246, 0.45)' : '0 8px 24px rgba(0,0,0,0.35)',
+            transition: 'border 0.3s, box-shadow 0.3s'
+          }}>
+            <button
+              onClick={() => setShowAvatarStage(false)}
+              title="Hide avatar"
+              style={{ position: 'absolute', top: '6px', right: '6px', width: '18px', height: '18px', borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.15)', color: '#e2e8f0', fontSize: '10px', cursor: 'pointer', lineHeight: 1 }}
+            >
+              ✕
+            </button>
+            {activeAgent.avatarConfig.mode === 'photo' && activeAgent.avatarConfig.photoUrl ? (
+              <PhotoAvatar
+                photoUrl={activeAgent.avatarConfig.photoUrl}
+                landmarks={activeAgent.avatarConfig.landmarks}
+                size={170}
+                talking={!!playingMessageId}
+                analyser={analyserRef}
+                motion={{ mouth: activeAgent.avatarConfig.mouthMotion, head: activeAgent.avatarConfig.headMotion, expr: activeAgent.avatarConfig.exprMotion }}
+              />
+            ) : (
+              <AnimatedAvatar
+                config={activeAgent.avatarConfig}
+                size={170}
+                talking={!!playingMessageId}
+                analyser={analyserRef}
+              />
+            )}
+            <div style={{ fontSize: '12px', fontWeight: 700, color: '#e2e8f0', marginTop: '6px' }}>{activeAgent.name}</div>
+            <div style={{ fontSize: '10px', color: playingMessageId ? '#a78bfa' : '#64748b' }}>
+              {playingMessageId ? '● Speaking' : 'Listening…'}
+            </div>
+          </div>
+        )}
 
         {/* Chat Feed */}
         <div ref={chatFeedRef} style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '960px', margin: '0 auto', width: '100%' }}>

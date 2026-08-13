@@ -1,6 +1,37 @@
 import React, { useState, useRef } from 'react';
-import { Agent, LocalModel } from '../../types/agent';
+import { Agent, AvatarConfig, LocalModel } from '../../types/agent';
 import { createAgent, updateAgent, deleteAgent, uploadVoiceSample, getAudioStreamUrl, getAuthHeaders } from '../../services/api';
+import AnimatedAvatar, {
+  DEFAULT_AVATAR_CONFIG, SKIN_TONES, HAIR_COLORS, EYE_COLORS, SHIRT_COLORS, BG_COLORS, HAIR_STYLES, ACCESSORIES
+} from '../../components/AnimatedAvatar';
+import PhotoAvatar, { DEFAULT_LANDMARKS } from '../../components/PhotoAvatar';
+import FaceMarkerEditor from '../../components/FaceMarkerEditor';
+
+/** Downscale an uploaded portrait to a compact dataURL (agents are stored as JSON). */
+const downscalePhoto = (file: File): Promise<string> => new Promise((resolve, reject) => {
+  const fr = new FileReader();
+  fr.onload = () => {
+    const im = new Image();
+    im.onload = () => {
+      const maxSide = 640;
+      const sc = Math.min(1, maxSide / Math.max(im.width, im.height));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(im.width * sc));
+      c.height = Math.max(1, Math.round(im.height * sc));
+      c.getContext('2d')!.drawImage(im, 0, 0, c.width, c.height);
+      resolve(c.toDataURL('image/jpeg', 0.87));
+    };
+    im.onerror = reject;
+    im.src = fr.result as string;
+  };
+  fr.onerror = reject;
+  fr.readAsDataURL(file);
+});
+
+// Runtime-only dynamic import: keeps both TypeScript and Vite from trying to
+// resolve the CDN URL at build time (the face model is optional — markers can
+// always be placed by hand).
+const dynamicImport = new Function('u', 'return import(u)') as (u: string) => Promise<any>;
 import { Sparkles, Mic, Upload, Volume2, Save, Trash2, Plus, CheckCircle2, UserCheck, StopCircle, Music, Square, Zap, ShieldCheck, Play, Radio, Cpu, Layers, Sliders, FileCode, Box } from 'lucide-react';
 
 interface AgentCreatorStudioProps {
@@ -80,6 +111,62 @@ export const AgentCreatorStudio: React.FC<AgentCreatorStudioProps> = ({
   const [avatar, setAvatar] = useState(agents[0]?.avatar || AVATAR_GRADIENTS[0]);
   const [avatarIcon, setAvatarIcon] = useState(agents[0]?.avatarIcon || '🎙️');
   const [avatarImage, setAvatarImage] = useState<string | undefined>(agents[0]?.avatarImage);
+  const [avatarConfig, setAvatarConfig] = useState<AvatarConfig>(agents[0]?.avatarConfig || DEFAULT_AVATAR_CONFIG);
+  const [detectingFace, setDetectingFace] = useState(false);
+
+  const handlePortraitSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const url = await downscalePhoto(file);
+      setAvatarConfig(prev => ({ ...prev, mode: 'photo', photoUrl: url, landmarks: prev.landmarks || DEFAULT_LANDMARKS }));
+      setRecordingStatus('Portrait loaded — click "Auto-Detect Face" or drag the markers onto the eyes and mouth.');
+    } catch {
+      alert('Could not read that image file.');
+    }
+  };
+
+  const autoDetectFace = async () => {
+    const url = avatarConfig.photoUrl;
+    if (!url || detectingFace) return;
+    setDetectingFace(true);
+    try {
+      const { FilesetResolver, FaceLandmarker } = await dynamicImport('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
+      const fileset = await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+      const fl = await FaceLandmarker.createFromOptions(fileset, {
+        baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task' },
+        runningMode: 'IMAGE',
+        numFaces: 1,
+      });
+      const imgEl = new Image();
+      imgEl.src = url;
+      await new Promise<void>((res, rej) => { imgEl.onload = () => res(); imgEl.onerror = () => rej(new Error('image load')); });
+      const result = fl.detect(imgEl);
+      fl.close();
+      const pts = result?.faceLandmarks?.[0];
+      if (!pts || pts.length < 478) throw new Error('No face found in the photo');
+      // 468 / 473 are the two iris centers; order them by x so "left" is the
+      // viewer's left. Mouth center sits between upper (13) and lower (14) lip.
+      const [le, re] = pts[468].x <= pts[473].x ? [pts[468], pts[473]] : [pts[473], pts[468]];
+      const mw = Math.hypot(pts[291].x - pts[61].x, pts[291].y - pts[61].y) * 1.15;
+      setAvatarConfig(prev => ({
+        ...prev,
+        landmarks: {
+          leftEye: { x: le.x, y: le.y },
+          rightEye: { x: re.x, y: re.y },
+          mouth: { x: (pts[13].x + pts[14].x) / 2, y: (pts[13].y + pts[14].y) / 2 },
+          mouthWidth: Math.max(0.08, Math.min(0.42, mw)),
+        },
+      }));
+      setRecordingStatus('✓ Face points detected — fine-tune with the markers if needed.');
+      setTimeout(() => setRecordingStatus(null), 4000);
+    } catch (err) {
+      console.error('Face auto-detect failed:', err);
+      alert('Auto-detect failed (it needs internet to fetch the face model once). Drag the markers onto the eyes and mouth manually instead.');
+    } finally {
+      setDetectingFace(false);
+    }
+  };
   const [personaTag, setPersonaTag] = useState(agents[0]?.personaTag || 'General AI');
   const [systemPrompt, setSystemPrompt] = useState(agents[0]?.systemPrompt || 'You are a helpful AI assistant.');
   const [temperature, setTemperature] = useState(agents[0]?.temperature || 0.7);
@@ -149,6 +236,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
     setAvatar(agent.avatar);
     setAvatarIcon(agent.avatarIcon || '🤖');
     setAvatarImage(agent.avatarImage);
+    setAvatarConfig(agent.avatarConfig || DEFAULT_AVATAR_CONFIG);
     setPersonaTag(agent.personaTag || 'General');
     setSystemPrompt(agent.systemPrompt);
     setTemperature(agent.temperature);
@@ -184,6 +272,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
     setAvatar(AVATAR_GRADIENTS[0]);
     setAvatarIcon('🎙️');
     setAvatarImage(undefined);
+    setAvatarConfig(DEFAULT_AVATAR_CONFIG);
     setPersonaTag('General AI');
     setSystemPrompt('You are a helpful AI assistant.');
     setTemperature(0.7);
@@ -325,6 +414,7 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
       avatar,
       avatarIcon,
       avatarImage,
+      avatarConfig,
       personaTag,
       systemPrompt,
       temperature,
@@ -874,6 +964,192 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Section 1b: Animated Persona Avatar */}
+          <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '12px', border: '1px solid var(--bg-card-border)' }}>
+            <h4 style={{ fontSize: '14px', color: '#0f172a', fontWeight: 700, marginBottom: '12px' }}>
+              🧑‍🎤 Animated Persona Avatar
+              <span style={{ fontSize: '11px', fontWeight: 500, color: '#475569', marginLeft: '8px' }}>
+                blinks, breathes & lip-syncs while your agent speaks
+              </span>
+            </h4>
+
+            {/* Mode: illustrated persona vs the user's own photo */}
+            <div style={{ display: 'flex', gap: '6px', marginBottom: '14px' }}>
+              {([['cartoon', '🎨 Illustrated'], ['photo', '📷 Photo Realistic']] as Array<['cartoon' | 'photo', string]>).map(([m, label]) => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setAvatarConfig(prev => ({ ...prev, mode: m }))}
+                  style={{
+                    padding: '6px 14px', fontSize: '12px', borderRadius: '8px', cursor: 'pointer',
+                    border: '1px solid #cbd5e1', fontWeight: 700,
+                    background: (avatarConfig.mode ?? 'cartoon') === m ? '#0f172a' : '#ffffff',
+                    color: (avatarConfig.mode ?? 'cartoon') === m ? '#ffffff' : '#0f172a'
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {avatarConfig.mode === 'photo' ? (
+              <div style={{ display: 'flex', gap: '18px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                <div style={{ flexShrink: 0, textAlign: 'center' }}>
+                  {avatarConfig.photoUrl ? (
+                    <PhotoAvatar
+                      photoUrl={avatarConfig.photoUrl}
+                      landmarks={avatarConfig.landmarks}
+                      size={150}
+                      talking={testAudioPlaying}
+                      motion={{ mouth: avatarConfig.mouthMotion, head: avatarConfig.headMotion, expr: avatarConfig.exprMotion }}
+                    />
+                  ) : (
+                    <div style={{ width: '150px', height: '150px', borderRadius: '50%', background: '#e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', color: '#64748b', textAlign: 'center', padding: '14px' }}>
+                      Upload a front-facing portrait to bring it to life
+                    </div>
+                  )}
+                  <div style={{ fontSize: '10px', color: '#64748b', marginTop: '6px' }}>
+                    {testAudioPlaying ? 'Speaking…' : 'Live preview'}
+                  </div>
+                </div>
+                <div style={{ flex: 1, minWidth: '260px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <label style={{ background: '#0f172a', color: '#fff', padding: '8px 12px', borderRadius: '8px', fontSize: '11px', fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                      <Upload size={12} /> {avatarConfig.photoUrl ? 'Change Portrait' : 'Upload Portrait'}
+                      <input type="file" accept="image/*" onChange={handlePortraitSelect} style={{ display: 'none' }} />
+                    </label>
+                    {avatarImage && avatarConfig.photoUrl !== avatarImage && (
+                      <button
+                        type="button"
+                        onClick={() => setAvatarConfig(prev => ({ ...prev, mode: 'photo', photoUrl: avatarImage, landmarks: prev.landmarks || DEFAULT_LANDMARKS }))}
+                        style={{ padding: '8px 12px', fontSize: '11px', borderRadius: '8px', cursor: 'pointer', border: '1px solid #cbd5e1', background: '#ffffff', color: '#0f172a', fontWeight: 700 }}
+                      >
+                        Use profile photo
+                      </button>
+                    )}
+                    {avatarConfig.photoUrl && (
+                      <button
+                        type="button"
+                        onClick={autoDetectFace}
+                        disabled={detectingFace}
+                        style={{ padding: '8px 12px', fontSize: '11px', borderRadius: '8px', cursor: detectingFace ? 'wait' : 'pointer', border: '1px solid #a5b4fc', background: '#eef2ff', color: '#4338ca', fontWeight: 700 }}
+                      >
+                        {detectingFace ? '🔍 Detecting…' : '🔍 Auto-Detect Face'}
+                      </button>
+                    )}
+                  </div>
+                  {avatarConfig.photoUrl && (
+                    <FaceMarkerEditor
+                      photoUrl={avatarConfig.photoUrl}
+                      landmarks={avatarConfig.landmarks || DEFAULT_LANDMARKS}
+                      onChange={(lm) => setAvatarConfig(prev => ({ ...prev, landmarks: lm }))}
+                    />
+                  )}
+                  {avatarConfig.photoUrl && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', background: '#eef2ff', border: '1px solid #c7d2fe', borderRadius: '10px', padding: '10px 12px' }}>
+                      <div style={{ fontSize: '11px', fontWeight: 700, color: '#3730a3' }}>🎚️ Animation Intensity</div>
+                      {([
+                        ['Mouth movement', 'mouthMotion'],
+                        ['Head movement', 'headMotion'],
+                        ['Expression (brows/lips)', 'exprMotion'],
+                      ] as Array<[string, 'mouthMotion' | 'headMotion' | 'exprMotion']>).map(([label, key]) => {
+                        const val = avatarConfig[key] ?? 1;
+                        return (
+                          <label key={key} style={{ fontSize: '11px', color: '#475569', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ width: '128px', flexShrink: 0 }}>{label}</span>
+                            <input
+                              type="range" min={0} max={2} step={0.05}
+                              value={val}
+                              onChange={(e) => setAvatarConfig(prev => ({ ...prev, [key]: parseFloat(e.target.value) }))}
+                              style={{ flex: 1 }}
+                            />
+                            <span style={{ width: '38px', textAlign: 'right', color: '#3730a3' }}>{Math.round(val * 100)}%</span>
+                          </label>
+                        );
+                      })}
+                      <div style={{ fontSize: '10px', color: '#64748b' }}>100% = default. Drag toward 0 for subtler, past 100% for more drama.</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+            <div style={{ display: 'flex', gap: '18px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+              <div style={{ flexShrink: 0, textAlign: 'center' }}>
+                <AnimatedAvatar config={avatarConfig} size={150} talking={testAudioPlaying} />
+                <div style={{ fontSize: '10px', color: '#64748b', marginTop: '6px' }}>
+                  {testAudioPlaying ? 'Speaking…' : 'Live preview'}
+                </div>
+              </div>
+              <div style={{ flex: 1, minWidth: '260px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {([
+                  ['Skin', SKIN_TONES, 'skinTone'],
+                  ['Hair Color', HAIR_COLORS, 'hairColor'],
+                  ['Eyes', EYE_COLORS, 'eyeColor'],
+                  ['Shirt', SHIRT_COLORS, 'shirtColor'],
+                  ['Backdrop', BG_COLORS, 'bgColor'],
+                ] as Array<[string, string[], 'skinTone' | 'hairColor' | 'eyeColor' | 'shirtColor' | 'bgColor']>).map(([label, palette, key]) => (
+                  <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '11px', color: '#475569', fontWeight: 600, width: '76px', flexShrink: 0 }}>{label}</span>
+                    <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+                      {palette.map(color => (
+                        <div
+                          key={color}
+                          onClick={() => setAvatarConfig(prev => ({ ...prev, [key]: color }))}
+                          style={{
+                            width: '22px', height: '22px', borderRadius: '6px', background: color, cursor: 'pointer',
+                            border: avatarConfig[key] === color ? '2px solid #0f172a' : '2px solid transparent',
+                            boxShadow: avatarConfig[key] === color ? '0 0 0 2px #a5b4fc' : 'none'
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '11px', color: '#475569', fontWeight: 600, width: '76px', flexShrink: 0 }}>Hairstyle</span>
+                  <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+                    {HAIR_STYLES.map(hs => (
+                      <button
+                        key={hs.id}
+                        type="button"
+                        onClick={() => setAvatarConfig(prev => ({ ...prev, hairStyle: hs.id }))}
+                        style={{
+                          padding: '4px 10px', fontSize: '11px', borderRadius: '6px', cursor: 'pointer',
+                          border: '1px solid #cbd5e1',
+                          background: avatarConfig.hairStyle === hs.id ? '#0f172a' : '#ffffff',
+                          color: avatarConfig.hairStyle === hs.id ? '#ffffff' : '#0f172a', fontWeight: 600
+                        }}
+                      >
+                        {hs.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '11px', color: '#475569', fontWeight: 600, width: '76px', flexShrink: 0 }}>Extras</span>
+                  <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+                    {ACCESSORIES.map(ac => (
+                      <button
+                        key={ac.id}
+                        type="button"
+                        onClick={() => setAvatarConfig(prev => ({ ...prev, accessory: ac.id }))}
+                        style={{
+                          padding: '4px 10px', fontSize: '11px', borderRadius: '6px', cursor: 'pointer',
+                          border: '1px solid #cbd5e1',
+                          background: avatarConfig.accessory === ac.id ? '#0f172a' : '#ffffff',
+                          color: avatarConfig.accessory === ac.id ? '#ffffff' : '#0f172a', fontWeight: 600
+                        }}
+                      >
+                        {ac.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            )}
           </div>
 
           {/* Section 2: System Prompt Engineer */}

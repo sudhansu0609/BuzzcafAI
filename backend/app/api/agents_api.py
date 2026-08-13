@@ -39,6 +39,9 @@ class AgentModel(BaseModel):
     voiceProfile: Optional[VoiceProfileModel] = None
     createdAt: Optional[str] = None
     avatarImage: Optional[str] = None
+    # Animated persona config (skin/hair/eyes/etc.) — opaque to the backend;
+    # without an explicit field pydantic would silently drop it on save.
+    avatarConfig: Optional[Dict[str, Any]] = None
     voiceEnabled: Optional[bool] = True
     ownerId: Optional[str] = None
 
@@ -285,7 +288,12 @@ async def chat_stream_parallel_tts(request: ChatRequest, x_user_id: str = Header
     sample_path = voice_profile.get("samplePath") if voice_profile else None
     pitch = voice_profile.get("pitch", 1.0) if voice_profile else 1.0
     rate = voice_profile.get("rate", 1.0) if voice_profile else 1.0
-    
+
+    # Heat the clone pipeline (GPU clocks, kernels, speaker latents — and the
+    # XTTS server relaunch if it died) while the LLM writes the first sentence,
+    # so the first audio chunk doesn't pay the cold-start penalty serially.
+    VoiceEngineService.warm_xtts_for_sample(sample_path)
+
     llm_service = LocalLLMService()
     
     sse_queue: asyncio.Queue = asyncio.Queue()

@@ -158,7 +158,11 @@ def _get_cached_latents(speaker_wav: str):
 # then re-roll the take when the result runs long and keep the closest one.
 MAX_ATTEMPTS = 2
 DURATION_TOLERANCE = 1.35   # accept up to 35% over the estimate
-TRUNCATION_FLOOR = 0.55     # below this, the take was cut short — also reject
+# Below this ratio the take was probably cut short. Calibrated for MERGED
+# chunks (90-220 chars), whose healthy ratios run 0.53-0.84 of the CPS
+# estimate — at the old 0.55 floor, roughly half of good Hindi takes were
+# rejected as "truncated" and re-rolled for nothing (~3s each).
+TRUNCATION_FLOOR = 0.40
 
 # Absolute slack added on top of the ratio test. Short lines have very noisy
 # duration ratios — "Sure!" overshooting its 1.2s estimate by half a second
@@ -261,8 +265,10 @@ def _synthesize_sentence(sent, lang, gpt_cond_latent, speaker_embedding,
             sys.stdout.flush()
             return best[1], attempt, False
 
-        print(f"[XTTS Server]   take {attempt} rejected ({dur:.2f}s > "
-              f"{allowed:.2f}s allowed) — re-rolling: {sent[:40]!r}")
+        reason = (f"{dur:.2f}s > {allowed:.2f}s allowed" if dur > allowed
+                  else f"ratio {ratio:.2f} < floor {TRUNCATION_FLOOR}")
+        print(f"[XTTS Server]   take {attempt} rejected ({reason}) — "
+              f"re-rolling: {sent[:40]!r}")
         sys.stdout.flush()
 
     return best[1], attempts_cap, False
@@ -322,6 +328,40 @@ def _split_sentences(text: str):
 
     return merged or [text.strip()]
 
+# ── Per-speaker warmup ──────────────────────────────────────────────────────
+# The first inference after the GPU has idled runs at ~2x the cost of the ones
+# that follow (downclocked GPU + cold kernels). A chat reply has a natural
+# window to hide that in: the LLM takes several seconds to produce the first
+# sentence, during which TTS has nothing to do. /warmup lets the backend use
+# that window — it caches the speaker's latents and runs one throwaway micro
+# inference so the first *real* sentence starts hot.
+_WARM_STATE = {"speaker": None, "at": 0.0}
+_WARM_INTERVAL_S = 90.0
+
+
+def _warm_speaker(speaker_wav: str) -> None:
+    try:
+        if (_WARM_STATE["speaker"] == speaker_wav
+                and time.time() - _WARM_STATE["at"] < _WARM_INTERVAL_S):
+            return
+        with TTS_LOCK:
+            g, s = _get_cached_latents(speaker_wav)
+            XTTS.inference(
+                text="ठीक है।", language="hi",
+                gpt_cond_latent=g, speaker_embedding=s,
+                temperature=0.75, repetition_penalty=REPETITION_PENALTY,
+                length_penalty=1.0, top_k=50, top_p=0.85,
+                enable_text_splitting=False,
+            )
+        _WARM_STATE["speaker"] = speaker_wav
+        _WARM_STATE["at"] = time.time()
+        print(f"[XTTS Server] 🔥 Warmed for {os.path.basename(speaker_wav)}")
+        sys.stdout.flush()
+    except Exception as e:
+        print(f"[XTTS Server] Warmup notice: {e}")
+        sys.stdout.flush()
+
+
 class XTTSHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass  # Suppress default HTTP logs
@@ -338,6 +378,24 @@ class XTTSHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
+
+        if parsed.path == "/warmup":
+            content_length = int(self.headers.get("Content-Length", 0))
+            try:
+                data = json.loads(self.rfile.read(content_length))
+                speaker_wav = data.get("speaker_wav", "")
+            except Exception:
+                speaker_wav = ""
+            if speaker_wav and os.path.exists(speaker_wav):
+                # Fire-and-forget: reply immediately so the caller never blocks
+                # on the warm inference itself.
+                threading.Thread(target=_warm_speaker, args=(speaker_wav,), daemon=True).start()
+                self.send_response(202)
+            else:
+                self.send_response(400)
+            self.end_headers()
+            return
+
         if parsed.path != "/synthesize":
             self.send_response(404)
             self.end_headers()

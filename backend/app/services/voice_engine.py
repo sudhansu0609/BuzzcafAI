@@ -7,6 +7,8 @@ import subprocess
 import shutil
 import json
 import re
+import threading
+import time
 import urllib.request
 import urllib.error
 from typing import Dict, Any, Optional, List
@@ -85,25 +87,97 @@ def _is_f5_server_ready() -> bool:
     except Exception:
         return False
 
+# Relaunch bookkeeping. A dead XTTS server is the single biggest cause of a
+# cloned agent answering in somebody else's voice, so we relaunch on demand —
+# but never faster than the cooldown, or a burst of chat sentences would each
+# spawn their own 2GB model load.
+_XTTS_LAUNCH_LOCK = threading.Lock()
+_XTTS_LAST_LAUNCH = 0.0
+XTTS_LAUNCH_COOLDOWN_S = 120.0
+# How long a cloned request may block waiting for the model to finish loading.
+XTTS_READY_WAIT_S = float(os.getenv("XTTS_READY_WAIT_S", "45"))
+
+
 def _start_xtts_server_background() -> None:
     """Start the XTTS server as a background process if not running."""
     if not os.path.exists(VOICE_ENV_PYTHON) or not os.path.exists(XTTS_SERVER_SCRIPT):
         return
     try:
+        # DETACHED_PROCESS: the server must NOT inherit the backend's console.
+        # While it did, closing the backend window — or any uvicorn --reload
+        # restart — delivered it a CTRL_CLOSE and it aborted mid-session
+        # ("forrtl: error (200): program aborting due to window-CLOSE event").
+        # From then on every reply silently fell back to a generic Edge voice.
+        creationflags = 0
+        if os.name == 'nt':
+            DETACHED_PROCESS = 0x00000008
+            CREATE_NEW_PROCESS_GROUP = 0x00000200
+            creationflags = DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
         subprocess.Popen(
             [VOICE_ENV_PYTHON, XTTS_SERVER_SCRIPT],
             stdout=open(os.path.join(BACKEND_DIR, "xtts_server.log"), "a"),
             stderr=subprocess.STDOUT,
+            stdin=subprocess.DEVNULL,
             cwd=BACKEND_DIR,
-            creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
+            close_fds=True,
+            creationflags=creationflags
         )
         print("[VoiceEngine] Started XTTS server in background — warming up...")
     except Exception as e:
         print(f"[VoiceEngine] Could not start XTTS server: {e}")
 
-def _call_xtts_server(text: str, speaker_wav: str, language: str = "en") -> Optional[bytes]:
-    """Call the persistent XTTS microservice to synthesize speech."""
-    body = json.dumps({"text": text, "speaker_wav": speaker_wav, "language": language}).encode()
+
+def _launch_xtts_if_down() -> None:
+    """Relaunch the XTTS microservice if it stopped answering (cooldown-guarded)."""
+    global _XTTS_LAST_LAUNCH
+    with _XTTS_LAUNCH_LOCK:
+        if _is_xtts_server_ready():
+            return
+        if time.time() - _XTTS_LAST_LAUNCH < XTTS_LAUNCH_COOLDOWN_S:
+            return
+        _XTTS_LAST_LAUNCH = time.time()
+        _start_xtts_server_background()
+
+
+def _ensure_xtts_ready(timeout: float = XTTS_READY_WAIT_S) -> bool:
+    """Block (bounded) until the XTTS microservice is serving, relaunching it
+    if it died. Blocking is deliberate for cloned agents: the alternative is
+    answering the user in a voice that is not their clone at all.
+
+    Blocking call — invoke via asyncio.to_thread from async code.
+    """
+    if _is_xtts_server_ready():
+        return True
+    _launch_xtts_if_down()
+    deadline = time.time() + max(0.0, timeout)
+    while time.time() < deadline:
+        if _is_xtts_server_ready():
+            return True
+        time.sleep(1.0)
+    return _is_xtts_server_ready()
+
+def _call_xtts_server(text: str, speaker_wav: str, language: str = "en",
+                      temperature: float = 0.80, speed: float = 1.0,
+                      max_attempts: Optional[int] = None) -> Optional[bytes]:
+    """Call the persistent XTTS microservice to synthesize speech.
+
+    temperature controls emotional expressiveness (higher = more emotive
+    prosody); speed slightly slows/speeds delivery for clarity.
+
+    max_attempts=1 tells the server to skip its over-generation re-rolls. Use it
+    for the first sentence of a reply, where the listener is waiting on audio
+    and a re-roll would double the wait.
+    """
+    payload = {
+        "text": text,
+        "speaker_wav": speaker_wav,
+        "language": language,
+        "temperature": temperature,
+        "speed": speed,
+    }
+    if max_attempts is not None:
+        payload["max_attempts"] = max_attempts
+    body = json.dumps(payload).encode()
     try:
         req = urllib.request.Request(
             f"{XTTS_SERVER_URL}/synthesize",
@@ -111,7 +185,10 @@ def _call_xtts_server(text: str, speaker_wav: str, language: str = "en") -> Opti
             headers={"Content-Type": "application/json"},
             method="POST"
         )
-        with urllib.request.urlopen(req, timeout=60) as resp:
+        # Generous timeout: the server's over-generation guard may re-roll a
+        # sentence up to 3 times, so a long multi-sentence reply can take
+        # noticeably longer than a single pass.
+        with urllib.request.urlopen(req, timeout=180) as resp:
             if resp.status == 200:
                 data = resp.read()
                 if data:
@@ -183,15 +260,16 @@ def _call_rvc_server(base_audio: str, model_path: str, pitch_shift: int = 0) -> 
 
 class VoiceEngineService:
     VOICES_DIR = VOICES_DIR
-    _xtts_server_started = False
 
     @staticmethod
     def ensure_xtts_server() -> None:
-        """Ensure the XTTS background server is running."""
-        if not _is_xtts_server_ready():
-            if not VoiceEngineService._xtts_server_started:
-                VoiceEngineService._xtts_server_started = True
-                _start_xtts_server_background()
+        """Ensure the XTTS background server is running (fire-and-forget).
+
+        Deliberately not latched to "started once": the server can die at any
+        point in a session, and a latch turned that into a permanent downgrade
+        to non-cloned voices for every later reply.
+        """
+        _launch_xtts_if_down()
 
     @staticmethod
     def get_voice_models() -> List[Dict[str, str]]:
@@ -261,23 +339,73 @@ class VoiceEngineService:
 
     @staticmethod
     def _normalize_audio_to_pcm_wav(input_path: str, output_path: str) -> bool:
-        """Normalizes recorded/uploaded audio sample to clean mono 16-bit PCM WAV for XTTS zero-shot voice cloning."""
+        """Clean a recorded/uploaded sample into the ideal XTTS cloning reference.
+
+        A clean reference is the biggest factor in cloning accuracy. We:
+          • decode to mono at 24 kHz (XTTS's native rate — no internal resample)
+          • trim leading/trailing silence (dead air confuses the speaker encoder)
+          • drop internal gaps longer than ~0.6s that add no timbre information
+          • keep up to 30s of actual speech (matches gpt_cond_len=30)
+          • peak-normalize so every clone has consistent, clear loudness
+        """
         try:
             if not os.path.exists(input_path):
                 return False
-            data, sr = sf.read(input_path)
-            if len(data.shape) > 1:
-                data = data.mean(axis=1)  # Convert stereo channels to mono
-            sf.write(output_path, data, sr, subtype='PCM_16')
+            # Decode → mono float32 @ 24kHz
+            y, sr = librosa.load(input_path, sr=24000, mono=True)
+            if y is None or len(y) == 0:
+                raise ValueError("empty audio")
+
+            # Trim leading/trailing silence
+            y_trim, _ = librosa.effects.trim(y, top_db=30)
+            if len(y_trim) < sr * 0.5:  # trimming ate almost everything → keep original
+                y_trim = y
+
+            # Concatenate only the voiced/energetic intervals, keeping short
+            # natural pauses but removing long dead gaps.
+            intervals = librosa.effects.split(y_trim, top_db=30)
+            if len(intervals) > 0:
+                max_gap = int(sr * 0.6)
+                pieces = []
+                prev_end = None
+                for start, end in intervals:
+                    if prev_end is not None:
+                        gap = start - prev_end
+                        if gap > 0:
+                            pieces.append(y_trim[prev_end:prev_end + min(gap, max_gap)])
+                    pieces.append(y_trim[start:end])
+                    prev_end = end
+                y_clean = np.concatenate(pieces) if pieces else y_trim
+            else:
+                y_clean = y_trim
+
+            # Cap to 30s of speech for a strong-but-bounded conditioning window
+            if len(y_clean) > sr * 30:
+                y_clean = y_clean[: sr * 30]
+
+            # Peak-normalize to ~-1 dBFS (avoid clipping, consistent loudness)
+            peak = float(np.max(np.abs(y_clean))) if len(y_clean) else 0.0
+            if peak > 0:
+                y_clean = (y_clean / peak) * 0.891  # ~-1 dBFS
+
+            sf.write(output_path, y_clean, sr, subtype='PCM_16', format='WAV')
             return True
         except Exception as ex:
             print(f"[VoiceEngine] Normalization notice: {ex}")
             try:
-                if os.path.exists(input_path) and input_path != output_path:
-                    shutil.copyfile(input_path, output_path)
-                    return True
+                # Fallback: at least deliver clean mono PCM_16 at original rate
+                data, sr = sf.read(input_path)
+                if len(data.shape) > 1:
+                    data = data.mean(axis=1)
+                sf.write(output_path, data, sr, subtype='PCM_16')
+                return True
             except Exception:
-                pass
+                try:
+                    if os.path.exists(input_path) and input_path != output_path:
+                        shutil.copyfile(input_path, output_path)
+                        return True
+                except Exception:
+                    pass
             return False
 
     @staticmethod
@@ -335,21 +463,6 @@ class VoiceEngineService:
             "status": "cloned"
         }
 
-    VOICES_DIR = VOICES_DIR
-    _xtts_server_started = False
-
-    @staticmethod
-    def ensure_xtts_server() -> None:
-        """Ensure the XTTS background server is running."""
-        if not _is_xtts_server_ready():
-            if not VoiceEngineService._xtts_server_started:
-                VoiceEngineService._xtts_server_started = True
-                _start_xtts_server_background()
-
-    @staticmethod
-    def get_voice_models() -> List[Dict[str, str]]:
-        return VOICE_MODELS_CATALOG
-
     @staticmethod
     def prepare_expressive_speech_text(text: str, is_kokoro: bool = False) -> str:
         if not text:
@@ -404,6 +517,73 @@ class VoiceEngineService:
 
         # 5. Add prosodic breath pauses
         cleaned = cleaned.replace("...", "... ").replace("! ", "! ").replace("? ", "? ")
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+        return cleaned
+
+    # Romanized Hindi tokens that are NOT also English words. Deliberately
+    # excludes ambiguous ones ("main", "nam", "hu") — those are what made the
+    # old substring heuristic fire on "domain", "name" and "human".
+    _HINGLISH_TOKENS = frozenset({
+        "mera", "meri", "mere", "naam", "tumhara", "tumse", "tum", "tumhe",
+        "aap", "aapka", "aapko", "kya", "kyun", "kyon", "kaise", "kaisa",
+        "hai", "hain", "hoon", "nahi", "nahin", "acha", "achha", "achhi",
+        "bahut", "yaar", "arre", "chalo", "matlab", "thoda", "zyada",
+        "abhi", "aaj", "kal", "milkar", "khush", "dekhna", "chahta",
+        "chahti", "hua", "hui", "karo", "karna", "raha", "rahi", "rahe",
+        "gaya", "gayi", "bhi", "toh", "phir", "kuch", "kaun", "kahan",
+        "jaldi", "theek", "dost", "bhai", "didi", "namaste", "baat",
+        "mujhe", "mujhko", "hum", "hamara", "sab", "koi", "wala", "wali",
+    })
+
+    @staticmethod
+    def detect_tts_language(text: str) -> str:
+        """Pick the XTTS language code for `text` ("hi" or "en").
+
+        Matches on WORD BOUNDARIES, not substrings. The previous substring
+        heuristic routed ~75% of plain English to the Hindi path (\"name\",
+        \"domain\", \"human\", \"chair\" all matched, and \"agent\"/\"voice\"
+        were literally in the Hindi list) — which matters a lot, because
+        XTTS's Hindi text frontend is an unimplemented stub in Coqui TTS
+        0.22.0 and produces rambling, mumbled audio.
+        """
+        if not text:
+            return "en"
+        # Any Devanagari character is decisive.
+        if any('ऀ' <= ch <= 'ॿ' for ch in text):
+            return "hi"
+        words = set(re.findall(r"[a-z]+", text.lower()))
+        hits = words & VoiceEngineService._HINGLISH_TOKENS
+        # Two distinct markers, or one in a short line, indicates Hinglish.
+        # A single marker inside a long English sentence is treated as English.
+        if len(hits) >= 2 or (hits and len(words) <= 6):
+            return "hi"
+        return "en"
+
+    @staticmethod
+    def prepare_clone_text(text: str) -> str:
+        """Prepare text for XTTS voice cloning.
+
+        Unlike prepare_expressive_speech_text (used for Edge/Kokoro), this does
+        NOT inject filler tokens like "hehe...", "haaah...", "mmm..." — XTTS
+        tries to literally pronounce those, which is the root cause of the
+        mumbling/gibberish. Emotion for XTTS instead comes from clean text +
+        natural punctuation (! ? ...) + the reference voice + temperature.
+        We keep the sentence and its emotive words fully intact, only stripping
+        markup and normalizing spacing so every word is voiced clearly.
+        """
+        if not text:
+            return ""
+        # Strip markdown / formatting symbols XTTS would otherwise vocalize
+        cleaned = re.sub(r'[*_#`~^|<>]', ' ', text)
+        # Remove emoji / non-speech pictographs that produce noise
+        cleaned = re.sub(r'[\U0001F000-\U0001FAFF\U00002600-\U000027BF]', ' ', cleaned)
+        # Drop stray bracketed stage-directions e.g. [laughs], (sighs)
+        cleaned = re.sub(r'[\[\(][^\]\)]{0,20}[\]\)]', ' ', cleaned)
+        # Keep sentence-final punctuation for natural intonation; collapse
+        # runs of dots to a single ellipsis (a gentle pause, not a stutter)
+        cleaned = re.sub(r'\.{3,}', '...', cleaned)
+        cleaned = re.sub(r'([!?]){2,}', r'\1', cleaned)
+        # Normalize whitespace
         cleaned = re.sub(r'\s+', ' ', cleaned).strip()
         return cleaned
 
@@ -617,7 +797,13 @@ class VoiceEngineService:
         voice_base: Optional[str] = None,
         clone_method: str = "openvoice",
         fast_mode: bool = True
-    ) -> tuple[bytes, str]:
+    ) -> tuple[bytes, str, str]:
+        """Synthesize `text`. Returns (audio_bytes, media_type, engine).
+
+        `engine` names what actually spoke ("xtts-clone", "edge-fallback", …)
+        so callers can tell the listener when the clone was unavailable instead
+        of quietly substituting a stranger's voice.
+        """
         if not text or not text.strip():
             text = "Hello! Your MidnightBuzz voice studio is active."
 
@@ -626,16 +812,19 @@ class VoiceEngineService:
         if len(raw_text) < 10:
             # Return a tiny silent WAV (44-byte header + 0 samples)
             silent_wav = b'RIFF$\x00\x00\x00WAVEfmt \x10\x00\x00\x00\x01\x00\x01\x00"V\x00\x00D\xac\x00\x00\x02\x00\x10\x00data\x00\x00\x00\x00'
-            return silent_wav, "audio/wav"
+            return silent_wav, "audio/wav", "silence"
 
-        if fast_mode and len(raw_text) > 220:
+        # Check if user-uploaded sample path exists
+        has_custom_sample = sample_path and os.path.exists(os.path.join(VOICES_DIR, os.path.basename(sample_path)))
+
+        # Never trim a cloned reply: the clone is expected to speak every word.
+        # XTTS splits long text into sentences server-side anyway, so trimming
+        # here would only silence the tail of the message.
+        if fast_mode and len(raw_text) > 220 and not has_custom_sample:
             text = VoiceEngineService.optimize_text_for_fast_tts(raw_text, max_chars=220)
 
         # Determine gender for voice selection
         is_female = any(fem in (voice_base or "").lower() for fem in ["swara", "neerja", "ananya", "shilpi", "woman", "female", "girl", "sarah", "bella"]) or any(w in text.lower() for w in ["shilpi", "ananya", "ladki", "female"])
-
-        # Check if user-uploaded sample path exists
-        has_custom_sample = sample_path and os.path.exists(os.path.join(VOICES_DIR, os.path.basename(sample_path)))
 
         # Detect if voice_base is a Kokoro voice
         is_kokoro_voice = voice_base and "kokoro" in voice_base.lower()
@@ -644,25 +833,42 @@ class VoiceEngineService:
 
         # ── Step 0A: True Voice Cloning for Agents with Audio Samples ──
         # If the user recorded or uploaded a voice sample (has_custom_sample=True),
-        # ALWAYS use high-speed GPU XTTS v2 zero-shot cloning in THEIR exact voice!
-        if has_custom_sample and _is_xtts_server_ready():
+        # the reply MUST come out in their voice. We wait for (and relaunch) the
+        # XTTS microservice rather than quietly substituting a stock voice — a
+        # silent downgrade is indistinguishable from "cloning is broken".
+        if has_custom_sample:
+            clean_filename = os.path.basename(sample_path)
             try:
-                clean_filename = os.path.basename(sample_path)
                 speaker_wav_path = os.path.join(VOICES_DIR, clean_filename)
-                normalized_path = os.path.join(VOICES_DIR, f"norm_{clean_filename}")
+                # "norm2_" cache key forces regeneration of references that were
+                # normalized by the older (uncleaned) logic.
+                normalized_path = os.path.join(VOICES_DIR, f"norm2_{clean_filename}")
                 if not os.path.exists(normalized_path):
                     VoiceEngineService._normalize_audio_to_pcm_wav(speaker_wav_path, normalized_path)
                 target_wav = normalized_path if os.path.exists(normalized_path) else speaker_wav_path
 
-                hindi_words = ["mera", "nam", "naam", "main", "tumhara", "hai", "hu", "kya", "dekhna", "chahta", "achi", "achhi", "hui", "nahi", "सुधांशु", "हाय", "वॉइस", "agent", "voice"]
-                xtts_lang = "hi" if any(w in text.lower() for w in hindi_words) or any('\u0900' <= char <= '\u097F' for char in text) else "en"
-                tts_text = VoiceEngineService.prepare_expressive_speech_text(text.strip(), is_kokoro=False)
+                xtts_lang = VoiceEngineService.detect_tts_language(text)
+                # Use the clean-text preparer (no injected "hehe/haaah/mmm"
+                # fillers) so XTTS voices every real word clearly instead of
+                # mumbling nonsense syllables.
+                tts_text = VoiceEngineService.prepare_clone_text(text.strip())
 
                 print(f"[VoiceEngine] High-Speed XTTS v2 zero-shot cloning user voice from '{clean_filename}'...")
-                result = await asyncio.to_thread(_call_xtts_server, tts_text, target_wav, xtts_lang)
-                if result:
-                    print(f"[VoiceEngine] [OK] XTTS v2 cloned user voice in '{xtts_lang}': {len(result)} bytes")
-                    return result, "audio/wav"
+                # Two passes: the server can die between the health check and the
+                # request, and relaunching costs far less than the wrong voice.
+                for attempt in (1, 2):
+                    if not await asyncio.to_thread(_ensure_xtts_ready):
+                        print("[VoiceEngine] [WARN] XTTS server did not come up in time")
+                        break
+                    # temperature=0.85 gives lively, emotive prosody in the cloned
+                    # voice; speed=0.96 keeps articulation crisp and unhurried.
+                    result = await asyncio.to_thread(
+                        _call_xtts_server, tts_text, target_wav, xtts_lang, 0.85, 0.96, None
+                    )
+                    if result:
+                        print(f"[VoiceEngine] [OK] XTTS v2 cloned user voice in '{xtts_lang}': {len(result)} bytes")
+                        return result, "audio/wav", "xtts-clone"
+                    print(f"[VoiceEngine] XTTS clone attempt {attempt} produced no audio")
             except Exception as xtts_ex:
                 print(f"[VoiceEngine] XTTS v2 voice cloning notice: {xtts_ex}")
 
@@ -675,8 +881,8 @@ class VoiceEngineService:
             try:
                 audio_bytes = await VoiceEngineService._edge_tts_generate(tts_text, pitch=pitch, rate=rate, voice=fallback_voice)
                 if audio_bytes and len(audio_bytes) > 200:
-                    print(f"[VoiceEngine] [OK] Cloned agent Edge TTS fallback '{fallback_voice}': {len(audio_bytes)} bytes")
-                    return audio_bytes, "audio/mpeg"
+                    print(f"[VoiceEngine] [WARN] CLONE UNAVAILABLE — spoke with Edge TTS '{fallback_voice}' instead: {len(audio_bytes)} bytes")
+                    return audio_bytes, "audio/mpeg", "edge-fallback"
             except Exception as ex:
                 print(f"[VoiceEngine] Edge TTS cloned-agent fallback error: {ex}")
 
@@ -687,7 +893,7 @@ class VoiceEngineService:
                 kokoro_bytes = await asyncio.to_thread(VoiceEngineService._kokoro_generate, text.strip(), voice_base, rate)
                 if kokoro_bytes:
                     print(f"[VoiceEngine] [OK] Kokoro ONNX voice '{voice_base}': {len(kokoro_bytes)} bytes")
-                    return kokoro_bytes, "audio/wav"
+                    return kokoro_bytes, "audio/wav", "kokoro"
             except Exception as k_ex:
                 print(f"[VoiceEngine] Kokoro ONNX notice: {k_ex}")
 
@@ -702,7 +908,7 @@ class VoiceEngineService:
                     el_voice = "ErXwobaYiN019PkySvjV"
             el_bytes = VoiceEngineService._elevenlabs_generate(text.strip(), voice_id=el_voice, api_key=el_key)
             if el_bytes:
-                return el_bytes, "audio/mpeg"
+                return el_bytes, "audio/mpeg", "elevenlabs"
 
         # ── Step 1: Edge TTS — Fast, Clear, Reliable (~200ms) ──
         # Use the agent's configured voice_base if it's a valid Edge TTS ID,
@@ -719,7 +925,7 @@ class VoiceEngineService:
             audio_bytes = await VoiceEngineService._edge_tts_generate(tts_text, pitch=pitch, rate=rate, voice=edge_voice)
             if audio_bytes and len(audio_bytes) > 200:
                 print(f"[VoiceEngine] [OK] Edge TTS '{edge_voice}': {len(audio_bytes)} bytes")
-                return audio_bytes, "audio/mpeg"
+                return audio_bytes, "audio/mpeg", "edge"
         except Exception as ex:
             print(f"[VoiceEngine] Edge TTS attempt 1 error: {ex}")
 
@@ -731,7 +937,7 @@ class VoiceEngineService:
                 audio_bytes = await VoiceEngineService._edge_tts_generate(sanitized_text, pitch=pitch, rate=rate, voice=edge_voice)
                 if audio_bytes and len(audio_bytes) > 200:
                     print(f"[VoiceEngine] [OK] Edge TTS (sanitized) '{edge_voice}': {len(audio_bytes)} bytes")
-                    return audio_bytes, "audio/mpeg"
+                    return audio_bytes, "audio/mpeg", "edge"
             except Exception as ex:
                 print(f"[VoiceEngine] Edge TTS attempt 2 (sanitized) error: {ex}")
 
@@ -740,11 +946,13 @@ class VoiceEngineService:
             audio_bytes = await VoiceEngineService._edge_tts_generate(sanitized_text, pitch=pitch, rate=rate, voice="en-IN-NeerjaExpressiveNeural")
             if audio_bytes and len(audio_bytes) > 200:
                 print(f"[VoiceEngine] [OK] Expressive Indian Edge TTS 'en-IN-NeerjaExpressiveNeural': {len(audio_bytes)} bytes")
-                return audio_bytes, "audio/mpeg"
+                return audio_bytes, "audio/mpeg", "edge"
         except Exception as ex:
             print(f"[VoiceEngine] Edge TTS NeerjaExpressive error: {ex}")
 
         # ── Step 2: XTTS v2 Voice Cloning (final XTTS attempt for any remaining cases) ──
+        # No user sample here, so this is a stock reference — don't block waiting
+        # for a cold server, just use it if it happens to be up.
         if _is_xtts_server_ready():
             try:
                 target_wav = None
@@ -756,12 +964,12 @@ class VoiceEngineService:
                     target_wav = os.path.join(VOICES_DIR, "60sec_ref_12s.wav")
 
                 if target_wav and os.path.exists(target_wav):
-                    tts_text = VoiceEngineService.prepare_expressive_speech_text(text.strip(), is_kokoro=False)
+                    tts_text = VoiceEngineService.prepare_clone_text(text.strip())
                     print(f"[VoiceEngine] XTTS v2 fallback with ref='{os.path.basename(target_wav)}', lang='hi'")
-                    result = _call_xtts_server(tts_text, target_wav, "hi")
+                    result = _call_xtts_server(tts_text, target_wav, "hi", 0.85, 0.96)
                     if result:
                         print(f"[VoiceEngine] [OK] XTTS v2 speech: {len(result)} bytes")
-                        return result, "audio/wav"
+                        return result, "audio/wav", "xtts-stock"
             except Exception as xtts_ex:
                 print(f"[VoiceEngine] XTTS v2 error: {xtts_ex}")
 
@@ -771,7 +979,7 @@ class VoiceEngineService:
             print(f"[VoiceEngine] Final fallback: Kokoro ONNX '{kokoro_voice}'")
             kokoro_bytes = VoiceEngineService._kokoro_generate(text.strip(), voice=kokoro_voice, speed=rate)
             if kokoro_bytes:
-                return kokoro_bytes, "audio/wav"
+                return kokoro_bytes, "audio/wav", "kokoro"
 
         # ── Step 4: gTTS absolute last resort ──
         try:
@@ -779,10 +987,10 @@ class VoiceEngineService:
             fp = io.BytesIO()
             tts.write_to_fp(fp)
             fp.seek(0)
-            return fp.read(), "audio/mpeg"
+            return fp.read(), "audio/mpeg", "gtts"
         except Exception as ex:
             print(f"gTTS error: {ex}")
-            return b"", "audio/mpeg"
+            return b"", "audio/mpeg", "none"
 
     @staticmethod
     def transcribe_audio(audio_bytes: bytes) -> str:

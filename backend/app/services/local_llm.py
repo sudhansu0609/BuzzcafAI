@@ -19,6 +19,19 @@ def clean_human_dialogue(text: str) -> str:
     result = " ".join(lines).strip()
     return result if result else text.strip()
 
+def _is_chat_model(model_id: str, item: Dict[str, Any]) -> bool:
+    """Exclude embedding/reranker models from the chat model picker.
+
+    LM Studio's native /api/v0/models reports a "type" ("llm" / "embeddings" /
+    "vlm"); the OpenAI-compatible /v1/models does not, so fall back to the name.
+    """
+    m_type = (item.get("type") or "").lower()
+    if m_type in ("embeddings", "embedding"):
+        return False
+    lowered = model_id.lower()
+    return not any(tag in lowered for tag in ("embed", "reranker", "-rerank"))
+
+
 class LocalLLMService:
     @staticmethod
     def get_available_models() -> Dict[str, Any]:
@@ -27,50 +40,66 @@ class LocalLLMService:
         lm_studio_online = False
         ollama_online = False
 
-        # Check LM Studio (OpenAI Compatible)
-        try:
-            res = requests.get(f"{LM_STUDIO_BASE_URL}/models", timeout=1.5)
-            if res.status_code == 200:
-                lm_studio_online = True
-                data = res.json()
-                for item in data.get("data", []):
-                    models.append({
-                        "id": item.get("id"),
-                        "name": item.get("id"),
-                        "provider": "LM Studio",
-                        "online": True
-                    })
-        except Exception:
-            pass
+        # Check LM Studio (OpenAI Compatible & Native API)
+        lm_urls = [
+            f"{LM_STUDIO_BASE_URL}/models",
+            "http://localhost:1234/api/v0/models"
+        ]
+        for url in lm_urls:
+            if lm_studio_online and models:
+                break
+            try:
+                res = requests.get(url, timeout=5.0)
+                if res.status_code == 200:
+                    data = res.json()
+                    raw_models = data.get("data", [])
+                    if raw_models:
+                        lm_studio_online = True
+                        for item in raw_models:
+                            m_id = item.get("id")
+                            if m_id and _is_chat_model(m_id, item) and not any(m["id"] == m_id for m in models):
+                                models.append({
+                                    "id": m_id,
+                                    "name": m_id,
+                                    "provider": "LM Studio",
+                                    "online": True
+                                })
+            except Exception:
+                pass
 
         # Check Ollama
         try:
-            res = requests.get(f"{OLLAMA_BASE_URL}/api/tags", timeout=1.5)
+            res = requests.get(f"{OLLAMA_BASE_URL}/api/tags", timeout=3.0)
             if res.status_code == 200:
                 ollama_online = True
                 data = res.json()
                 for item in data.get("models", []):
                     m_name = item.get("name")
-                    models.append({
-                        "id": m_name,
-                        "name": m_name,
-                        "provider": "Ollama",
-                        "online": True
-                    })
+                    if m_name and not any(m["id"] == m_name for m in models):
+                        models.append({
+                            "id": m_name,
+                            "name": m_name,
+                            "provider": "Ollama",
+                            "online": True
+                        })
         except Exception:
             pass
 
-        # Fallback presets matching Open WebUI standard base models
+        # Fallback presets if engines offline
         if not models:
             models = [
+                {"id": "gemma-4-e4b-it-obliterated", "name": "Gemma 4 E4B (LM Studio)", "provider": "LM Studio Preset", "online": False},
+                {"id": "google/gemma-4-12b-qat", "name": "Google Gemma 4 12B QAT", "provider": "LM Studio Preset", "online": False},
+                {"id": "gemma-4-12b-coder-fable5-composer2.5-v1", "name": "Gemma 4 12B Coder", "provider": "LM Studio Preset", "online": False},
+                {"id": "qwen3.6-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp", "name": "Qwen 3.6 27B Fable Fusion", "provider": "LM Studio Preset", "online": False},
+                {"id": "rombos-llm-v2.6-qwen-14b", "name": "Rombos LLM v2.6 Qwen 14B", "provider": "LM Studio Preset", "online": False},
+                {"id": "qwen/qwen3-coder-30b", "name": "Qwen 3 Coder 30B", "provider": "LM Studio Preset", "online": False},
+                {"id": "devstral-small-2-24b-instruct-2512", "name": "Devstral Small 24B", "provider": "LM Studio Preset", "online": False},
+                {"id": "qwen/qwen3.5-9b", "name": "Qwen 3.5 9B", "provider": "LM Studio Preset", "online": False},
                 {"id": "llama3.3:70b", "name": "Llama 3.3 (70B Instruct)", "provider": "Ollama / Base LLM", "online": False},
                 {"id": "llama3.2:3b", "name": "Llama 3.2 (3B Chat)", "provider": "Ollama / Base LLM", "online": False},
                 {"id": "deepseek-r1:70b", "name": "DeepSeek R1 (70B Reasoning)", "provider": "Ollama / Base LLM", "online": False},
                 {"id": "deepseek-r1:8b", "name": "DeepSeek R1 (8B Reasoning)", "provider": "Ollama / Base LLM", "online": False},
-                {"id": "qwen2.5-coder:32b", "name": "Qwen 2.5 Coder (32B)", "provider": "Ollama / Base LLM", "online": False},
-                {"id": "qwen2.5:72b", "name": "Qwen 2.5 (72B Instruct)", "provider": "Ollama / Base LLM", "online": False},
-                {"id": "mistral-small:24b", "name": "Mistral Small (24B)", "provider": "Ollama / Base LLM", "online": False},
-                {"id": "gemma2:27b", "name": "Gemma 2 (27B)", "provider": "Ollama / Base LLM", "online": False},
                 {"id": "gpt-4o", "name": "GPT-4o (OpenAI Cloud)", "provider": "OpenAI / Cloud", "online": False},
                 {"id": "claude-3.5-sonnet", "name": "Claude 3.5 Sonnet", "provider": "Anthropic / Cloud", "online": False},
                 {"id": "gemini-1.5-flash", "name": "Gemini 1.5 Flash", "provider": "Google / Cloud", "online": False}
@@ -208,9 +237,42 @@ class LocalLLMService:
             "stream": True
         }
         
+        import re as _re
+
         accumulated = ""
-        buffer = ""
-        
+        buffer = ""       # partial sentence still being typed
+        pending = ""      # complete sentences waiting to become a TTS chunk
+        first_chunk = True
+
+        # XTTS renders a 60-200 character line fluently, but rambles or mumbles
+        # on short fragments — measured over-generation of 1.5-2.7x the expected
+        # duration for lines under 25 chars, against 0.6-0.8x for full lines. So
+        # whole sentences are grouped into a chunk before being handed to TTS
+        # instead of every "Haan!" getting its own synthesis pass. The first
+        # chunk is allowed to be smaller to keep time-to-first-audio down.
+        FIRST_CHUNK_MIN = 45
+        CHUNK_MIN = 90
+        CHUNK_MAX = 220
+
+        def take_chunk(final: bool) -> str:
+            """Pop the next TTS chunk off `pending`, or '' to let it keep growing."""
+            nonlocal pending, first_chunk
+            text = pending.strip()
+            if not text:
+                pending = ""
+                return ""
+            if not final and len(text) < (FIRST_CHUNK_MIN if first_chunk else CHUNK_MIN):
+                return ""
+            if len(text) > CHUNK_MAX:
+                cut = text.rfind(' ', 0, CHUNK_MAX)
+                if cut <= 0:
+                    cut = CHUNK_MAX
+                chunk, pending = text[:cut].strip(), text[cut:].strip()
+            else:
+                chunk, pending = text, ""
+            first_chunk = False
+            return chunk
+
         try:
             response = requests.post(
                 f"{LM_STUDIO_BASE_URL}/chat/completions",
@@ -218,52 +280,61 @@ class LocalLLMService:
                 timeout=90.0,
                 stream=True
             )
-            
+
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if not line:
                         continue
-                    
+
                     line_str = line.decode('utf-8')
                     if line_str.startswith('data: '):
                         data_str = line_str[6:]
                         if data_str == '[DONE]':
-                            # Final sentence from remaining buffer
-                            if buffer.strip():
-                                yield "SENTENCE", buffer.strip()
-                                buffer = ""
+                            # Flush whatever is left, including a trailing
+                            # fragment with no closing punctuation.
+                            leftover = clean_human_dialogue(buffer).strip()
+                            if leftover:
+                                pending = f"{pending} {leftover}".strip()
+                            buffer = ""
+                            while True:
+                                chunk = take_chunk(final=True)
+                                if not chunk:
+                                    break
+                                yield "SENTENCE", chunk
                             yield "DONE", accumulated
                             return
-                        
+
                         try:
                             data = json.loads(data_str)
                             delta = data.get("choices", [{}])[0].get("delta", {})
                             content = delta.get("content", "")
-                            
+
                             if content:
                                 accumulated += content
                                 buffer += content
                                 yield "TOKEN", content
-                                
-                                # Check for sentence boundary — greedily emit all complete sentences
-                                MIN_SENTENCE_LEN = 12
+
                                 # Split on sentence-ending punctuation while keeping the delimiter
-                                import re as _re
                                 sentence_parts = _re.split(r'(?<=[.!?\n।])', buffer)
                                 if len(sentence_parts) > 1:
-                                    # All parts except the last are complete sentences
-                                    remainder = sentence_parts[-1]
+                                    # All parts except the last are complete
+                                    # sentences. Append them in order — the old
+                                    # code prepended short ones onto the
+                                    # remainder, which reversed them and made
+                                    # the agent speak clauses out of sequence.
                                     for part in sentence_parts[:-1]:
-                                        cleaned_sentence = clean_human_dialogue(part)
-                                        if cleaned_sentence.strip() and len(cleaned_sentence.strip()) >= MIN_SENTENCE_LEN:
-                                            yield "SENTENCE", cleaned_sentence.strip()
-                                        elif cleaned_sentence.strip():
-                                            # Too short — prepend to remainder so it merges with next sentence
-                                            remainder = cleaned_sentence + remainder
-                                    buffer = remainder
+                                        cleaned_sentence = clean_human_dialogue(part).strip()
+                                        if cleaned_sentence:
+                                            pending = f"{pending} {cleaned_sentence}".strip()
+                                    buffer = sentence_parts[-1]
+                                    while True:
+                                        chunk = take_chunk(final=False)
+                                        if not chunk:
+                                            break
+                                        yield "SENTENCE", chunk
                         except json.JSONDecodeError:
                             continue
-            
+
         except Exception as e:
             print(f"[LocalLLM] Streaming error: {e}")
             yield "ERROR", f"Streaming failed: {e}"

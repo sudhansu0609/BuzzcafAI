@@ -161,7 +161,14 @@ export async function fetchModelsStatus(): Promise<ModelsStatusResponse> {
       lmStudioOnline: false,
       ollamaOnline: false,
       models: [
-        { id: 'qwen2.5-coder', name: 'Qwen 2.5 Coder', provider: 'Local Preset', online: false },
+        { id: 'gemma-4-e4b-it-obliterated', name: 'Gemma 4 E4B', provider: 'Local Preset', online: false },
+        { id: 'google/gemma-4-12b-qat', name: 'Gemma 4 12B QAT', provider: 'Local Preset', online: false },
+        { id: 'gemma-4-12b-coder-fable5-composer2.5-v1', name: 'Gemma 4 12B Coder', provider: 'Local Preset', online: false },
+        { id: 'qwen3.6-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp', name: 'Qwen 3.6 27B Fable Fusion', provider: 'Local Preset', online: false },
+        { id: 'rombos-llm-v2.6-qwen-14b', name: 'Rombos LLM v2.6 Qwen 14B', provider: 'Local Preset', online: false },
+        { id: 'qwen/qwen3-coder-30b', name: 'Qwen 3 Coder 30B', provider: 'Local Preset', online: false },
+        { id: 'devstral-small-2-24b-instruct-2512', name: 'Devstral Small 24B', provider: 'Local Preset', online: false },
+        { id: 'qwen/qwen3.5-9b', name: 'Qwen 3.5 9B', provider: 'Local Preset', online: false },
         { id: 'llama-3.2-3b', name: 'Llama 3.2 3B', provider: 'Local Preset', online: false },
         { id: 'deepseek-r1-8b', name: 'DeepSeek R1 8B', provider: 'Local Preset', online: false },
       ]
@@ -215,7 +222,7 @@ export async function streamChat(
   history: ChatMessage[],
   model?: string,
   onToken?: (token: string) => void,
-  onAudioChunk?: (audioBase64: string, text: string, mediaType: string) => void,
+  onAudioChunk?: (audioBase64: string, text: string, mediaType: string, engine?: string) => void,
   onDone?: (fullText: string) => void,
   onError?: (error: string) => void
 ): Promise<void> {
@@ -265,7 +272,7 @@ export async function streamChat(
           if (data.type === 'token') {
             onToken?.(data.content);
           } else if (data.type === 'audio_chunk') {
-            onAudioChunk?.(data.audio, data.text, data.media_type || 'audio/wav');
+            onAudioChunk?.(data.audio, data.text, data.media_type || 'audio/wav', data.engine);
           } else if (data.type === 'done') {
             onDone?.(data.full_text);
           } else if (data.type === 'error') {

@@ -190,25 +190,33 @@ async def tts_stream(
     voice_model: Optional[str] = None,
     agent_id: Optional[str] = None,
     clone_method: str = "f5",
-    fast_mode: bool = True
+    fast_mode: bool = True,
+    x_user_id: Optional[str] = Header(None)
 ):
     voice_base = voice_model
     if agent_id:
-        agent = registry.get_agent_by_id(agent_id, "all")
+        # Look the agent up as its owner, the same way every other endpoint
+        # does. This used to pass the literal string "all", which the registry
+        # matches against ownerId — so it resolved nothing, and every cloned
+        # agent addressed by id alone got answered in a stock Edge voice.
+        agent = registry.get_agent_by_id(agent_id, x_user_id or "user-default")
         if agent and agent.get("voiceProfile"):
             vp = agent["voiceProfile"]
-            # If agent has a cloned voice sample, extract samplePath
-            if not sample_path and vp.get("cloned") is True and vp.get("samplePath"):
+            # Any recorded sample means "speak as this person" — matching the
+            # /chat/stream path, which never required the `cloned` flag. Gating
+            # on it here made replay use a stock voice for the same agent that
+            # streams in its clone.
+            if not sample_path and vp.get("samplePath"):
                 sample_path = vp.get("samplePath")
 
             if not voice_base:
                 is_female = any(fem in (agent.get("name", "") + " " + agent.get("role", "")).lower() for fem in ["shilpi", "ananya", "swara", "neerja", "female", "woman", "girl", "sarah", "bella"])
                 voice_base = vp.get("voiceId") or vp.get("clonedVoiceBase") or ("kokoro-af_bella" if is_female else "kokoro-am_adam")
 
-    audio_bytes, media_type = await VoiceEngineService.generate_speech_audio(
+    audio_bytes, media_type, engine = await VoiceEngineService.generate_speech_audio(
         text, pitch=pitch, rate=rate, sample_path=sample_path, voice_base=voice_base, clone_method=clone_method, fast_mode=fast_mode
     )
-    return Response(content=audio_bytes, media_type=media_type)
+    return Response(content=audio_bytes, media_type=media_type, headers={"X-Voice-Engine": engine})
 
 @router.post("/settings/elevenlabs")
 def save_elevenlabs_key(data: Dict[str, str]):
@@ -283,7 +291,11 @@ async def chat_stream_parallel_tts(request: ChatRequest, x_user_id: str = Header
     sse_queue: asyncio.Queue = asyncio.Queue()
     work_queue: asyncio.Queue = asyncio.Queue()
     sentence_counter = 0
-    NUM_TTS_WORKERS = 2
+    # Single worker on purpose: XTTS serializes every request behind one global
+    # GPU lock, so extra workers add no throughput — they only let a later
+    # sentence win the lock ahead of an earlier one, delaying the audio the
+    # listener is actually waiting for.
+    NUM_TTS_WORKERS = 1
     loop = asyncio.get_running_loop()
     
     # Track when all TTS workers have finished
@@ -298,13 +310,17 @@ async def chat_stream_parallel_tts(request: ChatRequest, x_user_id: str = Header
                 break
             text, p_pitch, p_rate, p_sample, p_voice, seq_num = item
             try:
-                audio_bytes, media_type = await VoiceEngineService.generate_speech_audio(
+                # The over-generation guard runs on every sentence, including the
+                # first. Skipping it there bought ~2s of latency at the cost of
+                # the opening line — the one the listener judges the voice by —
+                # being the most likely to ramble or mumble.
+                audio_bytes, media_type, engine = await VoiceEngineService.generate_speech_audio(
                     text, pitch=p_pitch, rate=p_rate, sample_path=p_sample, voice_base=p_voice, fast_mode=True
                 )
                 audio_b64 = base64.b64encode(audio_bytes).decode('utf-8')
-                event_data = f"data: {json.dumps({'type': 'audio_chunk', 'audio': audio_b64, 'text': text, 'media_type': media_type, 'seq': seq_num})}\n\n"
+                event_data = f"data: {json.dumps({'type': 'audio_chunk', 'audio': audio_b64, 'text': text, 'media_type': media_type, 'seq': seq_num, 'engine': engine})}\n\n"
                 await sse_queue.put(event_data)
-                print(f"[StreamTTS] Worker-{worker_id} completed sentence {seq_num} ({len(text)} chars -> {len(audio_bytes)} bytes)")
+                print(f"[StreamTTS] Worker-{worker_id} completed sentence {seq_num} via {engine} ({len(text)} chars -> {len(audio_bytes)} bytes)")
             except Exception as e:
                 print(f"[StreamTTS] Worker-{worker_id} error for sentence {seq_num}: {e}")
                 err_data = f"data: {json.dumps({'type': 'audio_error', 'message': str(e), 'text': text, 'seq': seq_num})}\n\n"

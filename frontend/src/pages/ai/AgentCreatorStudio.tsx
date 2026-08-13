@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Agent, LocalModel } from '../../types/agent';
-import { createAgent, updateAgent, deleteAgent, uploadVoiceSample, getAudioStreamUrl } from '../../services/api';
+import { createAgent, updateAgent, deleteAgent, uploadVoiceSample, getAudioStreamUrl, getAuthHeaders } from '../../services/api';
 import { Sparkles, Mic, Upload, Volume2, Save, Trash2, Plus, CheckCircle2, UserCheck, StopCircle, Music, Square, Zap, ShieldCheck, Play, Radio, Cpu, Layers, Sliders, FileCode, Box } from 'lucide-react';
 
 interface AgentCreatorStudioProps {
@@ -291,17 +291,20 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
     try {
       if (audioFileToClone) {
         const res = await uploadVoiceSample(audioFileToClone);
-        setIsCloned(true);
-        if (res.samplePath) setSamplePath(res.samplePath);
-      } else {
-        setIsCloned(true);
+        // Without a stored samplePath there is nothing for the backend to clone
+        // from — reporting success here left the agent speaking in whatever
+        // voice it had before, which reads as "my sample was ignored".
+        if (!res?.samplePath) throw new Error('Server returned no samplePath');
+        setSamplePath(res.samplePath);
+        setAudioFileToClone(null);
       }
+      setIsCloned(true);
       setRecordingStatus('✓ 100% Indistinguishable RVC GPU Voice Profile Active & Locked In!');
       setTimeout(() => setRecordingStatus(null), 4000);
     } catch (err) {
-      setIsCloned(true);
-      setRecordingStatus('✓ RVC GPU Voice Profile Active!');
-      setTimeout(() => setRecordingStatus(null), 3000);
+      console.error('Voice clone upload failed:', err);
+      setRecordingStatus('❌ Voice sample upload failed — the agent will NOT use this voice. Try again.');
+      setTimeout(() => setRecordingStatus(null), 6000);
     }
   };
 
@@ -399,7 +402,9 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
     const audioUrl = getAudioStreamUrl(textToSpeak, pitch, rate, agentIdToUse, path, modelToUse);
     
     try {
-      const res = await fetch(audioUrl, { signal: AbortSignal.timeout(90000) });
+      // Send the identity headers: the backend resolves agent_id against the
+      // owning user, so an unidentified preview cannot find a cloned agent.
+      const res = await fetch(audioUrl, { headers: getAuthHeaders(), signal: AbortSignal.timeout(90000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const arrayBuffer = await res.arrayBuffer();
       if (arrayBuffer.byteLength === 0) throw new Error('Empty audio response from server');
@@ -726,7 +731,9 @@ VOICE_PROFILE sample_path="${samplePath || ''}" cloned=${isCloned ? 'true' : 'fa
               </h4>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <span style={{ fontSize: '11px', color: '#0f172a', background: '#e2e8f0', padding: '3px 8px', borderRadius: '6px', border: '1px solid #cbd5e1', fontWeight: 600 }}>
-                  {availableModels.some(m => m.online && m.provider?.includes('LM Studio')) ? '🟢 LM Studio Active (Port 1234)' : '⚡ LM Studio / Local Base Models Ready'}
+                  {availableModels.some(m => m.online && m.provider?.includes('LM Studio')) 
+                    ? `🟢 LM Studio Active (${availableModels.length} Models Ready)` 
+                    : `⚡ ${availableModels.length} Base Models Ready`}
                 </span>
               </div>
             </div>

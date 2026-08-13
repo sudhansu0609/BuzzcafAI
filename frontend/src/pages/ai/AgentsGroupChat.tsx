@@ -64,6 +64,9 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
   const [isMuted, setIsMuted] = useState(false);
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null);
   const [speechLang, setSpeechLang] = useState<string>('hi-IN');
+  // Which engine actually spoke last — 'xtts-clone' means the real clone, any
+  // other value means the backend had to substitute a stock voice.
+  const [lastVoiceEngine, setLastVoiceEngine] = useState<string | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -390,6 +393,7 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
     setThinkingMessage(thinkingTxt);
     announceThinkingAudio(thinkingTxt, targetAgent);
     setIsLoading(true);
+    setLastVoiceEngine(null);  // the badge reports this reply, not the last one
 
     const agentMsgId = `msg-agent-${Date.now()}`;
     const mainAgent = targetAgent;
@@ -480,7 +484,8 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
           }
         },
         // onAudioChunk: play each sentence's audio immediately as it arrives
-        (base64: string, text: string, mediaType: string) => {
+        (base64: string, text: string, mediaType: string, engine?: string) => {
+          if (engine) setLastVoiceEngine(engine);
           if (!isMuted && mainAgent?.voiceEnabled !== false) {
             enqueueAudioChunk(base64, text, mediaType, agentMsgId);
           }
@@ -553,6 +558,8 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
     try {
       const res = await fetch(url, { headers: getAuthHeaders() });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const engine = res.headers.get('X-Voice-Engine');
+      if (engine) setLastVoiceEngine(engine);
       const blob = await res.blob();
       if (blob.size === 0) throw new Error('0 bytes audio response');
       
@@ -805,9 +812,25 @@ export const AgentsGroupChat: React.FC<AgentsGroupChatProps> = ({ agents, initia
               <div style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', gap: '10px' }}>
                 <span>{chatMode === 'single' ? activeAgent?.role : `${groupSelectedAgentIds.length} Agents Active`}</span>
                 <span>•</span>
-                <span style={{ color: activeAgent?.voiceProfile?.cloned ? '#f472b6' : 'var(--accent-secondary)' }}>
-                  {activeAgent?.voiceProfile?.cloned ? '🧬 Cloned Neural Voice' : '🎙️ System Voice'}
-                </span>
+                {(() => {
+                  // Report the voice that actually spoke, not the one that was
+                  // configured — a dead XTTS server used to silently swap in a
+                  // stock voice while this label still claimed "Cloned".
+                  const isClonedAgent = !!activeAgent?.voiceProfile?.cloned;
+                  const fellBack = isClonedAgent && !!lastVoiceEngine && lastVoiceEngine !== 'xtts-clone';
+                  if (fellBack) {
+                    return (
+                      <span style={{ color: '#fbbf24' }} title={`Clone unavailable — spoke via "${lastVoiceEngine}"`}>
+                        ⚠️ Clone unavailable — stock voice
+                      </span>
+                    );
+                  }
+                  return (
+                    <span style={{ color: isClonedAgent ? '#f472b6' : 'var(--accent-secondary)' }}>
+                      {isClonedAgent ? '🧬 Cloned Neural Voice' : '🎙️ System Voice'}
+                    </span>
+                  );
+                })()}
               </div>
             </div>
           </div>

@@ -1,1 +1,0 @@
-class NotionSync: pass

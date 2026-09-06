@@ -1,1 +1,0 @@
-class UserManager: pass

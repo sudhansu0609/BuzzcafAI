@@ -1,2 +1,0 @@
-class PasswordHasher:
-    pass

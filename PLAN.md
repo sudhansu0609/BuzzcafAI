@@ -46,6 +46,12 @@ Studio owns **I2, I11, I12** and shares **I5, I9**.
 | 5.4 | Split `App.tsx` into `src/pages/*` + `src/state/studio.tsx`; delete stub trees per `ARCHITECTURE.md`; `docs/` → `docs/legacy/` | L | green after each slice; `App.tsx` < 400 lines |
 | 5.5 | Optional: streaming `POST /api/studio/chat/stream` | M | only if chat still feels slow |
 
+## v6 — Video intelligence (owner's ask, 2026-09-06)
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| S1 | Analyze a video or channel link | `app/services/video_intel.py`: yt-dlp (no API key) for metadata, captions, the "most replayed" heatmap and the channel's last 30 uploads; metrics (views/day, like rate, comments per 1k, views ÷ subs, outlier multiple vs the channel median, hook transcript, replay peaks with what was said, title signals); one model call with the target channel's brand guide → why it works + blueprint (titles, hook script, outline, thumbnail, tags, length, CTA, differentiator, do-not-copy); `POST /api/video-intel/analyze`, `GET /recent`, `/{id}`; cached; `simulated` when no model answered; Analyze tab with "Save as topic" and "Start a project" | **J3** paste a link → breakdown in under a minute; a channel link → outliers + what to borrow; nothing invented when no model is up |
+
 ## Not doing
 
 - Voice (any form) until text chat, memory and control are solid.

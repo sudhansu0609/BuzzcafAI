@@ -6,3 +6,4 @@
 # path opens a database. Every route reads and writes JSON files. If a database
 # is reintroduced, add those deps back to the root manifest.
 -r ../requirements.txt
+yt-dlp>=2025.1        # video intelligence: metadata, captions, heatmap without an API key

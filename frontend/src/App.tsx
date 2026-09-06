@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
+  BarChart3,
   AlertCircle,
   Bot,
   ChevronUp,
@@ -19,6 +20,7 @@ import StudioChat from './pages/StudioChat';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import TopicVault from './pages/TopicVault';
+import Analyze from './pages/Analyze';
 import Workforce from './pages/Workforce';
 import Health from './pages/Health';
 import Settings from './pages/Settings';
@@ -50,6 +52,7 @@ const SECTIONS: NavSection[] = [
       { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, title: 'Studio overview' },
       { id: 'projects', label: 'Projects', icon: <FolderGit2 size={18} />, title: 'Production projects' },
       { id: 'topic_vault', label: 'Topic Vault', icon: <Compass size={18} />, title: 'Topic ideas and saved vault' },
+      { id: 'analyze', label: 'Analyze', icon: <BarChart3 size={18} />, title: 'Why a video or channel performs, and how to model ours on it' },
     ],
   },
   {
@@ -153,6 +156,7 @@ function Shell() {
           {tab === 'dashboard' && <Dashboard />}
           {tab === 'projects' && <Projects />}
           {tab === 'topic_vault' && <TopicVault />}
+          {tab === 'analyze' && <Analyze />}
           {tab === 'agent_creator_studio' && (
             <AgentCreatorStudio
               onLaunchGroupChat={(ids) => {

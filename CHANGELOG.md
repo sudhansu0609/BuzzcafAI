@@ -34,6 +34,15 @@ Notable changes to Buzzcaf AI Studio. Newest first.
 - **Purge.** 26 dead trees, 128 stub files, the auth stub and `app/db` removed;
   `docs/` archived to `docs/legacy/`.
 
+### v6 — Video intelligence
+
+- **Analyze tab.** Paste a video or channel link: metrics against the channel's
+  own median, most-replayed moments with the transcript at each peak, why it
+  works, and a blueprint for our version on the selected channel. Backed by
+  `services/video_intel.py` (yt-dlp, no API key) and `POST /api/video-intel/analyze`;
+  results cached under `knowledge/video_intel/`; labelled numbers-only when no
+  model answers.
+
 ### Earlier unreleased repair pass (tagged `pre-v5`)
 
 ### Fixed — the app now runs as designed

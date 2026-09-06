@@ -21,10 +21,12 @@ app = FastAPI(title="Buzzcaf AI Studio")
 from app.api.agents_api import router as agents_router
 from app.api.studio_api import router as studio_router
 from app.api.buzzbrain_api import router as buzzbrain_router
+from app.api.video_intel_api import router as video_intel_router
 from app.services.events import bus as event_bus
 app.include_router(agents_router)
 app.include_router(studio_router)
 app.include_router(buzzbrain_router)
+app.include_router(video_intel_router)
 
 
 @app.on_event("startup")

@@ -442,3 +442,7 @@
   font-weight: 700;
   font-size: 0.85rem;
 }
+
+/* v6: spinner for long-running actions (Analyze) */
+.spin { animation: studio-spin 1s linear infinite; }
+@keyframes studio-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

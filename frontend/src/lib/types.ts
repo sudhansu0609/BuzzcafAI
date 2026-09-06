@@ -87,8 +87,40 @@ export type TabId =
   | 'dashboard'
   | 'projects'
   | 'topic_vault'
+  | 'analyze'
   | 'agent_creator_studio'
   | 'agents_group_chat'
   | 'ai_workforce'
   | 'health'
   | 'settings';
+
+// Video intelligence (v6). The analysis object is model output and is read
+// defensively in the page; only the stable fields are typed.
+export interface VideoIntelSummary {
+  id: string;
+  kind: 'video' | 'channel';
+  title?: string;
+  channel?: string;
+  thumbnail?: string;
+  view_count?: number;
+  outlier_multiple?: number | null;
+  channel_for?: string;
+  simulated?: boolean;
+  generated_at?: string;
+}
+
+export interface VideoIntel {
+  kind: 'video' | 'channel';
+  id: string;
+  channel_for: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  video: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metrics: Record<string, any>;
+  recent: Array<{ id: string; title: string; view_count: number; duration: number; url?: string; outlier_multiple?: number | null }>;
+  transcript_excerpt?: Array<{ t: number; text: string }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  analysis: Record<string, any>;
+  simulated: boolean;
+  generated_at: string;
+}

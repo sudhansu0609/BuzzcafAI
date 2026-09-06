@@ -18,7 +18,9 @@ read from this checkout.
 |---|---:|---|
 | `backend/app/main.py` | 706 | FastAPI app: projects, workflows, topics, brands, settings, diagnostics, static mount |
 | `backend/desktop_app.py` | 370 | The window: fast preflight, in-process uvicorn, WebView2, remembered size, `--dev` |
+| `backend/app/services/video_intel.py` | 591 | Video/channel intelligence: yt-dlp fetch, metrics, model read with brand guide, cache (v6) |
 | `backend/app/api/buzzbrain_api.py` | 254 | BuzzBrain snapshot store (`knowledge/buzzbrain/`) and `GET /api/buzzbrain/*` |
+| `backend/app/api/video_intel_api.py` | 64 | `POST /api/video-intel/analyze`, `GET /recent`, `GET /{id}` (v6) |
 | `backend/app/services/studio_chat.py` | 206 | Chat as a messages list: persona + roster once, channel guide, ≤6 relevant memories, 8 turns |
 | `backend/app/api/studio_api.py` | 148 | Control API for Dexter: `/api/studio/state`, `/chat`, `/events` (SSE) |
 | `frontend/src/App.tsx` | 193 | Shell only: sidebar, header, toasts; pages live in `src/pages/*` |
@@ -35,7 +37,7 @@ read from this checkout.
 Also live: `backend/app/api/agents_api.py` (Agents Workbench + group chat),
 `backend/app/services/` (`agents_registry`, `local_llm`, `events`),
 `backend/preflight.py`, `frontend/src/pages/` (`StudioChat`, `Dashboard`,
-`Projects`, `TopicVault`, `Workforce`, `Health`, `Settings`, `ai/*`),
+`Projects`, `TopicVault`, `Analyze`, `Workforce`, `Health`, `Settings`, `ai/*`),
 `frontend/src/state/studio.tsx`, `frontend/src/services/{http,api}.ts`,
 `backend/apps/cli/main.py`.
 

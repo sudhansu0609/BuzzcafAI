@@ -64,6 +64,20 @@ Both run in CI on every push and pull request (`.github/workflows/ci.yml`).
 
 ---
 
+## Analyze (v6)
+
+The **Analyze** tab takes a YouTube video or channel link and answers two
+questions: why does it perform, and how do we model our video on it. Data comes
+from yt-dlp with no API key (views, likes, comments, captions, the "most
+replayed" heatmap, and the channel's last 30 uploads as the baseline); the
+reading is one model call with the selected channel's brand guide, so the
+blueprint (titles, hook script, outline, thumbnail direction, tags, length,
+CTA, what not to copy) is written for *that* channel. "Save as topic" puts the
+first working title in the Topic Vault; "Start a project" creates a production
+project on the channel's default workflow. When no model answers you get the
+numbers and a "numbers only" badge, never an invented analysis. Dexter can ask
+for the same thing: "analyse this video <link> for beyond3baje".
+
 ## Configuration
 
 Paths are derived from the checkout location by `backend/core/paths.py`; nothing

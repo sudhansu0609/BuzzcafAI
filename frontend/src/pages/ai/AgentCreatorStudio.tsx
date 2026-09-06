@@ -1,3 +1,4 @@
+import { apiFetch } from '../../services/http';
 import React, { useState, useEffect } from 'react';
 import { Bot, Plus, Mic, Sliders, Play, Save, RefreshCw, Cpu, Volume2, CheckCircle } from 'lucide-react';
 
@@ -48,7 +49,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
 
   const fetchAgents = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/agents-workbench/agents');
+      const res = await apiFetch('/api/agents-workbench/agents');
       const data = await res.json();
       setAgents(data.agents || []);
       if (data.agents && data.agents.length > 0) {
@@ -61,7 +62,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
 
   const fetchLocalModels = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/agents-workbench/local-models');
+      const res = await apiFetch('/api/agents-workbench/local-models');
       const data = await res.json();
       setLocalModels(data.models || []);
     } catch (e) {
@@ -87,7 +88,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
         voiceId
       };
 
-      const res = await fetch('http://localhost:8000/api/agents-workbench/agents', {
+      const res = await apiFetch('/api/agents-workbench/agents', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -121,7 +122,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
       formData.append('name', voiceName);
       formData.append('file', selectedFile);
 
-      const res = await fetch('http://localhost:8000/api/agents-workbench/voice/clone', {
+      const res = await apiFetch('/api/agents-workbench/voice/clone', {
         method: 'POST',
         body: formData
       });

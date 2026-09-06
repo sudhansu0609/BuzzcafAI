@@ -1,3 +1,4 @@
+import { apiFetch } from '../../services/http';
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, Mic, MicOff, Volume2, Users, ArrowLeft, Sparkles } from 'lucide-react';
 
@@ -9,6 +10,8 @@ interface ChatMessage {
   text: string;
   timestamp: string;
   audioUrl?: string;
+  /** True when the model server was unreachable and the text is canned. */
+  simulated?: boolean;
   isUser?: boolean;
 }
 
@@ -39,7 +42,7 @@ export default function AgentsGroupChat({
 
   const fetchActiveAgents = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/agents-workbench/agents');
+      const res = await apiFetch('/api/agents-workbench/agents');
       const data = await res.json();
       const active = (data.agents || []).filter((a: any) => selectedAgentIds.includes(a.id));
       setAgents(active);
@@ -48,7 +51,7 @@ export default function AgentsGroupChat({
       setMessages([
         {
           id: 'welcome-01',
-          sender: 'MidnightBuzz Group Chat Room',
+          sender: 'Buzzcaf Group Chat Room',
           text: `Welcome! Active agents: ${active.map((a: any) => a.name).join(', ')}. Ask a question or speak your continuous voice command to begin multi-agent project planning!`,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           avatarColor: '#7c3aed'
@@ -125,7 +128,7 @@ export default function AgentsGroupChat({
         conversationHistory: messages.map(m => ({ sender: m.isUser ? 'user' : 'assistant', text: m.text }))
       };
 
-      const res = await fetch('http://localhost:8000/api/agents-workbench/chat/group-chat', {
+      const res = await apiFetch('/api/agents-workbench/chat/group-chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -144,7 +147,8 @@ export default function AgentsGroupChat({
               avatarColor: resp.avatarColor || '#7c3aed',
               text: resp.response,
               timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              audioUrl: resp.voiceAudio?.audioUrl
+              audioUrl: resp.voiceAudio?.audioUrl,
+              simulated: !!resp.simulated
             };
             setMessages(prev => [...prev, agentMsg]);
           }, idx * 600);
@@ -219,12 +223,18 @@ export default function AgentsGroupChat({
               </div>
             )}
 
-            <div style={{ background: m.isUser ? '#1e1b4b' : '#0f172a', padding: '14px 18px', borderRadius: '12px', border: `1px solid ${m.isUser ? '#4338ca' : '#1e293b'}` }}>
+            <div style={{ background: m.isUser ? '#1e1b4b' : '#0f172a', padding: '14px 18px', borderRadius: '12px', border: `1px solid ${m.simulated ? '#f59e0b' : m.isUser ? '#4338ca' : '#1e293b'}` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', gap: '12px' }}>
                 <span style={{ fontWeight: 700, fontSize: '0.9rem', color: m.isUser ? '#a78bfa' : '#38bdf8' }}>{m.sender}</span>
                 {m.role && <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>• {m.role}</span>}
                 <span style={{ fontSize: '0.7rem', color: '#64748b' }}>{m.timestamp}</span>
               </div>
+
+              {m.simulated && (
+                <div style={{ fontSize: '0.7rem', color: '#f59e0b', fontWeight: 700, marginBottom: '6px', letterSpacing: '0.03em' }}>
+                  ⚠ SIMULATED — model server unreachable
+                </div>
+              )}
 
               <p style={{ margin: 0, fontSize: '0.92rem', color: '#f8fafc', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
                 {m.text}

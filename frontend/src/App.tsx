@@ -70,6 +70,9 @@ export default function App() {
   const [selectedLlm, setSelectedLlm] = useState<string>('gemini');
   const [geminiKey, setGeminiKey] = useState<string>('');
   const [openaiKey, setOpenaiKey] = useState<string>('');
+  // Whether a key is stored server-side. The value itself never reaches the browser.
+  const [geminiKeySet, setGeminiKeySet] = useState<boolean>(false);
+  const [openaiKeySet, setOpenaiKeySet] = useState<boolean>(false);
   
   // Live logs and running state
   const [runningProjId, setRunningProjId] = useState<string | null>(null);
@@ -87,7 +90,7 @@ export default function App() {
   const [savedToast, setSavedToast] = useState<string | null>(null);
 
   // Interactive Chat Window state
-  const [chatMessages, setChatMessages] = useState<{ sender: 'user' | 'agent', text: string, timestamp: string }[]>([]);
+  const [chatMessages, setChatMessages] = useState<{ sender: 'user' | 'agent', text: string, timestamp: string, simulated?: boolean }[]>([]);
   const [activeChatTopic, setActiveChatTopic] = useState<any | null>(null);
   const [chatInput, setChatInput] = useState<string>('');
   const [isChatSending, setIsChatSending] = useState<boolean>(false);
@@ -118,6 +121,10 @@ export default function App() {
 
   useEffect(() => {
     fetchRegisteredAgents();
+    // Earlier builds persisted voice API keys in localStorage, where any script
+    // on the page can read them. Purge anything left over from those builds.
+    localStorage.removeItem('picovoice_key');
+    localStorage.removeItem('openai_realtime_key');
   }, []);
 
   // Voice Activity Log History State
@@ -152,8 +159,11 @@ export default function App() {
   }, []);
 
   const [voiceProvider, setVoiceProvider] = useState<string>(() => localStorage.getItem('voice_provider') || 'native_local');
-  const [picovoiceKey, setPicovoiceKey] = useState<string>(() => localStorage.getItem('picovoice_key') || '');
-  const [openaiRealtimeKey, setOpenaiRealtimeKey] = useState<string>(() => localStorage.getItem('openai_realtime_key') || '');
+  // Voice API keys are held server-side only. These inputs start empty; typing
+  // in one replaces the stored key, leaving it blank keeps what is saved.
+  // localStorage is readable by any script on the page -- never put keys there.
+  const [picovoiceKey, setPicovoiceKey] = useState<string>('');
+  const [openaiRealtimeKey, setOpenaiRealtimeKey] = useState<string>('');
 
   // Mutable References for Synchronous Event Guards (Zero Stale State Closures)
   const isVoiceActiveRef = React.useRef<boolean>(false);
@@ -577,7 +587,10 @@ export default function App() {
       }
     } catch (e) {}
 
-    // Fallback Local Parser if offline
+    // Offline fallback parser. The backend (app/services/voice_intent.py) is
+    // the source of truth; this smaller table only runs when /api/jarvis/voice
+    // is unreachable, so voice navigation still works with the server down.
+    // Keep the two in step when adding a keyword that matters offline.
     if (!jarvisSpeech) {
       const text = sentenceHash;
       let target_ch = null;
@@ -885,7 +898,8 @@ export default function App() {
         setChatMessages(prev => [...prev, {
           sender: 'agent',
           text: data.reply || `I analyzed your directive for ${targetChannel}.`,
-          timestamp: new Date().toLocaleTimeString()
+          timestamp: new Date().toLocaleTimeString(),
+          simulated: !!data.simulated
         }]);
       } else {
         throw new Error('Server connection error');
@@ -894,7 +908,8 @@ export default function App() {
       setChatMessages(prev => [...prev, {
         sender: 'agent',
         text: `**[${agentName} - ${targetChannel}]**\n\nUnable to reach backend AI engine. Please ensure Python backend server is running on http://127.0.0.1:8000.`,
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
+        simulated: true
       }]);
     } finally {
       setIsChatSending(false);
@@ -1160,21 +1175,25 @@ export default function App() {
       if (res.ok) {
         const data = await res.json();
         if (data.selected_provider) setSelectedLlm(data.selected_provider);
-        if (data.gemini_api_key) setGeminiKey(data.gemini_api_key);
-        if (data.openai_api_key) setOpenaiKey(data.openai_api_key);
+        // The server never returns key values, only whether one is stored.
+        // Inputs stay empty; typing in one replaces the stored key.
+        setGeminiKeySet(!!data.gemini_api_key_set);
+        setOpenaiKeySet(!!data.openai_api_key_set);
       }
     } catch (e) {}
   };
 
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = {
+    const payload: Record<string, any> = {
       selected_provider: selectedLlm,
-      gemini_api_key: geminiKey,
-      openai_api_key: openaiKey,
-      gemini_model: "gemini-3.6-flash",
+      gemini_model: "gemini-1.5-flash",
       prefer_gemini: selectedLlm === 'gemini'
     };
+    // Only send a key when the user actually typed one -- an empty field means
+    // "keep what's already saved", not "erase it".
+    if (geminiKey.trim()) payload.gemini_api_key = geminiKey.trim();
+    if (openaiKey.trim()) payload.openai_api_key = openaiKey.trim();
     try {
       const res = await fetch('/api/settings', {
         method: 'POST',
@@ -1183,12 +1202,16 @@ export default function App() {
       });
       if (res.ok) {
         localStorage.setItem('selected_llm', selectedLlm);
+        // Drop the plaintext keys from browser memory; re-read stored status.
+        setGeminiKey('');
+        setOpenaiKey('');
+        await fetchSettings();
         alert(`Successfully saved settings! Active provider set to ${selectedLlm.toUpperCase()}.`);
       } else {
         throw new Error('Failed to save settings to server');
       }
     } catch (err: any) {
-      alert(`Saved settings locally: ${selectedLlm}`);
+      alert(`Could not save settings to the server: ${err?.message || err}`);
     }
   };
 
@@ -1853,7 +1876,7 @@ export default function App() {
         </div>
 
         <div className="sidebar-footer">
-          <p>MidnightBuzz AI Studio</p>
+          <p>Buzzcaf AI Studio</p>
           <p>© 2026 Production</p>
         </div>
       </div>
@@ -2462,10 +2485,25 @@ export default function App() {
                       </div>
                     ) : (
                       chatMessages.map((msg, i) => (
-                        <div key={i} className={msg.sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-agent'}>
+                        <div
+                          key={i}
+                          className={msg.sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-agent'}
+                          style={msg.simulated ? { borderLeft: '3px solid #f59e0b' } : undefined}
+                        >
                           <div style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: '4px', fontWeight: 600 }}>
                             {msg.sender === 'user' ? 'You' : getStrategistAgentName(selectedChannel)} • {msg.timestamp}
                           </div>
+                          {msg.simulated && (
+                            <div style={{
+                              fontSize: '0.7rem',
+                              color: '#f59e0b',
+                              marginBottom: '6px',
+                              fontWeight: 600,
+                              letterSpacing: '0.03em'
+                            }}>
+                              ⚠ SIMULATED — no AI provider responded. Configure a key in Settings.
+                            </div>
+                          )}
                           <div>{msg.text}</div>
                         </div>
                       ))
@@ -3192,29 +3230,43 @@ In 1652, a strange new substance arrived in London. It was dark, bitter, and sme
                       value={selectedLlm}
                       onChange={e => setSelectedLlm(e.target.value)}
                     >
-                      <option value="gemini">Google Gemini API (Default Model: gemini-3.6-flash)</option>
+                      <option value="gemini">Google Gemini API (Default Model: gemini-1.5-flash)</option>
                       <option value="openai">OpenAI ChatGPT API (Default Model: gpt-4o-mini)</option>
                       <option value="lm_studio">Local LM Studio API (Default Port: http://localhost:1234/v1)</option>
                     </select>
                   </div>
 
                   <div className="form-group" style={{ marginBottom: '24px' }}>
-                    <label>Google Gemini API Key</label>
-                    <input 
-                      type="password" 
-                      className="form-control" 
-                      placeholder="AIzaSy..." 
+                    <label>
+                      Google Gemini API Key
+                      {geminiKeySet && (
+                        <span style={{ marginLeft: '8px', fontSize: '0.75rem', color: '#4ade80' }}>
+                          ✓ key saved
+                        </span>
+                      )}
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder={geminiKeySet ? 'Saved — type a new key to replace it' : 'AIzaSy...'}
                       value={geminiKey}
                       onChange={e => setGeminiKey(e.target.value)}
                     />
                   </div>
 
                   <div className="form-group" style={{ marginBottom: '24px' }}>
-                    <label>OpenAI (ChatGPT) API Key</label>
-                    <input 
-                      type="password" 
-                      className="form-control" 
-                      placeholder="sk-proj-..." 
+                    <label>
+                      OpenAI (ChatGPT) API Key
+                      {openaiKeySet && (
+                        <span style={{ marginLeft: '8px', fontSize: '0.75rem', color: '#4ade80' }}>
+                          ✓ key saved
+                        </span>
+                      )}
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder={openaiKeySet ? 'Saved — type a new key to replace it' : 'sk-proj-...'}
                       value={openaiKey}
                       onChange={e => setOpenaiKey(e.target.value)}
                     />
@@ -3301,18 +3353,22 @@ In 1652, a strange new substance arrived in London. It was dark, bitter, and sme
 
                 <button type="button" className="btn" onClick={() => {
                   localStorage.setItem('voice_provider', voiceProvider);
-                  localStorage.setItem('picovoice_key', picovoiceKey);
-                  localStorage.setItem('openai_realtime_key', openaiRealtimeKey);
+                  // Only send a key the user actually typed; blank means "keep".
+                  const body: Record<string, string> = { provider: voiceProvider };
+                  if (picovoiceKey.trim()) body.picovoice_access_key = picovoiceKey.trim();
+                  if (openaiRealtimeKey.trim()) body.openai_realtime_key = openaiRealtimeKey.trim();
                   fetch('/api/voice/config', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      provider: voiceProvider,
-                      picovoice_access_key: picovoiceKey,
-                      openai_realtime_key: openaiRealtimeKey
+                    body: JSON.stringify(body)
+                  })
+                    .then(() => {
+                      // Drop the plaintext keys from browser memory once stored.
+                      setPicovoiceKey('');
+                      setOpenaiRealtimeKey('');
+                      alert(`Saved Voice Configuration: Active provider set to ${voiceProvider}.`);
                     })
-                  }).catch(() => {});
-                  alert(`Saved Voice Configuration: Active provider set to ${voiceProvider}.`);
+                    .catch(err => alert(`Could not save voice configuration: ${err?.message || err}`));
                 }}>
                   <CheckCircle2 size={18} />
                   <span>Save Voice Configuration</span>

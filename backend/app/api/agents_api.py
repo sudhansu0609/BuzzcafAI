@@ -1,12 +1,11 @@
 # Buzzcaf AI - Agents Workbench & Group Chat API Router
 from concurrent.futures import ThreadPoolExecutor
 from typing import List, Dict, Any, Optional
-from fastapi import APIRouter, HTTPException, File, UploadFile, Form, Body
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from app.services.agents_registry import agents_registry
 from app.services.local_llm import local_llm_service
-from app.services.voice_engine import voice_engine_service
 
 router = APIRouter(prefix="/api/agents-workbench", tags=["Agents Workbench"])
 
@@ -19,7 +18,6 @@ class AgentSchema(BaseModel):
     modelProvider: str = "LM Studio (http://localhost:1234)"
     modelName: str = "qwen2.5-coder-7b-instruct"
     temperature: float = 0.7
-    voiceId: str = "default-voice"
 
 class ChatMessageSchema(BaseModel):
     sender: str
@@ -52,23 +50,6 @@ def delete_agent(agent_id: str):
 def get_local_models():
     return local_llm_service.detect_local_models()
 
-@router.post("/voice/clone")
-async def clone_voice_profile(
-    name: str = Form(...),
-    file: UploadFile = File(...)
-):
-    contents = await file.read()
-    profile = voice_engine_service.process_voice_cloning_sample(
-        voice_name=name,
-        sample_audio_bytes=contents,
-        filename=file.filename or "sample.wav"
-    )
-    return {"status": "success", "profile": profile}
-
-@router.get("/voice/profiles")
-def list_voice_profiles():
-    return voice_engine_service.list_voice_profiles()
-
 @router.post("/chat/group-chat")
 def execute_group_chat(req: GroupChatRequestSchema):
     agents = []
@@ -93,12 +74,6 @@ def execute_group_chat(req: GroupChatRequestSchema):
             temperature=agent.get("temperature", 0.7)
         )
 
-        tts_result = voice_engine_service.synthesize_cloned_speech(
-            text=result.get("content", ""),
-            voice_id=agent.get("voiceId", "default-voice"),
-            agent_name=agent.get("name", "Agent")
-        )
-
         return {
             "agentId": agent.get("id"),
             "agentName": agent.get("name"),
@@ -109,7 +84,6 @@ def execute_group_chat(req: GroupChatRequestSchema):
             # The model server was unreachable and this text is canned. The UI
             # must label it -- otherwise a fallback reads as a real answer.
             "simulated": result.get("status") != "success",
-            "voiceAudio": tts_result
         }
 
     # Each agent is an independent ~30s network call. Run them concurrently so

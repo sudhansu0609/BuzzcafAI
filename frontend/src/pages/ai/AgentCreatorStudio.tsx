@@ -1,6 +1,6 @@
 import { apiFetch } from '../../services/http';
 import React, { useState, useEffect } from 'react';
-import { Bot, Plus, Mic, Sliders, Play, Save, RefreshCw, Cpu, Volume2, CheckCircle } from 'lucide-react';
+import { Bot, Plus, Sliders, Play, Save, RefreshCw, Cpu, CheckCircle } from 'lucide-react';
 
 interface Agent {
   id?: string;
@@ -11,7 +11,6 @@ interface Agent {
   modelProvider: string;
   modelName: string;
   temperature: number;
-  voiceId: string;
   isPreset?: boolean;
 }
 
@@ -26,9 +25,6 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
   const [agents, setAgents] = useState<Agent[]>([]);
   const [localModels, setLocalModels] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [cloningVoice, setCloningVoice] = useState(false);
-  const [voiceName, setVoiceName] = useState('');
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Form State
   const [name, setName] = useState('');
@@ -38,8 +34,8 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
   const [modelProvider, setModelProvider] = useState('LM Studio (http://localhost:1234)');
   const [modelName, setModelName] = useState('qwen2.5-coder-7b-instruct');
   const [temperature] = useState(0.7);
-  const [voiceId, setVoiceId] = useState('default-voice');
   const [editingId] = useState<string | null>(null);
+  const [saveNote, setSaveNote] = useState('');
   const [selectedAgentIds, setSelectedAgentIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -84,8 +80,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
         systemPrompt,
         modelProvider,
         modelName,
-        temperature,
-        voiceId
+        temperature
       };
 
       const res = await apiFetch('/api/agents-workbench/agents', {
@@ -97,9 +92,13 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
       if (res.ok) {
         fetchAgents();
         resetForm();
+        setSaveNote('Agent saved.');
+      } else {
+        setSaveNote(`Could not save the agent (${res.status}).`);
       }
     } catch (e) {
       console.error("Failed saving agent:", e);
+      setSaveNote('Could not reach the Studio backend.');
     } finally {
       setLoading(false);
     }
@@ -110,35 +109,6 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
     setRole('');
     setAvatarColor('#7c3aed');
     setSystemPrompt(PRESET_SYSTEM_PROMPTS[0].prompt);
-  };
-
-  const handleVoiceCloneSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!voiceName.trim() || !selectedFile) return;
-
-    setCloningVoice(true);
-    try {
-      const formData = new FormData();
-      formData.append('name', voiceName);
-      formData.append('file', selectedFile);
-
-      const res = await apiFetch('/api/agents-workbench/voice/clone', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setVoiceId(data.profile.id);
-        alert(`✓ Voice "${voiceName}" successfully cloned! Assigned to current agent.`);
-        setVoiceName('');
-        setSelectedFile(null);
-      }
-    } catch (e) {
-      console.error("Voice cloning failed:", e);
-    } finally {
-      setCloningVoice(false);
-    }
   };
 
   const toggleSelectAgent = (id: string) => {
@@ -158,7 +128,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
             <Bot style={{ color: '#a78bfa' }} /> Agents Creator & Personality Designer Studio
           </h1>
           <p style={{ color: '#94a3b8', margin: '6px 0 0 0', fontSize: '0.95rem' }}>
-            Design custom AI agents, assign local LLMs (LM Studio / Ollama), clone voice profiles, and launch multi-agent planning rooms.
+            Design custom AI agents, assign local LLMs (LM Studio / Ollama), and launch multi-agent planning rooms.
           </p>
         </div>
         <button
@@ -309,45 +279,9 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
             >
               <Save size={18} /> {editingId ? 'Update Agent Profile' : 'Save Agent to Studio'}
             </button>
+            {saveNote && <span style={{ fontSize: '0.85rem', color: saveNote.startsWith('Could not') ? '#fca5a5' : '#4ade80' }}>{saveNote}</span>}
           </form>
 
-          {/* Voice Cloning Sub-Section */}
-          <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #1e293b' }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0 0 10px 0', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Mic size={18} /> Zero-Shot Voice Cloning Studio (F5-TTS)
-            </h3>
-            <form onSubmit={handleVoiceCloneSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <input
-                type="text"
-                placeholder="Voice Profile Name (e.g. Host Accent)"
-                value={voiceName}
-                onChange={e => setVoiceName(e.target.value)}
-                style={{ padding: '8px 12px', background: '#1e293b', border: '1px solid #334155', borderRadius: '6px', color: '#fff', fontSize: '0.85rem' }}
-              />
-              <input
-                type="file"
-                accept="audio/*"
-                onChange={e => setSelectedFile(e.target.files ? e.target.files[0] : null)}
-                style={{ fontSize: '0.8rem', color: '#94a3b8' }}
-              />
-              <button
-                type="submit"
-                disabled={cloningVoice || !selectedFile}
-                style={{
-                  background: selectedFile ? '#0284c7' : '#334155',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '8px 14px',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                  cursor: selectedFile ? 'pointer' : 'not-allowed'
-                }}
-              >
-                {cloningVoice ? 'Cloning Voice Vector...' : '🎙️ Extract & Clone Voice Profile'}
-              </button>
-            </form>
-          </div>
         </div>
 
         {/* Right Column: Agents Library Grid */}
@@ -415,9 +349,6 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: '#94a3b8', paddingTop: '6px' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <Cpu size={14} style={{ color: '#38bdf8' }} /> {a.modelName}
-                    </span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Volume2 size={14} style={{ color: '#4ade80' }} /> Cloned Voice Active
                     </span>
                   </div>
                 </div>

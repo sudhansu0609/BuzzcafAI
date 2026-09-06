@@ -1,6 +1,6 @@
 import { apiFetch } from '../../services/http';
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Mic, MicOff, Volume2, Users, ArrowLeft, Sparkles } from 'lucide-react';
+import { Send, Users, ArrowLeft, Sparkles } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -9,7 +9,6 @@ interface ChatMessage {
   avatarColor?: string;
   text: string;
   timestamp: string;
-  audioUrl?: string;
   /** True when the model server was unreachable and the text is canned. */
   simulated?: boolean;
   isUser?: boolean;
@@ -25,15 +24,12 @@ export default function AgentsGroupChat({
   const [agents, setAgents] = useState<any[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
-  const [isListening, setIsListening] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     fetchActiveAgents();
-    initSpeechRecognition();
   }, [selectedAgentIds]);
 
   useEffect(() => {
@@ -52,53 +48,13 @@ export default function AgentsGroupChat({
         {
           id: 'welcome-01',
           sender: 'Buzzcaf Group Chat Room',
-          text: `Welcome! Active agents: ${active.map((a: any) => a.name).join(', ')}. Ask a question or speak your continuous voice command to begin multi-agent project planning!`,
+          text: `Welcome! Active agents: ${active.map((a: any) => a.name).join(', ')}. Ask a question to start multi-agent planning.`,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           avatarColor: '#7c3aed'
         }
       ]);
     } catch (e) {
       console.error("Failed fetching active chat agents:", e);
-    }
-  };
-
-  const initSpeechRecognition = () => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = 'en-US';
-
-      recognition.onresult = (event: any) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
-        }
-        setInputMessage(transcript);
-      };
-
-      recognition.onerror = (e: any) => {
-        console.error("Speech Recognition Notice:", e);
-        setIsListening(false);
-      };
-
-      recognitionRef.current = recognition;
-    }
-  };
-
-  const toggleListening = () => {
-    if (!recognitionRef.current) {
-      alert("Continuous Speech Recognition is not natively supported in this browser window.");
-      return;
-    }
-
-    if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-    } else {
-      recognitionRef.current.start();
-      setIsListening(true);
     }
   };
 
@@ -134,7 +90,17 @@ export default function AgentsGroupChat({
         body: JSON.stringify(payload)
       });
 
-      if (res.ok) {
+      if (!res.ok) {
+        let detail = `${res.status} ${res.statusText}`;
+        try {
+          const body = await res.json();
+          if (body && typeof body.detail === 'string') detail = body.detail;
+        } catch {
+          // no JSON body
+        }
+        throw new Error(detail);
+      }
+      {
         const data = await res.json();
         const agentResponses = data.agentResponses || [];
 
@@ -147,7 +113,6 @@ export default function AgentsGroupChat({
               avatarColor: resp.avatarColor || '#7c3aed',
               text: resp.response,
               timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              audioUrl: resp.voiceAudio?.audioUrl,
               simulated: !!resp.simulated
             };
             setMessages(prev => [...prev, agentMsg]);
@@ -155,7 +120,16 @@ export default function AgentsGroupChat({
         });
       }
     } catch (e) {
+      // A failed room used to leave the user's message hanging with no reply.
       console.error("Failed sending group chat message:", e);
+      setMessages(prev => [...prev, {
+        id: `err-${Date.now()}`,
+        sender: 'Buzzcaf Group Chat Room',
+        text: `Could not get replies: ${e instanceof Error ? e.message : String(e)}`,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        avatarColor: '#7f1d1d',
+        simulated: true
+      }]);
     } finally {
       setIsGenerating(false);
     }
@@ -182,27 +156,6 @@ export default function AgentsGroupChat({
           </div>
         </div>
 
-        {/* Continuous Listening Toggle Button */}
-        <button
-          onClick={toggleListening}
-          style={{
-            background: isListening ? 'linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)' : '#1e293b',
-            color: '#ffffff',
-            border: `1px solid ${isListening ? '#f43f5e' : '#334155'}`,
-            padding: '10px 18px',
-            borderRadius: '8px',
-            fontWeight: 700,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontSize: '0.9rem',
-            boxShadow: isListening ? '0 0 12px rgba(244, 63, 94, 0.5)' : 'none'
-          }}
-        >
-          {isListening ? <MicOff size={18} /> : <Mic size={18} />}
-          {isListening ? 'Stop Continuous Voice' : '🎙️ Start Continuous Voice'}
-        </button>
       </div>
 
       {/* Main Conversation Feed */}
@@ -240,16 +193,6 @@ export default function AgentsGroupChat({
                 {m.text}
               </p>
 
-              {!m.isUser && m.audioUrl && (
-                <div style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid #1e293b', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <button
-                    onClick={() => alert(`Playing cloned voice response for ${m.sender}...`)}
-                    style={{ background: '#1e293b', border: 'none', color: '#4ade80', padding: '4px 10px', borderRadius: '6px', fontSize: '0.78rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}
-                  >
-                    <Volume2 size={14} /> Listen in Cloned Voice
-                  </button>
-                </div>
-              )}
             </div>
 
             {m.isUser && (
@@ -271,7 +214,7 @@ export default function AgentsGroupChat({
       <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
         <input
           type="text"
-          placeholder={isListening ? "Listening continuously... speak now or type message..." : "Type project command or prompt for the group agents..."}
+          placeholder="Ask the group agents a question or give them a task..."
           value={inputMessage}
           onChange={e => setInputMessage(e.target.value)}
           style={{ flex: 1, padding: '14px 18px', background: '#0f172a', border: '1px solid #1e293b', borderRadius: '10px', color: '#fff', fontSize: '0.95rem' }}

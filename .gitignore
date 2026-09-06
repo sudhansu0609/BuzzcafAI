@@ -35,3 +35,7 @@ dist/
 build/
 .DS_Store
 Thumbs.db
+
+# desktop shell runtime state
+backend/config/window.json
+backend/logs/

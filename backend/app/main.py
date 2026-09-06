@@ -19,7 +19,6 @@ app = FastAPI(title="Buzzcaf AI Studio")
 
 from app.api.auth import router as auth_router
 from app.api.agents_api import router as agents_router
-from app.services.voice_intent import resolve_channel, resolve_tab, resolve_actions
 app.include_router(auth_router)
 app.include_router(agents_router)
 
@@ -111,9 +110,14 @@ class AssetRegisterSchema(BaseModel):
     status: Optional[str] = "active"
     project_id: Optional[str] = None
 
+STUDIO_VERSION = "0.5.0"
+
+
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    # `app` lets Dexter confirm it is talking to the Studio and not to some
+    # other process that happens to own port 8000.
+    return {"status": "ok", "app": "buzzcaf", "version": STUDIO_VERSION}
 
 @app.get("/projects")
 def projects():
@@ -745,112 +749,6 @@ Provide a helpful, strategic response in character as {agent_name}. Refer back t
             "reply": f"**{agent_name}** could not be reached: {e}\n\nCheck your provider settings and that the selected model is available."
         }
 
-
-VOICE_CONFIG = {
-    "provider": "native_local",
-    "picovoice_access_key": "",
-    "openai_realtime_key": "",
-    "wake_word": "Hey Buzzcaf"
-}
-
-class VoiceConfigSchema(BaseModel):
-    provider: Optional[str] = "native_local"
-    picovoice_access_key: Optional[str] = ""
-    openai_realtime_key: Optional[str] = ""
-    wake_word: Optional[str] = "Hey Buzzcaf"
-
-VOICE_SECRET_KEYS = ("picovoice_access_key", "openai_realtime_key")
-
-
-def _redact_voice_config() -> Dict[str, Any]:
-    """Same rule as /api/settings: report whether a key is set, never its value."""
-    safe = dict(VOICE_CONFIG)
-    for key in VOICE_SECRET_KEYS:
-        value = VOICE_CONFIG.get(key) or ""
-        safe[key] = MASKED_VALUE if value else ""
-        safe[f"{key}_set"] = bool(value)
-    return safe
-
-
-@app.get("/api/voice/config")
-def get_voice_config():
-    return _redact_voice_config()
-
-@app.post("/api/voice/config")
-def update_voice_config(payload: VoiceConfigSchema):
-    if payload.provider: VOICE_CONFIG["provider"] = payload.provider
-    if payload.wake_word: VOICE_CONFIG["wake_word"] = payload.wake_word
-    # An empty or still-masked value means "keep what is stored", so reopening
-    # the settings tab and saving does not wipe the key.
-    for key, value in (
-        ("picovoice_access_key", payload.picovoice_access_key),
-        ("openai_realtime_key", payload.openai_realtime_key),
-    ):
-        if value is None or value == "" or set(value) == {"*"}:
-            continue
-        VOICE_CONFIG[key] = value
-    return {"status": "success", "config": _redact_voice_config()}
-
-class JarvisVoiceSchema(BaseModel):
-    phrase: str
-    active_channel: Optional[str] = "Beyond3Baje"
-    active_tab: Optional[str] = "dashboard"
-
-@app.post("/api/jarvis/voice")
-def jarvis_voice_router(payload: JarvisVoiceSchema):
-    phrase = payload.phrase.strip()
-    p_lower = phrase.lower()
-    
-    # Keyword tables live in app/services/voice_intent.py -- one definition,
-    # so channel routing cannot drift between endpoints.
-    target_channel = resolve_channel(p_lower)
-    target_tab = resolve_tab(p_lower)
-    actions = resolve_actions(p_lower)
-    is_save = actions["is_save"]
-    is_chat = actions["is_chat"]
-    is_discover = actions["is_discover"]
-    is_stop = actions["is_stop"]
-    is_log = actions["is_log"]
-
-    curr_ch = target_channel or payload.active_channel
-    
-    # Autonomous Natural Speech Generation
-    if is_stop:
-        buzzcaf_speech = "Buzzcaf standing down, sir. Voice system paused."
-    elif is_log:
-        buzzcaf_speech = "Opening your voice activity log console now, sir."
-    elif target_channel and target_tab:
-        buzzcaf_speech = f"Right away, sir. Switched to {target_channel} and opened the {target_tab.replace('_', ' ')} workspace."
-    elif target_channel:
-        buzzcaf_speech = f"Certainly, sir. Aligning system intelligence with {target_channel}."
-    elif target_tab:
-        buzzcaf_speech = f"Opening {target_tab.replace('_', ' ')} workspace now, sir."
-    elif is_save:
-        buzzcaf_speech = f"Bookmarking the top discovered topic directly into your Vault, sir."
-    elif is_chat:
-        buzzcaf_speech = f"Initiating direct strategist chat session for {curr_ch}, sir."
-    elif is_discover:
-        buzzcaf_speech = f"Executing a full topic discovery sweep across Reddit, Wikipedia, and archives for {curr_ch}, sir."
-    elif any(w in p_lower for w in ["hi", "hello", "hey", "who are you", "what can you do"]):
-        buzzcaf_speech = f"Hello sir! I am Buzzcaf, your autonomous AI production assistant. Tell me what you need, and I will execute it."
-    else:
-        clean_phrase = phrase.replace("buzzcaf", "").replace("hey", "").replace("and", "").replace("please", "").strip()
-        buzzcaf_speech = f"Right away, sir. Executing your request regarding {clean_phrase if clean_phrase else 'your studio directive'}."
-
-    return {
-        "status": "success",
-        "buzzcaf_speech": buzzcaf_speech,
-        "jarvis_speech": buzzcaf_speech,
-        "action": {
-            "target_channel": target_channel,
-            "target_tab": target_tab,
-            "is_save": is_save,
-            "is_chat": is_chat,
-            "is_discover": is_discover,
-            "is_stop": is_stop,
-            "is_log": is_log
-        }
-    }
 
 @app.get("/api/agents")
 def get_all_agents():

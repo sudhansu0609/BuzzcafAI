@@ -7,7 +7,7 @@ uvicorn>=0.30,<1.0           # ASGI server used by the launcher
 pydantic>=2.7,<3.0           # request/response schemas (v2 API: model_dump)
 requests>=2.32,<3.0          # integrations/llm.py provider calls
 python-dotenv>=1.0,<2.0      # core/config.py loads backend/.env
-python-multipart>=0.0.9      # required by FastAPI UploadFile (voice clone upload)
+pywebview>=5.0               # backend/desktop_app.py - the desktop window
 
 # Test-only. Kept here so a single install produces a runnable test suite;
 # split into requirements-dev.txt if a slim production image is ever needed.

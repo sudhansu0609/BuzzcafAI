@@ -1,5 +1,8 @@
-fastapi
-uvicorn
-sqlalchemy
-psycopg2-binary
-alembic
+# The dependency list lives at the repo root so the two cannot drift.
+# `pip install -r backend/requirements.txt` and `pip install -r requirements.txt`
+# now install exactly the same thing.
+#
+# The former sqlalchemy/psycopg2-binary/alembic entries were dropped: no code
+# path opens a database. Every route reads and writes JSON files. If a database
+# is reintroduced, add those deps back to the root manifest.
+-r ../requirements.txt

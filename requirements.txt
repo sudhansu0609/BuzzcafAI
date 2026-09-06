@@ -1,3 +1,15 @@
-fastapi
-uvicorn
-pydantic
+# Buzzcaf AI Studio - backend runtime dependencies.
+# This is the single manifest; backend/requirements.txt includes this file.
+# Every entry below is actually imported by code that runs.
+
+fastapi>=0.115,<1.0          # app/main.py, app/api/*
+uvicorn>=0.30,<1.0           # ASGI server used by the launcher
+pydantic>=2.7,<3.0           # request/response schemas (v2 API: model_dump)
+requests>=2.32,<3.0          # integrations/llm.py provider calls
+python-dotenv>=1.0,<2.0      # core/config.py loads backend/.env
+python-multipart>=0.0.9      # required by FastAPI UploadFile (voice clone upload)
+
+# Test-only. Kept here so a single install produces a runnable test suite;
+# split into requirements-dev.txt if a slim production image is ever needed.
+pytest>=8.0
+httpx>=0.27                  # fastapi.testclient.TestClient depends on it

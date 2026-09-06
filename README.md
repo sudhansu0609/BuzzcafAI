@@ -1,58 +1,146 @@
-# ☕ Buzzcaf Media - Autonomous AI YouTube Channel Production & Studio Platform
+# ☕ Buzzcaf AI Studio
 
-An enterprise-grade, multi-agent AI production studio platform powering 5 distinct YouTube channel brands (**Beyond3Baje**, **Spilled Coffee After Dark**, **Life3Baje**, **Khayal3Baje**, and **Spilled Coffee Studio**). Driven by an autonomous 115-agent AI workforce operating across 19 specialized studio departments.
+A local, single-user multi-agent studio for producing YouTube content across five
+channel brands (**Beyond3Baje**, **Spilled Coffee After Dark**, **Life3Baje**,
+**Khayal3Baje**, **Spilled Coffee Studio**).
 
----
+115 agent personas are defined as Markdown files with YAML frontmatter and
+discovered at startup; workflows are JSON step definitions with per-step human
+approval gates. A FastAPI backend runs them against Gemini, OpenAI, or a local
+LM Studio / Ollama server.
 
-## 🚀 Key Features & Studio Capabilities
-
-- **115 Autonomous AI Agents**: Structured across 19 studio departments (Executive, Research, Creative, Writing, Voice Dictation, Scriptwriting, SEO, Analytics, Production, Publishing, etc.).
-- **Universal Hinglish Content Standard**: All topic discoveries, video titles, opening hooks, script outlines, full narration scripts, scene dialogues, and thumbnail concepts are generated in **Hinglish** (day-to-day conversational Hindi in Roman/English fonts).
-- **Voice Dictation Studio 🎙️**: Continuous Web Speech API engine with real-time speech-to-text, auto-restart on pause, mic power toggle, voice commands (`"delete line"`, `"new line"`, `"clear canvas"`), and High Sensitivity mode.
-- **Draggable & Resizable Split Canvas**: 78% default script draft canvas with vertical resizer bar and quick split ratio presets (78%, 85%, 60%).
-- **AI Story & Script Completer 🚀**: Seamlessly sends dictation drafts to specialized AI writing agents (`ScriptWriter`, `WriterAgent`, `HorrorSpecialist`, `MythologySpecialist`) to expand semi-written stories into multi-act Hinglish video scripts with visual B-roll cues.
-- **Topic Vault & Live Agent Chat**: Channel-scoped persistent topic discovery, bookmarked topic vault, memory logs disk sync, and instant agent dropdown switchers.
-
----
-
-## 🏗️ Architecture & Stack
-
-- **Backend**: FastAPI (Python 3.10+), PyDantic, Uvicorn, Google Gemini API 1.5 Flash / OpenAI / Local LM Studio.
-- **Frontend**: React 18, TypeScript, Vite, Vanilla CSS design system (Dark Glassmorphism, 4K Responsive Layouts).
-- **Memory & Storage**: Disk-persisted JSON memory logs (`MemorySystem`), local storage caching.
+> Every command and claim below was run against this checkout. See
+> [ARCHITECTURE.md](ARCHITECTURE.md) for what the code actually does, and
+> [AGENTS.md](AGENTS.md) for how to author an agent.
 
 ---
 
-## ⚡ Getting Started
+## Quick start
 
-### 1. Backend Server Setup
+Requires Python 3.10+ and Node 18+.
+
 ```bash
-cd backend
+# 1. Backend
 pip install -r requirements.txt
-python main.py start-server --port 8000 --host 127.0.0.1
+cd backend
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-*Backend API Swagger Documentation will be available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)*
 
-### 2. Frontend Dashboard Setup
 ```bash
+# 2. Frontend (separate terminal)
 cd frontend
 npm install
 npm run dev
 ```
-*Frontend Studio Application will be live at [http://localhost:5173/](http://localhost:5173/)*
+
+- Studio UI: <http://localhost:5173>
+- API docs: <http://127.0.0.1:8000/docs>
+
+On Windows, `start_buzzcafai.bat` starts both from this checkout on those ports.
+
+Then open **Settings** in the UI and add a Gemini or OpenAI key, or point the
+app at a local LM Studio server. Without a working provider the app still
+responds, but every reply is labelled **⚠ SIMULATED** — see
+[Simulated responses](#simulated-responses).
+
+### CLI
+
+`backend/main.py` exposes the same engine without the web UI:
+
+```bash
+cd backend
+python main.py list-agents         # all 115 registered personas
+python main.py list-workflows
+python main.py list-projects
+python main.py diagnostics
+python main.py create-project --name "Title" --brand Beyond3Baje --workflow life3baje_video
+python main.py start-server --port 8000 --host 127.0.0.1
+```
+
+### Tests
+
+```bash
+cd backend && python -m pytest tests -q     # 135 tests
+cd frontend && npx tsc --noEmit && npm run build
+```
+
+Both run in CI on every push and pull request (`.github/workflows/ci.yml`).
 
 ---
 
-## 📺 Channel Brands Managed
+## Configuration
 
-1. **Beyond3Baje 🔍**: 100% real-world, fact-grounded documentaries, true crime, dark history, and historical engineering disasters.
-2. **Spilled Coffee After Dark 🕯️**: Parapsychological folklore, 3 AM high-strangeness encounters, and regional horror archives.
-3. **Life3Baje 🌿**: Reflective personal essays, creative self-experiments, and cozy atmospheric video essays.
-4. **Khayal3Baje 📜**: Authentic ancient mythology, textual epic lore, and world mythologies.
-5. **Spilled Coffee Studio ☕**: Story architecture, classic literature breakdowns, and original creator fiction.
+Paths are derived from the checkout location by `backend/core/paths.py`; nothing
+needs editing to move or rename the project. Copy `.env.example` to `.env` to
+override anything.
+
+| Setting | Where | Notes |
+|---|---|---|
+| API keys | Settings UI → `backend/config/config.json`, or `.env` | The API never returns stored keys, only whether one is set |
+| Provider order | Settings UI | Falls back Gemini → OpenAI → LM Studio |
+| Ports | `frontend/vite.config.ts` + `start_buzzcafai.bat` | Frontend 5173, backend 8000; the dev proxy forwards `/api` |
+| Data directories | `.env` (`PROJECTS_PATH`, `KNOWLEDGE_PATH`, `PROMPTS_PATH`, `LOGS_PATH`) | Optional. Honoured only if the directory already exists |
 
 ---
 
-## 📄 License
+## Security posture
 
-MIT License. Developed for Buzzcaf Media YouTube Production Workflows.
+**This is a local, single-user application. There is no authentication, and no
+endpoint checks a token.** Run it bound to `127.0.0.1` only — the launcher does
+this deliberately. Do not expose it to a LAN or the internet as-is.
+
+What is in place:
+
+- CORS is restricted to the local dev origins; add more via `ALLOWED_ORIGINS`.
+- `GET /api/settings` masks API keys and returns `<key>_set` booleans instead.
+  Saving with an empty field keeps the stored key rather than erasing it.
+- Project ids are validated and resolved paths are confined to the projects
+  directory, so a crafted id cannot read files elsewhere on disk.
+
+---
+
+## Simulated responses
+
+When no LLM provider succeeds, the app returns canned text rather than failing.
+This is always labelled, never silent:
+
+- `LLMService.last_response_simulated` is set on the service.
+- API responses carry `"status": "simulated"` and `"simulated": true`.
+- The chat UI shows an amber **⚠ SIMULATED** banner on those messages.
+
+If you see that banner, no model was reached — check Settings and that your
+provider is running. A response without the banner came from a real model.
+
+---
+
+## Not implemented
+
+Stated plainly so nobody builds on it:
+
+- **Server-side voice cloning.** Uploading a reference clip stores the WAV
+  (`status: "sample_stored"`); no embedding is extracted and no TTS engine is
+  wired up. `synthesize_cloned_speech()` returns `status: "not_implemented"` and
+  no `audioUrl`; the UI falls back to browser speech synthesis.
+- **Authentication.** `POST /login` returns a placeholder token that nothing
+  verifies.
+- **Database.** `app/db/`, `app/models/`, and `alembic.ini` exist but no code
+  path opens a database. All state is JSON on disk.
+- **Most of the file tree.** Roughly two thirds of the Python files and nearly
+  all frontend files under `src/pages/` are empty scaffolding that nothing
+  imports. See [ARCHITECTURE.md](ARCHITECTURE.md) for the modules that are real.
+
+## Channel brands
+
+1. **Beyond3Baje 🔍** — fact-grounded documentaries, true crime, dark history.
+2. **Spilled Coffee After Dark 🕯️** — folklore, 3 AM encounters, regional horror.
+3. **Life3Baje 🌿** — reflective personal essays and atmospheric video essays.
+4. **Khayal3Baje 👁️** — fictional horror and speculative narrative.
+5. **Spilled Coffee Studio ☕** — flagship long-form storytelling.
+
+Content is authored in Hinglish (conversational Hindi in Roman script) — the
+channel guides under `backend/prompts/channels/` define each brand's voice.
+
+## License
+
+`LICENSE` is currently a placeholder. Treat this repository as all rights
+reserved until it is filled in.

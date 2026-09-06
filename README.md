@@ -17,26 +17,24 @@ LM Studio / Ollama server.
 
 ## Quick start
 
-Requires Python 3.10+ and Node 18+.
+Requires Python 3.10+ (with WebView2, present on Windows 11) and, for
+development, Node 18+.
+
+**Use it:** double-click `Buzzcaf Studio.vbs`. It runs `pythonw backend/desktop_app.py`:
+preflight, FastAPI on `127.0.0.1:8000` in-process, and a native window with no
+console. Closing the window ends the process. Dexter can also launch it
+("open the studio").
+
+**Develop it:**
 
 ```bash
-# 1. Backend
 pip install -r requirements.txt
-cd backend
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+cd frontend && npm install && npm run build      # writes backend/app/static
+start_buzzcafai.bat --dev                        # one console: backend + Vite on 5173
 ```
 
-```bash
-# 2. Frontend (separate terminal)
-cd frontend
-npm install
-npm run dev
-```
-
-- Studio UI: <http://localhost:5173>
 - API docs: <http://127.0.0.1:8000/docs>
-
-On Windows, `start_buzzcafai.bat` starts both from this checkout on those ports.
+- The built UI is served at `/` by the backend; `--dev` opens the Vite server instead.
 
 Then open **Settings** in the UI and add a Gemini or OpenAI key, or point the
 app at a local LM Studio server. Without a working provider the app still
@@ -45,22 +43,20 @@ responds, but every reply is labelled **⚠ SIMULATED** — see
 
 ### CLI
 
-`backend/main.py` exposes the same engine without the web UI:
+`backend/apps/cli/main.py` exposes the same engine without the UI:
 
 ```bash
 cd backend
-python main.py list-agents         # all 115 registered personas
-python main.py list-workflows
-python main.py list-projects
-python main.py diagnostics
-python main.py create-project --name "Title" --brand Beyond3Baje --workflow life3baje_video
-python main.py start-server --port 8000 --host 127.0.0.1
+python -m apps.cli.main list-agents         # all 115 registered personas
+python -m apps.cli.main list-workflows
+python -m apps.cli.main list-projects
+python -m apps.cli.main diagnostics
 ```
 
 ### Tests
 
 ```bash
-cd backend && python -m pytest tests -q     # 135 tests
+cd backend && python -m pytest tests -q     # 137 tests
 cd frontend && npx tsc --noEmit && npm run build
 ```
 
@@ -117,17 +113,12 @@ provider is running. A response without the banner came from a real model.
 
 Stated plainly so nobody builds on it:
 
-- **Server-side voice cloning.** Uploading a reference clip stores the WAV
-  (`status: "sample_stored"`); no embedding is extracted and no TTS engine is
-  wired up. `synthesize_cloned_speech()` returns `status: "not_implemented"` and
-  no `audioUrl`; the UI falls back to browser speech synthesis.
-- **Authentication.** `POST /login` returns a placeholder token that nothing
-  verifies.
-- **Database.** `app/db/`, `app/models/`, and `alembic.ini` exist but no code
-  path opens a database. All state is JSON on disk.
-- **Most of the file tree.** Roughly two thirds of the Python files and nearly
-  all frontend files under `src/pages/` are empty scaffolding that nothing
-  imports. See [ARCHITECTURE.md](ARCHITECTURE.md) for the modules that are real.
+- **Voice.** Removed in v5 (dictation, Jarvis, cloning). `git show pre-v5:...`
+  has the old code; `backend/projects/voice_profiles` is left on disk.
+- **Authentication.** None. The app binds to `127.0.0.1` and is single-user.
+- **Database.** None. All state is JSON on disk under `backend/projects` and
+  `backend/knowledge`.
+- **Streaming chat.** Replies arrive whole; see `PLAN.md` 5.5.
 
 ## Channel brands
 

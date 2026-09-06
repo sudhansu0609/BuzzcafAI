@@ -14,6 +14,25 @@ Notable changes to Buzzcaf AI Studio. Newest first.
   session memory file on each run.
 - `GET /api/projects` lists from `core.paths.PROJECTS_DIR` instead of a
   second path computed in `app/main.py`.
+- **Desktop app.** `backend/desktop_app.py` (pywebview) + `Buzzcaf Studio.vbs`
+  open the Studio in a native window with no console; `npm run build` writes
+  straight into `backend/app/static`; `start_buzzcafai.bat --dev` is the
+  one-console developer variant.
+- **Voice removed** (dictation, Jarvis, cloning routes and UI).
+- **Chat rebuilt.** `services/studio_chat.py` sends a real messages list:
+  persona and roster once, channel guide, up to six *relevant* memories, the
+  last eight turns. Hinglish applies only to content-producing workflow steps.
+  Failures are HTTP 502, shown as toasts.
+- **Chat is the landing tab.** `App.tsx` is a 193-line shell over
+  `src/pages/*`; fabricated fallback projects/topics/video ideas and the four
+  mock tabs are gone; every request goes through `services/api.ts`.
+- **Control API for Dexter.** `GET /api/studio/state`, `POST /api/studio/chat`,
+  `GET /api/studio/events` (SSE), `POST /api/projects/{id}/approve`; `/health`
+  identifies the app.
+- **BuzzBrain store.** `POST /api/buzzbrain/snapshot` and `GET /api/buzzbrain/*`;
+  a video is "mine" only when its channel id is in `owner_channel_ids`.
+- **Purge.** 26 dead trees, 128 stub files, the auth stub and `app/db` removed;
+  `docs/` archived to `docs/legacy/`.
 
 ### Earlier unreleased repair pass (tagged `pre-v5`)
 

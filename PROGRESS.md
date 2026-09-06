@@ -18,8 +18,17 @@ A row is **done** only with the evidence that proves it. Nothing is marked done 
 | 2.5 chat is the front door (**I11**) | ✅ done | `App.tsx` rewritten as a shell over `src/pages/*` + `state/studio.tsx`; landing tab `studio_chat`; all requests via `apiFetch`/`services/api.ts`; `Toast`/`ConfirmDialog` replace 10 `alert()`/`confirm()`; no fabricated projects/topics; mock tabs removed; real `/health` badge; `tsc` + `vite build` green |
 | 3.1 control API | ✅ done | `api/studio_api.py`: `GET /api/studio/state`, `POST /api/studio/chat`, `GET /api/studio/events` (SSE); `POST /api/projects/{id}/approve` (409 when nothing waits); events `project_created`/`step_started`/`step_completed`/`approval_needed`/`step_failed` published from create/execute; `/health` carries `app`+`version`; `tests/test_studio_api.py` 8 tests, suite 153 passed |
 | 5.1 BuzzBrain store | ✅ done | `api/buzzbrain_api.py`: `POST /api/buzzbrain/snapshot` → `knowledge/buzzbrain/snapshots.jsonl` + `index.json`, `GET /latest`, `/channels`, `/videos/{id}`; `mine` only via `owner_channel_ids` setting or a brand name; `buzzbrain_snapshot` event; `tests/test_buzzbrain_api.py` 6 tests, suite 159 passed. BuzzBrain 1.2.0 pushes snapshots and queues offline |
-| 5.4 frontend split + stub purge | ⚠️ frontend half done | 96 one-line stub files under `src/` deleted, `router.tsx` gone, `App.tsx` 3595 → ~200 lines; backend stub purge and `docs/legacy` still open |
-| 5.5 streaming (optional) | ⬜ open | |
+| 5.4 frontend split + stub purge | ✅ done | frontend: 96 stub files deleted, `router.tsx` gone, `App.tsx` 3595 → 193 lines over `src/pages/*`; backend: 26 dead trees + 32 stub files removed (21 placeholder tests), auth stub unmounted, `app/db` + `alembic.ini` dropped (no code opened a database); tracked files 766 → ~530, Python files 243 → 86; `docs/` → `docs/legacy/` (185 files) with a pointer README; `pytest` 137 passed; ARCHITECTURE.md rewritten to the surviving tree |
+| 5.5 streaming (optional) | ⬜ open | only if chat still feels slow with a local server up |
+
+## v5 acceptance bar (Studio rows; the rest are in `dexter/PROGRESS.md`)
+
+| # | Felt experience | Status | Evidence |
+|---|---|---|---|
+| I2 | One click opens the Studio | ✅ | `Buzzcaf Studio.vbs` → `[Desktop] Window opening after 3.7s`, no new `conhost`; `/health` → `app:"buzzcaf"` |
+| I11 | Studio chat is the front door | ✅ | landing tab `studio_chat`; toasts for every failure; `grep -n "alert(\|confirm(\| fetch(" src` empty |
+| I12 | Nothing lies | ✅ | fabricated projects/topics/video ideas removed; `simulated: true` travels to the UI badge; `list_brands` returns `[]` on error |
+| I13 | Reversible | ✅ | `git tag -l` → `pre-v5` |
 
 ## 2026-09-06
 

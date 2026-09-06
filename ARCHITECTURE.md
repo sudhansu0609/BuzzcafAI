@@ -1,14 +1,14 @@
 # Architecture
 
-What the code actually does, as of 2026-08-12. Line counts and paths were read
-from this checkout.
+What the code actually does, as of 2026-09-06 (v5). Line counts and paths were
+read from this checkout.
 
-> **Read this first:** the repository contains ~766 tracked files, but roughly
-> 162 of 243 Python files and 100 of 108 frontend `.ts`/`.tsx` files are empty
-> scaffolding (`class Foo: pass`) that nothing imports. Several subsystems exist
-> in three or four parallel copies, only one of which is live. The tables below
-> mark which copy is real. Grep results outside these modules are almost
-> certainly dead code.
+> The v5 purge removed the empty scaffolding that used to make up two thirds of
+> this repository: 26 dead trees, 128 stub files and 185 legacy design documents
+> (now under `docs/legacy/`, kept for history only). What remains is what runs.
+> The Studio is a desktop app (`backend/desktop_app.py` + pywebview) whose
+> front door is the Studio Assistant chat, and it is driven by Dexter over the
+> control API in `ECOSYSTEM.md`.
 
 ---
 
@@ -16,8 +16,12 @@ from this checkout.
 
 | Module | Lines | Responsibility |
 |---|---:|---|
-| `frontend/src/App.tsx` | 3581 | The entire UI: dashboard, projects, topic vault, chat, voice dictation, settings, health |
-| `backend/app/main.py` | 1195 | FastAPI app — every HTTP route, CORS, in-memory log buffer |
+| `backend/app/main.py` | 706 | FastAPI app: projects, workflows, topics, brands, settings, diagnostics, static mount |
+| `backend/desktop_app.py` | 370 | The window: fast preflight, in-process uvicorn, WebView2, remembered size, `--dev` |
+| `backend/app/api/buzzbrain_api.py` | 254 | BuzzBrain snapshot store (`knowledge/buzzbrain/`) and `GET /api/buzzbrain/*` |
+| `backend/app/services/studio_chat.py` | 206 | Chat as a messages list: persona + roster once, channel guide, ≤6 relevant memories, 8 turns |
+| `backend/app/api/studio_api.py` | 148 | Control API for Dexter: `/api/studio/state`, `/chat`, `/events` (SSE) |
+| `frontend/src/App.tsx` | 193 | Shell only: sidebar, header, toasts; pages live in `src/pages/*` |
 | `backend/integrations/llm.py` | 491 | Provider fallback chain and the simulated-response generator |
 | `backend/runtime/workflow.py` | 338 | Executes workflow steps, approval gates, error classification |
 | `backend/core/agent.py` | 233 | `AgentRegistry` — discovers and validates the 115 personas |
@@ -29,31 +33,27 @@ from this checkout.
 | `backend/core/paths.py` | — | **Single source of truth for every filesystem location** |
 
 Also live: `backend/app/api/agents_api.py` (Agents Workbench + group chat),
-`backend/app/services/` (`agents_registry`, `local_llm`, `voice_engine`),
-`frontend/src/pages/ai/` (`AgentCreatorStudio`, `AgentsGroupChat`),
-`frontend/src/services/http.ts`, `backend/apps/cli/main.py`.
+`backend/app/services/` (`agents_registry`, `local_llm`, `events`),
+`backend/preflight.py`, `frontend/src/pages/` (`StudioChat`, `Dashboard`,
+`Projects`, `TopicVault`, `Workforce`, `Health`, `Settings`, `ai/*`),
+`frontend/src/state/studio.tsx`, `frontend/src/services/{http,api}.ts`,
+`backend/apps/cli/main.py`.
 
-## Which copy is real
+## What was removed in v5 (so nobody looks for it)
 
-| Concern | Live | Dead duplicates |
-|---|---|---|
-| LLM routing | `backend/integrations/llm.py` | `backend/app/llm/`, `backend/integrations/ai/`, `llm_engine/` |
-| Agent runtime | `backend/runtime/`, `backend/core/agent.py` | `agent_runtime/`, `backend/app/runtime/` |
-| API app | `backend/app/main.py` | `backend/apps/api/main.py` |
-| Dashboard | `frontend/` | `backend/apps/dashboard/`, `backend/app/static/` (stale prebuilt bundle) |
-| Auth | `app/api/auth.py` (mounted, a stub) | `app/auth/`, `apps/api/auth/`, `admin/` |
-| Knowledge/memory | `backend/knowledge/`, `backend/memory/` | `backend/knowledge_engine/`, `backend/app/knowledge/`, `backend/memory_engine/` |
-
-`frontend/src/router.tsx` is never imported — `main.tsx` renders `App` directly,
-so everything under `frontend/src/pages/` except `pages/ai/` is unreachable.
-
----
+`backend/app/{llm,runtime,knowledge,markdown,production,publishing,repositories,
+auth,models,db}`, `backend/apps/api`, `backend/integrations/{ai,notion,youtube}`,
+`backend/{knowledge_engine,memory_engine,project_engine,workflow_engine,
+monitoring,publishing}`, `backend/markdown_engine`, the root
+`agent_runtime/ event_system/ llm_engine/ production/ research/ writing/`, the
+voice engine and Jarvis routes, `frontend/src/{layout,store,theme,router.tsx}`
+and every stub page. `git show pre-v5:<path>` retrieves any of it.
 
 ## Request path
 
 ```
-Browser (5173)
-  └─ /api/... ──► Vite dev proxy ──► FastAPI (127.0.0.1:8000)
+WebView2 window (backend/desktop_app.py)  or  Vite dev server (5173, --dev)
+  └─ /api/... ──► FastAPI (127.0.0.1:8000)
                                        └─ app/main.py route
                                             ├─ Project.load(id)          core/models/project.py
                                             ├─ WorkflowEngine            runtime/workflow.py
@@ -61,7 +61,9 @@ Browser (5173)
                                             │         ├─ prompts/agents/<Name>.md
                                             │         ├─ memory/memory.py (prior context)
                                             │         └─ LLMService      integrations/llm.py
-                                            │              └─ Gemini → OpenAI → LM Studio → simulated
+                                            │              └─ Gemini → OpenAI → LM Studio → simulated (labelled)
+                                            ├─ app/services/studio_chat.py   (Studio Assistant, /api/studio/chat)
+                                            ├─ app/services/events.py        (SSE bus → /api/studio/events)
                                             └─ JSON on disk (backend/projects/<id>/)
 ```
 
@@ -136,7 +138,6 @@ project's log.
 
 ## Known debt
 
-Tracked in `IMPROVEMENTS.md` with file:line references. The largest open items:
-the stub/duplicate file tree above, `App.tsx` at 3581 lines in a single
-component, synchronous blocking LLM calls with no streaming, and `docs/`
-(185 files) describing behavior that the stub modules never implemented.
+Tracked in `PLAN.md` / `PROGRESS.md`. Open: synchronous LLM calls with no
+streaming in the Studio chat (5.5, optional), and `backend/apps/dashboard/`
+(an old static dashboard nothing serves).

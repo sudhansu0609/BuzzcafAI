@@ -4,6 +4,19 @@ Notable changes to Buzzcaf AI Studio. Newest first.
 
 ## Unreleased
 
+### v5 — Studio as a desktop app controlled by Dexter
+
+- Tracking moved to `PLAN.md` + `PROGRESS.md`; `ECOSYSTEM.md` records ports,
+  launch order and the Dexter→Studio control contract. `IMPROVEMENTS.md` is
+  superseded.
+- Tests run against a throwaway copy of `knowledge/` and `projects/`
+  (`tests/conftest.py`); previously `test_memory_system` deleted every real
+  session memory file on each run.
+- `GET /api/projects` lists from `core.paths.PROJECTS_DIR` instead of a
+  second path computed in `app/main.py`.
+
+### Earlier unreleased repair pass (tagged `pre-v5`)
+
 ### Fixed — the app now runs as designed
 
 - **Agent personas actually load.** `BaseAgent` looked for prompt files at a

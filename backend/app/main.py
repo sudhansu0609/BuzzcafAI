@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from core.models.project import Project
-from core.paths import KNOWLEDGE_DIR
+from core.paths import KNOWLEDGE_DIR, PROJECTS_DIR
 from runtime.workflow import WorkflowEngine
 from integrations.llm import load_config, save_config
 from knowledge.assets import AssetService
@@ -41,7 +41,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-PROJECTS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "projects")
 engine = WorkflowEngine()
 asset_service = AssetService()
 

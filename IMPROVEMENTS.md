@@ -1,3 +1,8 @@
+> **Superseded on 2026-09-06.** Every finding below was addressed and committed
+> (tag `pre-v5`). Current work is tracked in [`PLAN.md`](PLAN.md) and
+> [`PROGRESS.md`](PROGRESS.md); the cross-project contract is in
+> [`ECOSYSTEM.md`](ECOSYSTEM.md). Kept for history.
+
 # BuzzcafAI / MidnightBuzz — Code Review & Improvement Plan
 
 **Reviewed:** 2026-08-12 · branch `main` @ `ba10a13`

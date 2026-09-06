@@ -3,6 +3,7 @@ import os
 import uuid
 import json
 import logging
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 
 logger = logging.getLogger("buzzcaf_ai.voice_engine")
@@ -32,14 +33,17 @@ class VoiceEngineService:
         with open(audio_path, "wb") as f:
             f.write(sample_audio_bytes)
 
+        # The reference clip is stored, but no embedding is extracted yet --
+        # say so rather than reporting the profile as ready to synthesize.
         metadata = {
             "id": voice_id,
             "name": voice_name,
             "audioPath": audio_path,
             "sampleFilename": filename,
-            "status": "ready",
-            "model": "F5-TTS Zero-Shot Local Engine",
-            "createdAt": "2026-07-28T00:00:00Z"
+            "status": "sample_stored",
+            "model": None,
+            "detail": "Reference clip saved. Voice embedding extraction is not implemented yet.",
+            "createdAt": datetime.now(timezone.utc).isoformat()
         }
 
         with open(os.path.join(voice_dir, "profile.json"), "w", encoding="utf-8") as f:
@@ -67,17 +71,23 @@ class VoiceEngineService:
         voice_id: str = "default-voice",
         agent_name: str = "AI Agent"
     ) -> Dict[str, Any]:
-        """Synthesize TTS speech in agent's cloned voice profile."""
-        output_filename = f"tts-{uuid.uuid4().hex[:8]}.wav"
-        
+        """Synthesize TTS speech in the agent's cloned voice profile.
+
+        Not implemented yet: no TTS engine is wired up. This deliberately
+        returns no audioUrl -- an earlier version returned a URL for a file
+        that was never written, so every playback attempt 404'd. The client
+        should fall back to browser speech synthesis while status is
+        'not_implemented'.
+        """
         return {
-            "status": "synthesized",
+            "status": "not_implemented",
             "text": text,
             "voiceId": voice_id,
             "agentName": agent_name,
-            "audioUrl": f"/api/voice/audio/{output_filename}",
+            "audioUrl": None,
             "sampleRate": 24000,
-            "engine": "F5-TTS / XTTS v2 Zero-Shot Local Engine"
+            "engine": None,
+            "detail": "Server-side voice cloning is not wired up; using browser speech instead."
         }
 
 voice_engine_service = VoiceEngineService()

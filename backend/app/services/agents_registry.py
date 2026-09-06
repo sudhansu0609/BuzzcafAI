@@ -107,12 +107,13 @@ class AgentsRegistry:
         return new_agent
 
     def delete_agent(self, agent_id: str) -> bool:
+        """Delete a custom agent. Preset agents are never deletable."""
         agents = self.list_agents()
-        filtered = [a for a in agents if a.get("id") != agent_id or a.get("isPreset", False)]
-        if len(filtered) != len(agents):
-            self._write_all(filtered)
-            return True
-        return False
+        target = next((a for a in agents if a.get("id") == agent_id), None)
+        if target is None or target.get("isPreset", False):
+            return False
+        self._write_all([a for a in agents if a is not target])
+        return True
 
     def _write_all(self, agents: List[Dict[str, Any]]):
         with open(AGENTS_FILE_PATH, "w", encoding="utf-8") as f:

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "saved_topic_1",
+    "topic": "Bhangarh Fort Ka Wo Guard Jo Raat Ke 3 Baje Ghaayab Ho Gaya",
+    "category": "Paranormal & Haunted Locations",
+    "channel": "Spilled Coffee After Dark",
+    "viral_potential": 9,
+    "country": "India",
+    "source_type": "Local Indian Folklore & Archives",
+    "sources_used": [
+      "Reddit (r/Paranormal)",
+      "Local Rajasthani Folklore"
+    ],
+    "visual_requirements": [
+      "Haunted fort archival photos",
+      "Night rain mist imagery"
+    ],
+    "exclusion_audit": "\u2713 Verified: Parapsychological Folklore",
+    "notes": "Focus on the 3AM guard shift testimonies written in Hinglish script",
+    "saved_at": "2026-08-12T19:35:40.655639"
+  },
+  {
+    "id": "saved_topic_2",
+    "topic": "Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya",
+    "category": "Engineering & Disaster Stories",
+    "channel": "Beyond3Baje",
+    "viral_potential": 9,
+    "country": "International",
+    "source_type": "Historical & Technical Archives",
+    "sources_used": [
+      "Naval Inspection Records",
+      "Wikipedia Disasters"
+    ],
+    "visual_requirements": [
+      "Ship cross-section 3D diagram",
+      "17th Century maps"
+    ],
+    "exclusion_audit": "\u2713 EXCLUSION VERIFIED: 100% Real-World True Story in Hinglish",
+    "notes": "Use 3D stability diagram for 45-second Hinglish opening hook",
+    "saved_at": "2026-08-12T19:35:40.655662"
+  }
+]

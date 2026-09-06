@@ -10,21 +10,32 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from core.models.project import Project
+from core.paths import KNOWLEDGE_DIR
 from runtime.workflow import WorkflowEngine
 from integrations.llm import load_config, save_config
 from knowledge.assets import AssetService
 
-app = FastAPI(title="MidnightBuzz AI Studio")
+app = FastAPI(title="Buzzcaf AI Studio")
 
 from app.api.auth import router as auth_router
 from app.api.agents_api import router as agents_router
+from app.services.voice_intent import resolve_channel, resolve_tab, resolve_actions
 app.include_router(auth_router)
 app.include_router(agents_router)
 
-# Enable CORS for local development
+# CORS is restricted to the local dev frontend. A wildcard here would let any
+# page you visit in the same browser call this API -- including the settings
+# endpoint. Extra origins can be added via ALLOWED_ORIGINS (comma-separated).
+DEFAULT_ALLOWED_ORIGINS = [
+    "http://localhost:5173", "http://127.0.0.1:5173",
+    "http://localhost:3005", "http://127.0.0.1:3005",
+]
+_extra_origins = [
+    o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").split(",") if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=DEFAULT_ALLOWED_ORIGINS + _extra_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,25 +46,34 @@ engine = WorkflowEngine()
 asset_service = AssetService()
 
 import logging
-logger = logging.getLogger("midnight_buzz")
-from collections import defaultdict
+logger = logging.getLogger("buzzcaf_ai")
+from collections import defaultdict, deque
+
+# Per-project ring buffer size. Without a cap the server grows without bound
+# for as long as it stays up.
+MAX_LOG_LINES = 500
+
 
 class InMemoryLogHandler(logging.Handler):
     def __init__(self):
         super().__init__()
-        self.logs = defaultdict(list)
+        self.logs = defaultdict(lambda: deque(maxlen=MAX_LOG_LINES))
 
     def emit(self, record):
         try:
             msg = self.format(record)
-            project_id = getattr(record, "project_id", "N/A")
-            if project_id == "N/A" and active_executions:
-                for pid in active_executions:
-                    self.logs[pid].append(msg)
-            elif project_id != "N/A":
+            project_id = getattr(record, "project_id", None)
+            if project_id:
                 self.logs[project_id].append(msg)
+            elif len(active_executions) == 1:
+                # Unattributed lines belong to the only run in flight. With two
+                # or more running we cannot tell them apart, so we drop the
+                # line rather than copying it into every project's log.
+                self.logs[next(iter(active_executions))].append(msg)
         except Exception:
-            pass
+            # A logging handler must never raise -- it would break the call
+            # that emitted the record. Report to stderr and carry on.
+            self.handleError(record)
 
 log_handler = InMemoryLogHandler()
 log_handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] [%(name)s] - %(message)s'))
@@ -70,7 +90,7 @@ class ProjectCreateSchema(BaseModel):
 
 class SettingsSchema(BaseModel):
     gemini_api_key: Optional[str] = ""
-    gemini_model: Optional[str] = "gemini-3.6-flash"
+    gemini_model: Optional[str] = "gemini-1.5-flash"
     openai_api_key: Optional[str] = ""
     openai_model: Optional[str] = "gpt-4o-mini"
     lm_studio_url: Optional[str] = "http://localhost:1234/v1"
@@ -102,7 +122,10 @@ def projects():
 
 @app.get("/api/brands")
 def get_brands():
-    return ["Beyond3Baje", "Khayal3Baje", "Spilled Coffee Studio", "Spilled Coffee: After Dark", "Spilled Coffee After Dark", "Life3Baje"]
+    # One canonical spelling per channel. "Spilled Coffee: After Dark" was
+    # listed separately and resolved to the same vault; _channel_slug() now
+    # treats the variants as equal, so the duplicate entry is gone.
+    return ["Beyond3Baje", "Khayal3Baje", "Spilled Coffee Studio", "Spilled Coffee After Dark", "Life3Baje"]
 
 @app.get("/api/assets")
 def get_assets(type: Optional[str] = None, tag: Optional[str] = None, query: Optional[str] = None):
@@ -122,20 +145,47 @@ def register_asset(payload: AssetRegisterSchema):
     )
 
 
+SECRET_SETTING_KEYS = ("gemini_api_key", "openai_api_key")
+MASKED_VALUE = "********"
+
+
+def _redact_settings(config: Dict[str, Any]) -> Dict[str, Any]:
+    """Never send stored credentials back over the wire.
+
+    Each secret is replaced with a fixed mask plus a `<key>_set` boolean so the
+    UI can show whether a key is configured without ever receiving it.
+    """
+    safe = dict(config)
+    for key in SECRET_SETTING_KEYS:
+        value = config.get(key) or ""
+        safe[key] = MASKED_VALUE if value else ""
+        safe[f"{key}_set"] = bool(value)
+    return safe
+
+
 @app.get("/api/settings")
 def get_settings():
-    return load_config()
+    return _redact_settings(load_config())
 
 @app.post("/api/settings")
 def update_settings(settings: SettingsSchema):
     new_config = load_config()
     data = settings.model_dump(exclude_unset=True)
     for k, v in data.items():
-        if v is not None:
-            new_config[k] = v
+        if v is None:
+            continue
+        # A blank or still-masked secret means "leave the stored key alone" --
+        # otherwise reopening the settings page would erase the saved key.
+        if k in SECRET_SETTING_KEYS and (v == "" or set(v) == {"*"}):
+            continue
+        new_config[k] = v
     save_config(new_config)
     engine.llm_service.reload_config()
-    return {"status": "success", "message": "Settings updated successfully.", "config": new_config}
+    return {
+        "status": "success",
+        "message": "Settings updated successfully.",
+        "config": _redact_settings(new_config),
+    }
 
 @app.get("/api/workflows")
 def get_workflows():
@@ -202,6 +252,8 @@ def get_project(project_id: str):
     try:
         project = Project.load(project_id)
         return project.to_dict()
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
 
@@ -209,7 +261,11 @@ def get_project(project_id: str):
 def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
     feedback = payload.feedback if payload else None
     active_executions.add(project_id)
-    log_handler.logs[project_id] = [f"Starting execution of workflow step at {datetime.now().isoformat()}..."]
+    # Reset in place so the entry stays a capped deque, not a plain list.
+    log_handler.logs[project_id].clear()
+    log_handler.logs[project_id].append(
+        f"Starting execution of workflow step at {datetime.now().isoformat()}..."
+    )
     try:
         project = engine.execute_next(project_id, user_feedback=feedback)
         # Add final agent logs if any
@@ -219,6 +275,8 @@ def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
                 if step_log not in log_handler.logs[project_id]:
                     log_handler.logs[project_id].append(step_log)
         return project.to_dict()
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
     except Exception as e:
@@ -229,7 +287,10 @@ def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
 
 @app.get("/api/projects/{project_id}/logs")
 def get_project_execution_logs(project_id: str):
-    return log_handler.logs.get(project_id, ["No active logs found for this project."])
+    lines = log_handler.logs.get(project_id)
+    if not lines:
+        return ["No active logs found for this project."]
+    return list(lines)
 
 @app.get("/api/projects/{project_id}/asset/{asset_name}")
 def get_project_asset(project_id: str, asset_name: str):
@@ -239,10 +300,16 @@ def get_project_asset(project_id: str, asset_name: str):
         if not asset_file:
             raise HTTPException(status_code=404, detail="Asset not generated yet")
             
-        file_path = os.path.join(project.get_project_dir(), asset_file)
+        project_dir = os.path.realpath(project.get_project_dir())
+        file_path = os.path.realpath(os.path.join(project_dir, asset_file))
+        # Asset names come from the project's own manifest, but a malformed or
+        # hand-edited project.json should not be able to read arbitrary files.
+        if not file_path.startswith(project_dir + os.sep):
+            raise HTTPException(status_code=400, detail="Invalid asset path")
         if not os.path.exists(file_path):
             raise HTTPException(status_code=404, detail="Asset file missing on disk")
-            
+
+
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
             
@@ -250,9 +317,12 @@ def get_project_asset(project_id: str, asset_name: str):
         if asset_file.endswith(".json"):
             try:
                 return json.loads(content)
-            except:
-                pass
+            except json.JSONDecodeError as e:
+                # Fall through and return it as raw text, but say why.
+                logger.warning(f"Asset {asset_file} is not valid JSON: {e}")
         return {"content": content}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
 
@@ -263,327 +333,90 @@ class TopicDiscoverSchema(BaseModel):
     sources: Optional[List[str]] = None
     pillar_filter: Optional[str] = None
 
+SEED_TOPICS_DIR = os.path.join(KNOWLEDGE_DIR, "seed_topics")
+
+_seed_topics_cache: Optional[Dict[str, List[Dict[str, Any]]]] = None
+
+
+def _channel_slug(name: str) -> str:
+    """Canonical key for a channel name.
+
+    'Spilled Coffee: After Dark' and 'Spilled Coffee After Dark' are the same
+    channel spelled two ways. Comparing slugs avoids the old two-way substring
+    match, under which a short name could match an unrelated longer one.
+    """
+    return re.sub(r"[^a-z0-9]+", "", name.lower())
+
+
+def _load_seed_topics() -> Dict[str, List[Dict[str, Any]]]:
+    """Curated starter topics, one JSON file per channel in seed_topics/.
+
+    This is seed data, not model output -- responses built from it are tagged
+    `"source": "curated_seed"`.
+    """
+    global _seed_topics_cache
+    if _seed_topics_cache is not None:
+        return _seed_topics_cache
+
+    vaults: Dict[str, List[Dict[str, Any]]] = {}
+    if os.path.isdir(SEED_TOPICS_DIR):
+        for fname in sorted(os.listdir(SEED_TOPICS_DIR)):
+            if not fname.endswith(".json"):
+                continue
+            path = os.path.join(SEED_TOPICS_DIR, fname)
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                vaults[data["channel"]] = data.get("topics", [])
+            except Exception as e:
+                logger.error(f"Could not load seed topics from {path}: {e}")
+    else:
+        logger.warning(f"Seed topics directory missing: {SEED_TOPICS_DIR}")
+
+    _seed_topics_cache = vaults
+    return vaults
+
+
 @app.post("/api/topics/discover")
 def discover_channel_topics(payload: TopicDiscoverSchema):
     channel = payload.channel.strip()
-    
+
     agent_map = {
-        "spilled coffee studio": "SpilledCoffeeStudioStrategist",
-        "spilled coffee after dark": "AfterDarkStrategist",
-        "spilled coffee: after dark": "AfterDarkStrategist",
+        "spilledcoffeestudio": "SpilledCoffeeStudioStrategist",
+        "spilledcoffeeafterdark": "AfterDarkStrategist",
         "raat3baje": "AfterDarkStrategist",
         "beyond3baje": "Beyond3BajeStrategist",
         "life3baje": "Life3BajeStrategist",
         "khayal3baje": "Khayal3BajeStrategist"
     }
+    target_agent_name = agent_map.get(_channel_slug(channel), "TopicVaultManager")
 
-    target_agent_name = agent_map.get(channel.lower(), "TopicVaultManager")
-    agent = AgentFactory.get_agent(target_agent_name)
+    # NOTE: this endpoint does not call the LLM. It serves curated seed topics,
+    # which is why the response is tagged `source: "curated_seed"` -- do not
+    # present these as freshly discovered by the strategist agent.
+    channel_vaults = _load_seed_topics()
 
-    prompt = f"Discover and vault high-retention video topic ideas for channel '{channel}'. Sources requested: {payload.sources or 'all'}."
-    
-    # Pre-built curated channel topic vaults for instant UI responsiveness & fallback
-    channel_vaults = {
-        "Spilled Coffee Studio": [
-          {
-            "topic": "Why Franz Kafka's Stories Still Scare Modern Readers",
-            "category": "Pillar 2: Great Literature & Classic Authors",
-            "pillar": "Great Literature",
-            "country": "Czech / Global",
-            "viral_potential": 9,
-            "schedule_day": "Wednesday",
-            "source_type": "Public Domain Excerpts & Literary Critique",
-            "sources_used": ["Public Domain Kafka Archives", "Literary Analysis Essays"],
-            "visual_requirements": ["Subtle ink sketches", "Rainy European cafe footage", "Annotated manuscript pages"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Literary Critique & Fair-Use Analysis"
-          },
-          {
-            "topic": "How Studio Ghibli & Pixar Write Unforgettable Emotion",
-            "category": "Pillar 3: Story Analysis",
-            "pillar": "Story Analysis",
-            "country": "Global Animation Craft",
-            "viral_potential": 10,
-            "schedule_day": "Monday",
-            "source_type": "Story Architecture Breakdown",
-            "sources_used": ["Pixar 22 Rules of Storytelling", "Miyazaki Interviews"],
-            "visual_requirements": ["Storyboarding timeline diagram", "Color palette analysis slides", "Character arc curves"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Educational Story Architecture"
-          },
-          {
-            "topic": "The Midnight Library (Original Fantasy Short Story)",
-            "category": "Pillar 1: Original Work (30%)",
-            "pillar": "Original Work",
-            "country": "Original Short Story",
-            "viral_potential": 9,
-            "schedule_day": "Friday",
-            "source_type": "Original Short Fiction / Poetry",
-            "sources_used": ["Creator Notebooks", "Original Draft #4"],
-            "visual_requirements": ["Cozy candlelit desk", "Macro fountain pen writing", "Cinematic original narration"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: 100% Original Creator Fiction"
-          },
-          {
-            "topic": "The Letter That Changed History (A 27-Year True Story)",
-            "category": "Pillar 4: Extraordinary True Stories",
-            "pillar": "Extraordinary True Stories",
-            "country": "International Human Narrative",
-            "viral_potential": 9,
-            "schedule_day": "Wednesday",
-            "source_type": "Historical Letters & Personal Journals",
-            "sources_used": ["Resurfaced Personal Archives", "Human Endurance Records"],
-            "visual_requirements": ["Vintage letter scans", "Historical map timeline", "Cinematic narrative B-roll"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Human Storytelling Narrative"
-          },
-          {
-            "topic": "How Haruki Murakami Blurs Reality & Dreams",
-            "category": "Pillar 2: Great Literature & Classic Authors",
-            "pillar": "Great Literature",
-            "country": "Japan / International",
-            "viral_potential": 9,
-            "schedule_day": "Monday",
-            "source_type": "Literary Breakdown",
-            "sources_used": ["Murakami Essays", "Magical Realism Critique"],
-            "visual_requirements": ["Jazz vinyl record slow spin", "Subtle neon rain visualizer"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Literary Critique"
-          },
-          {
-            "topic": "The Man Who Survived Two Atomic Bombs & Lived to 93",
-            "category": "Pillar 4: Extraordinary True Stories",
-            "pillar": "Extraordinary True Stories",
-            "country": "Japan",
-            "viral_potential": 10,
-            "schedule_day": "Friday",
-            "source_type": "Historical Archives & Testimony",
-            "sources_used": ["Tsutomu Yamaguchi Testimonies", "Hiroshima & Nagasaki Archives"],
-            "visual_requirements": ["Archival photo timeline", "Historical map overlay"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Historical Human Story"
-          }
-        ],
-        "Spilled Coffee After Dark": [
-          {
-            "topic": "Bhangarh Fort Ka Wo Guard Jo Raat Ke 3 Baje Ghaayab Ho Gaya",
-            "category": "Paranormal & Haunted Locations",
-            "pillar": "Paranormal & Haunted Locations",
-            "country": "India",
-            "viral_potential": 9,
-            "source_type": "Local Indian Folklore & Archives",
-            "sources_used": ["Reddit (r/Paranormal)", "Local Rajasthani Folklore", "Wikipedia Ghost Towns"],
-            "visual_requirements": ["Haunted fort archival photos", "Night rain mist imagery", "Map of Alwar District"],
-            "exclusion_audit": "✓ Verified: Parapsychological Folklore in Hinglish"
-          },
-          {
-            "topic": "Deep Web Ki Wo Silent Calls: Audio Incident #99 Ka Sach",
-            "category": "Internet Horror & Modern Myths",
-            "pillar": "Internet Horror & Modern Myths",
-            "country": "International",
-            "viral_potential": 8,
-            "source_type": "Reddit & Internet Archives",
-            "sources_used": ["r/HighStrangeness", "Lost Media Wiki", "Dark Web Archives"],
-            "visual_requirements": ["Spectrogram audio graphs", "Analog horror CRT noise", "Deep web log clippings"],
-            "exclusion_audit": "✓ Verified: Modern Internet ARG / Myth in Hinglish"
-          },
-          {
-            "topic": "Kuldhara Gaon Ka Unsolved Raaz: Ek Hi Raat Mein Poore Gaon Ka Ghaayab Hona",
-            "category": "True Mysteries",
-            "pillar": "True Mysteries",
-            "country": "India",
-            "viral_potential": 10,
-            "source_type": "Wikipedia & Indian Archives",
-            "sources_used": ["ASI Government Records", "r/UnresolvedMysteries", "Regional Folklore Books"],
-            "visual_requirements": ["Dry desert ruins aerial map", "Paliwal Brahmin family lineage charts"],
-            "exclusion_audit": "✓ Verified: Historical Unsolved Disappearance in Hinglish"
-          },
-          {
-            "topic": "Dow Hill School Ki Wo 3 AM Ki Seeti Aur Ghost Legends",
-            "category": "Paranormal & Haunted Locations",
-            "pillar": "Haunted Locations",
-            "country": "India (Kurseong)",
-            "viral_potential": 9,
-            "source_type": "Local Kurseong Archives",
-            "sources_used": ["Local Tea Garden Chronicles", "r/UnresolvedMysteries"],
-            "visual_requirements": ["Foggy pine forest footage", "Haunted school silhouette"],
-            "exclusion_audit": "✓ Verified: Regional Paranormal Legend in Hinglish"
-          },
-          {
-            "topic": "Skinwalker Ranch Ki Night Surveillance Logs: 2016 Ka Incident",
-            "category": "Internet Horror & Unexplained",
-            "pillar": "Unexplained Phenomena",
-            "country": "USA",
-            "viral_potential": 10,
-            "source_type": "NIDS Scientific Logs",
-            "sources_used": ["r/Skinwalkers", "Utah Paranormal Archives"],
-            "visual_requirements": ["Thermal night vision overlay", "Ranch topographic map"],
-            "exclusion_audit": "✓ Verified: Paranormal Field Investigation in Hinglish"
-          }
-        ],
-        "Beyond3Baje": [
-          {
-            "topic": "Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya",
-            "category": "Engineering & Disaster Stories",
-            "pillar": "Engineering & Disaster Stories",
-            "country": "International",
-            "viral_potential": 9,
-            "source_type": "Historical & Technical Archives",
-            "sources_used": ["Naval Inspection Records", "Wikipedia Disasters", "Engineering Accident Reports"],
-            "visual_requirements": ["Ship cross-section 3D diagram", "17th Century archival maps", "Stability calculation charts"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: 100% Real-World True Story in Hinglish"
-          },
-          {
-            "topic": "Unit 731 Ke Forgotten Secret Experiments Ka Dark Truth",
-            "category": "Dark History",
-            "pillar": "Dark History",
-            "country": "Japan / International",
-            "viral_potential": 10,
-            "source_type": "Declassified Government Documents",
-            "sources_used": ["National Archives", "Trial Transcripts", "Declassified CIA Records"],
-            "visual_requirements": ["Historical newspaper clippings", "Declassified stamp documents", "Geographic timeline map"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Documented Historical Event in Hinglish"
-          },
-          {
-            "topic": "Bharat Ka Sabse Rahasyamayi Missing Flight Incident Aur Sealed Radar Logs",
-            "category": "Unsolved Mysteries",
-            "pillar": "Unsolved Mysteries",
-            "country": "India",
-            "viral_potential": 9,
-            "source_type": "Aviation Accident Reports",
-            "sources_used": ["Civil Aviation Archives", "r/UnresolvedMysteries", "Air Traffic Control Transcripts"],
-            "visual_requirements": ["Radar flight path tracking map", "Cockpit transcript graphics", "Weather radar overlay"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Real Aviation Mystery in Hinglish"
-          },
-          {
-            "topic": "Stora Sjöfallet Gold Heist: Kaise 40 Minutes Mein $400M Ghaayab Ho Gaya",
-            "category": "True Crime & Heists",
-            "pillar": "True Crime",
-            "country": "Sweden / International",
-            "viral_potential": 9,
-            "source_type": "Judicial & Police Archives",
-            "sources_used": ["Interpol Records", "Police Investigation Transcripts"],
-            "visual_requirements": ["Heist route map overlay", "Vault blueprint graphics"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: True Crime Historical Record in Hinglish"
-          },
-          {
-            "topic": "Chernobyl Control Room: Reactor Explosion Se Micro-Minutes Pehle Kya Hua",
-            "category": "Dark History & Disasters",
-            "pillar": "Dark History",
-            "country": "Ukraine / USSR",
-            "viral_potential": 10,
-            "source_type": "IAEA Safety Reports & Control Logs",
-            "sources_used": ["IAEA Chernobyl Logs", "Declassified Soviet Records"],
-            "visual_requirements": ["Control panel 3D schematic", "Reactor core temperature timeline"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Real Historical Disaster in Hinglish"
-          }
-        ],
-        "Life3Baje": [
-          {
-            "topic": "Kyun Maine Phir Se Likhna Shuru Kiya (Aur Setup Kiya My Dream Desk)",
-            "category": "Creative Journey",
-            "pillar": "Creative Journey",
-            "country": "Personal Documentary",
-            "viral_potential": 9,
-            "source_type": "Personal Essay & Creator Journal",
-            "sources_used": ["Notebook Journals", "Writing Process Reflections"],
-            "visual_requirements": ["Cozy writing desk macro", "Notebook pages", "Warm morning coffee sunlight"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Authentic Journey in Hinglish"
-          },
-          {
-            "topic": "Maine Ek Hafte Tak Social Media Aur Entertainment Use Nahi Kiya",
-            "category": "Personal Experiments",
-            "pillar": "Personal Experiments",
-            "country": "Personal Documentary",
-            "viral_potential": 8,
-            "source_type": "Personal Trial Journal",
-            "sources_used": ["Screen Time Logs", "Daily Thought Essays"],
-            "visual_requirements": ["Minimalist room shots", "Analog clock slow pan", "Rain on window pane"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Authentic Self-Experiment in Hinglish"
-          },
-          {
-            "topic": "Kyun Bada Hona Itna Strange Lagta Hai Aur Hum Apni Curiosity Kaise Khote Hain",
-            "category": "Thoughts (Video Essays)",
-            "pillar": "Thoughts",
-            "country": "Personal Essay",
-            "viral_potential": 10,
-            "source_type": "Reflective Essays",
-            "sources_used": ["Childhood memory notes", "Aperture style essay literature"],
-            "visual_requirements": ["Cozy book shelf", "Walking in quiet forest", "Minimalist aesthetic visuals"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Reflective Essay in Hinglish"
-          },
-          {
-            "topic": "Late Night Baarish, Garam Coffee Aur Purani Kitabon Ki Shanti",
-            "category": "Creative Philosophy",
-            "pillar": "Creative Journey",
-            "country": "Personal Essay",
-            "viral_potential": 9,
-            "source_type": "Personal Journal",
-            "sources_used": ["Rainy Night Essays", "Creator Philosophy Notes"],
-            "visual_requirements": ["Window rain droplet macro", "Steaming coffee mug B-roll"],
-            "exclusion_audit": "✓ EXCLUSION VERIFIED: Authentic Personal Essay in Hinglish"
-          }
-        ],
-        "Khayal3Baje": [
-          {
-            "topic": "Pashupatastra Ka Raaz Aur Divine Cosmic Astral Weapons",
-            "category": "Vedic & Epic Lore",
-            "pillar": "Vedic & Epic Lore",
-            "country": "Ancient India",
-            "viral_potential": 10,
-            "source_type": "Sacred Texts & Epic Manuscripts",
-            "sources_used": ["Mahabharata Vana Parva", "Puranic Encylopedia", "Sanskrit Manuscripts"],
-            "visual_requirements": ["Epic oil painting visuals", "Cosmic fire rendering", "Ancient Sanskrit text overlays"],
-            "exclusion_audit": "✓ Verified: Authentic Textual Sacred Lore in Hinglish"
-          },
-          {
-            "topic": "Anunnaki Tablets Aur Mesopotamian Cosmic Creation Ka Myth",
-            "category": "World Mythologies",
-            "pillar": "World Mythologies",
-            "country": "Ancient Mesopotamia",
-            "viral_potential": 9,
-            "source_type": "Cuneiform Translations",
-            "sources_used": ["Enuma Elish Tablets", "British Museum Cuneiform Archives"],
-            "visual_requirements": ["3D Cuneiform tablet rendering", "Ziggurat starry night map"],
-            "exclusion_audit": "✓ Verified: Comparative World Mythology in Hinglish"
-          },
-          {
-            "topic": "Kurukshetra Yuddh Mein Karna Ke Khoye Hue Divine Astra Aur Kahani",
-            "category": "Vedic & Epic Lore",
-            "pillar": "Epic Lore",
-            "country": "Ancient India",
-            "viral_potential": 10,
-            "source_type": "Mahabharata Karna Parva",
-            "sources_used": ["Mahabharata Sanskrit Verse", "Bhandarkar Oriental Research Institute"],
-            "visual_requirements": ["Golden armor glow effect", "Chariot battlefield matte painting"],
-            "exclusion_audit": "✓ Verified: Ancient Epic Lore in Hinglish"
-          },
-          {
-            "topic": "Kali Yuga Ke Ant Tak Pehre Dete 7 Immortal Chiranjivi",
-            "category": "Sacred Epic Lore",
-            "pillar": "Sacred Epic Lore",
-            "country": "Ancient India",
-            "viral_potential": 10,
-            "source_type": "Puranic Texts",
-            "sources_used": ["Bhagavata Purana", "Vishnu Purana"],
-            "visual_requirements": ["Himalayan cave mist visual", "Sanskrit manuscript parchment"],
-            "exclusion_audit": "✓ Verified: Textual Puranic Mythology in Hinglish"
-          }
-        ]
-    }
-
-    # Match channel key
-    for k, topics in channel_vaults.items():
-        if k.lower() in channel.lower() or channel.lower() in k.lower():
+    requested = _channel_slug(channel)
+    for name, topics in channel_vaults.items():
+        if _channel_slug(name) == requested:
             return {
                 "status": "success",
-                "channel": k,
+                "source": "curated_seed",
+                "channel": name,
                 "agent_assigned": target_agent_name,
                 "inventory_counts": { "raw_ideas": 120, "researched_ideas": 55, "script_ready": 24 },
                 "topics": topics
             }
 
-    # Default fallback
+    # Unknown channel: fall back to the general-interest vault, and say so.
+    fallback = channel_vaults.get("Beyond3Baje", [])
     return {
         "status": "success",
+        "source": "curated_seed_fallback",
         "channel": channel,
         "agent_assigned": target_agent_name,
         "inventory_counts": { "raw_ideas": 100, "researched_ideas": 50, "script_ready": 20 },
-        "topics": channel_vaults["Beyond3Baje"]
+        "topics": fallback
     }
 
 SAVED_TOPICS_FILE = os.path.join(os.path.dirname(__file__), "..", "knowledge", "saved_topics.json")
@@ -602,7 +435,13 @@ class SavedTopicSchema(BaseModel):
     notes: Optional[str] = ""
 
 def _load_saved_topics() -> List[Dict[str, Any]]:
-    if not os.path.exists(SAVED_TOPICS_FILE):
+    # An empty or truncated file is treated as "never seeded" -- otherwise the
+    # vault stays permanently empty because the file technically exists.
+    needs_seed = (
+        not os.path.exists(SAVED_TOPICS_FILE)
+        or os.path.getsize(SAVED_TOPICS_FILE) == 0
+    )
+    if needs_seed:
         initial_topics = [
             {
                 "id": "saved_topic_1",
@@ -658,7 +497,7 @@ def get_saved_topics(channel: Optional[str] = None):
 @app.post("/api/topics/save")
 def save_topic(payload: SavedTopicSchema):
     topics = _load_saved_topics()
-    topic_data = payload.dict()
+    topic_data = payload.model_dump()
     if not topic_data.get("id"):
         topic_data["id"] = f"topic_{uuid.uuid4().hex[:8]}"
     topic_data["saved_at"] = datetime.now().isoformat()
@@ -859,6 +698,7 @@ Provide a helpful, strategic response in character as {agent_name}. Refer back t
 """
     try:
         reply_text = str(agent.execute(full_user_prompt))
+        simulated = getattr(agent.llm_service, "last_response_simulated", False)
         # Execute any delegated agent tasks embedded in the response
         reply_text = _process_agent_invocations(reply_text)
         
@@ -887,79 +727,25 @@ Provide a helpful, strategic response in character as {agent_name}. Refer back t
             logger.error(f"Error saving to memory_system in agent_chat: {mem_err}")
 
         return {
-            "status": "success",
+            "status": "simulated" if simulated else "success",
+            "simulated": simulated,
             "agent_name": agent_name,
             "channel": payload.channel,
             "reply": reply_text
         }
     except Exception as e:
-        logger.error(f"Error executing agent {agent_name}: {e}")
+        logger.error(f"Error executing agent {agent_name}: {e}", exc_info=True)
+        # An error is reported as an error. Returning "success" here made a
+        # failed call indistinguishable from a real strategist reply.
         return {
-            "status": "success",
+            "status": "error",
+            "simulated": True,
+            "error": str(e),
             "agent_name": agent_name,
             "channel": payload.channel,
-            "reply": f"Hello! As your **{agent_name}** for **{payload.channel}**, I'm ready to help. Let's discuss video concepts, script hooks, or visual production ideas!"
+            "reply": f"**{agent_name}** could not be reached: {e}\n\nCheck your provider settings and that the selected model is available."
         }
 
-class VoiceIntentSchema(BaseModel):
-    phrase: str
-
-@app.post("/api/voice/parse_intent")
-def parse_voice_intent(payload: VoiceIntentSchema):
-    phrase = payload.phrase.lower().strip()
-    
-    channels = {
-        "spilled coffee studio": "Spilled Coffee Studio",
-        "studio": "Spilled Coffee Studio",
-        "after dark": "Spilled Coffee After Dark",
-        "horror": "Spilled Coffee After Dark",
-        "raat": "Spilled Coffee After Dark",
-        "beyond": "Beyond3Baje",
-        "documentary": "Beyond3Baje",
-        "life": "Life3Baje",
-        "essay": "Life3Baje",
-        "khayal": "Khayal3Baje",
-        "mythology": "Khayal3Baje"
-    }
-
-    for kw, ch_name in channels.items():
-        if kw in phrase:
-            return {
-                "status": "success",
-                "intent": "SWITCH_CHANNEL",
-                "target_channel": ch_name,
-                "confidence": 0.95
-            }
-
-    nav_map = {
-        "dashboard": "dashboard",
-        "project": "projects",
-        "topic": "topic_discovery",
-        "vault": "topic_discovery",
-        "research": "research",
-        "writing": "writing",
-        "production": "production",
-        "publishing": "publishing",
-        "analytics": "publishing",
-        "setting": "settings"
-    }
-    for kw, tab_name in nav_map.items():
-        if kw in phrase:
-            return {
-                "status": "success",
-                "intent": "NAVIGATE",
-                "target_tab": tab_name,
-                "confidence": 0.90
-            }
-
-    if any(k in phrase for k in ["discover", "find", "search", "get topics"]):
-        return {"status": "success", "intent": "DISCOVER_TOPICS", "confidence": 0.92}
-    if any(k in phrase for k in ["save", "bookmark"]):
-        return {"status": "success", "intent": "SAVE_TOPIC", "confidence": 0.92}
-    if any(k in phrase for k in ["chat", "talk", "agent", "discuss"]):
-        return {"status": "success", "intent": "OPEN_CHAT", "confidence": 0.92}
-
-    return {"status": "success", "intent": "UNKNOWN", "confidence": 0.30}
 
 VOICE_CONFIG = {
     "provider": "native_local",
@@ -974,17 +760,37 @@ class VoiceConfigSchema(BaseModel):
     openai_realtime_key: Optional[str] = ""
     wake_word: Optional[str] = "Hey Buzzcaf"
 
+VOICE_SECRET_KEYS = ("picovoice_access_key", "openai_realtime_key")
+
+
+def _redact_voice_config() -> Dict[str, Any]:
+    """Same rule as /api/settings: report whether a key is set, never its value."""
+    safe = dict(VOICE_CONFIG)
+    for key in VOICE_SECRET_KEYS:
+        value = VOICE_CONFIG.get(key) or ""
+        safe[key] = MASKED_VALUE if value else ""
+        safe[f"{key}_set"] = bool(value)
+    return safe
+
+
 @app.get("/api/voice/config")
 def get_voice_config():
-    return VOICE_CONFIG
+    return _redact_voice_config()
 
 @app.post("/api/voice/config")
 def update_voice_config(payload: VoiceConfigSchema):
     if payload.provider: VOICE_CONFIG["provider"] = payload.provider
-    if payload.picovoice_access_key is not None: VOICE_CONFIG["picovoice_access_key"] = payload.picovoice_access_key
-    if payload.openai_realtime_key is not None: VOICE_CONFIG["openai_realtime_key"] = payload.openai_realtime_key
     if payload.wake_word: VOICE_CONFIG["wake_word"] = payload.wake_word
-    return {"status": "success", "config": VOICE_CONFIG}
+    # An empty or still-masked value means "keep what is stored", so reopening
+    # the settings tab and saving does not wipe the key.
+    for key, value in (
+        ("picovoice_access_key", payload.picovoice_access_key),
+        ("openai_realtime_key", payload.openai_realtime_key),
+    ):
+        if value is None or value == "" or set(value) == {"*"}:
+            continue
+        VOICE_CONFIG[key] = value
+    return {"status": "success", "config": _redact_voice_config()}
 
 class JarvisVoiceSchema(BaseModel):
     phrase: str
@@ -996,55 +802,16 @@ def jarvis_voice_router(payload: JarvisVoiceSchema):
     phrase = payload.phrase.strip()
     p_lower = phrase.lower()
     
-    # Smart Agentic Intent Inference Engine
-    target_channel = None
-    target_tab = None
-    is_save = False
-    is_chat = False
-    is_discover = False
-    is_stop = False
-    is_log = False
-
-    # Channel Intent Resolution
-    if any(k in p_lower for k in ["after dark", "horror", "raat", "ghost", "spilled coffee after dark"]):
-        target_channel = "Spilled Coffee After Dark"
-    elif any(k in p_lower for k in ["studio", "original", "story", "spilled coffee studio"]):
-        target_channel = "Spilled Coffee Studio"
-    elif any(k in p_lower for k in ["beyond", "documentary", "true story", "crime", "beyond3baje"]):
-        target_channel = "Beyond3Baje"
-    elif any(k in p_lower for k in ["life", "essay", "vlog", "journey", "life3baje"]):
-        target_channel = "Life3Baje"
-    elif any(k in p_lower for k in ["khayal", "mythology", "lore", "ancient", "khayal3baje"]):
-        target_channel = "Khayal3Baje"
-
-    # Tab Intent Resolution (Infers natural language variations like 'publish analytics', 'check performance', 'agent workforce')
-    if any(k in p_lower for k in ["project", "projects", "catalog", "production catalog"]):
-        target_tab = "projects"
-    elif any(k in p_lower for k in ["topic", "topics", "vault", "discover", "discovery", "idea", "ideas"]):
-        target_tab = "topic_discovery"
-    elif any(k in p_lower for k in ["research", "citation", "citations", "source", "sources", "study"]):
-        target_tab = "research"
-    elif any(k in p_lower for k in ["writing", "script", "scripts", "editor", "write"]):
-        target_tab = "writing"
-    elif any(k in p_lower for k in ["production", "scene", "board", "filmora", "b-roll", "b roll"]):
-        target_tab = "production"
-    elif any(k in p_lower for k in ["publish", "publishing", "analytic", "analytics", "performance", "view", "views", "stat", "stats"]):
-        target_tab = "publishing"
-    elif any(k in p_lower for k in ["workforce", "agent", "agents", "bot", "bots", "registry"]):
-        target_tab = "ai_workforce"
-    elif any(k in p_lower for k in ["health", "diagnostic", "diagnostics", "status", "system"]):
-        target_tab = "health"
-    elif any(k in p_lower for k in ["setting", "settings", "router", "config", "parameters", "api key"]):
-        target_tab = "settings"
-    elif any(k in p_lower for k in ["dashboard", "home", "overview", "main"]):
-        target_tab = "dashboard"
-
-    # Action Intent Resolution
-    if any(k in p_lower for k in ["save", "bookmark", "add to vault"]): is_save = True
-    if any(k in p_lower for k in ["chat", "talk", "discuss", "strategist", "ask agent"]): is_chat = True
-    if any(k in p_lower for k in ["find", "search", "discover", "generate", "look up", "sweep"]): is_discover = True
-    if any(k in p_lower for k in ["stop", "quiet", "mute", "turn off", "sleep", "pause"]): is_stop = True
-    if any(k in p_lower for k in ["activity log", "show log", "open log", "history", "logs", "activity"]): is_log = True
+    # Keyword tables live in app/services/voice_intent.py -- one definition,
+    # so channel routing cannot drift between endpoints.
+    target_channel = resolve_channel(p_lower)
+    target_tab = resolve_tab(p_lower)
+    actions = resolve_actions(p_lower)
+    is_save = actions["is_save"]
+    is_chat = actions["is_chat"]
+    is_discover = actions["is_discover"]
+    is_stop = actions["is_stop"]
+    is_log = actions["is_log"]
 
     curr_ch = target_channel or payload.active_channel
     

@@ -14,43 +14,54 @@ class LocalLLMService:
         """Auto-detect running models from LM Studio and Ollama API endpoints."""
         models = []
 
-        # 1. Probe LM Studio (http://localhost:1234/v1/models)
-        try:
-            req = urllib.request.Request(f"{LM_STUDIO_BASE_URL}/models", headers={"User-Agent": "BuzzcafAI"})
-            with urllib.request.urlopen(req, timeout=2) as resp:
-                if resp.status == 200:
-                    data = json.loads(resp.read().decode("utf-8"))
-                    for m in data.get("data", []):
-                        models.append({
-                            "id": m.get("id"),
-                            "name": m.get("id"),
-                            "provider": "LM Studio",
-                            "endpoint": LM_STUDIO_BASE_URL,
-                            "status": "online"
-                        })
-        except Exception as e:
-            logger.debug(f"LM Studio connection notice: {e}")
+        # 1. Probe LM Studio (http://localhost:1234/v1/models & /api/v0/models)
+        lm_endpoints = [f"{LM_STUDIO_BASE_URL}/models", "http://localhost:1234/api/v0/models"]
+        for ep in lm_endpoints:
+            if models:
+                break
+            try:
+                req = urllib.request.Request(ep, headers={"User-Agent": "BuzzcafAI"})
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    if resp.status == 200:
+                        data = json.loads(resp.read().decode("utf-8"))
+                        for m in data.get("data", []):
+                            m_id = m.get("id")
+                            if m_id and not any(x["id"] == m_id for x in models):
+                                models.append({
+                                    "id": m_id,
+                                    "name": m_id,
+                                    "provider": "LM Studio",
+                                    "endpoint": LM_STUDIO_BASE_URL,
+                                    "status": "online"
+                                })
+            except Exception as e:
+                logger.debug(f"LM Studio connection notice for {ep}: {e}")
 
         # 2. Probe Ollama / Open-WebUI (http://localhost:11434/v1/models)
         try:
             req = urllib.request.Request(f"{OLLAMA_BASE_URL}/models", headers={"User-Agent": "BuzzcafAI"})
-            with urllib.request.urlopen(req, timeout=2) as resp:
+            with urllib.request.urlopen(req, timeout=3) as resp:
                 if resp.status == 200:
                     data = json.loads(resp.read().decode("utf-8"))
                     for m in data.get("data", []):
-                        models.append({
-                            "id": m.get("id"),
-                            "name": m.get("id"),
-                            "provider": "Ollama / Open-WebUI",
-                            "endpoint": OLLAMA_BASE_URL,
-                            "status": "online"
-                        })
+                        m_id = m.get("id")
+                        if m_id and not any(x["id"] == m_id for x in models):
+                            models.append({
+                                "id": m_id,
+                                "name": m_id,
+                                "provider": "Ollama / Open-WebUI",
+                                "endpoint": OLLAMA_BASE_URL,
+                                "status": "online"
+                            })
         except Exception as e:
             logger.debug(f"Ollama connection notice: {e}")
 
         # Provide fallback local model entries if servers are offline
         if not models:
             models = [
+                {"id": "gemma-4-e4b-it-obliterated", "name": "Gemma 4 E4B (LM Studio)", "provider": "LM Studio", "endpoint": LM_STUDIO_BASE_URL, "status": "offline_preview"},
+                {"id": "google/gemma-4-12b-qat", "name": "Google Gemma 4 12B QAT", "provider": "LM Studio", "endpoint": LM_STUDIO_BASE_URL, "status": "offline_preview"},
+                {"id": "qwen3.6-27b-fable-fusion-711-uncensored-heretic-nm-dau-neo-max-mtp", "name": "Qwen 3.6 27B Fable Fusion", "provider": "LM Studio", "endpoint": LM_STUDIO_BASE_URL, "status": "offline_preview"},
                 {"id": "qwen2.5-coder-7b-instruct", "name": "Qwen 2.5 Coder 7B (LM Studio)", "provider": "LM Studio", "endpoint": LM_STUDIO_BASE_URL, "status": "offline_preview"},
                 {"id": "llama3.2:latest", "name": "Llama 3.2 3B (Ollama)", "provider": "Ollama / Open-WebUI", "endpoint": OLLAMA_BASE_URL, "status": "offline_preview"},
                 {"id": "deepseek-r1-distill-llama-8b", "name": "DeepSeek R1 Distill 8B", "provider": "LM Studio", "endpoint": LM_STUDIO_BASE_URL, "status": "offline_preview"}

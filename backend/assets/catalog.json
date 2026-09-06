@@ -1,1 +1,33 @@
-[]
+[
+    {
+        "id": "ai_image_newton_portrait_v1",
+        "title": "Newton Portrait",
+        "type": "ai_image",
+        "tags": [
+            "newton",
+            "portrait",
+            "scientist",
+            "alchemy"
+        ],
+        "source": "internal",
+        "license": "Royalty Free",
+        "creation_date": "2026-08-12T18:46:31.468436",
+        "used_in_projects": [],
+        "status": "active",
+        "file_path": "assets/ai_image/ai_image_newton_portrait_v1.png"
+    },
+    {
+        "id": "ai_image_isaac_newton_v1",
+        "title": "Isaac Newton",
+        "type": "ai_image",
+        "tags": [
+            "newton"
+        ],
+        "source": "internal",
+        "license": "Royalty Free",
+        "creation_date": "2026-08-12T18:46:31.472854",
+        "used_in_projects": [],
+        "status": "active",
+        "file_path": "assets/ai_image/ai_image_isaac_newton_v1.png"
+    }
+]

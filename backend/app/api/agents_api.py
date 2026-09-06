@@ -1,4 +1,5 @@
 # Buzzcaf AI - Agents Workbench & Group Chat API Router
+from concurrent.futures import ThreadPoolExecutor
 from typing import List, Dict, Any, Optional
 from fastapi import APIRouter, HTTPException, File, UploadFile, Form, Body
 from pydantic import BaseModel
@@ -37,7 +38,7 @@ def list_all_agents():
 
 @router.post("/agents")
 def create_or_update_agent(agent_data: AgentSchema):
-    saved = agents_registry.save_agent(agent_data.dict())
+    saved = agents_registry.save_agent(agent_data.model_dump())
     return {"status": "success", "agent": saved}
 
 @router.delete("/agents/{agent_id}")
@@ -79,14 +80,14 @@ def execute_group_chat(req: GroupChatRequestSchema):
     if not agents:
         raise HTTPException(status_code=404, detail="No valid agents selected")
 
-    responses = []
-    for agent in agents:
-        prompt = agent.get("systemPrompt", "You are an AI assistant.")
-        hist = [{"role": m.sender, "content": m.text} for m in req.conversationHistory] + [{"role": "user", "content": req.userMessage}]
-        
+    hist = [{"role": m.sender, "content": m.text} for m in req.conversationHistory] + [
+        {"role": "user", "content": req.userMessage}
+    ]
+
+    def _ask(agent: Dict[str, Any]) -> Dict[str, Any]:
         result = local_llm_service.generate_agent_chat_response(
-            system_prompt=prompt,
-            messages=hist,
+            system_prompt=agent.get("systemPrompt", "You are an AI assistant."),
+            messages=list(hist),
             model_name=agent.get("modelName", req.localModel),
             provider_endpoint=req.providerEndpoint,
             temperature=agent.get("temperature", 0.7)
@@ -98,18 +99,28 @@ def execute_group_chat(req: GroupChatRequestSchema):
             agent_name=agent.get("name", "Agent")
         )
 
-        responses.append({
+        return {
             "agentId": agent.get("id"),
             "agentName": agent.get("name"),
             "agentRole": agent.get("role"),
             "avatarColor": agent.get("avatarColor"),
             "response": result.get("content"),
             "modelUsed": result.get("model_used"),
+            # The model server was unreachable and this text is canned. The UI
+            # must label it -- otherwise a fallback reads as a real answer.
+            "simulated": result.get("status") != "success",
             "voiceAudio": tts_result
-        })
+        }
 
+    # Each agent is an independent ~30s network call. Run them concurrently so
+    # a five-agent room answers in one round trip instead of five.
+    with ThreadPoolExecutor(max_workers=min(len(agents), 8)) as pool:
+        responses = list(pool.map(_ask, agents))
+
+    any_simulated = any(r["simulated"] for r in responses)
     return {
-        "status": "success",
+        "status": "simulated" if any_simulated else "success",
+        "simulated": any_simulated,
         "userMessage": req.userMessage,
         "agentResponses": responses
     }

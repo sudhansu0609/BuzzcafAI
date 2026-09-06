@@ -1,0 +1,75 @@
+{
+  "channel": "Khayal3Baje",
+  "topics": [
+    {
+      "topic": "Pashupatastra Ka Raaz Aur Divine Cosmic Astral Weapons",
+      "category": "Vedic & Epic Lore",
+      "pillar": "Vedic & Epic Lore",
+      "country": "Ancient India",
+      "viral_potential": 10,
+      "source_type": "Sacred Texts & Epic Manuscripts",
+      "sources_used": [
+        "Mahabharata Vana Parva",
+        "Puranic Encylopedia",
+        "Sanskrit Manuscripts"
+      ],
+      "visual_requirements": [
+        "Epic oil painting visuals",
+        "Cosmic fire rendering",
+        "Ancient Sanskrit text overlays"
+      ],
+      "exclusion_audit": "✓ Verified: Authentic Textual Sacred Lore in Hinglish"
+    },
+    {
+      "topic": "Anunnaki Tablets Aur Mesopotamian Cosmic Creation Ka Myth",
+      "category": "World Mythologies",
+      "pillar": "World Mythologies",
+      "country": "Ancient Mesopotamia",
+      "viral_potential": 9,
+      "source_type": "Cuneiform Translations",
+      "sources_used": [
+        "Enuma Elish Tablets",
+        "British Museum Cuneiform Archives"
+      ],
+      "visual_requirements": [
+        "3D Cuneiform tablet rendering",
+        "Ziggurat starry night map"
+      ],
+      "exclusion_audit": "✓ Verified: Comparative World Mythology in Hinglish"
+    },
+    {
+      "topic": "Kurukshetra Yuddh Mein Karna Ke Khoye Hue Divine Astra Aur Kahani",
+      "category": "Vedic & Epic Lore",
+      "pillar": "Epic Lore",
+      "country": "Ancient India",
+      "viral_potential": 10,
+      "source_type": "Mahabharata Karna Parva",
+      "sources_used": [
+        "Mahabharata Sanskrit Verse",
+        "Bhandarkar Oriental Research Institute"
+      ],
+      "visual_requirements": [
+        "Golden armor glow effect",
+        "Chariot battlefield matte painting"
+      ],
+      "exclusion_audit": "✓ Verified: Ancient Epic Lore in Hinglish"
+    },
+    {
+      "topic": "Kali Yuga Ke Ant Tak Pehre Dete 7 Immortal Chiranjivi",
+      "category": "Sacred Epic Lore",
+      "pillar": "Sacred Epic Lore",
+      "country": "Ancient India",
+      "viral_potential": 10,
+      "source_type": "Puranic Texts",
+      "sources_used": [
+        "Bhagavata Purana",
+        "Vishnu Purana"
+      ],
+      "visual_requirements": [
+        "Himalayan cave mist visual",
+        "Sanskrit manuscript parchment"
+      ],
+      "exclusion_audit": "✓ Verified: Textual Puranic Mythology in Hinglish"
+    }
+  ]
+}

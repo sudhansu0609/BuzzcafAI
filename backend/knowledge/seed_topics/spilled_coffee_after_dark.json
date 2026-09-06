@@ -1,0 +1,95 @@
+{
+  "channel": "Spilled Coffee After Dark",
+  "topics": [
+    {
+      "topic": "Bhangarh Fort Ka Wo Guard Jo Raat Ke 3 Baje Ghaayab Ho Gaya",
+      "category": "Paranormal & Haunted Locations",
+      "pillar": "Paranormal & Haunted Locations",
+      "country": "India",
+      "viral_potential": 9,
+      "source_type": "Local Indian Folklore & Archives",
+      "sources_used": [
+        "Reddit (r/Paranormal)",
+        "Local Rajasthani Folklore",
+        "Wikipedia Ghost Towns"
+      ],
+      "visual_requirements": [
+        "Haunted fort archival photos",
+        "Night rain mist imagery",
+        "Map of Alwar District"
+      ],
+      "exclusion_audit": "✓ Verified: Parapsychological Folklore in Hinglish"
+    },
+    {
+      "topic": "Deep Web Ki Wo Silent Calls: Audio Incident #99 Ka Sach",
+      "category": "Internet Horror & Modern Myths",
+      "pillar": "Internet Horror & Modern Myths",
+      "country": "International",
+      "viral_potential": 8,
+      "source_type": "Reddit & Internet Archives",
+      "sources_used": [
+        "r/HighStrangeness",
+        "Lost Media Wiki",
+        "Dark Web Archives"
+      ],
+      "visual_requirements": [
+        "Spectrogram audio graphs",
+        "Analog horror CRT noise",
+        "Deep web log clippings"
+      ],
+      "exclusion_audit": "✓ Verified: Modern Internet ARG / Myth in Hinglish"
+    },
+    {
+      "topic": "Kuldhara Gaon Ka Unsolved Raaz: Ek Hi Raat Mein Poore Gaon Ka Ghaayab Hona",
+      "category": "True Mysteries",
+      "pillar": "True Mysteries",
+      "country": "India",
+      "viral_potential": 10,
+      "source_type": "Wikipedia & Indian Archives",
+      "sources_used": [
+        "ASI Government Records",
+        "r/UnresolvedMysteries",
+        "Regional Folklore Books"
+      ],
+      "visual_requirements": [
+        "Dry desert ruins aerial map",
+        "Paliwal Brahmin family lineage charts"
+      ],
+      "exclusion_audit": "✓ Verified: Historical Unsolved Disappearance in Hinglish"
+    },
+    {
+      "topic": "Dow Hill School Ki Wo 3 AM Ki Seeti Aur Ghost Legends",
+      "category": "Paranormal & Haunted Locations",
+      "pillar": "Haunted Locations",
+      "country": "India (Kurseong)",
+      "viral_potential": 9,
+      "source_type": "Local Kurseong Archives",
+      "sources_used": [
+        "Local Tea Garden Chronicles",
+        "r/UnresolvedMysteries"
+      ],
+      "visual_requirements": [
+        "Foggy pine forest footage",
+        "Haunted school silhouette"
+      ],
+      "exclusion_audit": "✓ Verified: Regional Paranormal Legend in Hinglish"
+    },
+    {
+      "topic": "Skinwalker Ranch Ki Night Surveillance Logs: 2016 Ka Incident",
+      "category": "Internet Horror & Unexplained",
+      "pillar": "Unexplained Phenomena",
+      "country": "USA",
+      "viral_potential": 10,
+      "source_type": "NIDS Scientific Logs",
+      "sources_used": [
+        "r/Skinwalkers",
+        "Utah Paranormal Archives"
+      ],
+      "visual_requirements": [
+        "Thermal night vision overlay",
+        "Ranch topographic map"
+      ],
+      "exclusion_audit": "✓ Verified: Paranormal Field Investigation in Hinglish"
+    }
+  ]
+}

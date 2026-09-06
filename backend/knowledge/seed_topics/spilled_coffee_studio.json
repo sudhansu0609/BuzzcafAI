@@ -1,0 +1,117 @@
+{
+  "channel": "Spilled Coffee Studio",
+  "topics": [
+    {
+      "topic": "Why Franz Kafka's Stories Still Scare Modern Readers",
+      "category": "Pillar 2: Great Literature & Classic Authors",
+      "pillar": "Great Literature",
+      "country": "Czech / Global",
+      "viral_potential": 9,
+      "schedule_day": "Wednesday",
+      "source_type": "Public Domain Excerpts & Literary Critique",
+      "sources_used": [
+        "Public Domain Kafka Archives",
+        "Literary Analysis Essays"
+      ],
+      "visual_requirements": [
+        "Subtle ink sketches",
+        "Rainy European cafe footage",
+        "Annotated manuscript pages"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: Literary Critique & Fair-Use Analysis"
+    },
+    {
+      "topic": "How Studio Ghibli & Pixar Write Unforgettable Emotion",
+      "category": "Pillar 3: Story Analysis",
+      "pillar": "Story Analysis",
+      "country": "Global Animation Craft",
+      "viral_potential": 10,
+      "schedule_day": "Monday",
+      "source_type": "Story Architecture Breakdown",
+      "sources_used": [
+        "Pixar 22 Rules of Storytelling",
+        "Miyazaki Interviews"
+      ],
+      "visual_requirements": [
+        "Storyboarding timeline diagram",
+        "Color palette analysis slides",
+        "Character arc curves"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: Educational Story Architecture"
+    },
+    {
+      "topic": "The Midnight Library (Original Fantasy Short Story)",
+      "category": "Pillar 1: Original Work (30%)",
+      "pillar": "Original Work",
+      "country": "Original Short Story",
+      "viral_potential": 9,
+      "schedule_day": "Friday",
+      "source_type": "Original Short Fiction / Poetry",
+      "sources_used": [
+        "Creator Notebooks",
+        "Original Draft #4"
+      ],
+      "visual_requirements": [
+        "Cozy candlelit desk",
+        "Macro fountain pen writing",
+        "Cinematic original narration"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: 100% Original Creator Fiction"
+    },
+    {
+      "topic": "The Letter That Changed History (A 27-Year True Story)",
+      "category": "Pillar 4: Extraordinary True Stories",
+      "pillar": "Extraordinary True Stories",
+      "country": "International Human Narrative",
+      "viral_potential": 9,
+      "schedule_day": "Wednesday",
+      "source_type": "Historical Letters & Personal Journals",
+      "sources_used": [
+        "Resurfaced Personal Archives",
+        "Human Endurance Records"
+      ],
+      "visual_requirements": [
+        "Vintage letter scans",
+        "Historical map timeline",
+        "Cinematic narrative B-roll"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: Human Storytelling Narrative"
+    },
+    {
+      "topic": "How Haruki Murakami Blurs Reality & Dreams",
+      "category": "Pillar 2: Great Literature & Classic Authors",
+      "pillar": "Great Literature",
+      "country": "Japan / International",
+      "viral_potential": 9,
+      "schedule_day": "Monday",
+      "source_type": "Literary Breakdown",
+      "sources_used": [
+        "Murakami Essays",
+        "Magical Realism Critique"
+      ],
+      "visual_requirements": [
+        "Jazz vinyl record slow spin",
+        "Subtle neon rain visualizer"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: Literary Critique"
+    },
+    {
+      "topic": "The Man Who Survived Two Atomic Bombs & Lived to 93",
+      "category": "Pillar 4: Extraordinary True Stories",
+      "pillar": "Extraordinary True Stories",
+      "country": "Japan",
+      "viral_potential": 10,
+      "schedule_day": "Friday",
+      "source_type": "Historical Archives & Testimony",
+      "sources_used": [
+        "Tsutomu Yamaguchi Testimonies",
+        "Hiroshima & Nagasaki Archives"
+      ],
+      "visual_requirements": [
+        "Archival photo timeline",
+        "Historical map overlay"
+      ],
+      "exclusion_audit": "✓ EXCLUSION VERIFIED: Historical Human Story"
+    }
+  ]
+}

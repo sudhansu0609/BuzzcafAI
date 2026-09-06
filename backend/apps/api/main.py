@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-PROJECTS_DIR = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\projects"
+from core.paths import PROJECTS_DIR
 engine = WorkflowEngine()
 asset_service = AssetService()
 

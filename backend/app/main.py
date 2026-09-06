@@ -20,8 +20,19 @@ app = FastAPI(title="Buzzcaf AI Studio")
 
 from app.api.auth import router as auth_router
 from app.api.agents_api import router as agents_router
+from app.api.studio_api import router as studio_router
+from app.services.events import bus as event_bus
 app.include_router(auth_router)
 app.include_router(agents_router)
+app.include_router(studio_router)
+
+
+@app.on_event("startup")
+async def _bind_event_bus():
+    # Workflow steps run in the threadpool; the bus needs the loop to publish from there.
+    import asyncio
+
+    event_bus.bind_loop(asyncio.get_running_loop())
 
 # CORS is restricted to the local dev frontend. A wildcard here would let any
 # page you visit in the same browser call this API -- including the settings
@@ -245,7 +256,12 @@ def create_project(payload: ProjectCreateSchema):
             brand=payload.brand,
             workflow_name=payload.workflow_name
         )
-        return project.to_dict()
+        data = project.to_dict()
+        event_bus.publish("project_created", {
+            "project_id": data.get("id"), "name": data.get("name"), "brand": data.get("brand"),
+            "workflow_name": data.get("workflow_name"), "current_step": data.get("current_step"),
+        })
+        return data
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -261,6 +277,20 @@ def get_project(project_id: str):
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
 
+def _step_event_payload(project_id: str, project) -> Dict[str, Any]:
+    last = project.steps_history[-1] if project.steps_history else None
+    return {
+        "project_id": project_id,
+        "name": project.name,
+        "brand": project.brand,
+        "status": project.status,
+        "current_step": project.current_step,
+        "step": last.step_name if last else None,
+        "step_status": last.status if last else None,
+        "agent": last.agent_name if last else None,
+    }
+
+
 @app.post("/api/projects/{project_id}/execute")
 def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
     feedback = payload.feedback if payload else None
@@ -270,6 +300,7 @@ def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
     log_handler.logs[project_id].append(
         f"Starting execution of workflow step at {datetime.now().isoformat()}..."
     )
+    event_bus.publish("step_started", {"project_id": project_id, "feedback": bool(feedback)})
     try:
         project = engine.execute_next(project_id, user_feedback=feedback)
         # Add final agent logs if any
@@ -278,16 +309,48 @@ def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
             for step_log in last_step.logs:
                 if step_log not in log_handler.logs[project_id]:
                     log_handler.logs[project_id].append(step_log)
+        payload_out = _step_event_payload(project_id, project)
+        if payload_out.get("step_status") == "paused_for_approval":
+            event_bus.publish("approval_needed", payload_out)
+        else:
+            event_bus.publish("step_completed", payload_out)
         return project.to_dict()
     except ValueError as e:
+        event_bus.publish("step_failed", {"project_id": project_id, "error": str(e)})
         raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
     except Exception as e:
         log_handler.logs[project_id].append(f"[ERROR] Execution failed: {str(e)}")
+        event_bus.publish("step_failed", {"project_id": project_id, "error": str(e)})
         raise HTTPException(status_code=500, detail=f"Execution error: {str(e)}")
     finally:
         active_executions.discard(project_id)
+
+
+@app.post("/api/projects/{project_id}/approve")
+def approve_project_step(project_id: str, payload: ExecuteStepSchema = None):
+    """
+    Approve the step waiting on the creator (or send it back with notes).
+
+    An alias of execute: WorkflowEngine treats "execute with no feedback" on a
+    paused step as approval and "execute with feedback" as a revision request.
+    Spelling that out as /approve makes Dexter's intent explicit and lets the
+    Studio refuse when nothing is actually waiting.
+    """
+    try:
+        project = Project.load(project_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+    last = project.steps_history[-1] if project.steps_history else None
+    if not last or last.status != "paused_for_approval":
+        raise HTTPException(
+            status_code=409,
+            detail=f"Nothing is waiting for approval on '{project.name}' (current step: {project.current_step}).",
+        )
+    return execute_project_step(project_id, payload)
 
 @app.get("/api/projects/{project_id}/logs")
 def get_project_execution_logs(project_id: str):

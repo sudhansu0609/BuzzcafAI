@@ -3,7 +3,7 @@ import json
 import logging
 import requests
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import List, Dict, Any, Optional
 
 
 from core.errors import LLMUnavailable
@@ -82,6 +82,136 @@ class LLMService:
 
     def reload_config(self):
         self.config = load_config()
+
+    def generate_chat(
+        self,
+        system_prompt: str,
+        messages: List[Dict[str, str]],
+        require_json: bool = False,
+    ) -> str:
+        """
+        Multi-turn generation: `messages` is an ordered list of
+        {"role": "user"|"assistant", "content": ...}. Same provider order and
+        fallback rules as generate_text; the last user message is what the
+        simulated fixture answers when no provider is reachable.
+        """
+        self.reload_config()
+        self.last_response_simulated = False
+
+        provider = self.config.get("selected_provider") or os.environ.get("SELECTED_PROVIDER")
+        if not provider:
+            provider = "gemini" if self.config.get("prefer_gemini", True) else "lm_studio"
+        provider = provider.lower()
+
+        providers_to_try = [provider]
+        for p in ["gemini", "openai", "lm_studio"]:
+            if p not in providers_to_try:
+                providers_to_try.append(p)
+
+        for current_p in providers_to_try:
+            if current_p == "gemini":
+                api_key = self.config.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
+                if api_key:
+                    try:
+                        logger.info("Attempting chat via Google Gemini API...")
+                        return self._chat_gemini(api_key, system_prompt, messages, require_json)
+                    except Exception as e:
+                        logger.warning(f"Gemini API chat failed: {e}.")
+            elif current_p == "openai":
+                api_key = self.config.get("openai_api_key") or os.environ.get("OPENAI_API_KEY", "")
+                if api_key:
+                    try:
+                        logger.info("Attempting chat via OpenAI API...")
+                        return self._chat_openai_compat(
+                            "https://api.openai.com/v1/chat/completions",
+                            {"Authorization": f"Bearer {api_key}"},
+                            self.config.get("openai_model", "gpt-4o-mini"),
+                            system_prompt, messages, require_json,
+                        )
+                    except Exception as e:
+                        logger.warning(f"OpenAI API chat failed: {e}.")
+            elif current_p == "lm_studio":
+                lm_url = self.config.get("lm_studio_url", "http://localhost:1234/v1")
+                try:
+                    logger.info(f"Attempting chat via local LM Studio at {lm_url}...")
+                    return self._chat_openai_compat(
+                        f"{lm_url.rstrip('/')}/chat/completions", {},
+                        self.config.get("lm_studio_model", "meta-llama-3-8b-instruct"),
+                        system_prompt, messages, False,
+                    )
+                except Exception as e:
+                    logger.warning(f"LM Studio API chat failed: {e}.")
+
+        if not _simulation_enabled():
+            raise LLMUnavailable(
+                "No LLM provider is reachable. Check your API keys and that the "
+                "selected model is available in Settings."
+            )
+        logger.warning("No LLM provider succeeded; returning simulated content.")
+        self.last_response_simulated = True
+        from dev.fixtures import generate_simulated_response
+
+        last_user = next((m.get("content", "") for m in reversed(messages) if m.get("role") == "user"), "")
+        return generate_simulated_response(system_prompt, last_user, require_json)
+
+    def _chat_openai_compat(
+        self,
+        url: str,
+        headers: Dict[str, str],
+        model: str,
+        system_prompt: str,
+        messages: List[Dict[str, str]],
+        require_json: bool,
+    ) -> str:
+        payload_messages = []
+        if system_prompt:
+            payload_messages.append({"role": "system", "content": system_prompt})
+        payload_messages.extend(
+            {"role": m.get("role", "user"), "content": m.get("content", "")} for m in messages
+        )
+        payload: Dict[str, Any] = {"model": model, "messages": payload_messages, "temperature": 0.7}
+        if require_json:
+            payload["response_format"] = {"type": "json_object"}
+        response = requests.post(
+            url, headers={"Content-Type": "application/json", **headers}, json=payload, timeout=90
+        )
+        if response.status_code != 200:
+            raise Exception(f"{url} returned code {response.status_code}: {response.text[:300]}")
+        resp_json = response.json()
+        try:
+            return resp_json["choices"][0]["message"]["content"]
+        except (KeyError, IndexError) as e:
+            raise Exception(f"Failed to parse chat response payload: {resp_json}. Error: {e}")
+
+    def _chat_gemini(
+        self, api_key: str, system_prompt: str, messages: List[Dict[str, str]], require_json: bool
+    ) -> str:
+        configured_model = self.config.get("gemini_model", "gemini-1.5-flash")
+        candidate_models = list(dict.fromkeys(
+            [configured_model, "gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-exp"]
+        ))
+        contents = [
+            {"role": "user" if m.get("role") == "user" else "model", "parts": [{"text": m.get("content", "")}]}
+            for m in messages
+        ]
+        last_error = None
+        for model in candidate_models:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+            payload: Dict[str, Any] = {"contents": contents, "generationConfig": {"temperature": 0.7}}
+            if system_prompt:
+                payload["systemInstruction"] = {"parts": [{"text": system_prompt}]}
+            if require_json:
+                payload["generationConfig"]["responseMimeType"] = "application/json"
+            try:
+                response = requests.post(url, headers={"Content-Type": "application/json"}, json=payload, timeout=60)
+                if response.status_code == 200:
+                    return response.json()["candidates"][0]["content"]["parts"][0]["text"]
+                last_error = f"Gemini API ({model}) returned code {response.status_code}: {response.text[:200]}"
+                logger.warning(last_error)
+            except Exception as e:
+                last_error = str(e)
+                logger.warning(f"Error calling Gemini model {model}: {e}")
+        raise Exception(f"All Gemini models failed. Last error: {last_error}")
 
     def generate_text(self, system_prompt: str, user_prompt: str, require_json: bool = False) -> str:
         self.reload_config()

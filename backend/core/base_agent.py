@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import os
 import json
 import logging
-from typing import Optional, Any
+from typing import Any, Dict, List, Optional
 from integrations.llm import LLMService
 from core.context import Context
 from core.paths import AGENTS_DIR
@@ -22,7 +22,7 @@ class BaseAgent(ABC):
         self.llm_service = llm_service or LLMService()
         self.system_prompt = self._load_system_prompt()
 
-    def _load_system_prompt(self) -> str:
+    def _load_system_prompt(self, hinglish: bool = True) -> str:
         prompt_path = os.path.join(AGENTS_DIR, f"{self.agent_name}.md")
         base_prompt = ""
         if not os.path.exists(prompt_path):
@@ -61,7 +61,12 @@ class BaseAgent(ABC):
             except Exception as e:
                 logger.error(f"Error building workforce roster for {self.agent_name}: {e}")
 
-        # Mandatory Hinglish Language Directive for All Agents & Topic/Script Generations
+        # Hinglish directive for content generation (workflow steps produce
+        # titles, hooks and scripts). The Studio Assistant chat passes
+        # hinglish=False and answers in the creator's own language instead.
+        if not hinglish:
+            return base_prompt
+
         hinglish_directive = (
             "\n\n### MANDATORY STUDIO LANGUAGE & SCRIPT DIRECTIVE (HINGLISH ENFORCEMENT):\n"
             "ALL generated topic titles, video hooks, outlines, full narration scripts, scene dialogues, "
@@ -79,6 +84,25 @@ class BaseAgent(ABC):
 
     def refresh_prompt(self):
         self.system_prompt = self._load_system_prompt()
+
+    def execute_messages(
+        self,
+        messages: List[Dict[str, str]],
+        system_extra: str = "",
+        hinglish: bool = False,
+        require_json: bool = False,
+    ) -> str:
+        """
+        A real multi-turn chat: persona (+ roster for strategists) as the system
+        prompt, `system_extra` appended once, and the turns passed as messages.
+        Memory is the caller's business - the Studio Assistant injects only the
+        relevant items - so nothing is auto-injected or auto-saved here.
+        """
+        system_prompt = self._load_system_prompt(hinglish=hinglish) + (system_extra or "")
+        logger.info(f"Agent '{self.agent_name}' is answering a chat turn ({len(messages)} messages)...")
+        return self.llm_service.generate_chat(
+            system_prompt=system_prompt, messages=messages, require_json=require_json
+        )
 
     def execute(self, task: Any, require_json: bool = False) -> Any:
         try:
@@ -111,7 +135,7 @@ class BaseAgent(ABC):
                     scope="agent",
                     owner=self.agent_name,
                     tags=["execution"],
-                    content={"task_summary": user_prompt[:200], "result_snippet": str(raw_output)[:300]}
+                    content={"task_summary": user_prompt[:600], "result_snippet": str(raw_output)[:2000]}
                 )
             except Exception as e:
                 logger.error(f"Error saving agent memory: {e}")
@@ -137,7 +161,7 @@ class BaseAgent(ABC):
                 scope="agent",
                 owner=self.agent_name,
                 tags=["execution"],
-                content={"task_summary": user_prompt[:200], "result_snippet": str(raw_output)[:300]}
+                content={"task_summary": user_prompt[:600], "result_snippet": str(raw_output)[:2000]}
             )
         except Exception as e:
             logger.error(f"Error saving agent memory: {e}")

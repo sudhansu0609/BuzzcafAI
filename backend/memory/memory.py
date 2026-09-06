@@ -140,10 +140,30 @@ class MemorySystem:
             
         return item
 
-    def retrieve(self, scope: str, owner: Optional[str] = None, tags: Optional[List[str]] = None, project_id: Optional[str] = None, limit: int = 15) -> List[MemoryItem]:
-        """Retrieves and filters memory entries by tag matching, scope, and recency.
+    _STOPWORDS = frozenset(
+        "a an the this that these those my your our their its is are was were be been "
+        "am do does did have has had will would shall should can could may might must "
+        "of in on at to for with from by about into over and or but if then when what "
+        "which who where why how there here please ok okay hey me we us you he she it "
+        "they them i".split()
+    )
 
-        With no owner, returns memories for every owner in the scope.
+    @classmethod
+    def _tokens(cls, text: str) -> set:
+        import re as _re
+
+        return {
+            tok for tok in _re.findall(r"[a-z0-9]+", (text or "").lower())
+            if len(tok) > 2 and tok not in cls._STOPWORDS
+        }
+
+    def retrieve(self, scope: str, owner: Optional[str] = None, tags: Optional[List[str]] = None, project_id: Optional[str] = None, limit: int = 15, query: Optional[str] = None) -> List[MemoryItem]:
+        """Retrieves memory entries by scope, optional tags and recency.
+
+        With `query`, items are ranked by how many content words they share
+        with the query (recency breaks ties) so the message decides what is
+        recalled; without matches, or without a query, newest first. With no
+        owner, returns memories for every owner in the scope.
         """
         items: List[MemoryItem] = []
 
@@ -166,6 +186,18 @@ class MemorySystem:
 
         # Sort by updated timestamp desc (recency)
         items.sort(key=lambda x: x.updated, reverse=True)
+
+        query_tokens = self._tokens(query) if query else set()
+        if query_tokens:
+            scored = []
+            for item in items:
+                text = json.dumps(item.content) if isinstance(item.content, (dict, list)) else str(item.content)
+                overlap = len(query_tokens & self._tokens(text))
+                scored.append((overlap, item))
+            if any(score > 0 for score, _ in scored):
+                # Stable sort keeps the recency order among equal scores.
+                scored.sort(key=lambda pair: pair[0], reverse=True)
+                return [item for score, item in scored if score > 0][:limit]
         return items[:limit]
 
     def clear(self, scope: str, owner: Optional[str] = None, project_id: Optional[str] = None) -> None:

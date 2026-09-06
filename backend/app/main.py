@@ -7,6 +7,7 @@ from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, HTTPException, Body
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 from core.models.project import Project
@@ -528,54 +529,6 @@ def delete_saved_topic(payload: Dict[str, Any] = Body(...)):
     _save_saved_topics(topics)
     return {"status": "success", "message": "Topic removed from vault", "remaining": len(topics)}
 
-def _build_workforce_summary() -> str:
-    """Builds a formatted summary of all 115 registered agents in the AgentRegistry."""
-    from core.agent import agent_registry
-    dept_map: Dict[str, List[str]] = {}
-    for agent_def in agent_registry.agents.values():
-        dept = agent_def.department or "General"
-        dept_map.setdefault(dept, []).append(agent_def.name)
-    
-    lines = [f"### Available Studio Workforce Directory ({len(agent_registry.agents)} Registered AI Agents)"]
-    for dept, agents in sorted(dept_map.items()):
-        agent_list_str = ", ".join(sorted(agents))
-        lines.append(f"- **{dept}** ({len(agents)} agents): {agent_list_str}")
-    return "\n".join(lines)
-
-
-def _process_agent_invocations(reply_text: str) -> str:
-    """
-    Parses [INVOKE_AGENT: AgentName] task [/INVOKE_AGENT] blocks in the strategist output,
-    executes the target agents using AgentFactory, and embeds their output live.
-    """
-    pattern = r"\[INVOKE_AGENT:\s*([a-zA-Z0-9_]+)\](.*?)\[/INVOKE_AGENT\]"
-    matches = list(re.finditer(pattern, reply_text, re.DOTALL))
-    if not matches:
-        return reply_text
-
-    final_text = reply_text
-    for match in matches:
-        full_tag = match.group(0)
-        target_agent_name = match.group(1).strip()
-        task_instruction = match.group(2).strip()
-        
-        logger.info(f"Strategist delegated task to specialist agent: '{target_agent_name}'")
-        try:
-            target_agent = AgentFactory.get_agent(target_agent_name)
-            agent_response = target_agent.execute(
-                f"You have been invoked by a Lead Channel Strategist to perform the following task:\n\n{task_instruction}"
-            )
-            
-            replacement = f"\n\n---\n🤖 **[Delegated Specialist Execution: `{target_agent_name}`]**\n> *Task*: {task_instruction}\n\n{agent_response}\n---\n\n"
-            final_text = final_text.replace(full_tag, replacement)
-        except Exception as e:
-            logger.error(f"Failed to execute delegated agent {target_agent_name}: {e}")
-            replacement = f"\n*⚠️ Unable to complete execution for delegated agent `{target_agent_name}`: {e}*\n"
-            final_text = final_text.replace(full_tag, replacement)
-
-    return final_text
-
-
 class AgentChatSchema(BaseModel):
     agent_name: str
     channel: str
@@ -623,131 +576,36 @@ def get_chat_history(channel: str, agent_name: str):
 
 @app.post("/api/topics/agent_chat")
 def agent_chat(payload: AgentChatSchema):
-    agent_name = payload.agent_name.strip()
-    try:
-        agent = AgentFactory.get_agent(agent_name)
-    except Exception:
-        agent = AgentFactory.get_agent("TopicVaultManager")
-    
-    history_formatted = ""
-    if payload.chat_history:
-        for msg in payload.chat_history:
-            role = "User" if msg.get("role") == "user" else agent_name
-            history_formatted += f"\n{role}: {msg.get('content', '')}"
+    """The Studio Assistant turn. See app/services/studio_chat.run_chat."""
+    from app.services.studio_chat import run_chat
 
-    topic_formatted = ""
-    if payload.context_topic:
-        t = payload.context_topic
-        topic_formatted = f"""
-### Currently Discussed Topic Details
-- Title: {t.get('topic')}
-- Category/Pillar: {t.get('category')}
-- Target Channel: {t.get('channel', payload.channel)}
-- Viral Potential: {t.get('viral_potential')}/10
-- Sources Used: {', '.join(t.get('sources_used', [])) if isinstance(t.get('sources_used'), list) else t.get('sources_used', '')}
-- Visual Requirements: {', '.join(t.get('visual_requirements', [])) if isinstance(t.get('visual_requirements'), list) else t.get('visual_requirements', '')}
-"""
-
-    # Retrieve persistent long-term memories from memory_system
-    memory_formatted = ""
+    agent_name = (payload.agent_name or "").strip()
     try:
-        from memory.memory import memory_system
-        agent_memories = memory_system.retrieve(scope="agent", owner=agent_name, limit=15)
-        session_memories = memory_system.retrieve(scope="session", owner=payload.channel, limit=15)
-        
-        all_mem_text = []
-        for m in agent_memories + session_memories:
-            c_text = json.dumps(m.content) if isinstance(m.content, (dict, list)) else str(m.content)
-            all_mem_text.append(f"- [{m.updated[:19]}] {c_text}")
-            
-        if all_mem_text:
-            memory_formatted = "\n### MANDATORY LONG-TERM PERSISTENT STUDIO MEMORY LOGS:\n" + "\n".join(all_mem_text) + "\n"
+        return run_chat(
+            message=payload.message,
+            channel=payload.channel,
+            agent_name=agent_name or None,
+            history=payload.chat_history,
+            context_topic=payload.context_topic,
+        )
     except Exception as e:
-        logger.error(f"Error retrieving memories in agent_chat: {e}")
-
-    workforce_roster = _build_workforce_summary()
-
-    full_user_prompt = f"""
-You are acting in your role as Lead Channel Strategist ({agent_name}) for the channel '{payload.channel}'.
-You have full strategic authority over an autonomous AI Studio workforce of 115 specialized agents across 19 departments.
-
-{workforce_roster}
-
-{memory_formatted}
-
-### CRITICAL MEMORY & CONTINUITY DIRECTIVE:
-You have FULL ACCESS to past persistent studio memories, user directives, channel preferences, and prior conversation context above.
-YOU MUST REMEMBER all previous choices, topic decisions, hooks, script directions, and feedback given by the user in past interactions.
-
-### MANDATORY HINGLISH LANGUAGE & SCRIPT DIRECTIVE:
-You MUST reply and generate all topic titles, script hooks, outlines, dialogues, B-roll notes, and video ideas in **Hinglish** (day-to-day conversational Hindi written in Roman/English fonts).
-Do NOT write pure formal English scripts or Devanagari Hindi text. Use natural, conversational Hinglish as spoken in top Hindi YouTube documentaries & video essays!
-
-### Strategic Delegation Capabilities:
-1. You KNOW about every single agent listed in the workforce directory above.
-2. If the user asks for specific work (such as deep fact-checking, full script writing, SEO tags & titles, thumbnail concepts, B-roll/scene planning, or vault management), YOU HAVE THE POWER TO CALL THOSE AGENTS.
-3. To delegate a task and make a specialized agent execute it live, insert the following tag in your response:
-   [INVOKE_AGENT: AgentName] Write clear instructions for what you need this agent to do... [/INVOKE_AGENT]
-
-{topic_formatted}
-
-### Active Conversation Turns History:
-{history_formatted if history_formatted else "No previous turns in this immediate session."}
-
-### User's Current Question/Directive:
-{payload.message}
-
-Provide a helpful, strategic response in character as {agent_name}. Refer back to any relevant past decisions or context stored in your memory logs whenever appropriate. All topic titles, script outlines, and dialogues MUST be in Hinglish!
-"""
-    try:
-        reply_text = str(agent.execute(full_user_prompt))
-        simulated = getattr(agent.llm_service, "last_response_simulated", False)
-        # Execute any delegated agent tasks embedded in the response
-        reply_text = _process_agent_invocations(reply_text)
-        
-        # Save interaction into persistent MemorySystem disk files
-        try:
-            from memory.memory import memory_system
-            mem_payload = {
-                "user": payload.message,
-                "reply": reply_text,
-                "agent": agent_name,
-                "channel": payload.channel
-            }
-            memory_system.save(
-                scope="agent",
-                owner=agent_name,
-                tags=["chat", payload.channel],
-                content=mem_payload
-            )
-            memory_system.save(
-                scope="session",
-                owner=payload.channel,
-                tags=["chat", agent_name],
-                content=mem_payload
-            )
-        except Exception as mem_err:
-            logger.error(f"Error saving to memory_system in agent_chat: {mem_err}")
-
-        return {
-            "status": "simulated" if simulated else "success",
-            "simulated": simulated,
-            "agent_name": agent_name,
-            "channel": payload.channel,
-            "reply": reply_text
-        }
-    except Exception as e:
-        logger.error(f"Error executing agent {agent_name}: {e}", exc_info=True)
-        # An error is reported as an error. Returning "success" here made a
-        # failed call indistinguishable from a real strategist reply.
-        return {
-            "status": "error",
-            "simulated": True,
-            "error": str(e),
-            "agent_name": agent_name,
-            "channel": payload.channel,
-            "reply": f"**{agent_name}** could not be reached: {e}\n\nCheck your provider settings and that the selected model is available."
-        }
+        logger.error(f"Studio chat failed for {agent_name or payload.channel}: {e}", exc_info=True)
+        # A failed call is an HTTP failure, not a 200 with an apology inside:
+        # Dexter's client checks res.ok, and the UI shows the detail in a toast.
+        detail = f"{agent_name or 'The strategist'} could not be reached: {e}"
+        return JSONResponse(
+            status_code=502,
+            content={
+                "status": "error",
+                "simulated": True,
+                "error": str(e),
+                "detail": detail,
+                "agent_name": agent_name,
+                "channel": payload.channel,
+                "reply": f"**{agent_name or 'Strategist'}** could not be reached: {e}\n\n"
+                         "Check your provider settings and that the selected model is available.",
+            },
+        )
 
 
 @app.get("/api/agents")

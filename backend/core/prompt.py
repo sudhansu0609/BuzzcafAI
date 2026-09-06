@@ -3,10 +3,9 @@ import re
 import logging
 from typing import Dict, Any, List, Optional
 from core.markdown import markdown_loader
+from core.paths import PROMPTS_DIR
 
-logger = logging.getLogger("spilled_coffee_ai.core.prompt")
-
-PROMPTS_DIR = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\prompts"
+logger = logging.getLogger("buzzcaf_ai.core.prompt")
 
 REQUIRED_SECTIONS = ["role", "objective", "instructions", "output_format"]
 

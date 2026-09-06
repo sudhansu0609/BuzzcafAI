@@ -38,7 +38,7 @@ class Diagnostics:
     @staticmethod
     def log_summary():
         report = Diagnostics.get_report()
-        logger.info(f"--- Spilled Coffee AI Studio Diagnostics ---")
+        logger.info(f"--- Buzzcaf AI Studio Diagnostics ---")
         logger.info(f"Application: {report['app_name']} ({report['environment']})")
         logger.info(f"Startup Time: {report['startup_time_seconds']}s")
         logger.info(f"Loaded Workflows: {report['loaded_workflows_count']}")

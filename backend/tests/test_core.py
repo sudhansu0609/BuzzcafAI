@@ -18,7 +18,7 @@ def test_config_manager_validation():
     assert cm1 is cm2
     
     # Assert default values loaded
-    assert cm1.get("APP_NAME") == "Spilled Coffee AI Studio"
+    assert cm1.get("APP_NAME") == "Buzzcaf AI Studio"
     assert cm1.get("LOG_LEVEL") in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
 def test_markdown_loader_and_parser():
@@ -144,7 +144,7 @@ def test_workflow_registry_validation():
 def test_diagnostics_report():
     report = Diagnostics.get_report()
     assert "startup_time_seconds" in report
-    assert report["app_name"] == "Spilled Coffee AI Studio"
+    assert report["app_name"] == "Buzzcaf AI Studio"
     assert report["registered_agents_count"] >= 79
 
 
@@ -188,7 +188,8 @@ def test_knowledge_manager():
     
     # Clean up test file
     import os
-    filepath = os.path.join(r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\knowledge", "research", "mock_gravity.md")
+    from core.paths import KNOWLEDGE_DIR
+    filepath = os.path.join(KNOWLEDGE_DIR, "research", "mock_gravity.md")
     if os.path.exists(filepath):
         os.remove(filepath)
     knowledge_manager.rebuild_index()

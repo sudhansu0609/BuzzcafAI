@@ -2,14 +2,18 @@ import os
 import shutil
 import pytest
 import json
+import requests
+from types import SimpleNamespace
 from core.models.project import Project, StepExecution
 from core.models.workflow import WorkflowDefinition, WorkflowStep
 from core.agent import AgentFactory
-from runtime.workflow import WorkflowEngine
+from core.errors import ApprovalRequired, AssetMissing
+from runtime.workflow import WorkflowEngine, classify_error
 from integrations.llm import LLMService
+from core.paths import ASSETS_DIR, PROJECTS_DIR
 
 
-TEST_PROJECTS_DIR = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\projects"
+TEST_PROJECTS_DIR = PROJECTS_DIR
 
 @pytest.fixture(autouse=True)
 def cleanup_test_projects():
@@ -91,8 +95,8 @@ def test_workflow_execution_flow():
 def test_asset_service():
     from knowledge.assets import AssetService
     # Temporarily rename actual catalog if it exists for isolation
-    actual_catalog_path = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\assets\catalog.json"
-    backup_path = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\assets\catalog_backup.json"
+    actual_catalog_path = os.path.join(ASSETS_DIR, "catalog.json")
+    backup_path = os.path.join(ASSETS_DIR, "catalog_backup.json")
     
     if os.path.exists(actual_catalog_path):
         os.rename(actual_catalog_path, backup_path)
@@ -165,8 +169,8 @@ def test_naming_compliance():
     assert "TheLostBhangarhFortHistory" in project_id
     
     # Verify Asset Naming: asset_type_subject_version.ext
-    actual_catalog_path = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\assets\catalog.json"
-    backup_path = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\assets\catalog_backup.json"
+    actual_catalog_path = os.path.join(ASSETS_DIR, "catalog.json")
+    backup_path = os.path.join(ASSETS_DIR, "catalog_backup.json")
     if os.path.exists(actual_catalog_path):
         os.rename(actual_catalog_path, backup_path)
         
@@ -198,25 +202,46 @@ def test_error_handling_compliance():
     p.save()
     
     engine = WorkflowEngine()
-    
-    # Mock LLM service to raise a connection timeout exception
+
+    # A real transport failure, not a string that happens to say "timeout" --
+    # classification is by exception type.
     class BrokenLLM:
         def generate_text(self, *args, **kwargs):
-            raise Exception("connection timed out")
-            
+            raise requests.ConnectionError("upstream unreachable")
+
     engine.llm_service = BrokenLLM()
-    
+
     # Execute next step - should throw and fail
     with pytest.raises(Exception):
         engine.execute_next("test_error_flow")
-        
+
     # Reload project and check error categorization logs
     loaded = Project.load("test_error_flow")
     assert len(loaded.steps_history) == 1
     assert loaded.steps_history[0].status == "failed"
     assert any("[RETRYABLE]" in log for log in loaded.steps_history[0].logs)
-    
+
     # Clean up test directories
     shutil.rmtree(loaded.get_project_dir())
+
+
+def test_error_classification_by_type():
+    """Our own bugs must not be laundered into workflow states."""
+    # A NameError mentioning "connection" used to be classified RETRYABLE
+    # purely because of the word in its message.
+    assert classify_error(NameError("name 'connection' is not defined")) == "BLOCKING"
+    assert classify_error(requests.Timeout()) == "RETRYABLE"
+    assert classify_error(requests.ConnectionError()) == "RETRYABLE"
+    assert classify_error(ApprovalRequired("needs sign-off")) == "HUMAN_INTERVENTION_REQUIRED"
+    assert classify_error(AssetMissing("research")) == "RECOVERABLE"
+    assert classify_error(FileNotFoundError("script.md")) == "RECOVERABLE"
+
+    rate_limited = requests.HTTPError("429 Too Many Requests")
+    rate_limited.response = SimpleNamespace(status_code=429)
+    assert classify_error(rate_limited) == "RETRYABLE"
+
+    bad_request = requests.HTTPError("400 Bad Request")
+    bad_request.response = SimpleNamespace(status_code=400)
+    assert classify_error(bad_request) == "BLOCKING"
 
 

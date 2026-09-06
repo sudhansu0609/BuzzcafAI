@@ -4,9 +4,10 @@ import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 
-logger = logging.getLogger("spilled_coffee_ai.core.knowledge")
+from core.paths import KNOWLEDGE_DIR
 
-KNOWLEDGE_DIR = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\knowledge"
+logger = logging.getLogger("buzzcaf_ai.core.knowledge")
+
 INDEX_PATH = os.path.join(KNOWLEDGE_DIR, "index.json")
 
 CATEGORIES = ["research", "prompts", "assets", "stories"]

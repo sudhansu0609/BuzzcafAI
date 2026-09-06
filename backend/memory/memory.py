@@ -1,10 +1,13 @@
 import os
 import json
+import logging
 import uuid
 import time
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from core.config import config_manager
+
+logger = logging.getLogger("buzzcaf_ai.memory")
 
 class MemoryItem:
     def __init__(self, scope: str, owner: str, tags: List[str], content: Any, confidence: float = 1.0, source: str = "agent", id: Optional[str] = None):
@@ -67,6 +70,35 @@ class MemorySystem:
             return os.path.join(projects_path, project_id, "project_memory.json")
         return os.path.join(knowledge_path, f"memory_{scope}_{owner_clean}.json")
 
+    _SCOPE_PREFIXES = {
+        "department": "dept_",
+        "agent": "agent_",
+        "session": "session_",
+    }
+
+    def _get_scope_paths(self, scope: str, project_id: Optional[str] = None) -> List[str]:
+        """Every storage file belonging to a scope, across all owners.
+
+        Memory is stored one file per (scope, owner). Callers that omit an
+        owner mean "the whole scope", so resolve to every matching file
+        rather than silently reading the 'system' owner's file only.
+        """
+        knowledge_path = config_manager.get("KNOWLEDGE_PATH")
+        if scope == "global":
+            return [os.path.join(knowledge_path, "global_memory.json")]
+        if scope == "project":
+            path = self._get_storage_path(scope, "system", project_id)
+            return [path] if path else []
+
+        prefix = self._SCOPE_PREFIXES.get(scope, f"memory_{scope}_")
+        if not os.path.isdir(knowledge_path):
+            return []
+        return [
+            os.path.join(knowledge_path, name)
+            for name in sorted(os.listdir(knowledge_path))
+            if name.startswith(prefix) and name.endswith("_memory.json")
+        ]
+
     def _load_memories(self, path: str) -> List[MemoryItem]:
         if not os.path.exists(path):
             return []
@@ -74,7 +106,10 @@ class MemorySystem:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 return [MemoryItem.from_dict(d) for d in data]
-        except Exception:
+        except Exception as e:
+            # Corrupt memory must not take the agent down, but it should be
+            # visible -- a silent [] looks identical to "no memories yet".
+            logger.warning(f"Could not read memories from {path}: {e}")
             return []
 
     def _save_memories(self, path: str, items: List[MemoryItem]) -> None:
@@ -82,8 +117,10 @@ class MemorySystem:
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "w", encoding="utf-8") as f:
                 json.dump([item.to_dict() for item in items], f, indent=2)
-        except Exception:
-            pass
+        except Exception as e:
+            # Swallowing this silently hid the fact that memory was being
+            # written to a directory that did not exist.
+            logger.error(f"Failed to persist memories to {path}: {e}")
 
     def save(self, scope: str, owner: str, tags: List[str], content: Any, confidence: float = 1.0, project_id: Optional[str] = None) -> MemoryItem:
         """Saves a structured memory item to persistent disk storage, preventing duplicates."""
@@ -103,13 +140,20 @@ class MemorySystem:
             
         return item
 
-    def retrieve(self, scope: str, owner: str = "system", tags: Optional[List[str]] = None, project_id: Optional[str] = None, limit: int = 15) -> List[MemoryItem]:
-        """Retrieves and filters memory entries by tag matching, scope, and recency."""
+    def retrieve(self, scope: str, owner: Optional[str] = None, tags: Optional[List[str]] = None, project_id: Optional[str] = None, limit: int = 15) -> List[MemoryItem]:
+        """Retrieves and filters memory entries by tag matching, scope, and recency.
+
+        With no owner, returns memories for every owner in the scope.
+        """
         items: List[MemoryItem] = []
-        
-        path = self._get_storage_path(scope, owner, project_id)
-        if path:
-            items = self._load_memories(path)
+
+        if owner:
+            path = self._get_storage_path(scope, owner, project_id)
+            if path:
+                items = self._load_memories(path)
+        else:
+            for path in self._get_scope_paths(scope, project_id):
+                items.extend(self._load_memories(path))
 
         # Filter by tags list intersection
         if tags:
@@ -124,13 +168,18 @@ class MemorySystem:
         items.sort(key=lambda x: x.updated, reverse=True)
         return items[:limit]
 
-    def clear(self, scope: str, owner: str = "system", project_id: Optional[str] = None) -> None:
-        """Clears memory storage layer file."""
-        path = self._get_storage_path(scope, owner, project_id)
-        if path and os.path.exists(path):
-            try:
-                os.remove(path)
-            except Exception:
-                pass
+    def clear(self, scope: str, owner: Optional[str] = None, project_id: Optional[str] = None) -> None:
+        """Clears memory storage. With no owner, clears the whole scope."""
+        if owner:
+            targets = [self._get_storage_path(scope, owner, project_id)]
+        else:
+            targets = self._get_scope_paths(scope, project_id)
+
+        for path in targets:
+            if path and os.path.exists(path):
+                try:
+                    os.remove(path)
+                except OSError as e:
+                    logger.warning(f"Could not clear memory file {path}: {e}")
 
 memory_system = MemorySystem()

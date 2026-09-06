@@ -21,7 +21,8 @@ class LoggingManager:
             return
             
         if not log_dir:
-            log_dir = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\logs"
+            from core.paths import LOGS_DIR
+            log_dir = LOGS_DIR
             
         os.makedirs(log_dir, exist_ok=True)
         log_file = os.path.join(log_dir, "app.log")

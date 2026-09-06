@@ -9,7 +9,32 @@ from core.models.workflow import WorkflowDefinition, WorkflowStep
 from core.agent import AgentFactory
 from integrations.llm import LLMService
 
+import requests
+
+from core.errors import ApprovalRequired, AssetMissing, LLMUnavailable
+
 logger = logging.getLogger("buzzcaf_ai.engine.workflow")
+
+
+def classify_error(exc: Exception) -> str:
+    """Categorise a step failure by exception type, not by message text.
+
+    Anything unrecognised is BLOCKING on purpose: an unexpected exception is a
+    bug in our code, and dressing it up as a retryable workflow state hides it.
+    """
+    if isinstance(exc, ApprovalRequired):
+        return "HUMAN_INTERVENTION_REQUIRED"
+    if isinstance(exc, (LLMUnavailable, requests.Timeout, requests.ConnectionError, TimeoutError, ConnectionError)):
+        return "RETRYABLE"
+    if isinstance(exc, requests.HTTPError):
+        status = getattr(getattr(exc, "response", None), "status_code", None)
+        # Rate limits and transient upstream faults are worth another attempt.
+        if status == 429 or (status is not None and 500 <= status < 600):
+            return "RETRYABLE"
+        return "BLOCKING"
+    if isinstance(exc, (AssetMissing, FileNotFoundError)):
+        return "RECOVERABLE"
+    return "BLOCKING"
 
 WORKFLOWS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prompts", "workflows")
 CHANNELS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prompts", "channels")
@@ -314,17 +339,9 @@ Please output the content matching the required output format (Markdown or JSON)
             logger.info(f"Step '{step_def.name}' completed with status: {execution_status}")
             
         except Exception as e:
-            # Enforce Error Handling: Categorize error
-            error_class = "BLOCKING"
+            error_class = classify_error(e)
             error_msg = str(e)
-            
-            if "timeout" in error_msg.lower() or "connection" in error_msg.lower() or "429" in error_msg:
-                error_class = "RETRYABLE"
-            elif "not found" in error_msg.lower() or "missing" in error_msg.lower():
-                error_class = "RECOVERABLE"
-            elif "approval" in error_msg.lower() or "feedback" in error_msg.lower():
-                error_class = "HUMAN_INTERVENTION_REQUIRED"
-                
+
             log_message = f"[{error_class}] Error executing agent step '{step_def.name}': {error_msg}"
             logger.error(log_message)
             

@@ -5,10 +5,9 @@ import datetime
 import shutil
 from typing import Dict, Any, List, Optional
 from core.models.project import Project
+from core.paths import PROJECTS_DIR
 
-logger = logging.getLogger("spilled_coffee_ai.core.project")
-
-PROJECTS_DIR = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\projects"
+logger = logging.getLogger("buzzcaf_ai.core.project")
 
 REQUIRED_FOLDERS = [
     "research", "outline", "script", "storyboard", "visuals", 

@@ -4,10 +4,12 @@ import logging
 from typing import Dict, Any, Optional
 import dotenv
 
-logger = logging.getLogger("spilled_coffee_ai.core.config")
+from core import paths
 
-DOTENV_PATH = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\.env"
-CONFIG_PATH = r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\config\config.json"
+logger = logging.getLogger("buzzcaf_ai.core.config")
+
+DOTENV_PATH = paths.DOTENV_PATH
+CONFIG_PATH = paths.CONFIG_PATH
 
 class ConfigurationManager:
     _instance = None
@@ -28,22 +30,27 @@ class ConfigurationManager:
     def load(self):
         # 1. Load defaults
         self.settings = {
-            "APP_NAME": "Spilled Coffee AI Studio",
+            "APP_NAME": "Buzzcaf AI Studio",
             "APP_ENV": "development",
             "LOG_LEVEL": "INFO",
-            "PROJECTS_PATH": r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\projects",
-            "KNOWLEDGE_PATH": r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\knowledge",
-            "PROMPTS_PATH": r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\prompts",
+            "PROJECTS_PATH": paths.PROJECTS_DIR,
+            "KNOWLEDGE_PATH": paths.KNOWLEDGE_DIR,
+            "PROMPTS_PATH": paths.PROMPTS_DIR,
             "GEMINI_API_KEY": "",
             "LM_STUDIO_URL": "http://localhost:1234/v1",
             "LM_STUDIO_MODEL": "meta-llama-3-8b-instruct",
             "PREFER_GEMINI": True
         }
 
-        # 2. Load from .env if present
+        # 2. Load from .env if present. The repo-root .env is the primary file
+        # the operator edits; backend/.env may supply extras but must not
+        # clobber it (an empty key there would wipe a real one).
+        if os.path.exists(paths.ROOT_DOTENV_PATH):
+            dotenv.load_dotenv(paths.ROOT_DOTENV_PATH, override=True)
+            logger.info(f"Loaded configuration overrides from {paths.ROOT_DOTENV_PATH}")
         if os.path.exists(DOTENV_PATH):
-            dotenv.load_dotenv(DOTENV_PATH, override=True)
-            logger.info("Loaded configuration overrides from .env")
+            dotenv.load_dotenv(DOTENV_PATH, override=False)
+            logger.info(f"Loaded supplementary configuration from {DOTENV_PATH}")
 
         # 3. Resolve using Priority: Env -> Config file -> Default
         # Resolve config file values first
@@ -76,6 +83,23 @@ class ConfigurationManager:
                 else:
                     self.settings[k] = env_val
 
+        # Directory overrides are only honoured when they already exist. A path
+        # left over from an earlier project name must not silently create a new
+        # tree outside the checkout -- fall back to the canonical location.
+        canonical_dirs = {
+            "PROJECTS_PATH": paths.PROJECTS_DIR,
+            "KNOWLEDGE_PATH": paths.KNOWLEDGE_DIR,
+            "PROMPTS_PATH": paths.PROMPTS_DIR,
+        }
+        for key, canonical in canonical_dirs.items():
+            configured = self.settings.get(key)
+            if configured and not os.path.isdir(configured) and configured != canonical:
+                logger.warning(
+                    f"Configured {key} '{configured}' does not exist; "
+                    f"falling back to '{canonical}'."
+                )
+                self.settings[key] = canonical
+
         self.validate()
 
     def reload(self):
@@ -95,8 +119,8 @@ class ConfigurationManager:
                 raise ValueError(f"CRITICAL CONFIG ERROR: Required configuration key '{key}' is missing or empty.")
 
         # Validate directory permissions and exists
-        paths = ["PROJECTS_PATH", "KNOWLEDGE_PATH", "PROMPTS_PATH"]
-        for path_key in paths:
+        path_keys = ["PROJECTS_PATH", "KNOWLEDGE_PATH", "PROMPTS_PATH"]
+        for path_key in path_keys:
             path_val = self.settings[path_key]
             if not os.path.exists(path_val):
                 try:

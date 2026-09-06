@@ -67,11 +67,16 @@ class AgentRegistry:
                             version=fm.get("version", "1.0.0"),
                             prompt_filepath=f_path
                         )
-                        self.validate(agent)
+                        self.validate(agent, check_dependencies=False)
                         self.agents[agent.name.lower()] = agent
                         logger.info(f"AgentRegistry: Discovered and registered agent '{agent.name}'")
                 except Exception as e:
                     logger.error(f"AgentRegistry: Failed to load agent from {f_name}: {e}")
+
+        # Dependencies can only be checked once every agent is registered --
+        # doing it mid-scan just reports whatever sorts later in the directory.
+        for agent in self.agents.values():
+            self._validate_dependencies(agent)
 
     def register(self, agent: AgentDefinition):
         self.validate(agent)
@@ -100,17 +105,24 @@ class AgentRegistry:
     def list(self) -> List[AgentDefinition]:
         return list(self.agents.values())
 
-    def validate(self, agent: AgentDefinition):
+    def validate(self, agent: AgentDefinition, check_dependencies: bool = True):
         """Validate required fields, dependencies, and duplicates."""
         if not agent.name or not agent.department or not agent.role:
             raise ValueError(f"Agent validation error: Missing required fields (name, department, role).")
-            
-        # Verify dependency exists if we are not bootstrapping
-        # (Ignore dependencies during bootstrapping or if they correspond to known roles)
-        known_roles = ["ceo", "researchagent", "writeragent", "editoragent", "creativedirectoragent", "seomanageragent"]
+
+        if check_dependencies:
+            self._validate_dependencies(agent)
+
+    # Built-in roles implemented in code rather than as a prompt file.
+    KNOWN_ROLES = [
+        "ceo", "researchagent", "writeragent", "editoragent",
+        "creativedirectoragent", "seomanageragent",
+    ]
+
+    def _validate_dependencies(self, agent: AgentDefinition):
         for dep in agent.dependencies:
             dep_key = dep.lower()
-            if dep_key not in self.agents and dep_key not in known_roles:
+            if dep_key not in self.agents and dep_key not in self.KNOWN_ROLES:
                 logger.warning(f"Agent '{agent.name}' has unresolved dependency: '{dep}'")
 
 agent_registry = AgentRegistry()

@@ -1,10 +1,12 @@
 
 from abc import ABC, abstractmethod
 import os
+import json
 import logging
 from typing import Optional, Any
 from integrations.llm import LLMService
 from core.context import Context
+from core.paths import AGENTS_DIR
 from core.result import Result
 
 logger = logging.getLogger("spilled_coffee_ai.core.base_agent")
@@ -21,21 +23,18 @@ class BaseAgent(ABC):
         self.system_prompt = self._load_system_prompt()
 
     def _load_system_prompt(self) -> str:
-        prompt_path = os.path.join(
-            r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\prompts\agents",
-            f"{self.agent_name}.md"
-        )
+        prompt_path = os.path.join(AGENTS_DIR, f"{self.agent_name}.md")
         base_prompt = ""
         if not os.path.exists(prompt_path):
             logger.warning(f"System prompt file for agent {self.agent_name} not found at {prompt_path}. Using default.")
-            base_prompt = f"You are the {self.agent_name} of Spilled Coffee AI Studio. Follow instructions accurately."
+            base_prompt = f"You are the {self.agent_name} of Buzzcaf AI Studio. Follow instructions accurately."
         else:
             try:
                 with open(prompt_path, "r", encoding="utf-8") as f:
                     base_prompt = f.read()
             except Exception as e:
                 logger.error(f"Error loading system prompt for {self.agent_name}: {e}")
-                base_prompt = f"You are the {self.agent_name} of Spilled Coffee AI Studio."
+                base_prompt = f"You are the {self.agent_name} of Buzzcaf AI Studio."
 
         # If this is a Channel Strategist or Lead Agent, append the full 115-agent workforce directory
         if "strategist" in self.agent_name.lower() or self.agent_name in ["CEO", "COO", "CreativeDirectorAgent"]:

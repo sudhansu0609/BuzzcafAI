@@ -1,8 +1,28 @@
 import os
+import re
 import json
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Any, Optional
 from datetime import datetime
+
+# Project ids become directory names, and they arrive straight from the URL.
+# Anything outside this alphabet could escape the projects directory.
+_SAFE_ID = re.compile(r"^[A-Za-z0-9_.\-]+$")
+
+
+def _project_dir_for(project_id: str) -> str:
+    """Resolve a project id to its directory, refusing anything that escapes."""
+    from core.config import config_manager
+    projects_dir = config_manager.get("PROJECTS_PATH")
+
+    if not project_id or not _SAFE_ID.match(project_id) or project_id in (".", ".."):
+        raise ValueError(f"Invalid project id: {project_id!r}")
+
+    root = os.path.realpath(projects_dir)
+    resolved = os.path.realpath(os.path.join(root, project_id))
+    if resolved != root and not resolved.startswith(root + os.sep):
+        raise ValueError(f"Invalid project id: {project_id!r}")
+    return resolved
 
 @dataclass
 class StepExecution:
@@ -30,9 +50,7 @@ class Project:
     assets: Dict[str, str] = field(default_factory=dict)  # step_name -> file_path relative to project folder
 
     def get_project_dir(self) -> str:
-        from core.config import config_manager
-        projects_dir = config_manager.get("PROJECTS_PATH")
-        return os.path.join(projects_dir, self.id)
+        return _project_dir_for(self.id)
 
     def save(self):
         project_dir = self.get_project_dir()
@@ -57,9 +75,7 @@ class Project:
 
     @classmethod
     def load(cls, project_id: str) -> "Project":
-        from core.config import config_manager
-        projects_dir = config_manager.get("PROJECTS_PATH")
-        file_path = os.path.join(projects_dir, project_id, "project.json")
+        file_path = os.path.join(_project_dir_for(project_id), "project.json")
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"Project config file not found: {file_path}")
         with open(file_path, "r", encoding="utf-8") as f:

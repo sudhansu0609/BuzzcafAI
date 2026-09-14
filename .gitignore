@@ -39,3 +39,4 @@ Thumbs.db
 # desktop shell runtime state
 backend/config/window.json
 backend/logs/
+.buzzcode/

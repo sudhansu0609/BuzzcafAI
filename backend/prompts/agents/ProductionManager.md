@@ -79,7 +79,7 @@ Acts as the central operational manager for media production, ensuring high visu
 - Re-assign failed image prompt generations with updated negative prompts.
 
 ## 19. Escalation Rules
-- Escalate script scene ambiguities back to `Editor`.
+- Escalate script scene ambiguities back to `EditorAgent`.
 
 ## 20. Communication Rules
 - Provide clear asset lists in production logs.

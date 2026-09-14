@@ -1,0 +1,302 @@
+backend/integrations/buzzcaf_ports.py (lines 1-300 of 515)
+  1	"""
+  2	The Buzzcaf port ledger — pick a port, publish it, find someone else's.
+  3	
+  4	GUARDIAN_PLAN.md section 11 is the contract; this file is the canonical Python
+  5	implementation of it and is copied **byte-identical** into every Python app in
+  6	the ecosystem (`backend/test_buzzcaf_ports.py` fails when a copy drifts).
+  7	
+  8	The rules it implements, in one paragraph: a port is a *wish*, never a fact.
+  9	Each listener asks for `<APP>_PORT`, and if something already holds it, steps
+ 10	forward to the next free one rather than killing whoever is there. Once its own
+ 11	health route answers, it writes where it landed into the shared ledger
+ 12	`%LOCALAPPDATA%\\Buzzcaf\\ports.json` (override `BUZZCAF_PORTS_FILE`), and it
+ 13	removes that entry on a clean exit. Everyone else finds it with `discover()`:
+ 14	an explicit env URL, then the ledger entry whose pid is still alive, then a scan
+ 15	of `preferred … preferred+span` — and at every step the health route has to
+ 16	answer `{"app": "<name>", …}` or the answer does not count. That last check is
+ 17	the one that matters: loopback ports are crowded, and a scan that accepted any
+ 18	listener is exactly how CaliberAI got mistaken for the Studio.
+ 19	
+ 20	    pick_port(preferred, span=20, host="127.0.0.1") -> int
+ 21	    publish(app, port, health, extra=None, ledger=None) -> None
+ 22	    withdraw(app, ledger=None) -> None
+ 23	    discover(app, preferred, health_path="/health", span=20, env_url=None, ttl=3) -> str | None
+ 24	    ledger_path() -> Path
+ 25	
+ 26	plus two readers the consumers need — `entry(app)` and `entries()` — for the
+ 27	cases where the answer is not a base URL: a sub-service port under `extra`, or a
+ 28	third-party server (buzzcode's `llama-server`) that cannot be taught to name
+ 29	itself in its health body.
+ 30	
+ 31	Stdlib only, on purpose: this file is copied into apps that share no
+ 32	dependencies with each other, and a port helper that cannot be imported during
+ 33	startup is worse than a hardcoded port.
+ 34	
+ 35	An entry looks like:
+ 36	
+ 37	    {"dexter": {"port": 8098, "pid": 33716,
+ 38	                "started_at": "2026-09-10T18:21:07+00:00",
+ 39	                "health": "http://127.0.0.1:8098/health",
+ 40	                "extra": {"vite": 3006}}}
+ 41	
+ 42	Writes are read-merge-write under `ports.json.lock` (retried, considered stale
+ 43	after 5 s so one crashed writer cannot wedge the ecosystem) and land through a
+ 44	temp file plus `os.replace`, so a reader never sees half a file and one app's
+ 45	crash never loses another app's entry.
+ 46	"""
+ 47	
+ 48	from __future__ import annotations
+ 49	
+ 50	import json
+ 51	import os
+ 52	import socket
+ 53	import sys
+ 54	import threading
+ 55	import time
+ 56	import urllib.error
+ 57	import urllib.request
+ 58	from datetime import datetime, timezone
+ 59	from pathlib import Path
+ 60	from typing import Any, Dict, Optional, Tuple
+ 61	
+ 62	__all__ = [
+ 63	    "pick_port",
+ 64	    "publish",
+ 65	    "withdraw",
+ 66	    "discover",
+ 67	    "ledger_path",
+ 68	    "entry",
+ 69	    "entries",
+ 70	    "SPAN",
+ 71	]
+ 72	
+ 73	#: How far forward a listener may step, and how far a scan looks. One place, so
+ 74	#: BuzzBrain's extension and buzzcode's `ports.rs` quote the same number.
+ 75	SPAN = 20
+ 76	#: A lock older than this belonged to something that died holding it.
+ 77	LOCK_STALE_SECONDS = 5.0
+ 78	LOCK_RETRY_SECONDS = 0.02
+ 79	LOCK_TIMEOUT_SECONDS = 5.0
+ 80	#: Health probes are on startup paths and on `/api/dexter/apps`; keep them short.
+ 81	HEALTH_TIMEOUT = 1.5
+ 82	CONNECT_TIMEOUT = 0.25
+ 83	#: Seconds a discovery result (including "offline") is reused.
+ 84	DEFAULT_TTL = 3.0
+ 85	#: Windows: GetExitCodeProcess reports this while the process is still running.
+ 86	_STILL_ACTIVE = 259
+ 87	_ERROR_ACCESS_DENIED = 5
+ 88	
+ 89	_cache: Dict[str, Tuple[float, Optional[str]]] = {}
+ 90	_cache_lock = threading.Lock()
+ 91	
+ 92	
+ 93	# ───────────────────────── the ledger file ─────────────────────────
+ 94	
+ 95	
+ 96	def ledger_path() -> Path:
+ 97	    """Where the shared ledger lives. `BUZZCAF_PORTS_FILE` overrides it."""
+ 98	    override = (os.environ.get("BUZZCAF_PORTS_FILE") or "").strip()
+ 99	    if override:
+100	        return Path(override)
+101	    base = os.environ.get("LOCALAPPDATA")
+102	    if not base:
+103	        # Not Windows (CI, a container): the same file under XDG's data dir.
+104	        base = os.environ.get("XDG_DATA_HOME") or os.path.join(
+105	            os.path.expanduser("~"), ".local", "share"
+106	        )
+107	    return Path(base) / "Buzzcaf" / "ports.json"
+108	
+109	
+110	def _resolve(ledger: Optional[Any]) -> Path:
+111	    return Path(ledger) if ledger else ledger_path()
+112	
+113	
+114	class _FileLock:
+115	    """`ports.json.lock`, created O_EXCL, retried, broken when stale.
+116	
+117	    Deliberately not `msvcrt`/`fcntl`: those are per-platform, and the ledger is
+118	    written by Python, Node and Rust. A lock file with a staleness rule is the
+119	    one mechanism all three can implement the same way.
+120	    """
+121	
+122	    def __init__(self, target: Path) -> None:
+123	        self.path = Path(str(target) + ".lock")
+124	        self._fd: Optional[int] = None
+125	
+126	    def __enter__(self) -> "_FileLock":
+127	        deadline = time.time() + LOCK_TIMEOUT_SECONDS
+128	        while True:
+129	            try:
+130	                self.path.parent.mkdir(parents=True, exist_ok=True)
+131	            except OSError:
+132	                pass
+133	            try:
+134	                self._fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+135	                try:
+136	                    os.write(self._fd, str(os.getpid()).encode("ascii"))
+137	                except OSError:
+138	                    pass
+139	                return self
+140	            except FileExistsError:
+141	                if self._stale() or time.time() >= deadline:
+142	                    # Either the holder died, or it is so slow that waiting
+143	                    # longer would cost more than the write is worth. Losing an
+144	                    # entry is recoverable; a startup that never finishes is not.
+145	                    self._break()
+146	                    continue
+147	                time.sleep(LOCK_RETRY_SECONDS)
+148	            except OSError:
+149	                # An unwritable ledger directory: proceed unlocked rather than
+150	                # refuse to start. The write itself still fails loudly if it must.
+151	                return self
+152	
+153	    def __exit__(self, *exc: Any) -> None:
+154	        if self._fd is not None:
+155	            try:
+156	                os.close(self._fd)
+157	            except OSError:
+158	                pass
+159	            self._fd = None
+160	        self._break()
+161	
+162	    def _stale(self) -> bool:
+163	        try:
+164	            return (time.time() - self.path.stat().st_mtime) > LOCK_STALE_SECONDS
+165	        except OSError:
+166	            return False  # it vanished between the O_EXCL and here; just retry
+167	
+168	    def _break(self) -> None:
+169	        try:
+170	            self.path.unlink()
+171	        except OSError:
+172	            pass
+173	
+174	
+175	def _read(path: Path) -> Dict[str, Any]:
+176	    try:
+177	        with open(path, "r", encoding="utf-8") as handle:
+178	            data = json.load(handle)
+179	    except FileNotFoundError:
+180	        return {}
+181	    except Exception:
+182	        # A truncated or hand-edited ledger is not a reason to fail a startup.
+183	        return {}
+184	    return {k: v for k, v in data.items() if isinstance(v, dict)} if isinstance(data, dict) else {}
+185	
+186	
+187	def _write(path: Path, data: Dict[str, Any]) -> None:
+188	    path.parent.mkdir(parents=True, exist_ok=True)
+189	    temp = Path(f"{path}.{os.getpid()}.{threading.get_ident()}.tmp")
+190	    with open(temp, "w", encoding="utf-8") as handle:
+191	        json.dump(data, handle, indent=2, sort_keys=True)
+192	        handle.flush()
+193	        os.fsync(handle.fileno())
+194	    os.replace(temp, path)
+195	
+196	
+197	# ───────────────────────── picking ─────────────────────────
+198	
+199	
+200	def _bindable(port: int, host: str) -> bool:
+201	    """A real exclusive bind, not a probe.
+202	
+203	    A connect probe answers "is anyone listening", which is a different
+204	    question: a socket in TIME_WAIT, or one bound to `0.0.0.0` by another app,
+205	    refuses our bind while answering nothing. SO_REUSEADDR is *not* set — on
+206	    POSIX it would let us bind on top of a TIME_WAIT the OS is still holding,
+207	    and asking for SO_EXCLUSIVEADDRUSE on Windows is the whole point.
+208	    """
+209	    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+210	    try:
+211	        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+212	            try:
+213	                sock.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+214	            except OSError:
+215	                pass
+216	        sock.bind((host, port))
+217	        return True
+218	    except OSError:
+219	        return False
+220	    finally:
+221	        sock.close()
+222	
+223	
+224	def pick_port(preferred: int, span: int = SPAN, host: str = "127.0.0.1") -> int:
+225	    """The preferred port if it is free, else the next free one, else port 0.
+226	
+227	    Never evicts. Whatever holds the preferred port keeps it; we move.
+228	
+229	    There is an unavoidable gap between this bind and the server's — the socket
+230	    has to be closed for uvicorn (or Node, or Rust) to take it. In practice the
+231	    two are milliseconds apart in the same process; the alternative, handing the
+232	    listening socket to the server, is not something all three languages can do.
+233	    """
+234	    try:
+235	        preferred = int(preferred)
+236	    except (TypeError, ValueError):
+237	        preferred = 0
+238	    try:
+239	        span = max(0, int(span))
+240	    except (TypeError, ValueError):
+241	        span = SPAN
+242	
+243	    if 0 < preferred <= 65535:
+244	        for port in range(preferred, min(preferred + span, 65535) + 1):
+245	            if _bindable(port, host):
+246	                return port
+247	
+248	    # Everything in the window is taken: let the OS name one. An odd port beats
+249	    # a startup that gives up, and `publish()` tells everyone where it went.
+250	    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+251	    try:
+252	        sock.bind((host, 0))
+253	        return int(sock.getsockname()[1])
+254	    finally:
+255	        sock.close()
+256	
+257	
+258	# ───────────────────────── publishing ─────────────────────────
+259	
+260	
+261	def publish(
+262	    app: str,
+263	    port: int,
+264	    health: str,
+265	    extra: Optional[Dict[str, Any]] = None,
+266	    ledger: Optional[Any] = None,
+267	) -> None:
+268	    """Record where this app landed. Call it once the health route answers.
+269	
+270	    Publishing before the server is up is what turns a ledger into a liar: the
+271	    next app to look sees an entry, trusts the pid, and waits on a socket that
+272	    will never open.
+273	    """
+274	    path = _resolve(ledger)
+275	    record = {
+276	        "port": int(port),
+277	        "pid": os.getpid(),
+278	        "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+279	        "health": str(health),
+280	        "extra": dict(extra or {}),
+281	    }
+282	    with _FileLock(path):
+283	        data = _read(path)
+284	        data[str(app)] = record
+285	        _write(path, data)
+286	    _forget(str(app))
+287	
+288	
+289	def withdraw(app: str, ledger: Optional[Any] = None) -> None:
+290	    """Remove this app's entry, and only this app's entry."""
+291	    path = _resolve(ledger)
+292	    key = str(app)
+293	    with _FileLock(path):
+294	        data = _read(path)
+295	        if key in data:
+296	            del data[key]
+297	            _write(path, data)
+298	    _forget(key)
+299	
+300	
+… 215 more lines. Continue with read_file(path="backend/integrations/buzzcaf_ports.py", offset=301).

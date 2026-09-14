@@ -1,20 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { Bot, Send, Trash2, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Bot, ChevronDown, ChevronRight, Send, Trash2, X } from 'lucide-react';
 import { useStudio } from '../state/studio';
 import { getJson, postJson, describeError } from '../services/api';
 import { CHANNEL_META, strategistFor } from '../lib/channels';
-import type { ChatMessage, Topic } from '../lib/types';
+import Markdown from '../components/Markdown';
+import type { AgentInfo, ChatMessage, Invocation, Topic } from '../lib/types';
 
 // The Studio Assistant: one conversation per channel with that channel's
 // strategist persona. This is the landing tab (roadmap v5, 2.5) - before v5
 // the chat was the third sub-tab of the Topic Vault.
+//
+// Since v9 (A3) any registered persona can take the conversation, not just the
+// five strategists: the picker is fed by /api/agents and the choice is
+// remembered per channel.
 
 export const CHAT_TOPIC_KEY = 'buzzcaf_chat_topic';
+const CHAT_AGENT_KEY = 'buzzcaf_chat_agent';
 
 interface HistoryTurn {
   user: string;
   reply: string;
   timestamp?: string;
+  agent?: string;
 }
 
 interface ChatReply {
@@ -22,6 +29,41 @@ interface ChatReply {
   simulated?: boolean;
   status?: string;
   agent_name?: string;
+  invocations?: Invocation[];
+}
+
+// One delegation the strategist made, under the reply that made it (v9, B2).
+function InvocationCard({ item }: { item: Invocation }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ backgroundColor: '#12141d', border: '1px solid #1e2230', borderLeft: '3px solid #a78bfa', borderRadius: 8, padding: '10px 14px', marginTop: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+        <strong style={{ color: '#a78bfa', fontSize: '0.82rem' }}>Delegated to {item.agent}</strong>
+        {item.skipped && <span style={{ fontSize: '0.7rem', color: '#f59e0b', fontWeight: 700 }}>SKIPPED — over the per-reply limit</span>}
+        {item.simulated && !item.skipped && <span style={{ fontSize: '0.7rem', color: '#f59e0b', fontWeight: 700 }}>⚠ SIMULATED</span>}
+        {item.error && <span style={{ fontSize: '0.7rem', color: '#fca5a5', fontWeight: 700 }}>FAILED</span>}
+      </div>
+      <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: 4 }}>{item.task}</div>
+      {item.output && (
+        <>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.78rem', padding: '6px 0 0 0', display: 'flex', alignItems: 'center', gap: 4 }}
+          >
+            {open ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+            {open ? 'Hide what it said' : 'Show what it said'}
+          </button>
+          {open && (
+            <div style={{ marginTop: 8, borderTop: '1px solid #1e2230', paddingTop: 8 }}>
+              <Markdown text={item.output} />
+            </div>
+          )}
+        </>
+      )}
+      {item.error && <div style={{ fontSize: '0.78rem', color: '#fca5a5', marginTop: 6 }}>{item.error}</div>}
+    </div>
+  );
 }
 
 const SUGGESTIONS = [
@@ -47,6 +89,22 @@ function readPendingTopic(): Topic | null {
   }
 }
 
+function readChosenAgent(channel: string): string {
+  try {
+    return localStorage.getItem(`${CHAT_AGENT_KEY}:${channel}`) || '';
+  } catch {
+    return '';
+  }
+}
+
+function writeChosenAgent(channel: string, agent: string): void {
+  try {
+    localStorage.setItem(`${CHAT_AGENT_KEY}:${channel}`, agent);
+  } catch {
+    // Storage may be unavailable; the picker still works for this session.
+  }
+}
+
 export default function StudioChat() {
   const { brands, selectedChannel, setSelectedChannel, toast, confirm, health } = useStudio();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -54,10 +112,38 @@ export default function StudioChat() {
   const [sending, setSending] = useState(false);
   const [topic, setTopic] = useState<Topic | null>(null);
   const [loadedFor, setLoadedFor] = useState<string | null>(null);
+  const [personas, setPersonas] = useState<AgentInfo[]>([]);
+  const [chosenAgent, setChosenAgent] = useState<string>(() => readChosenAgent(selectedChannel));
   const feedRef = useRef<HTMLDivElement | null>(null);
 
-  const agent = strategistFor(selectedChannel);
+  const agent = chosenAgent || strategistFor(selectedChannel);
   const channelOptions = brands.length > 0 ? brands : CHANNEL_META.map((c) => c.id);
+
+  // The whole roster, so the creator can hand the conversation to any persona.
+  useEffect(() => {
+    getJson<{ agents?: AgentInfo[] }>('/api/agents')
+      .then((d) => setPersonas(d.agents || []))
+      .catch(() => setPersonas([]));
+  }, []);
+
+  const personaGroups = useMemo(() => {
+    const byDept = new Map<string, string[]>();
+    for (const p of personas) {
+      const dept = p.department || 'General';
+      byDept.set(dept, [...(byDept.get(dept) || []), p.name]);
+    }
+    return [...byDept.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  }, [personas]);
+
+  const pickAgent = (name: string) => {
+    setChosenAgent(name);
+    writeChosenAgent(selectedChannel, name);
+  };
+
+  // Each channel remembers its own persona; switching back restores it.
+  useEffect(() => {
+    setChosenAgent(readChosenAgent(selectedChannel));
+  }, [selectedChannel]);
 
   // A topic handed over from the vault ("Discuss this topic").
   useEffect(() => {
@@ -80,7 +166,7 @@ export default function StudioChat() {
         const restored: ChatMessage[] = [];
         for (const t of data.turns || []) {
           restored.push({ sender: 'user', text: t.user, timestamp: stamp(t.timestamp) });
-          restored.push({ sender: 'agent', text: t.reply, timestamp: stamp(t.timestamp) });
+          restored.push({ sender: 'agent', text: t.reply, timestamp: stamp(t.timestamp), agent: t.agent });
         }
         setMessages(restored);
       } catch {
@@ -121,6 +207,8 @@ export default function StudioChat() {
           timestamp: stamp(),
           simulated: !!data.simulated,
           error: data.status === 'error',
+          agent: data.agent_name || agent,
+          invocations: data.invocations || [],
         },
       ]);
     } catch (err) {
@@ -159,7 +247,7 @@ export default function StudioChat() {
           </div>
           <div>
             <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#ffffff' }}>{agent}</div>
-            <div style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 8, marginTop: 4, flexWrap: 'wrap' }}>
               <span>Channel</span>
               <select
                 className="form-control"
@@ -171,6 +259,35 @@ export default function StudioChat() {
                   <option key={b} value={b}>{b}</option>
                 ))}
               </select>
+              <span>Persona</span>
+              <select
+                className="form-control"
+                style={{ padding: '2px 8px', fontSize: '0.8rem', fontWeight: 700, color: '#a78bfa', backgroundColor: '#161923', borderColor: '#334155', width: 'auto', maxWidth: 260 }}
+                value={agent}
+                onChange={(e) => pickAgent(e.target.value)}
+                title="Any registered persona can take this conversation"
+              >
+                {personaGroups.length === 0 ? (
+                  <option value={agent}>{agent}</option>
+                ) : (
+                  personaGroups.map(([dept, names]) => (
+                    <optgroup key={dept} label={dept}>
+                      {names.map((n) => (
+                        <option key={n} value={n}>{n}</option>
+                      ))}
+                    </optgroup>
+                  ))
+                )}
+              </select>
+              {chosenAgent && chosenAgent !== strategistFor(selectedChannel) && (
+                <button
+                  type="button"
+                  onClick={() => pickAgent('')}
+                  style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.75rem', textDecoration: 'underline', padding: 0 }}
+                >
+                  back to the strategist
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -213,7 +330,7 @@ export default function StudioChat() {
             style={m.error ? { borderLeft: '3px solid #ef4444' } : m.simulated ? { borderLeft: '3px solid #f59e0b' } : undefined}
           >
             <div style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: 4, fontWeight: 600 }}>
-              {m.sender === 'user' ? 'You' : agent} • {m.timestamp}
+              {m.sender === 'user' ? 'You' : m.agent || agent} • {m.timestamp}
             </div>
             {m.simulated && !m.error && (
               <div style={{ fontSize: '0.7rem', color: '#f59e0b', marginBottom: 6, fontWeight: 600 }}>
@@ -221,6 +338,7 @@ export default function StudioChat() {
               </div>
             )}
             <div>{m.text}</div>
+            {(m.invocations || []).map((inv, j) => <InvocationCard key={`${i}-${j}`} item={inv} />)}
           </div>
         ))}
         {sending && (

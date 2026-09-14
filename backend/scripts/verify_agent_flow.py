@@ -38,7 +38,7 @@ def main():
         "ProductionManager",
         "PublishingManager",
         "CEO",
-        "SEOSpecialist"
+        "SEOManagerAgent"
     ]
 
     for name in test_agents:
@@ -69,7 +69,7 @@ def main():
         assert len(res_str) > 50, f"Execution returned empty or tiny output for {agent_name}"
 
     print("\n" + "=" * 60)
-    print("VERIFICATION SUCCESSFUL: All 115 Agents Load Cleanly & Execution Flow Works!")
+    print(f"VERIFICATION SUCCESSFUL: All {len(agents)} Agents Load Cleanly & Execution Flow Works!")
     print("=" * 60)
 
 if __name__ == "__main__":

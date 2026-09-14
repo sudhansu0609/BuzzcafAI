@@ -8,7 +8,7 @@ class WritingDepartment(Department):
     def __init__(self, llm_service: Optional[LLMService] = None):
         super().__init__(
             name="Writing",
-            manager_role="Editor",
+            manager_role="EditorAgent",
             specialist_roles=[
                 "StoryPlanner",
                 "OutlineWriter",
@@ -16,7 +16,10 @@ class WritingDepartment(Department):
                 "DialogueWriter",
                 "HorrorSpecialist",
                 "MythologySpecialist",
-                "Reviewer"
+                "Reviewer",
+                "WriterAgent",
+                "HorrorWriter",
+                "NarrationOptimizer"
             ],
             llm_service=llm_service
         )

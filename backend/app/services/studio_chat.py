@@ -21,8 +21,9 @@ import json
 import logging
 import os
 import re
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
+from app.services.events import bus
 from core.agent import AgentFactory
 from core.paths import PROMPTS_DIR
 
@@ -32,9 +33,14 @@ HISTORY_TURNS = 8          # user+assistant messages kept from the client histor
 MEMORY_LIMIT = 6           # relevant past exchanges injected into the system prompt
 GUIDE_CHARS = 1800         # how much of the brand guide rides along
 MEMORY_REPLY_CHARS = 600   # per remembered reply, in the prompt
+MAX_INVOCATIONS = 3        # delegations honoured per reply; the rest are logged as skipped
 
 _STRATEGISTS = {
+    # Brand names first (Originals / Raat3Baje), legacy spellings kept so old
+    # localStorage values and saved topics still resolve to the same agent.
+    "raat3baje": "AfterDarkStrategist",
     "after dark": "AfterDarkStrategist",
+    "originals": "SpilledCoffeeStudioStrategist",
     "studio": "SpilledCoffeeStudioStrategist",
     "life": "Life3BajeStrategist",
     "khayal": "Khayal3BajeStrategist",
@@ -136,30 +142,79 @@ def build_messages(history: Optional[List[Dict[str, str]]], message: str) -> Lis
     return turns
 
 
-def process_agent_invocations(reply_text: str) -> str:
-    """Run `[INVOKE_AGENT: X] task [/INVOKE_AGENT]` blocks and splice the results in."""
+def strip_invocations(text: str) -> str:
+    """The text with every `[INVOKE_AGENT: ...]` block removed."""
+    return _INVOKE_RE.sub("", text).strip()
+
+
+def process_agent_invocations(
+    reply_text: str,
+    llm_service: Optional[Any] = None,
+    caller: str = "the strategist",
+) -> Tuple[str, List[Dict[str, Any]]]:
+    """Run `[INVOKE_AGENT: X] task [/INVOKE_AGENT]` blocks and report what ran.
+
+    Returns the reply with each tag replaced by the delegated output, plus one
+    record per tag so the UI and the event bus can show who did what (roadmap
+    v9, B1). At most `MAX_INVOCATIONS` run per reply and the delegated output is
+    never scanned again, so a model cannot spend the studio in a loop.
+    """
     matches = list(_INVOKE_RE.finditer(reply_text))
     if not matches:
-        return reply_text
+        return reply_text, []
+
     final_text = reply_text
-    for match in matches:
+    records: List[Dict[str, Any]] = []
+    for index, match in enumerate(matches):
         full_tag = match.group(0)
         target = match.group(1).strip()
         task = match.group(2).strip()
-        logger.info("Strategist delegated to %s", target)
-        try:
-            agent = AgentFactory.get_agent(target)
-            output = agent.execute(
-                f"You have been invoked by a Lead Channel Strategist to perform the following task:\n\n{task}"
+
+        if index >= MAX_INVOCATIONS:
+            logger.warning(
+                "Skipping delegation to %s: %s already delegated %d times in one reply",
+                target, caller, MAX_INVOCATIONS,
             )
+            records.append({"agent": target, "task": task, "output": "", "simulated": False, "skipped": True})
+            final_text = final_text.replace(
+                full_tag,
+                f"\n*`{target}` was not run: at most {MAX_INVOCATIONS} delegations per reply.*\n",
+            )
+            continue
+
+        logger.info("%s delegated to %s", caller, target)
+        simulated = False
+        try:
+            agent = AgentFactory.get_agent(target, llm_service)
+            output = str(agent.execute(
+                f"You have been invoked by {caller} to perform the following task:\n\n{task}"
+            ))
+            simulated = bool(getattr(agent.llm_service, "last_response_simulated", False))
+            # Depth 1: whatever the specialist emitted is text, not a new order.
+            output = strip_invocations(output)
             replacement = (
                 f"\n\n---\n🤖 **[Delegated to `{target}`]**\n> *Task*: {task}\n\n{output}\n---\n\n"
             )
+            records.append({"agent": target, "task": task, "output": output, "simulated": simulated})
         except Exception as exc:
             logger.error("Delegated agent %s failed: %s", target, exc)
             replacement = f"\n*⚠️ `{target}` could not complete the delegated task: {exc}*\n"
+            records.append({"agent": target, "task": task, "output": "", "simulated": False, "error": str(exc)})
         final_text = final_text.replace(full_tag, replacement)
-    return final_text
+
+    for record in records:
+        if record.get("skipped"):
+            continue
+        try:
+            bus.publish("agent_invoked", {
+                "agent": record["agent"],
+                "task_preview": record["task"][:200],
+                "simulated": record["simulated"],
+            })
+        except Exception as exc:  # the bus must never take a chat turn down
+            logger.warning("could not publish agent_invoked: %s", exc)
+
+    return final_text, records
 
 
 def run_chat(
@@ -186,7 +241,9 @@ def run_chat(
 
     reply_text = str(agent.execute_messages(messages, system_extra=system_extra))
     simulated = bool(getattr(agent.llm_service, "last_response_simulated", False))
-    reply_text = process_agent_invocations(reply_text)
+    reply_text, invocations = process_agent_invocations(
+        reply_text, llm_service=agent.llm_service, caller=agent_name
+    )
 
     try:
         from memory.memory import memory_system
@@ -194,6 +251,17 @@ def run_chat(
         record = {"user": message, "reply": reply_text, "agent": agent_name, "channel": channel}
         memory_system.save(scope="agent", owner=agent_name, tags=["chat", channel], content=record)
         memory_system.save(scope="session", owner=channel, tags=["chat", agent_name], content=record)
+        # Delegated work is stored against the specialist that did it, tagged so
+        # it can be told apart from what the creator asked directly.
+        for item in invocations:
+            if item.get("skipped"):
+                continue
+            memory_system.save(
+                scope="agent",
+                owner=item["agent"],
+                tags=["delegated", agent_name, channel],
+                content={"user": item["task"], "reply": item["output"], "agent": item["agent"], "channel": channel},
+            )
     except Exception as exc:
         logger.error("could not store the exchange: %s", exc)
 
@@ -203,4 +271,5 @@ def run_chat(
         "agent_name": agent_name,
         "channel": channel,
         "reply": reply_text,
+        "invocations": invocations,
     }

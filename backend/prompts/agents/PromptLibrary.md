@@ -1,6 +1,6 @@
 ---
 name: "PromptLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Version all prompts and templates."
 inputs: ["prompt_update"]
 outputs: ["prompt_version_record"]

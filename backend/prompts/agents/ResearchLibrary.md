@@ -1,6 +1,6 @@
 ---
 name: "ResearchLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Maintain reusable research dossiers."
 inputs: ["dossier_data"]
 outputs: ["archived_dossier"]

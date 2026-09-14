@@ -44,7 +44,7 @@ Establishes the structural narrative foundation for video scripts, ensuring stro
 - `narrative_blueprint`: Complete story arc blueprint object.
 
 ## 9. Dependencies
-- Parent Agent: `WriterAgent` / `Editor`
+- Parent Agent: `WriterAgent` / `EditorAgent`
 - Upstream Prerequisite: `ResearchManager`
 
 ## 10. Tools & Integrations

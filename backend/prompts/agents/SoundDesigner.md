@@ -1,6 +1,6 @@
 ---
 name: "SoundDesigner"
-department: "Production Department"
+department: "Production"
 role: "Plan ambience, music and SFX."
 inputs: ["scenes_list"]
 outputs: ["audio_plan"]

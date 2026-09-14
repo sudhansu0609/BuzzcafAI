@@ -1,8 +1,15 @@
 # Agents
 
-115 agent personas across 19 departments, each defined as one Markdown file in
+105 agent personas across 13 departments, each defined as one Markdown file in
 `backend/prompts/agents/`. They are data, not code — adding an agent means
 adding a file. This is the project's strongest asset; keep it that way.
+
+> v9 merged ten duplicate personas (`Editor` into `EditorAgent`, `SEOSpecialist`
+> into `SEOManagerAgent`, `PublishingScheduleManager`/`SchedulerAgent` into
+> `ScheduleManager`, and the `*Analyzer` twins into their `*Analyst` originals)
+> and folded the `"X Department"` namespaces into `"X"`, so the departments in
+> the frontmatter now match the classes in `backend/app/departments/`
+> one-for-one. 115 → 105, 19 → 13.
 
 ---
 
@@ -15,7 +22,7 @@ by agent name.
 ```markdown
 ---
 name: "ResearchAgent"
-department: "Research Department"
+department: "Research"
 role: "Gathers background information, verifies historical facts and timelines,
        and lists reference sources."
 inputs: ["project_idea_summary"]
@@ -23,6 +30,8 @@ outputs: ["research_package"]
 dependencies: []
 permissions: ["read_knowledge", "write_project_assets"]
 version: "1.0.0"
+model_tier: "strong"
+temperature: 0.7
 ---
 
 # Agent Prompt: Research Department (ResearchAgent)
@@ -43,14 +52,38 @@ model. Everything in the frontmatter is metadata used by the registry.
 | Field | Required | Meaning |
 |---|---|---|
 | `name` | **yes** | Registry key and prompt filename. Without it the file is skipped entirely |
-| `department` | no | Grouping label, defaults to `"General"` |
+| `department` | no | Grouping label, defaults to `"General"`. Should be one of the 13 department names |
 | `role` | no | One-line description shown in the UI |
 | `inputs` / `outputs` | no | Asset types consumed and produced |
 | `dependencies` | no | Other agent names; validated after all agents load |
 | `permissions` | no | Declarative labels — **not enforced by any code** |
 | `version` | no | Defaults to `"1.0.0"` |
+| `model_tier` | no | `fast` or `strong`; anything else becomes `strong` (the default) |
+| `temperature` | no | 0–2, defaults to `0.7`; reaches the provider payload |
 
 List fields accept a real YAML list or a bracketed string; both are normalised.
+
+### Model tiers (v9)
+
+`model_tier` decides which provider is tried **first** for that persona.
+Settings map each tier to a provider and an optional model override
+(`tiers: {fast: {provider, model}, strong: {provider, model}}`, default
+`fast → llamacpp` on `http://127.0.0.1:8089/v1`). If the tier's provider is
+down, the normal fallback order (selected provider, then Gemini → OpenAI →
+LM Studio → llama.cpp) still applies, so a tier can never strand a call.
+
+`fast` is currently declared by `TagGenerator`, `TitleGenerator`,
+`DescriptionWriter`, `MetadataOptimizer`, `PublishingChecklist`,
+`TaxonomyManager` and `CitationArchivist`. Everything else runs `strong`.
+
+### Departments (v9)
+
+`backend/app/departments/*.py` holds one class per department; together they
+cover every registered persona exactly once (a test asserts the union equals the
+registry). `GET /api/departments` lists them, and
+`POST /api/departments/{name}/execute {task, role?}` runs the task on the
+manager — or on a named specialist. A workflow step may put a department name in
+`agent_role`; the engine resolves it to that department's manager.
 
 ## How loading works
 
@@ -69,8 +102,9 @@ List fields accept a real YAML list or a bracketed string; both are normalised.
 > `System prompt file for agent X not found` before looking anywhere else.
 
 Strategist and lead roles (`CEO`, `COO`, `CreativeDirectorAgent`, or any name
-containing "strategist") additionally get the full 115-agent directory appended
-so they can delegate.
+containing "strategist") additionally get the full agent directory appended so
+they can delegate. The counts in that roster come from the registry, so they
+cannot go stale when a persona is added or merged.
 
 ## Adding an agent
 
@@ -102,9 +136,23 @@ Verify the 1923 timeline claims in the draft above.
 [/INVOKE_AGENT]
 ```
 
-`_process_agent_invocations()` in `app/main.py` resolves those blocks, runs the
-named agent, and splices the result back into the transcript — so delegation is
-visible in the output and easy to trace.
+`process_agent_invocations()` in `app/services/studio_chat.py` resolves those
+blocks, runs the named agent on the caller's own `LLMService`, and splices the
+result back into the transcript. Since v9 it also returns a record per block —
+`{agent, task, output, simulated}` — which:
+
+- comes back on the chat response as `invocations`, one card per delegation in
+  the Studio Assistant;
+- publishes an `agent_invoked {agent, task_preview, simulated}` frame on
+  `GET /api/studio/events`, so Dexter sees it;
+- is stored in the specialist's own memory tagged `delegated`.
+
+Limits: **three** delegations per reply (the rest are recorded `skipped: true`
+and never run), and **depth 1** — tags inside a delegated output are stripped,
+not executed. Workflow steps run the same pass on their output and append each
+result under a `## Delegated: <Agent>` heading in the step's asset, recorded in
+`StepExecution.delegations`. JSON assets are exempt, since a heading would break
+the parse.
 
 ## Runtime-created agents
 

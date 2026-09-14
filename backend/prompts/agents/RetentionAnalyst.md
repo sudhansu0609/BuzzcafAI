@@ -44,7 +44,7 @@ Maximizes video average view duration (AVD) and percentage viewed by analyzing v
 
 ## 9. Dependencies
 - Upstream Prerequisite: `AnalyticsManager`
-- Downstream Consumer: `StoryPlanner` / `Editor` / `ScenePlanner`
+- Downstream Consumer: `StoryPlanner` / `EditorAgent` / `ScenePlanner`
 
 ## 10. Tools & Integrations
 - `LLMService` and YouTube Retention API telemetry.

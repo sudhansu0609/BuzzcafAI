@@ -137,7 +137,7 @@ Which concept would you like to develop or outline into a script?"""
     # After Dark Strategist
     elif "afterdark" in agent_name.lower() or "after dark" in agent_name.lower():
         if is_greeting:
-            return """Hello! I am your **Spilled Coffee After Dark Strategist**. I specialize in parapsychological folklore, 3 AM high-strangeness encounters, and regional horror archives.
+            return """Hello! I am your **Raat3Baje Strategist**. I specialize in parapsychological folklore, 3 AM high-strangeness encounters, and regional horror archives.
 
 Here is how I can assist you:
 - **Horror Topic Vault**: Discover regional 3 AM legends, haunted locations, and unexplained events.
@@ -154,7 +154,7 @@ Which terrifying topic or regional mystery shall we tackle today?"""
             ("The Mass Disappearance of Kuldhara Village", "1825 Paliwal Brahmin migration leaving 84 villages deserted overnight.", "True Mysteries")
         ]
         topic_lines = "\n".join([f"{idx+1}. **{t[0]}**: {t[1]} *(Pillar: {t[2]})*" for idx, t in enumerate(topics_db)])
-        return f"""Here are top horror & unexplained concepts for **Spilled Coffee After Dark**:
+        return f"""Here are top horror & unexplained concepts for **Raat3Baje**:
 
 {topic_lines}
 
@@ -212,10 +212,10 @@ Which essay concept or creative journey topic shall we outline?"""
 
 Which essay concept fits your creative direction best?"""
 
-    # Spilled Coffee Studio Strategist
+    # Originals Strategist
     else:
         if is_greeting:
-            return """Hello! I am your **Spilled Coffee Studio Strategist**. I am your primary partner for story architecture, classic literature breakdowns, and original creator fiction.
+            return """Hello! I am your **Originals Strategist**. I am your primary partner for story architecture, classic literature breakdowns, and original creator fiction.
 
 Here is how I can help you:
 - **Story Architecture**: Analyze storytelling rules from Ghibli, Pixar, Nolan, Kafka, and Murakami.
@@ -232,7 +232,7 @@ What literary breakdown or original story idea shall we refine today?"""
             ("How Haruki Murakami Blurs Reality & Dreams", "Magical realism techniques in modern literature.", "Literature Breakdown")
         ]
         topic_lines = "\n".join([f"{idx+1}. **{t[0]}**: {t[1]} *(Pillar: {t[2]})*" for idx, t in enumerate(topics_db)])
-        return f"""Here are story architecture & literary breakdown concepts for **Spilled Coffee Studio**:
+        return f"""Here are story architecture & literary breakdown concepts for **Originals**:
 
 {topic_lines}
 

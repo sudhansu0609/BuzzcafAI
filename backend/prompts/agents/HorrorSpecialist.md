@@ -45,7 +45,7 @@ Injects specialized horror tropes, eerie ambient descriptions, and chilling psyc
 
 ## 9. Dependencies
 - Upstream Prerequisite: `ScriptWriter`
-- Downstream Consumer: `Editor`
+- Downstream Consumer: `EditorAgent`
 
 ## 10. Tools & Integrations
 - `LLMService` and horror trope knowledge store.
@@ -79,7 +79,7 @@ Injects specialized horror tropes, eerie ambient descriptions, and chilling psyc
 - Retain original script structure if horror embellishments compromise story clarity.
 
 ## 19. Escalation Rules
-- Escalate non-horror script inputs back to `Editor`.
+- Escalate non-horror script inputs back to `EditorAgent`.
 
 ## 20. Communication Rules
 - Highlight modified horror scenes in revision logs.

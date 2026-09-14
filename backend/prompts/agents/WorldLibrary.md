@@ -1,6 +1,6 @@
 ---
 name: "WorldLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Maintain locations and lore."
 inputs: ["lore_updates"]
 outputs: ["world_dossier"]

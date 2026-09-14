@@ -17,6 +17,11 @@ class AgentDefinition(BaseModel):
     dependencies: List[str] = Field(default_factory=list)
     permissions: List[str] = Field(default_factory=list)
     version: str = "1.0.0"
+    # Which model tier this persona's work belongs on, and how loose the model
+    # should be when it answers (roadmap v9, F1/F2). Both come from the
+    # frontmatter; both have working defaults so no persona file must be edited.
+    model_tier: str = "strong"
+    temperature: float = 0.7
     prompt_filepath: Optional[str] = None
 
 class AgentRegistry:
@@ -56,6 +61,16 @@ class AgentRegistry:
                                 return [item.strip() for item in cleaned.split(",") if item.strip()]
                             return []
 
+                        def clean_tier(val):
+                            tier = str(val or "strong").strip().lower()
+                            return tier if tier in ("fast", "strong") else "strong"
+
+                        def clean_temperature(val):
+                            try:
+                                return max(0.0, min(2.0, float(val)))
+                            except (TypeError, ValueError):
+                                return 0.7
+
                         agent = AgentDefinition(
                             name=fm["name"],
                             department=fm.get("department", "General"),
@@ -65,6 +80,8 @@ class AgentRegistry:
                             dependencies=clean_list(fm.get("dependencies")),
                             permissions=clean_list(fm.get("permissions")),
                             version=fm.get("version", "1.0.0"),
+                            model_tier=clean_tier(fm.get("model_tier")),
+                            temperature=clean_temperature(fm.get("temperature", 0.7)),
                             prompt_filepath=f_path
                         )
                         self.validate(agent, check_dependencies=False)

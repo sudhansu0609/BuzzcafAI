@@ -4,6 +4,7 @@ Runs against the test sandbox from conftest.py, so projects created here are
 throwaway.
 """
 
+import json
 import shutil
 
 import pytest
@@ -28,11 +29,11 @@ def recorded_events(monkeypatch):
 
 @pytest.fixture
 def fake_llm(monkeypatch):
-    def fake_text(self, system_prompt, user_prompt, require_json=False):
+    def fake_text(self, system_prompt, user_prompt, require_json=False, **kwargs):
         self.last_response_simulated = False
         return "# Research package\n\nFindings for the step."
 
-    def fake_chat(self, system_prompt, messages, require_json=False):
+    def fake_chat(self, system_prompt, messages, require_json=False, **kwargs):
         self.last_response_simulated = False
         return "Strategist reply."
 
@@ -92,6 +93,9 @@ def test_create_publishes_and_approve_advances_a_paused_step(client, recorded_ev
         assert approved["steps_history"][-1]["status"] == "completed"
         assert approved["current_step"] != last["step_name"]
         assert any(kind == "step_completed" for kind, _ in recorded_events)
+        # v9 C3: the UI's Approve button posts here, so approve must announce
+        # itself on the bus exactly like execute does - one frame per run.
+        assert sum(1 for kind, _ in recorded_events if kind == "step_started") == 2
     finally:
         _cleanup(project_id)
 
@@ -109,13 +113,48 @@ def test_studio_chat_uses_the_channel_strategist(client, fake_llm):
 
 
 def test_studio_chat_failure_is_502(client, monkeypatch):
-    def boom(self, system_prompt, messages, require_json=False):
+    def boom(self, system_prompt, messages, require_json=False, **kwargs):
         raise RuntimeError("no model")
 
     monkeypatch.setattr(LLMService, "generate_chat", boom)
     res = client.post("/api/studio/chat", json={"message": "hi", "channel": "Beyond3Baje"})
     assert res.status_code == 502
     assert res.json()["status"] == "error"
+
+
+def test_discover_returns_model_topics_when_a_provider_answers(client, monkeypatch):
+    """v9 D2: the strategist writes the ideas; the seed list is only a fallback."""
+    dossier = json.dumps({"topics": [
+        {"topic": "Sundarban Ka Wo Jahaz Jo Kabhi Laut Ke Nahi Aaya", "category": "Maritime mystery"},
+        {"topic": "Kolkata Ki Wo Suranga Jise Sabne Bhula Diya", "category": "Dark history"},
+    ]})
+
+    def fake_text(self, system_prompt, user_prompt, require_json=False, **kwargs):
+        self.last_response_simulated = False
+        assert require_json is True
+        return dossier
+
+    monkeypatch.setattr(LLMService, "generate_text", fake_text)
+    body = client.post("/api/topics/discover", json={"channel": "Beyond3Baje"}).json()
+    assert body["source"] == "model"
+    assert body["agent_assigned"] == "Beyond3BajeStrategist"
+    assert [t["topic"] for t in body["topics"]] == [
+        "Sundarban Ka Wo Jahaz Jo Kabhi Laut Ke Nahi Aaya",
+        "Kolkata Ki Wo Suranga Jise Sabne Bhula Diya",
+    ]
+    assert all(t["channel"] == "Beyond3Baje" for t in body["topics"])
+
+
+def test_discover_falls_back_to_the_labelled_seed_list(client, monkeypatch):
+    """No provider answered: seed topics, tagged as seed topics."""
+    def simulated(self, system_prompt, user_prompt, require_json=False, **kwargs):
+        self.last_response_simulated = True
+        return "Sorry, no model is available."
+
+    monkeypatch.setattr(LLMService, "generate_text", simulated)
+    body = client.post("/api/topics/discover", json={"channel": "Beyond3Baje"}).json()
+    assert body["source"] == "curated_seed"
+    assert body["topics"]
 
 
 def test_event_frames_are_well_formed():

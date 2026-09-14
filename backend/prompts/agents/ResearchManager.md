@@ -25,7 +25,7 @@ Acts as the central manager for all information collection, ensuring depth, accu
 
 ## 4. Responsibilities
 - Deconstruct project research topics into specific research sub-tasks.
-- Delegate tasks to `WebResearcher`, `AcademicResearcher`, `FactChecker`, and `TrendResearcher`.
+- Delegate tasks to `WebResearcher`, `AcademicResearcher`, `FactChecker`, and `TrendAnalyst`.
 - Synthesize individual findings into a cohesive, structured `master_research_brief`.
 - Enforce department quality standards and citation completeness.
 
@@ -47,7 +47,7 @@ Acts as the central manager for all information collection, ensuring depth, accu
 
 ## 9. Dependencies
 - Parent Agent: `CEO`
-- Child Agents: `WebResearcher`, `AcademicResearcher`, `FactChecker`, `CitationManager`, `SourceValidator`, `TrendResearcher`, `ArchiveResearcher`
+- Child Agents: `WebResearcher`, `AcademicResearcher`, `FactChecker`, `CitationManager`, `SourceValidator`, `TrendAnalyst`, `ArchiveResearcher`
 
 ## 10. Tools & Integrations
 - `LLMService` router and `KnowledgeEngine` vector store.

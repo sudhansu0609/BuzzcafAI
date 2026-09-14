@@ -26,6 +26,9 @@ EVENT_TYPES = (
     "approval_needed",
     "step_failed",
     "buzzbrain_snapshot",
+    # v9: one agent handing work to another, and a department answering.
+    "agent_invoked",
+    "department_task",
 )
 
 

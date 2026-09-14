@@ -11,7 +11,6 @@ class ProjectManagementDepartment(Department):
             manager_role="ProjectManagerAgent",
             specialist_roles=[
                 "WorkflowManager",
-                "ScheduleManager",
                 "ResourcePlanner",
                 "RiskManager",
                 "DeliveryManager"

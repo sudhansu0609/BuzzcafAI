@@ -15,8 +15,16 @@ class ResearchDepartment(Department):
                 "FactChecker",
                 "CitationManager",
                 "SourceValidator",
-                "TrendResearcher",
-                "ArchiveResearcher"
+                "ArchiveResearcher",
+                "ResearchAgent",
+                "DocumentaryResearcher",
+                "HorrorResearcher",
+                "TopicVaultManager",
+                "Beyond3BajeStrategist",
+                "AfterDarkStrategist",
+                "SpilledCoffeeStudioStrategist",
+                "Life3BajeStrategist",
+                "Khayal3BajeStrategist"
             ],
             llm_service=llm_service
         )

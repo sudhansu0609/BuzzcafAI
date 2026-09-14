@@ -45,7 +45,7 @@ Transforms structural outlines into polished, captivating voiceover scripts read
 
 ## 9. Dependencies
 - Upstream Prerequisite: `OutlineWriter`
-- Downstream Consumer: `Editor` / `HorrorSpecialist` / `MythologySpecialist`
+- Downstream Consumer: `EditorAgent` / `HorrorSpecialist` / `MythologySpecialist`
 
 ## 10. Tools & Integrations
 - `LLMService` and brand vocabulary dictionaries.

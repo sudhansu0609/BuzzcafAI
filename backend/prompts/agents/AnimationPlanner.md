@@ -1,6 +1,6 @@
 ---
 name: "AnimationPlanner"
-department: "Production Department"
+department: "Production"
 role: "Plan animation complexity, rigs and timing."
 inputs: ["script_final"]
 outputs: ["animation_plan"]

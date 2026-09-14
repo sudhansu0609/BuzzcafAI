@@ -80,7 +80,7 @@ class FakeLLM:
         self.last_response_simulated = simulated
         self.seen = []
 
-    def generate_chat(self, system_prompt, messages, require_json=False):
+    def generate_chat(self, system_prompt, messages, require_json=False, **kwargs):
         self.seen.append((system_prompt, messages))
         return self.reply
 

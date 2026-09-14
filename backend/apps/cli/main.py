@@ -16,7 +16,7 @@ def main():
     
     # 1. start-server command
     start_parser = subparsers.add_parser("start-server", help="Launch the FastAPI web studio server")
-    start_parser.add_argument("--port", type=int, default=8000, help="Port to run the server on")
+    start_parser.add_argument("--port", type=int, default=8099, help="Port to run the server on")
     start_parser.add_argument("--host", type=str, default="localhost", help="Host address")
 
     
@@ -57,7 +57,7 @@ def main():
 
     
     if not args.command or args.command == "start-server":
-        port = getattr(args, "port", 8000)
+        port = getattr(args, "port", 8099)
         host = getattr(args, "host", "localhost")
         print(f"Launching Spilled Coffee AI Studio at http://{host}:{port} ...")
         uvicorn.run("app.main:app", host=host, port=port, reload=False)

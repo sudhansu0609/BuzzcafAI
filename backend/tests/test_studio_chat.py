@@ -27,7 +27,7 @@ class Capture:
         self.simulated = simulated
         self.calls: List[Dict[str, Any]] = []
 
-    def __call__(self, service, system_prompt, messages, require_json=False):
+    def __call__(self, service, system_prompt, messages, require_json=False, **kwargs):
         service.last_response_simulated = self.simulated
         self.calls.append({"system": system_prompt, "messages": messages})
         return self.reply
@@ -36,7 +36,7 @@ class Capture:
 def bind(cap: Capture):
     """A plain function so monkeypatch installs it as a real method (self is passed)."""
 
-    def fake(self, system_prompt, messages, require_json=False):
+    def fake(self, system_prompt, messages, require_json=False, **kwargs):
         return cap(self, system_prompt, messages, require_json)
 
     return fake
@@ -127,7 +127,7 @@ def test_full_exchange_is_stored(capture):
 
 
 def test_provider_failure_is_a_502(monkeypatch):
-    def boom(service, system_prompt, messages, require_json=False):
+    def boom(service, system_prompt, messages, require_json=False, **kwargs):
         raise RuntimeError("model server down")
 
     monkeypatch.setattr(LLMService, "generate_chat", boom)
@@ -146,13 +146,78 @@ def test_route_returns_the_reply_shape(capture):
     client = TestClient(app)
     res = client.post(
         "/api/topics/agent_chat",
-        json={"agent_name": "", "channel": "Spilled Coffee After Dark", "message": "give me a hook"},
+        json={"agent_name": "", "channel": "Raat3Baje", "message": "give me a hook"},
     )
     assert res.status_code == 200
     body = res.json()
     assert body["agent_name"] == "AfterDarkStrategist"
     assert body["reply"] == "Here is my take."
     assert body["simulated"] is False
+
+
+def _tag(agent: str, task: str) -> str:
+    return f"[INVOKE_AGENT: {agent}]{task}[/INVOKE_AGENT]"
+
+
+@pytest.fixture
+def delegation(monkeypatch):
+    """A strategist reply full of tags, a stub specialist, and a recording bus."""
+    from app.services import events
+
+    seen: List[Dict[str, Any]] = []
+    monkeypatch.setattr(
+        events.bus, "publish",
+        lambda event_type, payload=None: seen.append((event_type, payload)),
+    )
+
+    def fake_text(self, system_prompt, user_prompt, require_json=False, **kwargs):
+        self.last_response_simulated = False
+        return "Specialist findings."
+
+    monkeypatch.setattr(LLMService, "generate_text", fake_text)
+    return seen
+
+
+def test_two_invocations_produce_two_records_and_two_frames(monkeypatch, delegation):
+    reply = "Here is the plan.\n" + _tag("FactChecker", "Verify the 1923 dates.") + _tag("TitleGenerator", "Three titles.")
+    monkeypatch.setattr(LLMService, "generate_chat", bind(Capture(reply=reply)))
+
+    result = studio_chat.run_chat("plan the video", "Beyond3Baje")
+    records = result["invocations"]
+    assert [r["agent"] for r in records] == ["FactChecker", "TitleGenerator"]
+    assert all(r["output"] == "Specialist findings." for r in records)
+    assert all(r["simulated"] is False for r in records)
+    assert "[INVOKE_AGENT" not in result["reply"]
+    assert result["reply"].count("Delegated to") == 2
+
+    frames = [payload for kind, payload in delegation if kind == "agent_invoked"]
+    assert [f["agent"] for f in frames] == ["FactChecker", "TitleGenerator"]
+    assert frames[0]["task_preview"] == "Verify the 1923 dates."
+
+    from memory.memory import memory_system
+    stored = memory_system.retrieve(scope="agent", owner="FactChecker", limit=1)
+    assert stored and "delegated" in stored[0].tags
+    for owner in ("FactChecker", "TitleGenerator", "Beyond3BajeStrategist"):
+        memory_system.clear(scope="agent", owner=owner)
+    memory_system.clear(scope="session", owner="Beyond3Baje")
+
+
+def test_a_fourth_invocation_is_skipped_not_run(monkeypatch, delegation):
+    reply = "".join(_tag(name, f"do {name}") for name in ["FactChecker", "TitleGenerator", "TagGenerator", "Librarian"])
+    monkeypatch.setattr(LLMService, "generate_chat", bind(Capture(reply=reply)))
+
+    result = studio_chat.run_chat("delegate everything", "Beyond3Baje")
+    records = result["invocations"]
+    assert len(records) == 4
+    assert sum(1 for r in records if r.get("skipped")) == 1
+    assert records[-1]["agent"] == "Librarian" and records[-1]["skipped"] is True
+    assert "Librarian` was not run" in result["reply"]
+    assert len([p for kind, p in delegation if kind == "agent_invoked"]) == studio_chat.MAX_INVOCATIONS
+
+    from memory.memory import memory_system
+    for owner in ("FactChecker", "TitleGenerator", "TagGenerator", "Librarian", "Beyond3BajeStrategist"):
+        memory_system.clear(scope="agent", owner=owner)
+    memory_system.clear(scope="session", owner="Beyond3Baje")
 
 
 def test_query_aware_memory_retrieval_falls_back_to_recency():

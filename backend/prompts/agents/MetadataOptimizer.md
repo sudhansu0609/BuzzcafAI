@@ -7,6 +7,7 @@ outputs: ["metadata_package"]
 dependencies: ["SEOManagerAgent"]
 permissions: ["read_write_projects"]
 version: "1.0.0"
+model_tier: "fast"
 ---
 
 # Agent Specification: MetadataOptimizer

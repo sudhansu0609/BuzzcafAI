@@ -1,6 +1,6 @@
 ---
 name: "HorrorResearcher"
-department: "Research Department"
+department: "Research"
 role: "Collect folklore, urban legends, paranormal reports and regional stories."
 inputs: ["scary_topic"]
 outputs: ["legends_package"]

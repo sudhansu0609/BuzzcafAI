@@ -22,11 +22,13 @@ from app.api.agents_api import router as agents_router
 from app.api.studio_api import router as studio_router
 from app.api.buzzbrain_api import router as buzzbrain_router
 from app.api.video_intel_api import router as video_intel_router
+from app.api.departments_api import router as departments_router
 from app.services.events import bus as event_bus
 app.include_router(agents_router)
 app.include_router(studio_router)
 app.include_router(buzzbrain_router)
 app.include_router(video_intel_router)
+app.include_router(departments_router)
 
 
 @app.on_event("startup")
@@ -35,6 +37,41 @@ async def _bind_event_bus():
     import asyncio
 
     event_bus.bind_loop(asyncio.get_running_loop())
+
+
+#: Set by `serve_headless()` when this process published its own ledger entry.
+#: The desktop launcher owns the entry in the packaged app, and one process must
+#: never withdraw another's.
+_owns_ledger_entry = False
+
+
+def _withdraw_ledger_entry() -> None:
+    """Take `buzzcaf` back out of the shared port ledger, at most once."""
+    global _owns_ledger_entry
+    if not _owns_ledger_entry:
+        return
+    _owns_ledger_entry = False
+    try:
+        from integrations import buzzcaf_ports
+
+        buzzcaf_ports.withdraw(APP_ID)
+    except Exception as exc:  # a stale entry is bad; a crash on the way out is worse
+        print(f"[buzzcaf] could not withdraw from the port ledger: {exc}", flush=True)
+
+
+@app.on_event("shutdown")
+async def _leave_the_port_ledger():
+    """Withdraw here, not only in the `finally` around `uvicorn.run`.
+
+    On Windows a console control event - Ctrl+Break, closing the console window,
+    the machine shutting down - ends the process from the CRT's default handler
+    as soon as uvicorn's own handler returns, so neither `atexit` nor that
+    `finally` ever runs and the entry outlives the Studio. This hook is part of
+    uvicorn's *application shutdown*, which happens before that. Found in the P4
+    integration run: a graceful stop left `buzzcaf -> 8099` in the ledger naming
+    a pid that no longer existed.
+    """
+    _withdraw_ledger_entry()
 
 # CORS is restricted to the local dev frontend. A wildcard here would let any
 # page you visit in the same browser call this API -- including the settings
@@ -107,6 +144,11 @@ class SettingsSchema(BaseModel):
     openai_model: Optional[str] = "gpt-4o-mini"
     lm_studio_url: Optional[str] = "http://localhost:1234/v1"
     lm_studio_model: Optional[str] = "meta-llama-3-8b-instruct"
+    llamacpp_url: Optional[str] = "http://127.0.0.1:8089/v1"
+    llamacpp_model: Optional[str] = "local-model"
+    # Which provider and model each persona tier runs on (roadmap v9, F1):
+    # {"fast": {"provider": "llamacpp", "model": ""}, "strong": {...}}
+    tiers: Optional[Dict[str, Dict[str, str]]] = None
     prefer_gemini: Optional[bool] = True
     selected_provider: Optional[str] = "gemini"
     # YouTube channel ids the owner runs; BuzzBrain snapshots from these are "mine".
@@ -128,12 +170,37 @@ class AssetRegisterSchema(BaseModel):
 
 STUDIO_VERSION = "0.5.0"
 
+#: This app's name in the shared port ledger and in every /health body.
+APP_ID = "buzzcaf"
+#: A wish, not a fact (GUARDIAN_PLAN section 11 rule 1). The launcher may have to
+#: step past it, and whoever binds calls set_bound_port() with what it got.
+PREFERRED_PORT = int(os.getenv("BUZZCAF_PORT", "8099"))
+_bound_port = PREFERRED_PORT
+
+
+def set_bound_port(port: int) -> None:
+    """Record the port uvicorn actually bound, so /health can report the truth."""
+    global _bound_port
+    _bound_port = int(port)
+
+
+def bound_port() -> int:
+    return _bound_port
+
 
 @app.get("/health")
 def health():
-    # `app` lets Dexter confirm it is talking to the Studio and not to some
-    # other process that happens to own port 8000.
-    return {"status": "ok", "app": "buzzcaf", "version": STUDIO_VERSION}
+    # `app` lets Dexter, BuzzBrain and a second launcher confirm they are
+    # talking to the Studio and not to some other process on the same port.
+    # `port`/`pid` make the answer self-describing, so a scanner that finds us
+    # on a stepped-forward port knows where we really are and who we are.
+    return {
+        "status": "ok",
+        "app": APP_ID,
+        "version": STUDIO_VERSION,
+        "port": _bound_port,
+        "pid": os.getpid(),
+    }
 
 @app.get("/projects")
 def projects():
@@ -141,10 +208,9 @@ def projects():
 
 @app.get("/api/brands")
 def get_brands():
-    # One canonical spelling per channel. "Spilled Coffee: After Dark" was
-    # listed separately and resolved to the same vault; _channel_slug() now
-    # treats the variants as equal, so the duplicate entry is gone.
-    return ["Beyond3Baje", "Khayal3Baje", "Spilled Coffee Studio", "Spilled Coffee After Dark", "Life3Baje"]
+    # One canonical spelling per channel, so the frontend and every stored
+    # topic can be compared by slug without variant confusion.
+    return ["Beyond3Baje", "Khayal3Baje", "Originals", "Raat3Baje", "Life3Baje"]
 
 @app.get("/api/assets")
 def get_assets(type: Optional[str] = None, tag: Optional[str] = None, query: Optional[str] = None):
@@ -412,9 +478,10 @@ _seed_topics_cache: Optional[Dict[str, List[Dict[str, Any]]]] = None
 def _channel_slug(name: str) -> str:
     """Canonical key for a channel name.
 
-    'Spilled Coffee: After Dark' and 'Spilled Coffee After Dark' are the same
-    channel spelled two ways. Comparing slugs avoids the old two-way substring
-    match, under which a short name could match an unrelated longer one.
+    Legacy spellings ('Spilled Coffee Studio', 'After Dark') and the current
+    brand names ('Originals', 'Raat3Baje') refer to the same channels; comparing
+    slugs avoids the old two-way substring match, under which a short name could
+    match an unrelated longer one.
     """
     return re.sub(r"[^a-z0-9]+", "", name.lower())
 
@@ -448,35 +515,120 @@ def _load_seed_topics() -> Dict[str, List[Dict[str, Any]]]:
     return vaults
 
 
+DISCOVER_JSON_INSTRUCTION = """
+### Required Output Format (JSON only)
+Reply with a single JSON object and nothing else:
+
+{
+  "topics": [
+    {
+      "topic": "the video title, in Hinglish",
+      "category": "which channel pillar this belongs to",
+      "viral_potential": 8,
+      "country": "India | International | Global",
+      "source_type": "where the story comes from",
+      "sources_used": ["a real, checkable reference"],
+      "visual_requirements": ["archive footage, maps, diagrams you would need"],
+      "notes": "the angle, in one line"
+    }
+  ]
+}
+
+Give six topics. Do not repeat anything in "Already saved". Do not invent a
+source: leave "sources_used" empty rather than filling it with a plausible name.
+"""
+
+
+def _discover_prompt(channel: str) -> str:
+    """Channel guide + what is already saved, so the agent proposes new angles."""
+    from app.services.studio_chat import channel_guide
+
+    saved = [t for t in _load_saved_topics() if _channel_slug(t.get("channel", "")) == _channel_slug(channel)]
+    parts = [f"Propose fresh video topics for the channel '{channel}'."]
+    guide = channel_guide(channel)
+    if guide:
+        parts.append(f"\n\n## Brand guide for {channel}\n{guide}")
+    if saved:
+        titles = "\n".join(f"- {t.get('topic')}" for t in saved[:30])
+        parts.append(f"\n\n## Already saved (do not repeat)\n{titles}")
+    parts.append(DISCOVER_JSON_INSTRUCTION)
+    return "".join(parts)
+
+
+def _parse_discovered_topics(raw_output: Any, channel: str) -> List[Dict[str, Any]]:
+    """The agent's topic list, or [] when it did not answer in the schema."""
+    from integrations.llm import clean_json_response
+
+    try:
+        parsed = json.loads(clean_json_response(str(raw_output)))
+    except Exception as e:
+        logger.warning(f"Topic discovery reply was not JSON: {e}")
+        return []
+    items = parsed.get("topics") if isinstance(parsed, dict) else parsed
+    if not isinstance(items, list):
+        return []
+    topics = []
+    for item in items:
+        if not isinstance(item, dict) or not str(item.get("topic", "")).strip():
+            continue
+        item.setdefault("channel", channel)
+        topics.append(item)
+    return topics
+
+
 @app.post("/api/topics/discover")
 def discover_channel_topics(payload: TopicDiscoverSchema):
+    """Fresh topics from the channel's own strategist.
+
+    Until v9 this endpoint only ever served the curated seed files. It now asks
+    the agent first and keeps the seed list as the labelled fallback for when no
+    provider answered -- the `source` field says which one you are looking at.
+    """
     channel = payload.channel.strip()
 
     agent_map = {
+        "originals": "SpilledCoffeeStudioStrategist",
         "spilledcoffeestudio": "SpilledCoffeeStudioStrategist",
-        "spilledcoffeeafterdark": "AfterDarkStrategist",
         "raat3baje": "AfterDarkStrategist",
+        "spilledcoffeeafterdark": "AfterDarkStrategist",
         "beyond3baje": "Beyond3BajeStrategist",
         "life3baje": "Life3BajeStrategist",
         "khayal3baje": "Khayal3BajeStrategist"
     }
     target_agent_name = agent_map.get(_channel_slug(channel), "TopicVaultManager")
 
-    # NOTE: this endpoint does not call the LLM. It serves curated seed topics,
-    # which is why the response is tagged `source: "curated_seed"` -- do not
-    # present these as freshly discovered by the strategist agent.
-    channel_vaults = _load_seed_topics()
+    topics: List[Dict[str, Any]] = []
+    try:
+        agent = AgentFactory.get_agent(target_agent_name, engine.llm_service)
+        raw = agent.execute(_discover_prompt(channel), require_json=True)
+        if getattr(agent.llm_service, "last_response_simulated", False):
+            logger.warning("Topic discovery got no model response; falling back to the seed list.")
+        else:
+            topics = _parse_discovered_topics(raw, channel)
+    except Exception as e:
+        logger.error(f"Topic discovery via {target_agent_name} failed: {e}")
 
+    if topics:
+        return {
+            "status": "success",
+            "source": "model",
+            "channel": channel,
+            "agent_assigned": target_agent_name,
+            "topics": topics,
+        }
+
+    # No model answered (or it answered off-schema): serve the curated seed
+    # topics and say plainly that is what they are.
+    channel_vaults = _load_seed_topics()
     requested = _channel_slug(channel)
-    for name, topics in channel_vaults.items():
+    for name, seed_topics in channel_vaults.items():
         if _channel_slug(name) == requested:
             return {
                 "status": "success",
                 "source": "curated_seed",
                 "channel": name,
                 "agent_assigned": target_agent_name,
-                "inventory_counts": { "raw_ideas": 120, "researched_ideas": 55, "script_ready": 24 },
-                "topics": topics
+                "topics": seed_topics
             }
 
     # Unknown channel: fall back to the general-interest vault, and say so.
@@ -486,7 +638,6 @@ def discover_channel_topics(payload: TopicDiscoverSchema):
         "source": "curated_seed_fallback",
         "channel": channel,
         "agent_assigned": target_agent_name,
-        "inventory_counts": { "raw_ideas": 100, "researched_ideas": 50, "script_ready": 20 },
         "topics": fallback
     }
 
@@ -518,7 +669,7 @@ def _load_saved_topics() -> List[Dict[str, Any]]:
                 "id": "saved_topic_1",
                 "topic": "Bhangarh Fort Ka Wo Guard Jo Raat Ke 3 Baje Ghaayab Ho Gaya",
                 "category": "Paranormal & Haunted Locations",
-                "channel": "Spilled Coffee After Dark",
+                "channel": "Raat3Baje",
                 "viral_potential": 9,
                 "country": "India",
                 "source_type": "Local Indian Folklore & Archives",
@@ -595,6 +746,66 @@ def delete_saved_topic(payload: Dict[str, Any] = Body(...)):
         
     _save_saved_topics(topics)
     return {"status": "success", "message": "Topic removed from vault", "remaining": len(topics)}
+
+IDEA_DUMP_FILE = os.path.join(os.path.dirname(__file__), "..", "knowledge", "idea_dump.json")
+
+class IdeaDumpItemSchema(BaseModel):
+    id: str
+    title: str
+    notes: Optional[str] = ""
+    channel: Optional[str] = ""
+    createdAt: Optional[str] = None
+
+def _load_idea_dump() -> List[Dict[str, Any]]:
+    # Plain JSON on disk; the file only grows until the user deletes it. A
+    # missing file means "empty", and a corrupt file is left untouched (we
+    # never overwrite what we could not read).
+    if not os.path.exists(IDEA_DUMP_FILE):
+        return []
+    try:
+        with open(IDEA_DUMP_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, list):
+            return [d for d in data if isinstance(d, dict)]
+    except Exception:
+        pass
+    return []
+
+def _save_idea_dump(ideas: List[Dict[str, Any]]):
+    # Atomic write (temp file + replace) so a crash mid-write cannot corrupt
+    # the user's ideas.
+    os.makedirs(os.path.dirname(IDEA_DUMP_FILE), exist_ok=True)
+    tmp = IDEA_DUMP_FILE + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(ideas, f, indent=2)
+    os.replace(tmp, IDEA_DUMP_FILE)
+
+@app.get("/api/idea-dump")
+def get_idea_dump():
+    ideas = _load_idea_dump()
+    return {"status": "success", "count": len(ideas), "ideas": ideas}
+
+@app.post("/api/idea-dump")
+def put_idea_dump(payload: Dict[str, Any] = Body(...)):
+    """Replace the whole idea dump. The frontend sends its full local list on
+    every change (single user, no concurrency concerns)."""
+    raw = payload.get("ideas")
+    if not isinstance(raw, list):
+        return JSONResponse(status_code=400, content={"status": "error", "message": "Expected {'ideas': [...]}."})
+    ideas: List[Dict[str, Any]] = []
+    for item in raw:
+        if not isinstance(item, dict) or not str(item.get("title", "")).strip():
+            continue
+        idea = {
+            "id": str(item.get("id") or f"dump_{uuid.uuid4().hex[:8]}"),
+            "title": str(item["title"]).strip(),
+            "notes": str(item.get("notes", "")),
+            "channel": str(item.get("channel", "")),
+            "createdAt": str(item.get("createdAt") or datetime.now().isoformat()),
+        }
+        ideas.append(idea)
+    _save_idea_dump(ideas)
+    return {"status": "success", "message": "Idea dump saved to disk", "count": len(ideas)}
 
 class AgentChatSchema(BaseModel):
     agent_name: str
@@ -676,18 +887,34 @@ def agent_chat(payload: AgentChatSchema):
 
 
 @app.get("/api/agents")
-def get_all_agents():
-    prompts_dir = os.path.join(os.path.dirname(__file__), "..", "prompts", "agents")
+def get_all_agents(department: Optional[str] = None):
+    """The registered personas with their frontmatter.
+
+    Before v9 this listed the directory and invented `status: "Active & Idle"`,
+    which was neither true nor knowable. It now reports what the registry holds:
+    a persona is `registered` or it is not here at all.
+    """
+    from core.agent import agent_registry
+
+    wanted = (department or "").strip().lower()
     agents = []
-    if os.path.exists(prompts_dir):
-        for f in sorted(os.listdir(prompts_dir)):
-            if f.endswith(".md"):
-                agent_name = f[:-3]
-                agents.append({
-                    "name": agent_name,
-                    "status": "Active & Idle",
-                    "file": f
-                })
+    for a_def in agent_registry.agents.values():
+        if wanted and a_def.department.lower() != wanted:
+            continue
+        agents.append({
+            "name": a_def.name,
+            "department": a_def.department,
+            "role": a_def.role,
+            "inputs": a_def.inputs,
+            "outputs": a_def.outputs,
+            "dependencies": a_def.dependencies,
+            "version": a_def.version,
+            "model_tier": a_def.model_tier,
+            "temperature": a_def.temperature,
+            "status": "registered",
+            "file": os.path.basename(a_def.prompt_filepath) if a_def.prompt_filepath else f"{a_def.name}.md",
+        })
+    agents.sort(key=lambda a: (a["department"], a["name"]))
     return {"status": "success", "count": len(agents), "agents": agents}
 
 from core.diagnostics import Diagnostics
@@ -706,3 +933,77 @@ if os.path.exists(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 else:
     print(f"WARNING: UI static folder not found at: {static_dir}")
+
+
+# ───────────────────────── headless entry (no window) ─────────────────────────
+#
+# `python backend/desktop_app.py` opens the WebView2 window. Dexter's
+# buzzcaf_client documents an API-only fallback (`uvicorn app.main:app`); this
+# entry is that fallback done by the book: it picks its own port instead of
+# being handed one, publishes itself to the shared ledger, prints `READY port=N`
+# so a launcher can open the port we actually took, and withdraws on exit.
+#
+#     cd backend && python -m app.main [--port N] [--host H]
+
+
+def serve_headless(preferred: int | None = None, host: str = "127.0.0.1") -> int:
+    import atexit
+    import socket
+
+    import uvicorn
+
+    from integrations import buzzcaf_ports
+
+    preferred = int(preferred if preferred is not None else PREFERRED_PORT)
+    port = buzzcaf_ports.pick_port(preferred, host=host)
+    set_bound_port(port)
+    os.environ["BUZZCAF_PORT"] = str(port)
+    health_url = f"http://{host}:{port}/health"
+
+    # Publish once the socket is really ours. uvicorn binds before serving, so a
+    # thread that waits for /health to answer is the honest signal; a bound
+    # socket that never answers must not leave an entry behind.
+    import threading
+    import urllib.request
+
+    def _publish_when_up() -> None:
+        for _ in range(120):
+            try:
+                with urllib.request.urlopen(health_url, timeout=1) as res:
+                    if res.status == 200 and json.loads(res.read().decode("utf-8") or "{}").get("app") == APP_ID:
+                        break
+            except Exception:
+                pass
+            import time as _time
+
+            _time.sleep(0.25)
+        else:
+            return
+        buzzcaf_ports.publish(APP_ID, port, health_url)
+        print(f"READY port={port}", flush=True)
+
+    threading.Thread(target=_publish_when_up, name="buzzcaf-publish", daemon=True).start()
+    # This process owns the entry, so the shutdown hook (and these two
+    # backstops) may remove it.
+    global _owns_ledger_entry
+    _owns_ledger_entry = True
+    atexit.register(_withdraw_ledger_entry)
+    if port != preferred:
+        print(f"[buzzcaf] port {preferred} was busy; stepped forward to {port}", flush=True)
+    try:
+        uvicorn.run(app, host=host, port=port, log_level="warning")
+    finally:
+        _withdraw_ledger_entry()
+    del socket
+    return 0
+
+
+if __name__ == "__main__":
+    import argparse
+    import sys
+
+    _parser = argparse.ArgumentParser(description="Buzzcaf Studio backend (headless)")
+    _parser.add_argument("--port", type=int, default=None, help="preferred port (default: BUZZCAF_PORT or 8099)")
+    _parser.add_argument("--host", default="127.0.0.1")
+    _args = _parser.parse_args()
+    sys.exit(serve_headless(_args.port, _args.host))

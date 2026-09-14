@@ -21,6 +21,9 @@ export default function Dashboard() {
 
   const brandOptions = brands.length > 0 ? brands : CHANNEL_META.map((c) => c.id);
   const workflowOptions = workflows.map((w) => w.id || w.name);
+  // What the chosen workflow will actually do, before anything is created
+  // (roadmap v9, C2).
+  const chosen = workflows.find((w) => (w.id || w.name) === workflow) || null;
 
   useEffect(() => {
     getJson<{ agents?: AgentInfo[]; count?: number }>('/api/agents')
@@ -107,6 +110,28 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+          {chosen?.steps?.length ? (
+            <div style={{ margin: '4px 0 20px 0' }}>
+              <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: 10 }}>
+                {chosen.steps.length} steps{chosen.description ? ` · ${chosen.description}` : ''}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {chosen.steps.map((s, i) => (
+                  <div
+                    key={s.name}
+                    title={s.description}
+                    style={{ backgroundColor: '#12141d', border: '1px solid #1e2230', borderRadius: 8, padding: '8px 12px', fontSize: '0.78rem', maxWidth: 240 }}
+                  >
+                    <div style={{ color: '#ffffff', fontWeight: 600 }}>{i + 1}. {s.name}</div>
+                    <div style={{ color: '#94a3b8' }}>
+                      {s.agent_role}
+                      {s.requires_approval && <span style={{ color: '#a78bfa' }}> · approval</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
           <button type="submit" className="btn" disabled={creating || health === 'offline'}>
             <PlusCircle size={18} />
             <span>{creating ? 'Creating…' : 'Create project'}</span>

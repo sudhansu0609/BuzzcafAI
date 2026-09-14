@@ -43,7 +43,7 @@ Optimizes video metadata and topic selection to trigger YouTube algorithm recomm
 
 ## 9. Dependencies
 - Upstream Prerequisite: `AnalyticsManager`
-- Downstream Consumer: `PublishingManager` / `SEOSpecialist`
+- Downstream Consumer: `PublishingManager` / `SEOManagerAgent`
 
 ## 10. Tools & Integrations
 - `LLMService` and YouTube Analytics API.

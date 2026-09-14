@@ -14,5 +14,168 @@
     "source": "agent",
     "created": "2026-07-24T21:27:31.194595",
     "updated": "2026-07-24T21:27:31.194601"
+  },
+  {
+    "id": "c9ef1f0e-86d0-4b6d-95a0-a854d31eae9a",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "chat",
+      "Beyond3Baje"
+    ],
+    "content": {
+      "user": "Delegate this to the FactChecker. Output ONLY this and nothing else: [INVOKE_AGENT: FactChecker] Verify in one line whether Bhangarh Fort has documented 1923 records. [/INVOKE_AGENT]",
+      "reply": "\n\n---\n\ud83e\udd16 **[Delegated to `FactChecker`]**\n> *Task*: Verify in one line whether Bhangarh Fort has documented 1923 records.\n\nTo verify if Bhangarh Fort has documented 1923 records, I would check local historical archives and early 20th-century newspaper reports.\n---\n\n",
+      "agent": "Beyond3BajeStrategist",
+      "channel": "Beyond3Baje"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-09T20:25:47.415578",
+    "updated": "2026-09-09T20:25:47.415581"
+  },
+  {
+    "id": "3b9c50cb-8ed2-4c7c-95a7-256a2c80a18c",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "Hello! I am your **Beyond3Baje Strategist**. I specialize in 100% real-world, fact-grounded documentaries, true crime, dark history, and historical disasters.\n\nHere is what I can do for you:\n- **Topic Discovery**: Brainstorm high-CTR true crime, lost history, and historical disaster concepts.\n- **Hook & Pacing Design**: Craft 15-second retention hooks and 3-act documentary structures.\n- **Scripting & Outlining**: Outline verified documentary scripts grounded in real-world archives.\n- **Visual Asset Planning**: Suggest 3D maps, trial transcripts, and archival B-roll cues.\n\nWhat topic or video idea would you like to discuss today?"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:11:47.109238",
+    "updated": "2026-09-15T00:19:56.224046"
+  },
+  {
+    "id": "14548915-0920-40b0-9d1f-8869930ca59b",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Dyatlov Pass: 9 Hikers Ka Raat Ka Ghaayab Hona Kyon Ab Bhi Unsolved Hai?\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"historical PRs\n\n**Not implemented** (stated in README): voice (removed v5), auth, database, streaming chat."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:18:16.965794",
+    "updated": "2026-09-14T23:18:16.965801"
+  },
+  {
+    "id": "6591ac1a-1642-479f-937e-300728664de3",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": ""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:32:14.779054",
+    "updated": "2026-09-14T23:32:14.779061"
+  },
+  {
+    "id": "3fe4cdb1-08f2-4eac-aed7-5dd2416d408f",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Dyatlov Pass: 9 Trekker Ki Raat Achanak Kyon Aisi Buri Ho Gayi?\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"Soviet investigation records aur survivor accounts\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Ural mountain route ka animated map\",\n        \"tent cut ka forensic diagram\",\n        \"weather aur temperature timeline\",\n        \"search team movement ka timeline\"\n      ],\n      \"notes\": \"Evidence se aage, theories ko calmly compare karte hue unsolved angle.\"\n    },\n    {\n      \"topic\": \"Black Dahlia: 1947 Mein Hollywood Ko Hilane Wali Unsolved Murder Mystery\",\n      \"category\": \"True Crime\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"police files aur court records\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"1947 Los Angeles street map\",\n        \"police case timeline\",\n        \"newspaper clipping style archive visuals\",\n        \"media frenzy ka timeline chart\"\n      ],\n      \"notes\": \"Police files, witness accounts aur media frenzy ko calmly connect karte hue.\"\n    },\n    {\n      \"topic\": \"Unit 731: Wo Japanese Medical Unit Jiska Raaz Ab Bhi Chhupa Hai\",\n      \"category\": \"Dark History\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"war tribunal records aur declassified documents\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Manchuria / Japan route map\",\n        \"lab setup diagram\",\n        \"trial documents ka archival close-up\",\n        \"secret operations ka timeline\"\n      ],\n      \"notes\": \"Documented facts se human experimentation aur historical accountability ka serious angle.\"\n    },\n    {\n      \"topic\": \"Chernobyl: Ek Reactor Test Jo Poore Sheher Ki Zindagi Badal Di\",\n      \"category\": \"Engineering & Disaster Stories\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:34:26.003236",
+    "updated": "2026-09-14T23:34:26.003242"
+  },
+  {
+    "id": "4765aad5-8520-4e0c-b365-7b4ea235f42f",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"D.B. Cooper: Jo Aakhri Baar Ticket Use Hui, Uske Baad Kya Hua?\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"FBI case file, FAA records, airline logs\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"727 flight route ka animated map\",\n        \"cash count ka simple diagram\",\n        \"timeline style police files\",\n        \"plane interior layout sketch\"\n      ],\n      \"notes\": \"Evidence ke bina mystery ko calmly present karte hue, public ka role aur FBI ki gap dikhaana.\"\n    },\n    {\n      \"topic\": \"Boston Ki Woh Molasses Wave Jo Bina Kisi Se Pooche 1,500 Log Ko Hilaya\",\n      \"category\": \"Engineering & Disaster Stories\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"city records, harbor engineering reports, court files\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Boston street map\",\n        \"molasses tank cross-section diagram\",\n        \"wave propagation animation\",\n        \"damage timeline chart\"\n      ],\n      \"notes\": \"Ek chhoti si pressure galti se poori street ka destruction kaise hua, iska engineering angle.\"\n    },\n    {\n      \"topic\": \"1972 Andes Flight: Jab Plane Toot Gaya, Toh 16 Din Ka Sach Kya Tha?\",\n      \"category\": \"Extraordinary Real Stories\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"survivor accounts, rescue records, flight data\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Andes route ka map\",\n        \"plane breakup diagram\",\n        \"survival timeline\",\n        \"temperature aur weather chart\"\n      ],\n      \"notes\": \"Human endurance aur hard choices ko facts ke saath, bina exaggeration ke dikhana.\"\n    },\n    {\n      \"topic\": \"Radium Girls: Jo Chamiyon Mein Rang Banti Thi, Woh Zindagi Kaunsi Thi?\",\n      \"category\": \"Dark History\",\n      \"viral_potential\": 8,\n      \"country\": \"International\","
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:38:36.095750",
+    "updated": "2026-09-14T23:38:36.095761"
+  },
+  {
+    "id": "9e572cea-eeae-45cb-8e32-f5ea408f9621",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Tunguska: 1908 Ki Woh Aankh Jisko Dhoondhne Mein Dekade Lag Gaye\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"Soviet expedition reports, seismological records, tree-fall surveys\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Siberian blast-radius ka animated map\",\n        \"tree-fall direction ka diagram\",\n        \"1908 expedition archive photos\"\n      ],\n      \"notes\": \"Meteorite, airburst, aur exotic theories ko evidence ke saath calmly compare karte hue.\"\n    },\n    {\n      \"topic\": \"Cicada 3301: Jo Online Test Ne Internet Ko Chupke Se Hila Diya\",\n      \"category\": \"Internet Mysteries\",\n      \"viral_potential\": 9,\n      \"country\": \"Global\",\n      \"source_type\": \"public forum posts, puzzle metadata, participant accounts\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"puzzle route ka timeline\",\n        \"encryption challenge ka simple diagram\",\n        \"online community structure ka map\"\n      ],\n      \"notes\": \"Real internet mystery ka public evidence aur participant psychology ko fact-based angle.\"\n    },\n    {\n      \"topic\": \"Nirav Modi: Jo Aakhri Din Mein Bhi Sabko Dhoka Dene Ka Kamaal Kiya\",\n      \"category\": \"True Crime\",\n      \"viral_potential\": 9,\n      \"country\": \"India\",\n      \"source_type\": \"court records, bank audit reports, CBI and trial documents\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Gujarat bank branches ka map\",\n        \"money-flow ka diagram\",\n        \"case timeline\"\n      ],\n      \"notes\": \"Financial fraud, institutional gaps, aur last-day confession ko serious documentary tone mein.\"\n    },\n    {\n      \"topic\": \"MKUltra: Jo Memory Experiment Ne Apni Hi Team Ko Hila Diya\",\n      \"category\": \"Dark History\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"declassified CIA documents, court records, survivor accounts\",\n      \"sourc"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-14T23:48:53.233663",
+    "updated": "2026-09-14T23:48:53.233670"
+  },
+  {
+    "id": "b62feea1-d1cb-4282-ad94-1289f38eca25",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Flannan Isles: 1914 Ki Woh Raat Jab Airship Ke Saath Poora Crew Ghaayab Ho Gaya\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"maritime logs, crew manifests, and weather records\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"North Atlantic route map\",\n        \"airship interior layout\",\n        \"crew log timeline\",\n        \"storm and weather animation\"\n      ],\n      \"notes\": \"Calm evidence-first angle: weather, radio silence, and missing crew facts without supernatural claims.\"\n    },\n    {\n      \"topic\": \"Great Train Robbery: 1963 Ki Woh Chori Jiske Baad Bhi Method Baat Banti Hai\",\n      \"category\": \"True Crime\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"court records, police files, and newspaper archives\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"train route map\",\n        \"robbery sequence timeline\",\n        \"police investigation board\",\n        \"money flow diagram\"\n      ],\n      \"notes\": \"Focus on planning, execution, and investigative gaps rather than glamorizing crime.\"\n    },\n    {\n      \"topic\": \"Tuskegee Study: 40 Saal Ka Woh Medical Experiment Jo Trust Ko Tod Diya\",\n      \"category\": \"Dark History\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"public health records, investigative reports, and survivor accounts\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"study timeline\",\n        \"consent and informed-consent diagram\",\n        \"clinic flow map\",\n        \"ethical decision points chart\"\n      ],\n      \"notes\": \"Serious documentary angle on consent, institutional failure, and long-term accountability.\"\n    },\n    {\n      \"topic\": \"City of Z: 1925 Ki Woh Expedition Jisko Wapas Aane Mein Dekade Laga Diya\",\n      \"category\": \"Extraordinary Real Stories\",\n      \"viral_potential\": 8,\n      \"country\": \"I"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-15T00:06:07.814750",
+    "updated": "2026-09-15T00:06:07.814756"
+  },
+  {
+    "id": "ed521d5b-ef4d-41ae-95de-74b5426d7c7a",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Soviet Ghost Army: Jo Fake Tanks Aur Sound Weapons Ne WWII Ko Chupke Se Hila Diya\",\n      \"category\": \"Dark History\",\n      \"viral_potential\": 9,\n      \"country\": \"International\",\n      \"source_type\": \"declassified military records, unit histories, engineer interviews\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"inflatable tank cross-section diagram\",\n        \"sound wave animation\",\n        \"European front map\",\n        \"archival unit photos\"\n      ],\n      \"notes\": \"Fake tanks, sound waves aur propaganda ko evidence ke saath dikhate hue.\"\n    },\n    {\n      \"topic\": \"Tacoma Narrows Bridge: Jab Ek Choti Si Vibration Ne Puri Bridge Ko Khol Diya\",\n      \"category\": \"Engineering & Disaster Stories\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"engineering reports, bridge design documents, contemporary news records\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"bridge cross-section diagram\",\n        \"wind tunnel animation\",\n        \"collapse sequence timeline\",\n        \"1940s newsreel style visuals\"\n      ],\n      \"notes\": \"Design, wind load aur failure sequence ko calm, technical documentary tone mein.\"\n    },\n    {\n      \"topic\": \"Kryptos Puzzle: Jo Artwork Ne CIA Ko Bhi Hila Diya\",\n      \"category\": \"Internet Mysteries\",\n      \"viral_potential\": 8,\n      \"country\": \"Global\",\n      \"source_type\": \"artist statements, puzzle community records, public decryption attempts\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Kryptos sculpture close-up\",\n        \"cipher grid animation\",\n        \"solved/unsolved puzzle timeline\",\n        \"online community map\"\n      ],\n      \"notes\": \"Art, encryption aur public puzzle-solving ko evidence-based mystery angle mein.\"\n    },\n    {\n      \"topic\": \"2008 Mumbai: Jo Ek Raat Ne Security Architecture Ke Raaz Khol Diye\",\n      \"category\": \"True Crime\",\n      \"viral_potential\": 9,\n      \"country\": \"Indi"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-15T00:07:21.187452",
+    "updated": "2026-09-15T00:07:21.187460"
+  },
+  {
+    "id": "cde1cc6c-8b81-4e9b-86bc-30feb71034bd",
+    "scope": "agent",
+    "owner": "Beyond3BajeStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'Beyond3Baje'.\n\n## Brand guide for Beyond3Baje\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**: Deliberate and suspenseful. Starts with an unresolved paradox",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Mary Celeste: Jo Khali Pilaan Par Poora Crew Ghaayab Ho Gaya\",\n      \"category\": \"Unsolved Mysteries\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"maritime logs, court documents, contemporary newspaper archives\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Atlantic route map\",\n        \"ship deck layout diagram\",\n        \"cargo manifest timeline\",\n        \"weather and radio silence chart\"\n      ],\n      \"notes\": \"Evidence-first angle: crew missing, ship intact, cargo undisturbed, without supernatural claims.\"\n    },\n    {\n      \"topic\": \"Alfred Packer: Jo Aadmi Do Baar Mar Gaya Aur Do Baar Zinda Nikla\",\n      \"category\": \"True Crime\",\n      \"viral_potential\": 8,\n      \"country\": \"International\",\n      \"source_type\": \"court records, prison files, newspaper archives, witness accounts\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Colorado mountain route map\",\n        \"trial timeline\",\n        \"witness testimony board\",\n        \"body evidence diagram\"\n      ],\n      \"notes\": \"Serial killer reputation vs. wrongful conviction angle, based on documented case and retrial.\"\n    },\n    {\n      \"topic\": \"Emu War: Jab Australia Ne Emus Se Ladaai Shuru Kar Di\",\n      \"category\": \"Extraordinary Real Stories\",\n      \"viral_potential\": 7,\n      \"country\": \"International\",\n      \"source_type\": \"government military reports, agricultural records, newspaper archives\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Western Australia map\",\n        \"military operation timeline\",\n        \"emu movement diagram\",\n        \"media headline archive\"\n      ],\n      \"notes\": \"Factual and darkly comic angle on a real government military response to agricultural pest control.\"\n    },\n    {\n      \"topic\": \"London Beer Flood: Jab Ek Tank Ka Tootna Poore Sheher Ko Beech Mein Chhod Diya\",\n      \"category\": \"Engineering & Disaster Stories\",\n      \"viral_potential\": 8"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-15T00:09:00.834589",
+    "updated": "2026-09-15T00:09:00.834596"
   }
 ]

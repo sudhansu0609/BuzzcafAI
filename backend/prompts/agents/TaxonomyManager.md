@@ -7,6 +7,7 @@ outputs: ["structured_taxonomy_tree"]
 dependencies: ["KnowledgeManager"]
 permissions: ["read_write_knowledge"]
 version: "1.0.0"
+model_tier: "fast"
 ---
 
 # Agent Specification: TaxonomyManager

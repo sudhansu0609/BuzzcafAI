@@ -1,7 +1,7 @@
-# Brand Style Guide: Spilled Coffee Studio
+# Brand Style Guide: Originals
 
 ## Overview
-Spilled Coffee Studio focuses on original fiction, poetry, books, and interactive storytelling.
+Originals focuses on original fiction, poetry, books, and interactive storytelling.
 
 ## Core Identity
 - **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provoking literature.

@@ -1,6 +1,6 @@
 ---
 name: "CreativeDirectorAgent"
-department: "Creative Department"
+department: "Creative"
 role: "Plans visual scene lists, generates AI image generation prompts, and plans thumbnails."
 inputs: ["script_final", "scene_breakdown"]
 outputs: ["shot_list", "clip_plan", "image_plan", "thumbnail_plan"]

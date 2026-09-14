@@ -92,6 +92,104 @@ def test_workflow_execution_flow():
     shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, "test_exec_flow"))
 
 
+def _run_research_step(monkeypatch, project_id, reply):
+    """Run just the Research step of a throwaway documentary project."""
+    monkeypatch.setattr(
+        LLMService,
+        "generate_text",
+        lambda self, system_prompt, user_prompt, require_json=False, **kwargs: reply,
+    )
+    p = Project(
+        id=project_id,
+        name="Research honesty probe",
+        brand="Beyond3Baje",
+        workflow_name="beyond3baje_documentary",
+        current_step="Research",
+    )
+    p.save()
+    return WorkflowEngine().execute_next(project_id), os.path.join(TEST_PROJECTS_DIR, project_id, "research")
+
+
+def test_research_step_writes_a_file_per_json_section(monkeypatch):
+    """v9 D1: a JSON dossier becomes the five section files, no filler."""
+    reply = json.dumps({
+        "timeline": ["1923 - the mill burns down"],
+        "facts": ["Seventeen workers were on shift"],
+        "sources": ["District gazetteer 1924 - archive.org/x"],
+        "media": ["Fire brigade photograph, state archive"],
+        "unanswered_questions": ["Who reported the fire?"],
+    })
+    project_id = "test_research_json"
+    try:
+        p, research_dir = _run_research_step(monkeypatch, project_id, reply)
+        written = sorted(f for f in os.listdir(research_dir) if f != "research.md")
+        assert written == ["facts.md", "media.md", "sources.md", "timeline.md", "unanswered_questions.md"]
+        with open(os.path.join(research_dir, "timeline.md"), encoding="utf-8") as f:
+            assert "1923 - the mill burns down" in f.read()
+        assert p.assets["research"] == "research/research.md"
+        assert p.steps_history[-1].simulated_sections == []
+    finally:
+        shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, project_id), ignore_errors=True)
+
+
+def test_research_step_labels_a_prose_reply_instead_of_faking_sections(monkeypatch):
+    """v9 D1: prose keeps its own file and the five sections stay unwritten."""
+    project_id = "test_research_prose"
+    try:
+        p, research_dir = _run_research_step(
+            monkeypatch, project_id, "The mill fire is documented but the cause is disputed."
+        )
+        assert os.listdir(research_dir) == ["research.md"]
+        with open(os.path.join(research_dir, "research.md"), encoding="utf-8") as f:
+            assert "cause is disputed" in f.read()
+        assert p.steps_history[-1].simulated_sections == [
+            "timeline", "facts", "sources", "media", "unanswered_questions",
+        ]
+    finally:
+        shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, project_id), ignore_errors=True)
+
+
+def test_workflow_step_delegation_lands_in_the_asset(monkeypatch):
+    """v9 B3: a step's agent can hand work on, and you can read the result."""
+    def fake_text(self, system_prompt, user_prompt, require_json=False, **kwargs):
+        self.last_response_simulated = False
+        if "You have been invoked by" in user_prompt:
+            return "Checked: the 1923 dates hold."
+        if require_json:
+            return json.dumps({"facts": ["The mill burned in 1923"]})
+        return "SCRIPT DRAFT.\n[INVOKE_AGENT: FactChecker]Verify the 1923 dates.[/INVOKE_AGENT]"
+
+    monkeypatch.setattr(LLMService, "generate_text", fake_text)
+    project_id = "test_step_delegation"
+    try:
+        Project(
+            id=project_id,
+            name="Delegation probe",
+            brand="Beyond3Baje",
+            workflow_name="beyond3baje_documentary",
+            current_step="Research",
+        ).save()
+        engine = WorkflowEngine()
+        engine.execute_next(project_id)   # Research runs and pauses
+        engine.execute_next(project_id)   # approved, advances to Scripting
+        p = engine.execute_next(project_id)
+
+        with open(os.path.join(TEST_PROJECTS_DIR, project_id, p.assets["script"]), encoding="utf-8") as f:
+            content = f.read()
+        assert "## Delegated: FactChecker" in content
+        assert "Checked: the 1923 dates hold." in content
+        assert "[INVOKE_AGENT" not in content
+
+        step = next(h for h in p.steps_history if h.step_name == "Scripting")
+        assert step.delegations == [
+            {"agent": "FactChecker", "task_preview": "Verify the 1923 dates.", "simulated": False, "skipped": False}
+        ]
+    finally:
+        shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, project_id), ignore_errors=True)
+        from memory.memory import memory_system
+        memory_system.clear(scope="agent", owner="FactChecker")
+
+
 def test_asset_service():
     from knowledge.assets import AssetService
     # Temporarily rename actual catalog if it exists for isolation

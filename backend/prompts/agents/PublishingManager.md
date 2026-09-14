@@ -24,7 +24,7 @@ To oversee video distribution, metadata finalization, thumbnail selection, platf
 Acts as the central operational manager for publishing workflows, ensuring 100% compliant, search-optimized, and timely content releases on YouTube and social platforms.
 
 ## 4. Responsibilities
-- Direct `SEOSpecialist`, `MetadataOptimizer`, `ThumbnailSpecialist`, `UploadManager`, and `ScheduleManager`.
+- Direct `SEOManagerAgent`, `MetadataOptimizer`, `ThumbnailSpecialist`, `UploadManager`, and `ScheduleManager`.
 - Validate that metadata, tags, descriptions, and thumbnails conform to YouTube policies.
 - Execute publication workflows and verify upload receipts.
 - Produce `publication_order` manifest.
@@ -46,7 +46,7 @@ Acts as the central operational manager for publishing workflows, ensuring 100% 
 
 ## 9. Dependencies
 - Parent Agent: `CEO`
-- Child Agents: `SEOSpecialist`, `MetadataOptimizer`, `ThumbnailSpecialist`, `UploadManager`, `ScheduleManager`, `CommunityPublisher`
+- Child Agents: `SEOManagerAgent`, `MetadataOptimizer`, `ThumbnailSpecialist`, `UploadManager`, `ScheduleManager`, `CommunityPublisher`
 
 ## 10. Tools & Integrations
 - `LLMService` and YouTube Data API v3 integrations.

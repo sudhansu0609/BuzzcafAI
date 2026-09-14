@@ -34,6 +34,12 @@ class StepExecution:
     output_files: Dict[str, str] = field(default_factory=dict)
     logs: List[str] = field(default_factory=list)
     human_feedback: Optional[str] = None
+    # Output sections the model did not actually produce, so nothing downstream
+    # mistakes an empty section for a researched one (roadmap v9, D1).
+    simulated_sections: List[str] = field(default_factory=list)
+    # Specialists this step handed work to, one entry per [INVOKE_AGENT] block
+    # the step's agent emitted (roadmap v9, B3).
+    delegations: List[Dict[str, Any]] = field(default_factory=list)
 
 @dataclass
 class Project:

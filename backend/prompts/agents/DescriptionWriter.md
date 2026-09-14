@@ -1,12 +1,13 @@
 ---
 name: "DescriptionWriter"
-department: "Publishing Department"
+department: "Publishing"
 role: "Create searchable descriptions with chapters when applicable."
 inputs: ["final_script"]
 outputs: ["video_description"]
 dependencies: []
 permissions: ["read_knowledge"]
 version: "1.0.0"
+model_tier: "fast"
 ---
 
 # Agent Prompt: Description Writer

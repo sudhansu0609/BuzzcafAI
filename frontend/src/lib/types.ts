@@ -16,17 +16,28 @@ export interface Project {
 
 export interface StepRecord {
   step_name?: string;
+  agent_name?: string;
   status?: string;
   timestamp?: string;
+  started_at?: string;
+  completed_at?: string;
   error?: string;
   [key: string]: unknown;
+}
+
+// One step of a workflow definition, as GET /api/workflows sends it.
+export interface WorkflowStepInfo {
+  name: string;
+  agent_role: string;
+  description?: string;
+  requires_approval?: boolean;
 }
 
 export interface WorkflowInfo {
   id?: string;
   name: string;
   description?: string;
-  steps?: unknown[];
+  steps?: WorkflowStepInfo[];
 }
 
 export interface Topic {
@@ -44,12 +55,27 @@ export interface Topic {
   saved_at?: string;
 }
 
+// One `[INVOKE_AGENT: X]` block the strategist emitted and the Studio ran
+// (roadmap v9, B1). `skipped` means it was over the per-reply cap.
+export interface Invocation {
+  agent: string;
+  task: string;
+  output: string;
+  simulated?: boolean;
+  skipped?: boolean;
+  error?: string;
+}
+
 export interface ChatMessage {
   sender: 'user' | 'agent';
   text: string;
   timestamp: string;
   simulated?: boolean;
   error?: boolean;
+  // Which persona actually answered this turn - the picker can change between
+  // turns, so the header cannot use the currently selected one.
+  agent?: string;
+  invocations?: Invocation[];
 }
 
 export interface StudioSettings {
@@ -62,8 +88,16 @@ export interface StudioSettings {
   [key: string]: unknown;
 }
 
+// One row of GET /api/agents. Everything but `name` comes from the persona
+// file's frontmatter, so a field the file omits arrives empty, never invented.
 export interface AgentInfo {
   name: string;
+  department?: string;
+  role?: string;
+  inputs?: string[];
+  outputs?: string[];
+  dependencies?: string[];
+  version?: string;
   status?: string;
   file?: string;
 }
@@ -91,6 +125,7 @@ export type TabId =
   | 'agent_creator_studio'
   | 'agents_group_chat'
   | 'ai_workforce'
+  | 'departments'
   | 'health'
   | 'settings';
 

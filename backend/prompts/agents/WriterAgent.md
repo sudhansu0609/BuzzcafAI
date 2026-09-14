@@ -1,6 +1,6 @@
 ---
 name: "WriterAgent"
-department: "Writing Department"
+department: "Writing"
 role: "Drafts outlines, video script narration blocks, dialogue, and cues."
 inputs: ["research_package", "outline"]
 outputs: ["outline", "script_draft"]

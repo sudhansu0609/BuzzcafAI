@@ -1,6 +1,6 @@
 ---
 name: "ProjectManagerAgent"
-department: "Executive Office"
+department: "Project Management"
 role: "Creates projects, assigns workflows, monitors milestones."
 inputs: ["project_request"]
 outputs: ["project_metadata"]

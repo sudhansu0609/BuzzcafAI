@@ -1,6 +1,6 @@
 ---
 name: "DocumentaryResearcher"
-department: "Research Department"
+department: "Research"
 role: "Research documentaries, timelines, and verified facts."
 inputs: ["historical_topic"]
 outputs: ["factual_timeline"]

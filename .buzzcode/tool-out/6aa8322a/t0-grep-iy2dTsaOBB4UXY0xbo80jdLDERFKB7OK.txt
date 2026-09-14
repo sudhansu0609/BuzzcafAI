@@ -1,0 +1,311 @@
+CHANGELOG.md
+  63: - **Launcher starts this checkout.** `start_spilledCoffeeAi.bat` pointed at a
+  134: - Duplicate "Spilled Coffee: After Dark" / "Spilled Coffee After Dark" brand
+backend/dev/fixtures.py
+  244: - **Target Channel**: Spilled Coffee Media
+  253: *Directive processed in character by Spilled Coffee AI Strategist Engine.*"""
+backend/knowledge/agent_factchecker_memory.json
+  12:       "reply": "Here are story architecture & literary breakdown concepts for **Spilled Coffee Studio**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable E
+  31:       "reply": "Here are story architecture & literary breakdown concepts for **Spilled Coffee Studio**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable E
+backend/knowledge/agent_researchagent_memory.json
+  11:       "result_snippet": "Hello! I am your **Spilled Coffee Studio Strategist**. I am your primary partner for story architecture, classic literature breakdowns, and original creator fiction.\n\nHere is how I can help you:\n- **Story Architecture**: Analyze storytelling rules from Ghibli, Pixar, Nola
+backend/core/base_agent.py
+  12: logger = logging.getLogger("spilled_coffee_ai.core.base_agent")
+backend/core/doctor.py
+  11: logger = logging.getLogger("spilled_coffee_ai.core.doctor")
+backend/core/diagnostics.py
+  7: logger = logging.getLogger("spilled_coffee_ai.core.diagnostics")
+backend/app/static/assets/index-CI0OzFe7.js
+  275:  */const wo=B("X",[["path",{d:"M18 6 6 18",key:"1bl5f8"}],["path",{d:"m6 6 12 12",key:"d8bk6v"}]]),xh="".replace(/\/$/,""),kh=6e4;function jh(e){return`${xh}${e.startsWith("/")?e:`/${e}`}`}function Ue(e,t={}){return fetch(jh(e),{...t,signal:t.signal??AbortSignal.timeout(kh)})}const wh={success:{fg:"
+backend/prompts/workflows/spilled_coffee_story.json
+  2:     "id": "spilled_coffee_story",
+  3:     "name": "Spilled Coffee Original Story",
+backend/apps/dashboard/index.html
+  6:     <title>Spilled Coffee AI Studio | Buzzcaf Media</title>
+  23:                     <span class="logo-text">Spilled Coffee <span class="logo-sub">AI Studio</span></span>
+  156:                     <p class="settings-desc">Manage API credentials and fallback models. Spilled Coffee AI Studio will attempt the Google Gemini API first, falling back to local LM Studio if limits are exceeded.</p>
+backend/projects/2026-07-21_Khayal3Baje_TheLastLantern/script/draft.md
+  1: # Research Document: The Spilled Coffee Mystery
+  9: 3. **The Spilled Coffee Phenomenon**: Many famous works of fiction were outlined on napkins stained with spilled coffee.
+backend/apps/cli/main.py
+  12:         description="Spilled Coffee AI Studio CLI - Operating System Core Management Utility"
+  62:         print(f"Launching Spilled Coffee AI Studio at http://{host}:{port} ...")
+backend/core/logger.py
+  69: logger = LoggingManager.get_logger("spilled_coffee_ai")
+backend/knowledge/video_intel/dQw4w9WgXcQ.json
+  976:   "raw_model_text": "Hello! I am your **Spilled Coffee Studio Strategist**. I am your primary partner for story architecture, classic literature breakdowns, and original creator fiction.\n\nHere is how I can help you:\n- **Story Architecture**: Analyze storytelling rules from Ghibli, Pixar, Nolan, K
+backend/projects/2026-07-21_Khayal3Baje_TheLastLantern/research/summary.md
+  1: # Research Document: The Spilled Coffee Mystery
+  9: 3. **The Spilled Coffee Phenomenon**: Many famous works of fiction were outlined on napkins stained with spilled coffee.
+backend/projects/2026-07-22_Beyond3Baje_TestLiveLogger/script/draft.md
+  7: # Outline: The Spilled Coffee Mystery
+  27: ## IV. The Spilled Coffee Phenomenon
+  35: *   **Closing Thought:** The legacy of the spilled coffee is the structured world we inhabit today.
+  41: # Script Draft: The Spilled Coffee Mystery
+  63: **[VISUAL: Title Card fades in over a dark, swirling coffee texture: THE SPILLED COFFEE MYSTERY.]**
+  99: #### **SCENE 4: THE SPILLED COFFEE PHENOMENON**
+backend/projects/2026-07-22_Beyond3Baje_TestLiveLogger/research/summary.md
+  1: # Research Document: The Spilled Coffee Mystery
+  9: 3. **The Spilled Coffee Phenomenon**: Many famous works of fiction were outlined on napkins stained with spilled coffee.
+backend/knowledge/session_beyond3baje_memory.json
+  12:       "reply": "Here are story architecture & literary breakdown concepts for **Spilled Coffee Studio**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable E
+  31:       "reply": "Here are story architecture & literary breakdown concepts for **Spilled Coffee Studio**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable E
+backend/projects/2026-07-22_Beyond3Baje_TestLiveLogger/production/scenes.json
+  1: # Scene Breakdown: The Spilled Coffee Mystery
+  14: | **Visuals** | Extreme macro shot of a dark coffee drop hitting a pool; slow-motion ripples. Flickering candlelight on stone. Aggressive quill scratching on parchment. Title Card: *THE SPILLED COFFEE MYSTERY*. |
+  47: ## Scene 4: The Spilled Coffee Phenomenon
+backend/core/markdown.py
+  6: logger = logging.getLogger("spilled_coffee_ai.core.markdown")
+backend/prompts/agents/AnimationPlanner.md
+  15: You are the Animation Planner of Spilled Coffee AI Studio.
+backend/prompts/agents/AnalyticsHandoff.md
+  15: You are the Analytics Handoff Manager of Spilled Coffee AI Studio.
+backend/projects/2026-07-21_Khayal3Baje_TheLastLantern/production/storyboard.md
+  1: # Research Document: The Spilled Coffee Mystery
+  9: 3. **The Spilled Coffee Phenomenon**: Many famous works of fiction were outlined on napkins stained with spilled coffee.
+backend/prompts/agents/AssetLibrary.md
+  15: You are the Asset Library Manager of Spilled Coffee AI Studio.
+backend/prompts/agents/AcademicResearcher.md
+  53: - System Logger (`spilled_coffee_ai.academicresearcher`).
+backend/prompts/agents/AudienceResearcher.md
+  53: - System Logger (`spilled_coffee_ai.audienceresearcher`).
+backend/prompts/agents/AutomationManager.md
+  53: - System Logger (`spilled_coffee_ai.automationmanager`).
+backend/prompts/agents/AuditAgent.md
+  52: - System Logger (`spilled_coffee_ai.auditagent`).
+backend/prompts/agents/CEO.md
+  15: You are the CEO and Executive Decision Maker of Spilled Coffee AI Studio.
+backend/app/services/studio_chat.py
+  43:     "originals": "SpilledCoffeeStudioStrategist",
+  44:     "studio": "SpilledCoffeeStudioStrategist",
+backend/app/main.py
+  481:     'Spilled Coffee: After Dark' and 'Spilled Coffee After Dark' are the same
+  589:         "originals": "SpilledCoffeeStudioStrategist",
+  590:         "spilledcoffeestudio": "SpilledCoffeeStudioStrategist",
+  592:         "spilledcoffeeafterdark": "AfterDarkStrategist",
+backend/prompts/agents/CharacterLibrary.md
+  15: You are the Character Library Manager of Spilled Coffee AI Studio.
+backend/prompts/agents/CampaignPlanner.md
+  53: - System Logger (`spilled_coffee_ai.campaignplanner`).
+backend/tests/test_all_79_agents.py
+  12:     "SpilledCoffeeStudioStrategist", "AfterDarkStrategist", "Beyond3BajeStrategist", "Life3BajeStrategist", "Khayal3BajeStrategist", "TopicVaultManager",
+backend/prompts/agents/CFO.md
+  53: - System Logger (`spilled_coffee_ai.cfo`).
+backend/prompts/agents/BackupManager.md
+  53: - System Logger (`spilled_coffee_ai.backupmanager`).
+backend/scripts/verify_agent_flow.py
+  30:         "SpilledCoffeeStudioStrategist",
+  59:         ("SpilledCoffeeStudioStrategist", "Give me 3 classic literature breakdown concepts.")
+backend/prompts/agents/ChiefKnowledgeOfficer.md
+  53: - System Logger (`spilled_coffee_ai.chiefknowledgeofficer`).
+backend/app/departments/base.py
+  6: logger = logging.getLogger("spilled_coffee_ai.departments.base")
+backend/app/departments/research.py
+  25:                 "SpilledCoffeeStudioStrategist",
+backend/prompts/agents/CitationArchivist.md
+  54: - System Logger (`spilled_coffee_ai.citationarchivist`).
+backend/runtime/demo_runner.py
+  6: logger = logging.getLogger("spilled_coffee_ai.runtime.demo_runner")
+  11:         print("Starting Live Spilled Coffee AI End-to-End Demo")
+backend/prompts/agents/ClipFinder.md
+  15: You are the Clip Finder of Spilled Coffee AI Studio.
+backend/prompts/agents/CommunityPublisher.md
+  53: - System Logger (`spilled_coffee_ai.communitypublisher`).
+backend/prompts/agents/CitationManager.md
+  53: - System Logger (`spilled_coffee_ai.citationmanager`).
+backend/prompts/agents/CompetitorAnalyst.md
+  53: - System Logger (`spilled_coffee_ai.competitoranalyst`).
+backend/prompts/agents/ConfigurationManager.md
+  53: - System Logger (`spilled_coffee_ai.configurationmanager`).
+backend/prompts/agents/COO.md
+  53: - System Logger (`spilled_coffee_ai.coo`).
+backend/prompts/agents/CreativeDirectorAgent.md
+  15: You are the Creative Director at Spilled Coffee AI Studio.
+backend/prompts/agents/CTO.md
+  53: - System Logger (`spilled_coffee_ai.cto`).
+backend/prompts/agents/DescriptionWriter.md
+  16: You are the Description Writer of Spilled Coffee AI Studio.
+docs/legacy/AnalyticsDepartment.md
+  35: - **Specification**: [backend/prompts/agents/AnalyticsManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/AnalyticsManager.md)
+  40: - **Specification**: [backend/prompts/agents/PerformanceAnalyst.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/PerformanceAnalyst.md)
+  45: - **Specification**: [backend/prompts/agents/CTRAnalyst.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/CTRAnalyst.md)
+  50: - **Specification**: [backend/prompts/agents/RetentionAnalyst.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/RetentionAnalyst.md)
+  55: - **Specification**: [backend/prompts/agents/RecommendationAgent.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/RecommendationAgent.md)
+  60: - **Specification**: [backend/prompts/agents/CompetitorAnalyst.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/CompetitorAnalyst.md)
+frontend/src/lib/channels.ts
+  21:     strategist: 'SpilledCoffeeStudioStrategist',
+  22:     workflow: 'spilled_coffee_story',
+  64:   if (lower.includes('spilled coffee')) return CHANNEL_META[0];
+backend/prompts/agents/DeliveryManager.md
+  53: - System Logger (`spilled_coffee_ai.deliverymanager`).
+backend/prompts/agents/DocumentaryResearcher.md
+  15: You are the Documentary Researcher of Spilled Coffee AI Studio.
+backend/prompts/agents/DocumentationAgent.md
+  53: - System Logger (`spilled_coffee_ai.documentationagent`).
+backend/prompts/agents/DialogueWriter.md
+  53: - System Logger (`spilled_coffee_ai.dialoguewriter`).
+backend/prompts/agents/EnvironmentPlanner.md
+  53: - System Logger (`spilled_coffee_ai.environmentplanner`).
+backend/prompts/agents/ExecutiveAssistant.md
+  53: - System Logger (`spilled_coffee_ai.executiveassistant`).
+backend/prompts/agents/EventManager.md
+  53: - System Logger (`spilled_coffee_ai.eventmanager`).
+backend/prompts/agents/FilmoraTimeline.md
+  15: You are the Filmora Timeline Planner of Spilled Coffee AI Studio.
+docs/legacy/Architecture.md
+  1: # Spilled Coffee AI Studio: System Architecture Specification
+  5: **Corpus / Workspace**: `SpilledCoffeeAI`  
+  11: **Spilled Coffee AI Studio** is an enterprise-grade autonomous AI workforce and video production pipeline designed for automated content creation across YouTube, Shorts, and digital media channels (including *Beyond3Baje* dark mystery and *Khayal3Baje* mythological folklore channels).
+  44: Every agent in Spilled Coffee AI Studio belongs to exactly one department and executes tasks mapped by its manager agent:
+  47: Spilled Coffee AI Studio
+backend/prompts/agents/HealthMonitor.md
+  52: - System Logger (`spilled_coffee_ai.healthmonitor`).
+docs/legacy/API.md
+  1: # Spilled Coffee AI Studio: REST API Specification (`API.md`)
+backend/prompts/agents/HorrorWriter.md
+  16: You are the Horror Writer of Spilled Coffee AI Studio.
+docs/legacy/AutomationDepartment.md
+  35: - **Specification**: [backend/prompts/agents/AutomationManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/AutomationManager.md)
+  40: - **Specification**: [backend/prompts/agents/QueueManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/QueueManager.md)
+  45: - **Specification**: [backend/prompts/agents/EventManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/EventManager.md)
+  50: - **Specification**: [backend/prompts/agents/WorkflowExecutor.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/WorkflowExecutor.md)
+  55: - **Specification**: [backend/prompts/agents/IntegrationManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/IntegrationManager.md)
+  60: - **Specification**: [backend/prompts/agents/NotificationManager.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/NotificationManager.md)
+docs/legacy/AUTH_FLOW.md
+  10: Spilled Coffee AI Studio implements a secure **JSON Web Token (JWT)** authentication architecture with **Role-Based Access Control (RBAC)** to protect API endpoints, admin operations, and agent execution controls.
+  61:   "iss": "spilled_coffee_ai_auth"
+backend/prompts/agents/InfrastructureManager.md
+  53: - System Logger (`spilled_coffee_ai.infrastructuremanager`).
+docs/legacy/BuzzcafMedia.md
+  7: -   Spilled Coffee Studio
+  8: -   Spilled Coffee After Dark
+backend/prompts/agents/HorrorResearcher.md
+  15: You are the Horror Researcher of Spilled Coffee AI Studio.
+backend/prompts/agents/IntegrationManager.md
+  53: - System Logger (`spilled_coffee_ai.integrationmanager`).
+docs/legacy/ChannelDefinitions.md
+  9: ## 1. Spilled Coffee Studio (Where Stories Are Born)
+  13: Spilled Coffee Studio establishes the creator's identity as a master writer, storyteller, and story craftsman.
+  33: - **[SpilledCoffeeStudioStrategist](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/SpilledCoffeeStudioStrategist.md)**
+  37: ## 2. Spilled Coffee After Dark (Horror, Paranormal & Urban Legends)
+  40: Formerly *Raat3Baje*, **Spilled Coffee After Dark** is the primary home for horror narrations, creepy urban legends, paranormal investigations, and real-world mysteries.
+  59: - **[AfterDarkStrategist](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/AfterDarkStrategist.md)**
+  83: - **[Beyond3BajeStrategist](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/Beyond3BajeStrategist.md)**
+  100: - **[Life3BajeStrategist](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/Life3BajeStrategist.md)**
+  110: - **[Khayal3BajeStrategist](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/Khayal3BajeStrategist.md)**
+  116: The central **[TopicVaultManager](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/TopicVaultManager.md)** maintains the following inventory threshold per channel:
+  120: | **Spilled Coffee Studio** | 100+ | 50+ | 20+ |
+  121: | **Spilled Coffee After Dark** | 100+ | 50+ | 20+ |
+backend/prompts/agents/Librarian.md
+  53: - System Logger (`spilled_coffee_ai.librarian`).
+backend/prompts/agents/KnowledgeManager.md
+  53: - System Logger (`spilled_coffee_ai.knowledgemanager`).
+backend/prompts/agents/KnowledgeCurator.md
+  53: - System Logger (`spilled_coffee_ai.knowledgecurator`).
+IMPROVEMENTS.md
+  21: | 1 | Hardcoded absolute paths to a **deleted** `SpilledCoffeeAI` folder in 3 core modules | Agent personas never load; memory/logs written to a phantom directory outside the repo |
+  33: The project was renamed (`SpilledCoffeeAI` → `BuzzcafAI` / `MidnightBuzz`) but three
+  38: | `backend/core/config.py` | 9–10, 32–34 | `b:\...\SpilledCoffeeAI\backend\.env`, `...\config\config.json`, `PROJECTS_PATH`, `KNOWLEDGE_PATH`, `PROMPTS_PATH` |
+  39: | `backend/core/base_agent.py` | 24 | `b:\...\SpilledCoffeeAI\backend\prompts\agents` |
+  40: | `backend/integrations/llm.py` | 11 | `b:\...\SpilledCoffeeAI\backend\config\config.json` |
+  51:          b:\...\SpilledCoffeeAI\backend\prompts\agents\ResearchAgent.md. Using default.
+  63: `import app.main` recreates `B:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\{knowledge,logs,projects,prompts}`
+  145: | `start_spilledCoffeeAi.bat:9-10` | 3005 | 8095 |
+  165: launcher — `start_spilledCoffeeAi.bat` is a third product name, and it's untracked
+  166: (`git status` shows `?? start_spilledCoffeeAi.bat`).
+  469: - **Duplicate brand names** (`main.py:105`): `"Spilled Coffee: After Dark"` and `"Spilled Coffee After Dark"` are both listed, and the topic-vault matcher (`main.py:570`) does substring matching in both directions, so `"Life3Baje"` could match unexpectedly. Use a canonical slug per channel.
+  524: `B:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\` (backend/{knowledge,logs,projects,prompts}).
+README.md
+  4: channel brands (**Beyond3Baje**, **Spilled Coffee After Dark**, **Life3Baje**,
+  5: **Khayal3Baje**, **Spilled Coffee Studio**).
+  165: 2. **Spilled Coffee After Dark 🕯️** — folklore, 3 AM encounters, regional horror.
+  168: 5. **Spilled Coffee Studio ☕** — flagship long-form storytelling.
+backend/prompts/agents/MarketingManager.md
+  53: - System Logger (`spilled_coffee_ai.marketingmanager`).
+backend/prompts/agents/MemoryManager.md
+  53: - System Logger (`spilled_coffee_ai.memorymanager`).
+docs/legacy/Company.md
+  10: -   Spilled Coffee AI Studio (internal platform)
+  21: Spilled Coffee AI Studio.
+backend/prompts/agents/MetadataOptimizer.md
+  54: - System Logger (`spilled_coffee_ai.metadataoptimizer`).
+backend/prompts/agents/NarrationOptimizer.md
+  15: You are the Narration Optimizer of Spilled Coffee AI Studio.
+backend/prompts/agents/MythologySpecialist.md
+  53: - System Logger (`spilled_coffee_ai.mythologyspecialist`).
+backend/prompts/agents/NewsletterManager.md
+  53: - System Logger (`spilled_coffee_ai.newslettermanager`).
+backend/prompts/agents/NotificationManager.md
+  53: - System Logger (`spilled_coffee_ai.notificationmanager`).
+backend/prompts/agents/PerformanceAnalyst.md
+  53: - System Logger (`spilled_coffee_ai.performanceanalyst`).
+docs/legacy/CORE_RUNTIME.md
+  10: The **Core Runtime Engine** manages the lifecycle, prompt resolution, LLM execution, context passing, and error recovery for all 79 AI agents in Spilled Coffee AI Studio.
+  50:             r"b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend\prompts\agents",
+  56:         return f"You are the {self.agent_name} of Spilled Coffee AI Studio."
+  80: 3. **Fallback Injection**: If an input dependency is missing, default fallback context is injected and a warning is logged via `spilled_coffee_ai.core.base_agent`.
+backend/prompts/agents/ProductionReviewer.md
+  53: - System Logger (`spilled_coffee_ai.productionreviewer`).
+backend/prompts/agents/ProjectManagerAgent.md
+  15: You are the Project Manager Agent of Spilled Coffee AI Studio.
+backend/prompts/agents/PromptLibrary.md
+  15: You are the Prompt Library Manager of Spilled Coffee AI Studio.
+backend/prompts/agents/PublishingChecklist.md
+  16: You are the Publishing Compliance Checker of Spilled Coffee AI Studio.
+docs/legacy/DecisionMaking.md
+  10: Every agent in Spilled Coffee AI Studio operates under a strict rule hierarchy when resolving conflicts, task trade-offs, or quality decisions:
+backend/prompts/agents/ResearchLibrary.md
+  15: You are the Research Library Manager of Spilled Coffee AI Studio.
+backend/prompts/agents/QueueManager.md
+  53: - System Logger (`spilled_coffee_ai.queuemanager`).
+docs/legacy/DEPLOYMENT.md
+  1: # Spilled Coffee AI Studio: Production Deployment Guide (`DEPLOYMENT.md`)
+  61: cd b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\backend
+  70: cd b:\youtubeProjects\Buzzcaf Media\SpilledCoffeeAI\frontend
+backend/prompts/agents/QAManager.md
+  52: - System Logger (`spilled_coffee_ai.qamanager`).
+backend/prompts/agents/ReviewAgent.md
+  53: - System Logger (`spilled_coffee_ai.reviewagent`).
+backend/prompts/agents/ResourcePlanner.md
+  53: - System Logger (`spilled_coffee_ai.resourceplanner`).
+backend/prompts/agents/Reviewer.md
+  53: - System Logger (`spilled_coffee_ai.reviewer`).
+backend/prompts/agents/RiskManager.md
+  53: - System Logger (`spilled_coffee_ai.riskmanager`).
+backend/prompts/agents/RuntimeMonitor.md
+  53: - System Logger (`spilled_coffee_ai.runtimemonitor`).
+backend/prompts/agents/SecurityMonitor.md
+  53: - System Logger (`spilled_coffee_ai.securitymonitor`).
+backend/prompts/agents/SoundDesigner.md
+  15: You are the Sound Designer of Spilled Coffee AI Studio.
+backend/prompts/agents/SocialMediaManager.md
+  53: - System Logger (`spilled_coffee_ai.socialmediamanager`).
+backend/prompts/agents/SpilledCoffeeStudioStrategist.md
+  2: name: "SpilledCoffeeStudioStrategist"
+  6: outputs: ["spilled_coffee_studio_topics"]
+  12: # Agent Specification: SpilledCoffeeStudioStrategist
+  15: - **Agent Name**: SpilledCoffeeStudioStrategist
+  41: - Deliver `spilled_coffee_studio_topics` JSON payload.
+  55: - `spilled_coffee_studio_topics`: Array of video concepts with script outlines and legal excerpt guidelines.
+  84: 3. Export `spilled_coffee_studio_topics` JSON payload.
+  107: You are SpilledCoffeeStudioStrategist for Originals.
+  122:   "task_name": "SpilledCoffeeStudioStrategist_Task",
+  135:   "agent": "SpilledCoffeeStudioStrategist",
+  137:     "spilled_coffee_studio_topics": [
+docs/legacy/ExecutiveOffice.md
+  12: The **Executive Office** provides strategic leadership, company-wide governance, operational oversight, financial budgeting, tech stack architecture, and knowledge management for Spilled Coffee AI Studio.
+  35: - **Specification**: [backend/prompts/agents/CEO.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/CEO.md)
+  40: - **Specification**: [backend/prompts/agents/COO.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/COO.md)
+  45: - **Specification**: [backend/prompts/agents/CTO.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/CTO.md)
+  50: - **Specification**: [backend/prompts/agents/CFO.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/CFO.md)
+  55: - **Specification**: [backend/prompts/agents/ChiefKnowledgeOfficer.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/ChiefKnowledgeOfficer.md)
+  60: - **Specification**: [backend/prompts/agents/ExecutiveAssistant.md](file:///b:/youtubeProjects/Buzzcaf%20Media/SpilledCoffeeAI/backend/prompts/agents/ExecutiveAssistant.md)
+backend/prompts/agents/StoryLibrary.md
+  15: You are the Story Library Manager of Spilled Coffee AI Studio.
+docs/legacy/FolderStructure.md
+  3:     SpilledCoffeeAI/
+backend/prompts/agents/TagGenerator.md
+  16: You are the Tag Generator of Spilled Coffee AI Studio.
+backend/prompts/agents/TitleGenerator.md
+  16: You are the Title Generator of Spilled Coffee AI Studio.
+… more than 200 matches; narrow the pattern, add a glob, or raise max_results.

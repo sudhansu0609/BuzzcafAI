@@ -1,6 +1,6 @@
 ---
 name: "CharacterLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Store character biographies and traits."
 inputs: ["character_details"]
 outputs: ["character_profile"]

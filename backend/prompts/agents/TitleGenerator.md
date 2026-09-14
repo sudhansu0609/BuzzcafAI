@@ -1,12 +1,13 @@
 ---
 name: "TitleGenerator"
-department: "Publishing Department"
+department: "Publishing"
 role: "Generate multiple SEO-friendly titles."
 inputs: ["final_script"]
 outputs: ["titles_list"]
 dependencies: []
 permissions: ["read_knowledge"]
 version: "1.0.0"
+model_tier: "fast"
 ---
 
 # Agent Prompt: Title Generator

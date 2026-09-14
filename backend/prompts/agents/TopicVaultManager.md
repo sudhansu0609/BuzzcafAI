@@ -18,7 +18,7 @@ version: "1.0.0"
 - **Version**: 1.0.0
 
 ## 2. Mission
-To manage the central Topic Vault database across all Buzzcaf Media channel brands (**Spilled Coffee After Dark**, **Beyond3Baje**, **Life3Baje**, and **Khayal3Baje**), maintaining 100+ raw ideas, 50 researched ideas, and 20 script-ready ideas per channel.
+To manage the central Topic Vault database across all Buzzcaf Media channel brands (**Raat3Baje**, **Originals**, **Beyond3Baje**, **Life3Baje**, and **Khayal3Baje**), maintaining 100+ raw ideas, 50 researched ideas, and 20 script-ready ideas per channel.
 
 ## 3. Purpose
 Maintains a structured, queryable topic database in Notion / CSV / JSON format, ensuring content pipelines are never stalled by a lack of video topics.

@@ -1,6 +1,6 @@
 ---
 name: "AssetLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Index images, audio, video and project assets."
 inputs: ["file_metadata"]
 outputs: ["indexed_asset_record"]

@@ -31,7 +31,7 @@ _REQUIRED = [
     ("dotenv", "reading .env"),
 ]
 
-EXPECTED_PERSONAS = 115
+EXPECTED_PERSONAS = 105
 
 
 class Report:
@@ -146,12 +146,13 @@ def check_personas(report: Report) -> None:
 
 
 def check_port(report: Report) -> None:
-    """Port 8000 must be free, or already answered by this very app."""
+    """Report on the preferred port. Never fatal: if an unrelated process holds
+    it, the Studio steps to the next free port at launch (desktop_app._resolve_port)."""
     import json
     import socket
     import urllib.request
 
-    port = int(os.getenv("BUZZCAF_PORT", "8000"))
+    port = int(os.getenv("BUZZCAF_PORT", "8099"))
     try:
         req = urllib.request.Request(f"http://127.0.0.1:{port}/health")
         with urllib.request.urlopen(req, timeout=1.5) as res:
@@ -159,8 +160,8 @@ def check_port(report: Report) -> None:
         if body.get("app") == "buzzcaf":
             report.add(OK, "Port", f"{port} already served by a running Studio (window will attach)")
         else:
-            report.add(FAIL, "Port", f"{port} is taken by something that is not the Studio",
-                       "Stop that process or set BUZZCAF_PORT to a free port")
+            report.add(WARN, "Port", f"{port} is taken by something that is not the Studio",
+                       "the Studio will start on the next free port")
         return
     except Exception:
         pass
@@ -169,8 +170,8 @@ def check_port(report: Report) -> None:
             sock.bind(("127.0.0.1", port))
             report.add(OK, "Port", f"{port} is free")
         except OSError:
-            report.add(FAIL, "Port", f"{port} is in use but does not answer /health",
-                       "Stop that process or set BUZZCAF_PORT to a free port")
+            report.add(WARN, "Port", f"{port} is in use but does not answer /health",
+                       "the Studio will start on the next free port")
 
 
 def check_llm(report: Report) -> None:

@@ -16,7 +16,11 @@ class ProductionDepartment(Department):
                 "CharacterPlanner",
                 "EnvironmentPlanner",
                 "AssetManager",
-                "ProductionReviewer"
+                "ProductionReviewer",
+                "AnimationPlanner",
+                "ClipFinder",
+                "FilmoraTimeline",
+                "SoundDesigner"
             ],
             llm_service=llm_service
         )

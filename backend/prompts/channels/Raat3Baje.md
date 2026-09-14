@@ -1,7 +1,7 @@
-# Brand Style Guide: Spilled Coffee After Dark
+# Brand Style Guide: Raat3Baje
 
 ## Overview
-Spilled Coffee After Dark is the premium narrated horror and paranormal storytelling channel of Buzzcaf Media.
+Raat3Baje is the premium narrated horror and paranormal storytelling channel of Buzzcaf Media.
 
 ## Core Identity
 - **Topic Focus**: Paranormal investigations, true ghost stories, unsolved mysteries of the dark, and creepy encounters.

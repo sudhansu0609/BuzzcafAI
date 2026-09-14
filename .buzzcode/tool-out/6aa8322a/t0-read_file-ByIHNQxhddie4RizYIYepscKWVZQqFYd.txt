@@ -1,0 +1,251 @@
+backend/core/agent.py (lines 1-250 of 250)
+  1	import os
+  2	import logging
+  3	from typing import Dict, List, Any, Optional
+  4	from pydantic import BaseModel, Field
+  5	from core.markdown import markdown_loader
+  6	
+  7	logger = logging.getLogger("buzzcaf_ai.core.agent")
+  8	
+  9	AGENTS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prompts", "agents")
+ 10	
+ 11	class AgentDefinition(BaseModel):
+ 12	    name: str
+ 13	    department: str
+ 14	    role: str
+ 15	    inputs: List[str] = Field(default_factory=list)
+ 16	    outputs: List[str] = Field(default_factory=list)
+ 17	    dependencies: List[str] = Field(default_factory=list)
+ 18	    permissions: List[str] = Field(default_factory=list)
+ 19	    version: str = "1.0.0"
+ 20	    # Which model tier this persona's work belongs on, and how loose the model
+ 21	    # should be when it answers (roadmap v9, F1/F2). Both come from the
+ 22	    # frontmatter; both have working defaults so no persona file must be edited.
+ 23	    model_tier: str = "strong"
+ 24	    temperature: float = 0.7
+ 25	    prompt_filepath: Optional[str] = None
+ 26	
+ 27	class AgentRegistry:
+ 28	    _instance = None
+ 29	    
+ 30	    def __new__(cls):
+ 31	        if cls._instance is None:
+ 32	            cls._instance = super(AgentRegistry, cls).__new__(cls)
+ 33	            cls._instance.agents: Dict[str, AgentDefinition] = {}
+ 34	            cls._instance.agent_cache: Dict[str, Any] = {} # lazy cache
+ 35	            cls._instance.discover_agents()
+ 36	        return cls._instance
+ 37	
+ 38	    def discover_agents(self):
+ 39	        """Discovers agents dynamically from prompts/agents/ directory."""
+ 40	        self.agents.clear()
+ 41	        if not os.path.exists(AGENTS_DIR):
+ 42	            os.makedirs(AGENTS_DIR, exist_ok=True)
+ 43	            return
+ 44	
+ 45	        for f_name in os.listdir(AGENTS_DIR):
+ 46	            if f_name.endswith(".md"):
+ 47	                f_path = os.path.join(AGENTS_DIR, f_name)
+ 48	                try:
+ 49	                    # Leverage MarkdownLoader to parse frontmatter
+ 50	                    doc = markdown_loader.load(f_path)
+ 51	                    fm = doc.frontmatter
+ 52	                    
+ 53	                    if "name" in fm:
+ 54	                        # Translate frontmatter types
+ 55	                        def clean_list(val):
+ 56	                            if isinstance(val, list):
+ 57	                                return val
+ 58	                            if isinstance(val, str):
+ 59	                                # simple string list parse e.g. ["a", "b"]
+ 60	                                cleaned = val.replace("[", "").replace("]", "").replace('"', "").replace("'", "")
+ 61	                                return [item.strip() for item in cleaned.split(",") if item.strip()]
+ 62	                            return []
+ 63	
+ 64	                        def clean_tier(val):
+ 65	                            tier = str(val or "strong").strip().lower()
+ 66	                            return tier if tier in ("fast", "strong") else "strong"
+ 67	
+ 68	                        def clean_temperature(val):
+ 69	                            try:
+ 70	                                return max(0.0, min(2.0, float(val)))
+ 71	                            except (TypeError, ValueError):
+ 72	                                return 0.7
+ 73	
+ 74	                        agent = AgentDefinition(
+ 75	                            name=fm["name"],
+ 76	                            department=fm.get("department", "General"),
+ 77	                            role=fm.get("role", ""),
+ 78	                            inputs=clean_list(fm.get("inputs")),
+ 79	                            outputs=clean_list(fm.get("outputs")),
+ 80	                            dependencies=clean_list(fm.get("dependencies")),
+ 81	                            permissions=clean_list(fm.get("permissions")),
+ 82	                            version=fm.get("version", "1.0.0"),
+ 83	                            model_tier=clean_tier(fm.get("model_tier")),
+ 84	                            temperature=clean_temperature(fm.get("temperature", 0.7)),
+ 85	                            prompt_filepath=f_path
+ 86	                        )
+ 87	                        self.validate(agent, check_dependencies=False)
+ 88	                        self.agents[agent.name.lower()] = agent
+ 89	                        logger.info(f"AgentRegistry: Discovered and registered agent '{agent.name}'")
+ 90	                except Exception as e:
+ 91	                    logger.error(f"AgentRegistry: Failed to load agent from {f_name}: {e}")
+ 92	
+ 93	        # Dependencies can only be checked once every agent is registered --
+ 94	        # doing it mid-scan just reports whatever sorts later in the directory.
+ 95	        for agent in self.agents.values():
+ 96	            self._validate_dependencies(agent)
+ 97	
+ 98	    def register(self, agent: AgentDefinition):
+ 99	        self.validate(agent)
+100	        self.agents[agent.name.lower()] = agent
+101	        logger.info(f"AgentRegistry: Manually registered agent '{agent.name}'")
+102	
+103	    def unregister(self, name: str):
+104	        key = name.lower()
+105	        if key in self.agents:
+106	            del self.agents[key]
+107	            if key in self.agent_cache:
+108	                del self.agent_cache[key]
+109	            logger.info(f"AgentRegistry: Unregistered agent '{name}'")
+110	
+111	    def get(self, name: str) -> Optional[AgentDefinition]:
+112	        """Lazy load or fetch from cache if already populated."""
+113	        key = name.lower()
+114	        if key in self.agent_cache:
+115	            return self.agent_cache[key]
+116	        if key in self.agents:
+117	            agent = self.agents[key]
+118	            self.agent_cache[key] = agent
+119	            return agent
+120	        return None
+121	
+122	    def list(self) -> List[AgentDefinition]:
+123	        return list(self.agents.values())
+124	
+125	    def validate(self, agent: AgentDefinition, check_dependencies: bool = True):
+126	        """Validate required fields, dependencies, and duplicates."""
+127	        if not agent.name or not agent.department or not agent.role:
+128	            raise ValueError(f"Agent validation error: Missing required fields (name, department, role).")
+129	
+130	        if check_dependencies:
+131	            self._validate_dependencies(agent)
+132	
+133	    # Built-in roles implemented in code rather than as a prompt file.
+134	    KNOWN_ROLES = [
+135	        "ceo", "researchagent", "writeragent", "editoragent",
+136	        "creativedirectoragent", "seomanageragent",
+137	    ]
+138	
+139	    def _validate_dependencies(self, agent: AgentDefinition):
+140	        for dep in agent.dependencies:
+141	            dep_key = dep.lower()
+142	            if dep_key not in self.agents and dep_key not in self.KNOWN_ROLES:
+143	                logger.warning(f"Agent '{agent.name}' has unresolved dependency: '{dep}'")
+144	
+145	agent_registry = AgentRegistry()
+146	
+147	from core.base_agent import BaseAgent
+148	from integrations.llm import LLMService, clean_json_response
+149	import json
+150	
+151	class CEOAgent(BaseAgent):
+152	    def __init__(self, llm_service: Optional[LLMService] = None):
+153	        super().__init__("CEO", llm_service)
+154	
+155	    def plan_next_step(self, project_details: str, current_step: str, history: str) -> Dict[str, Any]:
+156	        prompt = f"""
+157	Analyze the project details and history. Recommend the task details for the next step.
+158	
+159	### Project Details
+160	{project_details}
+161	
+162	### Current Active Step
+163	{current_step}
+164	
+165	### Previous Execution History
+166	{history}
+167	
+168	Respond in the required JSON format containing:
+169	- "task_objective"
+170	- "target_agent"
+171	- "context_files"
+172	- "constraints"
+173	"""
+174	        raw_output = self.execute(prompt, require_json=True)
+175	        try:
+176	            cleaned = clean_json_response(raw_output)
+177	            return json.loads(cleaned)
+178	        except Exception as e:
+179	            logger.error(f"CEOAgent failed to parse task plan JSON: {e}. Output was: {raw_output}")
+180	            return {
+181	                "task_objective": f"Execute standard {current_step} step.",
+182	                "target_agent": f"{current_step}Agent",
+183	                "context_files": [],
+184	                "constraints": ["Follow brand standards."]
+185	            }
+186	
+187	class ResearchAgent(BaseAgent):
+188	    def __init__(self, llm_service: Optional[LLMService] = None):
+189	        super().__init__("ResearchAgent", llm_service)
+190	
+191	    def execute(self, task: Any, require_json: bool = False) -> str:
+192	        return super().execute(task, require_json)
+193	
+194	class WriterAgent(BaseAgent):
+195	    def __init__(self, llm_service: Optional[LLMService] = None):
+196	        super().__init__("WriterAgent", llm_service)
+197	
+198	    def execute(self, task: Any, require_json: bool = False) -> str:
+199	        return super().execute(task, require_json)
+200	
+201	class EditorAgent(BaseAgent):
+202	    def __init__(self, llm_service: Optional[LLMService] = None):
+203	        super().__init__("EditorAgent", llm_service)
+204	
+205	    def execute(self, task: Any, require_json: bool = False) -> str:
+206	        return super().execute(task, require_json)
+207	
+208	class CreativeDirectorAgent(BaseAgent):
+209	    def __init__(self, llm_service: Optional[LLMService] = None):
+210	        super().__init__("CreativeDirectorAgent", llm_service)
+211	
+212	    def execute(self, task: Any, require_json: bool = False) -> str:
+213	        return super().execute(task, require_json)
+214	
+215	class SEOManagerAgent(BaseAgent):
+216	    def __init__(self, llm_service: Optional[LLMService] = None):
+217	        super().__init__("SEOManagerAgent", llm_service)
+218	
+219	    def execute(self, task: Any, require_json: bool = False) -> str:
+220	        return super().execute(task, require_json)
+221	
+222	class AgentFactory:
+223	    @staticmethod
+224	    def get_agent(agent_role: str, llm_service: Optional[LLMService] = None) -> BaseAgent:
+225	        role_map = {
+226	            "ceo": CEOAgent,
+227	            "researchagent": ResearchAgent,
+228	            "writeragent": WriterAgent,
+229	            "editoragent": EditorAgent,
+230	            "creativedirectoragent": CreativeDirectorAgent,
+231	            "seomanageragent": SEOManagerAgent
+232	        }
+233	        normalized = agent_role.lower().strip()
+234	        if normalized in role_map:
+235	            return role_map[normalized](llm_service)
+236	
+237	        # Look up registered agent definition for exact file name matching
+238	        def_obj = agent_registry.get(normalized)
+239	        target_name = def_obj.name if def_obj else agent_role
+240	
+241	        class GenericAgent(BaseAgent):
+242	            def __init__(self, name: str, service: Optional[LLMService] = None):
+243	                super().__init__(name, service)
+244	
+245	            def execute(self, task: Any, require_json: bool = False) -> str:
+246	                return super().execute(task, require_json)
+247	
+248	        return GenericAgent(target_name, llm_service)
+249	
+250	

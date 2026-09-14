@@ -15,14 +15,14 @@ export interface ChannelMeta {
 
 export const CHANNEL_META: ChannelMeta[] = [
   {
-    id: 'Spilled Coffee Studio',
+    id: 'Originals',
     icon: '✍️',
-    desc: 'Originals & story analysis',
+    desc: 'Original stories, fiction & analysis',
     strategist: 'SpilledCoffeeStudioStrategist',
     workflow: 'spilled_coffee_story',
   },
   {
-    id: 'Spilled Coffee After Dark',
+    id: 'Raat3Baje',
     icon: '👻',
     desc: 'Horror, paranormal & urban legends',
     strategist: 'AfterDarkStrategist',
@@ -58,8 +58,10 @@ export function metaFor(channel: string | undefined | null): ChannelMeta {
   const exact = CHANNEL_META.find((c) => c.id === channel);
   if (exact) return exact;
   const lower = channel.toLowerCase();
-  if (lower.includes('after dark')) return CHANNEL_META[1];
-  if (lower.includes('studio')) return CHANNEL_META[0];
+  if (lower.includes('raat3baje') || lower.includes('after dark')) return CHANNEL_META[1];
+  // 'originals' before the legacy 'studio' so old localStorage values still resolve.
+  if (lower.includes('originals')) return CHANNEL_META[0];
+  if (lower.includes('spilled coffee')) return CHANNEL_META[0];
   if (lower.includes('life')) return CHANNEL_META[3];
   if (lower.includes('khayal')) return CHANNEL_META[4];
   return DEFAULT_META;

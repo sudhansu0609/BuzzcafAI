@@ -1,10 +1,10 @@
 ---
 name: "NarrationOptimizer"
-department: "Writing Department"
+department: "Writing"
 role: "Adapt scripts for spoken narration."
 inputs: ["script_edited"]
 outputs: ["narration_script"]
-dependencies: ["Editor"]
+dependencies: ["EditorAgent"]
 permissions: ["read_project_assets", "write_project_assets"]
 version: "1.0.0"
 ---

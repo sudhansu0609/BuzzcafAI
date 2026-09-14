@@ -1,12 +1,13 @@
 ---
 name: "HorrorWriter"
-department: "Writing Department"
+department: "Writing"
 role: "Produce long-form Hindi horror scripts."
 inputs: ["script_outline"]
 outputs: ["hindi_horror_script"]
 dependencies: ["OutlineWriter"]
 permissions: ["read_project_assets", "write_project_assets"]
 version: "1.0.0"
+temperature: 0.9
 ---
 
 # Agent Prompt: Horror Writer

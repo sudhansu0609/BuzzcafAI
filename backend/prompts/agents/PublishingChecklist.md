@@ -1,12 +1,13 @@
 ---
 name: "PublishingChecklist"
-department: "Publishing Department"
+department: "Publishing"
 role: "Verify assets, metadata and compliance."
 inputs: ["publish_package"]
 outputs: ["compliance_status"]
 dependencies: []
 permissions: ["read_knowledge"]
 version: "1.0.0"
+model_tier: "fast"
 ---
 
 # Agent Prompt: Publishing Checklist

@@ -1,6 +1,6 @@
 ---
 name: "StoryLibrary"
-department: "Knowledge Department"
+department: "Knowledge"
 role: "Catalog completed stories and outlines."
 inputs: ["script_final"]
 outputs: ["catalog_record"]

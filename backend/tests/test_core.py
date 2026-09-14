@@ -141,6 +141,64 @@ def test_workflow_registry_validation():
     # Clean up registry
     registry.unregister("test_registry_wf")
 
+
+def test_workflow_validator_reads_the_agent_registry():
+    """v9 A1: any registered persona may run a step, an unknown name may not."""
+    from core.agent import agent_registry
+
+    registry = WorkflowRegistry()
+
+    # ScriptWriter is a persona file, not one of the six hard-coded roles the
+    # validator used to accept.
+    assert "scriptwriter" in agent_registry.agents
+    specialist_wf = WorkflowDefinition(
+        id="test_specialist_wf",
+        name="Specialist Workflow",
+        description="A step run by a persona outside the old literal list",
+        steps=[
+            WorkflowStep(
+                name="Draft",
+                agent_role="ScriptWriter",
+                description="Writes the draft",
+                requires_approval=False,
+                input_assets=[],
+                output_asset_type="script_package",
+            )
+        ],
+    )
+    registry.register(specialist_wf)
+    assert registry.get("test_specialist_wf") is not None
+    registry.unregister("test_specialist_wf")
+
+    unknown_wf = WorkflowDefinition(
+        id="test_unknown_agent_wf",
+        name="Unknown Agent Workflow",
+        description="A typo must not be silently accepted",
+        steps=[
+            WorkflowStep(
+                name="Draft",
+                agent_role="NoSuchAgent",
+                description="Writes the draft",
+                requires_approval=False,
+                input_assets=[],
+                output_asset_type="script_package",
+            )
+        ],
+    )
+    with pytest.raises(ValueError) as exc:
+        registry.register(unknown_wf)
+    assert "not in the Agent Registry" in str(exc.value)
+
+
+def test_shipped_workflows_all_load():
+    """The six workflows under prompts/workflows survive validation."""
+    registry = WorkflowRegistry()
+    registry.discover_workflows()
+    assert len(registry.list()) == 6
+    for wf in registry.list():
+        assert wf.steps
+
+
 def test_diagnostics_report():
     report = Diagnostics.get_report()
     assert "startup_time_seconds" in report

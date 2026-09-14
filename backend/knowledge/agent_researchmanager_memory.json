@@ -1,0 +1,18 @@
+[
+  {
+    "id": "21a4e283-e00c-4606-913c-ee515eb05f57",
+    "scope": "agent",
+    "owner": "ResearchManager",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Name two source types you would check for a 1923 Indian fort incident. One line each.",
+      "result_snippet": "For a 1923 Indian fort incident, I would check official government archives and old newspaper archives."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-09T20:25:33.746591",
+    "updated": "2026-09-09T20:25:33.746596"
+  }
+]

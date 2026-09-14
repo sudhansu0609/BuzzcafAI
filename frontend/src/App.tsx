@@ -3,6 +3,7 @@ import {
   BarChart3,
   AlertCircle,
   Bot,
+  Building2,
   ChevronUp,
   Compass,
   Database,
@@ -22,6 +23,7 @@ import Projects from './pages/Projects';
 import TopicVault from './pages/TopicVault';
 import Analyze from './pages/Analyze';
 import Workforce from './pages/Workforce';
+import Departments from './pages/Departments';
 import Health from './pages/Health';
 import Settings from './pages/Settings';
 import AgentCreatorStudio from './pages/ai/AgentCreatorStudio';
@@ -61,6 +63,7 @@ const SECTIONS: NavSection[] = [
       { id: 'agent_creator_studio', label: 'Agents Workbench', icon: <Bot size={18} style={{ color: '#a78bfa' }} />, title: 'Agents Workbench' },
       { id: 'agents_group_chat', label: 'Group Chat', icon: <Users size={18} style={{ color: '#a78bfa' }} />, title: 'Agents group chat' },
       { id: 'ai_workforce', label: 'Personas', icon: <Users size={18} />, title: 'Agent personas' },
+      { id: 'departments', label: 'Departments', icon: <Building2 size={18} />, title: 'Departments' },
     ],
   },
   {
@@ -169,6 +172,7 @@ function Shell() {
             <AgentsGroupChat selectedAgentIds={groupChatAgentIds} onBackToStudio={() => navigate('agent_creator_studio')} />
           )}
           {tab === 'ai_workforce' && <Workforce />}
+          {tab === 'departments' && <Departments />}
           {tab === 'health' && <Health />}
           {tab === 'settings' && <Settings />}
         </div>

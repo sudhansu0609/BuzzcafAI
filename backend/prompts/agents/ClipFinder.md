@@ -1,6 +1,6 @@
 ---
 name: "ClipFinder"
-department: "Production Department"
+department: "Production"
 role: "Recommend stock or owned clips for each scene."
 inputs: ["scenes_breakdown"]
 outputs: ["clip_recommendations"]

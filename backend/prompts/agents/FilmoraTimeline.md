@@ -1,6 +1,6 @@
 ---
 name: "FilmoraTimeline"
-department: "Production Department"
+department: "Production"
 role: "Create timeline instructions for editing."
 inputs: ["storyboard"]
 outputs: ["timeline_instructions"]

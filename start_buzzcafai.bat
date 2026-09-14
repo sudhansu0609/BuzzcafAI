@@ -5,8 +5,9 @@ REM Buzzcaf Studio - developer launcher (one console, live-reloading UI)
 REM
 REM Day-to-day use: double-click "Buzzcaf Studio.vbs" instead. It opens only
 REM the app window, no console. This script is for working on the code: it
-REM runs the same desktop shell with --dev, which serves the Vite dev server
-REM (port 5173, hot reload) inside the window and prints the log here.
+REM runs the same desktop shell with --dev, which serves our Vite dev server
+REM (port 5173, or the next free one when another project's Vite is there;
+REM hot reload) inside the window and prints the log here.
 REM
 REM Interpreter: BUZZCAF_PYTHON -> .venv\Scripts\python.exe -> python on PATH.
 REM ===================================================

@@ -52,6 +52,94 @@ Studio owns **I2, I11, I12** and shares **I5, I9**.
 |---|---|---|---|
 | S1 | Analyze a video or channel link | `app/services/video_intel.py`: yt-dlp (no API key) for metadata, captions, the "most replayed" heatmap and the channel's last 30 uploads; metrics (views/day, like rate, comments per 1k, views ÷ subs, outlier multiple vs the channel median, hook transcript, replay peaks with what was said, title signals); one model call with the target channel's brand guide → why it works + blueprint (titles, hook script, outline, thumbnail, tags, length, CTA, differentiator, do-not-copy); `POST /api/video-intel/analyze`, `GET /recent`, `/{id}`; cached; `simulated` when no model answered; Analyze tab with "Save as topic" and "Start a project" | **J3** paste a link → breakdown in under a minute; a channel link → outliers + what to borrow; nothing invented when no model is up |
 
+## v9 — Staff activation (owner's ask, 2026-09-09)
+
+**Why.** 115 personas load and register, but only 8 ever run: `core/workflow.py:73`
+hard-codes six `valid_agents` (the comment above it claims it reads the registry),
+the chat UI hard-codes five strategists (`frontend/src/lib/channels.ts`), and the
+12 `app/departments` classes — a verified 79-agent ownership map — have no
+caller outside a test. Delegation exists only as `[INVOKE_AGENT: X]` tags the
+model may emit, run silently by `studio_chat.process_agent_invocations`.
+Frontmatter `inputs/outputs/dependencies/permissions` do nothing at runtime.
+Numbering: Dexter took v7/v8, so the Studio's next shared number is v9.
+
+Order of work: **A → C → D → B → E → F → G.** Each phase ends green
+(`pytest tests -q` in `backend/`, `tsc` + `vite build` in `frontend/`) before
+the next starts. Nothing is marked done in `PROGRESS.md` without evidence.
+
+### Phase A — Unlock the roster
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| A1 | Validator reads the registry | `core/workflow.py` `WorkflowRegistry.validate`: replace the literal list with `{k for k in agent_registry.agents}` (import the singleton from `core.agent`), compare `step.agent_role.lower().strip()`. Unknown names still raise so a typo cannot silently drop a workflow. | `tests/test_router.py`+new test: a workflow whose step names `ScriptWriter` registers; one naming `NoSuchAgent` raises `ValueError`; the 6 shipped workflows still load |
+| A2 | `/api/agents` carries the frontmatter | `app/main.py` `list_agents`: build from `agent_registry.agents.values()` → `{name, department, role, inputs, outputs, dependencies, version, file}`; `?department=` filter; `status` becomes `"registered"` (the old `"Active & Idle"` was invented). `pages/Workforce.tsx`: group by department, show role, filter by name or department, count per group. | `GET /api/agents` returns 115 rows with non-empty `department` and `role`; Personas tab shows 19 groups |
+| A3 | Any persona in chat | `pages/StudioChat.tsx`: persona picker fed by `/api/agents` grouped by department, default = the channel strategist from `lib/channels.ts`, choice remembered per channel in `localStorage`; sends `agent_name` to `POST /api/topics/agent_chat` (backend unchanged — it already accepts any name, `main.py:600`). Reply header names the persona that answered. | pick `FactChecker` on Beyond3Baje, ask a question, reply arrives in that persona's voice; `knowledge/agent_factchecker_memory.json` appears |
+| A4 | Prune the duplicate generation | Merge into one canonical file each: `CTRAnalyst`/`CTRAnalyzer`, `RetentionAnalyst`/`RetentionAnalyzer`, `RecommendationAgent`/`RecommendationEngine`, `TrendAnalyst`/`TrendAnalyzer`/`TrendResearcher`, `Editor`/`EditorAgent` (keep `EditorAgent`, workflows use it), `ThumbnailSpecialist`/`ThumbnailPlanner`, `SEOSpecialist`/`SEOManagerAgent` (keep `SEOManagerAgent`), `ScheduleManager`/`PublishingScheduleManager`/`SchedulerAgent`. Fold the `"X Department"` namespaces into `"X"` so departments match the 12 classes + `Creative`. Update `EXPECTED_PERSONAS` in `preflight.py`, `dependencies:` lines that pointed at a removed name, and the "19 departments" text in `core/base_agent.py:50`. Keep the better prose of each pair. | `python -c "from core.agent import AgentRegistry; print(len(AgentRegistry().agents))"` matches `EXPECTED_PERSONAS`; no `dependencies` warning in the log; `pytest` green |
+
+### Phase C — Read the work
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| C1 | Asset viewer | `pages/Projects.tsx`: list `project.assets` (name → file) for the selected project; click opens a right-hand panel that fetches `GET /api/projects/{id}/asset/{name}` (exists, `main.py`) and renders Markdown with a small in-repo renderer (headings, lists, paragraphs, fenced code — no library). | open a project, click `script`, read the script in the window |
+| C2 | Workflow step preview | `pages/Dashboard.tsx`: when a workflow is chosen, render its `steps[]` (name, `agent_role`, approval flag) from `/api/workflows` before "Start project". `pages/Projects.tsx`: step timeline for the current project — done / current / pending from `project.history` + the workflow definition, approval steps marked. | the new-project form shows the 13 documentary steps; Projects shows the current step highlighted |
+| C3 | Real approve | Approve button calls `POST /api/projects/{id}/approve` (409-aware) instead of `execute` with an empty body; "Revise" keeps `execute` with `feedback`. | `approval_needed` → click Approve → `step_started` on `/api/studio/events` |
+
+### Phase D — Nothing lies, continued
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| D1 | Research output is real or labelled | `runtime/workflow.py:202-309`: the research step asks `ResearchAgent` for JSON with keys `timeline, facts, sources, media, unanswered_questions` (`require_json=True`, schema in the instruction); each key → its file. Non-JSON reply → raw text to `research.md`, the five files are **not** written, `history_step` records `simulated_sections: [...]`. Delete the literal "Information gathered from research." filler. | `grep -rn "Information gathered from research" backend` empty; `tests/test_workflow_engine`: JSON reply → 5 files; prose reply → 1 file + label |
+| D2 | Discover uses a model | `POST /api/topics/discover`: run `TopicVaultManager` (via `AgentFactory` + `LLMService`, `require_json`) with the channel guide + saved topics as context; `curated_seed` stays only as the labelled fallback when `last_response_simulated`. Response `source: "model" \| "curated_seed"`; `TopicVault.tsx` shows a "seed list, no model" badge on the fallback. | with a model up, discover returns fresh topics with `source: "model"`; without, the badge shows |
+| D3 | One source of truth | Delete `prompts/standards/AgentRegistry.json` (nothing loads it); `AGENTS.md` says `permissions` is unenforced — keep that sentence until F1 lands. | `grep -rn AgentRegistry.json backend docs *.md` → only history |
+
+### Phase B — Delegation you can see
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| B1 | Structured invocations | `services/studio_chat.py` `process_agent_invocations` returns `[{agent, task, output, simulated}]`; cap 3 per reply, depth 1 (an invoked agent's output is not scanned again); `run_chat` response gains `invocations`; each publishes `agent_invoked {agent, task_preview, simulated}` on `services/events.py`; memory rows tagged `delegated`. Pass the caller's `LLMService` instead of constructing a new one. | `tests/test_studio_chat.py`: a reply with two tags → two records, event bus sees two frames; a reply with four → three run, one logged as skipped |
+| B2 | Invocation cards | `StudioChat.tsx`: under a reply, one card per invocation ("Delegated to FactChecker", task, expandable output, simulated badge). | visible in the window; Dexter receives `agent_invoked` |
+| B3 | Delegation inside workflow steps | `runtime/workflow.py`: after `agent.execute`, run the same invocation pass on the output; append each result under `## Delegated: <Agent>` in the step's asset; record in `history_step`. The step's own `requires_approval` gates the assembled output — no new gate. | a documentary run where the strategist delegates shows the section in the asset and in the history |
+
+### Phase E — Departments
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| E1 | Departments API | Make `Department.__init__` lazy (`_initialize_agents` on first `get_agent`). `app/api/departments_api.py`: `GET /api/departments` → `[{name, manager, specialists[]}]`; `POST /api/departments/{name}/execute {task, role?, require_json?}` → `Department.execute_task` (manager unless `role` given); publishes `department_task` event; 404 unknown department, 502 on `LLMUnavailable`, `simulated` flag carried. Mount in `main.py`. | `tests/test_departments_api.py`: list has 13 entries; execute routes to the manager; unknown → 404 |
+| E2 | Departments tab | `pages/Departments.tsx`: one card per department (manager, specialists), "Ask this department" box, result with simulated badge; sidebar entry under Agents. | ask Research for sources on a topic; the manager answers |
+| E3 | Workflow steps may name a department | `WorkflowRegistry.validate` accepts a department name; `WorkflowEngine` resolves `agent_role` against the registry first, else the department's manager. | a test workflow with `"agent_role": "Research"` runs |
+| E4 | Every persona has a home | The 36 personas outside any class get added to the right class (or a new `creative.py`); `Department.list_agents()` union across classes == registry keys. | test asserting the union equality |
+
+### Phase F — Right model for the job
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| F1 | Model tiers | Frontmatter `model_tier: fast \| strong` (default `strong`; `fast` for `TagGenerator`, `TitleGenerator`, `DescriptionWriter`, `MetadataOptimizer`, `PublishingChecklist`, `TaxonomyManager`, `CitationArchivist`); `AgentDefinition.model_tier`; settings gain `tiers: {fast: {provider, model}, strong: {provider, model}}`; `LLMService.generate_text/generate_chat(..., tier=)` picks the tier's provider first, then the existing global fallback order; `BaseAgent` passes its tier. Add a `llamacpp` provider (OpenAI-compatible, `LLAMACPP_URL`, default `http://127.0.0.1:8089/v1`) so the local 27B is first-class. `Settings.tsx`: editable model names, tier mapping, `owner_channel_ids`. | `tests/test_llm.py`: tier `fast` hits the fast provider, falls back when it's down; settings round-trip |
+| F2 | Temperature per persona | Frontmatter `temperature:` (default 0.7) → `AgentDefinition` → `LLMService` call. | `HorrorWriter` at 0.9 and `FactChecker` at 0.2 reach the provider payload in a test |
+
+### Phase G — Docs and contract
+
+| # | Item | Design | Acceptance |
+|---|---|---|---|
+| G1 | Docs match the code | `AGENTS.md` (counts, tiers, departments, delegation), `ARCHITECTURE.md` (departments API, events), `README.md` (agent count, Departments tab), `ECOSYSTEM.md` (new events `agent_invoked`, `department_task`; routes `/api/departments*` for Dexter tools) — copy `ECOSYSTEM.md` to `../dexter/ECOSYSTEM.md` so 0.4 still holds. | `diff ECOSYSTEM.md ../dexter/ECOSYSTEM.md` empty |
+
+### v9 acceptance bar (felt experience)
+
+| # | Felt experience | Proof |
+|---|---|---|
+| K1 | Every persona is one click away | pick any of the personas in chat and get an answer in that voice |
+| K2 | I can see who did what | delegation cards in chat; `agent_invoked` on the event bus |
+| K3 | I can read the script in the app | asset panel on Projects |
+| K4 | Nothing lies, still | no filler text in research assets; discover fallback is badged |
+| K5 | Departments answer | "Ask Research" routes to the manager and specialists |
+| K6 | Cheap work goes to the local model | `fast` tier → `llamacpp` on 8089 when it is up |
+
+### v9 not doing
+
+- A visual workflow editor — JSON is fine while there are six workflows; C2 shows what a workflow will do.
+- Merging the Agents Workbench (`custom_agents.json`, 3 presets) into the personas — separate toy system, leave it.
+- Enforcing `permissions` — nothing calls tools yet; a label with no consequence is honest as long as `AGENTS.md` says so.
+- Streaming chat (5.5) — still deferred.
+
 ## Not doing
 
 - Voice (any form) until text chat, memory and control are solid.

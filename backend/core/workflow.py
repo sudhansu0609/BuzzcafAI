@@ -3,10 +3,27 @@ import json
 import logging
 from typing import Dict, List, Any, Optional
 from core.models.workflow import WorkflowDefinition, WorkflowStep
+from core.agent import agent_registry
 
 logger = logging.getLogger("buzzcaf_ai.core.workflow")
 
 WORKFLOWS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "prompts", "workflows")
+
+
+def _department_names() -> set:
+    """Department names a step may address instead of a persona (roadmap v9, E3).
+
+    Imported lazily so `core` never depends on `app` being importable; if the
+    departments package is unavailable, only personas are accepted.
+    """
+    try:
+        from app.departments import list_departments
+
+        return {dept.name.lower() for dept in list_departments()}
+    except Exception as exc:
+        logger.warning(f"WorkflowRegistry: department names unavailable ({exc}); validating against personas only")
+        return set()
+
 
 class WorkflowRegistry:
     _instance = None
@@ -68,12 +85,17 @@ class WorkflowRegistry:
         if not wf.id or not wf.name or not wf.steps:
             raise ValueError(f"Workflow '{wf.id}' is missing required fields (id, name, steps).")
 
-        # 1. Validate agents
-        # List of registered agents from AgentRegistry
-        valid_agents = ["ceo", "researchagent", "writeragent", "editoragent", "creativedirectoragent", "seomanageragent"]
+        # 1. Validate agents against the registry itself. Until v9 this was a
+        # six-name literal, so 109 of the 115 personas could not appear in a
+        # workflow at all. An unknown name still raises, so a typo cannot
+        # silently drop a workflow at startup.
+        valid_agents = set(agent_registry.agents)
+        departments = _department_names()
         for step in wf.steps:
-            if step.agent_role.lower().strip() not in valid_agents:
-                raise ValueError(f"Workflow '{wf.id}' validation error: Agent '{step.agent_role}' at step '{step.name}' is not in the Agent Registry.")
+            role = step.agent_role.lower().strip()
+            if role in valid_agents or role in departments:
+                continue
+            raise ValueError(f"Workflow '{wf.id}' validation error: Agent '{step.agent_role}' at step '{step.name}' is not in the Agent Registry.")
 
         # 2. Check circular dependencies in input assets
         # Build dependency graph

@@ -10,12 +10,17 @@ class PublishingDepartment(Department):
             name="Publishing",
             manager_role="PublishingManager",
             specialist_roles=[
-                "SEOSpecialist",
+                "SEOManagerAgent",
                 "MetadataOptimizer",
                 "ThumbnailSpecialist",
                 "UploadManager",
-                "PublishingScheduleManager",
-                "CommunityPublisher"
+                "ScheduleManager",
+                "CommunityPublisher",
+                "TitleGenerator",
+                "DescriptionWriter",
+                "TagGenerator",
+                "PublishingChecklist",
+                "AnalyticsHandoff"
             ],
             llm_service=llm_service
         )

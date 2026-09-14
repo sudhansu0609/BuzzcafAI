@@ -14,7 +14,13 @@ class KnowledgeDepartment(Department):
                 "KnowledgeCurator",
                 "Librarian",
                 "TaxonomyManager",
-                "CitationArchivist"
+                "CitationArchivist",
+                "AssetLibrary",
+                "CharacterLibrary",
+                "PromptLibrary",
+                "ResearchLibrary",
+                "StoryLibrary",
+                "WorldLibrary"
             ],
             llm_service=llm_service
         )

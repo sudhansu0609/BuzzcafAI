@@ -1,6 +1,6 @@
 ---
 name: "AnalyticsHandoff"
-department: "Publishing Department"
+department: "Publishing"
 role: "Record publish data for analytics team."
 inputs: ["publish_response"]
 outputs: ["analytics_payload"]

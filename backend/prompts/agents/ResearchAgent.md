@@ -1,6 +1,6 @@
 ---
 name: "ResearchAgent"
-department: "Research Department"
+department: "Research"
 role: "Gathers background information, verifies historical facts and timelines, and lists reference sources."
 inputs: ["project_idea_summary"]
 outputs: ["research_package"]

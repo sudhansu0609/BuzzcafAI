@@ -7,6 +7,7 @@ outputs: ["fact_check_audit"]
 dependencies: ["ResearchManager"]
 permissions: ["read_write_knowledge"]
 version: "1.0.0"
+temperature: 0.2
 ---
 
 # Agent Specification: FactChecker

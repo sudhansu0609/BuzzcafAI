@@ -21,10 +21,17 @@ class Department:
         self.llm_service = llm_service or LLMService()
         self.manager_agent: Optional[BaseAgent] = None
         self.specialists: Dict[str, BaseAgent] = {}
-        self._initialize_agents()
+        self._initialized = False
 
     def _initialize_agents(self):
-        """Instantiates department manager and specialist agents."""
+        """Instantiates department manager and specialist agents.
+
+        Lazy since v9 (E1): constructing a department reads every one of its
+        persona files off disk, and listing the departments does not need that.
+        """
+        if self._initialized:
+            return
+        self._initialized = True
         if self.manager_role:
             self.manager_agent = AgentFactory.get_agent(self.manager_role, self.llm_service)
             logger.info(f"Department [{self.name}]: Initialized Manager '{self.manager_role}'")
@@ -34,6 +41,7 @@ class Department:
 
     def get_agent(self, role_name: str) -> Optional[BaseAgent]:
         """Fetches an agent by role name."""
+        self._initialize_agents()
         key = role_name.lower().strip()
         if self.manager_role and key == self.manager_role.lower().strip():
             return self.manager_agent

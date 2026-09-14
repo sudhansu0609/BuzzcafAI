@@ -45,6 +45,21 @@ app at a local LM Studio server. Without a working provider the app still
 responds, but every reply is labelled **⚠ SIMULATED** — see
 [Simulated responses](#simulated-responses).
 
+### macOS / Linux
+
+One file, like `Buzzcaf Studio.vbs` on Windows (needs Python 3.10+; Node 18+
+only for `--dev`, e.g. `brew install python node`):
+
+```bash
+./start_buzzcafai.sh            # first run creates .venv and installs deps, then opens the window
+./start_buzzcafai.sh --dev      # developer mode: Vite dev server with hot reload
+```
+
+The built UI is committed in `backend/app/static`, so normal mode runs without
+Node; the script rebuilds it only if that folder is missing. The `.bat`/`.vbs`
+launchers are Windows-only; `desktop_app.py` itself is cross-platform, and this
+script is the complete equivalent (same preflight, same port-stepping behaviour).
+
 ### CLI
 
 `backend/apps/cli/main.py` exposes the same engine without the UI:

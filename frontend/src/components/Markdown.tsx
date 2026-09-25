@@ -13,7 +13,7 @@ function inline(text: string, keyBase: string): ReactNode[] {
     if (part.startsWith('**') && part.endsWith('**')) return <strong key={key}>{part.slice(2, -2)}</strong>;
     if (part.startsWith('*') && part.endsWith('*')) return <em key={key}>{part.slice(1, -1)}</em>;
     if (part.startsWith('`') && part.endsWith('`')) {
-      return <code key={key} style={{ backgroundColor: '#1e2230', padding: '1px 5px', borderRadius: 4, fontSize: '0.85em' }}>{part.slice(1, -1)}</code>;
+      return <code key={key} style={{ backgroundColor: 'var(--bg-code)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', padding: '1px 5px', borderRadius: 4, fontSize: '0.85em' }}>{part.slice(1, -1)}</code>;
     }
     return <span key={key}>{part}</span>;
   });
@@ -54,7 +54,7 @@ export default function Markdown({ text }: { text: string }) {
     if (fence) {
       if (code) {
         blocks.push(
-          <pre key={`c-${blocks.length}`} style={{ backgroundColor: '#0b0d14', border: '1px solid #1e2230', borderRadius: 6, padding: 12, overflowX: 'auto', margin: '0 0 12px 0', fontSize: '0.8rem' }}>
+          <pre key={`c-${blocks.length}`} style={{ backgroundColor: 'var(--bg-code)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', borderRadius: 6, padding: 12, overflowX: 'auto', margin: '0 0 12px 0', fontSize: '0.8rem' }}>
             <code>{code.lines.join('\n')}</code>
           </pre>,
         );
@@ -78,7 +78,7 @@ export default function Markdown({ text }: { text: string }) {
       const level = heading[1].length;
       const key = `h-${blocks.length}`;
       blocks.push(
-        <div key={key} style={{ fontSize: HEADING_SIZES[level - 1], fontWeight: 700, color: '#ffffff', margin: blocks.length ? '18px 0 8px 0' : '0 0 8px 0' }}>
+        <div key={key} style={{ fontSize: HEADING_SIZES[level - 1], fontWeight: 700, color: 'var(--text-primary, #ffffff)', margin: blocks.length ? '18px 0 8px 0' : '0 0 8px 0' }}>
           {inline(heading[2], key)}
         </div>,
       );
@@ -112,11 +112,11 @@ export default function Markdown({ text }: { text: string }) {
   flushList();
   if (code) {
     blocks.push(
-      <pre key={`c-${blocks.length}`} style={{ backgroundColor: '#0b0d14', border: '1px solid #1e2230', borderRadius: 6, padding: 12, overflowX: 'auto', margin: '0 0 12px 0', fontSize: '0.8rem' }}>
+      <pre key={`c-${blocks.length}`} style={{ backgroundColor: 'var(--bg-code, #0b0d14)', border: '1px solid var(--border-card, #1e2230)', color: 'var(--text-primary, #e2e8f0)', borderRadius: 6, padding: 12, overflowX: 'auto', margin: '0 0 12px 0', fontSize: '0.8rem' }}>
         <code>{code.lines.join('\n')}</code>
       </pre>,
     );
   }
 
-  return <div style={{ color: '#e2e8f0', fontSize: '0.88rem' }}>{blocks}</div>;
+  return <div style={{ color: 'var(--text-primary, #e2e8f0)', fontSize: '0.88rem' }}>{blocks}</div>;
 }

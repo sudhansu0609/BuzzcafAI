@@ -232,3 +232,16 @@ def test_query_aware_memory_retrieval_falls_back_to_recency():
     by_recency = memory_system.retrieve(scope="agent", owner=owner, query="nothing matches here zzz")
     assert len(by_recency) == 2
     memory_system.clear(scope="agent", owner=owner)
+
+
+def test_deep_research_tags_resolve(monkeypatch):
+    """[NEWS_SEARCH]/[BOOK_SEARCH]/[ARCHIVE_SEARCH] resolve to formatted results."""
+    import app.services.deep_research as dr
+
+    monkeypatch.setattr(dr, "deep_research", lambda q, kinds=(), per_source=5: {
+        "results": [{"title": "The Flood of 1978", "snippet": "front page", "url": "http://n/1", "source": "GDELT", "kind": "news"}],
+        "by_kind": {}, "sources_searched": [{"source": "GDELT", "count": 1}],
+    })
+    out = studio_chat.process_web_research_tags("Background: [NEWS_SEARCH: floods] please")
+    assert "The Flood of 1978" in out and "GDELT" in out
+    assert "[NEWS_SEARCH" not in out  # the tag itself was replaced

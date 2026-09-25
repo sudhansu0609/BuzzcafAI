@@ -16,8 +16,30 @@ root = fso.GetParentFolderName(WScript.ScriptFullName)
 
 py = env("BUZZCAF_PYTHON")
 If py = "" Or Not fso.FileExists(py) Then py = root & "\.venv\Scripts\pythonw.exe"
+If Not fso.FileExists(py) Then
+    Dim candidates, c
+    candidates = Array("C:\Python314\pythonw.exe", "C:\Program Files\Python311\pythonw.exe", "C:\Program Files\Python313\pythonw.exe", "C:\Program Files\Python312\pythonw.exe", "C:\Python311\pythonw.exe", "C:\Python312\pythonw.exe", "C:\Python313\pythonw.exe")
+    For Each c In candidates
+        If fso.FileExists(c) Then
+            py = c
+            Exit For
+        End If
+    Next
+End If
+If Not fso.FileExists(py) Then
+    On Error Resume Next
+    Dim ex
+    Set ex = sh.Exec("where.exe pythonw.exe")
+    If Err.Number = 0 And Not ex Is Nothing Then
+        Dim line
+        line = Trim(ex.StdOut.ReadLine())
+        If fso.FileExists(line) Then py = line
+    End If
+    On Error GoTo 0
+End If
 If Not fso.FileExists(py) Then py = "pythonw.exe"
 
 sh.CurrentDirectory = root & "\backend"
-' 0 = hidden window, False = do not wait.
-sh.Run """" & py & """ -X utf8 """ & root & "\backend\desktop_app.py""", 0, False
+' 1 = normal window (pythonw has no console, so only the Studio window shows), False = do not wait.
+sh.Run """" & py & """ -X utf8 """ & root & "\backend\desktop_app.py""", 1, False
+

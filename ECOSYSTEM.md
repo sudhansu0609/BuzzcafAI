@@ -306,9 +306,41 @@ VrDeep, MastGaane and CaliberAI as running when none of them were.
 | `studio_ask_department` | `POST /api/departments/{name}/execute` |
 | `youtube_channel_status` / `youtube_video_stats` | `GET /api/buzzbrain/channels`, `/videos/{id}`, `/latest` |
 | `studio_analyze_video` | `POST /api/video-intel/analyze` |
-| (event stream) | `GET /api/studio/events` SSE: `project_created`, `step_started`, `step_completed`, `approval_needed`, `step_failed`, `buzzbrain_snapshot`, `agent_invoked`, `department_task` |
+| (event stream) | `GET /api/studio/events` SSE: `project_created`, `step_started`, `step_completed`, `approval_needed`, `step_failed`, `buzzbrain_snapshot`, `agent_invoked`, `department_task`, `video_progress`, `video_ready`, `video_failed` |
 
 BuzzBrain → Studio: `POST /api/buzzbrain/snapshot`.
+
+---
+
+## 7a. BuzzEdit bridge (produce_video)
+
+BuzzcafAI's agents are the creative brain (script + a structured per-scene
+`production/visual_plan.json`); BuzzEdit is the editor/renderer (Whisper
+transcribe → auto-cut → ComfyUI B-roll → FFmpeg render). This bridge
+translates one into the other and drives BuzzEdit's own HTTP API end-to-end,
+resolved the same way every other cross-app call in this ecosystem is —
+`buzzcaf_ports.discover("buzzedit", 8099, health_path="/api/health")`, never
+a hardcoded port (§3's 8099 collision applies here directly: BuzzcafAI and
+BuzzEdit both prefer it).
+
+| Route | Direction | Does |
+|---|---|---|
+| `POST /api/projects/{id}/produce_video {recording_path, settings_override?, mode?}` | BuzzcafAI → BuzzEdit (Entry A) | Background thread: checks BuzzEdit + ComfyUI are up, imports the recording, transcribes, annotates the script with the visual plan's `[kind: arg]` directives, sets the script, enqueues a `presentation` render, polls to completion, stores `output_path` on the project |
+| `GET /api/projects/{id}/produce_video/status` | poll | `{state: starting\|running\|ready\|failed, message, progress, ...}` — no job queue in this repo, so this is an in-memory dict, not a durable job record |
+| `POST /api/produce/plan {brand, script_text?, transcript?}` | BuzzEdit → BuzzcafAI (Entry B) | Synchronous: runs the `PromptEngineer` visual-plan agent, returns `{annotated_script, settings, visual_plan, skipped_beats}` for BuzzEdit's own backend to `PUT` onto its project |
+
+The interchange contract is `production/visual_plan.json`: `{genre, beats: [{anchor,
+kind, ...}]}`, where `anchor` is a short verbatim phrase from the script and
+`kind` is one of `broll_image`, `broll_video`, `map`, `chart`, `stat_callout`,
+`quote_card`, `character_card`, `location_card`, `definition_card`, `split`,
+`chapter`. `backend/integrations/buzzedit_script.py` locates each anchor
+(exact substring, else a sentence-level fuzzy fallback) and splices in
+BuzzEdit's inline directive (or a `# heading` line for `chapter`) immediately
+before it, leaving every spoken word untouched.
+
+`output_path` on a finished render is a path on **BuzzEdit's own filesystem**
+— there is no proxy back to BuzzcafAI's UI, so the Studio shows it as text
+plus an "open on BuzzEdit's machine" note rather than a clickable link.
 
 ---
 

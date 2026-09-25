@@ -15,6 +15,15 @@ from core.errors import ApprovalRequired, AssetMissing, LLMUnavailable
 
 logger = logging.getLogger("buzzcaf_ai.engine.workflow")
 
+# Spoken-narration pace used to turn a target runtime (minutes) into a word
+# budget for the writer. It suits the channels' conversational Hinglish
+# narration and is the single knob for retuning length pacing.
+WORDS_PER_MINUTE = 140
+
+# Step output types whose prompt gets a target-length directive when the
+# project has one set (Project.metadata["target_duration_minutes"]).
+SCRIPT_OUTPUT_TYPES = {"outline", "script", "story", "script_final", "narration_optimized"}
+
 
 def classify_error(exc: Exception) -> str:
     """Categorise a step failure by exception type, not by message text.
@@ -68,6 +77,41 @@ Leave a key out entirely rather than filling it with placeholder text. Do not
 invent sources.
 """
 
+# `_call_local` (the path BaseAgent.execute() actually uses for local models,
+# see integrations/llm.py) never sends response_format/JSON-mode hints to
+# LM Studio or llama.cpp -- require_json=True is a no-op there. JSON
+# compliance for a locally-run visual_plan step comes only from instructions
+# in the prompt text, same as RESEARCH_JSON_INSTRUCTION above.
+VISUAL_PLAN_JSON_INSTRUCTION = """
+### Required Output Format (JSON only)
+Reply with a single JSON object and nothing else:
+
+{
+  "genre": "documentary",
+  "beats": [
+    {"anchor": "a short phrase copied verbatim from the script",
+     "kind": "broll_image|broll_video|map|chart|stat_callout|quote_card|character_card|location_card|definition_card|split|chapter|newspaper|case_file|fx|atmos|grade",
+     "image_prompt": "...", "video_prompt": "...", "negative_prompt": "...",
+     "style_hint": "...", "aspect_ratio": "16:9", "text": "...", "subtext": "...",
+     "place": "...", "data": {"value": 40, "suffix": "%"},
+     "effect": "flicker", "intensity": 0.6, "duration": 0.5, "priority": 1.0}
+  ]
+}
+
+`fx`/`atmos` beats trigger a visual effect BuzzEdit renders at the anchor: set
+`effect` to one of the palette names given below, with optional `intensity`
+(0-1) and `duration` (seconds). `fx` is a short punctuation hit (a reveal, a
+scare, a tension beat); `atmos` is an ambient texture held longer. `grade` shifts
+the colour for a moment (set `data` to `{"saturation":0.7,"vignette":0.3}` etc.).
+Use effects sparingly and only where they earn the moment.
+
+`anchor` MUST be copied character-for-character from the script you were given
+(a short phrase, not a paraphrase) -- it is used to locate where the beat
+belongs. Include only the fields relevant to `kind`; leave the rest out rather
+than inventing values. Do not invent an anchor that does not appear in the
+script.
+"""
+
 
 def _render_section(value: Any) -> str:
     """A section of the research JSON as Markdown, without inventing anything."""
@@ -92,12 +136,12 @@ def _apply_step_delegations(agent_output: str, llm_service, caller: str):
     whole thing. Callers skip this for JSON assets: a Markdown heading would
     make them unparseable.
     """
-    from app.services.studio_chat import process_agent_invocations, strip_invocations
+    from app.services.studio_chat import process_agent_invocations, strip_invocations, process_web_research_tags
 
-    text = str(agent_output)
+    text = process_web_research_tags(str(agent_output))
     _, records = process_agent_invocations(text, llm_service=llm_service, caller=caller)
     if not records:
-        return agent_output, records
+        return text, records
 
     parts = [strip_invocations(text)]
     for record in records:
@@ -124,6 +168,37 @@ def _parse_research(raw_output: str) -> Optional[Dict[str, Any]]:
     return parsed if isinstance(parsed, dict) else None
 
 from core.workflow import workflow_registry
+
+
+def _duration_directive(project: Project, output_asset_type: str) -> str:
+    """Target-length instruction for a script/outline step, or '' when unset.
+
+    Reads the target the creator set on the project (in minutes) and turns it
+    into a word budget so the writer produces a video of the right length; the
+    creator resizes simply by changing the number and re-running the step.
+    """
+    minutes = project.metadata.get("target_duration_minutes")
+    try:
+        minutes = float(minutes)
+    except (TypeError, ValueError):
+        return ""
+    if minutes <= 0:
+        return ""
+    if output_asset_type == "outline":
+        return (
+            f"\n\n### Target runtime\nPlan this outline for a video about {minutes:g} minutes long. "
+            f"Give each segment an approximate minute budget, and make those budgets add up to about "
+            f"{minutes:g} minutes.\n"
+        )
+    words = round(minutes * WORDS_PER_MINUTE)
+    return (
+        f"\n\n### Target runtime\nThis video's target length is {minutes:g} minutes -- about {words:,} "
+        f"spoken words at ~{WORDS_PER_MINUTE} words per minute. Write the narration to run about "
+        f"{minutes:g} minutes (within ~10%). If the material is thin, add depth, specific detail and "
+        f"examples rather than filler; if it runs long, tighten it. Do not mention the word count, the "
+        f"timing, or this instruction anywhere in the script itself.\n"
+    )
+
 
 class WorkflowEngine:
     def __init__(self, llm_service: Optional[LLMService] = None):
@@ -173,7 +248,12 @@ class WorkflowEngine:
                 logger.error(f"Error reading brand guide for {brand}: {e}")
         return f"Maintain high-quality storytelling matching the '{brand}' channel tone."
 
-    def execute_next(self, project_id: str, user_feedback: Optional[str] = None) -> Project:
+    def execute_next(
+        self,
+        project_id: str,
+        user_feedback: Optional[str] = None,
+        allow_all: Optional[bool] = None,
+    ) -> Project:
         """
         Executes the next step or re-runs the current step if feedback is provided.
         Returns the updated Project instance.
@@ -182,6 +262,19 @@ class WorkflowEngine:
         wf = self.get_workflow(project.workflow_name)
         if not wf:
             raise ValueError(f"Workflow '{project.workflow_name}' not found for project {project_id}")
+
+        # Check if allow_all is active (via parameter, project metadata, or global config)
+        if allow_all is not None:
+            is_allow_all = bool(allow_all)
+            project.metadata["allow_all"] = is_allow_all
+        else:
+            cfg = getattr(self.llm_service, "config", {})
+            is_allow_all = bool(
+                project.metadata.get("allow_all")
+                or project.metadata.get("auto_approve")
+                or cfg.get("allow_all_steps")
+                or cfg.get("auto_approve_workflow_steps")
+            )
 
         # Check if the project is already completed
         if project.current_step == "Completed" or project.status == "completed":
@@ -207,11 +300,13 @@ class WorkflowEngine:
                 history_step = hist
                 break
 
-        # If it was paused for approval and user approves without feedback
+        # If it was paused for approval and user approves without feedback (or allow_all is active)
         if history_step and history_step.status == "paused_for_approval" and not user_feedback:
-            # User approved! Mark it completed and advance
+            # User approved or allow_all triggered! Mark it completed and advance
             history_step.status = "completed"
             history_step.completed_at = datetime.now().isoformat()
+            if is_allow_all:
+                history_step.logs.append("Step approved via 'Allow All' option.")
             
             # Advance step
             next_step = wf.get_next_step(project.current_step)
@@ -222,15 +317,15 @@ class WorkflowEngine:
                 project.status = "completed"
             
             project.save()
-            logger.info(f"Step '{step_def.name}' approved by human. Advanced to '{project.current_step}'")
+            logger.info(f"Step '{step_def.name}' approved (allow_all={is_allow_all}). Advanced to '{project.current_step}'")
             return project
 
         # Run step execution (either new run, or re-run with user feedback)
         logger.info(f"Running step '{step_def.name}' for project '{project.name}'")
         
-        # Determine status
+        # Determine status: if allow_all is active, bypass paused_for_approval
         execution_status = "completed"
-        if step_def.requires_approval:
+        if step_def.requires_approval and not is_allow_all:
             execution_status = "paused_for_approval"
 
         # Instantiate step execution details in history
@@ -288,8 +383,53 @@ You are executing the step '{step_def.name}' for the media project '{project.nam
 Please output the content matching the required output format (Markdown or JSON).
 """
 
+        if step_def.output_asset_type == "research" or "research" in step_def.agent_role.lower():
+            try:
+                from app.services.web_research import web_research_service
+                web_brief = web_research_service.brief(project.name)
+                if web_brief and not web_brief.startswith("No live"):
+                    agent_instruction += f"\n\n### Verified Live Web Intelligence & Sources (On-Device Grounding):\n{web_brief}\n"
+                    history_step.logs.append("Injected verified live web research intelligence into prompt.")
+            except Exception as exc:
+                logger.warning(f"Web research brief generation failed: {exc}")
+
+            try:
+                from app.services.deep_research import build_source_brief
+                sb = build_source_brief(project.name, ("news", "archives", "books"))
+                if sb:
+                    agent_instruction += f"\n\n### Public Archives, Books & News (source material)\n{sb}\n"
+                    history_step.logs.append("Injected public archives/books/news source brief into prompt.")
+            except Exception as exc:
+                logger.warning(f"Deep research source brief generation failed: {exc}")
+
         if step_def.output_asset_type == "research":
             agent_instruction += RESEARCH_JSON_INSTRUCTION
+
+        if step_def.output_asset_type == "visual_plan":
+            agent_instruction += VISUAL_PLAN_JSON_INSTRUCTION
+            # Tell the planner this video's genre and the effects that suit it,
+            # so the fx/atmos beats it places are ones BuzzEdit renders well.
+            try:
+                from integrations.buzzedit_settings import settings_for_brand, fx_palette_for
+                genre = settings_for_brand(project.brand).get("genre", "general")
+                palette = ", ".join(fx_palette_for(project.brand))
+                agent_instruction += (
+                    f"\n\n### This video's genre and effect palette\n"
+                    f"Genre: {genre}. For `fx`/`atmos` beats favour these effects: {palette}. "
+                    f"Place them only where they earn the moment (a reveal, a tension beat, an "
+                    f"archival cutaway), not on every line.\n"
+                )
+            except Exception as exc:
+                logger.warning(f"Could not add genre effect palette to visual plan prompt: {exc}")
+
+        # Target length: fit the script/outline to the runtime the creator set.
+        if step_def.output_asset_type in SCRIPT_OUTPUT_TYPES:
+            directive = _duration_directive(project, step_def.output_asset_type)
+            if directive:
+                agent_instruction += directive
+                history_step.logs.append(
+                    f"Target runtime: {float(project.metadata['target_duration_minutes']):g} min injected into the {step_def.output_asset_type} prompt."
+                )
 
         # Call worker Agent (a persona, or a department's manager)
         agent = self._resolve_agent(step_def.agent_role)
@@ -299,6 +439,11 @@ Please output the content matching the required output format (Markdown or JSON)
 
         try:
             agent_output = agent.execute(agent_instruction, require_json=is_json)
+            if getattr(self.llm_service, "last_response_simulated", False):
+                history_step.simulated = True
+                history_step.logs.append(
+                    "[WARNING] No LLM provider answered; output was generated using simulated fallback."
+                )
 
             if not is_json:
                 agent_output, delegations = _apply_step_delegations(
@@ -382,6 +527,17 @@ Please output the content matching the required output format (Markdown or JSON)
                 if not os.path.exists(rev_log_path):
                     with open(rev_log_path, "w", encoding="utf-8") as f:
                         f.write("# Revision Log\n\n- Initial draft created.\n")
+
+                # Length feedback loop: report the actual length against target
+                # so the creator can see whether to resize and re-run this step.
+                if step_def.output_asset_type != "outline":
+                    words = len((agent_output or "").split())
+                    est_min = round(words / WORDS_PER_MINUTE, 1) if words else 0
+                    target = project.metadata.get("target_duration_minutes")
+                    if target:
+                        history_step.logs.append(f"Script length: {words:,} words ~{est_min} min (target {float(target):g}).")
+                    else:
+                        history_step.logs.append(f"Script length: {words:,} words ~{est_min} min.")
             elif step_def.output_asset_type in ["scene_breakdown", "shot_list", "clip_plan", "image_plan", "assets_collected", "voice_over", "edit_plan", "review_report", "sound_plan", "thumbnail_plan", "vlog_plan", "character_plan"]:
                 prod_dir = os.path.join(project.get_project_dir(), "production")
                 os.makedirs(prod_dir, exist_ok=True)
@@ -419,6 +575,22 @@ Please output the content matching the required output format (Markdown or JSON)
                     if not os.path.exists(def_path):
                         with open(def_path, "w", encoding="utf-8") as f:
                             f.write(def_content)
+            elif step_def.output_asset_type == "visual_plan":
+                # The structured per-scene image/clip plan the BuzzEdit bridge
+                # (app/api/produce_api.py) annotates onto the script. Without
+                # this branch it fell into the bare `else` below and landed at
+                # the project root instead of production/, unparsed.
+                prod_dir = os.path.join(project.get_project_dir(), "production")
+                os.makedirs(prod_dir, exist_ok=True)
+
+                from integrations.llm import clean_json_response
+                cleaned = clean_json_response(str(agent_output))
+
+                file_name = "production/visual_plan.json"
+                file_path = os.path.join(project.get_project_dir(), file_name)
+
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(cleaned)
             elif step_def.output_asset_type in ["seo_package", "publish_details", "analytics_report"]:
                 pub_dir = os.path.join(project.get_project_dir(), "publish")
                 os.makedirs(pub_dir, exist_ok=True)
@@ -466,8 +638,8 @@ Please output the content matching the required output format (Markdown or JSON)
             )
 
             
-            # If step does NOT require approval, advance immediately
-            if not step_def.requires_approval:
+            # If step does NOT require approval or allow_all is active, advance immediately
+            if not step_def.requires_approval or is_allow_all:
                 next_step = wf.get_next_step(project.current_step)
                 if next_step:
                     project.current_step = next_step.name
@@ -489,6 +661,36 @@ Please output the content matching the required output format (Markdown or JSON)
             project.save()
             raise e
 
-        
         project.save()
+        return project
+
+    def execute_all(self, project_id: str, allow_all: bool = True) -> Project:
+        """
+        Executes all remaining workflow steps sequentially until completion or failure.
+        When allow_all is True, approval-required steps will not pause the workflow.
+        """
+        project = Project.load(project_id)
+        if allow_all:
+            project.metadata["allow_all"] = True
+            project.save()
+
+        max_iterations = 30  # Guard against infinite loops
+        iterations = 0
+
+        while project.status != "completed" and project.current_step != "Completed" and iterations < max_iterations:
+            iterations += 1
+            prev_step = project.current_step
+            project = self.execute_next(project_id, allow_all=allow_all)
+            
+            last = project.steps_history[-1] if project.steps_history else None
+            if last and last.status == "failed":
+                logger.error(f"execute_all stopped due to step failure in '{last.step_name}'")
+                break
+            if last and last.status == "paused_for_approval" and not allow_all:
+                logger.info(f"execute_all paused for human approval at '{last.step_name}'")
+                break
+            if project.current_step == prev_step and last and last.status != "completed":
+                logger.warning(f"execute_all detected no progress at step '{prev_step}', stopping.")
+                break
+
         return project

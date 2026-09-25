@@ -1,0 +1,177 @@
+{
+  "topic": "The Company That Almost Took Down a Country",
+  "channel": "Beyond3Baje",
+  "evidence": {
+    "youtube": [
+      {
+        "id": "mlKkctrXm90",
+        "title": "China Refuses To Slow Down AI: Xi Jinping Is Betting His Economy’s Future | VisualEconomik EN",
+        "url": "https://www.youtube.com/watch?v=mlKkctrXm90",
+        "view_count": 6315,
+        "duration": 1021,
+        "channel": "VisualEconomik EN",
+        "upload_date": null
+      },
+      {
+        "id": "Uk96fp0KFg8",
+        "title": "The Email That Destroyed Nokia — And Almost Took Finland's Economy Down With It",
+        "url": "https://www.youtube.com/watch?v=Uk96fp0KFg8",
+        "view_count": 33,
+        "duration": 671,
+        "channel": "The Ledger's Shadow",
+        "upload_date": null
+      },
+      {
+        "id": "KjWvOv_UBAA",
+        "title": "15 More True Stories That Sound Completely Made Up",
+        "url": "https://www.youtube.com/watch?v=KjWvOv_UBAA",
+        "view_count": 36166,
+        "duration": 5659,
+        "channel": "TRUE, SOMEHOW",
+        "upload_date": null
+      },
+      {
+        "id": "-qRb8mkoRHo",
+        "title": "Family Sent Me to Prison for My Stepsis… I Got Out, Married a Millionaire CEO & Made Them Beg!",
+        "url": "https://www.youtube.com/watch?v=-qRb8mkoRHo",
+        "view_count": 9825,
+        "duration": 8349,
+        "channel": "Blueberry Drama",
+        "upload_date": null
+      },
+      {
+        "id": "IV3dnLzthDA",
+        "title": "The Man Who Accidentally Killed The Most People In History",
+        "url": "https://www.youtube.com/watch?v=IV3dnLzthDA",
+        "view_count": 43221520,
+        "duration": 1497,
+        "channel": "Veritasium",
+        "upload_date": null
+      },
+      {
+        "id": "qcJ70A2Tl_k",
+        "title": "My Neighbor Said, “Bring Your Granddaughter Over at 10 PM.” What I Saw Upstairs Shocked Me",
+        "url": "https://www.youtube.com/watch?v=qcJ70A2Tl_k",
+        "view_count": 22885,
+        "duration": 7489,
+        "channel": "Revenge Dad",
+        "upload_date": null
+      },
+      {
+        "id": "CmdCpRXnkGg",
+        "title": "Why you are Too Poor to Afford any Ev?",
+        "url": "https://www.youtube.com/watch?v=CmdCpRXnkGg",
+        "view_count": 324901,
+        "duration": 952,
+        "channel": "Biturbo Media",
+        "upload_date": null
+      },
+      {
+        "id": "E6uvXai0DqU",
+        "title": "Humiliated at wedding, he marries his loyal childhood friend!#drama",
+        "url": "https://www.youtube.com/watch?v=E6uvXai0DqU",
+        "view_count": 49918,
+        "duration": 8104,
+        "channel": "Heartstring Comics Drama",
+        "upload_date": null
+      },
+      {
+        "id": "GJ1FZ9GczKo",
+        "title": "FBI Director Kash Patel testifies before Senate",
+        "url": "https://www.youtube.com/watch?v=GJ1FZ9GczKo",
+        "view_count": 120778,
+        "duration": 16740,
+        "channel": "C-SPAN",
+        "upload_date": null
+      },
+      {
+        "id": "WBZnau8Px5E",
+        "title": "How Soros Made A Billion Dollars And Almost Broke Britain",
+        "url": "https://www.youtube.com/watch?v=WBZnau8Px5E",
+        "view_count": 2910303,
+        "duration": 637,
+        "channel": "Business Casual",
+        "upload_date": null
+      },
+      {
+        "id": "3bZoB8PiXas",
+        "title": "How did British Empire take over India? | Fall of Mughal Empire | Dhruv Rathee",
+        "url": "https://www.youtube.com/watch?v=3bZoB8PiXas",
+        "view_count": 20620530,
+        "duration": 1526,
+        "channel": "Dhruv Rathee",
+        "upload_date": null
+      },
+      {
+        "id": "gW2LtX1217s",
+        "title": "Creed Temps As Regional Manager - The Office",
+        "url": "https://www.youtube.com/watch?v=gW2LtX1217s",
+        "view_count": 9907616,
+        "duration": 190,
+        "channel": "The Office",
+        "upload_date": null
+      }
+    ],
+    "youtube_stats": {
+      "results": 12,
+      "with_view_counts": 12,
+      "median_views": 85348,
+      "max_views": 43221520,
+      "avg_duration_seconds": 4402,
+      "recent_share_pct": null,
+      "title_saturation_pct": 8
+    },
+    "web": [],
+    "trends": {
+      "available": false,
+      "note": "pytrends not installed; Google Trends signal skipped."
+    }
+  },
+  "verdict": {
+    "demand": {
+      "score": 9,
+      "reason": "The median view count of 85,348 suggests a strong existing audience interest in this theme. The existence of one video achieving over 43 million views indicates that the high-stakes narrative potential is massive."
+    },
+    "competition": {
+      "level": "medium",
+      "saturation": "low (8%)",
+      "note": "While there are multiple results, the low saturation percentage means that if we select a specific, well-researched case study and present it with high production value (B3B style), the competition within that niche will be manageable."
+    },
+    "differentiation": {
+      "angle": "Focusing on the systemic or philosophical reason *why* the collapse was inevitable, rather than just presenting the event.",
+      "gap": "Most titles are declarative statements ('The Company That...'). The gap is in framing it as a tragic paradox—a story of hubris, flawed innovation, or geopolitical pressure that made failure almost certain."
+    },
+    "audience_fit": "Excellent. This fits the Scholarly Detective archetype perfectly. It allows for deep-dive investigation into historical/economic anomalies, requiring objective analysis and presenting complex hypotheses.",
+    "recommendation": "make",
+    "confidence": 9,
+    "reasons": [
+      "High baseline demand indicated by median views (85k).",
+      "Low title saturation allows for a strong market entry point.",
+      "The theme is perfectly suited for B3B's deep-dive, scholarly tone."
+    ],
+    "suggested_title": "How [Specific Company Name] Nearly Broke [Country Name]: A Study in Systemic Failure",
+    "risks": [
+      "If the chosen company/story is too mundane or lacks geopolitical weight, it might fall into generic documentary fare.",
+      "The topic is broad; failing to narrow the scope will result in a meandering narrative."
+    ],
+    "top_competitors": [
+      {
+        "title": "The Man Who Accidentally Killed The Most People In History",
+        "views": 43221520,
+        "url": "https://www.youtube.com/watch?v=IV3dnLzthDA"
+      },
+      {
+        "title": "The Email That Destroyed Nokia — And Almost Took Finland's Economy Down With It",
+        "views": 33000,
+        "url": "https://www.youtube.com/watch?v=Uk96fp0KFg8"
+      },
+      {
+        "title": "China Refuses To Slow Down AI: Xi Jinping Is Betting His Economy’s Future | VisualEconomik EN",
+        "views": 6315,
+        "url": "https://www.youtube.com/watch?v=mlKkctrXm90"
+      }
+    ]
+  },
+  "simulated": false,
+  "generated_at": "2026-09-17T20:13:42"
+}

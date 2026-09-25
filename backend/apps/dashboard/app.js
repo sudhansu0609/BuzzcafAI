@@ -432,23 +432,34 @@ document.addEventListener("DOMContentLoaded", () => {
         setLoadingState(false);
     }
 
+    let currentModalAsset = null;
+
     // Global utility to fetch and display asset in a modal
     window.viewAsset = async (projectId, assetKey) => {
         const asset = await apiRequest(`/api/projects/${projectId}/asset/${assetKey}`);
         if (!asset) return;
 
-        el.modalTitle.textContent = `${assetKey.toUpperCase().replace("_", " ")} Asset`;
+        el.modalTitle.textContent = `${assetKey.toUpperCase().replace(/_/g, " ")} Asset`;
         
         let htmlContent = "";
+        let rawContent = "";
         
-        if (asset.content) {
-            // Markdown basic parse
+        if (typeof asset.content === "string") {
+            rawContent = asset.content;
             htmlContent = parseMarkdown(asset.content);
         } else {
-            // JSON format
-            htmlContent = `<pre><code>${JSON.stringify(asset, null, 4)}</code></pre>`;
+            rawContent = JSON.stringify(asset, null, 4);
+            htmlContent = `<pre><code>${rawContent}</code></pre>`;
         }
         
+        currentModalAsset = {
+            projectId,
+            assetKey,
+            rawContent,
+            htmlContent,
+            title: assetKey.replace(/_/g, " ")
+        };
+
         el.modalBodyContent.innerHTML = htmlContent;
         el.modalViewer.style.display = "block";
     };
@@ -462,6 +473,72 @@ document.addEventListener("DOMContentLoaded", () => {
             el.modalViewer.style.display = "none";
         }
     });
+
+    const modalBtnPrint = document.getElementById("modal-btn-print");
+    if (modalBtnPrint) {
+        modalBtnPrint.addEventListener("click", () => {
+            if (!currentModalAsset) return;
+            const printFrame = document.createElement("iframe");
+            printFrame.style.position = "fixed";
+            printFrame.style.right = "0";
+            printFrame.style.bottom = "0";
+            printFrame.style.width = "0";
+            printFrame.style.height = "0";
+            printFrame.style.border = "0";
+            document.body.appendChild(printFrame);
+            const doc = printFrame.contentWindow.document;
+            doc.open();
+            doc.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${currentModalAsset.title} - ${currentModalAsset.projectId}</title>
+                    <style>
+                        @page { margin: 0.5in; size: auto; }
+                        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; color: #111; line-height: 1.6; }
+                        h1 { border-bottom: 2px solid #333; padding-bottom: 8px; font-size: 20px; margin: 0 0 6px 0; }
+                        .meta { font-size: 12px; color: #666; margin-bottom: 20px; }
+                        pre { background: #f4f4f4; padding: 12px; border-radius: 4px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+                        table { border-collapse: collapse; width: 100%; margin: 14px 0; }
+                        th, td { border: 1px solid #ccc; padding: 6px 10px; }
+                        th { background: #f0f0f0; }
+                    </style>
+                </head>
+                <body>
+                    <h1>${currentModalAsset.title.toUpperCase()}</h1>
+                    <div class="meta">Project: <strong>${currentModalAsset.projectId}</strong> | Printed: ${new Date().toLocaleString()}</div>
+                    <div>${currentModalAsset.htmlContent}</div>
+                </body>
+                </html>
+            `);
+            doc.close();
+            setTimeout(() => {
+                printFrame.contentWindow.focus();
+                printFrame.contentWindow.print();
+                setTimeout(() => {
+                    document.body.removeChild(printFrame);
+                }, 1000);
+            }, 250);
+        });
+    }
+
+    const modalBtnSave = document.getElementById("modal-btn-save");
+    if (modalBtnSave) {
+        modalBtnSave.addEventListener("click", () => {
+            if (!currentModalAsset) return;
+            const isJson = !currentModalAsset.rawContent.trim().startsWith("#") && currentModalAsset.rawContent.trim().startsWith("{");
+            const filename = `${currentModalAsset.projectId}_${currentModalAsset.assetKey}.${isJson ? "json" : "md"}`;
+            const blob = new Blob([currentModalAsset.rawContent], { type: isJson ? "application/json" : "text/markdown;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+    }
 
     // Simple markdown parsing implementation for visual display
     function parseMarkdown(md) {

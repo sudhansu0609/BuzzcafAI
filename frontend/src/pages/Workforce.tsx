@@ -67,11 +67,11 @@ export default function Workforce() {
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
               {list.map((ag) => (
-                <div key={ag.name} style={{ backgroundColor: '#12141d', border: '1px solid #1e2230', borderRadius: 8, padding: '12px 16px', display: 'flex', gap: 12 }}>
-                  <Cpu size={18} style={{ color: '#a78bfa', opacity: 0.8, flexShrink: 0, marginTop: 2 }} />
+                <div key={ag.name} style={{ backgroundColor: 'var(--bg-subcard)', border: '1px solid var(--border-card)', borderRadius: 8, padding: '12px 16px', display: 'flex', gap: 12 }}>
+                  <Cpu size={18} style={{ color: 'var(--accent-primary)', opacity: 0.85, flexShrink: 0, marginTop: 2 }} />
                   <div style={{ minWidth: 0 }}>
-                    <h4 style={{ margin: '0 0 4px 0', color: '#ffffff', fontSize: '0.95rem' }}>{ag.name}</h4>
-                    <p style={{ margin: 0, fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.5 }}>
+                    <h4 style={{ margin: '0 0 4px 0', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{ag.name}</h4>
+                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                       {ag.role || 'No role stated in this persona file.'}
                     </p>
                   </div>

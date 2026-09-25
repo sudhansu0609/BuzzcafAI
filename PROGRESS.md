@@ -3,6 +3,39 @@
 Running record of what has actually landed, newest first. Plan: `PLAN.md`.
 A row is **done** only with the evidence that proves it. Nothing is marked done on intent.
 
+## 2026-09-17 — v11 BuzzEdit video-production bridge
+
+Full plan: `C:\Users\singh\.claude\plans\buzzcafai-has-agents-and-velvety-fog.md`
+(+ its line-referenced verification file). Servers, ComfyUI and BuzzEdit were
+never started this session (guardrail); everything below is import/syntax/
+type-check evidence, not a live end-to-end render. That live run (item under
+"Not verified" below) is still owed.
+
+| Item | Status | Evidence |
+|---|---|---|
+| v11.1 `integrations/buzzedit_client.py` | ✅ done (import-checked) | New file; `python -c "from integrations.buzzedit_client import BuzzEditClient, BuzzEditUnavailable"` succeeds; `base_url()` uses `buzzcaf_ports.discover("buzzedit", 8099, "/api/health")` |
+| v11.2 `integrations/buzzedit_script.py` | ✅ done (import-checked) | New file; `to_directive_script(script_text, visual_plan) -> (annotated_text, skipped_beats)`; exact-substring then sentence-level `difflib` fallback; `]` sanitised out of every directive argument; a local self-check regex counts inserted directives/headings and logs (not raises) on a mismatch |
+| v11.3 `integrations/buzzedit_settings.py` | ✅ done (import-checked) | New file; `settings_for_brand(brand, overrides)`; brand→genre map matches the source plan; overrides merged last |
+| v11.4 `runtime/workflow.py` visual_plan routing + JSON instruction | ✅ done | `VISUAL_PLAN_JSON_INSTRUCTION` constant added (mirrors `RESEARCH_JSON_INSTRUCTION`) and injected into the prompt for `output_asset_type == "visual_plan"`; new dedicated `elif` writes `production/visual_plan.json` (was previously falling into the bare-root `else`). `python -c "from core.workflow import workflow_registry; ..."` → all 6 workflows still load |
+| v11.5 `prompts/agents/PromptEngineer.md` | ✅ done | Frontmatter `version: 1.1.0`, `outputs` gains `visual_plan`; §8/§25/§26/§27/§28 extended with the `{genre, beats:[...]}` schema and worked examples, old `ai_prompt_dossier` schema kept |
+| v11.6 "Visual Plan" workflow step | ✅ done | Added to `beyond3baje_documentary.json`, `after_dark_narration.json`, `khayal3baje_horror.json`, `life3baje_video.json`, `VideoProductionWorkflow.json` (right after each one's `script`-producing step); intentionally **not** added to `spilled_coffee_story.json` (it produces `story`/`outline`/`script_final`, never `script`, and is a text/audiobook workflow, not a BuzzEdit candidate). `python -c "from core.workflow import workflow_registry; print(len(workflow_registry.workflows))"` → `6`, no validation errors |
+| v11.7 `app/api/produce_api.py` + mount | ✅ done | New router: `POST /api/projects/{id}/produce_video` (background `threading.Thread`, module-level `_produce_status` dict + lock, added to `active_executions`), `GET .../produce_video/status`. Mounted in `app/main.py` (`from app.api.produce_api import router as produce_router` + `app.include_router(produce_router)`). Verified via `app.openapi()["paths"]`: `/api/projects/{project_id}/produce_video`, `/api/projects/{project_id}/produce_video/status`, `/api/produce/plan` all present. Every symbol the module imports (`event_bus`, `Project`, `BuzzEditClient`/`BuzzEditUnavailable`, `to_directive_script`, `settings_for_brand`, `LLMService`/`clean_json_response`, `AgentFactory`, `VISUAL_PLAN_JSON_INSTRUCTION`, `sentinel_client`, `app.main.active_executions`) individually import-checked by name |
+| v11.7b SSE event types | ✅ done | `app/services/events.py` `EVENT_TYPES` gains `video_progress`, `video_ready`, `video_failed` |
+| v11.8 `POST /api/produce/plan` (reverse endpoint) | ✅ done | Same router as v11.7; synchronous, runs the `PromptEngineer` visual-plan agent + `to_directive_script` + `settings_for_brand`; route present in `app.openapi()["paths"]` |
+| v11.9 config/docs | ✅ done | `backend/config/config.example.json` gains `buzzedit_url`; `.env.example` gains a `BUZZEDIT_URL` example under a new "Sibling apps" section; `ECOSYSTEM.md` gains §7a "BuzzEdit bridge (produce_video)" documenting both routes + the interchange contract, and the 3 new SSE names added to §7's event list. `dexter/ECOSYSTEM.md` is now stale until re-synced (same accepted pattern as v9/v10 per this file) |
+| v11.10 Frontend (`Projects.tsx`, `lib/types.ts`) | ✅ done (type-checked) | `lib/types.ts` gains `ProduceVideoStatus`. `pages/Projects.tsx`: per-project "Produce Video" block (gated on `assets.script && assets.visual_plan`) with an absolute-path recording input, a genre/coverage style-override mini-form prefilled from the brand, a "Produce Video" button, a progress bar polling `GET .../produce_video/status` every 3s, an output-path display (flagged as a BuzzEdit-local path, not a link — no proxy exists), and a full-screen read-only Teleprompter overlay for the `buzzedit_script` asset. `cd frontend && ./node_modules/.bin/tsc --noEmit` → **0 errors**. `npm run build` was **not** run (task instruction); `backend/app/static/` is stale relative to this change |
+| v11.11 BuzzEdit `backend/integrations/buzzcaf_client.py` | ✅ done (import-checked, BuzzEdit repo) | New file + new `backend/integrations/__init__.py` package (didn't exist before). `discover("buzzcaf", 8099, "/health")` + `plan_visuals(transcript, brand)` → `POST /api/produce/plan`. `PYTHONPATH=. python -c "from integrations.buzzcaf_client import base_url, plan_visuals"` succeeds |
+| v11.12 BuzzEdit `POST /api/agents/plan_visuals` + AgentPanel UI | ✅ done (import-checked + type-checked, BuzzEdit repo) | `routes/agents.py` gains `plan_visuals` (transcribes-or-uses-existing-script → `buzzcaf_client.plan_visuals` → `presentation.script.apply_project_script`, all server-side); route confirmed at `/api/agents/plan_visuals` via both direct router inspection and `app.openapi()["paths"]` on the full `main.py` app. `src/hooks/api.ts` gains `planVisualsWithBuzzcaf` + `BUZZCAF_BRAND_OPTIONS`. `src/components/AgentPanel.tsx` gains a brand `<select>` + "Plan visuals with BuzzcafAI" button next to the script textarea, gated on `project?.transcript?.length`, using the file's existing `setError` pattern. `./node_modules/.bin/tsc --noEmit` (BuzzEdit repo) → **0 errors** |
+
+**Not verified (owed, needs both apps + ComfyUI actually running):** a live
+`produce_video` run end-to-end (Flow S and Flow R), the failure path with
+ComfyUI stopped, a live `discover("buzzedit", ...)` resolving to a real
+BuzzEdit process, and a live `POST /api/agents/plan_visuals` round trip on
+BuzzEdit's side. All backend routes are import-clean and appear in each app's
+own OpenAPI schema; none has been exercised against a running counterpart
+process. Per the task's guardrails, no server/ComfyUI was started and no
+tests were written this session.
+
 ## Status at a glance
 
 | Item | Status | Evidence |

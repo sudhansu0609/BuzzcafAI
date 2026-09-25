@@ -1,7 +1,7 @@
 import os
 import re
 import json
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field, asdict, fields
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 
@@ -40,6 +40,7 @@ class StepExecution:
     # Specialists this step handed work to, one entry per [INVOKE_AGENT] block
     # the step's agent emitted (roadmap v9, B3).
     delegations: List[Dict[str, Any]] = field(default_factory=list)
+    simulated: bool = False
 
 @dataclass
 class Project:
@@ -73,11 +74,21 @@ class Project:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Project":
+        data = dict(data)
         steps_history_data = data.pop("steps_history", [])
+
+        step_field_names = {f.name for f in fields(StepExecution)}
         steps_history = []
         for s in steps_history_data:
-            steps_history.append(StepExecution(**s))
-        return cls(steps_history=steps_history, **data)
+            if isinstance(s, dict):
+                filtered_s = {k: v for k, v in s.items() if k in step_field_names}
+                steps_history.append(StepExecution(**filtered_s))
+            elif isinstance(s, StepExecution):
+                steps_history.append(s)
+
+        project_field_names = {f.name for f in fields(cls)}
+        filtered_data = {k: v for k, v in data.items() if k in project_field_names and k != "steps_history"}
+        return cls(steps_history=steps_history, **filtered_data)
 
     @classmethod
     def load(cls, project_id: str) -> "Project":

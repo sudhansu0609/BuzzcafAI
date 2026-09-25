@@ -43,6 +43,15 @@ export async function postJson<T>(path: string, body?: unknown, init?: RequestIn
   );
 }
 
+export async function deleteJson<T>(path: string, init?: RequestInit): Promise<T> {
+  return parse<T>(
+    await apiFetch(path, {
+      method: 'DELETE',
+      ...init,
+    }),
+  );
+}
+
 export function describeError(err: unknown): string {
   if (err instanceof ApiError) return err.message;
   if (err instanceof DOMException && err.name === 'TimeoutError') return 'The backend did not answer in time.';

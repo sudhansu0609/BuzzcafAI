@@ -20,6 +20,14 @@
             "output_asset_type": "script"
         },
         {
+            "name": "Visual Plan",
+            "agent_role": "PromptEngineer",
+            "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "visual_plan"
+        },
+        {
             "name": "Sound Design Plan",
             "agent_role": "CreativeDirectorAgent",
             "description": "List sound effects and compile dark drone background tracks to blend under V.O.",

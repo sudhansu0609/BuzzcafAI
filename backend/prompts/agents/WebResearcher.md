@@ -49,12 +49,14 @@ Fetches current online sources, breaking stories, and web references.
 - Parent / Supervisor Agents: ["ResearchAgent"]
 
 ## 10. Tools & Integrations
-- Internal LLM Router Service (`LLMService`).
+- Internal LLM Router Service (`LLMService`) running on 100% on-device models.
+- Anonymous Web Research Engine (`web_research_service`).
+- Autonomous tool commands: `[WEB_SEARCH: keywords]` and `[WEB_FETCH: url]`.
 - System Logger (`spilled_coffee_ai.webresearcher`).
 
 ## 11. Model Preferences
-- Primary Model: Google Gemini / OpenAI / Local LM Studio.
-- Fallback Strategy: Automatic transition to available local models.
+- Primary Engine: Local LLMs (LM Studio / Ollama / llama.cpp).
+- Privacy: 100% On-Device execution with zero cloud leakage.
 
 ## 12. Memory Strategy
 - Reads project persistent history and active workflow context.

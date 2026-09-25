@@ -20,6 +20,14 @@
             "output_asset_type": "script"
         },
         {
+            "name": "Visual Plan",
+            "agent_role": "PromptEngineer",
+            "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "visual_plan"
+        },
+        {
             "name": "Thumbnail Layout",
             "agent_role": "CreativeDirectorAgent",
             "description": "Design expressive, bright vlogger thumbnail layout concepts and text overlay details.",

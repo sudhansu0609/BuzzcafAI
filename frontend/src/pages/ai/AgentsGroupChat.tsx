@@ -136,9 +136,9 @@ export default function AgentsGroupChat({
   };
 
   return (
-    <div style={{ padding: '24px', color: '#f8fafc', maxWidth: '1200px', margin: '0 auto', height: 'calc(100vh - 80px)', display: 'flex', flexDirection: 'column' }}>
+    <div className="group-chat-container">
       {/* Header Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#0f172a', padding: '16px 24px', borderRadius: '14px', border: '1px solid #1e293b', marginBottom: '16px' }}>
+      <div className="group-chat-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button
             onClick={onBackToStudio}
@@ -159,7 +159,7 @@ export default function AgentsGroupChat({
       </div>
 
       {/* Main Conversation Feed */}
-      <div style={{ flex: 1, background: '#090d16', borderRadius: '14px', border: '1px solid #1e293b', padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ flex: 1, background: 'var(--bg-app)', borderRadius: '14px', border: '1px solid var(--border-card)', padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {messages.map(m => (
           <div
             key={m.id}
@@ -171,16 +171,16 @@ export default function AgentsGroupChat({
             }}
           >
             {!m.isUser && (
-              <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: m.avatarColor || '#7c3aed', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: '1rem', flexShrink: 0 }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: m.avatarColor || 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: '1rem', flexShrink: 0 }}>
                 {m.sender.charAt(0)}
               </div>
             )}
 
-            <div style={{ background: m.isUser ? '#1e1b4b' : '#0f172a', padding: '14px 18px', borderRadius: '12px', border: `1px solid ${m.simulated ? '#f59e0b' : m.isUser ? '#4338ca' : '#1e293b'}` }}>
+            <div style={{ background: m.isUser ? 'var(--bg-card-hover)' : 'var(--chat-agent-bg)', padding: '14px 18px', borderRadius: '12px', border: `1px solid ${m.simulated ? '#f59e0b' : m.isUser ? 'var(--border-highlight)' : 'var(--chat-agent-border)'}` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', gap: '12px' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: m.isUser ? '#a78bfa' : '#38bdf8' }}>{m.sender}</span>
-                {m.role && <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>• {m.role}</span>}
-                <span style={{ fontSize: '0.7rem', color: '#64748b' }}>{m.timestamp}</span>
+                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: m.isUser ? 'var(--accent-primary)' : 'var(--accent-secondary)' }}>{m.sender}</span>
+                {m.role && <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>• {m.role}</span>}
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{m.timestamp}</span>
               </div>
 
               {m.simulated && (
@@ -189,21 +189,21 @@ export default function AgentsGroupChat({
                 </div>
               )}
 
-              <p style={{ margin: 0, fontSize: '0.92rem', color: '#f8fafc', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
+              <p style={{ margin: 0, fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
                 {m.text}
               </p>
 
             </div>
 
             {m.isUser && (
-              <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: '1rem', flexShrink: 0 }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--accent-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: '1rem', flexShrink: 0 }}>
                 U
               </div>
             )}
           </div>
         ))}
         {isGenerating && (
-          <div style={{ color: '#a78bfa', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px' }}>
+          <div style={{ color: 'var(--accent-primary)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px' }}>
             <Sparkles className="animate-spin" size={16} /> Agents are collaborating & thinking...
           </div>
         )}
@@ -217,14 +217,14 @@ export default function AgentsGroupChat({
           placeholder="Ask the group agents a question or give them a task..."
           value={inputMessage}
           onChange={e => setInputMessage(e.target.value)}
-          style={{ flex: 1, padding: '14px 18px', background: '#0f172a', border: '1px solid #1e293b', borderRadius: '10px', color: '#fff', fontSize: '0.95rem' }}
+          style={{ flex: 1, padding: '14px 18px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '10px', color: 'var(--text-primary)', fontSize: '0.95rem' }}
         />
         <button
           type="submit"
           disabled={isGenerating || !inputMessage.trim()}
           style={{
-            background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
-            color: '#fff',
+            background: 'var(--accent-gradient)',
+            color: 'var(--text-on-accent)',
             border: 'none',
             padding: '14px 24px',
             borderRadius: '10px',

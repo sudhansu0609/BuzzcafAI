@@ -102,5 +102,15 @@ class ProjectManager:
         except Exception as e:
             logger.error(f"Error archiving project {project_id}: {e}")
             raise e
-            
+
+    def delete_project(self, project_id: str) -> bool:
+        """Permanently remove project directory and assets."""
+        from core.models.project import _project_dir_for
+        target_dir = _project_dir_for(project_id)
+        if not os.path.exists(target_dir):
+            raise FileNotFoundError(f"Project directory not found: {project_id}")
+        shutil.rmtree(target_dir)
+        logger.info(f"ProjectManager: Project {project_id} permanently deleted at {target_dir}.")
+        return True
+
 project_manager = ProjectManager()

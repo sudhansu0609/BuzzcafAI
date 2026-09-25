@@ -1,0 +1,115 @@
+{
+    "id": "2026-09-23_Life3Baje_titletheArtOfStartingSmallWhyImBuildingACreativeLife",
+    "name": "*Title:** \"The Art of Starting Small: Why I\u2019m Building a Creative Life\"",
+    "brand": "Life3Baje",
+    "workflow_name": "life3baje_video",
+    "status": "completed",
+    "current_step": "Completed",
+    "created_at": "2026-09-23T14:25:06.546542",
+    "updated_at": "2026-09-23T14:32:59.268690",
+    "metadata": {
+        "allow_all": true,
+        "target_duration_minutes": 15.0
+    },
+    "steps_history": [
+        {
+            "step_name": "Vlog Planning",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-23T14:25:18.083471",
+            "completed_at": "2026-09-23T14:26:36.259656",
+            "output_files": {
+                "vlog_plan": "production/storyboard.md"
+            },
+            "logs": [
+                "Successfully executed step 'Vlog Planning' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=[] output_refs=production/storyboard.md elapsed_ms=78176"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Vlog Script & Prompts",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-23T14:26:36.264011",
+            "completed_at": "2026-09-23T14:28:25.607698",
+            "output_files": {
+                "script": "script/draft.md"
+            },
+            "logs": [
+                "Target runtime: 15 min injected into the script prompt.",
+                "Script length: 946 words ~6.8 min (target 15).",
+                "Successfully executed step 'Vlog Script & Prompts' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=['vlog_plan'] output_refs=script/draft.md elapsed_ms=109343"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Visual Plan",
+            "agent_name": "PromptEngineer",
+            "status": "completed",
+            "started_at": "2026-09-23T14:28:25.610769",
+            "completed_at": "2026-09-23T14:30:43.474430",
+            "output_files": {
+                "visual_plan": "production/visual_plan.json"
+            },
+            "logs": [
+                "Successfully executed step 'Visual Plan' via agent 'PromptEngineer'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=PromptEngineer status=completed input_refs=['script'] output_refs=production/visual_plan.json elapsed_ms=137863"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Thumbnail Layout",
+            "agent_name": "CreativeDirectorAgent",
+            "status": "completed",
+            "started_at": "2026-09-23T14:30:43.478397",
+            "completed_at": "2026-09-23T14:31:53.929989",
+            "output_files": {
+                "thumbnail_plan": "production/storyboard.md"
+            },
+            "logs": [
+                "Successfully executed step 'Thumbnail Layout' via agent 'CreativeDirectorAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=CreativeDirectorAgent status=completed input_refs=['script'] output_refs=production/storyboard.md elapsed_ms=70451"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "SEO & Publishing Tags",
+            "agent_name": "SEOManagerAgent",
+            "status": "completed",
+            "started_at": "2026-09-23T14:31:53.934291",
+            "completed_at": "2026-09-23T14:32:59.268315",
+            "output_files": {
+                "seo_package": "publish/publish.json"
+            },
+            "logs": [
+                "Successfully executed step 'SEO & Publishing Tags' via agent 'SEOManagerAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=SEOManagerAgent status=completed input_refs=['script', 'thumbnail_plan'] output_refs=publish/publish.json elapsed_ms=65334"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "vlog_plan": "production/storyboard.md",
+        "script": "script/draft.md",
+        "visual_plan": "production/visual_plan.json",
+        "thumbnail_plan": "production/storyboard.md",
+        "seo_package": "publish/publish.json"
+    }
+}

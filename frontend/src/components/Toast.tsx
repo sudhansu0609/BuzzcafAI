@@ -14,7 +14,7 @@ const COLORS: Record<ToastItem['kind'], { fg: string; bg: string; border: string
 export function ToastHost({ toasts, onDismiss }: { toasts: ToastItem[]; onDismiss: (id: string) => void }) {
   if (toasts.length === 0) return null;
   return (
-    <div style={{ position: 'fixed', bottom: 24, right: 24, display: 'flex', flexDirection: 'column', gap: 10, zIndex: 1000 }}>
+    <div className="toast-host-container">
       {toasts.map((t) => {
         const c = COLORS[t.kind];
         const Icon = t.kind === 'success' ? CheckCircle2 : t.kind === 'error' ? AlertCircle : Info;
@@ -32,7 +32,7 @@ export function ToastHost({ toasts, onDismiss }: { toasts: ToastItem[]; onDismis
               alignItems: 'center',
               gap: 10,
               fontWeight: 600,
-              maxWidth: 420,
+              maxWidth: '100%',
               boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
               animation: 'slideIn 0.3s ease-out',
             }}
@@ -76,8 +76,8 @@ export function ConfirmDialog({
         style={{ width: 460, maxWidth: '90vw', margin: 0 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 style={{ margin: '0 0 10px 0', color: '#ffffff', fontSize: '1.1rem' }}>{request.title}</h3>
-        {request.body && <p style={{ color: '#94a3b8', margin: '0 0 20px 0', lineHeight: 1.5 }}>{request.body}</p>}
+        <h3 style={{ margin: '0 0 10px 0', color: 'var(--text-primary)', fontSize: '1.1rem' }}>{request.title}</h3>
+        {request.body && <p style={{ color: 'var(--text-secondary)', margin: '0 0 20px 0', lineHeight: 1.5 }}>{request.body}</p>}
         <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
           <button type="button" className="btn btn-outline" onClick={() => onAnswer(false)}>
             <span>Cancel</span>

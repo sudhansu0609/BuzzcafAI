@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 from logging.handlers import RotatingFileHandler
 from typing import Optional
@@ -30,8 +31,11 @@ class LoggingManager:
         # Get root logger
         root_logger = logging.getLogger()
         
-        # Clear existing handlers
-        root_logger.handlers = []
+        # Keep existing handlers if they already write to studio.log or app.log
+        existing_log_files = set()
+        for h in root_logger.handlers:
+            if isinstance(h, RotatingFileHandler) and hasattr(h, 'baseFilename'):
+                existing_log_files.add(os.path.abspath(h.baseFilename))
         
         # Set level
         level = getattr(logging, log_level.upper(), logging.INFO)
@@ -44,17 +48,29 @@ class LoggingManager:
         # Add context filter
         context_filter = ContextFilter()
         
-        # Console Handler
-        console = logging.StreamHandler()
-        console.setFormatter(formatter)
-        console.addFilter(context_filter)
-        root_logger.addHandler(console)
+        # Console Handler (only if a real console/terminal stderr or stdout is available)
+        stream = None
+        for s in (sys.stderr, sys.stdout):
+            if s is not None and hasattr(s, "fileno"):
+                try:
+                    s.fileno()
+                    stream = s
+                    break
+                except Exception:
+                    pass
+        if stream is not None:
+            console = logging.StreamHandler(stream)
+            console.setFormatter(formatter)
+            console.addFilter(context_filter)
+            root_logger.addHandler(console)
         
-        # Rotating File Handler
-        file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5, encoding="utf-8")
-        file_handler.setFormatter(formatter)
-        file_handler.addFilter(context_filter)
-        root_logger.addHandler(file_handler)
+        # Rotating File Handler (add only if not already present)
+        abs_log_file = os.path.abspath(log_file)
+        if abs_log_file not in existing_log_files:
+            file_handler = RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5, encoding="utf-8")
+            file_handler.setFormatter(formatter)
+            file_handler.addFilter(context_filter)
+            root_logger.addHandler(file_handler)
         
         cls._initialized = True
         logging.info("LoggingManager initialized. Output routed to console and rotating file log.")

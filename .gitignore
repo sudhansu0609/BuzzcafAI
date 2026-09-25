@@ -40,3 +40,5 @@ Thumbs.db
 backend/config/window.json
 backend/logs/
 .buzzcode/
+*.exe
+scripts/claude_switcher/

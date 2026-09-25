@@ -135,6 +135,39 @@ def fetch_channel_videos(channel_url: str, limit: int = RECENT_LIMIT) -> List[Di
     return entries[:limit]
 
 
+def search_youtube(query: str, limit: int = 12) -> List[Dict[str, Any]]:
+    """Keyless YouTube search via yt-dlp (`ytsearch`), for topic demand/competition.
+
+    Flat extraction, so it stays fast and returns whatever metadata YouTube gives
+    for the result rows (view count, duration and upload date are usually present).
+    Returns [] on any failure -- no yt-dlp, no network, or a bad query -- so callers
+    can treat "no signal" and "search unavailable" the same way.
+    """
+    q = (query or "").strip()
+    if not q:
+        return []
+    try:
+        with _ydl(extract_flat=True, playlistend=limit) as ydl:
+            info = ydl.extract_info(f"ytsearch{limit}:{q}", download=False)
+    except Exception as exc:
+        logger.warning("youtube search failed for %r: %s", q, str(exc).splitlines()[0][:200])
+        return []
+    results: List[Dict[str, Any]] = []
+    for entry in (info or {}).get("entries") or []:
+        if not entry or not entry.get("id"):
+            continue
+        results.append({
+            "id": entry.get("id"),
+            "title": entry.get("title") or "",
+            "url": entry.get("url") or f"https://www.youtube.com/watch?v={entry.get('id')}",
+            "view_count": int(entry["view_count"]) if entry.get("view_count") is not None else None,
+            "duration": int(entry["duration"]) if entry.get("duration") is not None else None,
+            "channel": entry.get("channel") or entry.get("uploader") or "",
+            "upload_date": entry.get("upload_date"),
+        })
+    return results[:limit]
+
+
 # ───────────────────────── metrics ─────────────────────────
 
 

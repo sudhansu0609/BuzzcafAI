@@ -20,6 +20,14 @@
             "output_asset_type": "script"
         },
         {
+            "name": "Visual Plan",
+            "agent_role": "PromptEngineer",
+            "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "visual_plan"
+        },
+        {
             "name": "Scene Breakdown",
             "agent_role": "WriterAgent",
             "description": "Deconstruct the script into discrete production scenes with timing estimates.",

@@ -14,5 +14,133 @@
     "source": "agent",
     "created": "2026-07-26T01:28:19.805949",
     "updated": "2026-07-26T01:28:19.805954"
+  },
+  {
+    "id": "c6e3a840-4432-4c85-956c-b529d744916c",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**:",
+      "result_snippet": "Here are story architecture & literary breakdown concepts for **Originals**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable Emotion**: The 22 rules of storytelling and silent beats. *(Pillar: Story Analysis)*\n3. **The Midnight Library (Original Fantasy Short Story)**: A 30% original creator fiction piece. *(Pillar: Original Work)*\n4. **The Secret Story Structure of Christopher Nolan Movies**: Non-linear timelines and emotional anchors. *(Pillar: Story Architecture)*\n5. **How Haruki Murakami Blurs Reality & Dreams**: Magical realism techniques in modern literature. *(Pillar: Literature Breakdown)*\n\nWhich literary breakdown or original story concept shall we explore next?"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T10:40:45.973473",
+    "updated": "2026-09-16T10:40:45.973476"
+  },
+  {
+    "id": "a46bb25a-5418-43ab-9430-f5a6060989dd",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scene Breakdown' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pac",
+      "result_snippet": "Here are story architecture & literary breakdown concepts for **Originals**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable Emotion**: The 22 rules of storytelling and silent beats. *(Pillar: Story Analysis)*\n3. **The Midnight Library (Original Fantasy Short Story)**: A 30% original creator fiction piece. *(Pillar: Original Work)*\n4. **The Secret Story Structure of Christopher Nolan Movies**: Non-linear timelines and emotional anchors. *(Pillar: Story Architecture)*\n5. **How Haruki Murakami Blurs Reality & Dreams**: Magical realism techniques in modern literature. *(Pillar: Literature Breakdown)*\n\nWhich literary breakdown or original story concept shall we explore next?"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T10:40:58.991516",
+    "updated": "2026-09-16T10:40:58.991519"
+  },
+  {
+    "id": "7d33c2aa-71cf-4d00-bcef-ca4e9e8ad2e4",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Voice Recording' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pac",
+      "result_snippet": "Here are story architecture & literary breakdown concepts for **Originals**:\n\n1. **Why Franz Kafka's Stories Still Scare Modern Readers**: Analyzing psychological absurdity and isolation. *(Pillar: Great Literature)*\n2. **How Studio Ghibli & Pixar Write Unforgettable Emotion**: The 22 rules of storytelling and silent beats. *(Pillar: Story Analysis)*\n3. **The Midnight Library (Original Fantasy Short Story)**: A 30% original creator fiction piece. *(Pillar: Original Work)*\n4. **The Secret Story Structure of Christopher Nolan Movies**: Non-linear timelines and emotional anchors. *(Pillar: Story Architecture)*\n5. **How Haruki Murakami Blurs Reality & Dreams**: Magical realism techniques in modern literature. *(Pillar: Literature Breakdown)*\n\nWhich literary breakdown or original story concept shall we explore next?"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T10:41:55.494793",
+    "updated": "2026-09-16T10:41:55.494810"
+  },
+  {
+    "id": "74046d43-e810-4ad8-8509-66a28a08ffb5",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**:",
+      "result_snippet": "```markdown\n# Script Draft: Beyond3Baje - Originals Series\n## Episode Title: Why Franz Kafka's Stories Still Scare Modern Readers\n### Project: The Company That Almost Took Down a Country (Originals Pillar)\n### Brand: Beyond3Baje\n### Language: Hinglish\n\n---\n\n## [SCENE 01: THE HOOK]\n**VISUAL:** [Fade in from black. A dimly lit, dust-filled office archive room. Dust particles float in a single beam of light.]"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T10:58:18.838234",
+    "updated": "2026-09-16T10:58:18.838238"
+  },
+  {
+    "id": "b4039124-feaf-4f47-94ac-638a592593ab",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pacing**:",
+      "result_snippet": "# script/draft.md\n\n---\n\n## \ud83c\udfac Project: The Company That Almost Took Down a Country\n### \u26fd Topic Title: Standard Oil Ki Woh Taqat - Kya Ye Sach Mein Desh Ko Girane Wali Thi?\n*(Standard Oil's Power - Was It Really Destined to Bring the Nation Down?)*\n### \ud83d\udca1 Brand Focus: Beyond3Baje (The Scholarly Detective)\n### \ud83d\udcdc Tone: Cinematic, Serious, Thought-Provoking.\n### \ud83c\udf99\ufe0f Language: Hinglish\n\n---\n\n## [SCENE 01: THE HOOK - THE SHADOW TYCOON]\n**VISUAL:** [Fade in from absolute black. A slow, sweeping macro shot of an ancient, massive Standard Oil refinery complex at dusk. The orange glow reflects off the cooling towers. Dust motes are visible in the last beam of light.]\n**SOUND:** [Deep, resonant cinematic bass note holds. Subtle sound of industrial machinery humming and hissing oil.]\n\n**V.O. (Narrator):** Namaste aur swagat hai aapka Beyond3Baje mein. Kya socho agar main kahun ki America ke economic map par ek aisi company thi... jiske paas poora desh uske rules par chal raha tha? Ek aisa taqatwar *tycoon*, jiski chhaya (shadow) har chhote business, har state aur har ordinary American life ko control karti thi.\n[VISUAL: Quick montage of old archival photos \u2013 bustling Gilded Age streets, massive oil barrels, busy railroad tracks.]\n\n**V.O. (Narrator):** Yeh sirf tel bechne waali company nahi thi. Yeh ek *system* tha. Ek aisa monolithic trust jiska naam tha Standard Oil. Aur iski taqat itni zyada thi... ki humein lagta hai, yeh company hi desh ko girane wali thi. Par kya ye sach mein hua? Ya phir...\n[VISUAL: Focus zooms onto a faded historical document or the 1906 Supreme Court gavel.]\n**V.O. (Narrator):** ...yeh sirf ek *accelerant* tha? Chaliye, is khoj par nikalte hain.\n\n---\n\n## [SCENE 02: THE RISE - ROCKFELLER KA VISION]\n**VISUAL:** [Transition to a sepia-toned shot. A portrait of John D. Rockefeller\u2014intense gaze, sharp suit. We see him walking purposefully through a Pennsylvania oil field.]\n**SOUND:** [Music softens slightly, becoming more investigative and curious.]\n\n**V.O. (Na"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T11:01:19.011408",
+    "updated": "2026-09-16T11:01:19.011412"
+  },
+  {
+    "id": "283289f0-e586-40db-8c93-74ca8267ec01",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scene Breakdown' for the media project 'The Company That Almost Took Down a Country' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Overview\nBeyond3Baje is the flagship intellectual documentary brand of Buzzcaf Media.\n\n## Core Identity\n- **Topic Focus**: Unsolved mysteries, historical anomalies, deep-dive investigations, and science explorations.\n- **Narrative Archetype**: The Scholarly Detective. Objective, curious, intellectual, and deeply analytical.\n- **Tone**: Cinematic, thought-provoking, serious, and deeply engaging.\n- **Pac",
+      "result_snippet": "# \ud83c\udfac SCENE BREAKDOWN & PRODUCTION BLUEPRINT\n*(Project: The Company That Almost Took Down a Country | Brand: Beyond3Baje)*\n\n---\n\n## **OVERALL RUNTIME ESTIMATE:** ~4 minutes 25 seconds (High Pacing)\n**TONE GUIDE:** Cinematic, Deeply Investigative, Scholarly.\n**VISUAL STYLE GUIDE:** Moody lighting, historical texture (sepia/dusk), macro shots of industrial elements, clear graphic overlays for concepts.\n\n---\n\n### **[SCENE 01: THE HOOK - THE SHADOW TYCOON]**\n*   **Time Estimate:** 0:00 \u2013 0:50 (Approx. 50 seconds)\n*   **Goal:** Establish the core paradox and hook the viewer immediately. Set a tone of massive, unseen power.\n*   **Visual Focus:** Slow, sweeping macro shots (dusk refinery). Archival footage montage (Gilded Age streets, oil barrels, railroad tracks). Zoom onto historical artifacts/gavel.\n*   **Sound Cue:** Deep, resonant cinematic bass note (holds throughout the scene). Subtle industrial humming/hissing. Music starts low and builds tension.\n*   **Narrator Action:** Introduces the concept of a controlling *tycoon*. Uses rhetorical questions to engage the audience (\"Kya socho agar main kahun...\"). Ends with an unresolved query: \"accelerant tha?\"\n\n### **[SCENE 02: THE RISE - ROCKFELLER KA VISION]**\n*   **Time Estimate:** 0:51 \u2013 1:36 (Approx. 45 seconds)\n*   **Goal:** Introduce the protagonist (Rockefeller) and his revolutionary vision of turning local commodity into industrial control.\n*   **Visual Focus:** Sepia-toned portrait of John D. Rockefeller (intense gaze). Wide shot of Pennsylvania oil field. **Key Graphic:** Animated map showing scattered dots merging into a single, glowing blob. Time-lapse effect for the merger.\n*   **Sound Cue:** Music becomes investigative and curious\u2014a slightly faster tempo than Scene 01. Subtle 'whoosh' sound upon map merger.\n*   **Narrator Action:** Provides historical context (c. 1870s). Defines his goal: not just refining, but **control**. Simplifies the concept for the viewer (\"Basic concept samjho...\").\n\n### **[SCENE 03: THE "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-16T11:12:27.437796",
+    "updated": "2026-09-16T11:12:27.437800"
+  },
+  {
+    "id": "d88f2722-06c2-4d0d-bf57-d3da6b89a373",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Planning' for the media project '*Title:** \"The Art of Starting Small: Why I\u2019m Building a Creative Life\"' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Overview\nLife3Baje covers the creative journey, behind-the-scenes content, and daily workflows of the team at Buzzcaf Private Limited.\n\n## Core Identity\n- **Topic Focus**: Behind-the-scenes vlogs, workspace design updates, production diaries, and creative challenges.\n- **Narrative Archetype**: The Transparent Creator. Honest, energetic, friendly, and authentic.\n- **Tone**: Lighthe",
+      "result_snippet": "# Vlog Planning: The Art of Starting Small: Why I\u2019m Building a Creative Life\n\n**Project:** Vlog Planning  \n**Brand:** Life3Baje (The Transparent Creator)  \n**Language:** Hinglish (Roman Font)\n\n---\n\n## **Vlog Overview**\nIs vlog ka main goal hai viewers ko ye samjhana ki \"Big Goals\" ke peeche bhagne se pehle humein \"Small Starts\" ki value samajhni chahiye. Ye ek personal, honest journey hai jahan hum dikhayenge ki kaise perfection ki chinta chhodo aur bas *shuruat* karne par focus karo.\n\n---\n\n## **Vlog Structure & Segment Breakdown**\n\n| Timestamp | Segment Name | Theme / Talking Points | Visual Style & Cues |\n| :--- | :--- | :--- | :--- |\n| **0:00 - 0:45** | **The Hook: The Overwhelm** | Start with a relatable struggle. \"Hum sab bade sapne dekhte hain, par aksar unhe shuru karne se darte hain kyunki humein lagta hai ki sab kuch perfect hona chahiye.\" Introduce the concept of 'Starting Small'. | [Fast cuts] Handheld camera moving through a messy creative desk. Text overlay: *\u201cWhy are we scared to start?\u201d* |\n| **0:45 - 1:30** | **The \"Big\" Trap** | Talk about how trying to build a whole life/career at once can be paralyzing. Share a personal failure (e.g., wanting to write a book but failing to write one page). | [Bright natural lighting] Walking shot in a garden or balcony. Lo-fi background music starts. |\n| **1:30 - 3:00** | **The Philosophy of Small Wins** | Breakdown the strategy: Why 1% progress is better than 100% effort once a month. Talk about micro-habits and how \"Small\" gives you the freedom to experiment without fear of failure. | [On-screen text] List of small wins (e.g., 5 mins of sketching, writing 3 lines). Fast transitions between different 'small' activities. |\n| **3:00 - 5:00** | **Behind-the-Scenes: Building at Buzzcaf** | Show the actual workflow. \"Main kaise apna creative life build kar raha hoon.\" Show a mix of messy brainstorming, coffee breaks, and small victories in the studio. | [B-roll montage] Fast cuts of sketching, typing, laughing with the"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-23T14:26:36.237868",
+    "updated": "2026-09-23T14:26:36.237873"
+  },
+  {
+    "id": "7b86730b-78da-46c1-b459-22d94fe6af42",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Script & Prompts' for the media project '*Title:** \"The Art of Starting Small: Why I\u2019m Building a Creative Life\"' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Overview\nLife3Baje covers the creative journey, behind-the-scenes content, and daily workflows of the team at Buzzcaf Private Limited.\n\n## Core Identity\n- **Topic Focus**: Behind-the-scenes vlogs, workspace design updates, production diaries, and creative challenges.\n- **Narrative Archetype**: The Transparent Creator. Honest, energetic, friendly, and authentic.\n- **Tone**:",
+      "result_snippet": "# script/draft.md\n\n---\n\n## \ud83c\udfac Project: The Art of Starting Small: Why I\u2019m Building a Creative Life\n### \ud83c\udff7\ufe0f Brand Focus: Life3Baje (The Transparent Creator)\n### \ud83d\udde3\ufe0f Language: Hinglish (Roman Font)\n### \ud83c\udfad Tone: Lighthearted, Inspiring, Warm, and Conversational\n\n---\n\n## [SCENE 01: THE HOOK - THE OVERWhelm]\n**VISUAL:** [Fast cuts. A handheld camera moves quickly over a desk covered in half-finished sketches, coffee mugs, and crumpled papers. The lighting is warm and cozy.]\n**TEXT OVERLAY:** *\u201cWhy are we scared to start?\u201d*\n\n**V.O. (Narrator):** Hum sab ke paas bade sapne hote hain, right? Hum sochte hain ki ek din hum apni life build karenge, ek amazing brand banayenge, ya shayad ek masterpiece create karenge. Par aksar... hum unhe shuru karne se darte hain. \n\n[Visual: Narrator looks directly into the camera with a relatable sigh.]\n\n**V.O. (Narrator):** Kyun? Kyunki humein lagta hai ki jab sab kuch *perfect* hoga, tab hum shuru karenge. But honestly? Perfection ek illusion hai. Hum aksar \"the perfect moment\" ka wait karte rehte hain, aur us intezar mein woh 'starting' hi kahin kho jati hai. Aaj ke vlog mein, main baat karunga isi cheez par\u2014ki kaise hum bade goals ke peeche bhagte-bhagte chhote steps ko bhool jate hain. Let\u2019s talk about the art of starting small.\n\n---\n\n## [SCENE 02: THE \"BIG\" TRAP]\n**VISUAL:** [Transition to a walking shot. Narrator is walking through a garden or a balcony during golden hour. The vibe is relaxed.]\n\n**V.O. (Narrator):** Ek baar mere saath bhi aisa hua tha. Main chahta tha ki main ek poori book likhu. I had this massive vision in my head. Par jab maine paper uthaya, toh mujhe samajh nahi aaya ki pehla word kya likhun. Maine socha, \"Agar pehla chapter perfect nahi bana, toh kya fayda?\" \n\n[Visual: Fast cuts of the narrator looking frustrated at a blank notebook.]\n\n**V.O. (Narrator):** Aur yahi hai woh 'Big Trap'. Jab hum poore career ya poori life ko ek saath build karne ki koshish karte hain, hum aksar paralyze ho jate hain. Hum sochte hain, \"Ab"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-23T14:28:25.588701",
+    "updated": "2026-09-23T14:28:25.588708"
   }
 ]

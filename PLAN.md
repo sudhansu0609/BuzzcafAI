@@ -140,6 +140,37 @@ the next starts. Nothing is marked done in `PROGRESS.md` without evidence.
 - Enforcing `permissions` — nothing calls tools yet; a label with no consequence is honest as long as `AGENTS.md` says so.
 - Streaming chat (5.5) — still deferred.
 
+## v11 — BuzzEdit video-production bridge (owner's ask, 2026-09-16)
+
+**Why.** BuzzcafAI's agents write scripts and "AI image prompts" as free
+Markdown, but nothing ever calls ComfyUI or produces an image/clip. BuzzEdit
+is a talking-head auto-editor built around a recording (Whisper transcribe →
+auto-cut → ComfyUI B-roll → FFmpeg render). Full plan:
+`C:\Users\singh\.claude\plans\buzzcafai-has-agents-and-velvety-fog.md` (+
+its line-referenced verification file alongside it). Owner's ask, verbatim:
+"Record myself saying the script, then give it to either BuzzcafAI or
+BuzzEdit, and the rest is taken care of."
+
+Both script flows are in scope (script-first and record-first) and either app
+may be the entry point; style is auto-derived from brand with a per-video
+override. Phase 1 (items 1–7, 9, core of 10) is the priority; Phases 2–3
+(8, 11, 12) build on it.
+
+| # | Item | Effort | Acceptance |
+|---|---|---|---|
+| 1 | `integrations/buzzedit_client.py` (new): `BuzzEditClient` wrapping BuzzEdit's HTTP API, discovered via `buzzcaf_ports.discover("buzzedit", 8099, "/api/health")` | M | imports clean; `health()`/`comfyui_online()` best-effort, never raise |
+| 2 | `integrations/buzzedit_script.py` (new): `to_directive_script(script_text, visual_plan) -> (annotated_text, skipped_beats)` | M | anchor located exactly or by sentence-level fuzzy match; spoken text untouched outside inserted brackets/headings |
+| 3 | `integrations/buzzedit_settings.py` (new): `settings_for_brand(brand, overrides) -> PresentationSettings dict` | S | real BuzzEdit field names; overrides merged last |
+| 4 | `runtime/workflow.py`: dedicated `elif output_asset_type == "visual_plan"` → `production/visual_plan.json`; `VISUAL_PLAN_JSON_INSTRUCTION` injected into the prompt (mirrors `RESEARCH_JSON_INSTRUCTION`, required because `_call_local` ignores `require_json`) | S | `python -c "from core.workflow import workflow_registry"` still loads all workflows |
+| 5 | `prompts/agents/PromptEngineer.md`: extend output schema with the `visual_plan` shape (`genre`, `beats[{anchor,kind,...}]`) | S | schema documented, version bumped 1.1.0 |
+| 6 | Add a "Visual Plan" step (agent `PromptEngineer`, `output_asset_type: "visual_plan"`, `input_assets: ["script"]`) to every brand workflow that produces a `script` asset | S | all 6 workflow JSONs still validate at startup |
+| 7 | `app/api/produce_api.py` (new router), mounted in `main.py`: `POST /api/projects/{id}/produce_video` (background thread, module-level status dict, `active_executions`), `GET .../produce_video/status`; `video_progress`/`video_ready`/`video_failed` added to `services/events.py` | L | router import-clean, routes present in `app.openapi()["paths"]` |
+| 8 | `POST /api/produce/plan {brand, script_text?, transcript?}` (reverse endpoint, same router) | S | synchronous, returns `{annotated_script, settings, visual_plan}` |
+| 9 | Config/docs: `buzzedit_url` in `config.example.json`, `BUZZEDIT_URL` in `.env.example`, `ECOSYSTEM.md` §7a, this PLAN/PROGRESS entry | S | files updated |
+| 10 | Frontend `Projects.tsx` (+`services/api.ts`, `lib/types.ts`): attach-recording input, Produce Video button, style-override mini-form, progress poll, output path display, teleprompter view | M | `tsc` type-checks the new code; no `npm run build` run (task instruction) |
+| 11 | BuzzEdit `backend/integrations/buzzcaf_client.py` (new): discover `"buzzcaf"`, call `POST /api/produce/plan` | S | imports clean |
+| 12 | BuzzEdit route + "Plan visuals with BuzzcafAI" button in `AgentPanel.tsx` (server-side round trip) | M | button visible, gated on a transcript existing |
+
 ## Not doing
 
 - Voice (any form) until text chat, memory and control are solid.

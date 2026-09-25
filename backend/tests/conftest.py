@@ -39,6 +39,8 @@ os.environ["LOGS_PATH"] = str(_SANDBOX / "logs")
 # Guard against a stale override in .env: core.config loads the repo .env with
 # override=True, which would silently redirect the suite back to real data.
 os.environ.setdefault("BUZZCAF_TEST_SANDBOX", str(_SANDBOX))
+os.environ["SENTINEL_PIPE"] = r"\\.\pipe\BuzzcafTestSentinelAbsent"
+os.environ.setdefault("APP_ENV", "test")
 
 
 def pytest_sessionfinish(session, exitstatus):  # noqa: ARG001

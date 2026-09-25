@@ -85,7 +85,7 @@ export default function Departments() {
               {dept.specialists.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
                   {dept.specialists.map((s) => (
-                    <span key={s} style={{ backgroundColor: '#12141d', border: '1px solid #1e2230', borderRadius: 6, padding: '3px 9px', fontSize: '0.75rem', color: '#94a3b8' }}>
+                    <span key={s} style={{ backgroundColor: 'var(--bg-pill)', border: '1px solid var(--border-card)', borderRadius: 6, padding: '3px 9px', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                       {s}
                     </span>
                   ))}

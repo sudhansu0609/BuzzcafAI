@@ -4,10 +4,12 @@ import json
 import uuid
 from datetime import datetime
 from typing import Optional, List, Dict, Any
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, Query
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
+import html
+import webbrowser
 from pydantic import BaseModel
 
 from core.models.project import Project
@@ -23,12 +25,14 @@ from app.api.studio_api import router as studio_router
 from app.api.buzzbrain_api import router as buzzbrain_router
 from app.api.video_intel_api import router as video_intel_router
 from app.api.departments_api import router as departments_router
+from app.api.produce_api import router as produce_router
 from app.services.events import bus as event_bus
 app.include_router(agents_router)
 app.include_router(studio_router)
 app.include_router(buzzbrain_router)
 app.include_router(video_intel_router)
 app.include_router(departments_router)
+app.include_router(produce_router)
 
 
 @app.on_event("startup")
@@ -136,6 +140,10 @@ class ProjectCreateSchema(BaseModel):
     name: str
     brand: str
     workflow_name: str
+    allow_all: Optional[bool] = False
+    # Target video runtime in minutes; the Script/Outline steps write to this
+    # length. Optional -- omitted means "no target, write to natural length".
+    target_duration_minutes: Optional[float] = None
 
 class SettingsSchema(BaseModel):
     gemini_api_key: Optional[str] = ""
@@ -143,20 +151,28 @@ class SettingsSchema(BaseModel):
     openai_api_key: Optional[str] = ""
     openai_model: Optional[str] = "gpt-4o-mini"
     lm_studio_url: Optional[str] = "http://localhost:1234/v1"
-    lm_studio_model: Optional[str] = "meta-llama-3-8b-instruct"
+    lm_studio_model: Optional[str] = "qwen3.8-flash-next"
+    ollama_url: Optional[str] = "http://localhost:11434/v1"
+    ollama_model: Optional[str] = "qwen3.5:9b"
     llamacpp_url: Optional[str] = "http://127.0.0.1:8089/v1"
-    llamacpp_model: Optional[str] = "local-model"
+    llamacpp_model: Optional[str] = "qwen3.8-27b"
     # Which provider and model each persona tier runs on (roadmap v9, F1):
     # {"fast": {"provider": "llamacpp", "model": ""}, "strong": {...}}
     tiers: Optional[Dict[str, Dict[str, str]]] = None
-    prefer_gemini: Optional[bool] = True
-    selected_provider: Optional[str] = "gemini"
+    local_only: Optional[bool] = True
+    prefer_gemini: Optional[bool] = False
+    selected_provider: Optional[str] = "lm_studio"
     # YouTube channel ids the owner runs; BuzzBrain snapshots from these are "mine".
     owner_channel_ids: Optional[List[str]] = None
+    web_research_enabled: Optional[bool] = True
+    search_provider: Optional[str] = "auto"
+    searxng_url: Optional[str] = "http://localhost:8080"
+    allow_all_steps: Optional[bool] = False
 
 
 class ExecuteStepSchema(BaseModel):
     feedback: Optional[str] = None
+    allow_all: Optional[bool] = None
 
 class AssetRegisterSchema(BaseModel):
     title: str
@@ -184,22 +200,114 @@ def set_bound_port(port: int) -> None:
     _bound_port = int(port)
 
 
+import threading
+
+_bg_model_loading_lock = threading.Lock()
+_bg_model_is_loading = False
+
+
 def bound_port() -> int:
     return _bound_port
 
 
 @app.get("/health")
-def health():
+def health(blocking: bool = False):
     # `app` lets Dexter, BuzzBrain and a second launcher confirm they are
     # talking to the Studio and not to some other process on the same port.
     # `port`/`pid` make the answer self-describing, so a scanner that finds us
     # on a stepped-forward port knows where we really are and who we are.
+    import requests
+    from integrations.llm import models_match, ensure_local_model_loaded, get_loaded_lm_studio_models, is_model_already_loaded
+    from core.logger import logger
+
+    config = load_config()
+    selected_p = (config.get("selected_provider") or "lm_studio").lower()
+    model_name = config.get(f"{selected_p}_model", "")
+
+    model_status: Dict[str, Any] = {
+        "provider": selected_p,
+        "configured_model": model_name,
+        "connected": False,
+        "loaded": False,
+        "loaded_models": [],
+        "active_model": model_name,
+    }
+
+    if selected_p == "lm_studio":
+        try:
+            lm_url = (config.get("lm_studio_url") or "http://localhost:1234/v1").replace("/v1", "")
+            loaded = get_loaded_lm_studio_models(lm_url)
+            model_status["connected"] = True
+            model_status["loaded_models"] = loaded
+            is_loaded, matched_mid = is_model_already_loaded(model_name, loaded)
+            if is_loaded and matched_mid:
+                model_status["loaded"] = True
+                model_status["active_model"] = matched_mid
+            elif loaded:
+                model_status["loaded"] = True
+                model_status["active_model"] = loaded[0]
+            elif blocking:
+                res = ensure_local_model_loaded("lm_studio", model_name)
+                if res.get("loaded"):
+                    model_status["loaded"] = True
+                    model_status["active_model"] = res.get("model")
+            else:
+                # Non-blocking auto-load in background thread so /health answers in <50ms,
+                # ensuring desktop_app.py and ecosystem probes never time out.
+                def _bg_load():
+                    global _bg_model_is_loading
+                    try:
+                        logger.info(f"Health check triggering background load for model '{model_name}'...")
+                        ensure_local_model_loaded("lm_studio", model_name)
+                    except Exception as exc:
+                        logger.warning(f"Background load for model '{model_name}' failed: {exc}")
+                    finally:
+                        _bg_model_is_loading = False
+
+                with _bg_model_loading_lock:
+                    global _bg_model_is_loading
+                    if not _bg_model_is_loading:
+                        _bg_model_is_loading = True
+                        threading.Thread(target=_bg_load, name="bg-model-loader", daemon=True).start()
+
+                model_status["loaded"] = False
+                model_status["loading"] = True
+        except Exception:
+            model_status["connected"] = False
+    elif selected_p == "ollama":
+        try:
+            ol_url = (config.get("ollama_url") or "http://localhost:11434/v1").replace("/v1", "")
+            r = requests.get(f"{ol_url}/api/tags", timeout=1.0)
+            if r.status_code == 200:
+                model_status["connected"] = True
+                model_status["loaded"] = True
+                model_status["active_model"] = model_name
+        except Exception:
+            model_status["connected"] = False
+    elif selected_p == "llamacpp":
+        try:
+            lc_url = config.get("llamacpp_url") or "http://127.0.0.1:8089/v1"
+            r = requests.get(f"{lc_url}/models", timeout=1.0)
+            if r.status_code == 200:
+                model_status["connected"] = True
+                model_status["loaded"] = True
+                model_status["active_model"] = model_name
+        except Exception:
+            model_status["connected"] = False
+    elif selected_p in ("gemini", "openai"):
+        key_name = f"{selected_p}_api_key"
+        has_key = bool(config.get(key_name) or os.environ.get(key_name.upper()))
+        model_status["connected"] = has_key
+        model_status["loaded"] = has_key
+        model_status["active_model"] = model_name
+
     return {
         "status": "ok",
         "app": APP_ID,
         "version": STUDIO_VERSION,
         "port": _bound_port,
         "pid": os.getpid(),
+        "model_status": model_status,
     }
 
 @app.get("/projects")
@@ -272,6 +380,218 @@ def update_settings(settings: SettingsSchema):
         "config": _redact_settings(new_config),
     }
 
+@app.post("/api/settings/reset")
+def reset_settings():
+    """Reset settings to clean factory defaults with auto-detected local model."""
+    import requests
+    from integrations.llm import DEFAULT_TIERS
+
+    detected_model = "qwen3.8-27b-gsq-rco"
+    try:
+        r = requests.get("http://localhost:1234/api/v0/models", timeout=1.0)
+        if r.status_code == 200:
+            for m in r.json().get("data", []):
+                if m.get("state") == "loaded":
+                    detected_model = m.get("id")
+                    break
+    except Exception:
+        pass
+
+    default_config = {
+        "gemini_api_key": "",
+        "gemini_model": "gemini-1.5-flash",
+        "openai_api_key": "",
+        "openai_model": "gpt-4o-mini",
+        "lm_studio_url": "http://localhost:1234/v1",
+        "lm_studio_model": detected_model,
+        "ollama_url": "http://localhost:11434/v1",
+        "ollama_model": "qwen3.5:9b",
+        "llamacpp_url": "http://127.0.0.1:8089/v1",
+        "llamacpp_model": "qwen3.8-27b",
+        "tiers": {
+            "fast": {"provider": "lm_studio", "model": detected_model},
+            "strong": {"provider": "lm_studio", "model": detected_model},
+        },
+        "local_only": True,
+        "prefer_gemini": False,
+        "selected_provider": "lm_studio",
+        "web_research_enabled": True,
+        "search_provider": "duckduckgo",
+        "allow_all_steps": False,
+        "owner_channel_ids": ["@beyond3baje", "@khayal3baje", "@raat3baje"],
+        "searxng_url": "http://localhost:8080"
+    }
+    save_config(default_config)
+    engine.llm_service.reload_config()
+    return {
+        "status": "success",
+        "message": "Settings reset to factory defaults successfully.",
+        "config": _redact_settings(default_config),
+    }
+
+@app.get("/api/settings/local-models")
+def get_local_models():
+    """Probe active local servers and scan disk for downloaded models in LM Studio, Ollama, and llama.cpp."""
+    import requests
+    config = load_config()
+    detected: Dict[str, List[str]] = {
+        "lm_studio": [],
+        "ollama": [],
+        "llamacpp": []
+    }
+
+    # 1. LM Studio (API + Disk)
+    lms_set = set()
+    lm_url = (config.get("lm_studio_url") or "http://localhost:1234/v1").rstrip("/")
+    try:
+        r = requests.get(f"{lm_url}/models", timeout=2)
+        if r.status_code == 200:
+            for m in r.json().get("data", []):
+                mid = m.get("id")
+                if mid:
+                    lms_set.add(mid)
+    except Exception:
+        pass
+
+    # Disk scan for downloaded LM Studio models
+    for lms_dir in [os.path.expanduser("~/.lmstudio/models"), os.path.expanduser("~/.cache/lm-studio/models")]:
+        if os.path.isdir(lms_dir):
+            try:
+                for pub in os.listdir(lms_dir):
+                    pub_dir = os.path.join(lms_dir, pub)
+                    if os.path.isdir(pub_dir) and pub not in ("blobs", "manifests"):
+                        for m in os.listdir(pub_dir):
+                            if os.path.isdir(os.path.join(pub_dir, m)):
+                                lms_set.add(f"{pub}/{m}")
+            except Exception:
+                pass
+    detected["lm_studio"] = sorted(list(lms_set), key=lambda x: x.lower())
+
+    # 2. Ollama (API + Disk)
+    ollama_set = set()
+    ollama_base = (config.get("ollama_url") or "http://localhost:11434/v1").rstrip("/")
+    try:
+        host = ollama_base.replace("/v1", "")
+        r = requests.get(f"{host}/api/tags", timeout=2)
+        if r.status_code == 200:
+            for m in r.json().get("models", []):
+                mname = m.get("name") or m.get("model")
+                if mname:
+                    ollama_set.add(mname)
+    except Exception:
+        pass
+
+    try:
+        r2 = requests.get(f"{ollama_base}/models", timeout=2)
+        if r2.status_code == 200:
+            for m in r2.json().get("data", []):
+                mid = m.get("id")
+                if mid:
+                    ollama_set.add(mid)
+    except Exception:
+        pass
+
+    # Disk scan for downloaded Ollama models
+    ollama_manifests = os.path.expanduser("~/.ollama/models/manifests")
+    if os.path.isdir(ollama_manifests):
+        try:
+            for root, dirs, files in os.walk(ollama_manifests):
+                for f in files:
+                    rel = os.path.relpath(os.path.join(root, f), ollama_manifests).replace("\\", "/")
+                    parts = rel.split("/")
+                    if len(parts) >= 2:
+                        tag = parts[-1]
+                        model_name = parts[-2]
+                        ollama_set.add(f"{model_name}:{tag}" if tag != "latest" else model_name)
+        except Exception:
+            pass
+    detected["ollama"] = sorted(list(ollama_set), key=lambda x: x.lower())
+
+    # 3. llama.cpp
+    ll_set = set()
+    ll_url = (config.get("llamacpp_url") or "http://127.0.0.1:8089/v1").rstrip("/")
+    try:
+        r = requests.get(f"{ll_url}/models", timeout=2)
+        if r.status_code == 200:
+            for m in r.json().get("data", []):
+                mid = m.get("id")
+                if mid:
+                    ll_set.add(mid)
+    except Exception:
+        pass
+    default_ll = config.get("llamacpp_model") or "qwen3.8-27b"
+    if default_ll:
+        ll_set.add(default_ll)
+    detected["llamacpp"] = sorted(list(ll_set), key=lambda x: x.lower())
+
+    return detected
+
+@app.get("/api/research/search")
+def run_research_search(q: str = Query(..., description="Query to search"), limit: int = 5):
+    """Execute a privacy-safe web search via SearXNG, Wikipedia, and DuckDuckGo."""
+    from app.services.web_research import web_research_service
+    results = web_research_service.search(q, max_results=limit)
+    return {"query": q, "results": results, "count": len(results)}
+
+@app.get("/api/research/fetch")
+def run_research_fetch(url: str = Query(..., description="URL to fetch")):
+    """Safely fetch clean text from a public web page without scripts or tracking."""
+    from app.services.web_research import web_research_service
+    content = web_research_service.fetch(url)
+    return {"url": url, "content": content}
+
+@app.get("/api/research/sources")
+def run_source_research(q: str = Query(...), kinds: str = "news,archives,books", limit: int = 5):
+    """Search keyless book/archive/news providers (Gutenberg, Open Library, Internet Archive,
+    Wikisource, GDELT, Google News, Chronicling America) and return grouped, deduped results."""
+    from app.services.deep_research import deep_research
+    kl = tuple(k.strip() for k in kinds.split(",") if k.strip()) or ("news", "archives", "books")
+    return deep_research(q, kinds=kl, per_source=limit)
+
+@app.get("/api/research/searxng-test")
+def test_searxng_connection(url: Optional[str] = None):
+    """Test connection to a SearXNG instance and return status & sample result."""
+    from app.services.web_research import search_searxng
+    from integrations.llm import load_config
+    target_url = (url or load_config().get("searxng_url") or "http://localhost:8080").strip()
+    try:
+        results = search_searxng("test query", base_url=target_url, max_results=1)
+        if results:
+            return {
+                "status": "ok",
+                "message": f"Successfully connected to SearXNG at {target_url}!",
+                "url": target_url,
+                "sample": results[0]
+            }
+        else:
+            import requests
+            r = requests.get(f"{target_url.rstrip('/')}/search", params={"q": "test", "format": "json"}, timeout=3)
+            if r.status_code == 200:
+                return {
+                    "status": "warning",
+                    "message": f"SearXNG responded at {target_url}, but returned 0 results for the test query.",
+                    "url": target_url
+                }
+            elif r.status_code == 403 or "json" not in r.headers.get("content-type", ""):
+                return {
+                    "status": "error",
+                    "message": f"SearXNG reachable at {target_url}, but JSON format is disabled in settings.yml (add 'json' to search.formats).",
+                    "url": target_url
+                }
+            else:
+                return {
+                    "status": "error",
+                    "message": f"SearXNG returned HTTP {r.status_code} at {target_url}.",
+                    "url": target_url
+                }
+    except Exception as exc:
+        return {
+            "status": "error",
+            "message": f"Could not reach SearXNG at {target_url}: {exc}",
+            "url": target_url
+        }
+
+
 @app.get("/api/workflows")
 def get_workflows():
     engine.load_workflows()
@@ -305,13 +625,29 @@ def list_projects():
                 p = Project.load(pid)
                 projects.append(p.to_dict())
             except Exception as e:
-                # Log and skip corrupted projects
+                logger.warning(f"Could not load project '{pid}': {e}", exc_info=True)
                 continue
     # Sort by created_at descending
     projects.sort(key=lambda x: x.get("created_at", ""), reverse=True)
     return projects
 
 from executive.project import project_manager
+
+
+def _clamp_minutes(value: Optional[float]) -> Optional[float]:
+    """A sane target runtime in minutes, or None to clear it (<=0 or unparseable)."""
+    try:
+        minutes = float(value)
+    except (TypeError, ValueError):
+        return None
+    if minutes <= 0:
+        return None
+    return round(max(0.5, min(180.0, minutes)), 2)
+
+
+class DurationSchema(BaseModel):
+    minutes: Optional[float] = None
+
 
 @app.post("/api/projects")
 def create_project(payload: ProjectCreateSchema):
@@ -326,6 +662,16 @@ def create_project(payload: ProjectCreateSchema):
             brand=payload.brand,
             workflow_name=payload.workflow_name
         )
+        dirty = False
+        if payload.allow_all:
+            project.metadata["allow_all"] = True
+            dirty = True
+        minutes = _clamp_minutes(payload.target_duration_minutes)
+        if minutes:
+            project.metadata["target_duration_minutes"] = minutes
+            dirty = True
+        if dirty:
+            project.save()
         data = project.to_dict()
         event_bus.publish("project_created", {
             "project_id": data.get("id"), "name": data.get("name"), "brand": data.get("brand"),
@@ -335,6 +681,29 @@ def create_project(payload: ProjectCreateSchema):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+
+@app.post("/api/projects/{project_id}/duration")
+def set_project_duration(project_id: str, payload: DurationSchema):
+    """Set (or clear) the project's target video runtime in minutes.
+
+    The Script/Outline steps read this and write to the target length, so the
+    creator resizes a video by changing this and re-running the Script step.
+    A null/0 value clears the target.
+    """
+    try:
+        project = Project.load(project_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    minutes = _clamp_minutes(payload.minutes)
+    if minutes:
+        project.metadata["target_duration_minutes"] = minutes
+    else:
+        project.metadata.pop("target_duration_minutes", None)
+    project.save()
+    return project.to_dict()
 
 
 @app.get("/api/projects/{project_id}")
@@ -346,6 +715,45 @@ def get_project(project_id: str):
         raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
+
+
+@app.delete("/api/projects/{project_id}")
+def delete_project(project_id: str):
+    if project_id in active_executions:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot delete project '{project_id}' while a step is actively executing.",
+        )
+    name = project_id
+    brand = "Unknown"
+    try:
+        project = Project.load(project_id)
+        name = project.name
+        brand = project.brand
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found.")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.warning(f"Could not read metadata before deleting project '{project_id}': {e}")
+
+    try:
+        project_manager.delete_project(project_id)
+        if project_id in log_handler.logs:
+            del log_handler.logs[project_id]
+        event_bus.publish("project_deleted", {
+            "project_id": project_id,
+            "name": name,
+            "brand": brand,
+        })
+        return {"status": "deleted", "id": project_id, "name": name}
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found.")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error deleting project '{project_id}': {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to delete project: {e}")
 
 def _step_event_payload(project_id: str, project) -> Dict[str, Any]:
     last = project.steps_history[-1] if project.steps_history else None
@@ -364,15 +772,16 @@ def _step_event_payload(project_id: str, project) -> Dict[str, Any]:
 @app.post("/api/projects/{project_id}/execute")
 def execute_project_step(project_id: str, payload: ExecuteStepSchema = None):
     feedback = payload.feedback if payload else None
+    allow_all = payload.allow_all if payload else None
     active_executions.add(project_id)
     # Reset in place so the entry stays a capped deque, not a plain list.
     log_handler.logs[project_id].clear()
     log_handler.logs[project_id].append(
         f"Starting execution of workflow step at {datetime.now().isoformat()}..."
     )
-    event_bus.publish("step_started", {"project_id": project_id, "feedback": bool(feedback)})
+    event_bus.publish("step_started", {"project_id": project_id, "feedback": bool(feedback), "allow_all": bool(allow_all)})
     try:
-        project = engine.execute_next(project_id, user_feedback=feedback)
+        project = engine.execute_next(project_id, user_feedback=feedback, allow_all=allow_all)
         # Add final agent logs if any
         if project.steps_history:
             last_step = project.steps_history[-1]
@@ -422,12 +831,214 @@ def approve_project_step(project_id: str, payload: ExecuteStepSchema = None):
         )
     return execute_project_step(project_id, payload)
 
+
+@app.post("/api/projects/{project_id}/allow_all")
+def allow_all_and_advance(project_id: str):
+    """Enable Allow All mode on this project and unblock any waiting step."""
+    try:
+        project = Project.load(project_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    project.metadata["allow_all"] = True
+    project.save()
+
+    last = project.steps_history[-1] if project.steps_history else None
+    if last and last.status == "paused_for_approval":
+        return execute_project_step(project_id, ExecuteStepSchema(allow_all=True))
+    return project.to_dict()
+
+
+@app.post("/api/projects/{project_id}/toggle_allow_all")
+def toggle_project_allow_all(project_id: str):
+    """Toggle Allow All mode on this project."""
+    try:
+        project = Project.load(project_id)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    current = bool(project.metadata.get("allow_all"))
+    project.metadata["allow_all"] = not current
+    project.save()
+
+    if project.metadata["allow_all"]:
+        last = project.steps_history[-1] if project.steps_history else None
+        if last and last.status == "paused_for_approval":
+            return execute_project_step(project_id, ExecuteStepSchema(allow_all=True))
+
+    return project.to_dict()
+
+
+@app.post("/api/projects/{project_id}/run_all")
+def run_all_project_steps(project_id: str):
+    """Run all remaining steps of the project continuously until completion."""
+    active_executions.add(project_id)
+    log_handler.logs[project_id].clear()
+    log_handler.logs[project_id].append(
+        f"Starting automatic execution of all remaining steps at {datetime.now().isoformat()}..."
+    )
+    event_bus.publish("workflow_auto_run_started", {"project_id": project_id})
+    try:
+        project = engine.execute_all(project_id, allow_all=True)
+        if project.steps_history:
+            last_step = project.steps_history[-1]
+            for step_log in last_step.logs:
+                if step_log not in log_handler.logs[project_id]:
+                    log_handler.logs[project_id].append(step_log)
+        payload_out = _step_event_payload(project_id, project)
+        event_bus.publish("workflow_auto_run_completed", payload_out)
+        return project.to_dict()
+    except Exception as e:
+        log_handler.logs[project_id].append(f"[ERROR] Auto-run failed: {str(e)}")
+        event_bus.publish("step_failed", {"project_id": project_id, "error": str(e)})
+        raise HTTPException(status_code=500, detail=f"Auto-run error: {str(e)}")
+    finally:
+        active_executions.discard(project_id)
+
+
 @app.get("/api/projects/{project_id}/logs")
 def get_project_execution_logs(project_id: str):
     lines = log_handler.logs.get(project_id)
     if not lines:
         return ["No active logs found for this project."]
     return list(lines)
+
+
+@app.get("/api/system/logs")
+def get_system_logs(
+    level: str = "ALL",
+    source: str = "all",
+    limit: int = 250,
+    search: Optional[str] = None,
+):
+    """Retrieve structured system and error logs for the Studio UI."""
+    from core.paths import LOGS_DIR
+    import re
+    limit = max(10, min(1000, limit))
+    level_filter = level.upper()
+
+    log_files = []
+    if source in ("all", "app"):
+        app_log = os.path.join(LOGS_DIR, "app.log")
+        if os.path.exists(app_log):
+            log_files.append(("app", app_log))
+    if source in ("all", "studio"):
+        studio_log = os.path.join(LOGS_DIR, "studio.log")
+        if os.path.exists(studio_log):
+            log_files.append(("studio", studio_log))
+
+    parsed_entries = []
+    error_count = 0
+    warning_count = 0
+
+    app_pattern = re.compile(
+        r"^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}[,\.]\d{3})\s+\[(\w+)\]\s+\[([^\]]+)\]\s+(?:\[[^\]]*\]\s*-\s*)?(.*)$"
+    )
+    studio_pattern = re.compile(
+        r"^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}[,\.]\d{3})\s+(\w+)\s+([\w\.\-]+):\s*(.*)$"
+    )
+
+    for src_name, file_path in log_files:
+        try:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+                lines = f.readlines()[-800:]
+                current_entry = None
+                for line in lines:
+                    line_str = line.rstrip()
+                    if not line_str:
+                        continue
+                    m = app_pattern.match(line_str) or studio_pattern.match(line_str)
+                    if m:
+                        ts, lvl, comp, msg = m.groups()
+                        lvl_norm = lvl.upper()
+                        if lvl_norm in ("CRITICAL", "ERROR"):
+                            error_count += 1
+                        elif lvl_norm in ("WARNING", "WARN"):
+                            warning_count += 1
+
+                        current_entry = {
+                            "timestamp": ts,
+                            "level": lvl_norm,
+                            "logger": comp.strip(),
+                            "message": msg.strip(),
+                            "source": src_name,
+                            "traceback": [],
+                        }
+                        parsed_entries.append(current_entry)
+                    elif current_entry:
+                        current_entry["traceback"].append(line_str)
+                        if "error" in line_str.lower() or "exception" in line_str.lower():
+                            if current_entry["level"] not in ("ERROR", "CRITICAL"):
+                                current_entry["level"] = "ERROR"
+                                error_count += 1
+                    else:
+                        is_err = "error" in line_str.lower() or "exception" in line_str.lower()
+                        if is_err:
+                            error_count += 1
+                        parsed_entries.append({
+                            "timestamp": "",
+                            "level": "ERROR" if is_err else "INFO",
+                            "logger": src_name,
+                            "message": line_str,
+                            "source": src_name,
+                            "traceback": [],
+                        })
+        except Exception as e:
+            logger.warning("Failed reading log file %s: %s", file_path, e)
+
+    filtered = []
+    for entry in parsed_entries:
+        if level_filter != "ALL":
+            if level_filter == "ERROR" and entry["level"] not in ("ERROR", "CRITICAL"):
+                continue
+            elif level_filter == "WARNING" and entry["level"] not in ("WARN", "WARNING", "ERROR", "CRITICAL"):
+                continue
+            elif level_filter not in entry["level"]:
+                continue
+
+        if search and search.strip():
+            st = search.strip().lower()
+            text_corpus = f"{entry.get('message', '')} {entry.get('logger', '')} {' '.join(entry.get('traceback', []))}".lower()
+            if st not in text_corpus:
+                continue
+
+        filtered.append(entry)
+
+    filtered.reverse()
+    clipped = filtered[:limit]
+
+    return {
+        "status": "ok",
+        "total_parsed": len(parsed_entries),
+        "error_count": error_count,
+        "warning_count": warning_count,
+        "returned": len(clipped),
+        "level_filter": level_filter,
+        "logs": clipped,
+    }
+
+
+@app.post("/api/system/logs/clear")
+def clear_system_logs():
+    """Clear memory logs and truncate log files safely."""
+    from core.paths import LOGS_DIR
+    log_handler.logs.clear()
+    cleared_files = []
+    for name in ("app.log", "studio.log"):
+        p = os.path.join(LOGS_DIR, name)
+        if os.path.exists(p):
+            try:
+                with open(p, "w", encoding="utf-8") as f:
+                    f.truncate(0)
+                cleared_files.append(name)
+            except Exception as e:
+                logger.warning("Could not truncate %s: %s", name, e)
+    return {"status": "ok", "cleared": cleared_files}
+
 
 @app.get("/api/projects/{project_id}/asset/{asset_name}")
 def get_project_asset(project_id: str, asset_name: str):
@@ -462,6 +1073,169 @@ def get_project_asset(project_id: str, asset_name: str):
         raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
+
+
+@app.get("/api/projects/{project_id}/asset/{asset_name}/print", response_class=HTMLResponse)
+def print_project_asset(project_id: str, asset_name: str, auto: int = Query(0)):
+    try:
+        project = Project.load(project_id)
+        asset_file = project.assets.get(asset_name)
+        if not asset_file:
+            raise HTTPException(status_code=404, detail="Asset not generated yet")
+
+        project_dir = os.path.realpath(project.get_project_dir())
+        file_path = os.path.realpath(os.path.join(project_dir, asset_file))
+        if not file_path.startswith(project_dir + os.sep) or not os.path.exists(file_path):
+            raise HTTPException(status_code=404, detail="Asset file missing on disk")
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            raw_content = f.read()
+
+        escaped_content = html.escape(raw_content)
+        auto_script = "<script>window.addEventListener('load', () => { setTimeout(() => window.print(), 350); });</script>" if auto else ""
+
+        html_body = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{html.escape(project.name)} - {html.escape(asset_name)}</title>
+  <style>
+    @page {{
+      margin: 0.5in;
+      margin-top: 0.5in;
+      margin-bottom: 0.5in;
+      margin-left: 0.5in;
+      margin-right: 0.5in;
+      size: auto;
+    }}
+    body {{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #111827;
+      background: #ffffff;
+      margin: 0;
+      padding: 24px;
+      line-height: 1.6;
+      font-size: 11pt;
+    }}
+    .no-print {{
+      margin-bottom: 24px;
+      padding: 12px 18px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }}
+    .no-print button {{
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }}
+    .no-print button:hover {{
+      background: #1d4ed8;
+    }}
+    .header {{
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }}
+    .header h1 {{
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      color: #0f172a;
+      text-transform: capitalize;
+    }}
+    .header .meta {{
+      font-size: 13px;
+      color: #475569;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }}
+    .content {{
+      font-size: 11pt;
+      line-height: 1.65;
+    }}
+    pre {{
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 16px;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 10pt;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.55;
+      color: #0f172a;
+    }}
+    @media print {{
+      .no-print {{
+        display: none !important;
+      }}
+      body {{
+        padding: 0 !important;
+      }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="no-print">
+    <div>
+      <strong>Print Document:</strong> {html.escape(project.name)} &bull; {html.escape(asset_file)}
+      <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
+        Standard browser print dialog with full printer detection. (Shortcut: Ctrl + P)
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button onclick="window.print()">🖨️ Print to Printer</button>
+      <button onclick="window.close()" style="background:#64748b;">Close Tab</button>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1>{html.escape(asset_name.replace('_', ' '))}</h1>
+    <div class="meta">
+      <span><strong>Project:</strong> {html.escape(project.name)}</span>
+      <span><strong>Channel:</strong> {html.escape(project.brand)}</span>
+      <span><strong>File:</strong> {html.escape(asset_file)}</span>
+      <span><strong>Printed:</strong> {datetime.now().strftime("%b %d, %Y %I:%M %p")}</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <pre>{escaped_content}</pre>
+  </div>
+
+  {auto_script}
+</body>
+</html>
+"""
+        return HTMLResponse(content=html_body)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/projects/{project_id}/asset/{asset_name}/open_browser_print")
+def open_browser_print(project_id: str, asset_name: str):
+    try:
+        from core.paths import BUZZCAF_PORT
+        port = os.getenv("BUZZCAF_PORT", "8099")
+        url = f"http://127.0.0.1:{port}/api/projects/{project_id}/asset/{asset_name}/print?auto=1"
+        webbrowser.open(url)
+        return {"status": "opened", "url": url}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 from core.agent import AgentFactory
 
@@ -559,11 +1333,20 @@ def _parse_discovered_topics(raw_output: Any, channel: str) -> List[Dict[str, An
     """The agent's topic list, or [] when it did not answer in the schema."""
     from integrations.llm import clean_json_response
 
+    text = str(raw_output)
     try:
-        parsed = json.loads(clean_json_response(str(raw_output)))
+        parsed = json.loads(clean_json_response(text))
     except Exception as e:
-        logger.warning(f"Topic discovery reply was not JSON: {e}")
-        return []
+        logger.warning(f"Topic discovery reply was not clean JSON, trying tolerant extraction: {e}")
+        try:
+            from app.services.video_intel import _extract_json
+
+            parsed = _extract_json(text)
+        except Exception as e2:
+            logger.warning(f"Topic discovery tolerant extraction also failed: {e2}")
+            parsed = None
+        if parsed is None:
+            return []
     items = parsed.get("topics") if isinstance(parsed, dict) else parsed
     if not isinstance(items, list):
         return []
@@ -574,6 +1357,39 @@ def _parse_discovered_topics(raw_output: Any, channel: str) -> List[Dict[str, An
         item.setdefault("channel", channel)
         topics.append(item)
     return topics
+
+
+def _seed_topics_response(
+    channel: str,
+    target_agent_name: str,
+    source: str,
+    reason: str,
+    fallback_source: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Serve the curated seed topics for a channel, labelled with why."""
+    channel_vaults = _load_seed_topics()
+    requested = _channel_slug(channel)
+    for name, seed_topics in channel_vaults.items():
+        if _channel_slug(name) == requested:
+            return {
+                "status": "success",
+                "source": source,
+                "channel": name,
+                "agent_assigned": target_agent_name,
+                "topics": seed_topics,
+                "reason": reason,
+            }
+
+    # Unknown channel: fall back to the general-interest vault, and say so.
+    fallback = channel_vaults.get("Beyond3Baje", [])
+    return {
+        "status": "success",
+        "source": fallback_source or source,
+        "channel": channel,
+        "agent_assigned": target_agent_name,
+        "topics": fallback,
+        "reason": reason,
+    }
 
 
 @app.post("/api/topics/discover")
@@ -598,10 +1414,12 @@ def discover_channel_topics(payload: TopicDiscoverSchema):
     target_agent_name = agent_map.get(_channel_slug(channel), "TopicVaultManager")
 
     topics: List[Dict[str, Any]] = []
+    model_answered = False
     try:
         agent = AgentFactory.get_agent(target_agent_name, engine.llm_service)
         raw = agent.execute(_discover_prompt(channel), require_json=True)
-        if getattr(agent.llm_service, "last_response_simulated", False):
+        model_answered = not getattr(agent.llm_service, "last_response_simulated", False)
+        if not model_answered:
             logger.warning("Topic discovery got no model response; falling back to the seed list.")
         else:
             topics = _parse_discovered_topics(raw, channel)
@@ -615,31 +1433,54 @@ def discover_channel_topics(payload: TopicDiscoverSchema):
             "channel": channel,
             "agent_assigned": target_agent_name,
             "topics": topics,
+            "reason": "",
         }
 
-    # No model answered (or it answered off-schema): serve the curated seed
-    # topics and say plainly that is what they are.
-    channel_vaults = _load_seed_topics()
-    requested = _channel_slug(channel)
-    for name, seed_topics in channel_vaults.items():
-        if _channel_slug(name) == requested:
-            return {
-                "status": "success",
-                "source": "curated_seed",
-                "channel": name,
-                "agent_assigned": target_agent_name,
-                "topics": seed_topics
-            }
+    if model_answered:
+        # A real model replied, but not with a parseable topic list: say so
+        # plainly rather than silently mislabelling this as the curated seed.
+        return _seed_topics_response(
+            channel,
+            target_agent_name,
+            source="model_unparsed",
+            reason="The model replied but not as a topic list, so these are curated starter topics. Try Reload.",
+        )
 
-    # Unknown channel: fall back to the general-interest vault, and say so.
-    fallback = channel_vaults.get("Beyond3Baje", [])
-    return {
-        "status": "success",
-        "source": "curated_seed_fallback",
-        "channel": channel,
-        "agent_assigned": target_agent_name,
-        "topics": fallback
-    }
+    # No model answered at all: serve the curated seed topics and say so,
+    # with an actionable reason for why there was nothing else to show.
+    return _seed_topics_response(
+        channel,
+        target_agent_name,
+        source="curated_seed",
+        fallback_source="curated_seed_fallback",
+        reason="No model answered. Start your local model (LM Studio :1234 or llama.cpp :8089) or pick a provider in Settings.",
+    )
+
+
+class TopicValidateSchema(BaseModel):
+    topic: str
+    channel: Optional[str] = None
+    force: Optional[bool] = False
+
+
+@app.post("/api/topics/validate")
+def validate_topic_endpoint(payload: TopicValidateSchema):
+    """Check whether a topic is worth making before it becomes a project.
+
+    Gathers YouTube competition (keyless yt-dlp search), general web interest and
+    a best-effort Google Trends read, then returns a make/refine/skip verdict.
+    Returns 200 with a labelled `simulated` verdict when no model is reachable.
+    """
+    topic = (payload.topic or "").strip()
+    if not topic:
+        raise HTTPException(status_code=400, detail="A topic is required.")
+    try:
+        from app.services.topic_validation import validate_topic
+        return validate_topic(topic, payload.channel, bool(payload.force))
+    except Exception as e:
+        logger.error(f"Topic validation failed: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Topic validation failed: {e}")
+
 
 SAVED_TOPICS_FILE = os.path.join(os.path.dirname(__file__), "..", "knowledge", "saved_topics.json")
 
@@ -655,59 +1496,19 @@ class SavedTopicSchema(BaseModel):
     visual_requirements: Optional[List[str]] = []
     exclusion_audit: Optional[str] = ""
     notes: Optional[str] = ""
+    stage: Optional[str] = None
+    added_by: Optional[str] = None
+    tags: Optional[List[str]] = []
 
 def _load_saved_topics() -> List[Dict[str, Any]]:
-    # An empty or truncated file is treated as "never seeded" -- otherwise the
-    # vault stays permanently empty because the file technically exists.
-    needs_seed = (
-        not os.path.exists(SAVED_TOPICS_FILE)
-        or os.path.getsize(SAVED_TOPICS_FILE) == 0
-    )
-    if needs_seed:
-        initial_topics = [
-            {
-                "id": "saved_topic_1",
-                "topic": "Bhangarh Fort Ka Wo Guard Jo Raat Ke 3 Baje Ghaayab Ho Gaya",
-                "category": "Paranormal & Haunted Locations",
-                "channel": "Raat3Baje",
-                "viral_potential": 9,
-                "country": "India",
-                "source_type": "Local Indian Folklore & Archives",
-                "sources_used": ["Reddit (r/Paranormal)", "Local Rajasthani Folklore"],
-                "visual_requirements": ["Haunted fort archival photos", "Night rain mist imagery"],
-                "exclusion_audit": "✓ Verified: Parapsychological Folklore",
-                "notes": "Focus on the 3AM guard shift testimonies written in Hinglish script",
-                "saved_at": datetime.now().isoformat()
-            },
-            {
-                "id": "saved_topic_2",
-                "topic": "Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya",
-                "category": "Engineering & Disaster Stories",
-                "channel": "Beyond3Baje",
-                "viral_potential": 9,
-                "country": "International",
-                "source_type": "Historical & Technical Archives",
-                "sources_used": ["Naval Inspection Records", "Wikipedia Disasters"],
-                "visual_requirements": ["Ship cross-section 3D diagram", "17th Century maps"],
-                "exclusion_audit": "✓ EXCLUSION VERIFIED: 100% Real-World True Story in Hinglish",
-                "notes": "Use 3D stability diagram for 45-second Hinglish opening hook",
-                "saved_at": datetime.now().isoformat()
-            }
-        ]
-        os.makedirs(os.path.dirname(SAVED_TOPICS_FILE), exist_ok=True)
-        with open(SAVED_TOPICS_FILE, "w", encoding="utf-8") as f:
-            json.dump(initial_topics, f, indent=2)
-        return initial_topics
-    try:
-        with open(SAVED_TOPICS_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return []
+    from app.services import topic_store
+
+    return topic_store.load_topics()
 
 def _save_saved_topics(topics: List[Dict[str, Any]]):
-    os.makedirs(os.path.dirname(SAVED_TOPICS_FILE), exist_ok=True)
-    with open(SAVED_TOPICS_FILE, "w", encoding="utf-8") as f:
-        json.dump(topics, f, indent=2)
+    from app.services import topic_store
+
+    topic_store.save_topics(topics)
 
 @app.get("/api/topics/saved")
 def get_saved_topics(channel: Optional[str] = None):
@@ -718,34 +1519,37 @@ def get_saved_topics(channel: Optional[str] = None):
 
 @app.post("/api/topics/save")
 def save_topic(payload: SavedTopicSchema):
-    topics = _load_saved_topics()
-    topic_data = payload.model_dump()
-    if not topic_data.get("id"):
-        topic_data["id"] = f"topic_{uuid.uuid4().hex[:8]}"
-    topic_data["saved_at"] = datetime.now().isoformat()
-    
-    existing_idx = next((i for i, t in enumerate(topics) if t.get("topic") == topic_data["topic"] and t.get("channel") == topic_data["channel"]), -1)
-    if existing_idx >= 0:
-        topics[existing_idx].update(topic_data)
-    else:
-        topics.insert(0, topic_data)
-        
-    _save_saved_topics(topics)
-    return {"status": "success", "message": "Topic saved to vault successfully", "topic": topic_data}
+    from app.services import topic_store
+
+    stored = topic_store.add_topic(payload.model_dump(), added_by=(payload.added_by or "user"), stage=payload.stage)
+    return {"status": "success", "message": "Topic saved to vault successfully", "topic": stored}
 
 @app.post("/api/topics/delete")
 def delete_saved_topic(payload: Dict[str, Any] = Body(...)):
-    topic_id = payload.get("id")
-    topic_title = payload.get("topic")
-    topics = _load_saved_topics()
-    
-    if topic_id:
-        topics = [t for t in topics if t.get("id") != topic_id]
-    elif topic_title:
-        topics = [t for t in topics if t.get("topic") != topic_title]
-        
-    _save_saved_topics(topics)
-    return {"status": "success", "message": "Topic removed from vault", "remaining": len(topics)}
+    from app.services import topic_store
+
+    remaining = topic_store.delete_topic(topic_id=payload.get("id"), topic=payload.get("topic"))
+    return {"status": "success", "message": "Topic removed from vault", "remaining": remaining}
+
+class TopicUpdateSchema(BaseModel):
+    model_config = {"extra": "allow"}
+
+    id: str
+    stage: Optional[str] = None
+    notes: Optional[str] = None
+
+@app.post("/api/topics/update")
+def update_saved_topic(payload: TopicUpdateSchema):
+    from app.services import topic_store
+
+    fields = {k: v for k, v in payload.model_dump().items() if k != "id" and v is not None}
+    if "stage" in fields and fields["stage"] not in topic_store.STAGES:
+        return JSONResponse(status_code=400, content={"status": "error", "message": "invalid stage"})
+
+    updated = topic_store.update_topic(payload.id, fields)
+    if updated is None:
+        return JSONResponse(status_code=404, content={"status": "error", "message": "topic not found"})
+    return {"status": "success", "topic": updated}
 
 IDEA_DUMP_FILE = os.path.join(os.path.dirname(__file__), "..", "knowledge", "idea_dump.json")
 

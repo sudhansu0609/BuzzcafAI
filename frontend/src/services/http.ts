@@ -11,8 +11,8 @@
  */
 export const API_BASE: string = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '');
 
-/** Default ceiling for a single request; a hung backend should not spin forever. */
-export const DEFAULT_TIMEOUT_MS = 60_000;
+/** Default ceiling for a single request; 180s allows local LLMs to finish generation. */
+export const DEFAULT_TIMEOUT_MS = 180_000;
 
 export function apiUrl(path: string): string {
   return `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;

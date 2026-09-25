@@ -1,0 +1,152 @@
+{
+  "genre": "general",
+  "beats": [
+    {
+      "anchor": "Hum sab ke paas bade sapne hote hain, right?",
+      "kind": "broll_image",
+      "image_prompt": "A cinematic wide shot of a person standing on a hilltop looking at a vast starry galaxy, dreamy atmosphere, photoreal, 8k",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "hum unhe shuru karne se darte hain.",
+      "kind": "fx",
+      "effect": "push",
+      "intensity": 0.8,
+      "duration": 0.4,
+      "priority": 1.0
+    },
+    {
+      "anchor": "Perfection ek illusion hai.",
+      "kind": "quote_card",
+      "text": "Perfection ek illusion hai.",
+      "style_hint": "minimalist",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Main chahta tha ki main ek poori book likhu.",
+      "kind": "broll_image",
+      "image_prompt": "A massive, towering stack of old leather-bound books on a rustic wooden table, warm sunlight filtering through a window, photoreal",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Agar pehla chapter perfect nahi bana, toh kya fayda?",
+      "kind": "broll_video",
+      "video_prompt": "Extreme close-up of a hand holding a pen over a blank white page, the nib trembling slightly before touching the paper",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Planning ≠ Doing",
+      "kind": "quote_card",
+      "text": "Planning ≠ Doing",
+      "style_hint": "bold_modern",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "humein bas pehla brush stroke lena hai.",
+      "kind": "broll_image",
+      "image_prompt": "Macro shot of a paintbrush touching a canvas, a single streak of vibrant blue oil paint appearing, photoreal",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Solution hai \"Small Wins\" ka philosophy samajhna.",
+      "kind": "definition_card",
+      "data": {
+        "term": "Small Wins",
+        "definition": "The practice of celebrating minor progress to build momentum for larger goals."
+      },
+      "style_hint": "clean",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Hum aksar sochte hain ki ek din mein 100% effort dalenge aur sab kuch khatam kar denge.",
+      "kind": "split",
+      "image_prompt": "Left side: A person sprinting at full speed; Right side: A slow, steady walker moving forward. Photoreal style.",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "consistency ka asli magic 1% progress mein hota hai.",
+      "kind": "chart",
+      "data": {
+        "chart_type": "line",
+        "title": "The Power of 1%",
+        "labels": ["Day 1", "Day 10", "Day 30"],
+        "values": [1, 10, 30]
+      },
+      "style_hint": "clean",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Small starts give you the freedom to experiment.",
+      "kind": "broll_video",
+      "video_prompt": "Fast-paced montage of different creative experiments: a messy sketch, a pottery wheel spinning, a person playing a single guitar chord.",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Welcome to our creative home—Buzzcaf.",
+      "kind": "location_card",
+      "data": {
+        "place": "Buzzcaf Studio",
+        "description": "A warm, cluttered studio filled with art supplies and coffee mugs."
+      },
+      "style_hint": "warm",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Look at this—ye ek messy draft hai jo humne kal banaya tha.",
+      "kind": "broll_image",
+      "image_prompt": "Close-up of a rough, slightly smudged pencil sketch on textured paper, showing raw creative effort, photoreal",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "embracing the \"messy middle\"",
+      "kind": "atmos",
+      "effect": "grain",
+      "intensity": 0.5,
+      "duration": 2.0,
+      "priority": 1.0
+    },
+    {
+      "anchor": "Don't wait for the perfect moment.",
+      "kind": "quote_card",
+      "text": "Don't wait for the perfect moment.",
+      "style_hint": "inspiring",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    },
+    {
+      "anchor": "Just take that one small step today.",
+      "kind": "fx",
+      "effect": "push",
+      "intensity": 1.0,
+      "duration": 0.5,
+      "priority": 1.0
+    },
+    {
+      "anchor": "comment section mein mujhe batao—wo kaunsa ek 'small' kaam hai jo aap aaj shuru karne wale ho?",
+      "kind": "broll_image",
+      "image_prompt": "A close-up of a hand typing on a glowing smartphone screen in a cozy room, photoreal",
+      "style_hint": "photoreal",
+      "aspect_ratio": "16:9",
+      "priority": 1.0
+    }
+  ]
+}

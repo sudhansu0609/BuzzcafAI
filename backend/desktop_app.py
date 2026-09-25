@@ -27,11 +27,20 @@ import traceback
 import urllib.request
 from typing import Any, Dict, Optional, Tuple
 
+# pythonw starts with stdout/stderr set to None; anything that writes to
+# them (uvicorn's access log, a third-party print) would crash if None.
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, "w", encoding="utf-8")
+if sys.stderr is None:
+    sys.stderr = open(os.devnull, "w", encoding="utf-8")
+
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BACKEND_DIR)
 FRONTEND_DIR = os.path.join(ROOT_DIR, "frontend")
 if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)
+if sys.argv:
+    sys.argv[0] = os.path.abspath(__file__)
 os.chdir(BACKEND_DIR)  # app.main resolves prompts/knowledge relative to core.paths, but tests/tools assume cwd=backend
 
 # The checkout's .env is read here (without overriding a real environment) so a
@@ -72,6 +81,17 @@ MB_ERROR, MB_WARNING = 0x10, 0x30
 
 # ───────────────────────── logging (no console under pythonw) ─────────────────────────
 
+from logging.handlers import RotatingFileHandler
+
+
+class SafeRotatingFileHandler(RotatingFileHandler):
+    """Avoid Windows file lock crashes during rollover."""
+    def doRollover(self):
+        try:
+            super().doRollover()
+        except (PermissionError, OSError):
+            pass
+
 
 def _setup_logging() -> str:
     try:
@@ -83,22 +103,22 @@ def _setup_logging() -> str:
     os.makedirs(log_dir, exist_ok=True)
     log_path = os.path.join(log_dir, "studio.log")
 
-    from logging.handlers import RotatingFileHandler
-
-    handler = RotatingFileHandler(log_path, maxBytes=2_000_000, backupCount=3, encoding="utf-8")
+    handler = SafeRotatingFileHandler(log_path, maxBytes=5_000_000, backupCount=3, encoding="utf-8")
     handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s"))
     root = logging.getLogger()
     root.setLevel(logging.INFO)
+    
+    # Strip any orphaned or None-stream handlers that can crash when writing
+    for h in list(root.handlers):
+        if isinstance(h, logging.StreamHandler) and getattr(h, "stream", None) is None:
+            root.removeHandler(h)
+
     root.addHandler(handler)
 
-    # pythonw starts with stdout/stderr set to None; anything that writes to
-    # them (uvicorn's access log, a traceback) would be lost or raise.
-    if sys.stdout is None or sys.stderr is None:
-        stream = open(log_path, "a", encoding="utf-8", buffering=1)
-        if sys.stdout is None:
-            sys.stdout = stream
-        if sys.stderr is None:
-            sys.stderr = stream
+    def _uncaught_exception(exc_type, exc_val, exc_tb):
+        logging.getLogger("buzzcaf.desktop").critical("Uncaught exception", exc_info=(exc_type, exc_val, exc_tb))
+    sys.excepthook = _uncaught_exception
+
     return log_path
 
 
@@ -120,7 +140,7 @@ def _message_box(title: str, text: str, icon: int = MB_ERROR) -> None:
 # ───────────────────────── health / preflight ─────────────────────────
 
 
-def _studio_answering(url: str = HEALTH_URL, timeout: float = 1.5) -> bool:
+def _studio_answering(url: str = HEALTH_URL, timeout: float = 5.0) -> bool:
     """True only if *this app* answers - anything else on the port is not ours."""
     try:
         import json
@@ -403,12 +423,21 @@ def _load_window() -> Dict[str, Any]:
             saved = json.load(handle) or {}
     except Exception:
         saved = {}
-    for key in ("width", "height", "x", "y"):
+    for key in ("width", "height"):
         value = saved.get(key)
         if isinstance(value, (int, float)):
             geometry[key] = int(value)
     geometry["width"] = max(MIN_WIDTH, geometry["width"])
     geometry["height"] = max(MIN_HEIGHT, geometry["height"])
+
+    # In Windows, minimized windows or detached monitors can yield negative
+    # coordinates like -32000. Never restore off-screen positions.
+    x = saved.get("x")
+    y = saved.get("y")
+    if isinstance(x, (int, float)) and isinstance(y, (int, float)):
+        if int(x) > -1000 and int(y) > -1000:
+            geometry["x"] = int(x)
+            geometry["y"] = int(y)
     return geometry
 
 
@@ -416,13 +445,22 @@ def _save_window(window: Any) -> None:
     import json
 
     try:
+        data: Dict[str, Any] = {
+            "width": max(MIN_WIDTH, int(window.width)),
+            "height": max(MIN_HEIGHT, int(window.height)),
+        }
+        # In Windows, when a window is minimized or closed while minimized,
+        # coordinates become (-32000, -32000). Only persist valid positions.
+        wx = int(window.x)
+        wy = int(window.y)
+        if wx > -1000 and wy > -1000:
+            data["x"] = wx
+            data["y"] = wy
+
         os.makedirs(os.path.dirname(WINDOW_FILE), exist_ok=True)
         tmp = WINDOW_FILE + ".tmp"
         with open(tmp, "w", encoding="utf-8") as handle:
-            json.dump({
-                "width": int(window.width), "height": int(window.height),
-                "x": int(window.x), "y": int(window.y),
-            }, handle)
+            json.dump(data, handle)
         os.replace(tmp, WINDOW_FILE)
     except Exception as exc:
         log.warning("Could not remember window size: %s", exc)
@@ -460,8 +498,14 @@ def wait_for(url: str, timeout: float = 25.0, require_buzzcaf: bool = True) -> b
 # ───────────────────────── entry ─────────────────────────
 
 
-def launch_desktop(dev: bool = False) -> None:
+def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
     started = time.perf_counter()
+    if sys.platform == "win32":
+        try:
+            import ctypes
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("buzzcaf.media.studio.desktop")
+        except Exception as exc:
+            log.debug("Could not set AppUserModelID: %s", exc)
     _preflight_or_exit(dev)
 
     # Pick the real port before anything binds to it: reuse ours if it is already
@@ -551,15 +595,22 @@ def launch_desktop(dev: bool = False) -> None:
     window.events.closing += on_closing
     log.info("Window opening after %.1fs (%s).", time.perf_counter() - started, target_url)
     print(f"READY port={port}", flush=True)  # rule 6: whoever launched us opens what we report
-    webview.start(debug=dev)
+    show_devtools = devtools or os.getenv("BUZZCAF_DEVTOOLS", "0").lower() in ("1", "true", "yes")
+    icon_path = os.path.join(ROOT_DIR, "assets", "buzzcaf_studio.ico")
+    try:
+        webview.start(debug=show_devtools, icon=icon_path if os.path.exists(icon_path) else None)
+    finally:
+        # Guarantee all daemon threads, uvicorn listeners, and child processes exit cleanly
+        os._exit(0)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Buzzcaf Studio desktop app")
     parser.add_argument("--dev", action="store_true", help="show the Vite dev server instead of the built bundle")
+    parser.add_argument("--devtools", action="store_true", help="automatically open the Edge DevTools window")
     args = parser.parse_args()
     try:
-        launch_desktop(dev=args.dev)
+        launch_desktop(dev=args.dev, devtools=args.devtools)
         return 0
     except SystemExit as exc:
         return int(exc.code or 0)

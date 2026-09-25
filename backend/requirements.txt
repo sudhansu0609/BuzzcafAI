@@ -7,3 +7,4 @@
 # is reintroduced, add those deps back to the root manifest.
 -r ../requirements.txt
 yt-dlp>=2025.1        # video intelligence: metadata, captions, heatmap without an API key
+pytrends>=4.9        # topic_validation.py: optional Google Trends demand signal (lazily imported; degrades if absent)

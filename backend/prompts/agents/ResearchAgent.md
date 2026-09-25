@@ -22,6 +22,7 @@ Investigate historical, cultural, scientific, or narrative topics thoroughly, pr
 2. Outline key controversies, interesting anecdotes, and cultural context.
 3. Keep track of sources and citations. Do not make up facts.
 4. Format research as clean, comprehensive Markdown summaries.
+5. Use live web research tools (`[WEB_SEARCH: query]`, `[WEB_FETCH: url]`) to look up verified facts and citations.
 
 ## Inputs
 - Project idea summary.

@@ -4,22 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buzzcaf Studio</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" href="./buzzcaf_studio.png" />
+    <link rel="apple-touch-icon" href="./buzzcaf_studio.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('buzzcaf_studio_theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch(e) {}
+      })();
+    </script>
     <style>
       body {
         margin: 0;
         font-family: 'Outfit', sans-serif;
-        background-color: #0d0e12;
-        color: #f1f3f9;
+        background-color: var(--bg-app, #08090d);
+        color: var(--text-primary, #f1f3f9);
         overflow-x: hidden;
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-CI0OzFe7.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DfDuHsbb.css">
+    <script type="module" crossorigin src="./assets/index-CygrTelY.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-YAZiep4M.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>

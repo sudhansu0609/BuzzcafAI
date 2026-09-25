@@ -10,22 +10,31 @@ import {
   FolderGit2,
   HeartPulse,
   LayoutDashboard,
+  LayoutGrid,
+  Menu,
   MessageSquare,
+  Newspaper,
   Settings as SettingsIcon,
   Users,
+  X,
 } from 'lucide-react';
 
 import { StudioProvider, useStudio } from './state/studio';
+import { ThemeProvider } from './state/ThemeContext';
+import { ThemeSwitcher } from './components/ThemeSwitcher';
 import type { TabId } from './lib/types';
 import StudioChat from './pages/StudioChat';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import TopicVault from './pages/TopicVault';
+import Board from './pages/Board';
 import Analyze from './pages/Analyze';
+import Research from './pages/Research';
 import Workforce from './pages/Workforce';
 import Departments from './pages/Departments';
 import Health from './pages/Health';
 import Settings from './pages/Settings';
+import Logs from './pages/Logs';
 import AgentCreatorStudio from './pages/ai/AgentCreatorStudio';
 import AgentsGroupChat from './pages/ai/AgentsGroupChat';
 
@@ -54,7 +63,9 @@ const SECTIONS: NavSection[] = [
       { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, title: 'Studio overview' },
       { id: 'projects', label: 'Projects', icon: <FolderGit2 size={18} />, title: 'Production projects' },
       { id: 'topic_vault', label: 'Topic Vault', icon: <Compass size={18} />, title: 'Topic ideas and saved vault' },
+      { id: 'board', label: 'Board', icon: <LayoutGrid size={18} />, title: 'Topic board' },
       { id: 'analyze', label: 'Analyze', icon: <BarChart3 size={18} />, title: 'Why a video or channel performs, and how to model ours on it' },
+      { id: 'research', label: 'Research', icon: <Newspaper size={18} />, title: 'Search public archives, books and newspapers' },
     ],
   },
   {
@@ -69,6 +80,7 @@ const SECTIONS: NavSection[] = [
   {
     title: 'System',
     items: [
+      { id: 'logs', label: 'Error Logs', icon: <AlertCircle size={18} style={{ color: '#f87171' }} />, title: 'System & error logs' },
       { id: 'health', label: 'Health', icon: <HeartPulse size={18} />, title: 'System diagnostics' },
       { id: 'settings', label: 'Settings', icon: <SettingsIcon size={18} />, title: 'AI provider settings' },
     ],
@@ -83,12 +95,14 @@ function Shell() {
   const { tab, navigate, health, healthInfo, groupChatAgentIds, setGroupChatAgentIds, toast } = useStudio();
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const [showTop, setShowTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     workspaceRef.current?.scrollTo({ top: 0 });
   }, [tab]);
 
   const go = (id: TabId) => {
+    setMobileMenuOpen(false);
     if (id === 'agents_group_chat' && groupChatAgentIds.length === 0) {
       toast('Pick agents in the Agents Workbench first, then launch the group chat.', 'info');
       navigate('agent_creator_studio');
@@ -99,10 +113,30 @@ function Shell() {
 
   return (
     <div className="app-container">
-      <div className="sidebar">
+      {/* Mobile Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+          role="presentation"
+        />
+      )}
+
+      {/* Sidebar Navigation */}
+      <div className={`sidebar ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="sidebar-brand">
-          <Database size={24} />
-          <span>Buzzcaf Studio</span>
+          <div className="sidebar-brand-content">
+            <Database size={24} />
+            <span>Buzzcaf Studio</span>
+          </div>
+          <button
+            type="button"
+            className="sidebar-close-btn"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         {SECTIONS.map((section) => (
@@ -138,18 +172,65 @@ function Shell() {
         onScroll={() => setShowTop((workspaceRef.current?.scrollTop || 0) > 400)}
       >
         <div className="header">
-          <div className="header-title">{TITLES[tab]}</div>
+          <div className="header-left">
+            <button
+              type="button"
+              className="mobile-menu-toggle"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <div className="header-title" title={TITLES[tab]}>{TITLES[tab]}</div>
+          </div>
+
           <div className="header-status">
-            <div className="status-badge" title={healthInfo?.version ? `Studio backend v${healthInfo.version}` : undefined}>
-              <div className="status-dot" style={{ backgroundColor: health === 'online' ? '#4ade80' : health === 'offline' ? '#ef4444' : '#94a3b8' }} />
-              <span>{health === 'online' ? 'Backend online' : health === 'offline' ? 'Backend offline' : 'Checking backend…'}</span>
-            </div>
+            <ThemeSwitcher />
+            {(() => {
+              const ms = healthInfo?.model_status;
+              const isBackendUp = health === 'online';
+              const isModelConnected = Boolean(ms?.connected && ms?.loaded);
+              const isModelLoading = Boolean(ms?.connected && !ms?.loaded);
+
+              let dotColor = '#94a3b8';
+              let badgeText = 'Checking backend…';
+              let titleText = 'Checking backend & AI model status';
+
+              if (!isBackendUp) {
+                dotColor = '#ef4444';
+                badgeText = 'Backend offline';
+                titleText = 'Studio backend is not reachable on this port.';
+              } else if (isModelConnected) {
+                dotColor = '#4ade80';
+                const modelLabel = ms?.active_model || ms?.configured_model || ms?.provider || 'AI';
+                badgeText = `Online • ${modelLabel}`;
+                titleText = `Backend Online & Connected to ${ms?.provider} (${modelLabel})`;
+              } else if (isModelLoading) {
+                dotColor = '#f59e0b';
+                badgeText = 'AI Loading…';
+                titleText = `Backend online, waiting for local model to load (${ms?.provider}: ${ms?.configured_model})`;
+              } else {
+                dotColor = '#f59e0b';
+                badgeText = 'Backend online (No AI)';
+                titleText = `Backend is online, but AI provider (${ms?.provider || 'local'}) is not responding.`;
+              }
+
+              return (
+                <div className="status-badge" title={titleText} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                  <div className="status-dot" style={{ backgroundColor: dotColor }} />
+                  <span className="status-badge-text" style={{ maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {badgeText}
+                  </span>
+                </div>
+              );
+            })()}
           </div>
         </div>
 
         <div className="main-content">
           {health === 'offline' && (
-            <div style={{ backgroundColor: '#2d141b', border: '1px solid #7f1d1d', borderRadius: 8, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10, color: '#fca5a5', marginBottom: 24 }}>
+            <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid #ef4444', borderRadius: 8, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10, color: '#f87171', marginBottom: 24 }}>
               <AlertCircle size={20} />
               <span>The Studio backend is not answering on this port. Nothing below is live until it is back.</span>
             </div>
@@ -159,7 +240,9 @@ function Shell() {
           {tab === 'dashboard' && <Dashboard />}
           {tab === 'projects' && <Projects />}
           {tab === 'topic_vault' && <TopicVault />}
+          {tab === 'board' && <Board />}
           {tab === 'analyze' && <Analyze />}
+          {tab === 'research' && <Research />}
           {tab === 'agent_creator_studio' && (
             <AgentCreatorStudio
               onLaunchGroupChat={(ids) => {
@@ -175,6 +258,7 @@ function Shell() {
           {tab === 'departments' && <Departments />}
           {tab === 'health' && <Health />}
           {tab === 'settings' && <Settings />}
+          {tab === 'logs' && <Logs />}
         </div>
       </div>
 
@@ -182,7 +266,7 @@ function Shell() {
         <button
           type="button"
           onClick={() => workspaceRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 999, width: 46, height: 46, borderRadius: '50%', backgroundColor: '#f43f5e', color: '#ffffff', border: 'none', boxShadow: '0 8px 20px rgba(244, 63, 94, 0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ position: 'fixed', bottom: 32, right: 32, zIndex: 999, width: 46, height: 46, borderRadius: '50%', background: 'var(--accent-gradient)', color: 'var(--text-on-accent)', border: 'none', boxShadow: 'var(--card-shadow)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           title="Scroll to top"
         >
           <ChevronUp size={24} />
@@ -194,8 +278,10 @@ function Shell() {
 
 export default function App() {
   return (
-    <StudioProvider>
-      <Shell />
-    </StudioProvider>
+    <ThemeProvider>
+      <StudioProvider>
+        <Shell />
+      </StudioProvider>
+    </ThemeProvider>
   );
 }

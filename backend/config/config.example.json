@@ -6,5 +6,6 @@
     "lm_studio_url": "http://localhost:1234/v1",
     "lm_studio_model": "meta-llama-3-8b-instruct",
     "prefer_gemini": true,
-    "selected_provider": "gemini"
+    "selected_provider": "gemini",
+    "buzzedit_url": "http://127.0.0.1:8099"
 }

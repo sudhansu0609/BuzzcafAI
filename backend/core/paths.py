@@ -37,6 +37,7 @@ LOGS_DIR = _resolve("LOGS_PATH", BACKEND_DIR / "logs")
 
 AGENTS_DIR = os.path.join(PROMPTS_DIR, "agents")
 WORKFLOWS_DIR = os.path.join(PROMPTS_DIR, "workflows")
+CHANNELS_DIR = os.path.join(PROMPTS_DIR, "channels")
 ASSETS_DIR = str(BACKEND_DIR / "assets")
 CONFIG_DIR = str(BACKEND_DIR / "config")
 CONFIG_PATH = os.path.join(CONFIG_DIR, "config.json")

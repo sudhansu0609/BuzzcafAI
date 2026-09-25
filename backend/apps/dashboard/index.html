@@ -201,7 +201,13 @@
     <div id="modal-viewer" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2 id="modal-title">Asset Viewer</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding-right:36px; flex-wrap:wrap; gap:10px;">
+                <h2 id="modal-title" style="margin:0;">Asset Viewer</h2>
+                <div style="display:flex; gap:8px;">
+                    <button id="modal-btn-print" class="btn btn-secondary btn-sm" title="Print artifact to printer"><i class="fa-solid fa-print"></i> Print</button>
+                    <button id="modal-btn-save" class="btn btn-secondary btn-sm" title="Save artifact file to disk"><i class="fa-solid fa-download"></i> Save</button>
+                </div>
+            </div>
             <div id="modal-body-content" class="modal-body"></div>
         </div>
     </div>

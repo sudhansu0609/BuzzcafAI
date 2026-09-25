@@ -120,9 +120,9 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
   };
 
   return (
-    <div style={{ padding: '24px', color: '#f8fafc', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="agent-studio-container">
       {/* Header Banner */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', background: 'linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)', padding: '24px', borderRadius: '16px', border: '1px solid #312e81' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', background: 'linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)', padding: '24px', borderRadius: '16px', border: '1px solid #312e81', flexWrap: 'wrap', gap: '16px' }}>
         <div>
           <h1 style={{ fontSize: '1.8rem', fontWeight: 800, margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Bot style={{ color: '#a78bfa' }} /> Agents Creator & Personality Designer Studio
@@ -153,7 +153,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '24px' }}>
+      <div className="agent-creator-grid">
         {/* Left Column: Create & Customize Agent */}
         <div style={{ background: '#0f172a', padding: '24px', borderRadius: '16px', border: '1px solid #1e293b' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 16px 0', display: 'flex', alignItems: 'center', gap: '8px', color: '#a78bfa' }}>
@@ -162,31 +162,31 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
 
           <form onSubmit={handleSaveAgent} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Agent Full Name</label>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Agent Full Name</label>
               <input
                 type="text"
                 placeholder="e.g. Marcus Cole"
                 value={name}
                 onChange={e => setName(e.target.value)}
-                style={{ width: '100%', padding: '10px 14px', background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#fff', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '10px 14px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.95rem' }}
                 required
               />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Role / Specialty Title</label>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Role / Specialty Title</label>
               <input
                 type="text"
                 placeholder="e.g. Master Horror Scriptwriter"
                 value={role}
                 onChange={e => setRole(e.target.value)}
-                style={{ width: '100%', padding: '10px 14px', background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#fff', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '10px 14px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.95rem' }}
                 required
               />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Avatar Theme Color</label>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Avatar Theme Color</label>
               <div style={{ display: 'flex', gap: '10px' }}>
                 {['#7c3aed', '#f43f5e', '#38bdf8', '#4ade80', '#fb7185', '#f59e0b'].map(c => (
                   <button
@@ -198,7 +198,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                       height: '32px',
                       borderRadius: '50%',
                       background: c,
-                      border: avatarColor === c ? '3px solid #ffffff' : 'none',
+                      border: avatarColor === c ? '3px solid var(--text-primary)' : 'none',
                       cursor: 'pointer'
                     }}
                   />
@@ -207,14 +207,14 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Personality & System Prompt Instructions</label>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Personality & System Prompt Instructions</label>
               <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
                 {PRESET_SYSTEM_PROMPTS.map(p => (
                   <button
                     key={p.label}
                     type="button"
                     onClick={() => setSystemPrompt(p.prompt)}
-                    style={{ background: '#1e293b', border: '1px solid #334155', color: '#cbd5e1', padding: '4px 8px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
+                    style={{ background: 'var(--bg-pill)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)', padding: '4px 8px', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
                   >
                     {p.label}
                   </button>
@@ -225,17 +225,17 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                 value={systemPrompt}
                 onChange={e => setSystemPrompt(e.target.value)}
                 placeholder="Define instructions, tone of voice, domain expertise, and behavioral boundaries..."
-                style={{ width: '100%', padding: '10px 14px', background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#fff', fontSize: '0.9rem', resize: 'vertical' }}
+                style={{ width: '100%', padding: '10px 14px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.9rem', resize: 'vertical' }}
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div className="agent-form-two-col">
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Local LLM Provider</label>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Local LLM Provider</label>
                 <select
                   value={modelProvider}
                   onChange={e => setModelProvider(e.target.value)}
-                  style={{ width: '100%', padding: '10px', background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#fff', fontSize: '0.85rem' }}
+                  style={{ width: '100%', padding: '10px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                 >
                   <option value="LM Studio (http://localhost:1234)">LM Studio (Port 1234)</option>
                   <option value="Ollama (http://localhost:11434)">Ollama / Open-WebUI (Port 11434)</option>
@@ -243,11 +243,11 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '6px' }}>Assigned Local Model</label>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Assigned Local Model</label>
                 <select
                   value={modelName}
                   onChange={e => setModelName(e.target.value)}
-                  style={{ width: '100%', padding: '10px', background: '#1e293b', border: '1px solid #334155', borderRadius: '8px', color: '#fff', fontSize: '0.85rem' }}
+                  style={{ width: '100%', padding: '10px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                 >
                   {localModels.map(m => (
                     <option key={m.id} value={m.id}>{m.name}</option>
@@ -263,8 +263,8 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
               type="submit"
               disabled={loading}
               style={{
-                background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
-                color: '#fff',
+                background: 'var(--accent-gradient)',
+                color: 'var(--text-on-accent)',
                 border: 'none',
                 padding: '12px',
                 borderRadius: '8px',
@@ -287,10 +287,10 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
         {/* Right Column: Agents Library Grid */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: '#f8fafc' }}>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
               Active Agents Library ({agents.length})
             </h2>
-            <button onClick={fetchAgents} style={{ background: '#1e293b', color: '#94a3b8', border: '1px solid #334155', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <button onClick={fetchAgents} style={{ background: 'var(--bg-pill)', color: 'var(--text-secondary)', border: '1px solid var(--border-card)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <RefreshCw size={14} /> Sync Registry
             </button>
           </div>
@@ -302,9 +302,9 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                 <div
                   key={a.id}
                   style={{
-                    background: '#0f172a',
+                    background: 'var(--bg-subcard)',
                     borderRadius: '12px',
-                    border: `1.5px solid ${isSelected ? '#7c3aed' : '#1e293b'}`,
+                    border: `1.5px solid ${isSelected ? 'var(--accent-primary)' : 'var(--border-card)'}`,
                     padding: '16px',
                     display: 'flex',
                     flexDirection: 'column',
@@ -317,17 +317,17 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                         {a.name.charAt(0)}
                       </div>
                       <div>
-                        <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc' }}>{a.name}</h3>
-                        <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{a.role}</span>
+                        <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}>{a.name}</h3>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{a.role}</span>
                       </div>
                     </div>
 
                     <button
                       onClick={() => toggleSelectAgent(a.id || '')}
                       style={{
-                        background: isSelected ? '#7c3aed22' : '#1e293b',
-                        color: isSelected ? '#a78bfa' : '#94a3b8',
-                        border: `1px solid ${isSelected ? '#7c3aed' : '#334155'}`,
+                        background: isSelected ? 'var(--bg-card-hover)' : 'var(--bg-pill)',
+                        color: isSelected ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                        border: `1px solid ${isSelected ? 'var(--accent-primary)' : 'var(--border-card)'}`,
                         padding: '6px 12px',
                         borderRadius: '6px',
                         fontSize: '0.8rem',
@@ -342,13 +342,13 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                     </button>
                   </div>
 
-                  <p style={{ fontSize: '0.85rem', color: '#cbd5e1', background: '#1e293b44', padding: '10px', borderRadius: '6px', margin: 0, fontStyle: 'italic' }}>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', background: 'var(--bg-pill)', padding: '10px', borderRadius: '6px', margin: 0, fontStyle: 'italic' }}>
                     "{a.systemPrompt.slice(0, 140)}..."
                   </p>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: '#94a3b8', paddingTop: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: 'var(--text-muted)', paddingTop: '6px' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Cpu size={14} style={{ color: '#38bdf8' }} /> {a.modelName}
+                      <Cpu size={14} style={{ color: 'var(--accent-secondary)' }} /> {a.modelName}
                     </span>
                   </div>
                 </div>

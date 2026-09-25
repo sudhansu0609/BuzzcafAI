@@ -25,7 +25,7 @@ CANONICAL = BACKEND.parent.parent / "dexter" / "backend" / "buzzcaf_ports.py"
 
 
 def _digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 @pytest.fixture

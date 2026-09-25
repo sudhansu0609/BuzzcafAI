@@ -22,6 +22,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
 from app.services.events import bus
+from app.services import topic_store
 from core.paths import KNOWLEDGE_DIR
 
 logger = logging.getLogger("buzzcaf_ai.studio_api")
@@ -35,6 +36,48 @@ class StudioChatSchema(BaseModel):
     agent_name: Optional[str] = None
     history: Optional[List[Dict[str, str]]] = None
     context_topic: Optional[Dict[str, Any]] = None
+
+
+class ResearchAndSaveSchema(BaseModel):
+    topic: str
+    channel: Optional[str] = None
+
+
+class TopicSaveSchema(BaseModel):
+    topic: str
+    channel: Optional[str] = None
+    category: Optional[str] = None
+    notes: Optional[str] = None
+    stage: Optional[str] = None
+
+    class Config:
+        extra = "allow"
+
+
+class TopicUpdateSchema(BaseModel):
+    id: str
+    stage: Optional[str] = None
+
+    class Config:
+        extra = "allow"
+
+
+class TopicDeleteSchema(BaseModel):
+    id: Optional[str] = None
+    topic: Optional[str] = None
+
+
+class StudioSearchSchema(BaseModel):
+    query: str
+    kind: Optional[str] = "web"
+
+
+def _dexter_event(action: str, detail: Dict[str, Any]) -> None:
+    """Publish a `dexter_action` event; the bus must never take a route down."""
+    try:
+        bus.publish("dexter_action", {"action": action, **detail})
+    except Exception:
+        pass
 
 
 def _last_step(project: Dict[str, Any]) -> Dict[str, Any]:
@@ -139,6 +182,120 @@ def studio_chat(payload: StudioChatSchema):
                 "agent_name": agent_name, "channel": channel, "reply": detail,
             },
         )
+
+
+@router.get("/capabilities")
+def studio_capabilities():
+    """The full manifest of every action Dexter can invoke, from the registry
+    (single source of truth shared with POST /api/studio/invoke)."""
+    from app.services import dexter_registry
+
+    return dexter_registry.manifest()
+
+
+class InvokeSchema(BaseModel):
+    action: str
+    params: Optional[Dict[str, Any]] = {}
+    allow_dangerous: Optional[bool] = False
+
+
+@router.post("/invoke")
+def studio_invoke(payload: InvokeSchema):
+    """Dexter's single entry point: run any registered Studio action by name.
+
+    Reuses the app's own handlers, tags writes as ``dexter``, and emits a
+    ``dexter_action`` event so the Studio reflects the change live. Destructive
+    actions require ``allow_dangerous: true``. See GET /api/studio/capabilities
+    for the action list and their params.
+    """
+    from app.services import dexter_registry
+
+    result = dexter_registry.invoke(
+        payload.action,
+        payload.params or {},
+        allow_dangerous=bool(payload.allow_dangerous),
+    )
+    if result.get("status") == "error":
+        return JSONResponse(status_code=int(result.get("code", 400)), content=result)
+    return result
+
+
+@router.post("/topics/research_and_save")
+def studio_research_and_save(payload: ResearchAndSaveSchema):
+    from app.services.topic_validation import validate_topic
+
+    channel = payload.channel or ""
+    try:
+        result = validate_topic(payload.topic, channel)
+    except Exception as exc:
+        logger.error("research_and_save validate_topic failed: %s", exc, exc_info=True)
+        return JSONResponse(status_code=502, content={"status": "error", "message": str(exc)})
+
+    verdict = (result or {}).get("verdict") or {}
+    demand = verdict.get("demand") if isinstance(verdict, dict) else None
+    notes = demand.get("reason", "") if isinstance(demand, dict) else ""
+    row = topic_store.add_topic(
+        {
+            "topic": payload.topic,
+            "channel": channel,
+            "category": "General",
+            "notes": notes,
+            "validation": verdict,
+        },
+        added_by="dexter",
+        stage="researching",
+    )
+    _dexter_event("research_and_save", {"topic": payload.topic, "channel": channel})
+    return {"status": "success", "topic": row, "validation": result}
+
+
+@router.post("/topics/save")
+def studio_topic_save(payload: TopicSaveSchema):
+    row = topic_store.add_topic(payload.dict(exclude_none=True), added_by="dexter")
+    _dexter_event("topics_save", {"topic": payload.topic, "channel": payload.channel or ""})
+    return {"status": "success", "topic": row}
+
+
+@router.post("/topics/update")
+def studio_topic_update(payload: TopicUpdateSchema):
+    fields = payload.dict(exclude_none=True, exclude={"id"})
+    if "stage" in fields and fields["stage"] not in topic_store.STAGES:
+        return JSONResponse(status_code=400, content={"status": "error", "message": "invalid stage"})
+    row = topic_store.update_topic(payload.id, fields)
+    if row is None:
+        return JSONResponse(status_code=404, content={"status": "error", "message": "topic not found"})
+    _dexter_event("topics_update", {"id": payload.id})
+    return {"status": "success", "topic": row}
+
+
+@router.post("/topics/delete")
+def studio_topic_delete(payload: TopicDeleteSchema):
+    remaining = topic_store.delete_topic(topic_id=payload.id, topic=payload.topic)
+    _dexter_event("topics_delete", {"id": payload.id or "", "topic": payload.topic or ""})
+    return {"status": "success", "remaining": remaining}
+
+
+@router.get("/topics")
+def studio_topics_list():
+    return {"status": "success", "topics": topic_store.load_topics()}
+
+
+@router.post("/search")
+def studio_search(payload: StudioSearchSchema):
+    kind = (payload.kind or "web").strip().lower()
+    try:
+        if kind == "web":
+            from app.services.web_research import web_research_service
+
+            results = web_research_service.search(payload.query, max_results=5)
+        else:
+            from app.services.deep_research import deep_research
+
+            results = deep_research(payload.query, kinds=(kind,), per_source=3)
+    except Exception as exc:
+        logger.error("studio search failed for '%s' (%s): %s", payload.query, kind, exc, exc_info=True)
+        return JSONResponse(status_code=502, content={"status": "error", "message": str(exc)})
+    return {"status": "success", "kind": kind, "results": results}
 
 
 # ───────────────────────────── shutdown (roadmap v10, S1) ─────────────────────────────

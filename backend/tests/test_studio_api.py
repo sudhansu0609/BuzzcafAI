@@ -11,7 +11,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services import events
+from app.services import events, topic_store
 from integrations.llm import LLMService
 
 
@@ -173,3 +173,137 @@ def test_bus_delivers_to_subscribers_and_remembers_the_last_event():
     assert bus.last["approval_needed"]["payload"]["project_id"] == "p1"
     bus.unsubscribe(queue)
     assert bus.subscriber_count == 0
+
+
+def test_allow_all_bypasses_approval_and_toggle(client, fake_llm):
+    # Test 1: Project created with allow_all=True completes steps without paused_for_approval
+    res = client.post(
+        "/api/projects",
+        json={"name": "Auto run probe", "brand": "Beyond3Baje", "workflow_name": "beyond3baje_documentary", "allow_all": True},
+    )
+    assert res.status_code == 200
+    p_id = res.json()["id"]
+    try:
+        run = client.post(f"/api/projects/{p_id}/execute", json={})
+        assert run.status_code == 200
+        last = run.json()["steps_history"][-1]
+        assert last["status"] == "completed"  # Bypassed paused_for_approval!
+        assert run.json()["current_step"] != last["step_name"]  # Advanced immediately!
+    finally:
+        _cleanup(p_id)
+
+    # Test 2: Project created with allow_all=False pauses, then toggle_allow_all unblocks it
+    res2 = client.post(
+        "/api/projects",
+        json={"name": "Toggle probe", "brand": "Beyond3Baje", "workflow_name": "beyond3baje_documentary", "allow_all": False},
+    )
+    assert res2.status_code == 200
+    p2_id = res2.json()["id"]
+    try:
+        run2 = client.post(f"/api/projects/{p2_id}/execute", json={})
+        assert run2.status_code == 200
+        assert run2.json()["steps_history"][-1]["status"] == "paused_for_approval"
+
+        # Toggle allow all ON
+        toggled = client.post(f"/api/projects/{p2_id}/toggle_allow_all").json()
+        assert toggled["metadata"]["allow_all"] is True
+        # Since it was waiting, toggle also immediately approved and advanced
+        assert toggled["steps_history"][-1]["status"] == "completed"
+    finally:
+        _cleanup(p2_id)
+
+
+def test_project_resilient_deserialization():
+    from core.models.project import Project, StepExecution
+    data = {
+        "id": "test_resilient_proj",
+        "name": "Resilient Proj",
+        "brand": "Beyond3Baje",
+        "workflow_name": "beyond3baje_documentary",
+        "status": "active",
+        "future_unknown_project_field": "some_value",
+        "steps_history": [
+            {
+                "step_name": "Research",
+                "agent_name": "ResearchAgent",
+                "status": "completed",
+                "started_at": "2026-09-16T10:00:00",
+                "future_unknown_step_field": 12345,
+                "simulated": False,
+            }
+        ],
+    }
+    p = Project.from_dict(data)
+    assert p.id == "test_resilient_proj"
+    assert len(p.steps_history) == 1
+    assert p.steps_history[0].step_name == "Research"
+    assert p.steps_history[0].simulated is False
+
+
+def test_delete_project_api(client, recorded_events):
+    res = client.post(
+        "/api/projects",
+        json={"name": "Delete Probe", "brand": "Beyond3Baje", "workflow_name": "beyond3baje_documentary"},
+    )
+    assert res.status_code == 200
+    p_id = res.json()["id"]
+
+    # Deleting nonexistent returns 404
+    assert client.delete("/api/projects/nonexistent_xyz").status_code == 404
+
+    # Deleting with invalid characters returns 400
+    assert client.delete("/api/projects/bad!name").status_code == 400
+
+    # Deleting existing project succeeds
+    del_res = client.delete(f"/api/projects/{p_id}")
+    assert del_res.status_code == 200
+    assert del_res.json()["status"] == "deleted"
+    assert del_res.json()["id"] == p_id
+    assert any(kind == "project_deleted" and payload["project_id"] == p_id for kind, payload in recorded_events)
+
+    # Confirm it no longer exists
+    assert client.get(f"/api/projects/{p_id}").status_code == 404
+
+
+@pytest.fixture
+def vault(tmp_path, monkeypatch):
+    monkeypatch.setattr(topic_store, "KNOWLEDGE_DIR", str(tmp_path))
+    (tmp_path / "saved_topics.json").write_text("[]", encoding="utf-8")
+    return tmp_path
+
+
+def test_capabilities_lists_actions(client):
+    res = client.get("/api/studio/capabilities")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["app"] == "buzzcaf"
+    assert isinstance(body["actions"], list) and body["actions"]
+    # /capabilities is now generated from the Dexter capability registry
+    # (the single source of truth shared with POST /api/studio/invoke).
+    names = {a["name"] for a in body["actions"]}
+    assert {"topic_research_and_save", "studio_search", "topic_list", "topic_save"} <= names
+
+
+def test_research_and_save_writes_a_dexter_row(client, vault, monkeypatch):
+    import app.api.studio_api as studio_api
+
+    canned = {"verdict": {"demand": {"reason": "trending in-region"}}}
+    monkeypatch.setattr(studio_api, "topic_store", topic_store)
+
+    def fake_validate_topic(topic, channel=None, force=False):
+        return canned
+
+    import app.services.topic_validation as topic_validation
+    monkeypatch.setattr(topic_validation, "validate_topic", fake_validate_topic)
+
+    res = client.post(
+        "/api/studio/topics/research_and_save",
+        json={"topic": "The Lost Signal", "channel": "Beyond3Baje"},
+    )
+    assert res.status_code == 200, res.text
+    body = res.json()
+    assert body["status"] == "success"
+    assert body["topic"]["added_by"] == "dexter"
+    assert body["topic"]["stage"] == "researching"
+    assert body["topic"]["topic"] == "The Lost Signal"
+

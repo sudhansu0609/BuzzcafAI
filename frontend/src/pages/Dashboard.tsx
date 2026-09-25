@@ -18,6 +18,8 @@ export default function Dashboard() {
   const [brand, setBrand] = useState('Beyond3Baje');
   const [workflow, setWorkflow] = useState(workflowFor('Beyond3Baje'));
   const [creating, setCreating] = useState(false);
+  const [allowAll, setAllowAll] = useState(false);
+  const [durationMin, setDurationMin] = useState(8);
 
   const brandOptions = brands.length > 0 ? brands : CHANNEL_META.map((c) => c.id);
   const workflowOptions = workflows.map((w) => w.id || w.name);
@@ -42,7 +44,7 @@ export default function Dashboard() {
     if (!name.trim() || creating) return;
     setCreating(true);
     try {
-      await postJson('/api/projects', { name: name.trim(), brand, workflow_name: workflow });
+      await postJson('/api/projects', { name: name.trim(), brand, workflow_name: workflow, allow_all: allowAll, target_duration_minutes: durationMin });
       toast(`Project "${name.trim()}" created.`, 'success');
       setName('');
       await refreshProjects();
@@ -109,6 +111,18 @@ export default function Dashboard() {
                 <input type="text" className="form-control" value={workflow} onChange={(e) => setWorkflow(e.target.value)} />
               )}
             </div>
+            <div className="form-group">
+              <label>Target length (min)</label>
+              <input
+                type="number"
+                className="form-control"
+                min={0.5}
+                max={180}
+                step={0.5}
+                value={durationMin}
+                onChange={(e) => setDurationMin(Number(e.target.value))}
+              />
+            </div>
           </div>
           {chosen?.steps?.length ? (
             <div style={{ margin: '4px 0 20px 0' }}>
@@ -120,18 +134,29 @@ export default function Dashboard() {
                   <div
                     key={s.name}
                     title={s.description}
-                    style={{ backgroundColor: '#12141d', border: '1px solid #1e2230', borderRadius: 8, padding: '8px 12px', fontSize: '0.78rem', maxWidth: 240 }}
+                    style={{ backgroundColor: 'var(--bg-subcard)', border: '1px solid var(--border-card)', borderRadius: 8, padding: '8px 12px', fontSize: '0.78rem', maxWidth: 240 }}
                   >
-                    <div style={{ color: '#ffffff', fontWeight: 600 }}>{i + 1}. {s.name}</div>
-                    <div style={{ color: '#94a3b8' }}>
+                    <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{i + 1}. {s.name}</div>
+                    <div style={{ color: 'var(--text-secondary)' }}>
                       {s.agent_role}
-                      {s.requires_approval && <span style={{ color: '#a78bfa' }}> · approval</span>}
+                      {s.requires_approval && <span style={{ color: 'var(--accent-primary)' }}> · approval</span>}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           ) : null}
+          <div style={{ marginBottom: 18 }}>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.88rem', color: 'var(--text-primary)' }}>
+              <input
+                type="checkbox"
+                checked={allowAll}
+                onChange={(e) => setAllowAll(e.target.checked)}
+                style={{ width: 16, height: 16, accentColor: '#10b981', cursor: 'pointer' }}
+              />
+              <span>Allow all steps (run continuously without waiting for manual approval)</span>
+            </label>
+          </div>
           <button type="submit" className="btn" disabled={creating || health === 'offline'}>
             <PlusCircle size={18} />
             <span>{creating ? 'Creating…' : 'Create project'}</span>

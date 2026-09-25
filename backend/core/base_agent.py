@@ -82,6 +82,20 @@ class BaseAgent(ABC):
             except Exception as e:
                 logger.error(f"Error building workforce roster for {self.agent_name}: {e}")
 
+        # Live Web Research tool directives for research and fact personas
+        if "research" in self.agent_name.lower() or "fact" in self.agent_name.lower() or "analyst" in self.agent_name.lower():
+            research_tool_directive = (
+                "\n\n### Live Web Research & Verification Tools (100% On-Device & Private):\n"
+                "You have access to live web research and article scraping tools. To use them, output:\n"
+                "- `[WEB_SEARCH: keywords]` - searches SearXNG, DuckDuckGo, or Wikipedia anonymously for verified sources.\n"
+                "- `[WEB_FETCH: url]` - safely extracts text from a public web page.\n"
+                "- `[BOOK_SEARCH: keywords]` - searches open-domain books (Gutenberg, Open Library, Wikisource).\n"
+                "- `[NEWS_SEARCH: keywords]` - searches news/newspapers, India & worldwide (GDELT, Google News, historic archives).\n"
+                "- `[ARCHIVE_SEARCH: keywords]` - searches public archives (Internet Archive, Wikisource).\n"
+                "Always incorporate verified sources and URLs directly into your research outputs.\n"
+            )
+            base_prompt += research_tool_directive
+
         # Hinglish directive for content generation (workflow steps produce
         # titles, hooks and scripts). The Studio Assistant chat passes
         # hinglish=False and answers in the creator's own language instead.
@@ -121,10 +135,15 @@ class BaseAgent(ABC):
         """
         system_prompt = self._load_system_prompt(hinglish=hinglish) + (system_extra or "")
         logger.info(f"Agent '{self.agent_name}' is answering a chat turn ({len(messages)} messages)...")
-        return self.llm_service.generate_chat(
+        raw_output = self.llm_service.generate_chat(
             system_prompt=system_prompt, messages=messages, require_json=require_json,
             tier=self.model_tier, temperature=self.temperature,
         )
+        try:
+            from app.services.studio_chat import process_web_research_tags
+            return process_web_research_tags(raw_output)
+        except Exception:
+            return raw_output
 
     def execute(self, task: Any, require_json: bool = False) -> Any:
         try:
@@ -181,6 +200,13 @@ class BaseAgent(ABC):
             tier=self.model_tier,
             temperature=self.temperature,
         )
+        if not require_json:
+            try:
+                from app.services.studio_chat import process_web_research_tags
+                raw_output = process_web_research_tags(raw_output)
+            except Exception:
+                pass
+
         try:
             from memory.memory import memory_system
             memory_system.save(

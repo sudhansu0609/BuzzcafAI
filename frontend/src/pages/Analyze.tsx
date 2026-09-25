@@ -167,8 +167,8 @@ export default function Analyze() {
 
       {result && result.kind === 'video' && (
         <>
-          <div className="panel-card" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            {video.thumbnail && <img src={video.thumbnail} alt="" style={{ width: 240, borderRadius: 8, objectFit: 'cover' }} />}
+          <div className="panel-card analyze-video-card">
+            {video.thumbnail && <img src={video.thumbnail} alt="" className="analyze-thumbnail" />}
             <div style={{ flex: 1, minWidth: 260 }}>
               <h2 style={{ margin: '0 0 4px' }}>{video.title}</h2>
               <div style={{ opacity: 0.8 }}>
@@ -220,7 +220,7 @@ export default function Analyze() {
             </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+          <div className="analyze-factors-grid">
             <div className="panel-card">
               <div className="panel-title">Why it works</div>
               <ol>

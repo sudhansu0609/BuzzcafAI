@@ -29,6 +29,11 @@ EVENT_TYPES = (
     # v9: one agent handing work to another, and a department answering.
     "agent_invoked",
     "department_task",
+    # BuzzEdit video-production bridge (app/api/produce_api.py): a
+    # produce_video run's progress, success, and failure.
+    "video_progress",
+    "video_ready",
+    "video_failed",
 )
 
 

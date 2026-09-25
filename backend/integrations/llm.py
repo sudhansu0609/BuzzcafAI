@@ -22,8 +22,9 @@ def _simulation_enabled() -> bool:
 
 
 # Every provider we know how to reach, in the order we fall back through them.
-FALLBACK_ORDER = ["gemini", "openai", "lm_studio", "llamacpp"]
-LOCAL_PROVIDERS = {"lm_studio", "llamacpp"}
+FALLBACK_ORDER = ["gemini", "openai", "lm_studio", "llamacpp", "ollama"]
+LOCAL_PROVIDERS = {"lm_studio", "ollama", "llamacpp"}
+LOCAL_FALLBACK_ORDER = ["lm_studio", "llamacpp", "ollama"]
 DEFAULT_TEMPERATURE = 0.7
 
 # What we tell Sentinel an LM Studio request may cost when the model name says
@@ -55,11 +56,227 @@ def estimate_model_mib(name: str) -> int:
 
 # Two tiers, so cheap work (tags, titles, checklists) can go to the local model
 # and the writing stays on the strong one (roadmap v9, F1). An empty provider
-# means "use the globally selected one".
+# means "use the globally selected one". Defaults to local on-device models.
 DEFAULT_TIERS = {
     "fast": {"provider": "llamacpp", "model": ""},
     "strong": {"provider": "", "model": ""},
 }
+
+
+def normalize_model_name(name: str) -> str:
+    """Normalize model string by removing repo prefix, gguf extension, and non-alphanumeric chars."""
+    if not name:
+        return ""
+    s = name.strip().lower()
+    if "/" in s:
+        s = s.split("/")[-1]
+    s = re.sub(r"[-_.]gguf$", "", s)
+    s = re.sub(r"[^a-z0-9]", "", s)
+    return s
+
+
+def models_match(configured: str, candidate: str) -> bool:
+    """Fuzzy match between configured model identifier and candidate model identifier."""
+    if not configured or not candidate:
+        return False
+    if configured.strip().lower() == candidate.strip().lower():
+        return True
+    n_conf = normalize_model_name(configured)
+    n_cand = normalize_model_name(candidate)
+    if n_conf == n_cand:
+        return True
+    if len(n_conf) >= 5 and (n_conf in n_cand or n_cand in n_conf):
+        return True
+    return False
+
+
+def find_lms_binary() -> Optional[str]:
+    """Find the path to the LM Studio CLI binary (lms or lms.exe)."""
+    import shutil
+    lms_path = shutil.which("lms")
+    if lms_path and os.path.exists(lms_path):
+        return lms_path
+    candidates = [
+        os.path.expanduser(r"~/.lmstudio/bin/lms.exe"),
+        os.path.expanduser(r"~/.lmstudio/bin/lms"),
+        r"C:\Users\singh\.lmstudio\bin\lms.exe",
+        os.path.expandvars(r"%LOCALAPPDATA%\LM Studio\lms.exe"),
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+
+def get_loaded_lm_studio_models(base_url: str = "http://localhost:1234") -> List[str]:
+    """Return list of model IDs currently loaded in LM Studio memory."""
+    import subprocess
+    loaded: List[str] = []
+
+    # 1. Fast check: LM Studio REST API (/api/v0/models takes ~10ms)
+    try:
+        clean_url = base_url.rstrip("/").replace("/v1", "")
+        r = requests.get(f"{clean_url}/api/v0/models", timeout=0.8)
+        if r.status_code == 200:
+            data = r.json().get("data", [])
+            for m in data:
+                if m.get("state") == "loaded":
+                    mid = m.get("id")
+                    if mid and mid not in loaded:
+                        loaded.append(mid)
+            if loaded:
+                return loaded
+    except Exception as exc:
+        logger.debug("Failed querying /api/v0/models: %s", exc)
+
+    # 2. Fallback check: lms CLI process list (lms ps)
+    try:
+        bin_path = find_lms_binary()
+        if bin_path:
+            res = subprocess.run([bin_path, "ps"], capture_output=True, text=True, timeout=2)
+            if res.returncode == 0:
+                for line in res.stdout.strip().splitlines()[1:]:
+                    parts = line.split()
+                    if parts and parts[0] != "IDENTIFIER":
+                        mid = parts[0]
+                        if mid not in loaded:
+                            loaded.append(mid)
+    except Exception as exc:
+        logger.debug("Failed running lms ps: %s", exc)
+
+    return loaded
+
+
+def is_model_already_loaded(target_model: Optional[str], loaded_models: List[str]) -> Tuple[bool, Optional[str]]:
+    """Determine if target_model is already loaded in memory.
+    Returns (True, matched_id) if loaded, or (False, None)."""
+    if not loaded_models:
+        return False, None
+    if not target_model or not target_model.strip() or target_model.lower() in ("auto", "default"):
+        return True, loaded_models[0]
+
+    # 1. Exact match
+    for mid in loaded_models:
+        if target_model.strip().lower() == mid.strip().lower():
+            return True, mid
+
+    # 2. Fuzzy / normalized match
+    for mid in loaded_models:
+        if models_match(target_model, mid) or models_match(mid, target_model):
+            return True, mid
+
+    # 3. Substring match on normalized stems
+    n_target = normalize_model_name(target_model)
+    if len(n_target) >= 4:
+        for mid in loaded_models:
+            n_mid = normalize_model_name(mid)
+            if n_target in n_mid or n_mid in n_target:
+                return True, mid
+
+    return False, None
+
+
+def ensure_local_model_loaded(provider: str = "lm_studio", model_name: Optional[str] = None) -> Dict[str, Any]:
+    """Ensure that the requested local model is loaded in LM Studio or Ollama.
+    If already loaded, returns status immediately without calling load again.
+    If not loaded, attempts to bring it up automatically."""
+    import subprocess
+
+    if provider == "lm_studio":
+        try:
+            base_url = "http://localhost:1234"
+            loaded = get_loaded_lm_studio_models(base_url)
+
+            # If target model (or any model if none specified) is already loaded, NEVER reload it!
+            already_loaded, matched_mid = is_model_already_loaded(model_name, loaded)
+            if already_loaded and matched_mid:
+                logger.info(
+                    "LM Studio model '%s' (requested: '%s') is ALREADY loaded. Skipping reload.",
+                    matched_mid, model_name or "active",
+                )
+                return {
+                    "loaded": True,
+                    "model": matched_mid,
+                    "already_loaded": True,
+                    "all_loaded": loaded,
+                    "message": f"Model '{matched_mid}' is already loaded in memory",
+                }
+
+            # If target model is truly not loaded, find matching candidate
+            lms_bin = find_lms_binary()
+            if not lms_bin:
+                return {
+                    "loaded": False,
+                    "model": model_name or "",
+                    "already_loaded": False,
+                    "all_loaded": loaded,
+                    "message": "lms binary not found to load model",
+                }
+
+            r = requests.get(f"{base_url}/api/v0/models", timeout=2.0)
+            data = r.json().get("data", []) if r.status_code == 200 else []
+
+            target_key = None
+            if model_name:
+                for m in data:
+                    mid = m.get("id", "")
+                    if models_match(model_name, mid) or models_match(mid, model_name):
+                        target_key = mid
+                        break
+
+            # Re-check: Is resolved target_key already loaded?
+            if target_key:
+                is_target_loaded, loaded_id = is_model_already_loaded(target_key, loaded)
+                if is_target_loaded and loaded_id:
+                    logger.info("Resolved model '%s' is already loaded. Skipping reload.", loaded_id)
+                    return {
+                        "loaded": True,
+                        "model": loaded_id,
+                        "already_loaded": True,
+                        "all_loaded": loaded,
+                        "message": f"Model '{loaded_id}' is already loaded",
+                    }
+
+            # If no target specified or model not found, and some model is already loaded, DO NOT load arbitrary model
+            if not target_key and loaded:
+                logger.info("Existing model '%s' is already loaded. Skipping reload.", loaded[0])
+                return {
+                    "loaded": True,
+                    "model": loaded[0],
+                    "already_loaded": True,
+                    "all_loaded": loaded,
+                    "message": f"Active model '{loaded[0]}' is already loaded",
+                }
+
+            if not target_key and data and not loaded:
+                target_key = data[0].get("id")
+
+            if target_key and target_key not in loaded:
+                logger.info("Attempting to auto-load LM Studio model '%s' via lms CLI...", target_key)
+                cmd = [lms_bin, "load", target_key, "-y"]
+                proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+                if proc.returncode == 0:
+                    logger.info("Successfully loaded LM Studio model '%s'", target_key)
+                    return {"loaded": True, "model": target_key, "already_loaded": False, "message": f"Successfully loaded {target_key}"}
+                else:
+                    logger.warning("lms load failed: %s", proc.stderr)
+        except Exception as exc:
+            logger.warning("Failed to check or load model in LM Studio: %s", exc)
+
+    elif provider == "ollama":
+        try:
+            r = requests.get("http://localhost:11434/api/ps", timeout=1.5)
+            if r.status_code == 200:
+                running = [m.get("name") or m.get("model") for m in r.json().get("models", [])]
+                if model_name and any(models_match(model_name, m) for m in running):
+                    return {"loaded": True, "model": model_name, "already_loaded": True, "all_loaded": running, "message": "Model already loaded"}
+                if not model_name and running:
+                    return {"loaded": True, "model": running[0], "already_loaded": True, "all_loaded": running, "message": "Active model loaded"}
+            return {"loaded": True, "model": model_name or "ollama", "already_loaded": True, "message": "Ollama ready"}
+        except Exception as exc:
+            logger.warning("Ollama check failed: %s", exc)
+
+    return {"loaded": False, "model": model_name or "", "already_loaded": False, "message": "Could not verify model"}
 
 
 def load_config() -> Dict[str, Any]:
@@ -69,27 +286,20 @@ def load_config() -> Dict[str, Any]:
         "openai_api_key": "",
         "openai_model": "gpt-4o-mini",
         "lm_studio_url": "http://localhost:1234/v1",
-        "lm_studio_model": "meta-llama-3-8b-instruct",
+        "lm_studio_model": "qwen3.8-27b-gsq-rco",
+        "ollama_url": "http://localhost:11434/v1",
+        "ollama_model": "qwen3.5:9b",
         "llamacpp_url": "http://127.0.0.1:8089/v1",
-        "llamacpp_model": "local-model",
+        "llamacpp_model": "qwen3.8-27b",
         "tiers": {k: dict(v) for k, v in DEFAULT_TIERS.items()},
-        "prefer_gemini": True,
-        "selected_provider": "gemini"
+        "local_only": True,
+        "prefer_gemini": False,
+        "selected_provider": "lm_studio"
     }
 
     config = dict(default_config)
-    
-    # 1. Load from file if exists
-    if os.path.exists(CONFIG_PATH):
-        try:
-            with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-                file_config = json.load(f)
-                for k, v in file_config.items():
-                    config[k] = v
-        except Exception as e:
-            logger.error(f"Error loading LLM config: {e}")
 
-    # 2. Override with Environment Variables
+    # 1. Environment variables provide baseline defaults
     env_keys = {
         "GEMINI_API_KEY": "gemini_api_key",
         "GEMINI_MODEL": "gemini_model",
@@ -97,6 +307,8 @@ def load_config() -> Dict[str, Any]:
         "OPENAI_MODEL": "openai_model",
         "LM_STUDIO_URL": "lm_studio_url",
         "LM_STUDIO_MODEL": "lm_studio_model",
+        "OLLAMA_URL": "ollama_url",
+        "OLLAMA_MODEL": "ollama_model",
         "LLAMACPP_URL": "llamacpp_url",
         "LLAMACPP_MODEL": "llamacpp_model",
         "SELECTED_PROVIDER": "selected_provider"
@@ -105,9 +317,23 @@ def load_config() -> Dict[str, Any]:
         if os.environ.get(env_key):
             config[config_key] = os.environ[env_key]
 
+    if os.environ.get("LOCAL_ONLY") is not None:
+        config["local_only"] = os.environ["LOCAL_ONLY"].lower() in ["true", "1", "yes"]
+
     if os.environ.get("PREFER_GEMINI"):
         val = os.environ["PREFER_GEMINI"].lower() in ["true", "1", "yes"]
         config["prefer_gemini"] = val
+
+    # 2. Saved configuration in config.json overrides environment defaults
+    # so creator settings persist across reloads until explicitly reset
+    if os.path.exists(CONFIG_PATH):
+        try:
+            with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+                file_config = json.load(f)
+                for k, v in file_config.items():
+                    config[k] = v
+        except Exception as e:
+            logger.error(f"Error loading LLM config: {e}")
 
     # A config file written before v9 has no tiers, and a partial one must not
     # lose a tier: fill in whatever is missing.
@@ -147,7 +373,12 @@ class LLMService:
 
     def _provider_order(self, tier: Optional[str] = None) -> List[str]:
         """Which providers to try, in order: the tier's own first, then the
-        globally selected one, then everything else (roadmap v9, F1)."""
+        globally selected one, then everything else (roadmap v9, F1).
+
+        When local_only is True (default) or the selected provider is in
+        LOCAL_PROVIDERS, all cloud providers (Gemini, OpenAI) are strictly
+        filtered out to ensure zero data leaves the machine.
+        """
         order: List[str] = []
         tier_provider = str(self._tier_settings(tier).get("provider") or "").strip().lower()
         if tier_provider:
@@ -155,51 +386,109 @@ class LLMService:
 
         provider = self.config.get("selected_provider") or os.environ.get("SELECTED_PROVIDER")
         if not provider:
-            provider = "gemini" if self.config.get("prefer_gemini", True) else "lm_studio"
+            provider = "lm_studio" if not self.config.get("prefer_gemini", False) else "gemini"
         order.append(str(provider).lower())
-        order.extend(FALLBACK_ORDER)
+
+        is_local_only = bool(self.config.get("local_only", False))
+        if is_local_only:
+            order.extend(LOCAL_FALLBACK_ORDER)
+        else:
+            order.extend(FALLBACK_ORDER)
 
         seen, unique = set(), []
         for name in order:
-            if name and name not in seen:
-                seen.add(name)
-                unique.append(name)
+            if not name or name in seen:
+                continue
+            if is_local_only and name not in LOCAL_PROVIDERS:
+                continue
+            seen.add(name)
+            unique.append(name)
         return unique
 
     def _model_for(self, provider: str, tier: Optional[str]) -> str:
-        override = str(self._tier_settings(tier).get("model") or "").strip()
-        if override:
+        tier_cfg = self._tier_settings(tier)
+        tier_p = str(tier_cfg.get("provider") or "").strip().lower()
+        override = str(tier_cfg.get("model") or "").strip()
+        if override and (not tier_p or tier_p == provider.lower()):
             return override
         return {
             "gemini": self.config.get("gemini_model", "gemini-1.5-flash"),
             "openai": self.config.get("openai_model", "gpt-4o-mini"),
-            "lm_studio": self.config.get("lm_studio_model", "meta-llama-3-8b-instruct"),
-            "llamacpp": self.config.get("llamacpp_model", "local-model"),
+            "lm_studio": self.config.get("lm_studio_model", "qwen3.8-27b-gsq-rco"),
+            "ollama": self.config.get("ollama_model", "qwen3.5:9b"),
+            "llamacpp": self.config.get("llamacpp_model", "qwen3.8-27b"),
         }.get(provider, "")
 
     def _local_url(self, provider: str) -> str:
-        key = "lm_studio_url" if provider == "lm_studio" else "llamacpp_url"
-        default = "http://localhost:1234/v1" if provider == "lm_studio" else "http://127.0.0.1:8089/v1"
+        if provider == "ollama":
+            default = "http://localhost:11434/v1"
+            key = "ollama_url"
+        elif provider == "lm_studio":
+            default = "http://localhost:1234/v1"
+            key = "lm_studio_url"
+        else:
+            default = "http://127.0.0.1:8089/v1"
+            key = "llamacpp_url"
         return str(self.config.get(key) or default).rstrip("/")
 
+    def _is_lm_studio_model_loaded(self, model_name: str) -> bool:
+        """Check if the requested model is already resident in LM Studio VRAM/RAM."""
+        if not model_name:
+            return False
+        try:
+            base_url = self._local_url("lm_studio").replace("/v1", "")
+            r = requests.get(f"{base_url}/api/v0/models", timeout=0.8)
+            if r.status_code == 200:
+                for m in r.json().get("data", []):
+                    mid = m.get("id", "")
+                    if (m.get("state") == "loaded") and (mid == model_name or models_match(model_name, mid)):
+                        return True
+        except Exception:
+            pass
+        return False
+
+    def _resolve_lm_studio_model(self, requested_model: Optional[str] = None) -> str:
+        """Resolve a configured model identifier to the actual ID recognized by LM Studio."""
+        try:
+            base_url = self._local_url("lm_studio").replace("/v1", "")
+            r = requests.get(f"{base_url}/api/v0/models", timeout=0.8)
+            if r.status_code == 200:
+                data = r.json().get("data", [])
+                loaded_models = [m.get("id") for m in data if m.get("state") == "loaded"]
+                available_models = [m.get("id") for m in data]
+
+                # 1. Match against loaded models first
+                if requested_model:
+                    for mid in loaded_models:
+                        if models_match(requested_model, mid):
+                            return mid
+
+                # 2. Match against available models
+                if requested_model:
+                    for mid in available_models:
+                        if models_match(requested_model, mid):
+                            return mid
+
+                # 3. Fall back to currently loaded model
+                if loaded_models:
+                    return loaded_models[0]
+
+                # 4. Fall back to first available model
+                if available_models:
+                    return available_models[0]
+        except Exception as e:
+            logger.debug("Could not query LM Studio models: %s", e)
+        return requested_model or "qwen3.8-27b-gsq-rco"
+
     def _sentinel_allows(self, provider: str, tier: Optional[str] = None) -> bool:
-        """May we send a request that could make a model load? (roadmap v10, S1)
-
-        Only `lm_studio` is gated. The Studio never loads a model itself, but an
-        LM Studio server with JIT loading on will pull several GB onto the card
-        the moment a request arrives, and that is exactly the load Sentinel is
-        there to admit or refuse. `llamacpp` is buzzcode's engine, which does
-        its own reserving before it starts — asking twice for the same VRAM
-        would double-count it.
-
-        `query()` books nothing: it answers "would this be granted". A refusal
-        is not an error, it is a routing decision, so the caller moves on to the
-        next provider in FALLBACK_ORDER. An absent or older Sentinel answers
-        "granted", which is the behaviour the Studio had before this existed.
-        """
+        """May we send a request that could make a model load? (roadmap v10, S1)"""
         if provider != "lm_studio":
             return True
-        mib = estimate_model_mib(self._model_for(provider, tier))
+        model = self._model_for(provider, tier)
+        resolved_model = self._resolve_lm_studio_model(model)
+        if self._is_lm_studio_model_loaded(resolved_model):
+            return True
+        mib = estimate_model_mib(resolved_model)
         try:
             from integrations.sentinel_client import client as sentinel_client
 
@@ -214,11 +503,16 @@ class LLMService:
             str(b.get("client") or b.get("process") or "?") for b in (details.get("blockers") or [])
         )
         logger.warning(
-            "Sentinel refused %d MiB for lm_studio (%s%s); trying the next provider.",
+            "Sentinel refused %d MiB for lm_studio (%s%s); evaluating fallback.",
             mib,
             details.get("reason") or "no reason given",
             f"; held by {holders}" if holders else "",
         )
+        # If Strict Local is on and no other active client blocks the card, allow LM Studio
+        # to manage CPU offloading rather than stranding the user with simulated text.
+        if self.config.get("local_only", True) and not holders:
+            logger.info("Sentinel refused full VRAM, but LM Studio offloading is available; allowing request.")
+            return True
         return False
 
     def generate_chat(
@@ -264,9 +558,11 @@ class LLMService:
             elif current_p in LOCAL_PROVIDERS:
                 if not self._sentinel_allows(current_p, tier):
                     continue
+                if current_p == "lm_studio":
+                    model = self._resolve_lm_studio_model(model)
                 url = self._local_url(current_p)
                 try:
-                    logger.info(f"Attempting chat via local {current_p} at {url}...")
+                    logger.info(f"Attempting chat via local {current_p} at {url} (model: {model})...")
                     return self._chat_openai_compat(
                         f"{url}/chat/completions", {}, model,
                         system_prompt, messages, False, temp, timeout=180,
@@ -275,10 +571,13 @@ class LLMService:
                     logger.warning(f"{current_p} chat failed: {e}.")
 
         if not _simulation_enabled():
-            raise LLMUnavailable(
-                "No LLM provider is reachable. Check your API keys and that the "
-                "selected model is available in Settings."
+            msg = (
+                "No local LLM provider is reachable (LM Studio / Ollama / llama.cpp). "
+                "Cloud providers are blocked by Strict Local Mode to ensure zero data leaves your PC."
+                if self.config.get("local_only", True)
+                else "No LLM provider is reachable. Check your API keys and that the selected model is available in Settings."
             )
+            raise LLMUnavailable(msg)
         logger.warning("No LLM provider succeeded; returning simulated content.")
         self.last_response_simulated = True
         from dev.fixtures import generate_simulated_response
@@ -386,9 +685,11 @@ class LLMService:
             elif current_p in LOCAL_PROVIDERS:
                 if not self._sentinel_allows(current_p, tier):
                     continue
+                if current_p == "lm_studio":
+                    model = self._resolve_lm_studio_model(model)
                 url = self._local_url(current_p)
                 try:
-                    logger.info(f"Attempting generation via local {current_p} at {url}...")
+                    logger.info(f"Attempting generation via local {current_p} at {url} (model: {model})...")
                     return self._call_local(url, model, system_prompt, user_prompt, temp)
                 except Exception as e:
                     logger.warning(f"{current_p} API call failed: {e}.")
@@ -396,10 +697,13 @@ class LLMService:
 
         # Every provider failed or none was configured.
         if not _simulation_enabled():
-            raise LLMUnavailable(
-                "No LLM provider is reachable. Check your API keys and that the "
-                "selected model is available in Settings."
+            msg = (
+                "No local LLM provider is reachable (LM Studio / Ollama / llama.cpp). "
+                "Cloud providers are blocked by Strict Local Mode to ensure zero data leaves your PC."
+                if self.config.get("local_only", True)
+                else "No LLM provider is reachable. Check your API keys and that the selected model is available in Settings."
             )
+            raise LLMUnavailable(msg)
 
         # The canned response below is NOT model output -- flag it so callers
         # can label it. See backend/dev/fixtures.py.

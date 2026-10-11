@@ -19,7 +19,9 @@ class WritingDepartment(Department):
                 "Reviewer",
                 "WriterAgent",
                 "HorrorWriter",
-                "NarrationOptimizer"
+                "NarrationOptimizer",
+                "ShortsWriter",
+                "StyleAnalyst"
             ],
             llm_service=llm_service
         )

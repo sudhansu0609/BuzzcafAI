@@ -1,0 +1,100 @@
+{
+  "target": 3500,
+  "bible": {
+    "characters": [
+      {
+        "name": "Aryan (The Narrator)",
+        "who": "A seasoned Forest Officer (Vanrakshak) with 5 years of experience in the dense tiger reserves.",
+        "voice": "First-person, steady, slightly weary but professional. He speaks as 'main' (I)."
+      },
+      {
+        "name": "Vikram",
+        "who": "A senior ranger who provides warnings about the local folklore and 'dead zones'.",
+        "voice": "Gruff, cautious, authoritative."
+      }
+    ],
+    "narration": "First-person (main), past tense. The narrator is the forest officer experiencing the events.",
+    "setting": "A dense, remote tiger reserve in Central India during the monsoon season; specifically a 'no-go' zone where radio signals fail.",
+    "rules": [],
+    "key_facts": [
+      "The concept of 'Time Loops' or 'Echoes' in dense forests.",
+      "The psychological effect of isolation and auditory hallucinations.",
+      "Local belief in 'Aatma-Vani' (Soul Voices) that repeat past events."
+    ],
+    "motifs": [
+      "Static on the walkie-talkie",
+      "The smell of damp earth and decaying leaves",
+      "The specific phrase: 'Kahan ho tum?'",
+      "Distorted recordings"
+    ],
+    "tone": "Atmospheric, grounded, slow-burn horror. No jump-scares; the dread comes from the realization of a logical impossibility.",
+    "ending": "A chilling revelation about the timeline of the recording and the final moral to the audience."
+  },
+  "sections": [
+    {
+      "title": "Ek Anokhi Duty",
+      "purpose": "Introductory sequence including mandatory greetings, context setting, and establishing the narrator's role.",
+      "beats": [
+        "Mandatory greeting: 'Hello doston, mera naam hai Sudhansu aur aap dekh rahe hain Raat 3 Baje.'",
+        "Source disclosure: Mentioning it is based on a listener's experience of a forest officer.",
+        "Context setup: Describing the life of a vanrakshak and the isolation of the jungle.",
+        "Mandatory transition: 'Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain.'",
+        "The belief/twist hook: Mentioning how he once didn't believe in these things until his own experience.",
+        "Establishment of the setting: The year, the specific forest zone, and the upcoming patrol."
+      ],
+      "words": 600
+    },
+    {
+      "title": "Jungle Ki Khamoshi",
+      "purpose": "Establishing the atmosphere, the physical journey, and the first signs of 'wrongness'.",
+      "beats": [
+        "Description of the patrol route into the deep forest (the 'Zone 4' area).",
+        "Sensory details: The humidity, the heavy silence, and the failure of radio communication.",
+        "Introduction of Vikram (senior ranger) and his warnings about 'echoes' in the valley.",
+        "The physical sensation of being watched by something not quite animal.",
+        "The first oddity: Hearing a sound that seems to repeat perfectly every 10 seconds.",
+        "The transition from day to dusk, where the forest feels physically heavier."
+      ],
+      "words": 700
+    },
+    {
+      "title": "Woh Ajeeb Awaz",
+      "purpose": "The core mystery: The discovery of the voice note and its disturbing nature.",
+      "beats": [
+        "Stopping at a clearing to check equipment; finding a discarded, mud-caked walkie-talkie.",
+        "Hearing a burst of static followed by his own voice coming through the device.",
+        "The specific content: The narrator hears himself saying a sentence he only spoke that morning to a colleague.",
+        "The realization of the date/time on the recording—it matches today's date perfectly.",
+        "The discrepancy: In the recording, his voice sounds panicked and frantic, unlike his current calm state.",
+        "The realization that the 'voice' is coming from a location just a few meters away in the thicket."
+      ],
+      "words": 800
+    },
+    {
+      "title": "Gehrai Mein Dooba",
+      "purpose": "Escalation and the physical confrontation with the environment.",
+      "beats": [
+        "The narration of his decision to investigate the source of the voice despite the warning.",
+        "The atmosphere changing: The forest sounds (insects, birds) suddenly cutting out completely.",
+        "The recording starts looping but begins to distort, layering multiple voices over one another.",
+        "Physical manifestation: Seeing shadows move in a way that contradicts the wind or movement of trees.",
+        "A moment of panic when he hears his own voice scream for help from 'inside' a tree trunk.",
+        "The frantic attempt to retreat as the sun sets and the 'echoes' become more frequent and louder."
+      ],
+      "words": 800
+    },
+    {
+      "title": "Sachayi Ka Khulasa",
+      "purpose": "The climax, the final twist, and the concluding moral.",
+      "beats": [
+        "The discovery of a logbook or an old officer's ID at the source of the sound.",
+        "The realization: The recording isn't 'his' voice from today; it is his voice from 10 years ago (or another person who shared his name).",
+        "The twist: He realizes why the voice was so clear—it wasn't a recording, but a spatial fold.",
+        "The escape: Reaching the outpost and the lingering fear of 'hearing himself' in his sleep.",
+        "Final moral: 'Doston, zaroori nahi ki jis baat par tum yaqeen nahi karte, woh saari baatein jhooth ho.'",
+        "Closing line: 'Kabhi-kabhi doosron ki baaton par bhi yaqeen kar lena chahiye.'"
+      ],
+      "words": 600
+    }
+  ]
+}

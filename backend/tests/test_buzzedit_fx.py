@@ -33,5 +33,8 @@ def test_fx_palette_per_brand():
     assert "grain" in fx_palette_for("Beyond3Baje")       # documentary
     assert "flicker" in fx_palette_for("Raat3Baje")        # horror
     assert "redaction" in fx_palette_for("anything", genre="mystery")
-    # The per-call override still merges after the settings refactor.
-    assert settings_for_brand("Raat3Baje", {"target_coverage": 0.7})["target_coverage"] == 0.7
+    # The per-call override still merges after the settings refactor (on a
+    # channel still on BuzzEdit's coverage pair).
+    assert settings_for_brand("Life3Baje", {"target_coverage": 0.7})["target_coverage"] == 0.7
+    # A story channel's coverage is its video + images mix (2026-10-03).
+    assert settings_for_brand("Raat3Baje", {"video_broll_share": 0.4, "image_broll_share": 0.3})["target_coverage"] == 0.7

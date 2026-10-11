@@ -1,0 +1,34 @@
+[
+  {
+    "id": "b48d4172-2199-4b19-98b8-80ed3cc38b65",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line: place, era, season, time of day, light and colour of the story's world\",\n  \"characters\": [\n    {\"name\": \"the name used in the story\",\n      \"aliases\": [\"other words the story uses for them, e.g. the guard, the old woman\"],\n      \"look\": \"one English line: apparent age, gender, build, face, hair, clothing and one distinctive detail -- concrete and visual, no persona",
+      "result_snippet": "```json\n{\n  \"world\": \"A desolate, decaying government building in India with a gritty, desaturated atmosphere and flickering industrial lighting.\",\n  \"characters\": [\n    {\n      \"name\": \"Arjun\",\n      \"aliases\": [\"the guard\"],\n      \"look\": \"26-year-old Indian male, lean build, short dark hair, wearing a faded navy blue security uniform with a name badge and carrying a metallic flashlight.\"\n    },\n    {\n      \"name\": \"Ramlal\",\n      \"aliases\": [\"the old chowkidar\"],\n      \"look\": \"Late 60s Indian male, weathered face, graying hair, wearing a worn khaki uniform, missing the pinky finger on his left hand.\"\n    },\n    {\n      \"name\": \"The Host\",\n      \"aliases\": [\"host\"],\n      \"look\": \"Adult Indian male, neatly groomed, wearing modern casual attire, appearing in a dimly lit studio with warm amber lighting.\"\n    },\n    {\n      \"name\": \"The Entity\",\n      \"aliases\": [\"shadow\", \"voice of the mother\"],\n      \"look\": \"A tall, distorted human silhouette that appears as a flickering shadow on a wall, distinct from Arjun's own shadow.\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-02T19:22:54.325403",
+    "updated": "2026-10-02T19:22:54.325409"
+  },
+  {
+    "id": "f68640a3-c05a-479c-b048-56cf53259338",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line: place, era, season, time of day, light and colour of the story's world\",\n  \"main_character\": \"the name of the ONE character the story follows, or \\\"\\\"\",\n  \"characters\": [\n    {\"name\": \"the name used in the story\",\n      \"aliases\": [\"other words the story uses for them, e.g. the guard, the old woman\"],\n      \"gender\": \"male, female or \\\"\\\"\",\n      \"look\": \"one Engli",
+      "result_snippet": "{\"world\":\"A dense, remote tiger reserve forest in Central India (Madhya Pradesh) during the monsoon, from late afternoon into night, with wet deep-green foliage, damp mud, heavy mist, dim dusky light and cold desaturated blue-green tones.\",\"main_character\":\"Aryan\",\"characters\":[{\"name\":\"Aryan\",\"aliases\":[\"main\",\"the narrator\",\"the forest officer\",\"vanrakshak\"],\"gender\":\"male\",\"look\":\"Indian man in his early 30s, lean athletic build, tired weathered face with stubble, short dark hair, wearing a mud-stained olive-green forest department uniform with a cap and boots, a rusted metal ID card clipped to his chest pocket.\"},{\"name\":\"Vikram\",\"aliases\":[\"the senior ranger\",\"the ranger\",\"purana ranger\"],\"gender\":\"male\",\"look\":\"Indian man in his late 50s, stocky broad build, stern lined face with a thick grey moustache, short grey hair, wearing a faded khaki ranger uniform and a rain-darkened jacket, carrying a rifle and a walkie-talkie.\"},{\"name\":\"Sudhansu\",\"aliases\":[\"the host\"],\"gender\":\"male\",\"look\":\"Indian man in his 30s, neat short black hair, trimmed beard, wearing a dark casual jacket, seated in a dim studio with warm amber light.\"}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-08T11:25:28.669746",
+    "updated": "2026-10-08T11:25:28.669754"
+  }
+]

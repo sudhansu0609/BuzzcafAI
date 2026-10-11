@@ -129,7 +129,7 @@ def test_a_refused_query_skips_lm_studio_and_falls_through(monkeypatch, sentinel
 
     tried = []
 
-    def fake_local(self, base_url, model, system_prompt, user_prompt, temperature=0.7):
+    def fake_local(self, base_url, model, system_prompt, user_prompt, temperature=0.7, **kw):
         tried.append(base_url)
         return "llamacpp answered"
 
@@ -155,7 +155,7 @@ def test_a_granted_query_lets_lm_studio_through(monkeypatch, sentinel):
     monkeypatch.setattr(
         LLMService,
         "_call_local",
-        lambda self, base_url, model, s, u, temperature=0.7: (tried.append(base_url), "ok")[1],
+        lambda self, base_url, model, s, u, temperature=0.7, **kw: (tried.append(base_url), "ok")[1],
     )
     assert service.generate_text("system", "user") == "ok"
     assert "1234" in tried[0]
@@ -171,7 +171,7 @@ def test_the_chat_path_is_gated_too(monkeypatch, sentinel):
     monkeypatch.setattr(
         LLMService,
         "_chat_openai_compat",
-        lambda self, url, headers, model, s, m, j, t=0.7, timeout=90: (tried.append(url), "ok")[1],
+        lambda self, url, headers, model, s, m, j, t=0.7, timeout=90, **kw: (tried.append(url), "ok")[1],
     )
     service.generate_chat("system", [{"role": "user", "content": "hi"}])
     assert all("1234" not in url for url in tried), tried
@@ -187,7 +187,7 @@ def test_llamacpp_is_not_gated(monkeypatch, sentinel):
     service.config = {"selected_provider": "llamacpp", "llamacpp_model": "local-model"}
     monkeypatch.setattr(LLMService, "reload_config", lambda self: None)
     monkeypatch.setattr(
-        LLMService, "_call_local", lambda self, base_url, model, s, u, temperature=0.7: "ok"
+        LLMService, "_call_local", lambda self, base_url, model, s, u, temperature=0.7, **kw: "ok"
     )
     assert service.generate_text("system", "user") == "ok"
     assert fake.asked == []

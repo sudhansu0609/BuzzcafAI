@@ -1,0 +1,123 @@
+{
+  "last_run": "2026-10-01",
+  "ran_at": "2026-10-01T05:45:27",
+  "built": [
+    {
+      "channel": "Raat3Baje",
+      "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
+      "title": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
+      "current_step": "Visual Plan"
+    },
+    {
+      "channel": "Beyond3Baje",
+      "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
+      "title": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
+      "current_step": "Visual Plan"
+    },
+    {
+      "channel": "Life3Baje",
+      "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
+      "title": "When does a YouTube channel become an 'Actual Business'?",
+      "current_step": "Visual Plan"
+    }
+  ],
+  "skipped": [],
+  "history": [
+    {
+      "ran_at": "2026-10-01T05:45:27",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
+          "title": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
+          "title": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
+          "title": "When does a YouTube channel become an 'Actual Business'?",
+          "current_step": "Visual Plan"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-09-30T03:24:54",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-09-30_Raat3Baje_PeecheMatKhodhnaTheForbiddenBoundaryRaat3baje",
+          "title": "Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-09-30_Beyond3Baje_KaunHainYeTheBlackeyedChildren",
+          "title": "Kaun Hain Ye? The Black-Eyed Children",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-09-30_Life3Baje_Can5SmallYoutubeChannelsBecomeAMediaCompany",
+          "title": "Can 5 Small YouTube Channels Become a Media Company?",
+          "current_step": "Visual Plan"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-09-29T03:33:39",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-09-29_Raat3Baje_BasementKeRulesTheForbiddenDoordraftsraatKiDutyrule4KabhiPeecheMatDekhnatheBasementOfNoReturn",
+          "title": "Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-09-29_Beyond3Baje_MothmanPointPleasantKaRahasya",
+          "title": "Mothman: Point Pleasant ka Rahasya",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-09-29_Life3Baje_WhenDidItStopBeingJustvideostheBusinessReality",
+          "title": "When did it stop being just 'videos'? (The Business Reality)",
+          "current_step": "Visual Plan"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-09-28T22:09:31",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-09-28_Raat3Baje_EkForestOfficerKoJungleMeinApnaHiVoiceNoteSunaiDiya",
+          "title": "Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-09-28_Beyond3Baje_KaiseEkChotiSiEngineeringGaltiNePooreWarshipKoDubaDiya",
+          "title": "Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-09-28_Life3Baje_IStartedWithYoutubeVideosNowImTryingToBuildACompany",
+          "title": "I Started With YouTube Videos — Now I’m Trying to Build a Company",
+          "current_step": "Visual Plan"
+        }
+      ],
+      "skipped": []
+    }
+  ]
+}

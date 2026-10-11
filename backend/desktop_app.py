@@ -16,6 +16,7 @@ everything printed goes to backend/logs/studio.log.
 
 import argparse
 import atexit
+import json
 import logging
 import os
 import shutil
@@ -498,6 +499,50 @@ def wait_for(url: str, timeout: float = 25.0, require_buzzcaf: bool = True) -> b
 # ───────────────────────── entry ─────────────────────────
 
 
+def _running_production(port: int) -> Optional[str]:
+    """Title of the video in production right now, if any (asked over HTTP,
+    so it works for a backend in this process or another)."""
+    try:
+        with urllib.request.urlopen(f"http://{HOST}:{port}/api/produce/queue", timeout=2) as resp:
+            items = json.loads(resp.read().decode("utf-8")).get("items") or []
+        running = next((i for i in items if i.get("status") == "running"), None)
+        return (running.get("title") or "A video") if running else None
+    except Exception:
+        return None
+
+
+def _shutdown_backend(port: int) -> None:
+    """Ask a backend this window did not start to shut down (loopback only)."""
+    try:
+        req = urllib.request.Request(f"http://{HOST}:{port}/api/studio/shutdown", data=b"{}",
+                                     headers={"Content-Type": "application/json"}, method="POST")
+        urllib.request.urlopen(req, timeout=5).close()
+        log.info("Asked the already-running backend on port %d to shut down.", port)
+    except Exception as exc:
+        log.warning("Could not shut down the backend on port %d: %s", port, exc)
+
+
+def _window_icon() -> str:
+    """The window / taskbar icon: the light tile on a light Windows taskbar, the
+    dark tile on a dark one (assets/buzzcaf_studio_{light,dark}.ico, cut from
+    logo.png by scripts/generate_icon.py). Falls back to the exe icon."""
+    assets = os.path.join(ROOT_DIR, "assets")
+    light = False
+    if sys.platform == "win32":
+        try:
+            import winreg
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                                r"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize") as key:
+                light = bool(winreg.QueryValueEx(key, "SystemUsesLightTheme")[0])
+        except Exception as exc:
+            log.debug("Could not read the Windows taskbar theme: %s", exc)
+    for name in ("buzzcaf_studio_light.ico" if light else "buzzcaf_studio_dark.ico", "buzzcaf_studio.ico"):
+        path = os.path.join(assets, name)
+        if os.path.exists(path):
+            return path
+    return ""
+
+
 def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
     started = time.perf_counter()
     if sys.platform == "win32":
@@ -507,6 +552,10 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
         except Exception as exc:
             log.debug("Could not set AppUserModelID: %s", exc)
     _preflight_or_exit(dev)
+    # Marks this process as the desktop Studio: a BuzzEdit it starts headless is
+    # told this pid and quits by itself once the pid is gone, so a crash or a
+    # killed Studio cannot leave it holding the GPU (produce_api.launch_buzzedit_process).
+    os.environ["BUZZCAF_DESKTOP_PID"] = str(os.getpid())
 
     # Pick the real port before anything binds to it: reuse ours if it is already
     # up, otherwise take the preferred port, otherwise step past whatever
@@ -574,6 +623,10 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
                 )
         target_url = f"http://{HOST}:{port}/"
 
+    # Without this WebView2 silently drops every download -- the Music page's
+    # "Save" and the Projects artifact save included. With it, a download opens
+    # the native Save As dialog.
+    webview.settings["ALLOW_DOWNLOADS"] = True
     geometry = _load_window()
     window = webview.create_window(
         title="Buzzcaf Studio",
@@ -587,20 +640,42 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
         background_color="#0d0e12",
     )
 
-    def on_closing() -> None:
+    def on_closing() -> Optional[bool]:
+        from app.services import process_cleanup
+
+        running = None if process_cleanup.shutdown_requested else _running_production(port)
+        if running and not window.create_confirmation_dialog(
+            "Close Buzzcaf Studio?",
+            f'"{running}" is being produced. Closing stops it (and a BuzzEdit the Studio started); '
+            "you can retry it later from where it stopped.",
+        ):
+            return False  # pywebview: cancel the close
         _save_window(window)
         if vite_proc is not None:
             _stop_process_tree(vite_proc, vite_port)
+        return None
 
     window.events.closing += on_closing
     log.info("Window opening after %.1fs (%s).", time.perf_counter() - started, target_url)
     print(f"READY port={port}", flush=True)  # rule 6: whoever launched us opens what we report
     show_devtools = devtools or os.getenv("BUZZCAF_DEVTOOLS", "0").lower() in ("1", "true", "yes")
-    icon_path = os.path.join(ROOT_DIR, "assets", "buzzcaf_studio.ico")
+    icon_path = _window_icon()
     try:
-        webview.start(debug=show_devtools, icon=icon_path if os.path.exists(icon_path) else None)
+        webview.start(debug=show_devtools, icon=icon_path or None)
     finally:
-        # Guarantee all daemon threads, uvicorn listeners, and child processes exit cleanly
+        # The window is gone: take every backend process with it. Ours runs in
+        # this process, so its children (and a headless BuzzEdit it started)
+        # are stopped here; one that was already running when this window
+        # opened is asked to shut down, which runs the same cleanup there.
+        if already_running:
+            _shutdown_backend(port)
+        else:
+            try:
+                from app.services.process_cleanup import stop_everything
+
+                stop_everything()
+            except Exception as exc:  # a failed cleanup must never block the exit
+                log.warning("Shutdown cleanup failed: %s", exc)
         os._exit(0)
 
 

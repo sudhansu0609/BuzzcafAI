@@ -29,6 +29,8 @@ _DIRECTIVES = (
     "music", "mood", "quote", "stat", "source", "character", "location",
     "chart", "definition", "split", "freeze", "newspaper", "case_file",
     "fx", "atmos", "grade",
+    # designed graphics (integrations/effect_catalog.py)
+    "statement", "canvas", "pills", "point", "name", "source_quote", "document", "timeline",
 )
 _DIRECTIVE_RE = re.compile(r"\[\s*(" + "|".join(_DIRECTIVES) + r")\s*:\s*[^\]]+?\s*\]", re.IGNORECASE)
 _HEADING_RE = re.compile(r"^\s*#{1,6}\s+.+$", re.MULTILINE)
@@ -140,12 +142,30 @@ def _grade_arg(beat: Dict[str, Any]) -> str:
     return " ".join(parts)
 
 
+def _sfx_arg(beat: Dict[str, Any]) -> str:
+    """`<effect> | kind=<accent|bed> | level=<subtle|normal> | seconds=<n>` for
+    a `[sfx: ]` directive: a real sound of the scene the take planner placed
+    (visual_windows `sounds`), which BuzzEdit puts under the voice."""
+    effect = _clean_arg(beat.get("effect")).replace("|", "/").replace("[", "(")
+    try:
+        seconds = float(beat.get("seconds") or 3.0)
+    except (TypeError, ValueError):
+        seconds = 3.0
+    return (f"{effect} | kind={_clean_arg(beat.get('sfx_kind') or 'accent')} | "
+            f"level={_clean_arg(beat.get('level') or 'normal')} | seconds={seconds:g}")
+
+
+def _face_option(beat: Dict[str, Any]) -> str:
+    from integrations.effect_catalog import face_option
+    return face_option(beat)
+
+
 # plan `kind` -> a formatter producing the `[kind: arg]` string (source plan's
 # "Interchange schema" mapping table). `chapter`/`heading` are handled
 # separately below since they are a block insert, not a bracket directive.
 _DIRECTIVE_KIND = {
     "broll_image": lambda b: f"[broll: {_clean_arg(b.get('image_prompt'))}]",
-    "broll_video": lambda b: f"[video: {_clean_arg(b.get('video_prompt'))}]",
+    "broll_video": lambda b: f"[video: {_clean_arg(b.get('video_prompt'))}{_face_option(b)}]",
     "map": lambda b: f"[map: {_clean_arg(b.get('place'))}]",
     "chart": lambda b: f"[chart: {_chart_arg(b)}]",
     "newspaper": lambda b: f"[newspaper: {_newspaper_arg(b)}]",
@@ -159,12 +179,24 @@ _DIRECTIVE_KIND = {
     "fx": lambda b: f"[fx: {_fx_arg(b)}]",
     "atmos": lambda b: f"[atmos: {_fx_arg(b)}]",
     "grade": lambda b: f"[grade: {_grade_arg(b)}]",
+    # Background music from this point on (BuzzEdit's music_gen.parse_music_cue grammar).
+    "music_cue": lambda b: "[music: " + _clean_arg(
+        str(b.get("music") or b.get("text") or b.get("arg") or "off").replace("[", "(")) + "]",
+    # A real sound of the scene at this line, under the voice (visual_windows `sounds`).
+    "sfx_cue": lambda b: f"[sfx: {_sfx_arg(b)}]",
 }
 
 
 def _directive_for(beat: Dict[str, Any]) -> Optional[str]:
-    """The exact text to splice in for one beat, or None for an unknown kind."""
-    kind = str(beat.get("kind") or "").strip().lower()
+    """The exact text to splice in for one beat, or None for an unknown kind
+    (or a catalog kind whose fields could not be repaired into something
+    BuzzEdit can draw)."""
+    from integrations import effect_catalog
+
+    kind = effect_catalog.resolve_kind(beat.get("kind"))
+    if kind in effect_catalog.BY_KIND:
+        directive = effect_catalog.directive_for({**beat, "kind": kind})
+        return directive + " " if directive else None
     if kind in _HEADING_KINDS:
         heading = _clean_arg(beat.get("text") or beat.get("arg") or beat.get("anchor") or "")
         return f"\n\n# {heading}\n\n"

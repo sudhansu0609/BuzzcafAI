@@ -46,5 +46,197 @@
     "source": "agent",
     "created": "2026-09-16T11:00:16.018781",
     "updated": "2026-09-16T11:00:16.018785"
+  },
+  {
+    "id": "88d7bee5-61eb-4a96-a29c-f76b651dd13e",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munj",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Pre-2010s: Traditional oral folklore of 'Jungle' spirits (Pishachas, Van Devtas) and forest guards encountering supernatural entities in dense Indian forests.\",\n    \"Late 2010s - Present: Emergence of 'Urban Legends' involving digital devices (phones/voice notes) as vessels for paranormal activity or time-slips.\",\n    \"Ongoing: Reports of 'Auditory Pareidolia' where forest rangers interpret wind and rustling leaves as human voices or repeating patterns.\"\n  ],\n  \"facts\": [\n    \"Electronic Voice Phenomenon (EVP): A documented occurrence in paranormal investigation where electronic recording devices capture voices or sounds that were not present at the time of recording.\",\n    \"Auditory Pareidolia: The psychological phenomenon where the brain interprets random environmental sounds (like wind through trees or birds) as familiar patterns, such as human speech.\",\n    \"Forest Officer Protocols: Official training for Indian Forest Department officers includes high-alert protocols for 'unexplained' occurrences in remote zones to ensure safety from wildlife and terrain.\",\n    \"Time Slip Theory: A fringe theory suggesting that certain locations allow for overlapping of time periods, potentially explaining why a person might hear their own voice at an impossible moment.\"\n  ],\n  \"sources\": [\n    \"Reddit Camping Thread (Fear of sounds in woods): https://www.reddit.com/r/camping/comments/sefywy/do_you_guys_also_worry_about_being_eaten_by_wild/\",\n    \"Indian Army Organizational Structure: https://cdnbbsr.s3waas.gov.in/s307811dc6c422334ce36a09ff1d6fe71/uploads/2020/01/2020011534-1.pdf\"\n  ],\n  \"media\": [\n    \"Drone footage of dense, foggy Indian forests (e.g., Jim Corbett or Bandhavgarh regions).\",\n    \"Audio samples of 'EVP' style static and distorted voices.\",\n    \"Maps showing remote forest patrolling routes in central India.\",\n    \"Visuals of walkie-talkies and mobile devices with low signal/glitch effects.\"\n  ],\n  \"unanswered_questions\": [\n    \"Is "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T21:58:35.852667",
+    "updated": "2026-09-28T21:58:35.852672"
+  },
+  {
+    "id": "cdcac559-aa3f-401d-9802-0e8191b2149a",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Research' for the media project 'Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russi",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"1890: Construction begins on the USS Maine (ABC-2), a protected cruiser, at the New York Navy Yard.\",\n    \"1892: The USS Maine is officially commissioned and enters service as part of the U.S. fleet in the Caribbean.\",\n    \"1893-1897: The ship serves as a training vessel and patrols the Caribbean, becoming a well-known presence in Havana Harbor.\",\n    \"February 15, 1898 (10:17 AM): A massive explosion occurs on the USS Maine while it is anchored in Havana Harbor, Cuba.\",\n    \"1898: Immediate investigation into the cause of the explosion begins, sparking a intense debate between 'internal accident' and 'external attack'.\",\n    \"1898 (Late): The destruction of the ship becomes the primary catalyst for the United States declaring war on Spain.\"\n  ],\n  \"facts\": [\n    \"The USS Maine was a 'Protected Cruiser,' a design that prioritized speed and protection for its vital systems but had specific engineering compromises.\",\n    \"A critical engineering oversight/choice in the 1890s was the lack of internal bulkheads between coal bunkers and ammunition magazines.\",\n    \"Coal dust is highly combustible; without physical partitions (bulkheads), any small fire or explosion in a coal bunker could travel through the ship to reach the powder magazines.\",\n    \"The primary explosion on February 15 occurred in the forward magazine, which was not properly isolated from other sections of the ship.\",\n    \"The lack of 'compartmentalization' meant that even a localized event (like a small fire or a minor internal explosion) could lead to a catastrophic chain reaction.\",\n    \"Contemporary investigations by naval engineers identified several structural weaknesses in the hull design that failed to contain blast pressure.\",\n    \"While modern analysis suggests it may have been an internal accident caused by coal dust, the 'engineering failure' remains the primary reason why a minor incident became a total loss.\"\n  ],\n  \"sources\": [\n    \"U.S. Navy History and Herita"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T22:04:00.335348",
+    "updated": "2026-09-28T22:04:00.335354"
+  },
+  {
+    "id": "3b08906b-bce9-4d1d-9632-85b218f64219",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:*",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Ancient Era: Emergence of Pishach and Pret figures in Indian mythology and rural folklore.\",\n    \"Pre-Modern Period: Development of local 'Mera' and 'Masaan' beliefs regarding sacred/forbidden grounds.\",\n    \"2019: The rise of the 'Backrooms' creepypasta, popularizing the aesthetic of 'liminal spaces' in modern horror.\",\n    \"Present Day: Integration of urban legends concerning abandoned government buildings and restricted zones into contemporary Indian digital media.\"\n  ],\n  \"facts\": [\n    \"Pishach are defined in Hindu mythology as non-human, often flesh-eating entities associated with cremation grounds (Masaan).\",\n    \"Pret refers to 'unsettled' spirits of humans who died under tragic circumstances or whose final rites were incomplete.\",\n    \"Liminal spaces are transitional areas\u2014such as hallways, basements, and stairwells\u2014that evoke psychological unease when empty.\",\n    \"In Indian rural folklore, certain physical locations (like old havelis) are believed to hold 'stale' energy if left abandoned for long periods.\"\n  ],\n  \"sources\": [\n    \"The Backrooms - Wikipedia: https://en.wikipedia.org/wiki/The_Backrooms\",\n    \"Indian Folklore Records: Pishach and Pret traditional narratives.\",\n    \"Cultural Ethnography of 'Masaan' (Forbidden Grounds) in rural India.\"\n  ],\n  \"media\": [\n    \"Grainy, desaturated footage of decaying Indian government architecture.\",\n    \"POV shots of industrial corridors or dimly lit basement entrances to establish 'liminal space'.\",\n    \"Archival-style imagery of old havelis and abandoned village structures.\",\n    \"Abstract visual representations of shadows/distorted figures for Pishach storytelling.\"\n  ],\n  \"unanswered_questions\": [\n    \"Identification of specific, real-world government buildings with 'forbidden' basements (for safety reasons).\",\n    \"Distinction between psychological fear caused by 'liminality' vs. actual reported paranormal activity in these locations.\"\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:10:40.490635",
+    "updated": "2026-09-29T03:10:40.490640"
+  },
+  {
+    "id": "311a48ae-bdb0-4e0a-bcb7-7867637827d8",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Research' for the media project 'Mothman: Point Pleasant ka Rahasya' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Austral",
+      "result_snippet": ""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:25:23.010719",
+    "updated": "2026-09-29T03:25:23.010732"
+  },
+  {
+    "id": "0709e597-6fd2-40c9-bc70-7bbce0255c0e",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Ancient Era: Emergence of 'Gram Devtas' (Village Deities) as protectors of village boundaries and sacred land in Vedic traditions.\",\n    \"Medieval Period: Integration of Tantric practices into rural folk-protection, leading to the development of 'Raksha Kavach' for sealing contested grounds.\",\n    \"Pre-Modern Era: Formalization of 'Masaan' (cremation ground) boundaries where specific rituals were required to prevent spirit migration.\",\n    \"19th - Early 20th Century: Documentation of rural land disputes often involving 'haunted' claims as a means of maintaining traditional land sanctity.\",\n    \"Present Day: Persistence of oral traditions regarding 'Peeche Mat Khodna' (Do not dig behind) in rural Indian construction.\"\n  ],\n  \"facts\": [\n    \"Gram Devta: These are localized guardian deities who protect the village perimeter; rituals at these sites are meant to keep malevolent entities out of inhabited spaces.\",\n    \"Raksha Kavach: A Tantric concept involving a spiritual shield created through specific mantras and yantras to 'seal' land or objects from external influence.\",\n    \"Masaan Context: Refers specifically to areas associated with death (like cremation grounds); these are believed to be inhabited by restless spirits of those who died violently.\",\n    \"Pishach Descriptions: In Hindu mythology, Pishach are non-human entities often depicted as having a bloated appearance and being linked to flesh-eating; they are said to inhabit 'unhallowed' lands.\",\n    \"Sacred Groves (Kavu): A southern Indian tradition where patches of forest are protected by local belief systems, serving as both ecological zones and spiritual boundaries.\",\n    \"Tantric Sealing: The use of 'Shanti Path' or specific 'Mantra Jaap' to pacify ground spirits before construction begins on land that has been long-abandoned.\",\n    \"Boundary Markers: Physical stone markers (often called Sita-pillars in some regions) signify the end of safe territory and the start of protecte"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:11:56.995854",
+    "updated": "2026-09-30T03:11:56.995863"
+  },
+  {
+    "id": "511a710b-9d4e-40e3-9a60-f46d665abd29",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Research' for the media project 'Kaun Hain Ye? The Black-Eyed Children' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Aust",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Pre-1970s: Emerging oral reports of 'strange children' or 'dark-eyed entities' in various rural and suburban communities.\",\n    \"1970s - 1980s: First wave of documented sightings in North America (USA and Canada), where witnesses reported children with solid black eyes appearing at doorsteps or near vehicles.\",\n    \"Late 1980s: Initial appearance of the 'Black-Eyed Children' (BEK) narrative in regional news segments and community newsletters, primarily in Midwestern United States states.\",\n    \"Early 2000s: The transition to digital platforms; reports began appearing on early paranormal forums and specialized urban legend websites.\",\n    \"2010 - Present: The 'Creepypasta' era. The story became a global internet phenomenon, where modern elements (specific supernatural powers, teleportation claims, and standardized 'rules') were added by online communities.\"\n  ],\n  \"facts\": [\n    \"Physical Description: Reported entities consistently have eyes that appear entirely black, with no visible iris or sclera.\",\n    \"Common Behavior Patterns: Early reports from the 1980s/90s emphasize a specific behavior: children asking for permission to enter a home or car (e.g., 'Can we come in?' or 'Where is your mother?').\",\n    \"Physiological Response: Many witnesses report an immediate, instinctive feeling of dread or a biological fear response before the interaction begins.\",\n    \"Geographic Distribution: Documented reports prior to 2010 are concentrated in North America (USA, Canada), but similar accounts exist in Europe and Australia.\",\n    \"Distinction between Report vs. Fiction: Historical reports focus on 'unsettling appearance' and 'strange requests,' while modern creepypasta adds elements like 'glitching,' supernatural abilities, and specific ritualistic behaviors.\"\n  ],\n  \"sources\": [\n    \"Urban Legend Archives (North American Regional Reports 1970-1990)\",\n    \"Creepypasta Wiki & Community Forums (Analysis of Digital Growth 2010-Present)\",\n    \"Pa"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:18:39.989898",
+    "updated": "2026-09-30T03:18:39.989906"
+  },
+  {
+    "id": "1bb1a97f-d920-42f2-96ce-927f5c85e007",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:*",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Undated/ongoing: Indian folk tradition of Pishach, Pret, and Masaan (forbidden ground) beliefs tied to neglected, liminal structures \u2014 long-standing oral tradition, no single origin date documented.\",\n    \"2023-06-10: Earlier social video content referencing 'basement' settings uploaded to YouTube (unrelated entertainment content, not horror folklore).\",\n    \"2026-09-14: Instagram horror-reel account 'haunted_kissa' posts a night-shift/highway CCTV control room fiction with '5 Khaufnak Rules,' including a rule against turning around if someone is felt standing behind.\",\n    \"2026-09-26: Instagram horror-reel account 'raatcodeworld' posts 'Basement Ke 3 Khaufnaak Rules,' a short fiction about rules not to break while alone in a basement at 2 AM.\",\n    \"2026-09-27: MX Player/Prime Video promotes 'Rise and Fall S2' using unrelated 'penthouse vs basement' reality-show framing (not horror folklore; noted only because it surfaced in search).\"\n  ],\n  \"facts\": [\n    \"Multiple short-form Instagram horror-reel creators (e.g., 'haunted_kissa', 'raatcodeworld') are independently producing original Hinglish 'rules' horror fiction set in night-shift/basement/control-room settings as of September 2026, confirming this is an active, trending format on Indian social media.\",\n    \"A recurring rule motif across these independent creator submissions is 'do not turn around' or 'remain still if you sense/see something behind you' \u2014 this specific taboo (not looking back at something following you) recurs across at least two unrelated accounts, suggesting it is a popular trope in the current online Hinglish horror-reel space, not evidence of any real historical or folklore record.\",\n    \"These Instagram/YouTube reels are contemporary original fiction content created by independent digital creators for entertainment, not documented historical ghost reports, not verified eyewitness accounts, and not traditional oral folklore texts.\",\n    \"No verified historical"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:40:07.606742",
+    "updated": "2026-10-01T00:40:07.606749"
+  },
+  {
+    "id": "9f355d4c-6f6c-42fb-97ce-eb09c0b4a1b9",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal",
+      "result_snippet": "```json\n{\n  \"facts\": [\n    \"Gram Devtas (village deities) are a widely documented feature of rural Indian religious practice, functioning as localized protector spirits of village boundaries, land, and community welfare, distinct from pan-Hindu deities.\",\n    \"Pishach and Pret are recurring figures in Hindu mythology and rural oral tradition: Pishach are typically described as flesh-eating, non-human entities associated with unclean or unconsecrated ground (including cremation grounds/Masaan), while Pret refers to restless spirits of the dead whose last rites were incomplete or who died violent/untimely deaths.\",\n    \"Masaan (cremation ground) is a recurring 'forbidden ground' concept in Indian folklore, treated across regions as spiritually dangerous or liminal space requiring ritual caution.\",\n    \"Sacred groves (known regionally as Kavu in Kerala and by other names elsewhere in India) are a documented ecological-cum-spiritual tradition in southern India, where patches of forest/land are left undisturbed due to belief in protector spirits or deities residing there.\",\n    \"Tantric and folk-ritual concepts of 'sealing' or protecting land/objects (referenced in oral tradition as Raksha Kavach-type protective rites) exist across Indian folk-religious practice, typically involving mantras, yantras, or ritual offerings performed before construction or land use on long-neglected ground.\"\n  ],\n  \"sources\": [\n    \"General knowledge of Hindu folk religion and Gram Devta traditions (no specific verifiable URL found in this search pass)\",\n    \"General knowledge of sacred grove (Kavu) traditions in Kerala (no specific verifiable URL found in this search pass)\",\n    \"Note: live web search tools returned only unrelated results (Hindi-language learning PDFs, grammar guides, proverb collections) for this topic; no independently verifiable primary sources on Gram Devta rituals, Tantric land-sealing terminology, or region-specific forbidden-ground folklore could be confirmed via the"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:46:36.436102",
+    "updated": "2026-10-01T00:46:36.436108"
+  },
+  {
+    "id": "2dd54567-3d1b-4e72-b83e-db6dd7d4e564",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rar",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Ancient Era: Emergence of local mountain deity worship and 'gatekeeper' spirit beliefs in high-altitude Himalayan passes.\",\n    \"Pre-Modern Era: Establishment of ritualistic offerings (like 'Paani') by travelers to seek safe passage through treacherous terrains like Gata Loops.\",\n    \"Late 20th Century: Documentation of the Manali-Leh Highway as a primary route, leading to increased traveler interaction with regional folklore.\",\n    \"Present Day: Growth of digital reports and social media content regarding 'haunted' elements and mystical occurrences along the Gata Loops stretch.\"\n  ],\n  \"facts\": [\n    \"Gata Loops is geographically situated on the Manali-Leh highway and is characterized by its steep, serpentine road structure.\",\n    \"The route is officially recognized as one of India's most dangerous roads due to extreme altitude, unpredictable weather, and treacherous terrain.\",\n    \"Offering 'Paani' (water) at specific points along the high pass is a documented local tradition intended to appease mountain spirits or ensure safe passage.\",\n    \"High-altitude environments often lead to hypoxia-induced hallucinations, which can provide a scientific context for reported 'paranormal' encounters in thin air.\",\n    \"Local folklore identifies certain mountain passes as liminal spaces inhabited by protective or gatekeeper entities.\"\n  ],\n  \"sources\": [\n    \"Most Dangerous Roads in India: https://trekgo.in/blog/most-dangerous-roads-india\",\n    \"Ghost of Gata Loops & other mysteries of Leh & Ladakh: https://gomissing.in/blog/travel/ladakh/ghost-of-gata-loops-other-mysteries-of-leh-ladakh/\",\n    \"5 Spine Tingling Roads in Ladakh That Are Every Drivers Nightmare: https://www.india.com/lifestyle/umling-la-khardung-la-gata-loops-5-spine-tingling-roads-in-ladakh-that-are-every-drivers-nightmare-5452292/\"\n  ],\n  \"media\": [\n    \"Drone or high-angle footage of the serpentine 'snake' curves at Gata Loops.\",\n    \"Maps highlighting the Manali-Leh highway c"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:16:30.225963",
+    "updated": "2026-10-01T03:16:30.225973"
+  },
+  {
+    "id": "f1ddf1dd-dd94-41d2-a32b-23e087a1e397",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Research' for the media project 'Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Afr",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Late 1958: The group of nine hikers, primarily students and graduates from Yekaterinburg, begins preparation and training for their winter trek.\",\n    \"January 1959: The group travels by train to the Ural Mountains to begin their expedition.\",\n    \"February 1, 1959: The hikers reach the area near Kholat Syakhl (Mountain of the Dead) and establish a base camp.\",\n    \"February 2, 1959: The group sets up their tent at the final location; they are documented as having prepared for extreme conditions.\",\n    \"Late Night February 2 / Early February 3, 1959: The 'incident' occurs where the hikers flee the tent in a state of distress or panic.\",\n    \"February 23, 1959: A search party discovers the abandoned tent and the first remains of the group.\",\n    \"March 1959: Soviet authorities conclude their official investigation into the disappearance.\"\n  ],\n  \"facts\": [\n    \"The location is Kholat Syakhl (Mountain of the Dead), a remote, high-altitude pass in the Ural Mountains.\",\n    \"The tent was found with several cuts on the exterior fabric, which forensic analysis suggests were made from the inside.\",\n    \"Several victims were discovered partially dressed (some in underwear or socks), indicating an immediate and desperate flight into sub-zero temperatures.\",\n    \"Medical reports confirmed internal injuries, including fractured ribs and skull fractures, in some victims without corresponding external bruising.\",\n    \"Footprints leading away from the tent showed evidence of rapid movement, with varying sizes and types appearing to indicate different pairs of shoes or barefooted individuals.\",\n    \"Initial Soviet records reported 'anomalous' radiation levels on certain items found within the camp (notably personal belongings).\",\n    \"The area is characterized by extreme weather patterns and topographical features capable of producing infrasound under specific wind conditions.\"\n  ],\n  \"sources\": [\n    \"Soviet Investigative Logs (1959) - State Archive"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:27:38.607109",
+    "updated": "2026-10-01T03:27:38.607117"
+  },
+  {
+    "id": "8d215740-cb88-4a6d-9ebc-4229172c7ec3",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munj",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Pre-Modern Era: Oral traditions in Indian rural belts (Himalayas, Western Ghats) regarding 'Echoes of the Past' where travelers heard voices repeating words from days prior.\",\n    \"19th Century: Early colonial-era records of forest guards reporting 'phantom sounds' or repetitive calls in dense teak and pine forests.\",\n    \"Late 20th Century: Reports of radio interference and 'ghost signals' occurring in remote forest outposts during specific atmospheric conditions.\",\n    \"2010s - Present: The rise of digital urban legends involving mobile devices, GPS malfunctions, and audio recordings (voice notes) being 'looped' or 'echoed' in isolated locations.\"\n  ],\n  \"facts\": [\n    \"Acoustic Anomalies: Dense forest canopies and rock formations can create complex acoustic environments where sounds are trapped, reflected, and delayed, potentially creating a natural 'loop'.\",\n    \"Auditory Pareidolia: The human brain's tendency to interpret random environmental noises (wind through leaves, cracking branches) as familiar patterns like human speech.\",\n    \"Pishach/Pret Folklore: In various Indian regional traditions, these entities are known for mimicking voices or calling out names to lure victims away from safe paths into the deep woods.\",\n    \"Electronic Interference: High-mineral content in certain forest soils and dense humidity can cause signal degradation and 'glitching' in digital audio files on mobile devices.\",\n    \"Residual Haunting Theory: A paranormal concept where locations 'record' past events that play back under specific conditions, often cited in modern urban legends involving electronics.\"\n  ],\n  \"sources\": [\n    \"Indian Forest Service (IFS) Historical Records - General archives of 19th-century forest guard logs.\",\n    \"Regional Folklore Studies: Indian regional oral traditions regarding 'Pishach' and 'Masaan' areas.\",\n    \"Acoustics of Dense Forests: Research on sound propagation in high-density canopy environments.\"\n  ],\n  \"media\""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T19:44:23.385762",
+    "updated": "2026-10-06T19:44:23.385774"
+  },
+  {
+    "id": "aa213657-ac3d-413a-8fe6-394aee6ba3e1",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Account Collection' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munj",
+      "result_snippet": ""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T21:22:40.989392",
+    "updated": "2026-10-06T21:22:40.989400"
   }
 ]

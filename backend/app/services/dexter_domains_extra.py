@@ -29,6 +29,29 @@ def _h_produce_plan(p: Dict[str, Any]) -> Any:
     return produce_plan(ProducePlanSchema(**p))
 
 
+# ─────────────────────────── buzzanimate (E5) ────────────────────────────
+
+
+def _h_buzzanimate_status(p: Dict[str, Any]) -> Any:
+    from app.api.buzzanimate_api import buzzanimate_status
+    return buzzanimate_status(start=bool(p.get("start", False)))
+
+
+def _h_buzzanimate_call(p: Dict[str, Any]) -> Any:
+    from app.api.buzzanimate_api import buzzanimate_call, BuzzAnimateCallSchema
+    return buzzanimate_call(BuzzAnimateCallSchema(**p))
+
+
+def _h_animate_start(p: Dict[str, Any]) -> Any:
+    from app.api.buzzanimate_api import animate_project, AnimateSchema
+    return animate_project(p["project_id"], AnimateSchema(**{k: v for k, v in p.items() if k != "project_id"}))
+
+
+def _h_animate_status(p: Dict[str, Any]) -> Any:
+    from app.api.buzzanimate_api import animate_status
+    return animate_status(p["project_id"])
+
+
 # ────────────────────────────── catalog ──────────────────────────────
 
 
@@ -221,6 +244,16 @@ def register_all(reg: List[Dict[str, Any]]) -> None:
          "kind": "read", "params": {"project_id": "str"}, "summary": "Production status.", "handler": _h_produce_status},
         {"name": "produce_plan", "domain": "produce", "method": "POST", "path": "/api/produce/plan",
          "kind": "read", "params": {"brand": "str", "script_text": "str?", "transcript": "str?"}, "summary": "Plan a video's visuals.", "handler": _h_produce_plan},
+        # buzzanimate (BuzzAnimate docs/ECOSYSTEM_BRIDGE_PLAN.md step E5)
+        {"name": "buzzanimate_status", "domain": "produce", "method": "GET", "path": "/api/buzzanimate/status",
+         "kind": "read", "params": {"start": "bool?"}, "summary": "Is BuzzAnimate running, and what has it open.", "handler": _h_buzzanimate_status},
+        {"name": "buzzanimate_call", "domain": "produce", "method": "POST", "path": "/api/buzzanimate/call",
+         "kind": "write", "params": {"tool": "str", "args": "dict?", "start": "bool?"}, "summary": "Run one BuzzAnimate tool call.", "handler": _h_buzzanimate_call},
+        {"name": "animate_start", "domain": "produce", "method": "POST", "path": "/api/projects/{id}/animate",
+         "kind": "write", "params": {"project_id": "str", "casting_path": "str?", "scenes": "list?", "render": "bool?", "to_buzzedit": "bool?", "start": "bool?"},
+         "summary": "Build a project's script into a BuzzAnimate episode.", "handler": _h_animate_start},
+        {"name": "animate_status", "domain": "produce", "method": "GET", "path": "/api/projects/{id}/animate/status",
+         "kind": "read", "params": {"project_id": "str"}, "summary": "Animation status.", "handler": _h_animate_status},
         # catalog
         {"name": "brands", "domain": "catalog", "method": "GET", "path": "/api/brands",
          "kind": "read", "params": {}, "summary": "List brands/channels.", "handler": _h_brands},

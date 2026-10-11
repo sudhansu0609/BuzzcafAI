@@ -1,0 +1,89 @@
+{
+  "started_at": "2026-10-01T03:00:21",
+  "scope": "all",
+  "tasks": [
+    {
+      "task": "shorts_daily",
+      "seconds": 519,
+      "built": [
+        {
+          "channel": "Life3Baje",
+          "format": "poem",
+          "project_id": "2026-10-01_Life3Baje_ShortDheereDheereBadhtiTamanna",
+          "title": "Dheere Dheere Badhti Tamanna ⏳",
+          "score": 75
+        },
+        {
+          "channel": "Life3Baje",
+          "format": "poem",
+          "project_id": "2026-10-01_Life3Baje_ShortAsliBrandVsFakeMarketing",
+          "title": "Asli Brand vs Fake Marketing 🎭",
+          "score": 72
+        },
+        {
+          "channel": "Raat3Baje",
+          "format": "ghost_story",
+          "project_id": "2026-10-01_Raat3Baje_ShortGuligaAggressiveSpirit",
+          "title": "Guliga: Ek Khatarnak Shaitaan 🔥",
+          "score": 85
+        },
+        {
+          "channel": "Raat3Baje",
+          "format": "ghost_story",
+          "project_id": "2026-10-01_Raat3Baje_ShortShraapWalaGaonTimeStop",
+          "title": "Shraap Wala Gaon: Jahan Waqt Ruk Gaya ⏳",
+          "score": 75
+        },
+        {
+          "channel": "Beyond3Baje",
+          "format": "urban_legend",
+          "project_id": "2026-10-01_Beyond3Baje_ShortWestVirginiaMothmanMystery",
+          "title": "West Virginia ka Khauf: The Mothman 👁️",
+          "score": 78
+        },
+        {
+          "channel": "Beyond3Baje",
+          "format": "urban_legend",
+          "project_id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
+          "title": "Urban Legends: Sach ya Sirf Kahani? 🎭",
+          "score": 65
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "task": "longform",
+      "seconds": 9384,
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
+          "title": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
+          "title": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
+          "current_step": "Visual Plan"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
+          "title": "When does a YouTube channel become an 'Actual Business'?",
+          "current_step": "Visual Plan"
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "network": true,
+  "lm_studio": true,
+  "finished_at": "2026-10-01T05:46:04",
+  "hibernate": {
+    "hibernate": true,
+    "reasons": [],
+    "idle_minutes": 251.6,
+    "gpu_percent": 0.2
+  }
+}

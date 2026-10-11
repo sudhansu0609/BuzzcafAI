@@ -1,0 +1,95 @@
+```json
+{
+  "status": "success",
+  "agent": "SEOManagerAgent",
+  "results": {
+    "seo_package": {
+      "keyword_analysis": [
+        {
+          "keyword": "jungle horror story hindi",
+          "type": "primary",
+          "intent": "entertainment",
+          "est_volume": "high",
+          "difficulty": "medium"
+        },
+        {
+          "keyword": "haunted forest mystery",
+          "type": "secondary",
+          "intent": "entertainment",
+          "est_volume": "medium",
+          "difficulty": "low"
+        },
+        {
+          "keyword": "voice note mystery hindi",
+          "type": "secondary",
+          "intent": "entertainment",
+          "est_volume": "medium",
+          "difficulty": "low"
+        },
+        {
+          "keyword": "forest officer ghost story",
+          "type": "secondary",
+          "intent": "entertainment",
+          "est_volume": "medium",
+          "difficulty": "low"
+        },
+        {
+          "keyword": "time loop horror hindi",
+          "type": "long-tail",
+          "intent": "entertainment",
+          "est_volume": "low",
+          "difficulty": "low"
+        },
+        {
+          "keyword": "horror stories 2026 hindi",
+          "type": "broad",
+          "intent": "entertainment",
+          "est_volume": "high",
+          "difficulty": "medium"
+        }
+      ],
+      "titles": [
+        "Jungle Mein Meri Hi Awaaz? | The Voice Note Mystery",
+        "Peeche Mat Dekhna: Ek Forest Officer Ki Kahani",
+        "Voice Note Jo Maut Ban Gaya | Haunted Jungle Story",
+        "Kyun Usne Apni Hi Awaaz Suni? (The Forbidden Forest)",
+        "Wo Logbook Aur Mera Naam... (Jungle Mystery)"
+      ],
+      "description": "Raat ke sannate mein, ek forest officer ko jungle ke beech apni hi awaaz sunai deti hai... par wo recording usne kabhi ki hi nahi thi. Kya ye koi technical glitch tha, ya phir kisi aisi cheez ne uski pehchaan chura li jo sadiyon se is jungal mein qaid thi?\n\nExplore the chilling tale of 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya'. Is video mein hum dekhenge ek aise officer ki kahani jisne ek ajeeb logbook aur 2016 ke saal ko dekha, jabki wo khud aaj ki date mein tha. Kya jungle ne waqt ko rok diya tha?\n\nKaise ek simple duty ek horror nightmare mein badal gayi? Jaanne ke liye end tak dekhen.\n\n#Raat3Baje #JungleHorror #HindiHorrorStory #Mystery #UrbanLegends #HauntedForest #VoiceNoteMystery",
+      "tags": [
+        "jungle horror story hindi",
+        "haunted forest mystery",
+        "voice note mystery hindi",
+        "forest officer ghost story",
+        "hindi horror stories 2026",
+        "paranormal investigation india",
+        "horror storytelling",
+        "mystery stories hindi",
+        "raat3baje",
+        "sudhansu",
+        "time loop mystery",
+        "scary jungle videos",
+        "indian folklore horror",
+        "urban legends hindi"
+      ],
+      "hashtags": [
+        "#Raat3Baje",
+        "#JungleHorror",
+        "#HindiHorrorStory",
+        "#Mystery",
+        "#UrbanLegends",
+        "#HauntedForest",
+        "#VoiceNoteMystery",
+        "#GhostStories"
+      ],
+      "primary_keyword": "jungle horror story hindi",
+      "secondary_keywords": [
+        "haunted forest mystery",
+        "voice note mystery hindi",
+        "forest officer ghost story",
+        "time loop horror hindi"
+      ]
+    }
+  }
+}
+```

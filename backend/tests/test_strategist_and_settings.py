@@ -77,7 +77,11 @@ def test_health_endpoint_returns_model_status():
     assert "connected" in data["model_status"]
     assert "loaded" in data["model_status"]
 
-def test_settings_reset_endpoint():
+def test_settings_reset_endpoint(tmp_path, monkeypatch):
+    # Reset writes the config file: point it at a scratch file, or this
+    # test wipes the real backend/config/config.json (keys, tiers, models).
+    import integrations.llm as llm_module
+    monkeypatch.setattr(llm_module, "CONFIG_PATH", str(tmp_path / "config.json"))
     client = TestClient(app)
     response = client.post("/api/settings/reset")
     assert response.status_code == 200
@@ -86,3 +90,27 @@ def test_settings_reset_endpoint():
     assert "config" in data
     assert "selected_provider" in data["config"]
     assert data["config"]["selected_provider"] == "lm_studio"
+
+
+def test_an_exact_lm_studio_id_beats_a_fuzzy_prefix_match():
+    from integrations.llm import exact_model_id
+
+    ids = ["gemma4-12b-qat-uncensored-hauhaucs-balanced", "google/gemma-4-12b"]
+    # Normalised, "gemma412b" is a prefix of the uncensored model -- fuzzy
+    # matching alone would call that one "google/gemma-4-12b".
+    assert models_match("google/gemma-4-12b", ids[0])
+    assert exact_model_id("Google/Gemma-4-12B", ids) == "google/gemma-4-12b"
+    assert exact_model_id("HauhauCS/Gemma4-12B-QAT-Uncensored-GGUF", ids) is None
+
+
+def test_resolver_keeps_a_real_id_that_is_not_loaded(monkeypatch):
+    from types import SimpleNamespace
+
+    from integrations import llm
+
+    data = {"data": [{"id": "gemma4-12b-qat-uncensored-hauhaucs-balanced", "state": "loaded"},
+                     {"id": "google/gemma-4-12b", "state": "not-loaded"}]}
+    monkeypatch.setattr(llm.requests, "get", lambda url, timeout: SimpleNamespace(status_code=200, json=lambda: data))
+    svc = llm.LLMService()
+    assert svc._resolve_lm_studio_model("google/gemma-4-12b") == "google/gemma-4-12b"
+    assert svc._is_lm_studio_model_loaded("google/gemma-4-12b") is False

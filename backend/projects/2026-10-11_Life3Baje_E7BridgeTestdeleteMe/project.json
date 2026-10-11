@@ -1,0 +1,34 @@
+{
+    "id": "2026-10-11_Life3Baje_E7BridgeTestdeleteMe",
+    "name": "E7 bridge test (delete me)",
+    "brand": "Life3Baje",
+    "workflow_name": "after_dark_narration",
+    "status": "active",
+    "current_step": "Research",
+    "created_at": "2026-10-11T10:56:30.830993",
+    "updated_at": "2026-10-11T10:57:05.795166",
+    "metadata": {
+        "animation_output": {
+            "out_dir": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\animation",
+            "script": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\script/draft.md",
+            "files": [
+                "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\animation\\draft.buzz",
+                "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\animation\\report.md"
+            ],
+            "videos": [
+                "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\animation\\previews\\scene01_the_lane.mp4",
+                "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzcafStudio\\backend\\projects\\2026-10-11_Life3Baje_E7BridgeTestdeleteMe\\animation\\previews\\scene02_the_shop.mp4"
+            ],
+            "warnings": [],
+            "episode_job": 1,
+            "buzzedit": {
+                "buzzedit_project_id": "6eba7486",
+                "videos": 2
+            }
+        }
+    },
+    "steps_history": [],
+    "assets": {
+        "script": "script/draft.md"
+    }
+}

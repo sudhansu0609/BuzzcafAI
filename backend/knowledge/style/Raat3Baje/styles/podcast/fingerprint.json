@@ -1,0 +1,50 @@
+{
+ "words": 9432,
+ "english_share": 0.013,
+ "devanagari_share": 0.0,
+ "address_per_1000": 5.9,
+ "first_person_per_1000": 39.0,
+ "spoken": false,
+ "stage_share": 0.0,
+ "sentences": 773,
+ "sentence_avg": 12.2,
+ "sentence_median": 11,
+ "short_share": 0.132,
+ "long_share": 0.094,
+ "paragraph_sentences": 12.7,
+ "ellipsis_per_100": 0.0,
+ "question_per_100": 4.4,
+ "exclaim_per_100": 0.0,
+ "dialogue_per_100": 2.8,
+ "openers": [
+  "main",
+  "maine",
+  "par",
+  "woh",
+  "meri",
+  "kuch",
+  "us",
+  "yeh"
+ ],
+ "source": "written",
+ "phrases": [
+  "lag raha tha",
+  "aas paas",
+  "ke paas",
+  "tha main",
+  "ki aawaz",
+  "ki taraf",
+  "aisa lag raha",
+  "hua tha",
+  "paas ke",
+  "ke beech",
+  "baat ko",
+  "ki koshish",
+  "thi main",
+  "hone laga",
+  "ke baad"
+ ],
+ "openings": [
+  "Hello doston mera naam hai Sudhansu aur aap dekh rahe hain Raat teen Baje Doston aaj ki ek kahani ek anjan jangal ke us hissa par aadharit hai jinhone mitti ka sannata cha jata hai kahani phir mein ye kahani us waqt ki hai Jab"
+ ]
+}

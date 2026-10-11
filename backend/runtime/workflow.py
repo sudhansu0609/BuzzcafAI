@@ -8,6 +8,7 @@ from core.models.project import Project, StepExecution
 from core.models.workflow import WorkflowDefinition, WorkflowStep
 from core.agent import AgentFactory
 from integrations.llm import LLMService
+from integrations import effect_catalog, idle_offload
 
 import requests
 
@@ -23,6 +24,59 @@ WORDS_PER_MINUTE = 140
 # Step output types whose prompt gets a target-length directive when the
 # project has one set (Project.metadata["target_duration_minutes"]).
 SCRIPT_OUTPUT_TYPES = {"outline", "script", "story", "script_final", "narration_optimized"}
+
+# Steps that rewrite an existing script (edit / narration pass). Their output
+# must be the whole script again, so it is checked against the input's length.
+SCRIPT_REWRITE_TYPES = {"script_final", "narration_optimized"}
+
+# Steps that write words the creator will say: they get his own writing style
+# (app/services/writing_style.py) and are checked against it.
+STYLE_OUTPUT_TYPES = SCRIPT_OUTPUT_TYPES - {"outline"}
+
+SCRIPT_TEXT_INSTRUCTION = """
+### Output format (strict)
+Output the COMPLETE script as plain Markdown -- every scene, every spoken line,
+from the first word to the last. No JSON, no code fences, no wrapper object, no
+summary instead of the script, and no commentary before or after it.
+"""
+
+
+def _unwrap_script(text: str) -> str:
+    """Pull the script out of a JSON wrapper some personas answer with
+    (`{"results": {"script_final": "..."}}`); plain Markdown passes through."""
+    s = (text or "").strip()
+    fenced = s.startswith("```")
+    if fenced:
+        s = s.split("\n", 1)[1] if "\n" in s else ""
+        if s.rstrip().endswith("```"):
+            s = s.rstrip()[:-3]
+        s = s.strip()
+    if not s.startswith("{"):
+        return (text or "").strip() if not fenced else s
+    try:
+        data = json.loads(s, strict=False)  # models put raw newlines inside strings
+    except ValueError:
+        return s  # broken JSON: left for the length check to reject
+
+    def find(obj: Any) -> Optional[str]:
+        if isinstance(obj, dict):
+            for key in ("script_final", "narration_optimized", "narration", "script", "story", "text", "content"):
+                v = obj.get(key)
+                if isinstance(v, str) and v.strip():
+                    return v
+            for v in obj.values():
+                got = find(v)
+                if got:
+                    return got
+        return None
+
+    return (find(data) or s).strip()
+
+
+def _spoken_words(text: str) -> int:
+    """The words that are said: cue lines and speaker labels are not runtime."""
+    from app.services.writing_style import narration_words
+    return narration_words(text)
 
 
 def classify_error(exc: Exception) -> str:
@@ -59,22 +113,31 @@ RESEARCH_SECTIONS = {
     "sources": ("sources.md", "Sources"),
     "media": ("media.md", "Visual References"),
     "unanswered_questions": ("unanswered_questions.md", "Unanswered Questions"),
+    "story_material": ("story_material.md", "Story Material"),
 }
 
 RESEARCH_JSON_INSTRUCTION = """
-### Required Output Format (JSON only)
-Reply with a single JSON object and nothing else:
+### Required format of the finished dossier (JSON only, written AFTER your research)
+When your research is done, reply with a single JSON object and nothing else:
 
 {
-  "timeline": ["dated events, oldest first"],
-  "facts": ["verified factual claims, one per entry"],
-  "sources": ["title - url or archive reference"],
+  "timeline": ["dated events, oldest first -- each with its source URL"],
+  "facts": ["one verified claim per entry, labelled [Verified] / [Folklore] / [Alleged] / [Fiction], with its source URL"],
+  "sources": ["title - url (only pages you actually searched or read)"],
   "media": ["images, footage or maps worth sourcing, with where they come from"],
-  "unanswered_questions": ["what you could not establish"]
+  "unanswered_questions": ["what you could not establish"],
+  "story_material": {
+    "world": ["real texture for the setting: how the place, the job, the routine, the objects, the sounds and the smells actually are (from what you read)"],
+    "folklore": ["the entity or belief with its exact local rules: what it does, what it wants, what wards it off, which region, which name"],
+    "real_details": ["specific, unusual, checkable details a writer would never invent (a ritual, a register, a rule, a local word)"],
+    "story_seeds": ["3-5 concrete story engines drawn from the material: a situation, a character with a reason to stay, and the hidden history underneath"],
+    "twists": ["2-3 possible endings that re-read the earlier events, each tied to a real belief or detail above"]
+  }
 }
 
 Leave a key out entirely rather than filling it with placeholder text. Do not
-invent sources.
+invent sources, records, dates, villages or witnesses. For a story episode the
+"story_material" is what the writer needs most: fill it from what you read.
 """
 
 # `_call_local` (the path BaseAgent.execute() actually uses for local models,
@@ -90,9 +153,11 @@ Reply with a single JSON object and nothing else:
   "genre": "documentary",
   "beats": [
     {"anchor": "a short phrase copied verbatim from the script",
-     "kind": "broll_image|broll_video|map|chart|stat_callout|quote_card|character_card|location_card|definition_card|split|chapter|newspaper|case_file|fx|atmos|grade",
+     "kind": "<one kind from the Effect catalog below>",
      "image_prompt": "...", "video_prompt": "...", "negative_prompt": "...",
      "style_hint": "...", "aspect_ratio": "16:9", "text": "...", "subtext": "...",
+     "items": ["...", "..."], "number": 1, "caption": "...", "look": "...",
+     "source": "...", "format": "web", "site": "...", "ticks": ["...", "..."], "active": 0,
      "place": "...", "data": {"value": 40, "suffix": "%"},
      "effect": "flicker", "intensity": 0.6, "duration": 0.5, "priority": 1.0}
   ]
@@ -110,7 +175,7 @@ Use effects sparingly and only where they earn the moment.
 belongs. Include only the fields relevant to `kind`; leave the rest out rather
 than inventing values. Do not invent an anchor that does not appear in the
 script.
-"""
+""" + "\n" + effect_catalog.prompt_section() + "\n"
 
 
 def _render_section(value: Any) -> str:
@@ -123,6 +188,15 @@ def _render_section(value: Any) -> str:
                 lines.append(f"- {text.strip()}")
         return "\n".join(lines)
     if isinstance(value, dict):
+        # A dossier part made of named lists (the story material): one
+        # sub-heading per key, its items as bullets.
+        if value and all(isinstance(v, (list, str)) for v in value.values()):
+            parts = []
+            for key, v in value.items():
+                body = _render_section(v)
+                if body:
+                    parts.append(f"### {str(key).replace('_', ' ').title()}\n\n{body}")
+            return "\n\n".join(parts)
         return json.dumps(value, indent=2, ensure_ascii=False)
     return str(value or "").strip()
 
@@ -248,6 +322,7 @@ class WorkflowEngine:
                 logger.error(f"Error reading brand guide for {brand}: {e}")
         return f"Maintain high-quality storytelling matching the '{brand}' channel tone."
 
+    @idle_offload.tracked
     def execute_next(
         self,
         project_id: str,
@@ -328,6 +403,10 @@ class WorkflowEngine:
         if step_def.requires_approval and not is_allow_all:
             execution_status = "paused_for_approval"
 
+        # A re-run of a failed step (no new feedback) resumes a long script
+        # from its saved sections instead of starting over.
+        resume_long = bool(history_step and history_step.status == "failed" and not user_feedback)
+
         # Instantiate step execution details in history
         if not history_step or history_step.status == "completed":
             history_step = StepExecution(
@@ -348,6 +427,7 @@ class WorkflowEngine:
 
         # Gather inputs from dependencies
         context_data = ""
+        input_texts: Dict[str, str] = {}
         for input_asset in step_def.input_assets:
             asset_path = project.assets.get(input_asset)
             if asset_path:
@@ -355,7 +435,8 @@ class WorkflowEngine:
                 if os.path.exists(full_path):
                     try:
                         with open(full_path, "r", encoding="utf-8") as f:
-                            context_data += f"\n\n### Input Asset ({input_asset}):\n" + f.read()
+                            input_texts[input_asset] = f.read()
+                            context_data += f"\n\n### Input Asset ({input_asset}):\n" + input_texts[input_asset]
                     except Exception as e:
                         logger.error(f"Error reading asset file {full_path}: {e}")
 
@@ -372,13 +453,45 @@ You are executing the step '{step_def.name}' for the media project '{project.nam
 {context_data if context_data else "No input assets provided."}
 """
 
+        # Direction set before the run (the nightly long-form planner): the
+        # creator's own instructions for the channel, and the strategist's brief.
+        if project.metadata.get("creator_instructions"):
+            agent_instruction += (
+                "\n\n### The Creator's Instructions for this channel (follow these)\n"
+                f"{project.metadata['creator_instructions']}\n"
+            )
+        if project.metadata.get("creative_brief"):
+            agent_instruction += (
+                "\n\n### Creative Brief from the Channel Strategist\n"
+                f"{project.metadata['creative_brief']}\n"
+            )
+
+        # How the creator himself writes, learned from his own writing and
+        # recordings (app/services/writing_style.py): every script-writing step.
+        format_override = ""
+        if step_def.output_asset_type in STYLE_OUTPUT_TYPES:
+            from app.services import writing_style
+            # A sample he added since the style guide was written must be what
+            # the writer follows: rebuild the guide first when it is older.
+            refreshed = writing_style.ensure_current(project.brand, project)
+            if refreshed:
+                history_step.logs.append(refreshed)
+            style = writing_style.style_section(project.brand, project)
+            if style:
+                agent_instruction += style
+                history_step.logs.append("The creator's own writing style was added to the prompt.")
+                format_override = writing_style.format_override(project.brand, project)
+                rhythm = writing_style.rhythm_reminder(project.brand, project)
+                if rhythm:
+                    format_override += f"\n### Rhythm (the creator's own)\n{rhythm}\n"
+
         if history_step.human_feedback:
             agent_instruction += f"\n\n### IMPORTANT - User Requested Revisions:\nThe user has requested modifications. Please adjust your output based on this feedback:\n{history_step.human_feedback}\n"
 
         agent_instruction += f"""
 ### Task Description
 {step_def.description}
-
+{format_override}
 ### Expected Output
 Please output the content matching the required output format (Markdown or JSON).
 """
@@ -388,7 +501,9 @@ Please output the content matching the required output format (Markdown or JSON)
                 from app.services.web_research import web_research_service
                 web_brief = web_research_service.brief(project.name)
                 if web_brief and not web_brief.startswith("No live"):
-                    agent_instruction += f"\n\n### Verified Live Web Intelligence & Sources (On-Device Grounding):\n{web_brief}\n"
+                    agent_instruction += (
+                        "\n\n### Seed search results for the project title (a first look only -- may be off-topic; "
+                        f"your own searches decide what is true):\n{web_brief}\n")
                     history_step.logs.append("Injected verified live web research intelligence into prompt.")
             except Exception as exc:
                 logger.warning(f"Web research brief generation failed: {exc}")
@@ -421,6 +536,34 @@ Please output the content matching the required output format (Markdown or JSON)
                 )
             except Exception as exc:
                 logger.warning(f"Could not add genre effect palette to visual plan prompt: {exc}")
+            # Story channels: pictures and clips only, in story order, with the
+            # same characters throughout. This overrides the catalog above;
+            # anything else is stripped before the render either way.
+            try:
+                from integrations.buzzedit_settings import is_story_style, settings_for_brand as _sfb
+                from integrations import story_visuals
+                brand_settings = _sfb(project.brand, None, project)
+                if is_story_style(brand_settings):
+                    agent_instruction += (
+                        "\n\nIMPORTANT -- this channel overrides the Effect catalog above:\n"
+                        + story_visuals.planner_section(
+                            float(brand_settings.get("video_broll_share") or 0.0),
+                            story_visuals.load_cast_sheet(project))
+                        + "\nKeep a character's look identical in every image_prompt and "
+                        "video_prompt they appear in.\n")
+                    history_step.logs.append("Story visual style: pictures and videos only.")
+            except Exception as exc:
+                logger.warning(f"Could not add story visual rules to visual plan prompt: {exc}")
+            try:
+                from integrations.music_catalog import planner_direction
+                music_direction = planner_direction(project)
+                if music_direction:
+                    agent_instruction += f"\n\n{music_direction}\n"
+            except Exception as exc:
+                logger.warning(f"Could not add music direction to visual plan prompt: {exc}")
+
+        if step_def.output_asset_type in SCRIPT_OUTPUT_TYPES - {"outline"}:
+            agent_instruction += SCRIPT_TEXT_INSTRUCTION
 
         # Target length: fit the script/outline to the runtime the creator set.
         if step_def.output_asset_type in SCRIPT_OUTPUT_TYPES:
@@ -438,12 +581,40 @@ Please output the content matching the required output format (Markdown or JSON)
         is_json = step_def.output_asset_type in ["research", "visual_plan", "seo_package"]
 
         try:
-            agent_output = agent.execute(agent_instruction, require_json=is_json)
+            long_output = self._long_script_step(
+                project, step_def, agent, brand_guide, input_texts, history_step, resume_long,
+            )
+            if long_output is not None:
+                agent_output = long_output
+            elif step_def.output_asset_type == "research":
+                agent_output = self._research_step(project, step_def, agent, agent_instruction, history_step)
+            else:
+                agent_output = agent.execute(agent_instruction, require_json=is_json)
             if getattr(self.llm_service, "last_response_simulated", False):
                 history_step.simulated = True
                 history_step.logs.append(
                     "[WARNING] No LLM provider answered; output was generated using simulated fallback."
                 )
+                # A structured asset (visual plan, SEO package) made of canned
+                # text is worse than none: production parsed one as JSON and
+                # crashed, two videos later. Fail the step so it can be re-run
+                # with a model answering; the research loop labels its own.
+                if is_json and step_def.output_asset_type != "research":
+                    raise RuntimeError(
+                        f"No model answered for '{step_def.name}'; a simulated reply is not a usable "
+                        f"{step_def.output_asset_type}. Check the model/provider and run the step again."
+                    )
+
+            if step_def.output_asset_type == "visual_plan":
+                # The one JSON asset another program parses (produce_video).
+                from integrations.llm import clean_json_response
+                try:
+                    json.loads(clean_json_response(str(agent_output)))
+                except (TypeError, ValueError) as exc:
+                    raise RuntimeError(
+                        f"'{step_def.name}' did not return valid JSON for its {step_def.output_asset_type} "
+                        f"({exc}). Run the step again."
+                    ) from exc
 
             if not is_json:
                 agent_output, delegations = _apply_step_delegations(
@@ -475,6 +646,11 @@ Please output the content matching the required output format (Markdown or JSON)
 
                 dossier = _parse_research(agent_output)
                 written, missing = [], []
+                if dossier is None and not str(agent_output or "").strip():
+                    raise ValueError(
+                        "The researcher returned nothing; the step was not completed. Re-run it "
+                        "(check that the model is loaded and answering)."
+                    )
                 if dossier is None:
                     # Prose reply: keep it verbatim and write no section files at
                     # all, so an empty section is never mistaken for research.
@@ -518,7 +694,32 @@ Please output the content matching the required output format (Markdown or JSON)
                 fn = mapping.get(step_def.output_asset_type, "draft.md")
                 file_name = f"script/{fn}"
                 file_path = os.path.join(project.get_project_dir(), file_name)
-                
+
+                agent_output = _unwrap_script(agent_output)
+                # A rewrite pass (edit / narration) must return the whole script.
+                # A local model that runs out of context returns a stub instead;
+                # fail the step rather than hand the teleprompter nine words.
+                if step_def.output_asset_type in SCRIPT_REWRITE_TYPES:
+                    source_path = project.assets.get("script_final") if step_def.output_asset_type == "narration_optimized" else None
+                    source_path = source_path or project.assets.get("script")
+                    source_words = 0
+                    if source_path and os.path.exists(os.path.join(project.get_project_dir(), source_path)):
+                        with open(os.path.join(project.get_project_dir(), source_path), "r", encoding="utf-8") as f:
+                            source_words = _spoken_words(f.read())
+                    out_words = _spoken_words(agent_output)
+                    if source_words and out_words < source_words * 0.5:
+                        raise ValueError(
+                            f"The model returned only {out_words} words for a {source_words}-word script "
+                            f"(truncated or summarised); nothing was saved. Re-run this step, ideally on a "
+                            f"stronger or larger-context model."
+                        )
+
+                if step_def.output_asset_type in STYLE_OUTPUT_TYPES:
+                    agent_output = self._match_creator_style(
+                        project, step_def, agent, agent_output, history_step,
+                        may_revise=long_output is None)
+                    agent_output = self._fixed_greeting(project, agent_output, history_step)
+
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(agent_output)
                 
@@ -531,13 +732,13 @@ Please output the content matching the required output format (Markdown or JSON)
                 # Length feedback loop: report the actual length against target
                 # so the creator can see whether to resize and re-run this step.
                 if step_def.output_asset_type != "outline":
-                    words = len((agent_output or "").split())
+                    words = _spoken_words(agent_output)
                     est_min = round(words / WORDS_PER_MINUTE, 1) if words else 0
                     target = project.metadata.get("target_duration_minutes")
                     if target:
-                        history_step.logs.append(f"Script length: {words:,} words ~{est_min} min (target {float(target):g}).")
+                        history_step.logs.append(f"Script length: {words:,} spoken words ~{est_min} min (target {float(target):g}).")
                     else:
-                        history_step.logs.append(f"Script length: {words:,} words ~{est_min} min.")
+                        history_step.logs.append(f"Script length: {words:,} spoken words ~{est_min} min.")
             elif step_def.output_asset_type in ["scene_breakdown", "shot_list", "clip_plan", "image_plan", "assets_collected", "voice_over", "edit_plan", "review_report", "sound_plan", "thumbnail_plan", "vlog_plan", "character_plan"]:
                 prod_dir = os.path.join(project.get_project_dir(), "production")
                 os.makedirs(prod_dir, exist_ok=True)
@@ -605,7 +806,21 @@ Please output the content matching the required output format (Markdown or JSON)
                 title_path = os.path.join(pub_dir, "title.txt")
                 desc_path = os.path.join(pub_dir, "description.md")
                 tags_path = os.path.join(pub_dir, "tags.txt")
-                
+
+                # The SEO manager's own title, description and tags. These files
+                # used to get placeholders ("Title for <project>") every time.
+                from integrations.youtube_publish import parse_seo_package, description_with_hashtags
+                seo = parse_seo_package(str(agent_output))
+                if seo and seo["titles"]:
+                    with open(title_path, "w", encoding="utf-8") as f:
+                        f.write(seo["titles"][0] + "\n")
+                if seo and seo["description"]:
+                    with open(desc_path, "w", encoding="utf-8") as f:
+                        f.write(description_with_hashtags(seo["description"], seo["hashtags"]) + "\n")
+                if seo and seo["tags"]:
+                    with open(tags_path, "w", encoding="utf-8") as f:
+                        f.write(", ".join(seo["tags"]) + "\n")
+
                 if not os.path.exists(title_path):
                     with open(title_path, "w", encoding="utf-8") as f:
                         f.write(f"Title for {project.name}\n")
@@ -664,6 +879,215 @@ Please output the content matching the required output format (Markdown or JSON)
         project.save()
         return project
 
+    def _match_creator_style(self, project, step_def, agent, script: str, history_step,
+                             may_revise: bool) -> str:
+        """Score a script against the creator's measured style; below
+        `REVISE_BELOW`, ask the same agent once for a rewrite that keeps the
+        content and changes the manner, and keep whichever scores higher. A
+        long (sectioned) script is only scored here: each of its sections was
+        already rewritten toward his style as it was written (the `StyleGate`
+        in runtime/long_script.py), and 10k words in one call would be cut
+        short. Never fails the step."""
+        try:
+            from app.services import writing_style
+
+            if not writing_style.uses_my_style(project.brand, project):
+                return script                       # "agent style": not scored or rewritten
+            result = writing_style.check(script, project.brand)
+            if result is None:
+                return script
+            best, best_result = script, result
+            if may_revise and result["score"] < writing_style.REVISE_BELOW:
+                history_step.logs.append(
+                    f"Creator style match {result['score']}/100 -- rewriting once toward his style: "
+                    + " | ".join(result["fixes"][:4]))
+                revised = _unwrap_script(str(agent.execute(
+                    writing_style.revise_task(project.brand, script, result, project)) or ""))
+                again = writing_style.check(revised, project.brand) if revised else None
+                if (again is not None and again["score"] > result["score"]
+                        and _spoken_words(revised) >= 0.85 * _spoken_words(script)):
+                    best, best_result = revised, again
+                else:
+                    history_step.logs.append(
+                        "The style rewrite did not score higher (or came back short); kept the original.")
+            history_step.logs.append(
+                f"Creator style match: {best_result['score']}/100"
+                + (f" -- still off: {' | '.join(best_result['fixes'][:3])}" if best_result["fixes"] else "."))
+            matches = dict(project.metadata.get("style_match") or {})
+            matches[step_def.output_asset_type] = {
+                "score": best_result["score"], "fixes": best_result["fixes"],
+                "checked_at": datetime.now().isoformat(timespec="seconds")}
+            project.metadata["style_match"] = matches
+            return best
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"Creator style check failed: {exc}")
+            return script
+
+    def _research_step(self, project, step_def, agent, instruction: str, history_step) -> str:
+        """The research step as a tool loop (runtime/research_loop.py): the
+        researcher searches the live web, reads pages and searches again before
+        it writes the dossier. Every lookup is in the step log."""
+        from runtime import research_loop
+
+        def log(msg: str) -> None:
+            logger.info(msg)
+            history_step.logs.append(msg)
+            project.save()
+
+        result = research_loop.run(agent, instruction, log)
+        if result.get("calls"):
+            history_step.logs.append(f"Research: {len(result['calls'])} live lookup(s) in {result['turns']} turn(s).")
+        elif not result.get("simulated"):
+            history_step.logs.append("Research: the dossier was written without any live lookup.")
+        try:
+            from memory.memory import memory_system
+            memory_system.save(scope="agent", owner=step_def.agent_role, tags=["execution", "research"],
+                               content={"task_summary": f"{step_def.name} for {project.name}",
+                                        "result_snippet": str(result.get("raw") or "")[:2000]})
+        except Exception as e:
+            logger.warning(f"Could not save agent memory for the research step: {e}")
+        return str(result.get("raw") or "")
+
+    def _fixed_greeting(self, project, script: str, history_step) -> str:
+        """A full video opens with the creator's greeting, word for word -- his
+        name and the channel's, never a name borrowed from a sample. Shorts
+        (under ~3 minutes of words) have no greeting. Never fails the step."""
+        try:
+            from app.services import writing_style
+
+            if not writing_style.uses_my_style(project.brand, project) or _spoken_words(script) < 400:
+                return script
+            fixed, changed = writing_style.ensure_greeting(script, project.brand)
+            if changed:
+                history_step.logs.append(f"Greeting set to the creator's fixed line: {writing_style.greeting(project.brand)}")
+            return fixed
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"Could not check the greeting: {exc}")
+            return script
+
+    def _style_gate(self, project, kind: str):
+        """The creator's style applied section by section to a long script, or
+        None in "agent style" or when there is nothing of his to compare with."""
+        from app.services import writing_style
+        from runtime.long_script import StyleGate
+
+        if kind not in STYLE_OUTPUT_TYPES or not writing_style.uses_my_style(project.brand, project):
+            return None
+        if not writing_style.targets(writing_style.canonical_channel(project.brand)).get("words"):
+            return None
+        return StyleGate(
+            check=lambda text: writing_style.check(text, project.brand),
+            revise_task=lambda text, result: writing_style.revise_task(project.brand, text, result, project),
+            below=writing_style.REVISE_BELOW,
+            narration=writing_style.narration_format(project.brand, project),
+            reminder=writing_style.rhythm_reminder(project.brand, project))
+
+    def _long_script_step(self, project, step_def, agent, brand_guide: str, input_texts: Dict[str, str],
+                          history_step, resume: bool) -> Optional[str]:
+        """Write or rewrite a long script in sections (runtime/long_script.py) so
+        a small local model can produce 30-90+ minutes without losing quality.
+        Returns None when the step should run as a single ordinary call."""
+        from runtime import long_script
+
+        kind = step_def.output_asset_type
+        config = getattr(self.llm_service, "config", {}) or {}
+        try:
+            minutes = float(project.metadata.get("target_duration_minutes") or 0)
+        except (TypeError, ValueError):
+            minutes = 0.0
+        target = round(minutes * WORDS_PER_MINUTE)
+
+        source_key = None
+        if kind in SCRIPT_REWRITE_TYPES:
+            for key in (("script_final", "script") if kind == "narration_optimized" else ("script",)):
+                if input_texts.get(key, "").strip():
+                    source_key = key
+                    break
+            if not source_key or not long_script.should_chunk_rewrite(config, long_script.words(input_texts[source_key])):
+                return None
+            mode = "rewrite"
+        elif kind in ("script", "story") and long_script.should_section(config, target):
+            mode = "write"
+        else:
+            return None
+
+        # A compact context: the channel, the direction, the inputs (minus the
+        # script being rewritten) and the task -- no memory log, no JSON talk.
+        parts = [
+            f"You are working on the step '{step_def.name}' for the media project '{project.name}' "
+            f"(Brand: {project.brand}).",
+            f"### Brand Guidelines\n{brand_guide}",
+        ]
+        for key, text in input_texts.items():
+            if key == source_key:
+                continue
+            limit = 4000 if mode == "rewrite" else 12000
+            body = text if len(text) <= limit else text[:limit] + "\n[... trimmed ...]"
+            parts.append(f"### Input Asset ({key})\n{body}")
+        if project.metadata.get("creator_instructions"):
+            parts.append(f"### The Creator's Instructions for this channel (follow these)\n{project.metadata['creator_instructions']}")
+        if project.metadata.get("creative_brief"):
+            parts.append(f"### Creative Brief from the Channel Strategist\n{project.metadata['creative_brief']}")
+        format_override = ""
+        if kind in STYLE_OUTPUT_TYPES:
+            from app.services import writing_style
+            style = writing_style.style_section(project.brand, project)
+            if style:
+                parts.append(style.strip())
+                format_override = writing_style.format_override(project.brand, project)
+        if history_step.human_feedback:
+            parts.append(f"### IMPORTANT - User Requested Revisions\n{history_step.human_feedback}")
+        parts.append(f"### Task Description\n{step_def.description}\n{format_override}".rstrip())
+        context = "\n\n".join(parts)
+        gate = self._style_gate(project, kind)
+
+        def log(msg: str) -> None:
+            logger.info(msg)
+            history_step.logs.append(msg)
+            project.save()
+
+        if mode == "rewrite":
+            log(f"Long script: rewriting the {long_script.words(input_texts[source_key]):,}-word script in parts.")
+            return long_script.rewrite_in_chunks(agent, config, context, input_texts[source_key], log, gate)
+
+        work_dir = os.path.join(project.get_project_dir(), "script", "sections", kind)
+        writer = long_script.LongScriptWriter(agent, config, work_dir, log, gate)
+        if not resume:
+            writer.reset()
+        log(f"Long script: {minutes:g} min target (~{target:,} words) -- writing it section by section.")
+        text = writer.write(context, minutes, target)
+        try:
+            from memory.memory import memory_system
+            memory_system.save(scope="agent", owner=step_def.agent_role, tags=["execution", "long_script"],
+                               content={"task_summary": f"{step_def.name} for {project.name} ({minutes:g} min, sectioned)",
+                                        "result_snippet": text[:1500]})
+        except Exception as e:
+            logger.warning(f"Could not save agent memory for the long script: {e}")
+        return text
+
+    def restart(self, project_id: str, from_step: Optional[str] = None) -> Project:
+        """Rewind the project so `from_step` (default: the first step) and every
+        step after it run again. The title, brief, creator instructions, target
+        runtime and the earlier steps' assets are kept; the rewound steps'
+        history is dropped and their files are overwritten on the next run."""
+        project = Project.load(project_id)
+        wf = self.get_workflow(project.workflow_name)
+        if not wf or not wf.steps:
+            raise ValueError(f"Workflow '{project.workflow_name}' not found for project {project_id}")
+        names = [s.name for s in wf.steps]
+        start = from_step or names[0]
+        if start not in names:
+            raise ValueError(f"Step '{start}' is not in workflow '{wf.id}'. Steps: {', '.join(names)}")
+        rewound = set(names[names.index(start):])
+
+        project.steps_history = [h for h in project.steps_history if h.step_name not in rewound]
+        project.current_step = start
+        project.status = "active"
+        project.save()
+        logger.info(f"Project {project_id} rewound to '{start}' ({len(rewound)} step(s) will run again)")
+        return project
+
+    @idle_offload.tracked
     def execute_all(self, project_id: str, allow_all: bool = True) -> Project:
         """
         Executes all remaining workflow steps sequentially until completion or failure.

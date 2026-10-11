@@ -53,6 +53,20 @@ namespace BuzzcafStudio.Installer
             InitializeComponent();
         }
 
+        // The logo PNG is compiled into the exe (scripts/build_windows_app.py).
+        private static Image LoadLogo()
+        {
+            try
+            {
+                using (Stream st = Assembly.GetExecutingAssembly().GetManifestResourceStream("BuzzcafStudio.logo-dark.png"))
+                {
+                    if (st == null) return null;
+                    return new Bitmap(st);
+                }
+            }
+            catch { return null; }
+        }
+
         private string FindSourceDir()
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -72,7 +86,7 @@ namespace BuzzcafStudio.Installer
 
         private void InitializeComponent()
         {
-            this.Text = "Buzzcaf Studio Setup";
+            this.Text = "Buzzcaf AI Studio Setup";
             this.Size = new Size(580, 480);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -87,20 +101,34 @@ namespace BuzzcafStudio.Installer
                 try { this.Icon = new Icon(iconPath); } catch { }
             }
 
-            // Header Panel
+            // Header Panel: the brand logo (embedded in this exe), light ink on the dark header
             Panel pnlHeader = new Panel
             {
                 Dock = DockStyle.Top,
                 Height = 85,
-                BackColor = Color.FromArgb(30, 27, 75)
+                BackColor = Color.FromArgb(14, 16, 23)
             };
+
+            Image logo = LoadLogo();
+            if (logo != null)
+            {
+                PictureBox pic = new PictureBox
+                {
+                    Image = logo,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Location = new Point(22, 12),
+                    Size = new Size(194, 60),
+                    BackColor = Color.Transparent
+                };
+                pnlHeader.Controls.Add(pic);
+            }
 
             Label lblTitle = new Label
             {
-                Text = "Buzzcaf Studio Setup",
+                Text = "Setup",
                 Font = new Font("Segoe UI", 13.5f, FontStyle.Bold),
                 ForeColor = Color.White,
-                Location = new Point(24, 18),
+                Location = new Point(250, 18),
                 AutoSize = true
             };
 
@@ -108,13 +136,21 @@ namespace BuzzcafStudio.Installer
             {
                 Text = "Install Buzzcaf Media AI Studio Desktop on your computer",
                 Font = new Font("Segoe UI", 9f, FontStyle.Regular),
-                ForeColor = Color.FromArgb(167, 139, 250),
-                Location = new Point(25, 48),
+                ForeColor = Color.FromArgb(251, 146, 60),
+                Location = new Point(251, 48),
                 AutoSize = true
+            };
+
+            Panel accent = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 3,
+                BackColor = Color.FromArgb(249, 115, 22)
             };
 
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubtitle);
+            pnlHeader.Controls.Add(accent);
             this.Controls.Add(pnlHeader);
 
             // Body Panel
@@ -196,7 +232,7 @@ namespace BuzzcafStudio.Installer
 
             chkRegister = new CheckBox
             {
-                Text = "Register in Windows Installed Apps & Add to Run/Search (Win+R: buzzcaf)",
+                Text = "Register in Windows Installed Apps && Add to Run/Search (Win+R: buzzcaf)",
                 Checked = true,
                 Location = new Point(5, 161),
                 AutoSize = true
@@ -262,7 +298,7 @@ namespace BuzzcafStudio.Installer
                 Text = "Install Now",
                 Location = new Point(425, 16),
                 Size = new Size(115, 32),
-                BackColor = Color.FromArgb(124, 58, 237),
+                BackColor = Color.FromArgb(234, 88, 12),
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Segoe UI", 9.5f, FontStyle.Bold)

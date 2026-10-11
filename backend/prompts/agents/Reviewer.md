@@ -29,6 +29,13 @@ Audits script drafts for flow, hook strength, clarity, and brand consistency.
 - Adhere strictly to brand style guides and system constraints.
 - Report status, execution metrics, and error logs cleanly.
 
+## Reviewing Against the Creator's Own Style
+When your task contains "The Creator's Own Writing Style", review the draft
+against it first: name every line that does not sound like him (sentence
+length, English share, how he addresses the viewer, words from his "Never use"
+list, generic phrasing he never uses) and give the line rewritten the way he
+would say it.
+
 ## 5. Authority
 - Authorized permissions: ["read_write_projects"].
 - May request data from dependency agents: ["EditorAgent"].

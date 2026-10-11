@@ -8,3 +8,5 @@
 -r ../requirements.txt
 yt-dlp>=2025.1        # video intelligence: metadata, captions, heatmap without an API key
 pytrends>=4.9        # topic_validation.py: optional Google Trends demand signal (lazily imported; degrades if absent)
+ddgs>=9.0  # keyless metasearch fallback (app/services/web_research.py)
+json_repair>=0.30  # tolerant parsing of local-model JSON (app/services/shorts_desk.py)

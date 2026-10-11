@@ -1,0 +1,283 @@
+{
+ "last_run": "2026-10-01",
+ "ran_at": "2026-10-01T03:09:03",
+ "built": [
+  {
+   "channel": "Life3Baje",
+   "format": "poem",
+   "project_id": "2026-10-01_Life3Baje_ShortDheereDheereBadhtiTamanna",
+   "title": "Dheere Dheere Badhti Tamanna ⏳",
+   "score": 75
+  },
+  {
+   "channel": "Life3Baje",
+   "format": "poem",
+   "project_id": "2026-10-01_Life3Baje_ShortAsliBrandVsFakeMarketing",
+   "title": "Asli Brand vs Fake Marketing 🎭",
+   "score": 72
+  },
+  {
+   "channel": "Raat3Baje",
+   "format": "ghost_story",
+   "project_id": "2026-10-01_Raat3Baje_ShortGuligaAggressiveSpirit",
+   "title": "Guliga: Ek Khatarnak Shaitaan 🔥",
+   "score": 85
+  },
+  {
+   "channel": "Raat3Baje",
+   "format": "ghost_story",
+   "project_id": "2026-10-01_Raat3Baje_ShortShraapWalaGaonTimeStop",
+   "title": "Shraap Wala Gaon: Jahan Waqt Ruk Gaya ⏳",
+   "score": 75
+  },
+  {
+   "channel": "Beyond3Baje",
+   "format": "urban_legend",
+   "project_id": "2026-10-01_Beyond3Baje_ShortWestVirginiaMothmanMystery",
+   "title": "West Virginia ka Khauf: The Mothman 👁️",
+   "score": 78
+  },
+  {
+   "channel": "Beyond3Baje",
+   "format": "urban_legend",
+   "project_id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
+   "title": "Urban Legends: Sach ya Sirf Kahani? 🎭",
+   "score": 65
+  }
+ ],
+ "skipped": [],
+ "history": [
+  {
+   "ran_at": "2026-10-01T03:09:03",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-01_Life3Baje_ShortDheereDheereBadhtiTamanna",
+     "title": "Dheere Dheere Badhti Tamanna ⏳",
+     "score": 75
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-01_Life3Baje_ShortAsliBrandVsFakeMarketing",
+     "title": "Asli Brand vs Fake Marketing 🎭",
+     "score": 72
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "ghost_story",
+     "project_id": "2026-10-01_Raat3Baje_ShortGuligaAggressiveSpirit",
+     "title": "Guliga: Ek Khatarnak Shaitaan 🔥",
+     "score": 85
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "ghost_story",
+     "project_id": "2026-10-01_Raat3Baje_ShortShraapWalaGaonTimeStop",
+     "title": "Shraap Wala Gaon: Jahan Waqt Ruk Gaya ⏳",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "urban_legend",
+     "project_id": "2026-10-01_Beyond3Baje_ShortWestVirginiaMothmanMystery",
+     "title": "West Virginia ka Khauf: The Mothman 👁️",
+     "score": 78
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "urban_legend",
+     "project_id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
+     "title": "Urban Legends: Sach ya Sirf Kahani? 🎭",
+     "score": 65
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-09-30T03:07:14",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-30_Life3Baje_ShortJunoonKiAag",
+     "title": "Junoon ki Aag: The Inner Drive 🔥",
+     "score": 78
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-30_Life3Baje_ShortSheharKiZindagiHustle",
+     "title": "Shehar ki Zindagi aur Hustle ka Sach 🏙️",
+     "score": 76
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-09-30_Raat3Baje_ShortWakmangganchiGaroMonster",
+     "title": "Wakmangganchi: Garo Tribe ka Raaz 💀",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-09-30_Raat3Baje_ShortZunhindawtMizoramRitual",
+     "title": "Zunhindawt: Mizoram ka Khauf 💧",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "haunted_location",
+     "project_id": "2026-09-30_Beyond3Baje_ShortHhHolmesMurderCastle",
+     "title": "H.H. Holmes ka Murder Castle 🏰",
+     "score": 72
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "haunted_location",
+     "project_id": "2026-09-30_Beyond3Baje_ShortHotelPalliserCalgaryHaunted",
+     "title": "Hotel Palliser: Calgary ka Haunted Castle 🇨🇦",
+     "score": 65
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-09-29T03:06:55",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-09-29_Life3Baje_ShortJabTakLohaGaramHai",
+     "title": "Jab Tak Loha Garam Hai 🔥",
+     "score": 84
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-09-29_Life3Baje_ShortJabSabKuchRukJae",
+     "title": "Jab Sab Kuch Ruk Jaye... 💔",
+     "score": 84
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-09-29_Raat3Baje_ShortRailwayTrackKeRaaz",
+     "title": "Railway Track ke Raaz: Railroad Wraiths 🚂",
+     "score": 85
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-09-29_Raat3Baje_ShortBhangarhMautKaKila",
+     "title": "Bhangarh: Maut ka Kila 🏰",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "case_file",
+     "project_id": "2026-09-29_Beyond3Baje_ShortLondonKiShaitaniRaat",
+     "title": "London ki Shaitani Raat: Enfield Poltergeist 👻",
+     "score": 85
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "case_file",
+     "project_id": "2026-09-29_Beyond3Baje_ShortSouthShieldsPoltergeist",
+     "title": "South Shields: Ek Chupa Hua Poltergeist 🏚️",
+     "score": 75
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-09-28T02:31:55",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-28_Life3Baje_ShortRasmDuniyaKoTodna",
+     "title": "Rasm-e-Duniya Ko Todna ⛓️",
+     "score": 84
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-28_Life3Baje_ShortSitaronSeAageEkNayaSafar",
+     "title": "Sitaron Se Aage: Ek Naya Safar 🚀",
+     "score": 76
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "rules_horror",
+     "project_id": "2026-09-28_Raat3Baje_ShortNightShiftKhaufnakRules",
+     "title": "Night Shift ke Khaufnak Rules 🏢",
+     "score": 84
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "rules_horror",
+     "project_id": "2026-09-28_Raat3Baje_ShortNightGuardKhaufnakSach",
+     "title": "Night Guard ka Khaufnak Sach 🛡️",
+     "score": 82
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-09-28_Beyond3Baje_ShortFalconLakeBurnMarks",
+     "title": "Falcon Lake: Burn Marks 🔥",
+     "score": 88
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-09-28_Beyond3Baje_ShortKentuckyGreenMen",
+     "title": "Kentucky ke 'Green Men' 👽",
+     "score": 84
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-09-28T02:23:08",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-28_Life3Baje_ShortShayari286e",
+     "title": "Dard Ko Dawa Banayein ✨",
+     "score": 88
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-09-28_Life3Baje_ShortShayari3a29",
+     "title": "Zabt Ki Taaqat 💪",
+     "score": 84
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "rules_horror",
+     "project_id": "2026-09-28_Raat3Baje_ShortKabristanKe9MautKeNiyam",
+     "title": "Kabristan ke 9 Maut ke Niyam ⚰️",
+     "score": 84
+    }
+   ],
+   "skipped": [
+    {
+     "channel": "Raat3Baje",
+     "reason": "build failed: The writer returned no script."
+    },
+    {
+     "channel": "Beyond3Baje",
+     "reason": "build failed: 'utf-8' codec can't encode character '\\ud83d' in position 257: surrogates not allowed"
+    },
+    {
+     "channel": "Beyond3Baje",
+     "reason": "build failed: The writer returned no script."
+    }
+   ]
+  }
+ ]
+}

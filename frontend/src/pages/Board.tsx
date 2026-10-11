@@ -26,9 +26,11 @@ const STAGES: Stage[] = [
 ];
 
 export default function Board() {
-  const { brands, selectedChannel, navigate, toast } = useStudio();
+  const { brands, selectedChannel, navigate, toast, channelFilter: sharedFilter, setChannelFilter: setSharedFilter } = useStudio();
   const [topics, setTopics] = useState<Topic[]>([]);
-  const [channelFilter, setChannelFilter] = useState('all');
+  // Shared with the header's channel picker ('' there = 'all' here).
+  const channelFilter = sharedFilter || 'all';
+  const setChannelFilter = (v: string) => setSharedFilter(v === 'all' ? '' : v);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [quickAdd, setQuickAdd] = useState<Record<string, string>>({});
 

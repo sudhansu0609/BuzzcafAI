@@ -11,6 +11,8 @@ import sys
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS_DIR = os.path.join(ROOT_DIR, "assets")
+# Light-ink logo for the dark installer / uninstaller header, compiled into both exes.
+LOGO_RESOURCE = f'/resource:{os.path.join(ROOT_DIR, "frontend", "public", "logo-dark.png")},BuzzcafStudio.logo-dark.png'
 SCRIPTS_DIR = os.path.join(ROOT_DIR, "scripts")
 INSTALLER_DIR = os.path.join(ROOT_DIR, "installer")
 CSC_EXE = r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
@@ -72,6 +74,7 @@ def step_3_build_installer(icon_path: str):
         f"/win32manifest:{manifest}",
         f"/out:{out_exe}",
         "/r:System.dll,System.Windows.Forms.dll,System.Drawing.dll",
+        LOGO_RESOURCE,
         installer_src,
     ]
 
@@ -97,6 +100,7 @@ def step_4_build_uninstaller(icon_path: str):
         f"/win32manifest:{manifest}",
         f"/out:{out_exe}",
         "/r:System.dll,System.Windows.Forms.dll,System.Drawing.dll",
+        LOGO_RESOURCE,
         uninstaller_src,
     ]
 

@@ -1,0 +1,65 @@
+{
+    "id": "2026-09-29_Life3Baje_WhenDidItStopBeingJustvideostheBusinessReality",
+    "name": "When did it stop being just 'videos'? (The Business Reality)",
+    "brand": "Life3Baje",
+    "workflow_name": "life3baje_video",
+    "status": "active",
+    "current_step": "Visual Plan",
+    "created_at": "2026-09-29T03:30:43.209695",
+    "updated_at": "2026-09-29T03:33:39.518841",
+    "metadata": {
+        "target_duration_minutes": 12.0,
+        "topic_id": "topic_8a508453",
+        "topic_notes": "A raw, honest look at the transition from content creation to building a media infrastructure and physical products while juggling a full-time career.",
+        "creative_brief": "**Angle:** A raw, honest look at the transition from content creation to building a media infrastructure and physical products while juggling a full-time career.\n\n### Overview\nThis is a core documentary episode. It's not an advice video for others; it\u2019s about the creator's realization of what it takes to turn 'content' into a 'business.' The tone is honest, slightly weary but hopeful, and deeply personal.\n\n### Target Duration\n~12 Minutes\n\n### Core Narrative Arc\n1. **The Hook (0:00-1:30):** Start with the feeling of being overwhelmed by multiple channels. Contrast the 'dream' of having a media company vs. the 'reality' of managing production, logistics for Buzzcaf, and a 9-5 job. \n2. **The Evolution (1:30-4:00):** Reflect on the early days. When was the moment it stopped being just a hobby? Mention the shift from 'I want more views' to 'I need systems.'\n3. **The Multi-Channel Reality (4:00-7:00):** Discuss the logistical nightmare of managing multiple brands. Talk about the decision to build Buzzcaf as a tangible product and how that changed the creator's role from \"Creator\" to \"Founder.\"\n4. **The Numbers (7:00-10:30):** The 'Reality Check.' Show actual costs, revenue splits (if possible), or at least the complexity of expenses (marketing, logistics, content production). *[CREATOR TO FILL: Specific numbers/costs for Buzzcaf vs. YouTube Revenue]*\n5. **The Conclusion (10:30-12:00):** What is the ultimate goal? It\u2019s not just about money; it's about building something that lasts\u2014a media company.\n\n### Key Points to Include\n- The distinction between a 'Content Creator' and a 'Media Company Owner.'\n- The specific struggle of balancing software engineering work with business operations.\n- The transition from digital products (views/ads) to physical goods (Buzzcaf).\n- Honest mentions of failures in the process (logistics, time management, etc.).\n\n### Style & Tone\n- **Language:** Hinglish (Roman script). \n- **Voice:** Conversational and warm. No 'hustle culture' clich\u00e9s.\n- **Music:** Use a low-fi/acoustic blend for the building sections; switch to a slower, more reflective piano or solo violin when discussing the difficulties of balancing life/work.\\n\n### Visuals & B-Roll\n- **A-Roll:** Direct to camera in a comfortable setting (home office/studio).\n- **B-Roll:** Clips of the different YouTube channels, shots of Buzzcaf products/packaging, time-lapse of work sessions, and screen recordings of backend management tools or spreadsheets.\n- **Transitions:** Use smooth, organic transitions. Avoid flashy effects.\n\n### Scripting Instructions for Writer**\n- Do NOT use 'how to' language. Instead of \"How you can build a business,\" use \"How I am building this business.\" \n- Keep the Hinglish natural\u2014the way the creator actually speaks in daily life.\n- Ensure the transition between the software career and the media company is clear as a core part of his identity.",
+        "allow_all": false,
+        "nightly_longform": {
+            "built_at": "2026-09-29T03:33:39"
+        }
+    },
+    "steps_history": [
+        {
+            "step_name": "Vlog Planning",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-29T03:30:43.222733",
+            "completed_at": "2026-09-29T03:31:58.620012",
+            "output_files": {
+                "vlog_plan": "production/storyboard.md"
+            },
+            "logs": [
+                "Successfully executed step 'Vlog Planning' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=[] output_refs=production/storyboard.md elapsed_ms=75397"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Vlog Script & Prompts",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-29T03:31:58.634418",
+            "completed_at": "2026-09-29T03:33:39.509972",
+            "output_files": {
+                "script": "script/draft.md"
+            },
+            "logs": [
+                "Target runtime: 12 min injected into the script prompt.",
+                "Script length: 1,321 words ~9.4 min (target 12).",
+                "Successfully executed step 'Vlog Script & Prompts' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=['vlog_plan'] output_refs=script/draft.md elapsed_ms=100875"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "strategist_brief": "script/strategist_brief.md",
+        "vlog_plan": "production/storyboard.md",
+        "script": "script/draft.md"
+    }
+}

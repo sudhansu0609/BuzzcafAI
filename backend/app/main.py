@@ -16,6 +16,7 @@ from core.models.project import Project
 from core.paths import KNOWLEDGE_DIR, PROJECTS_DIR
 from runtime.workflow import WorkflowEngine
 from integrations.llm import load_config, save_config
+from integrations import idle_offload
 from knowledge.assets import AssetService
 
 app = FastAPI(title="Buzzcaf AI Studio")
@@ -26,6 +27,13 @@ from app.api.buzzbrain_api import router as buzzbrain_router
 from app.api.video_intel_api import router as video_intel_router
 from app.api.departments_api import router as departments_router
 from app.api.produce_api import router as produce_router
+from app.api.eye_contact_api import router as eye_contact_router
+from app.api.music_api import router as music_router
+from app.api.shorts_api import router as shorts_router
+from app.api.longform_api import router as longform_router
+from app.api.bulk_edit_api import router as bulk_edit_router
+from app.api.writing_style_api import router as writing_style_router
+from app.api.youtube_api import router as youtube_router
 from app.services.events import bus as event_bus
 app.include_router(agents_router)
 app.include_router(studio_router)
@@ -33,6 +41,16 @@ app.include_router(buzzbrain_router)
 app.include_router(video_intel_router)
 app.include_router(departments_router)
 app.include_router(produce_router)
+app.include_router(eye_contact_router)
+app.include_router(music_router)
+app.include_router(shorts_router)
+app.include_router(longform_router)
+app.include_router(bulk_edit_router)
+app.include_router(writing_style_router)
+app.include_router(youtube_router)
+# Studio -> BuzzAnimate (BuzzAnimate docs/ECOSYSTEM_BRIDGE_PLAN.md step E5).
+from app.api.buzzanimate_api import router as buzzanimate_router
+app.include_router(buzzanimate_router)
 
 
 @app.on_event("startup")
@@ -41,6 +59,41 @@ async def _bind_event_bus():
     import asyncio
 
     event_bus.bind_loop(asyncio.get_running_loop())
+
+
+@app.on_event("startup")
+async def _start_idle_offload():
+    """Unload the local models the Studio used once nothing has run for
+    `idle_offload_seconds` (integrations/idle_offload.py)."""
+    idle_offload.start()
+
+
+@app.on_event("startup")
+async def _start_shorts_daily():
+    """The Shorts Desk's morning batch (app/services/shorts_desk.py); it only
+    runs when `shorts_daily_enabled` is on."""
+    from app.services import shorts_desk
+    shorts_desk.start_scheduler()
+
+
+@app.on_event("startup")
+async def _start_buzzedit_keepalive():
+    """Keep BuzzEdit running in the background when the creator turned that on
+    (app/services/buzzedit_keepalive.py); idle otherwise."""
+    from app.services import buzzedit_keepalive
+    buzzedit_keepalive.start()
+
+
+@app.on_event("startup")
+async def _resume_produce_queue():
+    """Carry on with videos still queued for production when the Studio last
+    stopped (a paused queue stays paused)."""
+    try:
+        from app.services import produce_queue
+
+        produce_queue.kick()
+    except Exception as exc:  # noqa: BLE001 - a bad queue file must not block startup
+        print(f"[buzzcaf] could not resume the production queue: {exc}", flush=True)
 
 
 #: Set by `serve_headless()` when this process published its own ledger entry.
@@ -156,6 +209,41 @@ class SettingsSchema(BaseModel):
     ollama_model: Optional[str] = "qwen3.5:9b"
     llamacpp_url: Optional[str] = "http://127.0.0.1:8089/v1"
     llamacpp_model: Optional[str] = "qwen3.8-27b"
+    # The claude-local-api proxy (../claudeAPI): OpenAI-compatible, answers
+    # through the user's Claude Code login. `produce_llm_provider` = "claude"
+    # routes video production (visual planning; BuzzEdit's moods, topics and
+    # picture prompts) through it -- see app/api/produce_api.py.
+    claude_url: Optional[str] = None
+    claude_api_key: Optional[str] = None
+    claude_model: Optional[str] = None
+    produce_llm_provider: Optional[str] = None
+    # Thinking (reasoning) for local thinking models, LM Studio only: on for
+    # agents/chat/writing, off for video production's planning by default.
+    thinking_agents: Optional[bool] = None
+    thinking_production: Optional[bool] = None
+    # GPU memory (integrations/idle_offload.py): unload local models after
+    # this many idle seconds (0 = never), and whether that -- and the
+    # end-of-task offload -- may also stop the llama.cpp server.
+    idle_offload_seconds: Optional[int] = None
+    idle_offload_llamacpp: Optional[bool] = None
+    # How many visual-planning windows to run at once (blank = per provider).
+    produce_plan_workers: Optional[int] = None
+    # Free stock footage: the Pixabay key is handed to BuzzEdit, and the
+    # switch turns the stock fallback on for every render by default.
+    pixabay_api_key: Optional[str] = None
+    pixabay_enabled: Optional[bool] = None
+    # How BuzzEdit generates clips, pushed to it before every production
+    # (app/api/produce_api.py): "classic" (832x480, fast) or "hq" (1024x576
+    # delivered at 1080p, slower).
+    clip_generation_mode: Optional[str] = None
+    # BuzzEdit audio rack preset per channel, {channel: preset name}, applied
+    # to the BuzzEdit project's A1 rack before every render
+    # (app/api/produce_api.py). A channel not in the table gets none.
+    audio_rack_preset: Optional[Dict[str, str]] = None
+    # Folders of real-sound effects/beds, pushed to BuzzEdit's own SFX
+    # library (app/api/produce_api.py: sfx_library_dirs/sync_sfx_library_to_
+    # buzzedit) before every render, and proxied through /api/produce/sfx/*.
+    sfx_library_dirs: Optional[List[str]] = None
     # Which provider and model each persona tier runs on (roadmap v9, F1):
     # {"fast": {"provider": "llamacpp", "model": ""}, "strong": {...}}
     tiers: Optional[Dict[str, Dict[str, str]]] = None
@@ -173,6 +261,10 @@ class SettingsSchema(BaseModel):
 class ExecuteStepSchema(BaseModel):
     feedback: Optional[str] = None
     allow_all: Optional[bool] = None
+
+class RegenerateSchema(BaseModel):
+    from_step: Optional[str] = None  # None = regenerate everything from the first step
+    run: bool = True                 # False = only rewind; the creator steps through it
 
 class AssetRegisterSchema(BaseModel):
     title: str
@@ -198,12 +290,6 @@ def set_bound_port(port: int) -> None:
     """Record the port uvicorn actually bound, so /health can report the truth."""
     global _bound_port
     _bound_port = int(port)
-
-
-import threading
-
-_bg_model_loading_lock = threading.Lock()
-_bg_model_is_loading = False
 
 
 def bound_port() -> int:
@@ -252,26 +338,13 @@ def health(blocking: bool = False):
                     model_status["loaded"] = True
                     model_status["active_model"] = res.get("model")
             else:
-                # Non-blocking auto-load in background thread so /health answers in <50ms,
-                # ensuring desktop_app.py and ecosystem probes never time out.
-                def _bg_load():
-                    global _bg_model_is_loading
-                    try:
-                        logger.info(f"Health check triggering background load for model '{model_name}'...")
-                        ensure_local_model_loaded("lm_studio", model_name)
-                    except Exception as exc:
-                        logger.warning(f"Background load for model '{model_name}' failed: {exc}")
-                    finally:
-                        _bg_model_is_loading = False
-
-                with _bg_model_loading_lock:
-                    global _bg_model_is_loading
-                    if not _bg_model_is_loading:
-                        _bg_model_is_loading = True
-                        threading.Thread(target=_bg_load, name="bg-model-loader", daemon=True).start()
-
+                # A status poll never loads a model. It used to, in the
+                # background: opening the Studio put a 12B model on the card
+                # for nothing (offloaded idle five minutes later), and one
+                # loaded beside a render starved ComfyUI. The next real LLM
+                # call loads what it needs (LM Studio JIT, or
+                # ensure_local_model_loaded, which ejects the others first).
                 model_status["loaded"] = False
-                model_status["loading"] = True
         except Exception:
             model_status["connected"] = False
     elif selected_p == "ollama":
@@ -338,7 +411,7 @@ def register_asset(payload: AssetRegisterSchema):
     )
 
 
-SECRET_SETTING_KEYS = ("gemini_api_key", "openai_api_key")
+SECRET_SETTING_KEYS = ("gemini_api_key", "openai_api_key", "claude_api_key", "pixabay_api_key")
 MASKED_VALUE = "********"
 
 
@@ -374,6 +447,20 @@ def update_settings(settings: SettingsSchema):
         new_config[k] = v
     save_config(new_config)
     engine.llm_service.reload_config()
+    if "pixabay_api_key" in data or data.get("pixabay_enabled"):
+        # BuzzEdit does the actual stock search, so it needs the key too.
+        # Off the request thread: BuzzEdit may be down, and discovery waits.
+        import threading
+        from app.api.produce_api import sync_stock_keys_to_buzzedit
+        threading.Thread(target=sync_stock_keys_to_buzzedit, name="pixabay-key-sync", daemon=True).start()
+    if "thinking_production" in data:
+        import threading
+        from app.api.produce_api import sync_thinking_to_buzzedit
+        threading.Thread(target=sync_thinking_to_buzzedit, name="thinking-sync", daemon=True).start()
+    if "sfx_library_dirs" in data:
+        import threading
+        from app.api.produce_api import sync_sfx_library_to_buzzedit
+        threading.Thread(target=sync_sfx_library_to_buzzedit, name="sfx-library-sync", daemon=True).start()
     return {
         "status": "success",
         "message": "Settings updated successfully.",
@@ -900,6 +987,25 @@ def run_all_project_steps(project_id: str):
         active_executions.discard(project_id)
 
 
+@app.post("/api/projects/{project_id}/regenerate")
+def regenerate_project(project_id: str, payload: RegenerateSchema = None):
+    """Run the project again from `from_step` (default: the first step), keeping
+    its title, brief, creator instructions and target runtime."""
+    payload = payload or RegenerateSchema()
+    if project_id in active_executions:
+        raise HTTPException(status_code=409, detail="This project is already running.")
+    try:
+        project = engine.restart(project_id, payload.from_step)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
+    event_bus.publish("project_regenerate", {"project_id": project_id, "from_step": project.current_step})
+    if not payload.run:
+        return project.to_dict()
+    return run_all_project_steps(project_id)
+
+
 @app.get("/api/projects/{project_id}/logs")
 def get_project_execution_logs(project_id: str):
     lines = log_handler.logs.get(project_id)
@@ -1073,6 +1179,57 @@ def get_project_asset(project_id: str, asset_name: str):
         raise HTTPException(status_code=400, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Project not found")
+
+
+class AssetTextSchema(BaseModel):
+    content: str
+
+
+# Text assets the creator may rewrite by hand (the teleprompter's sources).
+EDITABLE_ASSET_EXTS = (".md", ".txt")
+
+
+@app.put("/api/projects/{project_id}/asset/{asset_name}")
+def put_project_asset(project_id: str, asset_name: str, payload: AssetTextSchema):
+    """Replace a text asset with the creator's edited version -- the script
+    taken out of the teleprompter, rectified, and put back. The previous text
+    is kept under `history/` beside it, so an edit can always be undone."""
+    try:
+        project = Project.load(project_id)
+    except (ValueError, FileNotFoundError):
+        raise HTTPException(status_code=404, detail="Project not found")
+    asset_file = project.assets.get(asset_name)
+    if not asset_file:
+        raise HTTPException(status_code=404, detail="Asset not generated yet")
+    if not asset_file.lower().endswith(EDITABLE_ASSET_EXTS):
+        raise HTTPException(status_code=400, detail="Only text (.md / .txt) assets can be edited here.")
+    project_dir = os.path.realpath(project.get_project_dir())
+    file_path = os.path.realpath(os.path.join(project_dir, asset_file))
+    if not file_path.startswith(project_dir + os.sep):
+        raise HTTPException(status_code=400, detail="Invalid asset path")
+    content = payload.content.replace("\r\n", "\n")
+    if not content.strip():
+        raise HTTPException(status_code=400, detail="The script is empty; nothing was saved.")
+    backup = None
+    if os.path.exists(file_path):
+        with open(file_path, "r", encoding="utf-8") as f:
+            previous = f.read()
+        if previous == content:
+            return {"status": "unchanged", "asset": asset_name}
+        history = os.path.join(os.path.dirname(file_path), "history")
+        os.makedirs(history, exist_ok=True)
+        stem, ext = os.path.splitext(os.path.basename(file_path))
+        backup = os.path.join(history, f"{stem}.{datetime.now().strftime('%Y%m%d-%H%M%S')}{ext}")
+        with open(backup, "w", encoding="utf-8") as f:
+            f.write(previous)
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    edits = project.metadata.setdefault("asset_edits", {})
+    edits[asset_name] = {"at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+                         "backup": os.path.relpath(backup, project_dir).replace("\\", "/") if backup else None}
+    project.save()
+    logger.info("Asset %s of %s replaced by hand (backup %s)", asset_name, project_id, backup)
+    return {"status": "saved", "asset": asset_name, "backup": edits[asset_name]["backup"]}
 
 
 @app.get("/api/projects/{project_id}/asset/{asset_name}/print", response_class=HTMLResponse)

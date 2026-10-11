@@ -1,0 +1,13 @@
+{
+    "id": "2026-09-28_Beyond3Baje_ShortFalconLakeBurningEncounter",
+    "name": "Short falcon lake burning encounter",
+    "brand": "Beyond3Baje",
+    "workflow_name": "shorts_ready",
+    "status": "active",
+    "current_step": "Research",
+    "created_at": "2026-09-28T02:22:41.701737",
+    "updated_at": "2026-09-28T02:22:41.701964",
+    "metadata": {},
+    "steps_history": [],
+    "assets": {}
+}

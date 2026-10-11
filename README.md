@@ -163,6 +163,52 @@ provider is running. A response without the banner came from a real model.
 
 ---
 
+## Publishing to YouTube
+
+A rendered project gets a **Publish to YouTube** panel: pick the channel, one of
+the SEO manager's titles (`publish/publish.json`), edit the description and tags,
+choose Private / Unlisted / Public / Scheduled, and upload. BuzzEdit's thumbnail
+is set too. Uploads resume after a dropped connection. Code:
+`backend/integrations/youtube_publish.py`, `backend/app/api/youtube_api.py`.
+
+**Upload in YouTube Studio** (no Google setup, can go public): the panel opens
+the brand channel's YouTube Studio upload screen in your browser (the channel id
+is looked up once from the handle in Settings -> Your Channels and kept in
+`config.json` `youtube_upload_channels`), shows the video and thumbnail in
+Explorer, and has Copy buttons for the title, description and tags. Paste the
+finished video's link back to record it on the project.
+
+**Upload directly (API)** needs a one-time setup (**Bulk Editor** tab -> **YouTube channels**):
+
+1. In https://console.cloud.google.com create one project and enable
+   **YouTube Data API v3**.
+2. **OAuth consent screen**: External, add your Google account as a test user,
+   then **Publish app** (in "Testing" Google expires sign-ins after 7 days).
+3. **Credentials -> Create OAuth client ID -> Desktop app**, download the JSON,
+   and add it with **Add Google client JSON**.
+4. **+ Connect a channel** once per channel. At Google's chooser pick the channel
+   itself (Brand Accounts are listed separately). Link each to its brand.
+
+Google locks videos uploaded from an API project that has not passed YouTube's
+API audit to **Private**. Request the free audit at
+https://support.google.com/youtube/contact/yt_api_form. Until it passes, upload
+videos that must go public through YouTube Studio itself. Each upload costs 1,600 of the project's
+10,000 daily quota units. Credentials live in `backend/config/youtube/`
+(git-ignored).
+
+## Bulk Editor
+
+The **Bulk Editor** tab connects your YouTube channels (the same sign-ins the
+Publish panel uses) and edits titles and descriptions across a whole channel:
+remove words, find => replace, add text to the start or end, filtered by
+public / unlisted / private. **Preview** is a dry run; **Apply** writes a backup
+of the originals first (`backend/config/youtube/backups/<channel id>/`) and
+wants the number of videos typed back; **Restore** puts any backup back. Tags,
+category and languages are kept. An edit costs 50 quota units, so one run is
+capped at 190 videos a day; re-running skips finished videos. Code:
+`backend/integrations/youtube_bulk_edit.py`, `backend/app/api/bulk_edit_api.py`.
+It replaces the old standalone Node editor (`../bulk_edit`).
+
 ## Not implemented
 
 Stated plainly so nobody builds on it:

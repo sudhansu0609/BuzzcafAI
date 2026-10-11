@@ -12,11 +12,15 @@ const PROVIDER_LABEL: Record<string, string> = {
 };
 
 export default function Dashboard() {
-  const { projects, settings, health, healthInfo, brands, workflows, refreshProjects, navigate, toast } = useStudio();
+  const { projects: allProjects, settings, health, healthInfo, brands, workflows, refreshProjects, navigate, toast, channelFilter, selectedChannel } = useStudio();
+  // Counts follow the header's channel picker ('' = all channels).
+  const projects = channelFilter
+    ? allProjects.filter((p) => (p.brand || '').toLowerCase() === channelFilter.toLowerCase())
+    : allProjects;
   const [agentCount, setAgentCount] = useState<number | null>(null);
   const [name, setName] = useState('');
-  const [brand, setBrand] = useState('Beyond3Baje');
-  const [workflow, setWorkflow] = useState(workflowFor('Beyond3Baje'));
+  const [brand, setBrand] = useState(channelFilter || selectedChannel || 'Beyond3Baje');
+  const [workflow, setWorkflow] = useState(workflowFor(channelFilter || selectedChannel || 'Beyond3Baje'));
   const [creating, setCreating] = useState(false);
   const [allowAll, setAllowAll] = useState(false);
   const [durationMin, setDurationMin] = useState(8);
@@ -38,6 +42,12 @@ export default function Dashboard() {
     const suggested = workflowFor(value);
     if (workflowOptions.length === 0 || workflowOptions.includes(suggested)) setWorkflow(suggested);
   };
+
+  // A channel picked in the header becomes the new project's channel.
+  useEffect(() => {
+    if (channelFilter) pickBrand(channelFilter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [channelFilter]);
 
   const create = async (e: FormEvent) => {
     e.preventDefault();

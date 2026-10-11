@@ -14,5 +14,53 @@
     "source": "agent",
     "created": "2026-09-16T10:42:10.034685",
     "updated": "2026-09-16T10:42:10.034689"
+  },
+  {
+    "id": "439a4a83-af2c-4501-a37b-020b55b758d6",
+    "scope": "agent",
+    "owner": "EditorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Narration Check' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** I",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"EditorAgent\",\n  \"results\": {\n    \"script_final\":_\n"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:04:05.827188",
+    "updated": "2026-10-01T00:04:05.827193"
+  },
+  {
+    "id": "04b2ed61-055e-44cd-a0f5-69ec549684c2",
+    "scope": "agent",
+    "owner": "EditorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Narration Check' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** I",
+      "result_snippet": "# Basement Ke Rules | The Forbidden Door\n**Project:** Basement ke Rules | The Forbidden Door\n**Brand:** Raat3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Grounded, Intense\n\n---\n\n## [SCENE 01: COLD OPEN]\n\n**VISUAL:** [Pitch black. A single flickering tube light buzzes to life, illuminating a narrow basement corridor with peeling government-issue green paint. Grain filter applied \u2014 slight desaturation throughout the story segment.]\n\n**SOUND:** [Low-frequency drone, 65 bpm. A tube light buzz-crackle loop.]\n\n**V.O. (Narrator):** (slow) Raat ke sawa do baje... ek security guard, akela, ek corridor mein khada hai. Uske haath kaanp rahe hain. (pause) Uske peeche, metal ka ek darwaza hai. Aur us darwaze ke peeche se... kadmon ki awaaz aa rahi hai.\n\n**SOUND:** [A single, deliberate footstep echo behind the door. Then silence.]\n\n**V.O. (Narrator):** (beat) Wo palatna chahta hai. Har cell uske jism ka usse kehta hai \u2014 peeche dekho. (long pause) Lekin uske haath mein ek purana register hai... aur us register ke pehle panne par likha hai \u2014 *\"Peeche mat dekhna.\"*\n\n**VISUAL:** [Hard cut to black. Title card: BASEMENT SECTOR 4.]\n\n**SOUND:** [off \u2014 total silence for two seconds before music resumes.]\n\n---\n\n## [SCENE 02: SETUP \u2014 WHO IS ARJUN]\n\n**VISUAL:** [Daylight. A cramped one-room flat in a Tier-2 Indian town. A young man, ARJUN, 26, packs a cheap steel tiffin. A hospital prescription slip is pinned to the wall with his mother's name on it.]\n\n**SOUND:** [Ambient daytime sounds \u2014 a ceiling fan creaking, distant traffic.]\n\n**V.O. (Narrator):** (normal) Arjun Verma. Chhabbis saal ka. Ek chhoti factory mein accountant tha, jab tak factory band nahi ho gayi. Uski maa ko dialysis chahiye \u2014 har hafte, teen din. Aur paison ke liye, Arjun ne wo job li jo koi aur lena nahi chahta tha \u2014 Zilla Parishad ki purani building mein, night shift security guard. Basement Sector 4 ki duty.\n\n**VISUAL:** [Arjun cycling through empty evening streets, the old governmen"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:45:28.297996",
+    "updated": "2026-10-01T00:45:28.298003"
+  },
+  {
+    "id": "dc2b3ed1-13cf-4c97-b953-c6ed908f4e48",
+    "scope": "agent",
+    "owner": "EditorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Narration Check' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, J",
+      "result_snippet": "# Peeche Mat Khodna: The Forbidden Boundary\n\n**Project:** Peeche Mat Khodna: The Forbidden Boundary\n**Brand:** Raat3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Grounded, Intense\n\n---\n\n## [SCENE 01: COLD OPEN]\n\n**VISUAL:** [Pitch black screen. Slowly, a torchlight beam cuts through darkness \u2014 dusty, rural ground at night. Grain filter, desaturated.]\n\n**SOUND:** [Low-frequency drone, 65 bpm. Crickets, then sudden silence.]\n\n**V.O. (Narrator):** (slow) Raat ke sawa gyarah baje. Ek aadmi, akela, apne naye plot mein foundation ke liye gaddha khod raha hai. (pause) Phawda mitti mein utarta hai \u2014 baar baar, ek hi rhythm mein. Phir... ek awaaz. Metal ki nahi. Pathar ki bhi nahi.\n\n**SOUND:** [A dull, hollow thud \u2014 wood striking wood underground.]\n\n**V.O. (Narrator):** (beat) Woh ruk jaata hai. Aur tabhi, kahin door se, ek buzurg aurat ki awaaz uske zehan mein goonjti hai \u2014 jo usne kal hi suni thi. (long pause) *\"Peeche mat khodna.\"*\n\n**VISUAL:** [Hard cut to black. Title card: THE FORBIDDEN BOUNDARY.]\n\n**SOUND:** [off \u2014 two seconds of total silence before music resumes.]\n\n---\n\n## [SCENE 02: THE HOST]\n\n**VISUAL:** [Cut to host in the Raat3Baje set. Dim, warm lighting. Direct eye contact with camera.]\n\n**V.O. (Narrator):** (normal) Namaskar, main hoon aapka host, aur ye hai Raat3Baje. Aaj hum baat karenge ek aisi kahani ki jo maine socha tha main bas suna raha hoon... lekin jab maine iske peeche ki research ki, toh pata chala iska darr kisi ek kahani se kahin zyada purana hai. Ye kahani hai ek zameen ki. Ek boundary ki. Aur un niyamon ki jo humne is zameen ke saath banaye hain \u2014 na sirf usse baantne ke liye, balki kuch cheezon ko bahar rakhne ke liye.\n\n**V.O. (Narrator):** (beat) Lekin pehle, main aapko ye kahani sunata hoon jaisi mujhe mili thi. Poori tarah se fictional. Lekin iske peeche jo parampara hai... wo bilkul asli hai.\n\n---\n\n## [SCENE 03: SETUP \u2014 THE FAMILY]\n\n**VISUAL:** [Daylight. A cramped Mumbai apartment. A young couple, ROHAN"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:51:55.365827",
+    "updated": "2026-10-01T00:51:55.365835"
   }
 ]

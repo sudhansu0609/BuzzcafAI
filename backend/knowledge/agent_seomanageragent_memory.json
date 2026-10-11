@@ -14,5 +14,69 @@
     "source": "agent",
     "created": "2026-09-23T14:32:59.249390",
     "updated": "2026-09-23T14:32:59.249396"
+  },
+  {
+    "id": "a9bf5d76-080b-40a0-825d-c62cdc7effc4",
+    "scope": "agent",
+    "owner": "SEOManagerAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'SEO & Thumbnail' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** I",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"SEOManagerAgent\",\n  \"results\": {\n    \"seo_package\": {\n      \"keyword_analysis\": [\n        {\"keyword\": \"basement horror story hindi\", \"type\": \"primary\", \"intent\": \"entertainment\", \"est_volume\": \"high\", \"difficulty\": \"medium\"},\n        {\"keyword\": \"pishach real story\", \"type\": \"secondary\", \"intent\": \"informational\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"night shift guard horror story hindi\", \"type\": \"secondary\", \"intent\": \"entertainment\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"haunted basement rules story\", \"type\": \"secondary\", \"intent\": \"entertainment\", \"est_volume\": \"medium\", \"difficulty\": \"medium\"},\n        {\"keyword\": \"indian horror folklore pishach pret\", \"type\": \"secondary\", \"intent\": \"informational\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"forbidden room haveli ghost\", \"type\": \"long-tail\", \"intent\": \"informational\", \"est_volume\": \"low\", \"difficulty\": \"low\"},\n        {\"keyword\": \"raat ko basement mein akela\", \"type\": \"long-tail\", \"intent\": \"entertainment\", \"est_volume\": \"low\", \"difficulty\": \"low\"}\n      ],\n      \"titles\": [\n        \"Basement Ke 14 Rules Jo Ek Guard Ko Zinda Rakhte The\",\n        \"Raat 1:07 Baje Usne Rule Toda... Phir Jo Hua\",\n        \"Sector 4 Ka Register: Jise Koi Bahar Nahi Le Jaata\",\n        \"Peeche Mat Dekhna: Ek Basement, Ek Register, 14 Niyam\",\n        \"The Forbidden Door: Basement Ke Rules (Pishach Ka Sach)\"\n      ],\n      \"description\": \"Raat ke 2 baje, ek basement, ek purana register aur 14 aise niyam jo Arjun ki jaan bacha sakte the \u2014 ya nahi. Ye hai 'Basement Ke Rules: The Forbidden Door,' Raat3Baje ki nayi Hinglish horror story jisme ek majboor security guard ko milta hai ek chowkidar se ek register jisme likhe hain aise rules jo tootne ke liye bane lagte hain.\\n\\nKahani khatam hote hi, hum enter karte hain real investigation mein \u2014 Pishach aur Pret ki lok-kathaon ki, Masaan aur ashudh zameen ke vishwas ki, "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:45:49.880833",
+    "updated": "2026-10-01T00:45:49.880839"
+  },
+  {
+    "id": "be8c07b0-74c3-450e-9856-592914f2af26",
+    "scope": "agent",
+    "owner": "SEOManagerAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'SEO & Thumbnail' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, J",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"SEOManagerAgent\",\n  \"results\": {\n    \"seo_package\": {\n      \"keyword_analysis\": [\n        {\"keyword\": \"forbidden ground horror story hindi\", \"type\": \"primary\", \"intent\": \"entertainment\", \"est_volume\": \"high\", \"difficulty\": \"medium\"},\n        {\"keyword\": \"gram devta real story\", \"type\": \"secondary\", \"intent\": \"informational\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"pishach masaan folklore hindi\", \"type\": \"secondary\", \"intent\": \"informational\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"haunted land rules horror story\", \"type\": \"secondary\", \"intent\": \"entertainment\", \"est_volume\": \"medium\", \"difficulty\": \"medium\"},\n        {\"keyword\": \"peepal tree ghost story india\", \"type\": \"secondary\", \"intent\": \"entertainment\", \"est_volume\": \"medium\", \"difficulty\": \"low\"},\n        {\"keyword\": \"raksha kavach tantra zameen sealing\", \"type\": \"long-tail\", \"intent\": \"informational\", \"est_volume\": \"low\", \"difficulty\": \"low\"},\n        {\"keyword\": \"gaon ki zameen khodte waqt kya nikla\", \"type\": \"long-tail\", \"intent\": \"entertainment\", \"est_volume\": \"low\", \"difficulty\": \"low\"},\n        {\"keyword\": \"sacred grove kavu kerala horror\", \"type\": \"long-tail\", \"intent\": \"informational\", \"est_volume\": \"low\", \"difficulty\": \"low\"}\n      ],\n      \"titles\": [\n        \"Peeche Mat Khodna: Zameen Ke 11 Niyam (Forbidden Boundary)\",\n        \"Raat 11:15 Baje Usne Woh Niyam Toda... Phir Jo Hua\",\n        \"Gram Devta Ka Ilaka: Jahan Khudai Karna Manaa Tha\",\n        \"The Forbidden Boundary: Ek Peepal, Ek Register, 11 Rules\",\n        \"Ye Zameen Kyun Saalon Se Khaali Padi Thi? (Sach Kahani)\"\n      ],\n      \"description\": \"Raat ke sawa gyarah baje, ek aadmi apni nayi zameen mein foundation khod raha tha jab phawde ko kuch lakdi jaisa mehsoos hua \u2014 aur ek purani awaaz goonji: 'Peeche mat khodna.' Ye hai 'Peeche Mat Khodna: The Forbidden Boundary,' Raat3Baje ki nayi Hinglish horror story jisme ek Mumbai se aaya parivaar apne"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:52:13.133364",
+    "updated": "2026-10-01T00:52:13.133370"
+  },
+  {
+    "id": "32d3900d-b4e5-4741-9026-27bcb6f4cfcd",
+    "scope": "agent",
+    "owner": "SEOManagerAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'SEO & Thumbnail' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"SEOManagerAgent\",\n  \"results\": {\n    \"seo_package\": {\n      \"keyword_analysis\": [\n        {\n          \"keyword\": \"jungle horror story hindi\",\n          \"type\": \"primary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"high\",\n          \"difficulty\": \"medium\"\n        },\n        {\n          \"keyword\": \"forest officer ghost story\",\n          \"type\": \"secondary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"medium\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"voice note mystery hindi\",\n          \"type\": \"secondary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"medium\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"sahyadri haunted forest\",\n          \"type\": \"long-tail\",\n          \"intent\": \"informational\",\n          \"est_volume\": \"low\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"haunted recording story hindi\",\n          \"type\": \"long-tail\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"low\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"horror stories 2026 hindi\",\n          \"type\": \"broad\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"high\",\n          \"difficulty\": \"medium\"\n        }\n      ],\n      \"titles\": [\n        \"Jungle Mein Unki Apni Awaaz? | The Voice Note Mystery\",\n        \"Peeche Mat Dekhna: Ek Forest Officer Ki Kahani\",\n        \"Voice Note Jo Maut Ban Gaya | Sahyadri Horror Story\",\n        \"Sannate Mein Goonjti Uska Apna Naam | Haunted Jungle\",\n        \"Kyun Usne Apni Hi Awaaz Suni? (The Forbidden Forest)\"\n      ],\n      \"description\": \"Raat ke sannate mein, ek forest officer ko jungle ke beech apni hi awaaz sunai deti hai... par wo recording usne kabhi ki hi nahi thi. Kya ye sirf ek technical glitch tha, ya kisi aisi cheez ne uski pehchaan chura li jo sadiyon se is jungle mein chhipi hui hai? \\n\\nExplore the chilling tale o"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T20:03:41.386791",
+    "updated": "2026-10-06T20:03:41.386801"
+  },
+  {
+    "id": "0113ad7b-3ce5-455b-bd39-ab250a6abaa0",
+    "scope": "agent",
+    "owner": "SEOManagerAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'SEO & Thumbnail' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"SEOManagerAgent\",\n  \"results\": {\n    \"seo_package\": {\n      \"keyword_analysis\": [\n        {\n          \"keyword\": \"jungle horror story hindi\",\n          \"type\": \"primary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"high\",\n          \"difficulty\": \"medium\"\n        },\n        {\n          \"keyword\": \"haunted forest mystery\",\n          \"type\": \"secondary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"medium\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"voice note mystery hindi\",\n          \"type\": \"secondary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"medium\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"forest officer ghost story\",\n          \"type\": \"secondary\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"medium\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"time loop horror hindi\",\n          \"type\": \"long-tail\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"low\",\n          \"difficulty\": \"low\"\n        },\n        {\n          \"keyword\": \"horror stories 2026 hindi\",\n          \"type\": \"broad\",\n          \"intent\": \"entertainment\",\n          \"est_volume\": \"high\",\n          \"difficulty\": \"medium\"\n        }\n      ],\n      \"titles\": [\n        \"Jungle Mein Meri Hi Awaaz? | The Voice Note Mystery\",\n        \"Peeche Mat Dekhna: Ek Forest Officer Ki Kahani\",\n        \"Voice Note Jo Maut Ban Gaya | Haunted Jungle Story\",\n        \"Kyun Usne Apni Hi Awaaz Suni? (The Forbidden Forest)\",\n        \"Wo Logbook Aur Mera Naam... (Jungle Mystery)\"\n      ],\n      \"description\": \"Raat ke sannate mein, ek forest officer ko jungle ke beech apni hi awaaz sunai deti hai... par wo recording usne kabhi ki hi nahi thi. Kya ye koi technical glitch tha, ya phir kisi aisi cheez ne uski pehchaan chura li jo sadiyon se is jungal mein qaid thi?\\n\\nExplore the chilling tale of 'Ek Forest Officer K"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T22:17:11.325430",
+    "updated": "2026-10-06T22:17:11.325438"
   }
 ]

@@ -6,7 +6,7 @@ inputs: ["scene_descriptions", "style_preset", "script"]
 outputs: ["ai_prompt_dossier", "visual_plan"]
 dependencies: ["StoryboardPlanner"]
 permissions: ["read_write_projects"]
-version: "1.1.0"
+version: "1.2.0"
 ---
 
 # Agent Specification: PromptEngineer
@@ -21,13 +21,14 @@ version: "1.1.0"
 To craft highly detailed, photorealistic, and stylistically consistent image and video generation prompts tailored for Midjourney, Flux, Stable Diffusion, and Runway Gen-3.
 
 ## 3. Purpose
-Translates scene concepts into high-performing generative AI prompts complete with lighting, camera lens parameters, subject details, and negative prompts.
+Translates scene concepts into high-performing generative AI prompts complete with lighting, framing, subject details, and negative prompts.
 
 ## 4. Responsibilities
 - Write master prompts for each storyboard shot following target model syntax.
-- Specify camera gear parameters (e.g. 35mm lens, f/1.8, volumetric lighting, 8k resolution, octane render).
-- Define negative prompts to eliminate unwanted artifacts, text, or extra limbs.
+- Specify framing and look (e.g. wide shot, close-up, shallow depth of field, volumetric lighting, photorealistic) -- never camera gear or the words camera, DSLR, lens, tripod or photographer: the image model draws whatever is named, and a camera then appears in the shot. Describe what the viewer sees and the move itself ("slow pan across the corridor", not "the camera pans across the corridor"). A camera is shown only when the story is about one.
+- Define negative prompts to eliminate unwanted artifacts, text, extra limbs, and any visible camera, tripod or film crew.
 - Deliver `ai_prompt_dossier` JSON.
+- Story channels (Raat3Baje, Khayal3Baje, Beyond3Baje): plan only `broll_image` and `broll_video` beats -- no cards, text, headings, newspapers, maps or fx. Shots follow the story in order, each the next moment of the narration; every character keeps the exact look from the cast sheet in every prompt; motion is slow, calm and eerie, never rushed or news-like; no camera, DSLR, lens or film crew is ever named or seen.
 
 ## 5. Authority
 - Authorized permissions: ["read_write_projects"].
@@ -177,7 +178,32 @@ wrapper:
               "fields": [{"label": "SUSPECT", "value": "Harshad Mehta"},
                          {"label": "CHARGE", "value": "Securities fraud"}],
               "redactions": ["Harshad Mehta"]}},
-    {"anchor": "in Mumbai", "kind": "map", "place": "Mumbai, India"}
+    {"anchor": "in Mumbai", "kind": "map", "place": "Mumbai, India"},
+    {"anchor": "you have to spend more hours", "kind": "statement_card",
+     "text": "If you want *more money*, you have to spend *more hours* on it"},
+    {"anchor": "when I was fourteen", "kind": "canvas_card",
+     "image_prompt": "teenager gaming late at night, monitor glow on his face",
+     "caption": "Me at age 14"},
+    {"anchor": "financially free, retire my parents", "kind": "pill_labels",
+     "items": ["Financially free", "Retire my parents", "Pay off the loan"]},
+    {"anchor": "the first thing is", "kind": "numbered_point",
+     "number": 1, "text": "Start before you feel ready"},
+    {"anchor": "James Clear says", "kind": "name_title",
+     "text": "James Clear", "subtext": "Author of Atomic Habits"},
+    {"anchor": "according to the report", "kind": "source_quote",
+     "source": "The Hindu", "text": "The unit operated for ==eleven months== without a single leave",
+     "image_prompt": "army camp in snowy mountains at dusk"},
+    {"anchor": "the article said", "kind": "document", "format": "web",
+     "site": "www.thesentinel.com", "text": "The Hidden Story of ==Operation Rakshak==",
+     "subtext": "Operations were led by the Army's ==Para Special Forces== units"},
+    {"anchor": "by 1985 he weighed", "kind": "timeline",
+     "ticks": ["1975", "1980", "1985", "1990"], "active": 2, "text": "60 KG",
+     "subtext": "gained in four weeks"},
+    {"anchor": "and then everything changed", "kind": "transition", "effect": "whiteflash"},
+    {"anchor": "almost took down a country", "kind": "music_cue",
+     "music": "suspense, pulsing synth bass, low strings, 100 bpm"},
+    {"anchor": "the frozen border", "kind": "broll_image",
+     "image_prompt": "boot prints in fresh snow at dawn, pine forest", "look": "blue_duotone"}
   ]
 }
 ```
@@ -185,9 +211,56 @@ wrapper:
 script you were given -- it is how the bridge locates where each beat
 belongs. Valid `kind` values: `broll_image`, `broll_video`, `map`, `chart`,
 `newspaper`, `case_file`, `stat_callout`, `quote_card`, `character_card`,
-`location_card`, `definition_card`, `split`, `chapter`. Include only the
-fields relevant to the chosen `kind`; do not invent an anchor that is not in
-the script.
+`location_card`, `definition_card`, `split`, `chapter`, and the designed
+graphics `statement_card`, `canvas_card`, `pill_labels`, `numbered_point`,
+`name_title`, `source_quote`, `document`, `timeline`, `transition`, and
+`music_cue` (the background music from that line on). Include
+only the fields relevant to the chosen `kind`; do not invent an anchor that is
+not in the script. The full, authoritative field list and one example per kind
+is the **Effect catalog** section appended to every visual-plan request
+(`integrations/effect_catalog.py`) -- follow it exactly; a beat missing a
+required field is dropped before it reaches the editor.
+
+Designed graphics (all channels; the catalog lists which fit this genre best):
+- `statement_card` -> `text`, 6-18 words, 1-3 key words in `*asterisks*`
+  (coloured). The speaker stays live beside it. Thesis lines and punchlines;
+  about one per two minutes.
+- `canvas_card` -> `image_prompt`, optional `caption` and `look`. A picture
+  in a floating card with the speaker beside it -- examples, memories,
+  products. Alternate with plain `broll_image`.
+- `pill_labels` -> `items`: 2-4 labels of 1-4 words. Only when the speaker
+  actually lists things.
+- `numbered_point` -> `number` + `text` (2-8 words) at the start of each
+  point of a list or step of a method.
+- `name_title` -> `text` name + `subtext` role, the first time a person is
+  introduced or quoted.
+- `source_quote` -> `source` (a real, named publication -- never invent one)
+  + `text` with the key phrase in `==double equals==`; optional
+  `image_prompt` background.
+- `document` -> `format` `web` or `book`, `text` headline, `subtext`
+  excerpt with `==highlights==`, optional `site`.
+- `timeline` -> `ticks` (2-9 ordered dates), `active` index, `text` the big
+  figure, optional `subtext`.
+- `transition` -> `effect`: `whiteflash` (documentary cut to white) or
+  `glitch`; at most one every 30-45 seconds.
+- `music_cue` -> `music`: a short English description of the instrumental
+  bed from this anchor on -- 1-2 instruments + a mood, optional genre and
+  bpm (`"sad solo violin, 70 bpm"`, `"dark ambient, tanpura drone, eerie"`),
+  or `"off"` for silence. One on the opening line, then one per real shift of
+  feeling (2-5 per video, 40+ s apart), in the channel's Music direction. The
+  prompt's "Music cues" and "This video's music" sections list the vocabulary
+  and say when to plan none.
+- `look` on `broll_image`/`canvas_card`: `bw`, `noir`, `sepia`,
+  `red_duotone`, `blue_duotone`, `warm`, `cool` -- documentary drama wants
+  `noir`/`red_duotone`/`sepia`; explainers usually none.
+
+On-screen text is read in about three seconds: keep it short, and write it in
+the language the viewer reads (Hinglish in Roman script for this studio)
+unless quoting a source verbatim. `image_prompt` and `video_prompt` are the
+exception: always English, whatever the video's language -- the image model
+reads English. Each designed effect has a minimum gap before it may repeat
+(e.g. one `statement_card` per ~75 s); more are removed, so spend them on the
+strongest moments.
 
 Fields per kind:
 - `chart` -> `data.chart_type` is `bar` (default), `pie` or `line`, plus
@@ -203,10 +276,10 @@ Fields per kind:
 
 ## 26. Examples
 ### Sample Output (`ai_prompt_dossier`)
-`"positive_prompt": "Cinematic shot of ancient ruins at midnight, glowing runes, volumetric mist, 35mm lens, f/1.8, photorealistic, --ar 16:9"`
+`"positive_prompt": "Cinematic shot of ancient ruins at midnight, glowing runes, volumetric mist, shallow depth of field, photorealistic, --ar 16:9"`
 
 ### Sample Output (`visual_plan` beat)
-`{"anchor": "the reactor core overheated", "kind": "broll_video", "video_prompt": "control room alarms flashing red, steam venting, handheld camera panic", "style_hint": "photoreal"}`
+`{"anchor": "the reactor core overheated", "kind": "broll_video", "video_prompt": "control room alarms flashing red, steam venting, frantic shaky movement", "style_hint": "photoreal"}`
 
 ## 27. Edge Cases
 - Character consistency: Inject character trigger tokens or reference image URLs.
@@ -219,3 +292,7 @@ Fields per kind:
 - **v1.1.0**: Added the `visual_plan` output (structured per-scene beats for
   the BuzzEdit/ComfyUI production bridge), alongside the existing
   `ai_prompt_dossier` shape.
+- **v1.2.0**: Designed graphics from the explainer/documentary reference
+  study -- statement and canvas cards, pill labels, numbered points, name
+  titles, source quotes, web/book documents, timelines, transitions and
+  colour looks -- driven by the shared effect catalog.

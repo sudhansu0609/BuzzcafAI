@@ -4,16 +4,21 @@ import {
   AlertCircle,
   Bot,
   Building2,
+  CalendarClock,
   ChevronUp,
   Compass,
-  Database,
   FolderGit2,
   HeartPulse,
   LayoutDashboard,
   LayoutGrid,
   Menu,
+  Music as MusicIcon,
   MessageSquare,
   Newspaper,
+  PenLine,
+  PenTool,
+  PanelLeftClose,
+  PanelLeftOpen,
   Settings as SettingsIcon,
   Users,
   X,
@@ -22,11 +27,16 @@ import {
 import { StudioProvider, useStudio } from './state/studio';
 import { ThemeProvider } from './state/ThemeContext';
 import { ThemeSwitcher } from './components/ThemeSwitcher';
+import { ChannelPicker } from './components/ChannelPicker';
 import type { TabId } from './lib/types';
 import StudioChat from './pages/StudioChat';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import TopicVault from './pages/TopicVault';
+import Music from './pages/Music';
+import WritingStyle from './pages/WritingStyle';
+import SchedulerDesk from './pages/SchedulerDesk';
+import BulkEdit from './pages/BulkEdit';
 import Board from './pages/Board';
 import Analyze from './pages/Analyze';
 import Research from './pages/Research';
@@ -62,10 +72,14 @@ const SECTIONS: NavSection[] = [
       { id: 'studio_chat', label: 'Studio Assistant', icon: <MessageSquare size={18} style={{ color: '#a78bfa' }} />, title: 'Studio Assistant' },
       { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, title: 'Studio overview' },
       { id: 'projects', label: 'Projects', icon: <FolderGit2 size={18} />, title: 'Production projects' },
+      { id: 'scheduler_desk', label: 'Scheduler Desk', icon: <CalendarClock size={18} style={{ color: '#f59e0b' }} />, title: 'Scheduler Desk: shorts and long-form schedulers' },
+      { id: 'bulk_edit', label: 'Bulk Editor', icon: <PenLine size={18} style={{ color: '#38bdf8' }} />, title: 'Bulk Editor' },
       { id: 'topic_vault', label: 'Topic Vault', icon: <Compass size={18} />, title: 'Topic ideas and saved vault' },
       { id: 'board', label: 'Board', icon: <LayoutGrid size={18} />, title: 'Topic board' },
       { id: 'analyze', label: 'Analyze', icon: <BarChart3 size={18} />, title: 'Why a video or channel performs, and how to model ours on it' },
       { id: 'research', label: 'Research', icon: <Newspaper size={18} />, title: 'Search public archives, books and newspapers' },
+      { id: 'music', label: 'Music', icon: <MusicIcon size={18} />, title: 'Generated background music and the licensed library' },
+      { id: 'writing_style', label: 'Writing Style', icon: <PenTool size={18} style={{ color: '#34d399' }} />, title: 'Your own writing style, per channel: what every writing agent matches' },
     ],
   },
   {
@@ -96,6 +110,20 @@ function Shell() {
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const [showTop, setShowTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // The Bulk Editor is a framed app: once opened it stays mounted (hidden) so
+  // switching tabs neither reloads it nor drops the progress of a running job.
+  const [bulkEditOpened, setBulkEditOpened] = useState(tab === 'bulk_edit');
+  useEffect(() => {
+    if (tab === 'bulk_edit') setBulkEditOpened(true);
+  }, [tab]);
+  // Desktop only: shrink the sidebar to an icon rail. Remembered per browser.
+  const [collapsed, setCollapsed] = useState(() => {
+    try { return localStorage.getItem('buzzcaf.sidebarCollapsed') === '1'; } catch { return false; }
+  });
+  const toggleCollapsed = () => setCollapsed((c) => {
+    try { localStorage.setItem('buzzcaf.sidebarCollapsed', c ? '0' : '1'); } catch { /* ignore */ }
+    return !c;
+  });
 
   useEffect(() => {
     workspaceRef.current?.scrollTo({ top: 0 });
@@ -123,12 +151,25 @@ function Shell() {
       )}
 
       {/* Sidebar Navigation */}
-      <div className={`sidebar ${mobileMenuOpen ? 'open' : ''}`}>
+      <div className={`sidebar ${mobileMenuOpen ? 'open' : ''} ${collapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-brand">
-          <div className="sidebar-brand-content">
-            <Database size={24} />
-            <span>Buzzcaf Studio</span>
+          {/* Full logo; the collapsed rail shows the B mark. Each has a light-theme
+              (dark ink) and a dark-theme (light ink) file, picked by CSS. */}
+          <div className="sidebar-brand-content" aria-label="Buzzcaf AI Studio">
+            <img className="brand-logo brand-logo-full brand-on-light" src={`${import.meta.env.BASE_URL}logo.png`} alt="Buzzcaf AI Studio" />
+            <img className="brand-logo brand-logo-full brand-on-dark" src={`${import.meta.env.BASE_URL}logo-dark.png`} alt="" />
+            <img className="brand-logo brand-logo-mark brand-on-light" src={`${import.meta.env.BASE_URL}logo-mark.png`} alt="" />
+            <img className="brand-logo brand-logo-mark brand-on-dark" src={`${import.meta.env.BASE_URL}logo-mark-dark.png`} alt="" />
           </div>
+          <button
+            type="button"
+            className="sidebar-collapse-btn"
+            onClick={toggleCollapsed}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
+          </button>
           <button
             type="button"
             className="sidebar-close-btn"
@@ -151,6 +192,7 @@ function Shell() {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && go(item.id)}
+                  title={collapsed ? item.label : undefined}
                 >
                   {item.icon}
                   <span>{item.label}</span>
@@ -186,6 +228,7 @@ function Shell() {
           </div>
 
           <div className="header-status">
+            <ChannelPicker />
             <ThemeSwitcher />
             {(() => {
               const ms = healthInfo?.model_status;
@@ -208,8 +251,8 @@ function Shell() {
                 titleText = `Backend Online & Connected to ${ms?.provider} (${modelLabel})`;
               } else if (isModelLoading) {
                 dotColor = '#f59e0b';
-                badgeText = 'AI Loading…';
-                titleText = `Backend online, waiting for local model to load (${ms?.provider}: ${ms?.configured_model})`;
+                badgeText = 'AI ready (loads on use)';
+                titleText = `Backend online. ${ms?.provider}: ${ms?.configured_model} is not on the GPU; it loads on the first request and unloads when idle.`;
               } else {
                 dotColor = '#f59e0b';
                 badgeText = 'Backend online (No AI)';
@@ -243,6 +286,10 @@ function Shell() {
           {tab === 'board' && <Board />}
           {tab === 'analyze' && <Analyze />}
           {tab === 'research' && <Research />}
+          {tab === 'music' && <Music />}
+          {tab === 'writing_style' && <WritingStyle />}
+          {tab === 'scheduler_desk' && <SchedulerDesk />}
+          {bulkEditOpened && <div hidden={tab !== 'bulk_edit'}><BulkEdit /></div>}
           {tab === 'agent_creator_studio' && (
             <AgentCreatorStudio
               onLaunchGroupChat={(ids) => {

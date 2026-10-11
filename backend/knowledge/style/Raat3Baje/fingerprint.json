@@ -1,0 +1,50 @@
+{
+ "words": 4716,
+ "english_share": 0.013,
+ "devanagari_share": 0.0,
+ "address_per_1000": 5.9,
+ "first_person_per_1000": 39.0,
+ "spoken": false,
+ "stage_share": 0.0,
+ "sentences": 387,
+ "sentence_avg": 12.2,
+ "sentence_median": 11,
+ "short_share": 0.132,
+ "long_share": 0.093,
+ "paragraph_sentences": 12.5,
+ "ellipsis_per_100": 0.0,
+ "question_per_100": 4.4,
+ "exclaim_per_100": 0.0,
+ "dialogue_per_100": 2.8,
+ "openers": [
+  "main",
+  "maine",
+  "par",
+  "woh",
+  "meri",
+  "kuch",
+  "us",
+  "yeh"
+ ],
+ "source": "written",
+ "phrases": [
+  "ke paas",
+  "lag raha tha",
+  "ke peeche",
+  "ki taraf",
+  "hua tha",
+  "peeche se",
+  "aisa lag raha",
+  "band kar",
+  "haath mein",
+  "ke baad",
+  "hai main",
+  "kar diya",
+  "laga tha",
+  "liya aur",
+  "pehli baar"
+ ],
+ "openings": [
+  "hila doshton main naam hai shuddhan so aur aap dekha hai raat 3 baje aapke liye ek phir se bahut hi interesting kahani lekar aa hoon main to chalie bina kisi der ke aaj ki kahani sar karte hain Raat ke sawa 2 baje ek"
+ ]
+}

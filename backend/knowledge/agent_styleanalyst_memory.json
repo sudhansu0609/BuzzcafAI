@@ -1,0 +1,98 @@
+[
+  {
+    "id": "84bcb604-5dea-49c1-a36a-82ef63e5dfb4",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text: ignore their\n  spelling mistakes and missing punctuation; learn his phrasing, rhythm,\n  openings, how he addresses viewers, fillers and how he moves a story on.\n- The \"script -> what he said\" pairs show how he rewrit",
+      "result_snippet": "## His voice in one paragraph\nHe talks like a solo narrator sitting close to the mic, warming up before the story starts: \"to chalie bina kisi der ke aaj ki kahani sar karte hain.\" He states the scene in blunt time-and-place fragments (\"Raat ke sawa 2 baje... ek security guard, akela\"), then slows down to describe a body's physical fear in small, literal steps rather than adjectives: \"Uske haath kaanp rahe hain.\" His sentences are plain, declarative, almost reportage-like, and he builds dread by listing rules one by one instead of explaining why they matter.\n\n## Sentence rhythm\n- Measured: 2092 words, only 1.6% English, 0% Devanagari, address-to-viewer roughly 5-6 times per 1000 words \u2014 he is almost entirely in Roman Hinglish, speaking directly to the audience sparingly but at regular intervals.\n- Short, fragment-style openers followed by a pause-dash before the detail: \"Raat ke sawa 2 baje... ek security guard, akela, ek corridor mein khara hai.\"\n- One physical/concrete fact per sentence: \"Uske peeche, metal ka ek darwaza hai.\" / \"Uske haath kaanp rahe hain.\"\n- Numbered-list rhythm when building rules, each a near-identical short clause: \"Pehla naam... Doosra niyam... Teesra... Chautha naam...\" \u2014 same sentence skeleton repeated, which is his main tension tool.\n- Trails off before a reveal with \"...\": \"woh us darwaze ke peeche se... kadmon ki awaaz sun pa raha hai.\"\n\n## Hinglish: how he mixes Hindi and English\n- Near-zero English words (1.6%) \u2014 he doesn't code-switch into English vocabulary at all; even job/workplace terms stay Hindi: \"night shift ka security guard,\" \"Zilla Parishad ki purani building.\"\n- Everything is Hindi content written/spoken in Roman letters, casual register, no Devanagari, no formal shuddh Hindi \u2014 conversational \"usne kar li thi\" not \"usne kar liya tha.\"\n- When adapting a written line, he shifts formal/literary Hindi into spoken casual Hindi: script \"lok-kathaon ki\" became \"log kathaok mein\" \u2014 he trades a bookish compound noun for an everyday"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-03T11:15:15.488249",
+    "updated": "2026-10-03T11:15:15.488255"
+  },
+  {
+    "id": "51c544d5-bf4d-4fe4-94b5-74d518eec052",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe talks like a solo narrator close to the mic, opening with a short greeting and a promise of a story: \"Hello doston... aur aap dekh rahe hain raat 3 baje, aapke liye ek phir se bahut hi interesting kahani lekar aa gaya hoon.\" He sets each scene in blunt time-and-place fragments (\"Raat ke sawa 2 baje... ek security guard, akela\"), then slows down to a body's physical reaction in short literal lines: \"Uske haath kaanp rahe hain.\" He builds dread by listing rules one after another in the same sentence shape, not by explaining why they matter.\n\n## Sentence rhythm\n- Measured: 2092 words, 1.6% English, 0% Devanagari, about 5.7 direct viewer addresses per 1000 words.\n- Short fragment openers, then a \"...\" pause before the detail: \"Raat ke sawa 2 baje... ek security guard, akela, ek corridor mein khada hai.\"\n- One concrete fact per sentence: \"Uske peeche, metal ka ek darwaza hai.\" / \"Uske haath kaanp rahe hain.\"\n- Numbered-rule skeleton, each item a near-identical short clause: \"Pehla niyam... Doosra niyam... Teesra... Chautha niyam...\" This repetition is his main tension tool.\n- Trailing \"...\" before a reveal: \"Aur woh us darwaze ke peeche se... kadmon ki awaaz sun pa raha hai.\"\n- Standalone time-stamp fragments as section breaks: \"Pehli shaam.\"\n\n## Hinglish: how he mixes Hindi and English\n- Almost all Hindi, in Roman letters, casual register: \"kisi der ke,\" \"sar karte hain\" (corrected: \"shuru karte hain\"), \"kar li thi,\" \"nahi milata tha.\" No Devanagari, no formal shuddh Hindi.\n- English is limited to a few concrete nouns and one adjective: \"security guard,\" \"night shift,\" \"corridor,\" \"factory,\" \"accountant,\" \"metal,\" \"interesting.\" Workplace and setting words are often kept in English (\"night shift ka security guard\").\n- Sentence grammar stays Hindi; English words slot into it as nouns: \"night shift ka security guard.\"\n- Second-person \"tum/tumhara/tumhein\" is used for the character inside the rules, not for the viewer.\n\n## Words and phrases"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-03T11:16:03.307473",
+    "updated": "2026-10-03T11:16:03.307479"
+  },
+  {
+    "id": "54d52906-590b-440d-9cf0-d9604bcca800",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe talks like a solo narrator close to the mic, opening with a short greeting and a promise of a story: \"Hello doston... aur aap dekh rahe hain raat 3 baje, aapke liye ek phir se bahut hi interesting kahani lekar aa gaya hoon.\" He sets each scene in blunt time-and-place fragments (\"Raat ke sawa 2 baje... ek security guard, akela\"), then slows down to a body's physical reaction in short literal lines: \"Uske haath kaanp rahe hain.\" He builds dread by listing rules one after another in the same sentence shape, not by explaining why they matter.\n\n## Sentence rhythm\n- Short fragment openers, then a \"...\" pause before the detail: \"Raat ke sawa 2 baje... ek security guard, akela, ek corridor mein khada hai.\"\n- One concrete fact per sentence, usually 4-10 words: \"Uske peeche, metal ka ek darwaza hai.\" / \"Uske haath kaanp rahe hain.\"\n- Numbered-rule skeleton, each item a near-identical short clause: \"Pehla niyam... Doosra niyam... Teesra niyam... Chautha niyam...\" This repetition is his main tension tool.\n- Trailing \"...\" before a reveal: \"Aur woh us darwaze ke peeche se... kadmon ki awaaz sun pa raha hai.\"\n- Standalone time-stamp fragments as section breaks: \"Pehli shaam.\"\n- Measured: 2092 words, 1.6% English, 0% Devanagari, about 5.7 direct viewer addresses per 1000 words.\n\n## Hinglish: how he mixes Hindi and English\n- Almost all Hindi, in Roman letters, casual register: \"kisi der ke,\" \"shuru karte hain,\" \"kar li thi,\" \"nahi milta tha.\" No Devanagari, no formal shuddh Hindi.\n- English is limited to a few concrete nouns: \"security guard,\" \"night shift,\" \"corridor,\" \"factory,\" \"accountant,\" \"metal.\" Workplace and setting words are kept in English (\"night shift ka security guard\").\n- Sentence grammar stays Hindi; English words slot in as nouns.\n- Second-person \"tum/tumhara/tumhein\" is used for the character inside the rules, not for the viewer.\n\n## Words and phrases he really uses\n- \"Hello doston\" (greeting to the viewer)\n- \"aap dekh rahe hain ra"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-03T11:20:35.816996",
+    "updated": "2026-10-03T11:20:35.817002"
+  },
+  {
+    "id": "f3aeecf8-0199-4ebe-9139-25133200e30e",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nLife3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe talks like a friend explaining an idea, not a narrator reading a script. He opens with a general \"we\" statement about people's dreams: \"Hum sab ke paas bade-bade sapne hote hain.\" He then names a fear, \"hum unhe shuru karne se darte hain,\" and argues against it with plain, slightly rough logic: \"Perfection bas ek illusion type ka hai.\" He tells a short personal story (\"mere saath bhi ek baar aisa hua tha\") and carries the point forward with examples from everyday life, such as painting, workouts and sketching. He uses a lot of \"aur,\" \"lekin\" and \"ya phir\" and keeps the thought moving rather than delivering it in tight lines. English enters at the level of concept labels (\"The Art of starting small,\" \"Big Trap,\" \"alternate sources of income\"), not sentence structure.\n\n## Sentence rhythm\n- Sample measure: 1208 words, 5.3% English, 0% Devanagari, about 16.6 direct viewer addresses per 1000 words.\n- Sentences are long and chained with conjunctions: \"...aur main socha tha ki agar mera jo pehla chapter hai woh agar perfect nahi hua to sab barabat ho jaega.\" Keep one idea per sentence where possible, but allow a chain of two or three linked clauses when giving a personal example.\n- Short, blunt verdicts close a thought: \"Perfection bas ek illusion type ka hai.\" / \"kabhi bhi sab kuch ekadam perfect nahi hoga.\"\n- Pauses are marked with \"...\" mainly at the start of a thought: \"lekin aksar... hum unhe shuru karne se darte hain.\"\n- The sample has no reliable sentence-length measurement because the transcript has almost no full stops. Writers should not copy the run-on punctuation of the transcript.\n\n## Hinglish: how he mixes Hindi and English\n- Grammar and connecting words are Hindi, in Roman letters, casual register: \"hum,\" \"karte hain,\" \"hoga,\" \"nahi hoga,\" \"ek chhota sa.\"\n- English appears as fixed phrases and nouns: \"The Art of starting small,\" \"Big Trap,\" \"creative journey,\" \"software engineer,\" \"software company,\" \"alternate sources of inc"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-03T11:21:05.528935",
+    "updated": "2026-10-03T11:21:05.528943"
+  },
+  {
+    "id": "4ecd338a-e928-43e9-93d4-d4f3329765fb",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe talks like a first-person storyteller sitting close to the mic, telling it as something that happened to him. He starts with a polite greeting and a promise (\"Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain.\"). He gives the time and place as plain facts (\"Yeh baat 1999 ki hai. December ka mahina tha.\"). He narrates the fear in small, literal, physical steps (\"Mere gardan se khoon beh raha tha. Aankhein laal thi.\"). The Hindi is Roman and fairly formal-spoken, with words like \"gasht,\" \"aadesh,\" \"nirnay\" and \"bandobast.\" English appears only as everyday nouns (\"jeep,\" \"duty,\" \"torch,\" \"post-mortem\"). He turns to the viewer as \"doston\" at a few chosen moments, such as the personal aside \"Par sach kahoon doston,\" and the closing moral \"Doston, zaroori nahi ki...\". On the recordings he shortens and roughens bookish lines into plain speech.\n\n## Format and point of view\n- Continuous narration in paragraphs of about 12 sentences (measured 12.5). There are no stage cues, no bracketed labels and no bullets (stage_share 0.0).\n- Short chapter titles on their own line, in Roman Hinglish, with no full stop: \"1999 ki wo daravani raat\", \"Neend mein wo khaufnak anubhav\", \"Sachayi ka khulasa\".\n- The story is told by \"main\" in the past tense: \"Yeh un dinon ki baat hai jab main bataur forest officer naya-naya duty par join hua tha.\" \"Main\" is the most common sentence opener, followed by \"maine,\" \"meri,\" \"woh\" and \"us.\"\n- First person runs at about 39 per 1000 words.\n- Dialogue is inline, in double quotes, introduced by \"kaha\" or \"bola\": Pawan ne apni nazar hatate hue kaha, \"Sar, koi bhi afsar yahan raat mein is chowki par nahi rukta hai.\" His own questions are unquoted and run into the sentence: \"Maine uska chehra dekh usse poochha, kya hua? Tum aise kyun dekh rahe ho?\"\n- Dialogue is rare (about 2.8 per 100 sentences). Addresses to a character are \"Sar\" and \"Saab.\"\n- Where a transcript's \"Raat 3 Baje\" scenes use present-tense fragments, t"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T20:43:15.696858",
+    "updated": "2026-10-06T20:43:15.696866"
+  },
+  {
+    "id": "86d74660-0f03-4529-ab38-d56eac1fe665",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe tells his stories as a first-person narrator, speaking close to the mic as if it happened to him. He opens with a polite greeting and a promise, \"Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain.\" He states time and place as plain facts: \"Yeh baat 1999 ki hai. December ka mahina tha.\" He describes fear through literal, physical details: \"Mere gardan se khoon beh raha tha. Aankhein laal thi, shareer tharthar kaamp raha tha.\" His Hindi is Roman and fairly formal-spoken, with words like \"gasht,\" \"aadesh,\" \"nirnay\" and \"bandobast.\" English appears only as everyday nouns (\"jeep,\" \"duty,\" \"post-mortem\"). He turns to \"doston\" at a few chosen moments, such as the closing moral \"Doston, zaroori nahi ki...\". The narration is calm and reportage-like, and the tension comes from small facts that pile up.\n\n## Format and point of view\n- Continuous narration in paragraphs of about 12-13 sentences (measured 12.7). There are no stage cues, no bracketed labels and no bullets (stage_share 0.0).\n- Short chapter titles sit on their own line, in Roman Hinglish, with no full stop: \"1999 ki wo daravani raat\", \"Sachayi ka khulasa\".\n- The narrator is \"main\", in the past tense: \"Yeh un dinon ki baat hai jab main bataur forest officer naya-naya duty par join hua tha.\" First person runs at about 39 per 1000 words. The most common sentence openers are \"main\", \"maine\", \"par\", \"woh\", \"meri\", \"kuch\", \"us\" and \"yeh\".\n- Dialogue is rare (2.8 per 100 sentences). It is inline, in double quotes, introduced by \"kaha\": Pawan ne apni nazar hatate hue kaha, \"Sar, koi bhi afsar yahan raat mein is chowki par nahi rukta hai.\" Characters address the narrator as \"Sar\" or \"Saab\".\n- His own questions are unquoted and run into the sentence: \"Maine uska chehra dekh usse poochha, kya hua? Tum aise kyun dekh rahe ho?\" Questions are about 4.4 per 100 sentences, and there are no exclamation marks (0.0).\n- The ellipsis count is 0.0 in his written text, so do not use \"...\" for"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T21:23:06.866098",
+    "updated": "2026-10-06T21:23:06.866104"
+  }
+]

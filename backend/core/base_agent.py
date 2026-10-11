@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 import os
 import json
 import logging
+import re
+from datetime import date
 from typing import Any, Dict, List, Optional
 from integrations.llm import LLMService
 from core.context import Context
@@ -53,6 +55,11 @@ class BaseAgent(ABC):
                 logger.error(f"Error loading system prompt for {self.agent_name}: {e}")
                 base_prompt = f"You are the {self.agent_name} of Buzzcaf AI Studio."
 
+        # The date goes first: buried at the end of a long persona, models
+        # ignored it and searched for their training year ("trending August 2024").
+        base_prompt = (f"Today's date is {date.today():%d %B %Y} (year {date.today().year}). Use it for anything "
+                       f"recent, current or trending, including the years in search queries.\n\n") + base_prompt
+
         # If this is a Channel Strategist or Lead Agent, append the full workforce
         # directory. Counts come from the registry: hard-coded ones went stale the
         # moment a persona was added or merged (roadmap v9, A4).
@@ -82,19 +89,23 @@ class BaseAgent(ABC):
             except Exception as e:
                 logger.error(f"Error building workforce roster for {self.agent_name}: {e}")
 
-        # Live Web Research tool directives for research and fact personas
-        if "research" in self.agent_name.lower() or "fact" in self.agent_name.lower() or "analyst" in self.agent_name.lower():
-            research_tool_directive = (
-                "\n\n### Live Web Research & Verification Tools (100% On-Device & Private):\n"
-                "You have access to live web research and article scraping tools. To use them, output:\n"
-                "- `[WEB_SEARCH: keywords]` - searches SearXNG, DuckDuckGo, or Wikipedia anonymously for verified sources.\n"
-                "- `[WEB_FETCH: url]` - safely extracts text from a public web page.\n"
-                "- `[BOOK_SEARCH: keywords]` - searches open-domain books (Gutenberg, Open Library, Wikisource).\n"
-                "- `[NEWS_SEARCH: keywords]` - searches news/newspapers, India & worldwide (GDELT, Google News, historic archives).\n"
-                "- `[ARCHIVE_SEARCH: keywords]` - searches public archives (Internet Archive, Wikisource).\n"
-                "Always incorporate verified sources and URLs directly into your research outputs.\n"
-            )
-            base_prompt += research_tool_directive
+        # Live web research tools, for every persona: research and strategy
+        # need them most, but writers fact-checking a date and analysts
+        # checking a trend use them too. The tags are resolved after the
+        # model answers (process_web_research_tags), through search_web ->
+        # the Studio's local SearXNG (ddgs fallback).
+        research_tool_directive = (
+            "\n\n### Live Web Research & Verification Tools (100% On-Device & Private):\n"
+            "You have access to live web research and article scraping tools. To use them, output:\n"
+            "- `[WEB_SEARCH: keywords]` - live metasearch (Google, Bing, Brave, DuckDuckGo, Wikipedia via the local SearXNG).\n"
+            "- `[WEB_FETCH: url]` - safely extracts text from a public web page.\n"
+            "- `[BOOK_SEARCH: keywords]` - searches open-domain books (Gutenberg, Open Library, Wikisource).\n"
+            "- `[NEWS_SEARCH: keywords]` - searches news/newspapers, India & worldwide (GDELT, Google News, historic archives).\n"
+            "- `[ARCHIVE_SEARCH: keywords]` - searches public archives (Internet Archive, Wikisource).\n"
+            "Prefer live search over memory for facts, dates, names, trends and quotes, and cite the URLs.\n"
+            "When a task asks for a JSON answer, never put these tags inside the JSON -- the JSON is parsed as-is.\n"
+        )
+        base_prompt += research_tool_directive
 
         # Hinglish directive for content generation (workflow steps produce
         # titles, hooks and scripts). The Studio Assistant chat passes
@@ -117,6 +128,46 @@ class BaseAgent(ABC):
 
         return base_prompt
 
+    _TOOL_TAG_RE = re.compile(r"\[(?:WEB_SEARCH|SEARCH|WEB_FETCH|BOOK_SEARCH|NEWS_SEARCH|ARCHIVE_SEARCH):", re.I)
+    _TOOL_SPAN_RE = re.compile(
+        r"\[(?:WEB_SEARCH|SEARCH|WEB_FETCH|BOOK_SEARCH|NEWS_SEARCH|ARCHIVE_SEARCH):[^\]]*\](?:\[/[A-Z_]+\])?", re.I)
+
+    def _research_pass(self, system_prompt: str, raw_output: Any, rerun, require_json: bool = False) -> Any:
+        """When the model asked for live research, run it and let the model
+        answer again WITH the results -- one extra round, never a loop.
+
+        Resolving the tags alone (the old behaviour) left the reply as a dump
+        of search results: the model never saw them, so it never used them.
+        `rerun(system_prompt)` makes the second call with the same messages.
+        """
+        text = str(raw_output or "")
+        if require_json or not self._TOOL_TAG_RE.search(text):
+            return raw_output
+        try:
+            from app.services.studio_chat import process_web_research_tags
+            resolved = process_web_research_tags(text)
+        except Exception as exc:
+            logger.warning("Research tags for %s could not be resolved: %s", self.agent_name, exc)
+            return raw_output
+        logger.info("Agent '%s' ran live research; answering again with the results.", self.agent_name)
+        followup = (
+            system_prompt
+            + "\n\n## Results of the live research you requested\n"
+            + resolved[:12000]
+            + "\n\nNow complete the task using these results. Cite the URLs you rely on. "
+              "Do not emit research tags again."
+        )
+        try:
+            final = rerun(followup)
+        except Exception as exc:
+            logger.warning("Research follow-up for %s failed: %s", self.agent_name, exc)
+            return resolved
+        final_text = str(final or "")
+        # The results are already in hand: a tag in the follow-up is the model
+        # asking again, not new work -- drop it rather than search twice.
+        final_text = self._TOOL_SPAN_RE.sub("", final_text).strip()
+        return final_text or resolved
+
     def refresh_prompt(self):
         self.system_prompt = self._load_system_prompt()
 
@@ -135,15 +186,13 @@ class BaseAgent(ABC):
         """
         system_prompt = self._load_system_prompt(hinglish=hinglish) + (system_extra or "")
         logger.info(f"Agent '{self.agent_name}' is answering a chat turn ({len(messages)} messages)...")
-        raw_output = self.llm_service.generate_chat(
-            system_prompt=system_prompt, messages=messages, require_json=require_json,
-            tier=self.model_tier, temperature=self.temperature,
-        )
-        try:
-            from app.services.studio_chat import process_web_research_tags
-            return process_web_research_tags(raw_output)
-        except Exception:
-            return raw_output
+        def ask(prompt: str) -> str:
+            return self.llm_service.generate_chat(
+                system_prompt=prompt, messages=messages, require_json=require_json,
+                tier=self.model_tier, temperature=self.temperature,
+            )
+
+        return self._research_pass(system_prompt, ask(system_prompt), ask, require_json)
 
     def execute(self, task: Any, require_json: bool = False) -> Any:
         try:
@@ -165,13 +214,14 @@ class BaseAgent(ABC):
             self.refresh_prompt()
             effective_system_prompt = self.system_prompt + memory_prompt_addon
             logger.info(f"Agent '{self.agent_name}' is executing task with memory context...")
-            raw_output = self.llm_service.generate_text(
-                system_prompt=effective_system_prompt,
-                user_prompt=user_prompt,
-                require_json=require_json,
-                tier=self.model_tier,
-                temperature=self.temperature,
-            )
+            def ask_ctx(prompt: str) -> str:
+                return self.llm_service.generate_text(
+                    system_prompt=prompt, user_prompt=user_prompt, require_json=require_json,
+                    tier=self.model_tier, temperature=self.temperature,
+                )
+
+            raw_output = self._research_pass(effective_system_prompt, ask_ctx(effective_system_prompt),
+                                             ask_ctx, require_json)
             try:
                 from memory.memory import memory_system
                 memory_system.save(
@@ -193,19 +243,13 @@ class BaseAgent(ABC):
         self.refresh_prompt()
         effective_system_prompt = self.system_prompt + memory_prompt_addon
         logger.info(f"Agent '{self.agent_name}' is executing task with memory context...")
-        raw_output = self.llm_service.generate_text(
-            system_prompt=effective_system_prompt,
-            user_prompt=user_prompt,
-            require_json=require_json,
-            tier=self.model_tier,
-            temperature=self.temperature,
-        )
-        if not require_json:
-            try:
-                from app.services.studio_chat import process_web_research_tags
-                raw_output = process_web_research_tags(raw_output)
-            except Exception:
-                pass
+        def ask(prompt: str) -> str:
+            return self.llm_service.generate_text(
+                system_prompt=prompt, user_prompt=user_prompt, require_json=require_json,
+                tier=self.model_tier, temperature=self.temperature,
+            )
+
+        raw_output = self._research_pass(effective_system_prompt, ask(effective_system_prompt), ask, require_json)
 
         try:
             from memory.memory import memory_system

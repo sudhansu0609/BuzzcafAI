@@ -99,6 +99,12 @@ def _run_research_step(monkeypatch, project_id, reply):
         "generate_text",
         lambda self, system_prompt, user_prompt, require_json=False, **kwargs: reply,
     )
+    # The research step is a tool loop over the chat API now (runtime/research_loop.py).
+    monkeypatch.setattr(
+        LLMService,
+        "generate_chat",
+        lambda self, system_prompt, messages, require_json=False, **kwargs: reply,
+    )
     p = Project(
         id=project_id,
         name="Research honesty probe",
@@ -127,7 +133,8 @@ def test_research_step_writes_a_file_per_json_section(monkeypatch):
         with open(os.path.join(research_dir, "timeline.md"), encoding="utf-8") as f:
             assert "1923 - the mill burns down" in f.read()
         assert p.assets["research"] == "research/research.md"
-        assert p.steps_history[-1].simulated_sections == []
+        # The reply carried no story material: that one section is recorded as missing.
+        assert p.steps_history[-1].simulated_sections == ["story_material"]
     finally:
         shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, project_id), ignore_errors=True)
 
@@ -143,7 +150,7 @@ def test_research_step_labels_a_prose_reply_instead_of_faking_sections(monkeypat
         with open(os.path.join(research_dir, "research.md"), encoding="utf-8") as f:
             assert "cause is disputed" in f.read()
         assert p.steps_history[-1].simulated_sections == [
-            "timeline", "facts", "sources", "media", "unanswered_questions",
+            "timeline", "facts", "sources", "media", "unanswered_questions", "story_material",
         ]
     finally:
         shutil.rmtree(os.path.join(TEST_PROJECTS_DIR, project_id), ignore_errors=True)
@@ -160,6 +167,9 @@ def test_workflow_step_delegation_lands_in_the_asset(monkeypatch):
         return "SCRIPT DRAFT.\n[INVOKE_AGENT: FactChecker]Verify the 1923 dates.[/INVOKE_AGENT]"
 
     monkeypatch.setattr(LLMService, "generate_text", fake_text)
+    monkeypatch.setattr(LLMService, "generate_chat",
+                        lambda self, system_prompt, messages, require_json=False, **kwargs:
+                        fake_text(self, system_prompt, messages[-1]["content"], require_json=True))
     project_id = "test_step_delegation"
     try:
         Project(

@@ -6,10 +6,939 @@
     "status": "completed",
     "current_step": "Completed",
     "created_at": "2026-09-23T14:25:06.546542",
-    "updated_at": "2026-09-23T14:32:59.268690",
+    "updated_at": "2026-09-27T16:37:01.900671",
     "metadata": {
         "allow_all": true,
-        "target_duration_minutes": 15.0
+        "target_duration_minutes": 15.0,
+        "buzzedit_project_id": "5fbc856f",
+        "script_deviation": {
+            "script_spoken_share": 0.171,
+            "adlib_share": 0.83,
+            "beats_placed": 89,
+            "beats_dropped": 12,
+            "skipped_paragraphs": 11
+        },
+        "precut": true,
+        "video_settings": {
+            "voice_preset": "podcast",
+            "zoom_depth": 0.25,
+            "target_coverage": 0.7,
+            "text_fx_per_minute": 5.0,
+            "review_mode": "none",
+            "precut": true,
+            "allow_free_stock": false,
+            "video_broll_share": 0.35,
+            "punch_rate_per_minute": 4.0,
+            "effects_review": false
+        },
+        "buzzedit_job_id": "job_cc5f007c",
+        "buzzedit_report": {
+            "project_id": "5fbc856f",
+            "started_at": "2026-09-27T14:56:17.671275",
+            "finished_at": "2026-09-27T16:37:01.128968",
+            "settings": {
+                "broll": true,
+                "broll_video": true,
+                "popups": true,
+                "graphics": false,
+                "face_zoom": true,
+                "captions": true,
+                "caption_preset": "karaoke_pop",
+                "title": true,
+                "title_preset": "overlay_hook",
+                "atmosphere": "auto",
+                "thumbnail": true,
+                "render": true,
+                "verify": true,
+                "shorts_clips": 3,
+                "shorts_full": false,
+                "cards": true,
+                "location_cards": true,
+                "character_cards": true,
+                "stat_callouts": true,
+                "source_cards": true,
+                "definition_cards": true,
+                "quote_cards": true,
+                "chapter_titles": true,
+                "end_screen": true,
+                "end_screen_text": "SUBSCRIBE",
+                "maps": true,
+                "split_screens": true,
+                "newspapers": true,
+                "case_files": true,
+                "recreations": true,
+                "map_style": "auto",
+                "structure": true,
+                "cold_open": true,
+                "metadata": true,
+                "moods": true,
+                "mood_strength": 1.0,
+                "grade": "auto",
+                "topic_transitions": true,
+                "topic_transition": "auto",
+                "music": true,
+                "music_volume": 0.16,
+                "music_duck": 0.85,
+                "music_synth_fallback": true,
+                "music_by_act": true,
+                "caption_emphasis": true,
+                "captions_bilingual": "auto",
+                "pip": "auto",
+                "pip_min_seconds": 4.0,
+                "freeze_on_stats": true,
+                "style_profile": null,
+                "sfx": true,
+                "sfx_volume": 0.45,
+                "ambience": true,
+                "ambience_kind": "auto",
+                "ambience_volume": 0.05,
+                "voice_preset": "podcast",
+                "loudness_lufs": -14.0,
+                "voice_enhance": "auto",
+                "voice_fx": [],
+                "sfx_source": "auto",
+                "music_source": "auto",
+                "fade_in_s": 0.5,
+                "fade_out_s": 1.5,
+                "target_coverage": 0.7,
+                "min_oncamera_gap_s": 0.8,
+                "broll_seconds_min": 2.0,
+                "broll_seconds_max": 3.0,
+                "video_broll_share": 0.35,
+                "max_broll_per_minute": null,
+                "popup_preset": "youtube_pop",
+                "zoom_depth": 0.25,
+                "seed": null,
+                "genre": "vlog",
+                "genre_secondary": "motivational",
+                "density": "busy",
+                "punch_rate_per_minute": 4.0,
+                "text_fx_per_minute": 5.0,
+                "allow_free_stock": false,
+                "llm_provider": "auto",
+                "llm_base_url": "",
+                "llm_model": "",
+                "text_fx": true,
+                "text_fx_styles": null,
+                "ai_label": true,
+                "person_matte": "auto"
+            },
+            "settings_sources": {
+                "genre": "studio",
+                "genre_secondary": "studio",
+                "density": "studio",
+                "target_coverage": "studio",
+                "video_broll_share": "studio",
+                "broll_seconds_min": "studio",
+                "broll_seconds_max": "studio",
+                "min_oncamera_gap_s": "studio",
+                "zoom_depth": "studio",
+                "punch_rate_per_minute": "studio",
+                "text_fx_per_minute": "studio",
+                "voice_preset": "studio",
+                "voice_enhance": "studio",
+                "sfx_source": "studio",
+                "music_source": "studio",
+                "allow_free_stock": "studio"
+            },
+            "program": {
+                "duration_s": 473.16,
+                "word_count": 1199,
+                "segment_count": 1,
+                "has_energy": true
+            },
+            "beats_planned": 102,
+            "beats_dropped": [
+                {
+                    "topic": "A massive, towering stack of old leather-bound books on a ru",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A top-down cinematic shot of a hand holding a pen over a bla",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A stack of high-quality hardcover books on a shelf, one book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A modern high-rise corporate office building with glass wind",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Close up of a painter's hands mixing oil paints on a palette",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Close up of hands sketching a detailed portrait in a noteboo",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Risk factor ko *kam* karo taaki dar khatam ho sake",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A character artist sketching a complex character on a digita",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A cinematic wide shot of a character walking through a vibra",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A close up of a mystery map with glowing markings, atmospher",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A futuristic server room with glowing blue LED lights and co",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A person's hands pouring milk into a cup of coffee to create",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A person speaking passionately on a small stage with microph",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A person narrating a story in a dimly lit studio with high-q",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A dramatic cinematic scene of a historical period drama, int",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A high-speed action chase scene in a city at night, neon lig",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A stylized montage of different storytelling icons: a mask, ",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A wide shot of a person standing in front of a large window ",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A close up of a 'Comment' icon popping up on a screen with g",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Art of Starting Small",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Art of Starting Small",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Struggles with Writing Book",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Illusion of Perfection",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Illusion of Perfection",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Confidence Through Action",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Confidence Through Action",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Confidence Through Action",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "THE BIG TRAP",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Starting a small beginning",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "THE HOOK - THE OVERWhelm",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "THE HOOK - THE OVERWhelm",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Creative growth and storytelling",
+                    "reason": "too close to another cutaway"
+                }
+            ],
+            "plan_source": "llm",
+            "genre": "vlog",
+            "genre_secondary": "motivational",
+            "assets_generated": 79,
+            "assets_cached": 0,
+            "assets_failed": [],
+            "stock_used": [],
+            "broll_placed": 72,
+            "popups_placed": 0,
+            "graphics_placed": 0,
+            "cards_placed": {
+                "chapter_title": 9,
+                "definition_card": 4,
+                "quote_card": 1,
+                "stat_callout": 2,
+                "end_screen": 1
+            },
+            "entities_found": 6,
+            "maps_placed": 0,
+            "newspapers_placed": 0,
+            "case_files_placed": 0,
+            "recreations_placed": 0,
+            "splits_placed": 0,
+            "pip_placed": 0,
+            "freezes_placed": 1,
+            "caption_emphasis": 10,
+            "caption_translations": 316,
+            "style_profile_applied": "",
+            "beats_placement_rejected": [
+                {
+                    "beat": "e12_l",
+                    "topic": "Imperfect Reality vs Expectations",
+                    "reason": "would overlap or crowd the previous cutaway"
+                },
+                {
+                    "beat": "e20_l",
+                    "topic": "Struggles with Writing Book",
+                    "reason": "would overlap or crowd the previous cutaway"
+                },
+                {
+                    "beat": "b20",
+                    "topic": "Struggles with Writing Book",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b23",
+                    "topic": "Struggles with Writing Book",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b26",
+                    "topic": "Struggles with Writing Book",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b28",
+                    "topic": "Struggles with Writing Book",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b40",
+                    "topic": "Confidence Through Action",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b42",
+                    "topic": "Confidence Through Action",
+                    "reason": "no room inside the beat's span"
+                },
+                {
+                    "beat": "b75",
+                    "topic": "Creative growth and storytelling",
+                    "reason": "would overlap or crowd the previous cutaway"
+                }
+            ],
+            "coverage_target": 0.7,
+            "coverage_achieved": 0.435,
+            "jump_cuts_total": 0,
+            "jump_cuts_covered": 0,
+            "comfyui_online": true,
+            "zooms_segment": 0,
+            "zooms_windowed": 4,
+            "zooms_punch_in": 2,
+            "zooms_punch_out": 2,
+            "zooms_suppressed_by_broll": 9,
+            "faces_detected_pct": 100.0,
+            "captions": 316,
+            "caption_script": "native",
+            "title_text": "START SMALL TO SUCCEED",
+            "atmosphere_applied": "grain",
+            "grade_applied": "warm",
+            "topic_transitions": 0,
+            "acts": [
+                "hook",
+                "context",
+                "context",
+                "point",
+                "point",
+                "point",
+                "takeaway",
+                "takeaway",
+                "takeaway",
+                "cta"
+            ],
+            "cold_open": {
+                "text": "lekin aksar... hum unhe shuru karne se darte hain.",
+                "seconds": 2.6,
+                "from_s": 24.0,
+                "source": "llm"
+            },
+            "metadata_written": true,
+            "moods": [
+                "build",
+                "tense",
+                "calm",
+                "reveal",
+                "build",
+                "climax",
+                "hopeful",
+                "calm",
+                "calm",
+                "hopeful"
+            ],
+            "mood_layers": 7,
+            "mood_hits": 0,
+            "script_aligned_words": 1196,
+            "script_spelling_fixed": 0,
+            "script_directives": 92,
+            "music_used": "afd0015037e65b1b.wav [hook] \u2192 afd0015037e65b1b.wav [point] \u2192 afd0015037e65b1b.wav [takeaway] \u2192 afd0015037e65b1b.wav [cta]",
+            "sfx_placed": 47,
+            "ambience_used": "",
+            "voice_preset": "podcast",
+            "voice_enhance_used": "rnnoise",
+            "sfx_source_used": {
+                "generated": 47
+            },
+            "music_source_used": "generated",
+            "thumbnail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\5fbc856f\\thumbnail.jpg",
+            "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_presented.mp4",
+            "verification": [
+                {
+                    "name": "speaker_on_screen",
+                    "ok": true,
+                    "detail": "cutaways cover 43% of the programme (target 70%)",
+                    "value": 0.435
+                },
+                {
+                    "name": "text_clear_of_face",
+                    "ok": false,
+                    "detail": "stat: 99 % @ 177.2s; START SMALL TO SUCCEED @ 3.2s",
+                    "value": 2.0
+                },
+                {
+                    "name": "text_not_stacked",
+                    "ok": true,
+                    "detail": "435 text items",
+                    "value": 0.0
+                },
+                {
+                    "name": "music_under_voice",
+                    "ok": true,
+                    "detail": "52 mix items",
+                    "value": 0.0
+                },
+                {
+                    "name": "assets_present",
+                    "ok": true,
+                    "detail": "all cutaway files exist",
+                    "value": 0.0
+                },
+                {
+                    "name": "render_exists",
+                    "ok": true,
+                    "detail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_presented.mp4",
+                    "value": null
+                },
+                {
+                    "name": "loudness",
+                    "ok": true,
+                    "detail": "-14.0 LUFS against -14.0 target, peak -1.4 dBFS",
+                    "value": -14.0
+                },
+                {
+                    "name": "av_length",
+                    "ok": true,
+                    "detail": "picture 476.36s, sound 476.40s",
+                    "value": -0.04
+                },
+                {
+                    "name": "length_matches_timeline",
+                    "ok": true,
+                    "detail": "rendered 476.36s, timeline 476.36s",
+                    "value": 0.0
+                }
+            ],
+            "shorts": [
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_short1.mp4",
+                    "topic": "THE HOOK - THE OVERWhelm",
+                    "from_s": 18.4,
+                    "seconds": 16.08
+                },
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_short2.mp4",
+                    "topic": "Struggles with Writing Book",
+                    "from_s": 65.64,
+                    "seconds": 58.0
+                },
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_short3.mp4",
+                    "topic": "Confidence Through Action",
+                    "from_s": 173.48,
+                    "seconds": 26.78
+                }
+            ],
+            "text_fx_placed": {
+                "kinetic_words": 7,
+                "knockout": 13,
+                "behind_head": 3
+            },
+            "person_matte_used": "torchvision",
+            "text_fx_skipped": [],
+            "designed_graphics": {
+                "speaker_slots": 11,
+                "statement_card": 4,
+                "canvas_card": 7
+            },
+            "ai_labels": 68,
+            "degraded": [
+                "video_broll: video budget of 45 min used; 11 clip(s) kept as stills",
+                "check:text_clear_of_face"
+            ],
+            "generation": {
+                "image_phase": {
+                    "phase": "images",
+                    "need_vram_mb": 9000.0,
+                    "need_ram_mb": 4000.0,
+                    "ready": true,
+                    "reason": "",
+                    "free_vram_mb": 15194,
+                    "available_ram_mb": 24160
+                },
+                "video_phase": {
+                    "planned": 29,
+                    "made": 18,
+                    "kept_still": 11,
+                    "skipped_reason": "video budget of 45 min used; 11 clip(s) kept as stills",
+                    "handover": {
+                        "phase": "video",
+                        "need_vram_mb": 11000.0,
+                        "need_ram_mb": 10000.0,
+                        "ready": true,
+                        "reason": "",
+                        "free_vram_mb": 14940,
+                        "available_ram_mb": 23034
+                    }
+                }
+            },
+            "timings": [
+                {
+                    "stage": "script",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shotplan",
+                    "seconds": 90.5,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail_title",
+                    "seconds": 7.19,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "moods",
+                    "seconds": 22.42,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "translate",
+                    "seconds": 22.76,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "entities",
+                    "seconds": 48.44,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata",
+                    "seconds": 5.82,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "eject_llm",
+                    "seconds": 0.92,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "assets",
+                    "seconds": 4195.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "maps_charts",
+                    "seconds": 0.56,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_broll",
+                    "seconds": 0.04,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_popups",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "face_detect",
+                    "seconds": 12.37,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "layout_speakers",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "overlays",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "ai_labels",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_cards",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "pip",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "freezes",
+                    "seconds": 0.16,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "plan_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "captions",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_emphasis",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_translations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "title",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "atmosphere",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "script_fx",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "cold_open",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata_reshift",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_moods",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "grade",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "recreations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "topic_transitions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_generation",
+                    "seconds": 33.97,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound",
+                    "seconds": 1.99,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "voice_master",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "text_fx",
+                    "seconds": 9.42,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail",
+                    "seconds": 16.15,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "render",
+                    "seconds": 1481.47,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shorts",
+                    "seconds": 118.29,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_timeline",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_render",
+                    "seconds": 16.66,
+                    "ok": true,
+                    "note": ""
+                }
+            ]
+        },
+        "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5fbc856f_presented.mp4"
     },
     "steps_history": [
         {
@@ -110,6 +1039,9 @@
         "script": "script/draft.md",
         "visual_plan": "production/visual_plan.json",
         "thumbnail_plan": "production/storyboard.md",
-        "seo_package": "publish/publish.json"
+        "seo_package": "publish/publish.json",
+        "script_deviation": "production/script_deviation.json",
+        "buzzedit_script": "script/buzzedit_script.md",
+        "visual_plan_take": "production/visual_plan_take.json"
     }
 }

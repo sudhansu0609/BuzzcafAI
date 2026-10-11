@@ -1,0 +1,36 @@
+{
+  "life3baje": {
+    "genre": "vlog",
+    "genre_secondary": "motivational",
+    "density": "busy",
+    "voice_preset": "studio_mic",
+    "auto_edit": {
+      "max_pause_seconds": 1.0,
+      "pause_padding_seconds": 0.35
+    }
+  },
+  "raat3baje": {
+    "genre": "horror",
+    "genre_secondary": "mystery",
+    "density": "busy",
+    "voice_preset": "horror_intimate"
+  },
+  "khayal3baje": {
+    "genre": "horror",
+    "genre_secondary": "mystery",
+    "density": "busy",
+    "voice_preset": "horror_intimate"
+  },
+  "beyond3baje": {
+    "genre": "documentary",
+    "genre_secondary": "mystery",
+    "density": "busy",
+    "voice_preset": "broadcast"
+  },
+  "originals": {
+    "genre": "general",
+    "genre_secondary": null,
+    "density": "balanced",
+    "voice_preset": "studio_mic"
+  }
+}

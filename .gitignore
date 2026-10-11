@@ -42,3 +42,10 @@ backend/logs/
 .buzzcode/
 *.exe
 scripts/claude_switcher/
+
+# YouTube OAuth client and channel sign-ins
+backend/config/youtube/
+
+# crash dumps / TypeScript build cache
+*.stackdump
+*.tsbuildinfo

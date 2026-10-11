@@ -191,10 +191,12 @@ def test_workflow_validator_reads_the_agent_registry():
 
 
 def test_shipped_workflows_all_load():
-    """The six workflows under prompts/workflows survive validation."""
+    """The seven workflows under prompts/workflows survive validation
+    (six channel pipelines plus the Shorts Desk's `shorts_ready`)."""
     registry = WorkflowRegistry()
     registry.discover_workflows()
-    assert len(registry.list()) == 6
+    assert len(registry.list()) == 7
+    assert "shorts_ready" in {wf.id for wf in registry.list()}
     for wf in registry.list():
         assert wf.steps
 

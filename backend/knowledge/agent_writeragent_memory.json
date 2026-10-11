@@ -142,5 +142,346 @@
     "source": "agent",
     "created": "2026-09-23T14:28:25.588701",
     "updated": "2026-09-23T14:28:25.588708"
+  },
+  {
+    "id": "681c83b5-8d5c-42da-8d98-7fdb2267c60b",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Script Writing' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, H",
+      "result_snippet": "# script/draft.md\n\n---\n\n## Project: Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya\n**Brand:** Raat3Baje (Investigation & Folklore)\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Eerie, Grounded.\n\n---\n\n## [SCENE 01: THE HOOK - THE ECHO IN THE TREES]\n\n**VISUAL:** [Fade in from black. A slow-motion drone shot of a dense, fog-covered forest in Central India (e.g., Kanha or Bandhavgarh). The trees look like skeletal fingers reaching out. The only sound is the low hum of wind through leaves.]\n**SOUND:** [Deep, haunting ambient pad starts. Low frequency thrum. A faint, distorted static crackle every 10 seconds.]\n\n**V.O. (Narrator):** (slow) Imagine kijiye... aap ek ghane jungle ke beechon-beech hain. Shaam dhal chuki hai, aur charo taraf sirf sannata hai. Ek aisa sannata jo itna gehra hai ki aapko apni hi dhadkan sunayi de rahi hai.\n\n**VISUAL:** [Cut to a close-up of a weathered walkie-talkie lying on a dry leaf. A small LED light blinks weakly.]\n\n**V.O. (Narrator):** Aap ek Forest Officer hain. Aapka kaam hai in junglon ki raksha karna... lekin kabhi-kabhi, ye jungle bhi apni raksha karte hain. Unke apne raaz hote hain. Apne purane, bhayanak sach.\n\n**VISUAL:** [Host appears on camera. Dim, moody lighting. Direct eye contact. The background is the Raat3Baje studio.]\n\n**V.O. (Narrator):** Aaj ki baat kuch alag hai. Yeh sirf ek \"bhoot\" ki kahani nahi hai. Ye ek aisi report hai jo modern technology aur purane folklore ke beech ki boundary ko mita deti hai. Ek officer... jinhone apne hi phone par record kiya gaya **Voice Note**, jungle ki gehraiyon se wapas sunte hue apna dimaag khone ki kagar par pahunch gaye.\n\n**VOR (Narrator):** (pause) Kya ye sirf ek technical glitch tha? Ya phir kuch aur... jo aapke voice ko \"copy\" kar raha tha? Chaliye, is raaz ki teh tak jaate hain.\n\n---\n\n## [SCENE 02: THE INCIDENT - THE RECORDING]\n\n**VISUAL:** [Cut to grainy, high-contrast B-roll of a forest patrol route at night. A flashlight beam cuts thro"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T22:00:29.303149",
+    "updated": "2026-09-28T22:00:29.303155"
+  },
+  {
+    "id": "438aaab0-c36b-41cb-b82b-155486ea8890",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russ",
+      "result_snippet": "# script/draft.md\n\n---\n\n## Project: Kaise Ek Choti Si Engineering Galti Ne Poore Warship Ko Duba Diya\n**Brand:** Beyond3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Cinematic, Serious, Analytical, Atmospheric.\n\n---\n\n## [SCENE 01: THE COLD OPEN - THE MOMENT OF IMPACT]\n\n**VISUAL:** [Fade in from black. A grainy, high-contrast black and white photo of a massive warship anchored in a harbor. The water is still. Suddenly, the screen shakes slightly as a deep, low-frequency boom echoes.]\n**SOUND:** [A heavy, muffled explosion sound followed by the ringing of metal. Low, ominous synth pads begin to swell.]\n\n**V.O. (Narrator):** (slow) 15 February, 1898. Havana Harbor, Cuba. \n**VISUAL:** [Slow zoom into the ship\u2019s hull. The camera focuses on a specific point where the metal seems to buckle under pressure.]\n**V.O. (Narrator):** Subah ke thik 10:17 baje... ek bhayanak dhamaka hua. Itna bada, ki usne poore samundar ko hilakar rakh diya. Ek second mein, jo jahaz mahino se garv se khada tha, wo ek tabaah shishi (shattered glass) ki tarah bikhar gaya.\n**SOUND:** [Sound of crumbling metal and rushing water.]\n**V.O. (Narrator):** (beat) Logon ne kaha ki ye dushman ka hamla tha. Ek mine thi... ya shayad ek torpedo? Lekin sachai kahin zyada... aur zyada 'dry' thi. \n**VISUAL:** [Cut to a blueprint of a ship, showing internal compartments.]\n**V.O. (Narrator):** Yeh koi conspiracy nahi thi. Ye ek engineering ki wo choti si galti thi, jisne na sirf ek jahaz ko dubaya... balki do bade deshon ke beech ek bhayanak jung ki shuruat kar di. \n**SOUND:** [Music cuts out suddenly. Silence for 1 second.]\n**V.O. (Narraror):** (slow) Ek aisi galti, jo shayad sirf ek 'design choice' thi... par usne itihas badal diya.\n\n---\n\n## [SCENE 02: THE INCIDENT - THE USS MAINE]\n\n**VISUAL:** [Transition to archival footage or photos of the USS Maine in its prime. It looks majestic, a \"Protected Cruiser.\"]\n**SOUND:** [Atmospheric, steady maritime music with a hint of mystery.]\n\n**V.O. (Narrator):** Is jaha"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T22:05:50.809797",
+    "updated": "2026-09-28T22:05:50.809803"
+  },
+  {
+    "id": "e4be5d6a-0936-403e-b931-739a5ce84600",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Planning' for the media project 'I Started With YouTube Videos \u2014 Now I\u2019m Trying to Build a Company' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** ge",
+      "result_snippet": "# Vlog Planning: I Started With YouTube Videos \u2014 Now I\u2019m Trying to Build a Company\n\n**Project:** Vlog Planning\n**Brand:** Life3Baje (The Transparent Creator)\n**Language:** Hinglish (Roman Script)\n\n---\n\n## **Core Premise & Viewer Payoff**\nThe video documents the creator's evolution from a \"content creator\" seeking views to an \"entrepreneur\" building a structured media infrastructure. The viewer payoff is a raw, unfiltered look at the transition: moving away from just making videos to building systems, hiring (or planning for it), and creating a sustainable business while balancing a full-time software career. It\u2019s about the shift from *hustle* to *systems*.\n\n---\n\n## **Title Options**\n1. YouTube se Company tak: Mera Sachha Safar \ud83d\ude80\n2. Why I\u2019m Moving Beyond \"Just\" Making Videos\n3. From Content Creator to Media Founder (The Honest Truth)\n4. YouTube par shuru kiya, par ab ek Business bana raha hoon.\n\n---\n\n## **Thumbnail Concept**\n*   **Visual:** A split-screen or \"Then vs. Now\" style. \n    *   **Left Side:** A grainy/older photo of the creator with a simple setup (The YouTuber).\n    *   **Right Side:** A high-quality, professional shot in the current studio/office setting (The Founder).\n*   **Text Overlay:** \"YouTube $\\rightarrow$ Company\" or \"The Real Transition.\"\n*   **Vibe:** Warm, authentic, and reflective.\n\n---\n\n## **Opening Hook (First 10 Seconds)**\n*(Visual: Close up of the creator looking directly into the camera, perhaps holding a coffee mug in the studio.)*\n**Narrator:** \"Log mujhse puchte hain ki main itne saare channels kyun chala raha hoon... ya phir Buzzcaf ko kyun build kar raha hoon. Sach ye hai ki mera maqsad sirf views lena nahi tha\u2014mera maqsad ek legacy banana tha.\"\n\n---\n\n## **A-Roll Setup & Camera Framing**\n*   **Setting:** A cozy, well-lit corner of the office/studio. \n*   **Framing:** Medium shot (waist up). The background should show some \"work in progress\" elements\u2014microphones, cameras, or a desk with monitors to establish the \"builder\" vibe.\n*   *"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T22:07:14.990995",
+    "updated": "2026-09-28T22:07:14.991000"
+  },
+  {
+    "id": "a7d71676-5327-49cb-ad36-9ce2b8103174",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Script & Prompts' for the media project 'I Started With YouTube Videos \u2014 Now I\u2019m Trying to Build a Company' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Ne",
+      "result_snippet": "# script/draft.md\n\n**Project:** I Started With YouTube Videos \u2014 Now I\u2019m Trying to Build a Company  \n**Brand:** Life3Baje  \n**Language:** Hinglish (Roman Script)  \n**Tone:** Honest, Warm, Reflective, Conversational  \n\n---\n\n## [SCENE 01: THE HOOK - THE WHY]\n\n**VISUAL:** [Close-up of the creator sitting in a warm, dimly lit studio. He is holding a coffee mug\u2014the steam is visible. The background shows soft bokeh lights and some equipment like a mic on a boom arm.]  \n**SOUND:** [Soft, acoustic guitar starts - 85 bpm. Warm and inviting.]\n\n**V.O. (Narrator):** (slow) Log mujhse aksar puchte hain... ki main itne saare channels kyun chala raha hoon? Ya phir ye Buzzcaf ka naam baar-baar kyu aata hai?  \n**VISUAL:** [Cut to a montage of different channel logos and thumbnails scrolling quickly.]  \n**V.O. (Narrator):** Sach kahun toh, mera maqsad kabhi bhi sirf views ya subscribers ka number badhana nahi tha. (beat) Mera maqsad hamesha se ek *legacy* banana raha hai. Ek aisa platform jo mere jaane ke baad bhi zinda rahe.  \n**VISUAL:** [Creator looks directly into the camera, leaning in slightly.]  \n**V.O. (Narrator):** Aaj ki video mein, main aapse bilkul transparent baat karna chahta hoon. Yeh meri journey hai\u2014ek content creator se ek media founder banne tak ka safar. Ismein jo khushiyan hain, jo darr hai, aur jo failures hain... sab kuch share karunga.  \n**SOUND:** [Music transitions to a light lo-fi beat.]\n\n---\n\n## [SCENE 02: THE ORIGIN - WHERE IT ALL BEGAN]\n\n**VISUAL:** [Cut to older footage or high-quality photos of the creator\u2019s early setup\u2014maybe a messy desk, basic lighting. Transition to current studio.]  \n**V.O. (Narrator):** Sab kuch shuru hua ek simple idea se... YouTube par videos banana. Shuruat mein, focus sirf content par tha. \"Kya log ise pasand karenge? Kya ye message deliver ho raha hai?\"  \n**VISUAL:** [Overlay of early thumbnails from his first few channels.]  \n**V.O. (Narrator):** Wo dinon mein ek alag hi excitement thi. Har video ke baad jab notifications aat"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T22:09:31.673769",
+    "updated": "2026-09-28T22:09:31.673774"
+  },
+  {
+    "id": "21fff3a2-0805-4baa-afe0-febee1254be5",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Script Writing' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** In",
+      "result_snippet": "# script/draft.md\n\n**Project:** Basement ke Rules | The Forbidden Door\n**Brand:** Raat3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Eerie, Grounded.\n\n---\n\n## [SCENE 01: THE STORY - THE RULES OF SECTOR 4]\n\n**VISUAL:** [The screen is dark. A grainy, high-contrast filter is applied to the footage. We see a flickering fluorescent light in a long, concrete corridor. The walls are stained with dampness. Sound of heavy boots walking on concrete.]\n**SOUND:** [Low-frequency drone (60-75 bpm). The hum of an old industrial fan and distant dripping water.]\n\n**V.O. (Narrator):** (slow) Raat ke do baje. Ek purani government building ka corridor. Sannata itna gehra hai ki aapko apne hi saans lene ki awaaz kisi cheekh jaisi lagti hai. \n**SOUND:** [A distant, metallic 'clink' of a pipe hitting the floor.]\n\n**V.O. (Narrator):** Aap yahan ek security guard hain. Aapki duty hai \"Sector 4\" ko guard karna\u2014ek aisa basement jo pichle bees saalon se band hai. Log kehte hain ki wahan niche kuch 'bhari' hai. Kuch aisi cheez, jise zinda logon ka wahan hona pasand nahi.\n**VISUAL:** [The camera focuses on a dusty, leather-bound logbook sitting on a metal desk. The pages are yellowed and brittle.]\n\n**V.O. (Narrator):** Jab aapne us purani logbook ko khola, toh sabse upar ek warning likhi thi. \"Basement Rules.\" \n**SOUND:** [Music stops abruptly. Silence for 2 seconds.]\n\n**V.O. (Narrator):** (slow) Rule Number One: *Agar aapko metal ke darwaze ke peeche se kadmon ki aahat sunayi de... toh peechhe mud kar mat dekhna.*\n**VISUAL:** [A heavy iron door at the end of the hallway begins to vibrate slightly.]\n\n**V.O. (Narrator):** Rule Number Two: *Agar koi ventilation shaft ke andar se aapka naam pukare, toh sirf phusphusa kar jawab dein. Kabhi chillayen nahi.*\n**SOUND:** [A faint, distorted whisper\u2014barely audible\u2014echoes through the pipes.]\n\n**V.O. (Narraror):** Rule Number Three: *Agar aapko koi saaya dikhe jo aapke saath hil nahi raha... toh 60 seconds tak bilkul sthi"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:12:34.468359",
+    "updated": "2026-09-29T03:12:34.468364"
+  },
+  {
+    "id": "fdd98ce9-f3b0-4dbd-929b-1adc12818a85",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'Mothman: Point Pleasant ka Rahasya' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Austra",
+      "result_snippet": "# script/draft.md\n\n**Project:** Mothman: Point Pleasant ka Rahasya\n**Brand:** Beyond3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Conversing, Atmospheric, Investigative, Serious.\n\n---\n\n## [SCENE 01: THE HOOK - NOVEMBER 1966]\n\n**VISUAL:** [The screen is pitch black. A grainy, high-contrast film grain overlay is applied, mimicking 1960s newsreel footage. Slowly, a flickering light appears over a silhouette of a bridge shrouded in fog.]\n**SOUND:** [Low-frequency drone begins\u2014dark, steady, and atmospheric. The sound of wind whistling through metal cables.]\n\n**V.O. (Narrator):** (slow) November, 1966. West Virginia ke Point Pleasant ka ilaka. Raat ka waqt hai... aur hawa mein ek ajeeb si bhari-pan hai. \n**SOUND:** [A distant, metallic groan of a bridge structure.]\n\n**V.O. (Narrator):** Kuch log jo us waqt wahan se guzar rahe the, unhone kuch aisa dekha jisne unhe zindagiyan ke liye darra diya. Ek bada sa, par-mukt (winged) saaya... jiske pankhon ka phailao kaafi bada tha. Par sabse khaufnaak cheez uski aankhen thi. \n**SOUND:** [A sharp, high-pitched violin screech, very brief, then back to the drone.]\n\n**V.O. (Narrator):** Do chamakti hui laal aankhen. Jaise koi aag ki tarah andhere mein jal rahi hon. Logon ne ise ek 'beast' kaha... kuch ne ise ek 'omen' yaani kisi bade hadse ka sanket maana. \n**VISUAL:** [Cut to a grainy, black-and-white photo of the Point Pleasant TNT area. A large \"M\" shape is subtly highlighted in the shadows.]\n\n**V.O. (Narrator):** Ye koi modern internet kahani nahi thi. Ye ek aisi report thi jo 1960s ke newspapers aur local witness statements mein damak rahi thi. Ek aisa rahasya jise aaj hum 'Mothman' ke naam se jaante hain.\n**SOUND:** [Music shifts\u2014a pulsing, rhythmic synth starts at 95 bpm.]\n\n---\n\n## [SCENE 02: THE INCIDENT - THE SIGHTINGS]\n\n**VISUAL:** [Montage of old-style newspaper clippings from the mid-60s. The words \"Sighting,\" \"Point Pleasant,\" and \"Mystery\" are visible in various headlines.]\n**SOUND:** [The sound of a typewriter c"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:27:24.918966",
+    "updated": "2026-09-29T03:27:24.918971"
+  },
+  {
+    "id": "5cffe3ea-4262-4837-a469-b17eeaaad4c8",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Planning' for the media project 'When did it stop being just 'videos'? (The Business Reality)' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** generic",
+      "result_snippet": "# Vlog Planning: When did it stop being just 'videos'? (The Business Reality)\n\n**Project:** Vlog Planning  \n**Brand:** Life3Baje  \n**Language:** Hinglish (Roman Script)  \n\n---\n\n## **Core Premise & Viewer Payoff**\nThe video captures the pivotal psychological and operational shift from being a \"Content Creator\" to becoming a \"Media Founder.\" The viewer payoff is an unfiltered look at the \"behind-the-scenes\" friction of building a multi-channel ecosystem and physical products (Buzzcaf) while balancing a high-pressure software career. It\u2019s about the transition from seeking *validation* (views/likes) to building *infrastructure* (systems/logistics).\n\n---\n\n## **Title Options**\n1. Jab 'Content' ek Business ban gaya. (When content became a business)\n2. From Creator to Founder: The Reality of Building Buzzcaf \u2615\n3. YouTube se Media Company tak ka safar.\n4. Why I\u2019m not \"just\" making videos anymore.\n5. The Truth about managing 5 channels & a 9-5 job.\n\n---\n\n## **Thumbnail Concept**\n*   **Visual:** A split-screen composition or a \"then vs. now\" aesthetic. \n    *   **Left Side (The Creator):** A slightly grainier, warmer shot of the creator with a basic setup, perhaps looking tired but happy. \n    *   **Right Side (The Founder):** A crisp, professional shot in the current studio/office, holding a Buzzcaf product or standing in front of multiple monitors showing \"work-in-progress\" systems.\n*   **Text Overlay:** \"Not just videos.\" / \"The Reality.\" or \"Creator $\\rightarrow$ Founder\"\n*   **Vibe:** Honest, grounded, and high-quality.\n\n---\n\n## **Opening Hook (0:00 - 1:30)**\n*(Visual: Close-up of the creator in a cozy studio setting. Soft lighting. He looks directly into the camera, perhaps taking a sip from a Buzzcaf mug.)*  \n**Narrator:** \"Log aksar puchte hain... ki itne saare channels kyun? Ya phir ye Buzzcaf ka obsession kyu? Sach toh ye hai ki ek point aaya jab mere liye 'content' sirf videos banana nahi raha. Wo ek hobby thi, par ab wo ek *infrastructure* ban chuka hai. Aaj main s"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:31:58.616555",
+    "updated": "2026-09-29T03:31:58.616565"
+  },
+  {
+    "id": "008bd014-5fc5-4143-a145-8b223a88ae9c",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Script & Prompts' for the media project 'When did it stop being just 'videos'? (The Business Reality)' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never**",
+      "result_snippet": "# script/draft.md\n\n**Project:** When did it stop being just 'videos'? (The Business Reality)\n**Brand:** Life3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Honest, Warm, Reflective, Conversational\n\n---\n\n## [SCENE 01: THE HOOK - BEYOND THE VIEWS]\n\n**VISUAL:** [Close-up of the creator in a cozy studio. Soft lighting. He is holding a Buzzcaf mug, steam rising from it. The background is slightly blurred but shows a professional setup.]\n**SOUND:** [Soft, acoustic guitar starts \u2013 85 bpm. Warm and intimate.]\n\n**V.O. (Narrator):** (slow) Log aksar mujhse ek hi sawaal puchte hain... \"Bhai, itne saare channels kyun?\" Ya phir, \"Ye Buzzcaf ka obsession kyun?\" (pause)\n\n**VISUAL:** [Cut to a fast montage of different channel logos and thumbnails scrolling across the screen.]\n\n**V.O. (Narrator):** Sach toh ye hai ki ek point aaya jab mere liye 'content' sirf videos banana nahi raha. Ye koi hobby nahi rahi... ye ek *infrastructure* ban chuka hai. \n\n**VISUAL:** [Creator looks directly into the camera, leaning in slightly.]\n\n**V.O. (Narrator):** Aaj ki video mein, main aapse bilkul transparent baat karna chahta hoon. Hum aksar \"content creation\" ko ek glamorous duniya maante hain\u2014jahan sirf views aur likes ka khel hai. Par mere liye, ye journey \"Content Creator\" se ek \"Media Founder\" banne tak ki kahani hai. (beat) Aaj hum us transition ke baare mein baat karenge... jab 'making content' se 'building a business' tak ka safar shuru hua.\n\n**SOUND:** [Music transitions to a light lo-fi beat.]\n\n---\n\n## [SCENE 02: THE EVOLUTION - FROM HOBBY TO SYSTEM]\n\n**VISUAL:** [A-Roll. Creator sitting in the studio. Cut to old, grainy footage of his early setup\u2014messy desk, basic lighting.]\n\n**V.O. (Narrator):** Shuruat mein, sab kuch bahut simple tha. Ek idea aata, ek video banti, aur agar log use pasand karte, toh wo 'reward' kaafi tha. Us waqt mera focus sirf content par tha. \"Kya ye message deliver ho raha hai? Kya log ise connect kar pa rahe hain?\" \n\n**VISUAL:** [Split screen: Left side shows"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:33:39.493984",
+    "updated": "2026-09-29T03:33:39.494018"
+  },
+  {
+    "id": "36398b8a-3e09-4a67-a59c-4305e51487de",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Script Writing' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Ja",
+      "result_snippet": "# script/draft.md\n\n**Project:** Peeche Mat Khodna: The Forbidden Boundary  \n**Brand:** Raat3Baje  \n**Language:** Hinglish (Roman Script)  \n**Tone:** Atmospheric, Investigative, Grounded, Intense  \n\n---\n\n## [SCENE 01: THE HOOK - THE RULES OF THE SOIL]\n\n**VISUAL:** [The screen is pitch black. A very low-frequency drone begins\u2014a deep, vibrating hum that feels heavy in the chest. Slowly, a flickering light appears, like an old torch or a dim flashlight hitting dusty ground.]\n\n**SOUND:** [Sound of rhythmic digging\u2014metal shovel hitting dry earth. The sound is muffled as if underground. Distant wind howling through trees.]\n\n**V.O. (Narrator):** (slow) Raat ke do baje hain. Ek sunsaan zameen ka tukda, jahan shehar ki roshni tak nahi pahunchti. Aap ek nayi building ka foundation daal rahe hain. Mitti thandi hai... aur hawa mein ek ajeeb si bhari-pan hai. \n\n**SOUND:** [The sound of the shovel hitting something solid\u2014not stone, but a hollow, wooden-like thud.]\n\n**V.O. (Narrator):** (pause) Tabhi... mitti ke neeche se ek awaaz aati hai. Ek sarsarahat. Jaise koi cheez zameen ke andar phansi hui ho aur aapne use chhed diya ho. \n\n**SOUND:** [A sudden, sharp metallic 'clink'\u2014then total silence for 2 seconds.]\n\n**V.O. (Narrar):** (slow) Us waqt, ek buzurg ki awaaz aapke kaano mein goonjti hai... jaise koi warning ho jo saalon pehle di gayi thi. *\"Peeche mat khodna.\"* \n\n**VISUAL:** [Cut to the host in the Raat3Baje set. Dim lighting, warm but moody tones. The host looks directly into the camera.]\n\n**V.O. (Narrator):** (normal) Yeh koi kahani nahi hai. Ye ek warning hai. Ek aisi boundary jo humne banayi hai\u2014na sirf zameen ko baantne ke liye, balki kuch cheezon ko... bahar rakhne ke liye. \n\n**VISUAL:** [Text appears on screen: THE RULES OF THE BOUNDARY.]\n\n**V.O. (Narrator):** Aaj ki episode mein, hum us \"Forbidden Boundary\" ki baat karenge. Us mitti ki, jo kabhi 'unhallowed' yaani apavitra maani jati hai. Hum baat karenge un rules ki jo rural India mein sadiyon se maane jaate hain... a"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:13:56.423888",
+    "updated": "2026-09-30T03:13:56.423894"
+  },
+  {
+    "id": "05505dc5-145c-4865-a231-9a77089588ad",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Scripting' for the media project 'Kaun Hain Ye? The Black-Eyed Children' (Brand: Beyond3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Beyond3Baje\n\n## Essence (read first)\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\"\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Aus",
+      "result_snippet": "# script/draft.md\n\n**Project:** Kaun Hain Ye? The Black-Eyed Children\n**Brand:** Beyond3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Grounded, Intense\n\n---\n\n## [SCENE 01: THE COLD OPEN - THE UNNATURAL LOOK]\n\n**VISUAL:** [The screen is pitch black. A very low-frequency drone begins\u2014a deep, vibrating hum that feels heavy in the chest. Slowly, a grainy, desaturated image of a suburban street at dusk fades in. The houses are dimly lit, and a thin mist hangs over the pavement.]\n\n**SOUND:** [Distant wind howling through trees. The faint sound of crickets suddenly cuts out into total silence.]\n\n**V.O. (Narrator):** (slow) 1980s ka ek pichla saal. Ek sunsaan suburban driveway... shaam ka waqt hai, aur thandak hawaon mein mehsoos ho rahi hai. Ek maa apne ghar ke andar se bahar dekhti hai. Bahar do bacche khade hain\u2014ek ladka aur ek ladki, lagbhag 10 saal ke. Wo bilkul normal dikhte hain... lekin jab wo upar dekhte hain, toh us maa ki cheekh nikal jaati hai.)\n\n**SOUND:** [A sharp, high-pitched violin screech for a split second, then immediate silence.]\n\n**V.O. (Narrator):** (slow) Kyunki unki aankhen... unki aankhen bilkul kaali thi. Na koi iris, na koi pupil. Sirf do gehre, khaali andhere ke gaddhe. Unka chehra ek sawal puch raha tha: *\"Kya hum andar aa sakte hain?\"*\n\n**VISUAL:** [The image of the street glitches for a second, showing a high-contrast close-up of an eye that is entirely black.]\n\n**V.O. (Narrator):** (normal) Yeh koi modern horror movie ka scene nahi hai. Ye ek report hai jo 1980s aur 90s ke dauran North America mein kai baar record ki gayi. Ek aisi report, jisne logo ko yeh sochne par majboor kar diya... ki kya kuch aisa hai jo hamare beech ghum raha hai, lekin wo insaan nahi hai?\n\n**SOUND:** [Music shifts\u2014a pulsing, rhythmic synth starts at 95 bpm.]\n\n---\n\n## [SCENE 02: THE INCIDENT - THE REPORTS]\n\n**VISUAL:** [Slow pan over old-fashioned neighborhood maps of the Midwest United States. Grainy textures applied to the footage."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:20:31.421845",
+    "updated": "2026-09-30T03:20:31.421850"
+  },
+  {
+    "id": "b0d9a4fb-ce40-4b8c-8182-5b419b62213e",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Planning' for the media project 'Can 5 Small YouTube Channels Become a Media Company?' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** generic product",
+      "result_snippet": "# Vlog Planning: Can 5 Small YouTube Channels Become a Media Company?\n\n**Project:** Can 5 Small YouTube Channels Become a Media Company?  \n**Brand:** Life3Baje  \n**Language:** Hinglish (Roman Script)\n\n---\n\n## **Core Premise & Viewer Payoff**\nThe video serves as a pivotal \"confession\" and strategic pivot point in the creator's journey. It moves away from the \"hustle\" narrative of growing a channel to the \"infrastructure\" reality of building a business. The viewer payoff is an honest look at the mental and operational ceiling of being a solo content creator and the transition into becoming a **Media Owner**. It\u2019s about moving from *selling views* to *building an ecosystem*.\n\n---\n\n## **Title Options**\n1. 5 Channels, 1 Vision: Content Creator se Media Owner tak.\n2. Why I'm building a \"Media Company\" (The Honest Truth).\n3. The \"Content Creator Trap\": Kyu sirf videos banana kaafi nahi hai.\n4. From YouTube to Business: Building an ecosystem for Buzzcaf.\n5. 5 Channels, 1 Studio, and the reality of scaling up.\n\n---\n\n## **Thumbnail Concept**\n*   **Visual:** A split-screen or \"multi-layered\" composition. On one side (or in the background), a cluttered desk with multiple monitors showing different channel dashboards (Beyond3Baje, Raat3Baje). In the foreground, a sharp, warm shot of the creator looking directly at the camera, perhaps holding a Buzzcaf mug.\n*   **Text Overlay:** \"Not just a YouTuber\" / \"The Transition\" or \"The Media House Plan.\"\n*   **Vibe:** Professional yet intimate. High production value but grounded in reality (no flashy neon arrows).\n\n---\n\n## **Opening Hook (0:00 - 1:30)**\n*(Visual: Close-up of the creator in a warm, dimly lit studio. He looks slightly tired but sincere. He takes a sip from a Buzzcaf mug.)*\n\n**Narrator:** \"Log aksar puchte hain... 'Bhai, itne saare channels kyun?' Ya phir, 'Buzzcaf ka obsession kyun?' (pause) Sach toh ye hai ki ek point aaya jab mere liye content banana sirf ek hobby nahi rahi. Ye ek infrastructure ban chuka hai. (beat) Aaj "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:23:30.860285",
+    "updated": "2026-09-30T03:23:30.860290"
+  },
+  {
+    "id": "e27fb759-e10b-441a-889e-b6cc598ee4ab",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Script & Prompts' for the media project 'Can 5 Small YouTube Channels Become a Media Company?' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** generic",
+      "result_snippet": "# script/draft.md\n\n**Project:** Can 5 Small YouTube Channels Become a Media Company?\n**Brand:** Life3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Honest, Warm, Conversational, Reflective\n\n---\n\n## [SCENE 01: THE HOOK - THE CONTENT CREATOR TRAP]\n\n**VISUAL:** [A tight, warm close-up of the creator sitting in a studio. The lighting is soft, creating an intimate \"late-night talk\" atmosphere. He holds a steaming mug of Buzzcaf coffee.]\n\n**SOUND:** [Soft, lo-fi acoustic guitar bed starts\u2014mellow and steady at 85 bpm.]\n\n**V.O. (Narrator):** (slow) Log aksar mujhse ek hi sawaal puchte hain... \"Bhai, itne saare channels kyun?\" Ya phir, \"Buzzcaf ka obsession kyun?\" (pause) Sach toh ye hai ki ek point aaya jab mere liye content banana sirf ek hobby nahi rahi. Ye ek infrastructure ban chuka hai.\n\n**VISUAL:** [Cut to a montage of the different channel logos: Beyond3Baje, Raat3Baje, etc., appearing on screen with soft transitions.]\n\n**V.O. (Narrator):** (normal) Aaj main aapse baat karna chahta hoon us \"Content Creator Trap\" ke baare mein\u2014wo point jahan growth ka matlab sirf zyada views nahi hota... balki zyada kaam aur zyada exhaustion hota hai. \n\n**VISUAL:** [Cut back to creator. He leans in slightly toward the camera.]\n\n**V.O. (Narrator):** Jab aap ek akele insaan ke taur par multiple brands handle karte hain, toh har cheez\u2014editing, research, planning, thumbnails\u2014aapke sar par hoti hai. Aur ek din, aapko realize hota hai ki \"solo\" chalna ab sustainable nahi hai. (beat) Agar mujhe isse badha paana hai, toh mujhe content creator se move karke, ek media owner banna hoga.\n\n---\n\n## [SCENE 02: THE MATH OF A MEDIA COMPANY]\n\n**VISUAL:** [A screen recording or blurred overlay showing the different analytics dashboards for the various channels.]\n\n**V.O. (Narrator):** (normal) Ab aap soch rahe honge, \"Media Company\" bolne se kya badal jayega? Media company ka matlab sirf ek bada office ya badi team nahi hai. Mere liye, iska matlab hai ek **ecosystem**. \n\n**VISUAL:** [Graphic on scr"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:24:54.466203",
+    "updated": "2026-09-30T03:24:54.466211"
+  },
+  {
+    "id": "516546c3-e1d2-4ef6-be98-a4cf2b6ea243",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Script Writing' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** In",
+      "result_snippet": "# Basement Ke Rules | The Forbidden Door\n**Project:** Basement ke Rules | The Forbidden Door\n**Brand:** Raat3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Grounded, Intense\n\n---\n\n## [SCENE 01: COLD OPEN]\n\n**VISUAL:** [Pitch black. A single flickering tube light buzzes to life, illuminating a narrow basement corridor with peeling government-issue green paint. Grain filter applied \u2014 slight desaturation throughout the story segment.]\n\n**SOUND:** [Low-frequency drone, 65 bpm. A tube light buzz-crackle loop.]\n\n**V.O. (Narrator):** (slow) Raat ke sawa do baje... ek security guard, akela, ek corridor mein khada hai. Uske haath kaanp rahe hain. (pause) Uske peeche, metal ka ek darwaza hai. Aur us darwaze ke peeche se... kadmon ki awaaz aa rahi hai.\n\n**SOUND:** [A single, deliberate footstep echo behind the door. Then silence.]\n\n**V.O. (Narrator):** (beat) Wo palatna chahta hai. Har cell uske jism ka usse kehta hai \u2014 peeche dekho. (long pause) Lekin uske haath mein ek purana register hai... aur us register ke pehle panne par likha hai \u2014 *\"Peeche mat dekhna.\"*\n\n**VISUAL:** [Hard cut to black. Title card: BASEMENT SECTOR 4.]\n\n**SOUND:** [off \u2014 total silence for two seconds before music resumes.]\n\n---\n\n## [SCENE 02: SETUP \u2014 WHO IS ARJUN]\n\n**VISUAL:** [Daylight. A cramped one-room flat in a Tier-2 Indian town. A young man, ARJUN, 26, packs a cheap steel tiffin. A hospital prescription slip is pinned to the wall with his mother's name on it.]\n\n**SOUND:** [Ambient daytime sounds \u2014 a ceiling fan creaking, distant traffic.]\n\n**V.O. (Narrator):** (normal) Arjun Verma. Chhabbis saal ka. Ek chhoti factory mein accountant tha, jab tak factory band nahi ho gayi. Uski maa ko dialysis chahiye \u2014 har hafte, teen din. Aur paison ke liye, Arjun ne wo job li jo koi aur lena nahi chahta tha \u2014 Zilla Parishad ki purani building mein, night shift security guard. Basement Sector 4 ki duty.\n\n**VISUAL:** [Arjun cycling through empty evening streets, the old governmen"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:42:21.600136",
+    "updated": "2026-10-01T00:42:21.600144"
+  },
+  {
+    "id": "469e8877-b929-48e6-9d76-b5e5454ff478",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Script Writing' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Ja",
+      "result_snippet": "# Peeche Mat Khodna: The Forbidden Boundary\n\n**Project:** Peeche Mat Khodna: The Forbidden Boundary\n**Brand:** Raat3Baje\n**Language:** Hinglish (Roman Script)\n**Tone:** Atmospheric, Investigative, Grounded, Intense\n\n---\n\n## [SCENE 01: COLD OPEN]\n\n**VISUAL:** [Pitch black screen. Slowly, a torchlight beam cuts through darkness \u2014 dusty, rural ground at night. Grain filter, desaturated.]\n\n**SOUND:** [Low-frequency drone, 65 bpm. Crickets, then sudden silence.]\n\n**V.O. (Narrator):** (slow) Raat ke sawa gyarah baje. Ek aadmi, akela, apne naye plot mein foundation ke liye gaddha khod raha hai. (pause) Phawda mitti mein utarta hai \u2014 baar baar, ek rhythm mein. Phir... ek awaaz. Metal ka nahi. Pathar ka bhi nahi.\n\n**SOUND:** [A dull, hollow thud \u2014 wood striking wood underground.]\n\n**V.O. (Narrator):** (beat) Woh ruk jaata hai. Aur tabhi, kahin door se, ek buzurg aurat ki awaaz uske zehan mein goonjti hai \u2014 jo usne kal hi suni thi. (long pause) *\"Peeche mat khodna.\"*\n\n**VISUAL:** [Hard cut to black. Title card: THE FORBIDDEN BOUNDARY.]\n\n**SOUND:** [off \u2014 two seconds of total silence before music resumes.]\n\n---\n\n## [SCENE 02: THE HOST]\n\n**VISUAL:** [Cut to host in the Raat3Baje set. Dim, warm lighting. Direct eye contact with camera.]\n\n**V.O. (Narrator):** (normal) Namaskar, main hoon aapka host, aur ye hai Raat3Baje. Aaj hum baat karenge ek aisi kahani ki jo maine socha tha ki main suna raha hoon... lekin jab maine iske peeche ki research ki, toh pata chala ki iska dar kahin zyada purana hai kisi ek kahani se. Ye kahani hai ek zameen ki. Ek boundary ki. Aur un rules ki jo humne is zameen ke saath banaye hain \u2014 na sirf usse baantne ke liye, balki kuch cheezon ko bahar rakhne ke liye.\n\n**V.O. (Narrator):** (beat) Lekin pehle, main aapko ye kahani sunata hoon jaisi mujhe mili thi. Poori tarah se fictional. Lekin iske peeche jo parampara hai... wo bilkul asli hai.\n\n---\n\n## [SCENE 03: SETUP \u2014 THE FAMILY]\n\n**VISUAL:** [Daylight. A cramped Mumbai apartment. A young couple, ROHAN (32"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:48:59.907846",
+    "updated": "2026-10-01T00:48:59.907852"
+  },
+  {
+    "id": "5f306076-f9a0-44e6-9d7e-00848eac7b47",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution",
+      "long_script"
+    ],
+    "content": {
+      "task_summary": "Script Writing for Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass (25 min, sectioned)",
+      "result_snippet": "## [SECTION 1: The Hook & The Warning]\n\n[SOUND: Heavy, howling wind. The sound of a truck engine struggling in low gear, muffled by thick fog.]\n\n[SOUND: A sudden, distorted truck horn blares\u2014long, piercing, and distorted as if echoing through a canyon.]\n\n[VOICE (Distorted/Panicked - Male)]: \"Piche mat dekhna! Woh peeche hai!\" \n\n[SOUND: A harsh metal grinding sound followed by a heavy thud. Sudden silence, except for the wind.]\n\n[MUSIC: Dark ambient drone with a low, haunting tanpura undertone begins slowly.]\n\n[VISUAL: Slow-motion drone shots of Gata Loops\u2014the road winding like a snake through grey, desolate peaks.]\n\n[HOST (Direct to camera, steady and serious)]: Gata Loops. \n(pause)\nIs naam ka zikr hi ek ajeeb si bechaini paida karta hai. Manali se Leh ke beech ek aisa rasta... jo itna khatarnak hai ki yahan har mod par maut ka saaya dikhta hai. Par kya aapko pata hai? Yahan ke log, aur un raste par sadiyon se chalne wale truck drivers, sirf mausam ya pathreli raahon se nahi darte. \n(slow)\nWoh un cheezon se darrte hain jo in thandi hawaon mein chhupi hain.\n\n[VISUAL: Rapid cuts of flickering lights on a truck cabin and dense yellow-tinted fog.]\n\n[HOST]: Kuch log ise 'superstition' kahenge, ya shayad sirf ek purani kahani. Lekin jab aap 14,000 feet ki unchai par hote hain\u2014jahan oxygen kam hoti hai aur darr zyada\u2014toh ye \"rules\" sirf baatein nahi rehti. \n(pause)\nYe survival manual ban jaate hain. \n\n[VIS1: Map overlay showing the specific treacherous stretch of Gata Loops.]\n\n[HOST"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:23:36.492082",
+    "updated": "2026-10-01T03:23:36.492086"
+  },
+  {
+    "id": "41db8c9f-d5af-487d-8ddb-7e9b3f371fb8",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution",
+      "long_script"
+    ],
+    "content": {
+      "task_summary": "Scripting for Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?) (15 min, sectioned)",
+      "result_snippet": "## [SECTION 1: The Mystery of the Mountain (Intro & Incident)]\n\n[SCENE START]\n\n[Visual: Cinematic, grainy black-and-white footage of snow-covered mountains. Slow zoom into a desolate peak.]\n[Sound: Low, haunting wind howling in the background. A deep, low-frequency synth pad builds tension.]\n\n**Narrator:** February 1959. (pause) Ural Mountains ka ek sunsan aur barf se dhaka ilaaka. Ek jagah jise log 'Kholat Syakhl' kehte hain\u2014yaani ki, 'Mountain of the Dead'. \n\n[Visual: A map overlay appears showing the remote location in Russia.]\n\n**Narrator:** Is naam ke peeche ek bhayankar sach chhupa hai. Ye koi tourist spot nahi tha; ye ek itna khatarnak aur isolated area tha jahan insaan ka kadam rakhna bhi maut ko dawat dena maana jata tha. (beat) Aur isi khamosh pahad ki god mein, ek aisi ghatna ghati jisne decades tak logon ko hairan kiya.\n\n[Visual: Cut to slow-motion shots of a tattered tent partially buried in snow.]\n[Sound: The wind fades slightly; the sound of crunching snow is heard.]\n\n**Narrator:** Jab search parties ne us area mein pahuncha, unhe ek tent mila jo barf ke niche dabba hua tha. Lekin ye koi normal camp nahi tha. Tent ka kapda bahar se nahi, balki *andar* se phada gaya tha. Jaise ki... (slow) kisi cheez se dar kar, ya kisi achanak aaye khatre se bachne ke liye, unhone usey faad kar bahar nikalne ki koshish ki ho. \n\n[Visual: Close up of the torn fabric and scattered items like boots and gloves.]\n\n**Narrator:** Jab unke kapde aur joote dhundhe gaye, toh ek ajeeb baat"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T05:39:57.875617",
+    "updated": "2026-10-01T05:39:57.875627"
+  },
+  {
+    "id": "3bf090c6-a408-487f-a15f-82ba0328dad8",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Planning' for the media project 'When does a YouTube channel become an 'Actual Business'?' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** generic pro",
+      "result_snippet": "# Vlog Planning: When does a YouTube channel become an 'Actual Business'?\n\n**Project:** When does a YouTube channel become an 'Actual Business'?  \n**Brand:** Life3Baje  \n**Language:** Hinglish (Roman Script)  \n**Tone:** Honest, Warm, Conversational, Reflective.\n\n---\n\n## **Core Premise & Viewer Payoff**\nThe video serves as a vulnerable \"internal audit\" of the creator's journey. It moves away from the external \"how-to\" style content and focuses on the internal transition: **When does a passion project cross the line into a sustainable business?** The viewer payoff is seeing the raw reality of managing multiple brands, the mental toll of being a solo creator with a full-time job, and the realization that a \"business\" involves logistics, risk, and systems\u2014not just views and engagement.\n\n---\n\n## **Title Options**\n1. Creator vs. CEO: Jab content ek business banta hai.  \n2. Is it a hobby or a business? My honest audit of the last year.  \n3. The \"Content Creator Trap\" aur transition to Media House.  \n4. Views vs. Systems: Why I\u2019m building more than just YouTube channels.  \n5. 1 Yeared Experiment: Kya ye sach mein ek business hai?\n\n---\n\n## **Thumbnail Concept**\n*   **Visual:** A split-screen or layered composition. Left side shows a \"Content Creator\" vibe (a close-up of the creator with a microphone/camera setup). Right side shows the \"Business Owner\" reality (the creator in his workspace, looking at order logs for Buzzcaf or complex spreadsheets).\n*   **Text Overlay:** \"Not just a YouTuber\" / \"The Tipping Point\" / \"Reality Check.\"\n*   **Vibe:** High production value but grounded. No neon colors; warm, moody lighting to match the \"late-night coffee conversation\" aesthetic.\n\n---\n\n## **Opening Hook (0:00 - 1:30)**\n*(Visual: A fast-paced but smooth montage of different channel logos [Beyond3Baje, Raat3Baje, etc.], followed by a transition to a raw, handheld shot of the creator looking exhausted at his desk late at night.)*\n\n**Narrator (Voiceover):** \"Log aksar puchte hain... 'B"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T05:43:40.902829",
+    "updated": "2026-10-01T05:43:40.902837"
+  },
+  {
+    "id": "9cfe0a01-8119-4fad-9605-b4d1e7661ebc",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Vlog Script & Prompts' for the media project 'When does a YouTube channel become an 'Actual Business'?' (Brand: Life3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Life3Baje\n\n## Essence (read first)\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\n- **Never** gen",
+      "result_snippet": "# script/draft.md\n\n**Project:** When does a YouTube channel become an 'Actual Business'?  \n**Brand:** Life3Baje  \n**Language:** Hinglish (Roman Script)  \n**Tone:** Honest, Warm, Conversational, Reflective  \n\n---\n\n## [SCENE 01: THE HOOK - THE CORE QUESTION]\n\n**VISUAL:** [A fast-paced but smooth montage of different channel logos\u2014Beyond3Baje, Raat3Baje, and others\u2014appearing over cinematic clips. The transitions are soft, not jarring.]  \n**SOUND:** [Soft, lo-fi acoustic guitar bed begins. 85 bpm. Warm and inviting.]\n\n**NARRATOR (Voiceover):** Log aksar mujhse ek hi sawaal puchte hain... (pause) \"Bhai, itne saare channels kyun?\" Ya phir, \"Ye sab manage kaise kar lete ho?\"  \n**VISUAL:** [Cut to a raw, handheld shot of the creator sitting at a desk, lit by a warm lamp. He looks slightly tired but sincere. A mug of Buzzcaf is in front of him.]\n\n**NARRATOR (Direct to camera):** Sach toh ye hai ki ek point aaya jab mere liye content banana sirf ek passion ya hobby nahi raha. Ye ek infrastructure ban chuka hai. (beat) Lekin aaj main khud se ek sawaal puchna chahta hoon: Kya ye sach mein ek business hai? Ya phir main bas ek bahut bade level par 'content' create kar raha hoon?  \n**VISUAL:** [Close-up of the creator\u2019s face.]\n\n**NARRATOR (Direct to camera):** Aaj ki video koi \"how-to\" guide nahi hai. Main aapko ye nahi sikha raha ki kaise grow karein. Ye ek personal audit hai. Ek introspection... us line ko samajhne ki koshish jo ek 'passion project' ko ek 'sustainable business' mein badalti hai. (slow) Let\u2019s talk about the reality behind the screen.\n\n---\n\n## [SCENE 02: THE REALITY CHECK - THE CONTENT CREATOR TRAP]\n\n**VISUAL:** [Cut to a montage of the creator working: typing on a laptop, editing footage in the dark, and looking at complex spreadsheets.]  \n**SOUND:** [Music transitions to a slightly more grounded, steady acoustic track.]\n\n**NARRATOR (Voiceover):** Jab aap ek akela insaan ho aur multiple brands ko manage kar rahe ho... tab aapko reality ka ehsaas tab hota hai jab "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T05:45:27.829332",
+    "updated": "2026-10-01T05:45:27.829340"
+  },
+  {
+    "id": "6bc645df-9374-4a16-8888-f4ee71bd5150",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution",
+      "long_script"
+    ],
+    "content": {
+      "task_summary": "Script Writing for Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya (25 min, sectioned)",
+      "result_snippet": "## [SECTION 1: The Call of Duty]\n\n[SOUND: Heavy, rhythmic crunching of dry leaves under boots. A low, distorted hum of wind through dense trees.]\n\n[VISUAL: Extreme close-up of a hand holding a rugged smartphone. The screen is cracked. On the screen, a voice note app is active. A waveform flickers.]\n\n**ARJUN (V.O.)**\n(slow)\nTumhari awaaz... \n(pause)\nKyun yahan se aa rahi hai?\n\n[SOUND: A sharp, distorted burst of static. The audio of the \"voice note\" sounds like Arjun\u2019s voice, but it is layered, as if two versions of him are speaking at once.]\n\n**ARJUN (V.O.)**\n(fast)\nMaine yeh abhi... \n(pause)\nAbhi record kiya tha. \n\n[SOUND: The sound of heavy breathing. A sudden, sharp intake of breath.]\n\n[VISUAL: Cut to Arjun\u2019s face. He is in his early 30s, sweat beads on his forehead. His eyes are wide, reflecting the dim light of the phone screen. Behind him, the forest is a wall of black and grey.]\n\n**ARJUN (V.O.)**\n(normal)\nRaat ka waqt... Sahyadri ki pahadiyan. \n(pause)\nArjun ek experienced forest officer tha. \n\n[VISUAL: A montage of Arjun in different settings\u2014walking through tall grass, marking trees with paint, and looking at a map. The colors are muted and earthy.]\n\n**ARJUN (V.O.)**\nUse is jungle ki har khamoshi... \n(pause)\nHar cheekh ka matlab pata tha. \n(pause)\nUsey pata tha ki ye jungli ilaaka kitna khatarnaak ho sakta hai.\n\n[VISUAL: A wide shot of a vast, dense forest. The trees are massive, their branches interlocking like skeletal fingers.]\n\n**ARJUN (V.O.)**\n(normal)\nLekin aaj"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T19:53:14.963320",
+    "updated": "2026-10-06T19:53:14.963324"
+  },
+  {
+    "id": "11bfbe44-0f77-4aa0-8c2e-6fe012a3b62d",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution",
+      "long_script"
+    ],
+    "content": {
+      "task_summary": "Script Writing for Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya (25 min, sectioned)",
+      "result_snippet": "## Pehli Duty aur Sannata\nHello doston, mera naam hai Sudhansu aur aap dekh rahe hain Raat 3 Baje. Aapke liye ek phir se bahut hi interesting kahani lekar aa gaya hoon. Toh chaliye bina kisi der ke aaj ki kahani shuru karte hain.\n\nYeh baat kuch saal pehle ki hai jab meri posting mere ghar se kaafi door, ek aise ilake mein hui jo pahadon aur ghane junglon se ghira tha. Main ek forest officer ke roop mein naye-naye duty par aaya tha aur mujhe pata tha ki ye koi aasaan kaam nahi hai. Sheher ki bhag-daur, shor-sharaabe aur logon ki bheed se door, yeh mera pehla bada kadam tha jahan mujhe khud ko sabit karna tha. Meri posting ki jagah ka naam bhi koi aam nahi tha; ye ek purani outpost thi jo pahadiyon ke beech bilkul akeli khadi thi. Jab main apni jeep mein nikalta tha, toh rasta jitna upar jata, utna hi mushkil hota jaata aur charon taraf sirf ped aur patthar reh jaate. Jaise-jaise hum jungle ke gehre hisse mein dhaste gaye, mere phone ka signal khatam hone laga. Ek waqt aisa aaya jab mera mobile bilkul maut ki khamoshi mein doob gaya aur screen par kuch nahi dikh raha tha. Yeh mere liye koi nayi baat nahi thi kyunki mujhe maloom tha ki yahan network milna mushkil hai, lekin us din jo sannata mujh tak pahuncha, wo kuch alag hi tha.\n\nJungle ka woh mahol ek dum se badal gaya aur hawa mein thandak ghusne lagi. Ped itne bade aur ghane the ki unki tehniyon ne aasman ko poori tarah dhak liya tha. Hawa mein mitti, sookhe patton aur purani lakdi ki ek bhari mehak thi jo naak mein chubhti"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T21:13:44.189156",
+    "updated": "2026-10-06T21:13:44.189169"
+  },
+  {
+    "id": "9426aaeb-b140-411f-a815-9d622ffa5590",
+    "scope": "agent",
+    "owner": "WriterAgent",
+    "tags": [
+      "execution",
+      "long_script"
+    ],
+    "content": {
+      "task_summary": "Script Writing for Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya (25 min, sectioned)",
+      "result_snippet": "## Ek Anokhi Duty\nHello doston, mera naam hai Sudhansu aur aap dekh rahe hain Raat 3 Baje. Doston, aaj ki yeh kahani ek aise vanrakshak ke anubhav par aadharit hai jinhone kai saalon tak jungle ki gehraiyon mein seva di. Ek vanrakshak ka jeevan mahan hota hai, lekin ye sirf bahar se hi aisa dikhta hai. Jungle ki khamosh raahein aur uski akadti thand ke beech ek alag tarah ka sannata hota hai jo insaan ko andar se hila deta hai. Jab aap din bhar ki duty ke baad raat ko camp mein baithte hain, toh jungle ki aawazein darr paida karne lagti hain. Iska mahol aur yahan ki mitti ki mehak har kisi ko ek alag ehsaas deti hai. Yeh sirf ped-paudhe nahi hain, balki ek poora sansar hai jisme kai raaz dafan hain. Mere liye yeh kaam sirf ek naukri nahi thi, balki meri zindagi ka ek bada hissa ban gaya tha. Is beech sab kuch bahut hi seedha aur saral lagta tha jab tak ki kuch anokhi ghatinaon ne mera nazariya badal nahi diya. Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain. Main aksar logon ko batata tha ki jungle ka apna ek niyam hota hai. Yeh niyam humein kabhi todna nahi chahiye.\n\nKehte hain ki ghane junglon mein purani yaadein aur aawazein aksar phans jaati hain. Ek waqt tak maine bhi kabhi bhoot-pret in cheezon par yaqeen nahi kiya tha. Par ab, jab main un baaton ko yaad karta hoon, toh mere badan mein ek thandak daud jati hai. Yeh baat kuch saal pehle ki hai jab meri posting Madhya Pradesh ke ek bahut hi door-daaraz ke tiger reserve mein hui thi. Monsoon ka mausam tha au"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T21:55:00.362269",
+    "updated": "2026-10-06T21:55:00.362280"
   }
 ]

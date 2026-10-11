@@ -43,6 +43,22 @@ export async function postJson<T>(path: string, body?: unknown, init?: RequestIn
   );
 }
 
+export async function putJson<T>(path: string, body?: unknown, init?: RequestInit): Promise<T> {
+  return parse<T>(
+    await apiFetch(path, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body ?? {}),
+      ...init,
+    }),
+  );
+}
+
+/** POST a multipart form (file uploads). The browser sets the boundary header. */
+export async function postForm<T>(path: string, form: FormData, init?: RequestInit): Promise<T> {
+  return parse<T>(await apiFetch(path, { method: 'POST', body: form, ...init }));
+}
+
 export async function deleteJson<T>(path: string, init?: RequestInit): Promise<T> {
   return parse<T>(
     await apiFetch(path, {

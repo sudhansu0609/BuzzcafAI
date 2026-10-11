@@ -238,6 +238,102 @@ def _register_topics(reg: List[Dict[str, Any]]) -> None:
     ])
 
 
+# ─────────────────────────────── audio domain ───────────────────────────────
+# BuzzEdit's whole-rack audio presets (BuzzEdit AUDIO_SUITE_PLAN.md brief A5).
+# `project` is the Studio project; its BuzzEdit edit is looked up from it.
+# Deleting a rack preset is not offered here.
+
+
+def _audio_project(p: Dict[str, Any]) -> str:
+    project = p.get("project") or p.get("project_id")
+    if not project:
+        raise KeyError("project")
+    return str(project)
+
+
+def _h_audio_rack_presets(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import audio_rack_presets
+    return audio_rack_presets()
+
+
+def _h_audio_rack_of_project(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import project_audio_rack
+    return project_audio_rack(_audio_project(p))
+
+
+def _h_apply_audio_rack_preset(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import ApplyAudioRackSchema, apply_project_audio_rack
+    return apply_project_audio_rack(_audio_project(p), ApplyAudioRackSchema(name=p["name"]))
+
+
+def _register_audio(reg: List[Dict[str, Any]]) -> None:
+    reg.extend([
+        {"name": "audio_rack_presets", "domain": "audio", "method": "GET", "path": "/api/produce/audio_rack_presets",
+         "kind": "read", "params": {}, "summary": "BuzzEdit's audio rack presets, and which channel uses which.",
+         "handler": _h_audio_rack_presets},
+        {"name": "audio_rack_of_project", "domain": "audio", "method": "GET", "path": "/api/projects/{id}/audio_rack",
+         "kind": "read", "params": {"project": "str"},
+         "summary": "The audio racks of a project's BuzzEdit edit, and the preset its production used.",
+         "handler": _h_audio_rack_of_project},
+        {"name": "apply_audio_rack_preset", "domain": "audio", "method": "POST", "path": "/api/projects/{id}/audio_rack/apply",
+         "kind": "write", "params": {"project": "str", "name": "str"},
+         "summary": "Set a project's A1 (voice) rack in BuzzEdit to a rack preset; the next render carries it.",
+         "handler": _h_apply_audio_rack_preset},
+    ])
+
+
+# ─────────────────────────────── voice domain ───────────────────────────────
+# BuzzEdit's voice conversion of the story characters' lines (BuzzEdit
+# VOICE_CHANGER_PLAN.md brief S3). `project` is the Studio project. Deleting a
+# voice from BuzzEdit's library is not offered here.
+
+
+def _h_voices(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import voice_library
+    return voice_library()
+
+
+def _h_voice_map_of_project(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import project_voice_map
+    return project_voice_map(_audio_project(p))
+
+
+def _h_voice_conversions_of_project(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import project_voice_conversions
+    return project_voice_conversions(_audio_project(p))
+
+
+def _h_set_character_voice(p: Dict[str, Any]) -> Any:
+    from app.api.produce_api import CastVoiceSchema, set_project_character_voice
+    if "voice" not in p and "preset" not in p:
+        raise KeyError("voice or preset")
+    return set_project_character_voice(_audio_project(p), CastVoiceSchema(
+        character=p["character"], voice=p.get("voice"), preset=p.get("preset")))
+
+
+def _register_voice(reg: List[Dict[str, Any]]) -> None:
+    reg.extend([
+        {"name": "voices", "domain": "voice", "method": "GET", "path": "/api/produce/voices",
+         "kind": "read", "params": {},
+         "summary": "BuzzEdit's voices library and voice presets (Woman, Child, Demon, Monster, Ghost).",
+         "handler": _h_voices},
+        {"name": "voice_map_of_project", "domain": "voice", "method": "GET", "path": "/api/projects/{id}/voice_map",
+         "kind": "read", "params": {"project": "str"},
+         "summary": "Which story character speaks in which voice, and the voice map the last production sent.",
+         "handler": _h_voice_map_of_project},
+        {"name": "voice_conversions_of_project", "domain": "voice", "method": "GET",
+         "path": "/api/projects/{id}/voice_conversions",
+         "kind": "read", "params": {"project": "str"},
+         "summary": "The character lines the last production converted to their voices, and why not when none.",
+         "handler": _h_voice_conversions_of_project},
+        {"name": "set_character_voice", "domain": "voice", "method": "PUT", "path": "/api/projects/{id}/cast/voice",
+         "kind": "write", "params": {"project": "str", "character": "str", "voice": "str?", "preset": "str?"},
+         "summary": "Set the voice of a story character in a project (a library voice and/or a preset; "
+                    "both empty = the creator's own voice). The next production converts their lines.",
+         "handler": _h_set_character_voice},
+    ])
+
+
 # ─────────────────────────────── assembly ───────────────────────────────
 
 
@@ -245,6 +341,8 @@ def _build() -> List[Dict[str, Any]]:
     reg: List[Dict[str, Any]] = []
     _register_projects(reg)
     _register_topics(reg)
+    _register_audio(reg)
+    _register_voice(reg)
     # The remaining domains (produce, catalog, research, studio, agents,
     # departments, buzzbrain, video_intel, system) live in a sibling module so
     # this file stays small; they follow the exact same entry shape.

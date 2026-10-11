@@ -1,5 +1,6 @@
 export type ThemeId =
   | 'dark'
+  | 'dusk'
   | 'light'
   | 'nordic'
   | 'slate'
@@ -48,6 +49,22 @@ export const THEMES: ThemeDefinition[] = [
       text: '#f1f5f9',
       accent: '#a78bfa',
       accentSecondary: '#f43f5e',
+    },
+  },
+  {
+    id: 'dusk',
+    name: 'Studio Dusk',
+    category: 'dark',
+    description: 'Studio Dark, a few steps lighter and softer: charcoal-slate surfaces with muted lavender & rose accents.',
+    iconName: 'Moon',
+    colors: {
+      bg: '#1a1c26',
+      sidebar: '#22252f',
+      card: '#262a36',
+      border: '#363b4b',
+      text: '#f1f3f8',
+      accent: '#a99bd9',
+      accentSecondary: '#e26d85',
     },
   },
   {

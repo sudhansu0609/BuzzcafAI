@@ -236,7 +236,8 @@ def search_searxng(query: str, base_url: str = "http://localhost:8080", max_resu
     params = {"q": clean_q, "format": "json"}
     headers = {"User-Agent": DEFAULT_USER_AGENT}
     try:
-        resp = requests.get(url, params=params, headers=headers, timeout=6)
+        # Metasearch fans out to several engines; the first query after start is slower.
+        resp = requests.get(url, params=params, headers=headers, timeout=15)
         if resp.status_code == 200:
             data = resp.json()
             for r in data.get("results", [])[:max_results]:
@@ -254,6 +255,55 @@ def search_searxng(query: str, base_url: str = "http://localhost:8080", max_resu
     except Exception as exc:
         logger.debug(f"SearXNG search at {base_url} failed: {exc}")
     return results
+
+
+def search_news(query: str, max_results: int = 5) -> List[Dict[str, str]]:
+    """News results: the local SearXNG's news category (Google/Bing/Yahoo
+    News...), `ddgs` news when SearXNG is unavailable. Never raises."""
+    clean_q = sanitize_search_query(query)
+    if not clean_q:
+        return []
+    try:
+        from integrations import searxng_service
+        base = searxng_service.base_url()
+    except Exception:
+        base = None
+    if base:
+        try:
+            resp = requests.get(f"{base}/search", params={"q": clean_q, "format": "json", "categories": "news"},
+                                headers={"User-Agent": DEFAULT_USER_AGENT}, timeout=15)
+            if resp.status_code == 200:
+                out = [{"title": r.get("title", ""), "snippet": r.get("content", ""), "url": r.get("url", ""),
+                        "source": f"SearXNG news ({r.get('engine', '')})"}
+                       for r in resp.json().get("results", [])[:max_results] if r.get("title") and r.get("url")]
+                if out:
+                    return out
+        except Exception as exc:
+            logger.debug(f"SearXNG news search failed: {exc}")
+    return search_ddgs(query, max_results=max_results, news=True)
+
+
+def search_ddgs(query: str, max_results: int = 5, news: bool = False) -> List[Dict[str, str]]:
+    """Keyless metasearch through the `ddgs` package -- the fallback when the
+    local SearXNG cannot start. Never raises."""
+    clean_q = sanitize_search_query(query)
+    if not clean_q:
+        return []
+    try:
+        from ddgs import DDGS
+        with DDGS() as ddgs:
+            rows = (ddgs.news(clean_q, region="in-en", max_results=max_results) if news
+                    else ddgs.text(clean_q, region="in-en", max_results=max_results))
+    except Exception as exc:
+        logger.debug(f"ddgs search failed: {exc}")
+        return []
+    out: List[Dict[str, str]] = []
+    for r in rows or []:
+        link = r.get("href") or r.get("url") or ""
+        if r.get("title") and link:
+            out.append({"title": r["title"], "snippet": r.get("body", ""), "url": link,
+                        "source": "ddgs news" if news else "ddgs"})
+    return out
 
 
 def search_web(
@@ -278,11 +328,21 @@ def search_web(
         cfg = {}
 
     chosen_provider = (provider or cfg.get("search_provider") or "auto").lower()
-    sx_url = searxng_url or cfg.get("searxng_url") or "http://localhost:8080"
 
-    # 1. SearXNG (if specifically requested or in auto mode)
+    # 1. SearXNG (if specifically requested or in auto mode). The Studio starts
+    # its local instance on demand (integrations/searxng_service.py); `ddgs`
+    # stands in when it cannot run.
     if chosen_provider in ("searxng", "auto"):
-        sx_results = search_searxng(clean_q, base_url=sx_url, max_results=max_results)
+        sx_url = searxng_url
+        if not sx_url:
+            try:
+                from integrations import searxng_service
+                sx_url = searxng_service.base_url()
+            except Exception as exc:
+                logger.debug(f"SearXNG service unavailable: {exc}")
+        sx_results = search_searxng(clean_q, base_url=sx_url, max_results=max_results) if sx_url else []
+        if not sx_results:
+            sx_results = search_ddgs(clean_q, max_results=max_results)
         for r in sx_results:
             url = r.get("url", "")
             if url and url not in seen_urls:

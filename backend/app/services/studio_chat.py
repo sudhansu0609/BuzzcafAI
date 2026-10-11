@@ -403,8 +403,9 @@ def strategist_for(channel: str) -> str:
     return "Beyond3BajeStrategist"
 
 
-def channel_guide(channel: str) -> str:
-    """The first part of prompts/channels/<Brand>.md, or '' when there is none."""
+def channel_guide(channel: str, full: bool = False) -> str:
+    """The first part of prompts/channels/<Brand>.md (all of it with `full`),
+    or '' when there is none."""
     if not channel:
         return ""
     lower = channel.lower()
@@ -431,7 +432,7 @@ def channel_guide(channel: str) -> str:
             text = handle.read().strip()
     except OSError:
         return ""
-    return text[:GUIDE_CHARS]
+    return text if full else text[:GUIDE_CHARS]
 
 
 def _memory_lines(agent_name: str, channel: str, message: str) -> List[str]:
@@ -474,11 +475,28 @@ def _topic_block(topic: Optional[Dict[str, Any]], channel: str) -> str:
     )
 
 
+_WRITER_AGENTS = {"writeragent", "scriptwriter", "horrorwriter", "dialoguewriter", "narrationoptimizer",
+                  "editoragent", "shortswriter", "horrorspecialist", "mythologyspecialist", "reviewer"}
+_WRITE_WORDS = re.compile(r"\b(write|rewrite|script|story|kahani|likh\w*|narration|hook|intro|outro|dialogue)\b",
+                          re.IGNORECASE)
+
+
+def _writes_for_him(agent_name: str, message: str) -> bool:
+    """A writer persona, or anyone asked to write something he will say."""
+    return (agent_name or "").lower() in _WRITER_AGENTS or bool(_WRITE_WORDS.search(message or ""))
+
+
 def build_system_extra(agent_name: str, channel: str, message: str, topic: Optional[Dict[str, Any]]) -> str:
     parts = [f"\n\n## You are speaking as {agent_name} for the channel '{channel}'."]
-    guide = channel_guide(channel)
+    # A channel's own strategist plans for it, so it gets the whole guide.
+    guide = channel_guide(channel, full="strategist" in agent_name.lower())
     if guide:
         parts.append(f"\n\n## Brand guide for {channel}\n{guide}")
+    if _writes_for_him(agent_name, message):
+        from app.services import writing_style
+        style = writing_style.style_section(channel)
+        if style:
+            parts.append(style)
     memories = _memory_lines(agent_name, channel, message)
     if memories:
         parts.append("\n\n## Relevant past exchanges with the creator\n" + "\n".join(memories))

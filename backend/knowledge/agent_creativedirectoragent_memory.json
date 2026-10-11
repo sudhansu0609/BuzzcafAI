@@ -78,5 +78,117 @@
     "source": "agent",
     "created": "2026-09-23T14:31:53.911507",
     "updated": "2026-09-23T14:31:53.911512"
+  },
+  {
+    "id": "bab176a6-e865-4f1c-8434-a8c79ebdbfae",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:**",
+      "result_snippet": "To ensure a professional and immersive audio experience for **Raat3Baje**, the sound design must bridge the gap between \"cinematic horror fiction\" and \"grounded investigative documentary.\" \n\nThe following plan outlines the specific SFX layers, drone textures, and musical transitions required to maintain the atmosphere of *Basement ke Rules*.\n\n---\n\n# Sound Design Plan: Basement ke Rules | The Forbidden Door\n\n## **1. Global Audio Aesthetic**\n*   **Primary Texture:** Dark Ambient / Industrial Drone.\n*   **Core Rule:** No \"jump-scare\" synth stings. Tension must be built through low-frequency vibrations and environmental textures. \n*   **The Silence Rule:** Every time a specific \"Rule\" is read or an entity (Pishach/Pret) is named, the music must drop to **0% volume** for 1.5\u20132 seconds before the next line.\n\n---\n\n## **2. Segment-Specific Sound Design**\n\n### **Segment I: The Story (The Rules of Sector 4)**\n*   **Vibe:** Claustrophobic, industrial, decaying.\n*   **Background Drone:**\n    *   **Track Type:** Low-frequency \"Industrial Decay\" drone (60-75 bpm).\n    *   **Texture:** A blend of a heavy industrial fan hum, metallic resonance, and a sub-bass pulse that feels like it\u2019s vibrating the listener's chest.\n*   **Layered SFX:**\n    *   **Footsteps:** Heavy leather boots on hollow concrete (add reverb to simulate a large corridor).\n    *   **Environment:** Distant water dripping into a metal container, rhythmic \"thrum\" of old electrical wiring.\n    *   **Specific Cues:**\n        *   *Metal Clink:* A high-frequency metallic 'clink' when the pipe hits the floor (Scene 1).\n        *   *The Whisper:* A dry, distorted whisper layered with a \"granulated\" effect to make it sound like it\u2019s coming from inside a metal pipe.\n        *   *The Slam:* A heavy, low-frequency thud of a rusted iron door slamming shut at the end of Scene 1.\n\n### **Segment II: The Transition (Host Entry)**\n*   **Vibe:** Shift from \"Movie\" to \"Investigation.\"\n*   **Transition Technique:** Cross-fade the indus"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:01:17.956453",
+    "updated": "2026-10-01T00:01:17.956460"
+  },
+  {
+    "id": "402db669-c013-411a-8a8b-d14d94546f5f",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Basement ke Rules | The Forbidden Door (Drafts: 'Raat ki Duty', 'Rule #4: Kabhi Peeche Mat Dekhna', 'The Basement of No Return')' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:**",
+      "result_snippet": "# Sound Design Plan: Basement Ke Rules | The Forbidden Door\n\n## 1. Background Drone Tracks (Blend Under V.O.)\n\n| Track ID | Segment(s) | BPM | Description | Blend Notes |\n|---|---|---|---|---|\n| **DRN-01 \"Sector 4 Hum\"** | Scene 01 (Cold Open) | 65 bpm | Low-frequency industrial/building drone \u2014 sub-bass pulse, distant electrical transformer hum, faint metallic resonance. | Enter at -18dB under V.O., swell slightly on \"kadmon ki awaaz.\" |\n| **DRN-02 \"Daylight Unease\"** | Scene 02 (Setup) | N/A (ambient, no pulse) | Warm but slightly hollow room tone \u2014 ceiling fan creak loop, muffled traffic, a single held string note (very low volume) foreshadowing dread under ordinary daylight. | Keep mostly diegetic; drone almost inaudible, just a subconscious tension layer. |\n| **DRN-03 \"Descent\"** | Scene 03 (Arrival) | 65 bpm \u2192 thins out | Same drone family as DRN-01 but filtered darker (low-pass at 400Hz) as Arjun descends; add a single sustained sarangi drone note under the basement description. | Drone visibly \"drops\" in pitch (-2 semitones) the moment he enters the basement \u2014 sound mirrors the temperature drop. |\n| **DRN-04 \"The Register\"** | Scene 04 (Rule-Giver) | 90 bpm (faint pulse under dialogue) | Suspenseful pulse begins low in the mix \u2014 tanpura drone base + very sparse dholak taps, almost subliminal. | Pulse should feel like it's \"listening\" \u2014 duck heavily under dialogue, rise only in pauses. |\n| **DRN-05 \"Reading the Rules\"** | Scene 05 (The Rules) | 65 bpm | Dark ambient base, continuous \u2014 tanpura drone + low sarangi drawn out, candle-flicker-synced subtle volume tremor. | Full drop to 0% (off) for 1.5\u20132s after each rule is read, before next page-turn SFX. |\n| **DRN-06 \"Half Answer\"** | Scene 06 (The Question) | 90 bpm, sparse | Pulsing low strings, very minimal \u2014 almost just a held cello drone with occasional dholak tap. | Cuts out fully when Ramlal says \"Kuch cheezein hoti hain jo hum disturb nahi karte.\" |\n| **DRN-07 \"Passage of Nights\"** | Scene 07 (The Nights"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:43:38.756161",
+    "updated": "2026-10-01T00:43:38.756167"
+  },
+  {
+    "id": "43734380-c0fb-48f4-9711-9efff52b8673",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Peeche Mat Khodhna: The Forbidden Boundary | Raat3Baje' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal,",
+      "result_snippet": "# Sound Design Plan: Peeche Mat Khodna \u2014 The Forbidden Boundary\n\n## 1. Global Audio Aesthetic\n- **Primary Texture:** Dark Ambient / Rural-Folk Drone (Tanpura, Sarangi, Shehnai base) \u2014 never synth-horror, never jump-scare stings.\n- **Core Rule (Silence Rule):** Every time a \"Rule\" is read, an entity is named (Pishach/Pret/Masaan), or a chilling line lands, drop to **0% volume (off)** for 1.5\u20133s before resuming.\n- **Tempo Bands:** 60-75 bpm (folklore/scene-setting) \u2192 85-100 bpm (investigation build) \u2192 dramatic hit (reveal, no jump-scare stinger \u2014 use sub-bass swell + taiko instead).\n\n---\n\n## 2. Background Drone Track List\n\n| Track ID | Segment(s) | BPM | Description | Blend Notes |\n|---|---|---|---|---|\n| **DRN-01 \"Raat Ke Sawa Gyarah\"** | Sc.01 Cold Open | 65 | Sub-bass pulse + distant hollow wind over dry rural ground; faint earthy rumble mimicking shovel digging. | Enter at -20dB; cut to hard silence 2s after \"Peeche mat khodna.\" |\n| **DRN-02 \"Host Grounding\"** | Sc.02 Host Intro | N/A ambient | Warm, low tanpura drone, near-inaudible; room-tone of the Raat3Baje set. | Barely-there \u2014 sits under direct address, not atmospheric horror. |\n| **DRN-03 \"Shehar Se Gaon\"** | Sc.03 Setup (Mumbai flat) | N/A | Bright daytime ambience \u2014 ceiling fan whir, muffled traffic honks, toddler toy rattle. No drone/horror texture here. | Fully diegetic; contrast deliberately \"normal\" before dread begins. |\n| **DRN-04 \"Pehli Shaam\"** | Sc.04 Arrival | 60 bpm | Dry wind-through-leaves loop + very low held sarangi note; distant single temple bell. | Bell hit is a hard sync point \u2014 let drone breathe around it, don't mask it. |\n| **DRN-05 \"Bhola Kaka\"** | Sc.05 Rule-Giver intro | 65 bpm, near-static | Creaking wood chair loop (rhythmic, almost metronomic) + rusted wind-chime layer, tanpura base very low. | Chair creak should feel like a clock \u2014 subconscious tension-timer. |\n| **DRN-06 \"The Register of Rules\"** | Sc.06 The Rules (10) | 70 bpm pulse | Continuous dark tanpura/sarangi drone wit"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T00:50:39.999997",
+    "updated": "2026-10-01T00:50:40.000003"
+  },
+  {
+    "id": "fb50c9b0-5368-4d16-957e-e4020a619017",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare",
+      "result_snippet": "# Sound Design Plan: Gata Loops ke 'Rules' | The Survival Rules of the High Pass\n\nThis plan bridges the gap between cinematic horror and grounded investigation, ensuring that the atmosphere of the high-altitude Himalayan pass feels suffocating and authentic.\n\n---\n\n## 1. Global Audio Aesthetic\n*   **Primary Texture:** **\"High-Altitude Isolation.\"** A blend of heavy wind textures, low-frequency sub-bass drones, and \"hollow\" acoustic elements (Tanpura/Sarangi). \n*   **The Silence Rule:** For the 12 Rules in Section 3, a **hard cut to 0% volume** for 1.5\u20132 seconds must occur immediately before each rule is read and after the final word of the rule is spoken. This emphasizes the \"weight\" of the warning.\n*   **No Jump-Scare Rule:** No high-frequency synth stings or sudden \"scary\" noises. Tension must be built through frequency layering (low-end drones) and environmental textures.\n\n---\n\n## 2. Background Drone Track List\n\n| Track ID | Segment(s) | BPM | Description | Blend Notes |\n| :--- | :--- | :--- | :--- | :--- |\n| **DRN-01 \"The Frozen Pass\"** | Section 1 (Hook & Warning) | 65 | A heavy, low-frequency wind drone mixed with a sub-bass pulse. Sounds like the \"weight\" of thin air and snow. | Start at -18dB; peak during the distorted horn blast. |\n| **DRN-02 \"Engine in the Mist\"** | Section 2 (The Journey) | 70 | A rhythmic, mechanical hum mimicking a heavy truck engine, layered with a distant, low-frequency drone. | Blend with actual vehicle SFX; it should feel like the cabin is a cocoon of sound. |\n| **DRN-03 \"The Gatekeeper\"** | Section 2 (Old Man Encounter) | 65 | A haunting, singular Sarangi note held for long periods, processed with heavy reverb to sound \"hollow.\" | Fade in as Vikram approaches the cabin; cut suddenly when the Old Man speaks. |\n| **DRN-04 \"The Manual\"** | Section 3 (The Rules) | 75 | A pulsing, rhythmic drone using a dark Tanpura base and low-frequency strings that feel like an approaching heartbeat. | This track should build tension as rules get prog"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T10:33:16.104855",
+    "updated": "2026-10-01T10:33:16.104863"
+  },
+  {
+    "id": "3e89d1cb-c124-4b9b-93de-d1b01d150cdf",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja",
+      "result_snippet": "# Sound Design Plan: Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya\n\nTo ensure a professional and immersive audio experience for **Raat3Baje**, the sound design must bridge the gap between cinematic atmosphere and grounded investigative journalism. The goal is to make the listener feel the claustrophobia of the forest and the psychological dread of hearing one's own voice mirrored by something \"other.\"\n\n---\n\n## 1. Global Audio Aesthetic\n*   **Primary Texture:** **\"Wild Isolation & Acoustic Mimicry.\"** A blend of heavy wind textures, low-frequency sub-bass drones, and \"hollow\" organic elements (Tanpura/Sarangi).\n*   **The Echo Rule:** When the officer hears their own voice in Scene 2, the audio must utilize a **Spatial Processing Effect** (Heavy Reverb + Delay) to make it sound like it is emanating from the trees, not from a device.\n*   **No Jump-Scare Rule:** No high-frequency synth stings or \"scary\" jump_sounds. Tension must be built through frequency layering and environmental textures.\n*   **The Silence Rule:** For key narrative beats (e.g., mentioning \"Pishach,\" \"Awaaz ka Jaal,\" or the final revelation), a **hard cut to 0% volume for 1.5\u20132 seconds** must occur before the most chilling line is delivered.\n\n---\n\n## 2. Background Drone Track List\n\n| Track ID | Segment(s) | BPM | Description | Blend Notes |\n| :--- | :--- | :--- | :--- | :--- |\n| **DRN-01 \"The Shadowed Woods\"** | Scene 01 (Hook) & Scene 02 (Initial Journey) | 65 | A heavy, low-frequency wind drone mixed with a deep sub-bass pulse. Sounds like the \"weight\" of a dense forest. | Start at -18dB; blend with organic forest textures (crickets/wind). |\n| **DRN-02 \"The Signal\"** | Scene 02 (The Report) | 75 | A rhythmic, pulsing electronic drone that feels like an \"active\" investigation or a radio signal. | Introduce when the host mentions \"The Report - Sector 4-B.\" |\n| **DRN-03 \"Ancient Echoes\"** | Scene 03 (Folklore/Pishach) | 65 | A haunting, singular Sarangi drone processed with heavy rever"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T11:06:49.283922",
+    "updated": "2026-10-01T11:06:49.283927"
+  },
+  {
+    "id": "ef7b8154-7113-46fe-bc9a-b3e53bc4ea7f",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja",
+      "result_snippet": ""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T19:54:07.195769",
+    "updated": "2026-10-06T19:54:07.195776"
+  },
+  {
+    "id": "42aa26fd-b61b-499b-a66a-c58da7c0b146",
+    "scope": "agent",
+    "owner": "CreativeDirectorAgent",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Sound Design Plan' for the media project 'Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja",
+      "result_snippet": "# Sound Design Plan: Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya\n**Brand:** Raat3Baje\n\nTo maintain the **Raat3Baje** aesthetic, the sound design must balance \"grounded investigation\" with \"eerie folk-horror.\" The goal is to make the audience feel the humidity of the jungle and the psychological weight of the \"time fold.\"\n\n---\n\n## 1. Global Audio Aesthetic\n*   **Primary Texture:** **\"Dense Wilderness Isolation.\"** Use heavy, low-frequency drones layered with organic forest textures (crickets, distant wind, rustling leaves). No high-pitched synth stings.\n*   **The Silence Rule:** For every major reveal\u2014specifically when the protagonist hears his own voice for the first time, identifies the \"Time Fold,\" or mentions the logbook from 2016\u2014the music must drop to **0% volume (Absolute Silence)** for **1.5\u20133 seconds** before the most chilling line is delivered.\n*   **No Jump-Scare Rule:** No sudden \"scary\" noises. Tension must be built through frequency layering (low-end drones) and environmental textures.\n*   **The Echo Effect:** When the voice note plays, apply a **Spatial Processing Effect** (Heavy Reverb + Delay) to make it sound like it is emerging from the trees/ground rather than just a radio.\n\n---\n\n## 2. Background Drone Track List\n\n| Track ID | Segment(s) | BPM | Description | Blend Notes |\n| :--- | :--- | :--- | :--- | :--- |\n| **DRN-01 \"Mitti ki Mehak\"** | Intro & Setup (Sudhansu's intro to the Forest Officer's life) | 65 | A heavy, earthy drone with a deep Tanpura base and low-frequency wind. Feels like damp earth and old trees. | Start at -18dB; blend with natural forest ambiance (crickets/wind). |\n| **DRN-02 \"No-Go Zone\"** | Journey into the restricted area (The transition to the center) | 75 | A more tense, rhythmic pulse using low strings and a \"hollow\" feeling. Sounds like being watched. | Introduce when the mention of 'No-Go Zone' happens. |\n| **DRN-03 \"The Thud\"** | The repeated sound & Shadow sequence | 65 | A slow, heavy, almost indus"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-06T21:56:22.611974",
+    "updated": "2026-10-06T21:56:22.611980"
   }
 ]

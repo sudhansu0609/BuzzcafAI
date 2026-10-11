@@ -1,0 +1,64 @@
+{
+    "id": "2026-09-30_Life3Baje_Can5SmallYoutubeChannelsBecomeAMediaCompany",
+    "name": "Can 5 Small YouTube Channels Become a Media Company?",
+    "brand": "Life3Baje",
+    "workflow_name": "life3baje_video",
+    "status": "active",
+    "current_step": "Visual Plan",
+    "created_at": "2026-09-30T03:22:18.005968",
+    "updated_at": "2026-09-30T03:24:54.485568",
+    "metadata": {
+        "target_duration_minutes": 12.0,
+        "topic_id": "topic_54cbf18b",
+        "creative_brief": "**Angle:** Moving from the 'Content Creator' mindset to the 'Media Owner' infrastructure.\n\n### Hook\nStart with the reality of the current situation: managing multiple channels (Beyond3Baje, Raat3Baje, etc.) while running Buzzcaf. The realization that doing everything as a solo creator is hitting a ceiling. It's not just about 'more views'; it's about building a system that survives without the creator doing every single task.\n\n### Structure & Timing (Target: 12 Minutes)\n- **0:00 - 1:30 | The Reality Check:** A raw opening in Hinglish. Talk about the current workload and the 'Content Creator Trap'\u2014where growth means more work, not necessarily more freedom. Show clips/screens of the different projects currently in progress.\n- **1:30 - 4:00 | The Math of a Media Company:** Explain what a 'Media Company' actually means for him. It\u2019s about cross-pollination (e.g., how the audience of one channel feeds into Buzzcaf or another project). Why having multiple channels is a strategic choice, not just a hobby.\n- **4:00 - 7:00 | The Infrastructure & Costs:** This is the 'Real Numbers' section. Discuss the costs of managing multiple identities (production, editing, different branding). [CREATOR TO FILL: Specific monthly burn or production costs for the various channels].\n- **7:00 - 10:00 | The Buzzcaf Integration:** How the physical brand (Buzzcaf) is the tangible anchor of the media company. Discuss the shift from 'selling a product' to 'building a brand ecosystem'.\n- **10:00 - 12:00 | The Long Road Ahead:** Honest thoughts on what it takes to make this sustainable while keeping his software career. No hype, just the plan.\n\n### Key Facts & Research (to be integrated by Writer)\n- Define 'Media Company' in the context of his specific goals (Multi-channel + Physical product).\n- Contrast the workflow of a solo creator vs. a studio-led model.\n- Mention the specific channels currently active: Beyond3Baje and Raat3Baje.\n\n### Tone & Voice\n- Honest, warm, and conversational Hinglish.\n- **Avoid:** Any 'how-to' advice for others or generic hustle motivation. This is his journey, not a tutorial.\n- **Style:** Use first person ('Main', 'Mera'). Be vulnerable about the exhaustion of managing multiple moving parts.\n\n### Visual/Editing Instructions\n- **A-Roll:** Warm lighting, conversational framing. \n- **B-Roll:** Montage of different project files in the studio, screenshots of the various channel dashboards (blurred if needed), and footage of Buzzcaf production.\n- **Music:** Start with a calm, lo-fi/acoustic bed for the 'reality' sections. Shift to a slightly more hopeful/energetic piano track when discussing the vision of the media company.\\n- **Shorts/Reels:** Extract 3 clips: 1. The 'Content Creator Trap' realization; 2. A brief explanation of what a Media Company is; 3. A raw segment on the costs/reality of multi-channel management.",
+        "allow_all": false,
+        "nightly_longform": {
+            "built_at": "2026-09-30T03:24:54"
+        }
+    },
+    "steps_history": [
+        {
+            "step_name": "Vlog Planning",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-30T03:22:18.026454",
+            "completed_at": "2026-09-30T03:23:30.863327",
+            "output_files": {
+                "vlog_plan": "production/storyboard.md"
+            },
+            "logs": [
+                "Successfully executed step 'Vlog Planning' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=[] output_refs=production/storyboard.md elapsed_ms=72836"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Vlog Script & Prompts",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-09-30T03:23:30.879654",
+            "completed_at": "2026-09-30T03:24:54.470042",
+            "output_files": {
+                "script": "script/draft.md"
+            },
+            "logs": [
+                "Target runtime: 12 min injected into the script prompt.",
+                "Script length: 1,107 words ~7.9 min (target 12).",
+                "Successfully executed step 'Vlog Script & Prompts' via agent 'WriterAgent'.",
+                "AUDIT TRAIL - workflow_id=life3baje_video agent=WriterAgent status=completed input_refs=['vlog_plan'] output_refs=script/draft.md elapsed_ms=83590"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "strategist_brief": "script/strategist_brief.md",
+        "vlog_plan": "production/storyboard.md",
+        "script": "script/draft.md"
+    }
+}

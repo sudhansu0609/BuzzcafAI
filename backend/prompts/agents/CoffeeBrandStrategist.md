@@ -1,6 +1,6 @@
 ---
 name: "CoffeeBrandStrategist"
-department: "Production"
+department: "Research"
 role: "Designs coffee brand positioning, YouTube creator placements, and product integration for Buzzcaf Coffee."
 inputs: ["video_script_draft", "channel_guide"]
 outputs: ["coffee_placement_brief", "creator_talking_points"]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "0a0c75fb-9a5d-40c4-92e8-badf1901d442",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 0:\nRaat ke do baje the. Main jungle ki pagdandi par akela chal raha tha, baarish halki si ho rahi thi. Achanak peeche se kisi ke daudne ki aawaz aayi, patte toot rahe the. Main ruk gaya. Door kahin ek darwaza zor se band hua. Phir ek aurat ki cheekh, itni tez ki mera dil ruk gaya. Mera phone bajne laga, screen par koi number nahi tha. Maine phone uthaya, udhar se sirf saans lene ki aawaz. Tabhi bijli kadki aur mandir ki ghanti apne aap bajne lagi.\n\n\n### Required Output Format (",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"baarish halki si ho rahi thi\", \"effect\": \"light rain falling on forest leaves\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 20}, {\"anchor\": \"peeche se kisi ke daudne ki aawaz aayi\", \"effect\": \"footsteps running on wet leaves\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"darwaza zor se band hua\", \"effect\": \"heavy wooden door slamming shut\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"ek aurat ki cheekh\", \"effect\": \"woman's piercing scream in distance\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"Mera phone bajne laga\", \"effect\": \"phone ringing\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 4}, {\"anchor\": \"saans lene ki aawaz\", \"effect\": \"slow heavy breathing over phone\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"bijli kadki\", \"effect\": \"loud thunder crack\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"mandir ki ghanti apne aap bajne lagi\", \"effect\": \"temple bell ringing\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 4}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-09T19:19:26.791477",
+    "updated": "2026-10-09T19:20:12.509918"
+  }
+]

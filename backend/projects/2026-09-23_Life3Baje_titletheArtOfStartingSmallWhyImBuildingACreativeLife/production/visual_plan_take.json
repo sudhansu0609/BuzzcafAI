@@ -1,0 +1,1819 @@
+{
+  "beats": [
+    {
+      "kind": "pill_labels",
+      "items": [
+        "Build a Brand",
+        "Create Masterpiece"
+      ],
+      "anchor": "apne ek brand banayenge ya phir koi most sa masterpiece banayenge apne",
+      "start": 18.36,
+      "end": 22.04,
+      "window_index": 0,
+      "prompt": "Build a Brand; Create Masterpiece",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person sitting at a desk looking frustrated and overwhelmed by a blank canvas in front of them, moody lighting, cinematic style",
+      "look": "noir",
+      "anchor": "lekin aksar ham unhein start karane se ladate hain",
+      "start": 23.96,
+      "end": 26.12,
+      "window_index": 0,
+      "prompt": "A person sitting at a desk looking frustrated and overwhelmed by a blank canvas in front of them, moody lighting, cinematic style",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A perfectly organized workspace with a cup of coffee and a clean notebook on a marble table, aesthetic minimalist style",
+      "caption": "The Perfect Scenario",
+      "anchor": "hamein lagte hain ki jab sab kuch time perfect hoga, sab kuch sahi chalega, ekadam perfect scenario",
+      "look": "",
+      "start": 31.28,
+      "end": 35.56,
+      "window_index": 0,
+      "prompt": "A perfectly organized workspace with a cup of coffee and a clean notebook on a marble table, aesthetic minimalist style",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A clock's gears turning smoothly, golden lighting, macro photography",
+      "look": "warm",
+      "anchor": "perfect circumstance hoga, tab ham start karenge",
+      "start": 35.92,
+      "end": 38.4,
+      "window_index": 0,
+      "prompt": "A clock's gears turning smoothly, golden lighting, macro photography",
+      "deleted": false
+    },
+    {
+      "kind": "transition",
+      "effect": "glitch",
+      "anchor": "jaise ham chahte hain waisa nahi hoga aur ise chakkar mein ham start nahi karte",
+      "start": 44.76,
+      "end": 48.32,
+      "window_index": 0,
+      "prompt": "glitch",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person running through a crowded city street at night, blurred lights in the background, motion blur",
+      "look": "red_duotone",
+      "anchor": "bade bade chijon ke peeche bhagate bhagate ham log bahut zaruri cheez bol jate",
+      "start": 50.08,
+      "end": 53.76,
+      "window_index": 0,
+      "prompt": "A person running through a crowded city street at night, blurred lights in the background, motion blur",
+      "deleted": false
+    },
+    {
+      "kind": "name_title",
+      "text": "THE ART OF STARTING",
+      "subtext": "A New Methodology",
+      "anchor": "The Art of starting' Small The Art of starting'",
+      "start": 56.6,
+      "end": 59.48,
+      "window_index": 0,
+      "prompt": "THE ART OF STARTING",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A person's hands typing on a mechanical keyboard in a dimly lit room",
+      "caption": "My Story",
+      "anchor": "aisa hua tha ek baar main ek book likhna ka socha tha",
+      "look": "",
+      "start": 60.76,
+      "end": 63.48,
+      "window_index": 0,
+      "prompt": "A person's hands typing on a mechanical keyboard in a dimly lit room",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A montage of research papers and bookmarks spread across a large table",
+      "look": "warm",
+      "anchor": "sab kuch research kiya, stedi kiya aur main yeh socha tha ki",
+      "start": 65.6,
+      "end": 71.08,
+      "window_index": 0,
+      "prompt": "A montage of research papers and bookmarks spread across a large table",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Perfect First Chapter",
+      "anchor": "jo pehla chapter hai woh agar perfect nahi hua",
+      "start": 71.44,
+      "end": 73.36,
+      "window_index": 0,
+      "prompt": "Perfect First Chapter",
+      "deleted": false
+    },
+    {
+      "kind": "statement_card",
+      "text": "Tumhara perfection ka *junoon* tumhe rok raha hai.",
+      "anchor": "achha nahi hoga aur ise chakkar",
+      "start": 74.64,
+      "end": 76.04,
+      "window_index": 0,
+      "prompt": "Tumhara perfection ka *junoon* tumhe rok raha hai.",
+      "deleted": false
+    },
+    {
+      "kind": "transition",
+      "effect": "whiteflash",
+      "anchor": "bahut shuru kal aate",
+      "start": 76.64,
+      "end": 77.44,
+      "window_index": 0,
+      "prompt": "whiteflash",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A top-down cinematic shot of a hand holding a pen over a blank notebook on a wooden desk, soft morning light, photorealistic",
+      "negative_prompt": "text, watermark, blurry",
+      "look": "warm",
+      "anchor": "main pen paper leke baat aur likhna ke koshish kiya lekin kabhi",
+      "start": 78.2,
+      "end": 81.28,
+      "window_index": 1,
+      "prompt": "A top-down cinematic shot of a hand holding a pen over a blank notebook on a wooden desk, soft morning light, photorealistic",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A messy desk with unfinished manuscripts and crumpled papers, cinematic lighting, shallow depth of field",
+      "negative_prompt": "text, logo",
+      "look": "warm",
+      "anchor": "mera woh jo perfect chapter tha woh complete nahi ho paya",
+      "start": 81.52,
+      "end": 83.88,
+      "window_index": 1,
+      "prompt": "A messy desk with unfinished manuscripts and crumpled papers, cinematic lighting, shallow depth of field",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A stack of high-quality hardcover books on a shelf, one book open to a blank page, soft focus background",
+      "negative_prompt": "text, blurry",
+      "look": "warm",
+      "anchor": "isi chakkad mein main woh book kabhi start nahi kar paya",
+      "start": 84.48,
+      "end": 86.76,
+      "window_index": 1,
+      "prompt": "A stack of high-quality hardcover books on a shelf, one book open to a blank page, soft focus background",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person sitting in a dimly lit room looking at a laptop screen reflecting on their face, moody atmosphere",
+      "negative_prompt": "text, watermark",
+      "look": "warm",
+      "anchor": "hamare saath aisa hi career mein bhi hota",
+      "start": 87.52,
+      "end": 89.2,
+      "window_index": 1,
+      "prompt": "A person sitting in a dimly lit room looking at a laptop screen reflecting on their face, moody atmosphere",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A modern high-rise corporate office building with glass windows reflecting the city skyline",
+      "negative_prompt": "text, blurry",
+      "look": "warm",
+      "anchor": "jab ham sochte hain ki kisi bahut badi company mein switch",
+      "start": 90.2,
+      "end": 92.08,
+      "window_index": 1,
+      "prompt": "A modern high-rise corporate office building with glass windows reflecting the city skyline",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A minimalist boutique storefront in a busy city street, clean aesthetic",
+      "negative_prompt": "text, logo",
+      "look": "warm",
+      "anchor": "ya phir koi bahut achhi company kholenge ya phir koi achhi shop dalenge",
+      "start": 92.56,
+      "end": 99.0,
+      "window_index": 1,
+      "prompt": "A minimalist boutique storefront in a busy city street, clean aesthetic",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A lone hiker standing at the base of a massive mountain, looking up towards the peak, cinematic scale",
+      "negative_prompt": "text, watermark",
+      "look": "warm",
+      "anchor": "cheez agar aapko koi pahar karna hai to aap eki baar mein top pe",
+      "start": 117.44,
+      "end": 120.44,
+      "window_index": 1,
+      "prompt": "A lone hiker standing at the base of a massive mountain, looking up towards the peak, cinematic scale",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "Close up of a painter's hands mixing oil paints on a palette, artistic and textured",
+      "negative_prompt": "text, blurry",
+      "look": "warm",
+      "anchor": "nahi pahu.nch chakate aapko agar koi",
+      "start": 120.6,
+      "end": 122.32,
+      "window_index": 1,
+      "prompt": "Close up of a painter's hands mixing oil paints on a palette, artistic and textured",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Bas line likhna",
+      "anchor": "banana hai to aap start cheez bas line likhna se 4",
+      "start": 122.68,
+      "end": 139.76,
+      "window_index": 1,
+      "prompt": "Bas line likhna",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person performing a high-intensity workout in a garage gym, sweat glistening, cinematic lighting",
+      "look": "warm",
+      "anchor": "koi workout karna hai",
+      "start": 141.24,
+      "end": 142.0,
+      "window_index": 2,
+      "prompt": "A person performing a high-intensity workout in a garage gym, sweat glistening, cinematic lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "Close up of hands sketching a detailed portrait in a notebook, charcoal and graphite textures",
+      "look": "warm",
+      "anchor": "koi sketching karna hai",
+      "start": 143.92,
+      "end": 144.76,
+      "window_index": 2,
+      "prompt": "Close up of hands sketching a detailed portrait in a notebook, charcoal and graphite textures",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A content creator's desk with a high-quality camera and studio lights, cinematic depth of field",
+      "look": "warm",
+      "anchor": "aap video banana par focus karane chahte",
+      "start": 150.64,
+      "end": 152.2,
+      "window_index": 2,
+      "prompt": "A content creator's desk with a high-quality camera and studio lights, cinematic depth of field",
+      "deleted": false
+    },
+    {
+      "kind": "pill_labels",
+      "items": [
+        "1 Video/Week",
+        "10 Shorts/Reels"
+      ],
+      "anchor": "main ek hafate mein bas ek video",
+      "start": 152.96,
+      "end": 154.6,
+      "window_index": 2,
+      "prompt": "1 Video/Week; 10 Shorts/Reels",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person standing alone in a foggy street looking uncertain, cinematic atmosphere",
+      "look": "noir",
+      "anchor": "jo failure ka hamara dar",
+      "start": 160.56,
+      "end": 161.56,
+      "window_index": 2,
+      "prompt": "A person standing alone in a foggy street looking uncertain, cinematic atmosphere",
+      "deleted": false
+    },
+    {
+      "kind": "statement_card",
+      "text": "Risk factor ko *kam* karo taaki dar khatam ho sake",
+      "anchor": "jo risk factor hai woh kam ho jata",
+      "start": 162.44,
+      "end": 163.88,
+      "window_index": 2,
+      "prompt": "Risk factor ko *kam* karo taaki dar khatam ho sake",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Sirf 10 minute ka risk",
+      "anchor": "agar kuch hua bhi to bas 10 mirt ki baat",
+      "start": 165.2,
+      "end": 166.84,
+      "window_index": 2,
+      "prompt": "Sirf 10 minute ka risk",
+      "deleted": false
+    },
+    {
+      "kind": "stat_callout",
+      "data": {
+        "value": 99,
+        "suffix": "%"
+      },
+      "anchor": "99 % and",
+      "start": 172.8,
+      "end": 173.64,
+      "window_index": 2,
+      "prompt": "",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A person starting a small local business, smiling at the camera",
+      "caption": "Success starts small",
+      "look": "warm",
+      "anchor": "agar aap dekhie agar aap start",
+      "start": 175.48,
+      "end": 182.08,
+      "window_index": 2,
+      "prompt": "A person starting a small local business, smiling at the camera",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A wide shot of a bustling city street with digital media advertisements on billboards",
+      "look": "warm",
+      "anchor": "barjagraph mediya main start kiya hai ek chota sa",
+      "start": 189.32,
+      "end": 202.28,
+      "window_index": 2,
+      "prompt": "A wide shot of a bustling city street with digital media advertisements on billboards",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person's hands sketching in a notebook on a wooden table, warm sunlight filtering through a window, cinematic depth of field",
+      "look": "warm",
+      "anchor": "start kiya hai apne life mein ek chota sa change karna hai",
+      "start": 205.36,
+      "end": 218.0,
+      "window_index": 3,
+      "prompt": "A person's hands sketching in a notebook on a wooden table, warm sunlight filtering through a window, cinematic depth of field",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person sitting in a dimly lit room, head in hands, looking at a messy desk full of papers, cinematic lighting",
+      "look": "noir",
+      "anchor": "phir aisa kuch -kuch chijen lekin baithe -baithe main soch raha",
+      "start": 218.36,
+      "end": 225.84,
+      "window_index": 3,
+      "prompt": "A person sitting in a dimly lit room, head in hands, looking at a messy desk full of papers, cinematic lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A wide shot of a creative studio with various items and tools laid out on tables, soft lighting",
+      "look": "warm",
+      "anchor": "ki mujhe aur bhi chijen karna",
+      "start": 226.0,
+      "end": 227.48,
+      "window_index": 3,
+      "prompt": "A wide shot of a creative studio with various items and tools laid out on tables, soft lighting",
+      "deleted": false
+    },
+    {
+      "kind": "pill_labels",
+      "items": [
+        "Creative Field",
+        "New Projects"
+      ],
+      "anchor": "mujhe apna jo creative mera jo field hai usko bhi parastu karna",
+      "start": 227.68,
+      "end": 230.8,
+      "window_index": 3,
+      "prompt": "Creative Field; New Projects",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A montage of diverse digital art and graphic designs displayed on a wall of monitors in a dark room",
+      "look": "warm",
+      "anchor": "aur mujhe in sab chijon ko bhi dikhana",
+      "start": 231.04,
+      "end": 232.92,
+      "window_index": 3,
+      "prompt": "A montage of diverse digital art and graphic designs displayed on a wall of monitors in a dark room",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A character artist sketching a complex character on a digital tablet, focus on the hand and stylus",
+      "caption": "Character Creation",
+      "anchor": "mujhe bahut achha hai jab main karektar koi banata",
+      "look": "",
+      "start": 233.48,
+      "end": 235.48,
+      "window_index": 3,
+      "prompt": "A character artist sketching a complex character on a digital tablet, focus on the hand and stylus",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A stylized character with expressive features talking to the camera in a fantasy setting",
+      "look": "warm",
+      "anchor": "khud se aur woh karektar baat karta",
+      "start": 235.6,
+      "end": 237.0,
+      "window_index": 3,
+      "prompt": "A stylized character with expressive features talking to the camera in a fantasy setting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A cinematic wide shot of a character walking through a vibrant marketplace in an ancient city",
+      "look": "warm",
+      "anchor": "ek story mein rehte hai uske apne din hoti",
+      "start": 237.16,
+      "end": 238.88,
+      "window_index": 3,
+      "prompt": "A cinematic wide shot of a character walking through a vibrant marketplace in an ancient city",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A close up of a mystery map with glowing markings, atmospheric lighting",
+      "look": "noir",
+      "anchor": "and son ya phir kisi mein interesting taopik",
+      "start": 239.0,
+      "end": 241.48,
+      "window_index": 3,
+      "prompt": "A close up of a mystery map with glowing markings, atmospheric lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A dramatic silhouette of a person in a hooded cloak standing on a cliff",
+      "look": "red_duotone",
+      "anchor": "baar mein baat karta",
+      "start": 241.6,
+      "end": 242.28,
+      "window_index": 3,
+      "prompt": "A dramatic silhouette of a person in a hooded cloak standing on a cliff",
+      "deleted": false
+    },
+    {
+      "kind": "transition",
+      "effect": "glitch",
+      "anchor": "ya phir kisi mistari phuli utilaij nahi",
+      "start": 242.84,
+      "end": 248.64,
+      "window_index": 3,
+      "prompt": "glitch",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A dusty old library with tall shelves and sunlight hitting the dust motes",
+      "look": "sepia",
+      "anchor": "put tha visentali bahut",
+      "start": 250.24,
+      "end": 257.56,
+      "window_index": 3,
+      "prompt": "A dusty old library with tall shelves and sunlight hitting the dust motes",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A stack of thick academic books on a wooden table, focus on the spine titles",
+      "look": "warm",
+      "anchor": "because padhane ke",
+      "start": 260.8,
+      "end": 267.76,
+      "window_index": 3,
+      "prompt": "A stack of thick academic books on a wooden table, focus on the spine titles",
+      "deleted": false
+    },
+    {
+      "kind": "statement_card",
+      "text": "Starting *small* is the most important step.",
+      "anchor": "mujhe bhi is baat ke riyalajeshan hua",
+      "start": 268.52,
+      "end": 270.0,
+      "window_index": 3,
+      "prompt": "Starting *small* is the most important step.",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Start Small, Stay Consistent",
+      "anchor": "starting small is veri",
+      "start": 270.64,
+      "end": 271.76,
+      "window_index": 3,
+      "prompt": "Start Small, Stay Consistent",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A sleek modern office building with a glass facade and a minimalist logo on the exterior, soft daylight, cinematic photography",
+      "look": "warm",
+      "anchor": "barjagrapht midiya ye ek kind of media company",
+      "start": 274.64,
+      "end": 277.04,
+      "window_index": 4,
+      "prompt": "A sleek modern office building with a glass facade and a minimalist logo on the exterior, soft daylight, cinematic photography",
+      "deleted": false
+    },
+    {
+      "kind": "pill_labels",
+      "items": [
+        "Multiple Channels",
+        "New Tools"
+      ],
+      "anchor": "mere jo channels hai",
+      "start": 278.04,
+      "end": 278.84,
+      "window_index": 4,
+      "prompt": "Multiple Channels; New Tools",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A split screen showing a person coding on one side and filming content on the other, high-tech aesthetic",
+      "caption": "Creative Journey",
+      "look": "warm",
+      "anchor": "I am going for my creative",
+      "start": 287.24,
+      "end": 288.36,
+      "window_index": 4,
+      "prompt": "A split screen showing a person coding on one side and filming content on the other, high-tech aesthetic",
+      "deleted": false
+    },
+    {
+      "kind": "name_title",
+      "text": "SOFTWARE ENGINEER",
+      "subtext": "Tech & Coffee Enthusiast",
+      "anchor": "software engineer",
+      "start": 291.88,
+      "end": 292.6,
+      "window_index": 4,
+      "prompt": "SOFTWARE ENGINEER",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A close-up of a high-quality espresso machine pouring rich coffee into a ceramic cup, steam rising, cinematic lighting",
+      "look": "warm",
+      "anchor": "coffee experience bhi hai",
+      "start": 295.08,
+      "end": 296.0,
+      "window_index": 4,
+      "prompt": "A close-up of a high-quality espresso machine pouring rich coffee into a ceramic cup, steam rising, cinematic lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A futuristic server room with glowing blue LED lights and complex wiring, high-tech atmosphere",
+      "look": "cool",
+      "anchor": "AI ka mahaul hai ya phir jaisa work culture",
+      "start": 297.52,
+      "end": 299.88,
+      "window_index": 4,
+      "prompt": "A futuristic server room with glowing blue LED lights and complex wiring, high-tech atmosphere",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A diverse portfolio of digital assets and icons on a tablet screen, clean aesthetic",
+      "look": "warm",
+      "anchor": "mere jo alternate sources of income",
+      "start": 306.44,
+      "end": 307.88,
+      "window_index": 4,
+      "prompt": "A diverse portfolio of digital assets and icons on a tablet screen, clean aesthetic",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Stable Format",
+      "anchor": "ek stable format pe leke",
+      "start": 311.24,
+      "end": 312.64,
+      "window_index": 4,
+      "prompt": "Stable Format",
+      "deleted": false
+    },
+    {
+      "kind": "transition",
+      "effect": "glitch",
+      "anchor": "agar by chance mere job ke saath kuch hota hai,",
+      "start": 314.6,
+      "end": 316.52,
+      "window_index": 4,
+      "prompt": "glitch",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person looking at a laptop screen with multiple windows open, showing growth charts and social media feeds",
+      "look": "warm",
+      "anchor": "jo alternate source of income hai, usko main pursue kar",
+      "start": 317.12,
+      "end": 319.56,
+      "window_index": 4,
+      "prompt": "A person looking at a laptop screen with multiple windows open, showing growth charts and social media feeds",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A minimalist cafe interior with a 'Book Coffee' sign on the door, warm lighting",
+      "look": "warm",
+      "anchor": "book coffee",
+      "start": 331.56,
+      "end": 336.96,
+      "window_index": 4,
+      "prompt": "A minimalist cafe interior with a 'Book Coffee' sign on the door, warm lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A steaming cup of specialty coffee in a rustic ceramic mug on a wooden cafe table, morning sunlight, cinematic depth of field",
+      "look": "warm",
+      "anchor": "phrij draid coffee product",
+      "start": 342.44,
+      "end": 343.64,
+      "window_index": 5,
+      "prompt": "A steaming cup of specialty coffee in a rustic ceramic mug on a wooden cafe table, morning sunlight, cinematic depth of field",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person's hands pouring milk into a cup of coffee to create latte art, close-up shot, soft lighting",
+      "look": "warm",
+      "anchor": "logon ko yeh bhi put",
+      "start": 345.12,
+      "end": 345.72,
+      "window_index": 5,
+      "prompt": "A person's hands pouring milk into a cup of coffee to create latte art, close-up shot, soft lighting",
+      "deleted": false
+    },
+    {
+      "kind": "pill_labels",
+      "items": [
+        "Coffee Lover",
+        "Passion Project"
+      ],
+      "anchor": "main coffee ka bahut zyada shaukin aadmi",
+      "start": 346.16,
+      "end": 347.6,
+      "window_index": 5,
+      "prompt": "Coffee Lover; Passion Project",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A cozy workspace with coffee brewing equipment and journals, warm lighting, cinematic aesthetic",
+      "look": "warm",
+      "anchor": "main eksaperiment karte rehte hoon aur mujhe bahut zyada pasand",
+      "start": 352.6,
+      "end": 355.36,
+      "window_index": 5,
+      "prompt": "A cozy workspace with coffee brewing equipment and journals, warm lighting, cinematic aesthetic",
+      "deleted": false
+    },
+    {
+      "kind": "statement_card",
+      "text": "Mera *passion* logon ke saath share karna hai",
+      "anchor": "yeh mera passion hai main chahta hoon",
+      "start": 356.36,
+      "end": 362.72,
+      "window_index": 5,
+      "prompt": "Mera *passion* logon ke saath share karna hai",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A group of people sitting in a cozy cafe, laughing and talking over cups of coffee",
+      "caption": "Sharing the Love",
+      "look": "warm",
+      "anchor": "apna passion logon ke saath share karun unhein achha",
+      "start": 363.08,
+      "end": 376.64,
+      "window_index": 5,
+      "prompt": "A group of people sitting in a cozy cafe, laughing and talking over cups of coffee",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A modern cafe storefront with a sign that says 'Beyond 3', warm lighting at dusk",
+      "look": "warm",
+      "anchor": "kal hai unke baar mein baat karunga iske live mera channel",
+      "start": 379.44,
+      "end": 382.72,
+      "window_index": 5,
+      "prompt": "A modern cafe storefront with a sign that says 'Beyond 3', warm lighting at dusk",
+      "deleted": false
+    },
+    {
+      "kind": "name_title",
+      "text": "BEYOND 3",
+      "subtext": "Community & Culture",
+      "anchor": "biyaond teen baje jisase main kuch entitij ke baar mein baat",
+      "start": 382.88,
+      "end": 385.36,
+      "window_index": 5,
+      "prompt": "BEYOND 3",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A diverse crowd of people attending a cultural event or workshop, cinematic lighting",
+      "look": "warm",
+      "anchor": "kuch arban lejents and phokalor ke baar mein baat",
+      "start": 385.96,
+      "end": 388.52,
+      "window_index": 5,
+      "prompt": "A diverse crowd of people attending a cultural event or workshop, cinematic lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person speaking passionately on a small stage with microphones, warm lighting",
+      "look": "warm",
+      "anchor": "jo ki kahin na kahin bhut pratosh se rileted",
+      "start": 389.0,
+      "end": 391.2,
+      "window_index": 5,
+      "prompt": "A person speaking passionately on a small stage with microphones, warm lighting",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A dark room with a single glowing screen showing a horror scene",
+      "caption": "Raat 3 Baje",
+      "look": "noir",
+      "anchor": "mere ek aur jo channel hai raat teen",
+      "start": 392.96,
+      "end": 394.68,
+      "window_index": 5,
+      "prompt": "A dark room with a single glowing screen showing a horror scene",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person narrating a story in a dimly lit studio with high-quality microphones",
+      "look": "noir",
+      "anchor": "jaha.n pe main hindi horror story sunata hoon woh to rahega hi iske",
+      "start": 395.04,
+      "end": 399.2,
+      "window_index": 5,
+      "prompt": "A person narrating a story in a dimly lit studio with high-quality microphones",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A mysterious and complex puzzle or mechanical gears moving in shadows",
+      "look": "noir",
+      "anchor": "ek aur channel hai kal teen baje orijinals uske piche kahin",
+      "start": 399.68,
+      "end": 402.76,
+      "window_index": 5,
+      "prompt": "A mysterious and complex puzzle or mechanical gears moving in shadows",
+      "deleted": false
+    },
+    {
+      "kind": "transition",
+      "effect": "whiteflash",
+      "anchor": "health in baze",
+      "start": 405.44,
+      "end": 405.92,
+      "window_index": 5,
+      "prompt": "whiteflash",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A dark, moody cinematic shot of a haunted mansion silhouette against a full moon, eerie atmosphere, foggy trees",
+      "look": "noir",
+      "anchor": "wahan pe horror nahi",
+      "start": 407.76,
+      "end": 408.56,
+      "window_index": 6,
+      "prompt": "A dark, moody cinematic shot of a haunted mansion silhouette against a full moon, eerie atmosphere, foggy trees",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A dramatic cinematic scene of a historical period drama, intense emotions on faces, high contrast lighting",
+      "look": "red_duotone",
+      "anchor": "kuch emotional stories aegi, kuch dramatic stories",
+      "start": 409.28,
+      "end": 411.84,
+      "window_index": 6,
+      "prompt": "A dramatic cinematic scene of a historical period drama, intense emotions on faces, high contrast lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A detective in a trench coat standing under a streetlamp in the rain, noir style, moody atmosphere",
+      "look": "noir",
+      "anchor": "ya phir comedy ho jaega, phir aisa kuch deep",
+      "start": 412.16,
+      "end": 414.4,
+      "window_index": 6,
+      "prompt": "A detective in a trench coat standing under a streetlamp in the rain, noir style, moody atmosphere",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A high-speed action chase scene in a city at night, neon lights reflecting on wet pavement, motion blur",
+      "look": "red_duotone",
+      "anchor": "detective wale stories mystery, thriller aisi kuch",
+      "start": 415.44,
+      "end": 418.84,
+      "window_index": 6,
+      "prompt": "A high-speed action chase scene in a city at night, neon lights reflecting on wet pavement, motion blur",
+      "deleted": false
+    },
+    {
+      "kind": "pill_labels",
+      "items": [
+        "Horror",
+        "Drama",
+        "Comedy",
+        "Mystery"
+      ],
+      "anchor": "in sab ko karan yeh hai ki main chahta hoon",
+      "start": 419.96,
+      "end": 421.6,
+      "window_index": 6,
+      "prompt": "Horror; Drama; Comedy; Mystery",
+      "deleted": false
+    },
+    {
+      "kind": "canvas_card",
+      "image_prompt": "A split screen showing a writer's desk with messy notes and a digital script on a tablet, warm lighting",
+      "caption": "Creative Journey",
+      "anchor": "apna jo creative journey hai, apna jo writing journey",
+      "look": "",
+      "start": 421.68,
+      "end": 423.76,
+      "window_index": 6,
+      "prompt": "A split screen showing a writer's desk with messy notes and a digital script on a tablet, warm lighting",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A stylized montage of different storytelling icons: a mask, a magnifying glass, and a sword, artistic aesthetic",
+      "look": "warm",
+      "anchor": "in sab ko pursue karu.n aur isliye main kaise",
+      "start": 423.88,
+      "end": 426.2,
+      "window_index": 6,
+      "prompt": "A stylized montage of different storytelling icons: a mask, a magnifying glass, and a sword, artistic aesthetic",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A glowing smartphone screen displaying a YouTube studio dashboard with rising graphs, cinematic depth of field",
+      "look": "warm",
+      "anchor": "karu.n YouTube pe",
+      "start": 430.56,
+      "end": 431.2,
+      "window_index": 6,
+      "prompt": "A glowing smartphone screen displaying a YouTube studio dashboard with rising graphs, cinematic depth of field",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A person's hands typing rapidly on a mechanical keyboard in a dimly lit room with neon accents",
+      "look": "cool",
+      "anchor": "thoda sa mess si jarni hai aur main start kiya",
+      "start": 439.56,
+      "end": 442.08,
+      "window_index": 6,
+      "prompt": "A person's hands typing rapidly on a mechanical keyboard in a dimly lit room with neon accents",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A wide shot of a person standing in front of a large window overlooking a city, looking determined",
+      "look": "warm",
+      "anchor": "main apna jo creative field hai jo parasu karane ja raha",
+      "start": 442.24,
+      "end": 444.56,
+      "window_index": 6,
+      "prompt": "A wide shot of a person standing in front of a large window overlooking a city, looking determined",
+      "deleted": false
+    },
+    {
+      "kind": "statement_card",
+      "text": "Aapka *goal* kya hai aur kaise reach karenge?",
+      "anchor": "main chahta hoon ki aap mujhe",
+      "start": 445.36,
+      "end": 446.48,
+      "window_index": 6,
+      "prompt": "Aapka *goal* kya hai aur kaise reach karenge?",
+      "deleted": false
+    },
+    {
+      "kind": "numbered_point",
+      "number": "1",
+      "text": "Small steps first",
+      "anchor": "sa smal step le sochte hain aur us",
+      "start": 453.52,
+      "end": 455.2,
+      "window_index": 6,
+      "prompt": "Small steps first",
+      "deleted": false
+    },
+    {
+      "kind": "broll_image",
+      "image_prompt": "A close up of a 'Comment' icon popping up on a screen with glowing particles around it",
+      "look": "warm",
+      "anchor": "mujhe comment hain bataye",
+      "start": 456.28,
+      "end": 458.4,
+      "window_index": 6,
+      "prompt": "A close up of a 'Comment' icon popping up on a screen with glowing particles around it",
+      "deleted": false
+    }
+  ],
+  "planning": {
+    "beats": [
+      {
+        "kind": "pill_labels",
+        "items": [
+          "Build a Brand",
+          "Create Masterpiece"
+        ],
+        "anchor": "apne ek brand banayenge ya phir koi most sa masterpiece banayenge apne",
+        "start": 18.36,
+        "end": 22.04,
+        "window_index": 0,
+        "prompt": "Build a Brand; Create Masterpiece"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person sitting at a desk looking frustrated and overwhelmed by a blank canvas in front of them, moody lighting, cinematic style",
+        "look": "noir",
+        "anchor": "lekin aksar ham unhein start karane se ladate hain",
+        "start": 23.96,
+        "end": 26.12,
+        "window_index": 0,
+        "prompt": "A person sitting at a desk looking frustrated and overwhelmed by a blank canvas in front of them, moody lighting, cinematic style"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A perfectly organized workspace with a cup of coffee and a clean notebook on a marble table, aesthetic minimalist style",
+        "caption": "The Perfect Scenario",
+        "anchor": "hamein lagte hain ki jab sab kuch time perfect hoga, sab kuch sahi chalega, ekadam perfect scenario",
+        "look": "",
+        "start": 31.28,
+        "end": 35.56,
+        "window_index": 0,
+        "prompt": "A perfectly organized workspace with a cup of coffee and a clean notebook on a marble table, aesthetic minimalist style"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A clock's gears turning smoothly, golden lighting, macro photography",
+        "look": "warm",
+        "anchor": "perfect circumstance hoga, tab ham start karenge",
+        "start": 35.92,
+        "end": 38.4,
+        "window_index": 0,
+        "prompt": "A clock's gears turning smoothly, golden lighting, macro photography"
+      },
+      {
+        "kind": "transition",
+        "effect": "glitch",
+        "anchor": "jaise ham chahte hain waisa nahi hoga aur ise chakkar mein ham start nahi karte",
+        "start": 44.76,
+        "end": 48.32,
+        "window_index": 0,
+        "prompt": "glitch"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person running through a crowded city street at night, blurred lights in the background, motion blur",
+        "look": "red_duotone",
+        "anchor": "bade bade chijon ke peeche bhagate bhagate ham log bahut zaruri cheez bol jate",
+        "start": 50.08,
+        "end": 53.76,
+        "window_index": 0,
+        "prompt": "A person running through a crowded city street at night, blurred lights in the background, motion blur"
+      },
+      {
+        "kind": "name_title",
+        "text": "THE ART OF STARTING",
+        "subtext": "A New Methodology",
+        "anchor": "The Art of starting' Small The Art of starting'",
+        "start": 56.6,
+        "end": 59.48,
+        "window_index": 0,
+        "prompt": "THE ART OF STARTING"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A person's hands typing on a mechanical keyboard in a dimly lit room",
+        "caption": "My Story",
+        "anchor": "aisa hua tha ek baar main ek book likhna ka socha tha",
+        "look": "",
+        "start": 60.76,
+        "end": 63.48,
+        "window_index": 0,
+        "prompt": "A person's hands typing on a mechanical keyboard in a dimly lit room"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A montage of research papers and bookmarks spread across a large table",
+        "look": "warm",
+        "anchor": "sab kuch research kiya, stedi kiya aur main yeh socha tha ki",
+        "start": 65.6,
+        "end": 71.08,
+        "window_index": 0,
+        "prompt": "A montage of research papers and bookmarks spread across a large table"
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Perfect First Chapter",
+        "anchor": "jo pehla chapter hai woh agar perfect nahi hua",
+        "start": 71.44,
+        "end": 73.36,
+        "window_index": 0,
+        "prompt": "Perfect First Chapter"
+      },
+      {
+        "kind": "statement_card",
+        "text": "Tumhara perfection ka *junoon* tumhe rok raha hai.",
+        "anchor": "achha nahi hoga aur ise chakkar",
+        "start": 74.64,
+        "end": 76.04,
+        "window_index": 0,
+        "prompt": "Tumhara perfection ka *junoon* tumhe rok raha hai."
+      },
+      {
+        "kind": "transition",
+        "effect": "whiteflash",
+        "anchor": "bahut shuru kal aate",
+        "start": 76.64,
+        "end": 77.44,
+        "window_index": 0,
+        "prompt": "whiteflash"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A top-down cinematic shot of a hand holding a pen over a blank notebook on a wooden desk, soft morning light, photorealistic",
+        "negative_prompt": "text, watermark, blurry",
+        "look": "warm",
+        "anchor": "main pen paper leke baat aur likhna ke koshish kiya lekin kabhi",
+        "start": 78.2,
+        "end": 81.28,
+        "window_index": 1,
+        "prompt": "A top-down cinematic shot of a hand holding a pen over a blank notebook on a wooden desk, soft morning light, photorealistic"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A messy desk with unfinished manuscripts and crumpled papers, cinematic lighting, shallow depth of field",
+        "negative_prompt": "text, logo",
+        "look": "warm",
+        "anchor": "mera woh jo perfect chapter tha woh complete nahi ho paya",
+        "start": 81.52,
+        "end": 83.88,
+        "window_index": 1,
+        "prompt": "A messy desk with unfinished manuscripts and crumpled papers, cinematic lighting, shallow depth of field"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A stack of high-quality hardcover books on a shelf, one book open to a blank page, soft focus background",
+        "negative_prompt": "text, blurry",
+        "look": "warm",
+        "anchor": "isi chakkad mein main woh book kabhi start nahi kar paya",
+        "start": 84.48,
+        "end": 86.76,
+        "window_index": 1,
+        "prompt": "A stack of high-quality hardcover books on a shelf, one book open to a blank page, soft focus background"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person sitting in a dimly lit room looking at a laptop screen reflecting on their face, moody atmosphere",
+        "negative_prompt": "text, watermark",
+        "look": "warm",
+        "anchor": "hamare saath aisa hi career mein bhi hota",
+        "start": 87.52,
+        "end": 89.2,
+        "window_index": 1,
+        "prompt": "A person sitting in a dimly lit room looking at a laptop screen reflecting on their face, moody atmosphere"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A modern high-rise corporate office building with glass windows reflecting the city skyline",
+        "negative_prompt": "text, blurry",
+        "look": "warm",
+        "anchor": "jab ham sochte hain ki kisi bahut badi company mein switch",
+        "start": 90.2,
+        "end": 92.08,
+        "window_index": 1,
+        "prompt": "A modern high-rise corporate office building with glass windows reflecting the city skyline"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A minimalist boutique storefront in a busy city street, clean aesthetic",
+        "negative_prompt": "text, logo",
+        "look": "warm",
+        "anchor": "ya phir koi bahut achhi company kholenge ya phir koi achhi shop dalenge",
+        "start": 92.56,
+        "end": 99.0,
+        "window_index": 1,
+        "prompt": "A minimalist boutique storefront in a busy city street, clean aesthetic"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A lone hiker standing at the base of a massive mountain, looking up towards the peak, cinematic scale",
+        "negative_prompt": "text, watermark",
+        "look": "warm",
+        "anchor": "cheez agar aapko koi pahar karna hai to aap eki baar mein top pe",
+        "start": 117.44,
+        "end": 120.44,
+        "window_index": 1,
+        "prompt": "A lone hiker standing at the base of a massive mountain, looking up towards the peak, cinematic scale"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "Close up of a painter's hands mixing oil paints on a palette, artistic and textured",
+        "negative_prompt": "text, blurry",
+        "look": "warm",
+        "anchor": "nahi pahu.nch chakate aapko agar koi",
+        "start": 120.6,
+        "end": 122.32,
+        "window_index": 1,
+        "prompt": "Close up of a painter's hands mixing oil paints on a palette, artistic and textured"
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Bas line likhna",
+        "anchor": "banana hai to aap start cheez bas line likhna se 4",
+        "start": 122.68,
+        "end": 139.76,
+        "window_index": 1,
+        "prompt": "Bas line likhna"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person performing a high-intensity workout in a garage gym, sweat glistening, cinematic lighting",
+        "look": "warm",
+        "anchor": "koi workout karna hai",
+        "start": 141.24,
+        "end": 142.0,
+        "window_index": 2,
+        "prompt": "A person performing a high-intensity workout in a garage gym, sweat glistening, cinematic lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "Close up of hands sketching a detailed portrait in a notebook, charcoal and graphite textures",
+        "look": "warm",
+        "anchor": "koi sketching karna hai",
+        "start": 143.92,
+        "end": 144.76,
+        "window_index": 2,
+        "prompt": "Close up of hands sketching a detailed portrait in a notebook, charcoal and graphite textures"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A content creator's desk with a high-quality camera and studio lights, cinematic depth of field",
+        "look": "warm",
+        "anchor": "aap video banana par focus karane chahte",
+        "start": 150.64,
+        "end": 152.2,
+        "window_index": 2,
+        "prompt": "A content creator's desk with a high-quality camera and studio lights, cinematic depth of field"
+      },
+      {
+        "kind": "pill_labels",
+        "items": [
+          "1 Video/Week",
+          "10 Shorts/Reels"
+        ],
+        "anchor": "main ek hafate mein bas ek video",
+        "start": 152.96,
+        "end": 154.6,
+        "window_index": 2,
+        "prompt": "1 Video/Week; 10 Shorts/Reels"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person standing alone in a foggy street looking uncertain, cinematic atmosphere",
+        "look": "noir",
+        "anchor": "jo failure ka hamara dar",
+        "start": 160.56,
+        "end": 161.56,
+        "window_index": 2,
+        "prompt": "A person standing alone in a foggy street looking uncertain, cinematic atmosphere"
+      },
+      {
+        "kind": "statement_card",
+        "text": "Risk factor ko *kam* karo taaki dar khatam ho sake",
+        "anchor": "jo risk factor hai woh kam ho jata",
+        "start": 162.44,
+        "end": 163.88,
+        "window_index": 2,
+        "prompt": "Risk factor ko *kam* karo taaki dar khatam ho sake"
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Sirf 10 minute ka risk",
+        "anchor": "agar kuch hua bhi to bas 10 mirt ki baat",
+        "start": 165.2,
+        "end": 166.84,
+        "window_index": 2,
+        "prompt": "Sirf 10 minute ka risk"
+      },
+      {
+        "kind": "stat_callout",
+        "data": {
+          "value": 99,
+          "suffix": "%"
+        },
+        "anchor": "99 % and",
+        "start": 172.8,
+        "end": 173.64,
+        "window_index": 2,
+        "prompt": ""
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A person starting a small local business, smiling at the camera",
+        "caption": "Success starts small",
+        "look": "warm",
+        "anchor": "agar aap dekhie agar aap start",
+        "start": 175.48,
+        "end": 182.08,
+        "window_index": 2,
+        "prompt": "A person starting a small local business, smiling at the camera"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A wide shot of a bustling city street with digital media advertisements on billboards",
+        "look": "warm",
+        "anchor": "barjagraph mediya main start kiya hai ek chota sa",
+        "start": 189.32,
+        "end": 202.28,
+        "window_index": 2,
+        "prompt": "A wide shot of a bustling city street with digital media advertisements on billboards"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person's hands sketching in a notebook on a wooden table, warm sunlight filtering through a window, cinematic depth of field",
+        "look": "warm",
+        "anchor": "start kiya hai apne life mein ek chota sa change karna hai",
+        "start": 205.36,
+        "end": 218.0,
+        "window_index": 3,
+        "prompt": "A person's hands sketching in a notebook on a wooden table, warm sunlight filtering through a window, cinematic depth of field"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person sitting in a dimly lit room, head in hands, looking at a messy desk full of papers, cinematic lighting",
+        "look": "noir",
+        "anchor": "phir aisa kuch -kuch chijen lekin baithe -baithe main soch raha",
+        "start": 218.36,
+        "end": 225.84,
+        "window_index": 3,
+        "prompt": "A person sitting in a dimly lit room, head in hands, looking at a messy desk full of papers, cinematic lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A wide shot of a creative studio with various items and tools laid out on tables, soft lighting",
+        "look": "warm",
+        "anchor": "ki mujhe aur bhi chijen karna",
+        "start": 226.0,
+        "end": 227.48,
+        "window_index": 3,
+        "prompt": "A wide shot of a creative studio with various items and tools laid out on tables, soft lighting"
+      },
+      {
+        "kind": "pill_labels",
+        "items": [
+          "Creative Field",
+          "New Projects"
+        ],
+        "anchor": "mujhe apna jo creative mera jo field hai usko bhi parastu karna",
+        "start": 227.68,
+        "end": 230.8,
+        "window_index": 3,
+        "prompt": "Creative Field; New Projects"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A montage of diverse digital art and graphic designs displayed on a wall of monitors in a dark room",
+        "look": "warm",
+        "anchor": "aur mujhe in sab chijon ko bhi dikhana",
+        "start": 231.04,
+        "end": 232.92,
+        "window_index": 3,
+        "prompt": "A montage of diverse digital art and graphic designs displayed on a wall of monitors in a dark room"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A character artist sketching a complex character on a digital tablet, focus on the hand and stylus",
+        "caption": "Character Creation",
+        "anchor": "mujhe bahut achha hai jab main karektar koi banata",
+        "look": "",
+        "start": 233.48,
+        "end": 235.48,
+        "window_index": 3,
+        "prompt": "A character artist sketching a complex character on a digital tablet, focus on the hand and stylus"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A stylized character with expressive features talking to the camera in a fantasy setting",
+        "look": "warm",
+        "anchor": "khud se aur woh karektar baat karta",
+        "start": 235.6,
+        "end": 237.0,
+        "window_index": 3,
+        "prompt": "A stylized character with expressive features talking to the camera in a fantasy setting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A cinematic wide shot of a character walking through a vibrant marketplace in an ancient city",
+        "look": "warm",
+        "anchor": "ek story mein rehte hai uske apne din hoti",
+        "start": 237.16,
+        "end": 238.88,
+        "window_index": 3,
+        "prompt": "A cinematic wide shot of a character walking through a vibrant marketplace in an ancient city"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A close up of a mystery map with glowing markings, atmospheric lighting",
+        "look": "noir",
+        "anchor": "and son ya phir kisi mein interesting taopik",
+        "start": 239.0,
+        "end": 241.48,
+        "window_index": 3,
+        "prompt": "A close up of a mystery map with glowing markings, atmospheric lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A dramatic silhouette of a person in a hooded cloak standing on a cliff",
+        "look": "red_duotone",
+        "anchor": "baar mein baat karta",
+        "start": 241.6,
+        "end": 242.28,
+        "window_index": 3,
+        "prompt": "A dramatic silhouette of a person in a hooded cloak standing on a cliff"
+      },
+      {
+        "kind": "transition",
+        "effect": "glitch",
+        "anchor": "ya phir kisi mistari phuli utilaij nahi",
+        "start": 242.84,
+        "end": 248.64,
+        "window_index": 3,
+        "prompt": "glitch"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A dusty old library with tall shelves and sunlight hitting the dust motes",
+        "look": "sepia",
+        "anchor": "put tha visentali bahut",
+        "start": 250.24,
+        "end": 257.56,
+        "window_index": 3,
+        "prompt": "A dusty old library with tall shelves and sunlight hitting the dust motes"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A stack of thick academic books on a wooden table, focus on the spine titles",
+        "look": "warm",
+        "anchor": "because padhane ke",
+        "start": 260.8,
+        "end": 267.76,
+        "window_index": 3,
+        "prompt": "A stack of thick academic books on a wooden table, focus on the spine titles"
+      },
+      {
+        "kind": "statement_card",
+        "text": "Starting *small* is the most important step.",
+        "anchor": "mujhe bhi is baat ke riyalajeshan hua",
+        "start": 268.52,
+        "end": 270.0,
+        "window_index": 3,
+        "prompt": "Starting *small* is the most important step."
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Start Small, Stay Consistent",
+        "anchor": "starting small is veri",
+        "start": 270.64,
+        "end": 271.76,
+        "window_index": 3,
+        "prompt": "Start Small, Stay Consistent"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A sleek modern office building with a glass facade and a minimalist logo on the exterior, soft daylight, cinematic photography",
+        "look": "warm",
+        "anchor": "barjagrapht midiya ye ek kind of media company",
+        "start": 274.64,
+        "end": 277.04,
+        "window_index": 4,
+        "prompt": "A sleek modern office building with a glass facade and a minimalist logo on the exterior, soft daylight, cinematic photography"
+      },
+      {
+        "kind": "pill_labels",
+        "items": [
+          "Multiple Channels",
+          "New Tools"
+        ],
+        "anchor": "mere jo channels hai",
+        "start": 278.04,
+        "end": 278.84,
+        "window_index": 4,
+        "prompt": "Multiple Channels; New Tools"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A split screen showing a person coding on one side and filming content on the other, high-tech aesthetic",
+        "caption": "Creative Journey",
+        "look": "warm",
+        "anchor": "I am going for my creative",
+        "start": 287.24,
+        "end": 288.36,
+        "window_index": 4,
+        "prompt": "A split screen showing a person coding on one side and filming content on the other, high-tech aesthetic"
+      },
+      {
+        "kind": "name_title",
+        "text": "SOFTWARE ENGINEER",
+        "subtext": "Tech & Coffee Enthusiast",
+        "anchor": "software engineer",
+        "start": 291.88,
+        "end": 292.6,
+        "window_index": 4,
+        "prompt": "SOFTWARE ENGINEER"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A close-up of a high-quality espresso machine pouring rich coffee into a ceramic cup, steam rising, cinematic lighting",
+        "look": "warm",
+        "anchor": "coffee experience bhi hai",
+        "start": 295.08,
+        "end": 296.0,
+        "window_index": 4,
+        "prompt": "A close-up of a high-quality espresso machine pouring rich coffee into a ceramic cup, steam rising, cinematic lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A futuristic server room with glowing blue LED lights and complex wiring, high-tech atmosphere",
+        "look": "cool",
+        "anchor": "AI ka mahaul hai ya phir jaisa work culture",
+        "start": 297.52,
+        "end": 299.88,
+        "window_index": 4,
+        "prompt": "A futuristic server room with glowing blue LED lights and complex wiring, high-tech atmosphere"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A diverse portfolio of digital assets and icons on a tablet screen, clean aesthetic",
+        "look": "warm",
+        "anchor": "mere jo alternate sources of income",
+        "start": 306.44,
+        "end": 307.88,
+        "window_index": 4,
+        "prompt": "A diverse portfolio of digital assets and icons on a tablet screen, clean aesthetic"
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Stable Format",
+        "anchor": "ek stable format pe leke",
+        "start": 311.24,
+        "end": 312.64,
+        "window_index": 4,
+        "prompt": "Stable Format"
+      },
+      {
+        "kind": "transition",
+        "effect": "glitch",
+        "anchor": "agar by chance mere job ke saath kuch hota hai,",
+        "start": 314.6,
+        "end": 316.52,
+        "window_index": 4,
+        "prompt": "glitch"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person looking at a laptop screen with multiple windows open, showing growth charts and social media feeds",
+        "look": "warm",
+        "anchor": "jo alternate source of income hai, usko main pursue kar",
+        "start": 317.12,
+        "end": 319.56,
+        "window_index": 4,
+        "prompt": "A person looking at a laptop screen with multiple windows open, showing growth charts and social media feeds"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A minimalist cafe interior with a 'Book Coffee' sign on the door, warm lighting",
+        "look": "warm",
+        "anchor": "book coffee",
+        "start": 331.56,
+        "end": 336.96,
+        "window_index": 4,
+        "prompt": "A minimalist cafe interior with a 'Book Coffee' sign on the door, warm lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A steaming cup of specialty coffee in a rustic ceramic mug on a wooden cafe table, morning sunlight, cinematic depth of field",
+        "look": "warm",
+        "anchor": "phrij draid coffee product",
+        "start": 342.44,
+        "end": 343.64,
+        "window_index": 5,
+        "prompt": "A steaming cup of specialty coffee in a rustic ceramic mug on a wooden cafe table, morning sunlight, cinematic depth of field"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person's hands pouring milk into a cup of coffee to create latte art, close-up shot, soft lighting",
+        "look": "warm",
+        "anchor": "logon ko yeh bhi put",
+        "start": 345.12,
+        "end": 345.72,
+        "window_index": 5,
+        "prompt": "A person's hands pouring milk into a cup of coffee to create latte art, close-up shot, soft lighting"
+      },
+      {
+        "kind": "pill_labels",
+        "items": [
+          "Coffee Lover",
+          "Passion Project"
+        ],
+        "anchor": "main coffee ka bahut zyada shaukin aadmi",
+        "start": 346.16,
+        "end": 347.6,
+        "window_index": 5,
+        "prompt": "Coffee Lover; Passion Project"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A cozy workspace with coffee brewing equipment and journals, warm lighting, cinematic aesthetic",
+        "look": "warm",
+        "anchor": "main eksaperiment karte rehte hoon aur mujhe bahut zyada pasand",
+        "start": 352.6,
+        "end": 355.36,
+        "window_index": 5,
+        "prompt": "A cozy workspace with coffee brewing equipment and journals, warm lighting, cinematic aesthetic"
+      },
+      {
+        "kind": "statement_card",
+        "text": "Mera *passion* logon ke saath share karna hai",
+        "anchor": "yeh mera passion hai main chahta hoon",
+        "start": 356.36,
+        "end": 362.72,
+        "window_index": 5,
+        "prompt": "Mera *passion* logon ke saath share karna hai"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A group of people sitting in a cozy cafe, laughing and talking over cups of coffee",
+        "caption": "Sharing the Love",
+        "look": "warm",
+        "anchor": "apna passion logon ke saath share karun unhein achha",
+        "start": 363.08,
+        "end": 376.64,
+        "window_index": 5,
+        "prompt": "A group of people sitting in a cozy cafe, laughing and talking over cups of coffee"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A modern cafe storefront with a sign that says 'Beyond 3', warm lighting at dusk",
+        "look": "warm",
+        "anchor": "kal hai unke baar mein baat karunga iske live mera channel",
+        "start": 379.44,
+        "end": 382.72,
+        "window_index": 5,
+        "prompt": "A modern cafe storefront with a sign that says 'Beyond 3', warm lighting at dusk"
+      },
+      {
+        "kind": "name_title",
+        "text": "BEYOND 3",
+        "subtext": "Community & Culture",
+        "anchor": "biyaond teen baje jisase main kuch entitij ke baar mein baat",
+        "start": 382.88,
+        "end": 385.36,
+        "window_index": 5,
+        "prompt": "BEYOND 3"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A diverse crowd of people attending a cultural event or workshop, cinematic lighting",
+        "look": "warm",
+        "anchor": "kuch arban lejents and phokalor ke baar mein baat",
+        "start": 385.96,
+        "end": 388.52,
+        "window_index": 5,
+        "prompt": "A diverse crowd of people attending a cultural event or workshop, cinematic lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person speaking passionately on a small stage with microphones, warm lighting",
+        "look": "warm",
+        "anchor": "jo ki kahin na kahin bhut pratosh se rileted",
+        "start": 389.0,
+        "end": 391.2,
+        "window_index": 5,
+        "prompt": "A person speaking passionately on a small stage with microphones, warm lighting"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A dark room with a single glowing screen showing a horror scene",
+        "caption": "Raat 3 Baje",
+        "look": "noir",
+        "anchor": "mere ek aur jo channel hai raat teen",
+        "start": 392.96,
+        "end": 394.68,
+        "window_index": 5,
+        "prompt": "A dark room with a single glowing screen showing a horror scene"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person narrating a story in a dimly lit studio with high-quality microphones",
+        "look": "noir",
+        "anchor": "jaha.n pe main hindi horror story sunata hoon woh to rahega hi iske",
+        "start": 395.04,
+        "end": 399.2,
+        "window_index": 5,
+        "prompt": "A person narrating a story in a dimly lit studio with high-quality microphones"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A mysterious and complex puzzle or mechanical gears moving in shadows",
+        "look": "noir",
+        "anchor": "ek aur channel hai kal teen baje orijinals uske piche kahin",
+        "start": 399.68,
+        "end": 402.76,
+        "window_index": 5,
+        "prompt": "A mysterious and complex puzzle or mechanical gears moving in shadows"
+      },
+      {
+        "kind": "transition",
+        "effect": "whiteflash",
+        "anchor": "health in baze",
+        "start": 405.44,
+        "end": 405.92,
+        "window_index": 5,
+        "prompt": "whiteflash"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A dark, moody cinematic shot of a haunted mansion silhouette against a full moon, eerie atmosphere, foggy trees",
+        "look": "noir",
+        "anchor": "wahan pe horror nahi",
+        "start": 407.76,
+        "end": 408.56,
+        "window_index": 6,
+        "prompt": "A dark, moody cinematic shot of a haunted mansion silhouette against a full moon, eerie atmosphere, foggy trees"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A dramatic cinematic scene of a historical period drama, intense emotions on faces, high contrast lighting",
+        "look": "red_duotone",
+        "anchor": "kuch emotional stories aegi, kuch dramatic stories",
+        "start": 409.28,
+        "end": 411.84,
+        "window_index": 6,
+        "prompt": "A dramatic cinematic scene of a historical period drama, intense emotions on faces, high contrast lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A detective in a trench coat standing under a streetlamp in the rain, noir style, moody atmosphere",
+        "look": "noir",
+        "anchor": "ya phir comedy ho jaega, phir aisa kuch deep",
+        "start": 412.16,
+        "end": 414.4,
+        "window_index": 6,
+        "prompt": "A detective in a trench coat standing under a streetlamp in the rain, noir style, moody atmosphere"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A high-speed action chase scene in a city at night, neon lights reflecting on wet pavement, motion blur",
+        "look": "red_duotone",
+        "anchor": "detective wale stories mystery, thriller aisi kuch",
+        "start": 415.44,
+        "end": 418.84,
+        "window_index": 6,
+        "prompt": "A high-speed action chase scene in a city at night, neon lights reflecting on wet pavement, motion blur"
+      },
+      {
+        "kind": "pill_labels",
+        "items": [
+          "Horror",
+          "Drama",
+          "Comedy",
+          "Mystery"
+        ],
+        "anchor": "in sab ko karan yeh hai ki main chahta hoon",
+        "start": 419.96,
+        "end": 421.6,
+        "window_index": 6,
+        "prompt": "Horror; Drama; Comedy; Mystery"
+      },
+      {
+        "kind": "canvas_card",
+        "image_prompt": "A split screen showing a writer's desk with messy notes and a digital script on a tablet, warm lighting",
+        "caption": "Creative Journey",
+        "anchor": "apna jo creative journey hai, apna jo writing journey",
+        "look": "",
+        "start": 421.68,
+        "end": 423.76,
+        "window_index": 6,
+        "prompt": "A split screen showing a writer's desk with messy notes and a digital script on a tablet, warm lighting"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A stylized montage of different storytelling icons: a mask, a magnifying glass, and a sword, artistic aesthetic",
+        "look": "warm",
+        "anchor": "in sab ko pursue karu.n aur isliye main kaise",
+        "start": 423.88,
+        "end": 426.2,
+        "window_index": 6,
+        "prompt": "A stylized montage of different storytelling icons: a mask, a magnifying glass, and a sword, artistic aesthetic"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A glowing smartphone screen displaying a YouTube studio dashboard with rising graphs, cinematic depth of field",
+        "look": "warm",
+        "anchor": "karu.n YouTube pe",
+        "start": 430.56,
+        "end": 431.2,
+        "window_index": 6,
+        "prompt": "A glowing smartphone screen displaying a YouTube studio dashboard with rising graphs, cinematic depth of field"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A person's hands typing rapidly on a mechanical keyboard in a dimly lit room with neon accents",
+        "look": "cool",
+        "anchor": "thoda sa mess si jarni hai aur main start kiya",
+        "start": 439.56,
+        "end": 442.08,
+        "window_index": 6,
+        "prompt": "A person's hands typing rapidly on a mechanical keyboard in a dimly lit room with neon accents"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A wide shot of a person standing in front of a large window overlooking a city, looking determined",
+        "look": "warm",
+        "anchor": "main apna jo creative field hai jo parasu karane ja raha",
+        "start": 442.24,
+        "end": 444.56,
+        "window_index": 6,
+        "prompt": "A wide shot of a person standing in front of a large window overlooking a city, looking determined"
+      },
+      {
+        "kind": "statement_card",
+        "text": "Aapka *goal* kya hai aur kaise reach karenge?",
+        "anchor": "main chahta hoon ki aap mujhe",
+        "start": 445.36,
+        "end": 446.48,
+        "window_index": 6,
+        "prompt": "Aapka *goal* kya hai aur kaise reach karenge?"
+      },
+      {
+        "kind": "numbered_point",
+        "number": "1",
+        "text": "Small steps first",
+        "anchor": "sa smal step le sochte hain aur us",
+        "start": 453.52,
+        "end": 455.2,
+        "window_index": 6,
+        "prompt": "Small steps first"
+      },
+      {
+        "kind": "broll_image",
+        "image_prompt": "A close up of a 'Comment' icon popping up on a screen with glowing particles around it",
+        "look": "warm",
+        "anchor": "mujhe comment hain bataye",
+        "start": 456.28,
+        "end": 458.4,
+        "window_index": 6,
+        "prompt": "A close up of a 'Comment' icon popping up on a screen with glowing particles around it"
+      }
+    ],
+    "windows": 7,
+    "ok": 7,
+    "failed": []
+  }
+}

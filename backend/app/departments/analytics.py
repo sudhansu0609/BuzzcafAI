@@ -11,6 +11,7 @@ class AnalyticsDepartment(Department):
             manager_role="AnalyticsManager",
             specialist_roles=[
                 "PerformanceAnalyst",
+                "ViralityJudge",
                 "CTRAnalyst",
                 "RetentionAnalyst",
                 "RecommendationAgent",

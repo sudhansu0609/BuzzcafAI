@@ -43,6 +43,47 @@
   --scrollbar-track: #08090d;
 }
 
+/* Studio Dusk: Studio Dark a few steps lighter, with softer (less saturated) accents. */
+[data-theme="dusk"] {
+  --bg-app: #1a1c26;
+  --bg-sidebar: #22252f;
+  --bg-header: rgba(34, 37, 47, 0.92);
+  --bg-card: #262a36;
+  --bg-card-hover: #2d3240;
+  --bg-subcard: #2a2e3b;
+  --bg-input: #171922;
+  --bg-pill: #2d3240;
+  --bg-code: #15171f;
+
+  --border-subtle: #2e3240;
+  --border-card: #363b4b;
+  --border-hover: #464c5f;
+  --border-highlight: #e26d85;
+
+  --text-primary: #f1f3f8;
+  --text-secondary: #a3adc0;
+  --text-muted: #7b869b;
+  --text-on-accent: #ffffff;
+
+  --accent-primary: #a99bd9;
+  --accent-secondary: #e26d85;
+  --accent-gradient: linear-gradient(135deg, #8f80c8 0%, #d4647d 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #9a8cd2 0%, #dd7088 100%);
+  --sidebar-brand-gradient: linear-gradient(135deg, #a99bd9, #e26d85);
+  --active-menu-bg: linear-gradient(90deg, #2d3240 0%, #22252f 100%);
+  --active-menu-border: #e26d85;
+  --active-menu-text: #ffffff;
+
+  --chat-agent-bg: #2a2e3b;
+  --chat-agent-border: #3a4053;
+  --chat-agent-text: #e2e6ee;
+
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --modal-overlay: rgba(10, 11, 16, 0.75);
+  --scrollbar-thumb: #3a4053;
+  --scrollbar-track: #1a1c26;
+}
+
 [data-theme="light"] {
   --bg-app: #f8fafc;
   --bg-sidebar: #ffffff;
@@ -421,6 +462,49 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+/* Brand logo: a dark-ink file for light themes and a light-ink file for dark
+   themes; the full logo in the open sidebar, the B mark in the collapsed rail. */
+:root {
+  --logo-on-light: none;
+  --logo-on-dark: block;
+}
+
+[data-theme="light"],
+[data-theme="nordic"],
+[data-theme="mint_light"] {
+  --logo-on-light: block;
+  --logo-on-dark: none;
+}
+
+.brand-logo {
+  display: none;
+  user-select: none;
+  -webkit-text-fill-color: initial;
+}
+
+.brand-logo.brand-on-light { display: var(--logo-on-light); }
+.brand-logo.brand-on-dark { display: var(--logo-on-dark); }
+
+.brand-logo-full {
+  width: 100%;
+  max-width: 196px;
+  height: auto;
+}
+
+.brand-logo-mark {
+  height: 40px;
+  width: auto;
+}
+
+.sidebar .brand-logo-mark { display: none; }
+
+@media (min-width: 769px) {
+  .sidebar.collapsed .brand-logo-full { display: none; }
+  .sidebar.collapsed .brand-logo-mark.brand-on-light { display: var(--logo-on-light); }
+  .sidebar.collapsed .brand-logo-mark.brand-on-dark { display: var(--logo-on-dark); }
 }
 
 .sidebar-close-btn {
@@ -444,6 +528,70 @@ html, body {
 
 .sidebar-backdrop {
   display: none;
+}
+
+/* Desktop collapse: the sidebar shrinks to an icon rail. The mobile
+   off-canvas sidebar (max-width: 768px) ignores it. */
+.sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  -webkit-text-fill-color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.sidebar-collapse-btn:hover {
+  color: var(--text-primary);
+  -webkit-text-fill-color: var(--text-primary);
+  background-color: var(--bg-card-hover);
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    transition: width 0.2s ease, padding 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .sidebar.collapsed {
+    width: 72px;
+    padding: 24px 10px;
+    overflow-x: hidden;
+  }
+
+  .sidebar.collapsed .sidebar-brand {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sidebar.collapsed .sidebar-brand-content span,
+  .sidebar.collapsed .menu-item span,
+  .sidebar.collapsed .sidebar-footer {
+    display: none;
+  }
+
+  /* Section titles become thin dividers between the icon groups. */
+  .sidebar.collapsed .sidebar-section-title {
+    font-size: 0;
+    height: 1px;
+    margin: 12px 8px;
+    background-color: var(--border-subtle);
+  }
+
+  .sidebar.collapsed .menu-item {
+    justify-content: center;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-collapse-btn {
+    display: none;
+  }
 }
 
 .sidebar-section-title {
@@ -1512,14 +1660,13 @@ html, body {
   align-items: flex-start;
 }
 
+/* Scrolls with the page, beside the project it belongs to (Projects.tsx sets
+   its margin-top to the open card's offset). It used to be sticky with its own
+   scrollbar, which made it feel detached from the card on the left. */
 .project-detail-drawer {
   width: 460px;
   max-width: 45vw;
   flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;
 }
 
 .agent-creator-grid {
@@ -2166,4 +2313,75 @@ html, body {
   }
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Video style controls (Projects > Produce): a heading over each control, and
+   selects compact enough that the chosen value is actually visible -- the
+   global .form-control padding (12px top/bottom) at a 32px height clipped it. */
+.vs-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.vs-field-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+/* Number boxes are sized for a few digits (60-80px inline), but the global
+   .form-control padding (16px a side) plus the spinner arrows left almost no
+   room and cut the value off -- a music track's "-20" dB showed as "-". */
+input[type="number"].form-control {
+  padding: 4px 4px 4px 8px;
+  min-width: 76px;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+.form-control.vs-select {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+select.form-control option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+.vs-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vs-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Bulk Editor tab: the framed editor fills the workspace; App.tsx keeps it mounted. */
+.bulk-edit-card { padding: 16px; margin-bottom: 0; }
+.bulk-edit-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.bulk-edit-actions { display: flex; gap: 8px; }
+.bulk-edit-actions .btn { padding: 8px 14px; font-size: 0.85rem; text-decoration: none; }
+.bulk-edit-frame { display: block; width: 100%; height: calc(100vh - 240px); min-height: 560px; border: 1px solid var(--border-card); border-radius: 8px; background: #fff; }
+.bulk-edit-note { display: flex; align-items: center; gap: 10px; padding: 24px 4px; color: var(--text-muted, inherit); }
+.bulk-edit-error { flex-direction: column; align-items: flex-start; color: #f87171; }

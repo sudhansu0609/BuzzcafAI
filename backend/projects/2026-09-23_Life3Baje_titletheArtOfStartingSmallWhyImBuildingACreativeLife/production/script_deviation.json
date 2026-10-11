@@ -1,0 +1,149 @@
+{
+  "script_tokens": 586,
+  "transcript_words": 1199,
+  "script_spoken_share": 0.171,
+  "adlib_share": 0.83,
+  "skipped_paragraphs": [
+    {
+      "index": 3,
+      "heading": null,
+      "preview": "Aur yahi hai woh 'Big Trap'. Jab hum poore career ya poori life ko ek saath build karne"
+    },
+    {
+      "index": 4,
+      "heading": null,
+      "preview": "Think about it. Agar aapko ek pahad chadhna hai, toh aap seedha top par jump nahi karte. Aap"
+    },
+    {
+      "index": 5,
+      "heading": "THE PHILOSOPHY OF SMALL WINS",
+      "preview": "Toh solution kya hai? Solution hai \"Small Wins\" ka philosophy samajhna."
+    },
+    {
+      "index": 6,
+      "heading": null,
+      "preview": "Hum aksar sochte hain ki ek din mein 100% effort dalenge aur sab kuch khatam kar denge. Par"
+    },
+    {
+      "index": 7,
+      "heading": null,
+      "preview": "Jab hum \"Small\" par focus karte hain, toh fear of failure kam ho jata hai. Agar aapne sirf"
+    },
+    {
+      "index": 8,
+      "heading": "BEHIND-THE-SCENES - BUILDING AT BUZZCAF",
+      "preview": "Main ye sirf bol nahi raha hoon, main ise live kar raha hoon. Welcome to our creative home—Buzzcaf."
+    },
+    {
+      "index": 9,
+      "heading": null,
+      "preview": "Yahan hum roz 'perfect' hone ki koshish nahi karte. Hum process ko enjoy karte hain. Look at this—ye"
+    },
+    {
+      "index": 10,
+      "heading": null,
+      "preview": "Humara creative life build hona koi ek din ka miracle nahi hai. Ye har din liye gaye chhote"
+    },
+    {
+      "index": 11,
+      "heading": "ACTIONABLE STEP & OUTRO",
+      "preview": "Toh aaj ka lesson simple hai: Don't wait for the perfect moment. Just take that one small step"
+    },
+    {
+      "index": 12,
+      "heading": null,
+      "preview": "Mera aapke liye ek chhota sa task hai. Comment section mein mujhe batao—wo kaunsa ek 'small' kaam hai"
+    },
+    {
+      "index": 13,
+      "heading": null,
+      "preview": "Yaad rakhna, consistency is just many small starts put together. Milte hain agle vlog mein. Keep creating!"
+    }
+  ],
+  "adlib_segments": [
+    {
+      "words": 27,
+      "preview": "kabhi bhi sab kuch ekadam perfect nahi hoga, sab kuch same nahi hoga, jaise ham chahte hain waisa"
+    },
+    {
+      "words": 225,
+      "preview": "ek book likhna ka socha tha aur main socha tha ki achhe se likhunga sab kuch research kiya,"
+    },
+    {
+      "words": 24,
+      "preview": "hafate mein bas ek video banayenge aur das banayenge usko kam se kam isase fayda yeh hota hai"
+    },
+    {
+      "words": 23,
+      "preview": "hamein confidence milta hai aage jane ka 99 % and cases mein agar aap dekhie agar aap start"
+    },
+    {
+      "words": 696,
+      "preview": "apne life mein ek chota sa change karna hai ya phir aisa kuch -kuch chijen lekin baithe -baithe"
+    }
+  ],
+  "beats_placed": 89,
+  "beats_paraphrased": 1,
+  "beats_dropped": [
+    {
+      "kind": "broll_video",
+      "anchor": "Agar pehla chapter perfect nahi bana, toh kya fayda?",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "quote_card",
+      "anchor": "Planning ≠ Doing",
+      "reason": "anchor not found in the recording"
+    },
+    {
+      "kind": "broll_image",
+      "anchor": "humein bas pehla brush stroke lena hai.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "definition_card",
+      "anchor": "Solution hai \"Small Wins\" ka philosophy samajhna.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "split",
+      "anchor": "Hum aksar sochte hain ki ek din mein 100% effort dalenge aur sab kuch khatam kar denge.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "chart",
+      "anchor": "consistency ka asli magic 1% progress mein hota hai.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "broll_video",
+      "anchor": "Small starts give you the freedom to experiment.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "location_card",
+      "anchor": "Welcome to our creative home—Buzzcaf.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "broll_image",
+      "anchor": "Look at this—ye ek messy draft hai jo humne kal banaya tha.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "atmos",
+      "anchor": "embracing the \"messy middle\"",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "quote_card",
+      "anchor": "Don't wait for the perfect moment.",
+      "reason": "not spoken in the recording"
+    },
+    {
+      "kind": "fx",
+      "anchor": "Just take that one small step today.",
+      "reason": "not spoken in the recording"
+    }
+  ]
+}

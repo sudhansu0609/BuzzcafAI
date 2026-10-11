@@ -1,0 +1,51 @@
+{
+    "id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
+    "name": "Urban Legends: Sach ya Sirf Kahani? \ud83c\udfad",
+    "brand": "Beyond3Baje",
+    "workflow_name": "shorts_ready",
+    "status": "active",
+    "current_step": "Ready to record",
+    "created_at": "2026-10-01T03:09:03.454868",
+    "updated_at": "2026-10-01T03:09:03.457247",
+    "metadata": {
+        "short_format": "urban_legend",
+        "short_channel": "Beyond3Baje",
+        "orientation": "vertical",
+        "target_duration_minutes": 2,
+        "shorts_desk": {
+            "score": 65,
+            "verdict": "maybe"
+        },
+        "video_settings": {
+            "shorts_clips": 0,
+            "shorts_full": false,
+            "genre": "mystery",
+            "density": "busy",
+            "broll_seconds_min": 2.5,
+            "broll_seconds_max": 4.0
+        }
+    },
+    "steps_history": [
+        {
+            "step_name": "Short Script",
+            "agent_name": "ShortsWriter",
+            "status": "completed",
+            "started_at": "2026-10-01T03:09:03.456853",
+            "completed_at": "2026-10-01T03:09:03.456853",
+            "output_files": {
+                "script": "script/short_script.md"
+            },
+            "logs": [
+                "Built by the Shorts Desk (International urban legend), score 65"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "script": "script/short_script.md",
+        "short_package": "publish/short_package.json"
+    }
+}

@@ -1,6 +1,7 @@
 import os
 import json
 import logging
+import threading
 import uuid
 import time
 from typing import Dict, Any, List, Optional
@@ -122,12 +123,19 @@ class MemorySystem:
             # written to a directory that did not exist.
             logger.error(f"Failed to persist memories to {path}: {e}")
 
+    # One process-wide lock around the read-modify-write below: parallel
+    # visual-planning windows (integrations/visual_windows.py) all save into
+    # the same agent's memory file, and two unguarded writers lose entries.
+    _save_lock = threading.Lock()
+
     def save(self, scope: str, owner: str, tags: List[str], content: Any, confidence: float = 1.0, project_id: Optional[str] = None) -> MemoryItem:
         """Saves a structured memory item to persistent disk storage, preventing duplicates."""
         item = MemoryItem(scope=scope, owner=owner, tags=tags, content=content, confidence=confidence)
-        
+
         path = self._get_storage_path(scope, owner, project_id)
-        if path:
+        if not path:
+            return item
+        with self._save_lock:
             items = self._load_memories(path)
             # Deduplicate write checks
             for existing in items:
@@ -137,7 +145,6 @@ class MemorySystem:
                     return existing
             items.append(item)
             self._save_memories(path, items)
-            
         return item
 
     _STOPWORDS = frozenset(

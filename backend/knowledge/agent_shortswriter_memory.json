@@ -1,0 +1,546 @@
+[
+  {
+    "id": "efb78aee-dd98-4b41-9f68-eb14fa7fd0cc",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Hindi poem (kavita)\", \"kind\": \"poem\", \"candidate\": {\"title\": \"\u092a\u094d\u0930\u092f\u093e\u0923\u0917\u0940\u0924\", \"best_title\": \"Rukna Mana Hai! \ud83d\ude80\", \"poet\": \"\u091c\u092f\u0936\u0902\u0915\u0930 \u092a\u094d\u0930\u0938\u093e\u0926\", \"hook\": \"Rukna nahi hai, kyunki tumhara maqsad bada hai. Prasad ji ki ye lines ek shakti deti hain.\", \"angle\": \"A high-energy call to action for those seeking motivation in their journey.\", \"angle_tip\": \"Start with the most intense line about 'Maqsad' (purpose) to grab attention instantly.\", \"theme\": \"Hope & courage\", \"era\": null, \"kind\": \"poem\", \"reasons\": [\"Very high demand evidence (2.6L+ views on related content).\", \"Low s",
+      "result_snippet": "```json\n{\n  \"title\": \"Rukna Mana Hai! \ud83d\ude80\",\n  \"hook_line\": \"Agar zindagi mein koi bada maqsad hai, toh rukna bilkul mana hai.\",\n  \"intro\": \"Jayashankar Prasad ji ki ye prerna-dayak panktiyaan suniye.\",\n  \"outro\": \"Yaad rakhiye, aapka lakshya bada hai, bas aage badhte rahiye.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Yeh kavita humein himmat aur hausle ke saath apne raste par aage badhne ki prerana deti hai. Jab maqsad bada ho, toh rukna mana hai!\",\n  \"caption\": \"Kya aapka lakshya aapko har din kuch naya karne ki shakti deta hai? \ud83d\ude80\\n\\nJayashankar Prasad ji ki ye behtareen lines ko share karein unke saath jo aaj thoda thak gaye hain.\\n\\nSave this for whenever you need a boost! \u2728\",\n  \"hashtags\": [\n    \"#motivation\",\n    \"#hindipoetry\",\n    \"#jayashankarprasad\",\n    \"#hindi_kavita\",\n    \"#inspiration\",\n    \"#shayari\",\n    \"#poetrylovers\",\n    \"#suvichar\",\n    \"#life3baje\",\n    \"#hindisads\",\n    \"#himmat\",\n    \"#hindivichar\"\n  ],\n  \"on_screen_text\": \"Rukna Mana Hai! \ud83d\ude80\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T01:17:12.137158",
+    "updated": "2026-09-28T01:17:12.137164"
+  },
+  {
+    "id": "7b555835-6ac6-4abb-a17d-acb2d5a1b91e",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Horror incident (1-2 min)\", \"kind\": \"story\", \"candidate\": {\"title\": \"NH-17 ka Khaufnak Sach\", \"best_title\": \"NH-17 ka Khaufnak Sach \ud83d\udc80\", \"poet\": null, \"hook\": \"Kya aapne kabhi suna hai ek aise highway ke baare mein jahan raat ko safar karna maut ko dawat dene jaisa hai?\", \"angle\": \"Uses the specific, trending NH-17 Goa incident of a couple's terrifying experience to build immediate tension.\", \"angle_tip\": \"Focus specifically on the 'couple's experience' to make it feel like a personal testimony rather than a general warning.\", \"theme\": \"Highway Horror\", \"era\"",
+      "result_snippet": "```json\n{\n  \"title\": \"NH-17 ka Khaufnak Sach \ud83d\udc80\",\n  \"hook_line\": \"Kya aapne kabhi suna hai ek aise highway ke baare mein jahan raat ko safar karna maut ko dawat dene jaisa hai?\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"NH-17... yaani aaj ka NH 66. Mumbai se Goa jaante hue, ye rasta jitna sundar dikhta hai, raat ke sannate mein utna hi khaufnaak ban jata hai. (pause) Log kehte hain ki is raste par kuch aisa hai jo sirf andhere mein bahar aata hai. Ek couple ka kissa aaj bhi logon ki rooh kaanp deta hai. Wo Goa ja rahe the... aur raat ke sannate mein, ek sunsan mod par unhe laga jaise koi peeche baitha hai. (pause) Gaadi ki lights mein unhone dekha\u2014ek dhundli si parchhayi jo raaste ke kinare khadi thi. Jab unhone break maara, toh wo cheez gayab ho gayi, lekin gaadi ke andar ek ajeeb si thandak aur purani mitti ki mehak reh gayi. (beat) Kehte hain ye sirf ek kahani nahi, balki un hazaron drivers ki warning hai jo raat ko is sunsaan raste par nikalte hain. Kuch log ise bhoot ka kissa maante hain, toh kuch kehte hain ki ye lambe safar aur akelapan ka darr hai... (slow) Lekin jab aap us khali sadak par honge aur peeche se koi awaaz aayegi, toh aapko fark nahi padega ki wo sach hai ya sirf ek kahani. Kya aap himmat karenge NH-17 par raat ko drive karne ki?\",\n  \"meaning_note\": \"Yeh video NH-17 (NH 66) ke mashhoor ghost stories aur night travel ke darr ko highlight karta hai.\",\n  \"caption\": \"Kya aapne kabhi kisi haunted highway ka anubhav kiya hai? \ud83d\udc80\\n\\nNH-17 ki ye kahani sunkar shayad aap agli baar raat mein drive karne se pehle do baar sochenge. Share karo unke saath jo Goa trip plan kar rahe hain! \\n\\nSave this if you love mystery! \ud83d\udc41\ufe0f\",\n  \"hashtags\": [\n    \"#NH17\",\n    \"#HauntedHighway\",\n    \"#GhostStories\",\n    \"#MumbaiGoa\",\n    \"#HorrorIndia\",\n    \"#Paranormal\",\n    \"#Mystery\",\n    \"#Raat3Baje\",\n    \"#HindiHorror\",\n    \"#UrbanLegends\",\n    \"#RoadTripFear\",\n    \"#GhostHunt\"\n  ],\n  \"on_screen_text\": \"NH-17 ka Khaufnak Sach \ud83d\udc80\",\n  \"estimated_seconds\": 105\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T01:17:34.436497",
+    "updated": "2026-09-28T01:17:34.436504"
+  },
+  {
+    "id": "e6c2e13a-1efe-4d09-88cc-47d9b5221d5f",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Dard Ko Dawa Banayein \u2728\",\n  \"title_en\": \"dard ko dawa banayein\",\n  \"hook_line\": \"Dard ko rehne bhi de dil mein, dawa ho jayegi.\",\n  \"intro\": \"Hakim Ajmal Khan Shaida ki ye khoobsurat nazm suniye.\",\n  \"outro\": \"Waqt har zakhm ko bhar deta hai, bas thoda sabr chahiye.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye shayari sikhaati hai ki waqt ke saath har dard aur mushkil insaan ko mazboot bana deti hai aur ek naye tajurbe mein badal jati hai.\",\n  \"caption\": \"Kya aapka koi purana zakhm aaj bhi aapko sikhata hai? \u2728\\n\\nHakim Ajmal Khan Shaida ki ye gehri baatein shayad aapke dil ko sukoon dein. Share kijiye unke saath jo mushkil waqt se guzar rahe hain.\\n\\nSave this for a peaceful moment.\",\n  \"hashtags\": [\n    \"#shayari\",\n    \"#hindi_poetry\",\n    \"#hakimajmalkhanshaida\",\n    \"#healing\",\n    =\"#hindipoetry\",\n    \"#life3baje\",\n    \"#urdupoetry\",\n    \"#sukoon\",\n    \"#zindagi\",\n    \"#motivation\",\n    \"#deepthoughts\"\n  ],\n  \"on_screen_text\": \"Dard Ko Dawa Banayein \u2728\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:18:06.592953",
+    "updated": "2026-09-28T02:18:06.592957"
+  },
+  {
+    "id": "559bf011-aa8b-4dac-a4bb-4f2747d7cf05",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Zabt Ki Taaqat \ud83d\udcaa\",\n  \"title_en\": \"zabt ki taaqat\",\n  \"hook_line\": \"Marta bhala hai zabt ki taaqat agar na ho.\",\n  \"intro\": \"Hakim Ajmal Khan Shaida ki ye gehri nazm suniye.\",\n  \"outro\": \"Zabt yani self-control, aaj ke daur mein sabse badi taaqat hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye sher sikhata hai ki andar kitna bhi shor ya dard kyun na ho, bahar se khud ko sambhal kar rakhna (self-control) hi asli takat hai.\",\n  \"caption\": \"Kya aap apne jazbaat par kabu paana seekh rahe hain? \ud83d\udee1\ufe0f\\n\\nHakim Ajmal Khan Shaida ki ye nazm unke liye hai jo mushkil waqt mein bhi khud ko mazboot rakhna chahte hain. Share karein unke saath jo aaj thoda struggle kar rahe hain.\\n\\nSave this for a moment of reflection.\",\n  \"hashtags\": [\n    \"#shayari\",\n    \"#hindi_poetry\",\n    \"#hakimajmalkhanshaida\",\n    \"#zabt\",\n    \"#resilience\",\n    =\"#selfcontrol\",\n    \"#hindipoetry\",\n    \"#life3baje\",\n    \"#urdupoetry\",\n    \"#motivation\",\n    \"#innerstrength\",\n    \"#deepthoughts\"\n  ],\n  \"on_screen_text\": \"Zabt Ki Taaqat \ud83d\udcaa\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:18:23.519903",
+    "updated": "2026-09-28T02:18:23.519907"
+  },
+  {
+    "id": "c3c481d1-7a0f-491d-94b4-5256a66ad99d",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Rules horror (fiction)\", \"kind\": \"fiction\", \"format_key\": \"rules_horror\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, Palt",
+      "result_snippet": "```json\n{\n  \"title\": \"Office ke Khaufnak Rules \ud83c\udfe2\ud83d\udc80\",\n  \"title_en\": \"office ke khaufnak rules\",\n  \"hook_line\": \"Agar aapko office mein cheekhne ki awaaz sunayi de, toh agle 30 minute tak bahar mat nikalna.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ye kahani hai ek IT park ki, jahan raat ki shift kabhi khatam nahi hoti. (pause) Kuch log kehte hain ki agar aap wahan 12 baje ke baad kaam kar rahe hain, toh aapko kuch rules follow karne honge... kyunki yahan sirf insaan hi kaam nahi karte. (normal) \\n\\nNote karein ye rules: \\nEk, agar koi colleague apna cabin lock karke andar se rone ki awaaz de, toh unhe ignore karein aur apni seat par baithe rahein. \\nDo, agar aapko elevator mein ek extra insaan dikhe jo bilkul shant ho, toh usse eye-contact mat karna. \\nTeen, agar pantry se kisi ke hansne ki awaaz aaye, toh wahan jaana mana hai. (pause) \\nChar, aur sabse zaroori... agar aapko corridor mein koi apna naam pukarte hue sunai de, toh palat kar mat dekhna. \\n\\nEk raat, ek naye intern ne teesre rule ko tod diya. Usne pantry se aati hui hasi ko samajh kar wahan jaana socha. (beat) Jab wo darwaze tak pahuncha, usne dekha ki wahan koi nahi tha... sirf ek purani kursi tezi se hil rahi thi aur deewar par khoon se likha tha: 'Rule Number Paanch: Kabhi peeche mat mudna.' (pause) Us raat ke baad, intern kabhi dikha hi nahi. Aaj bhi log kehte hain, us office ke corridor mein aaj bhi koi uska naam pukarta hai.\",\n  \"meaning_note\": \"Ye ek fictional horror story hai jo 'Rules' trope ka use karti hai, jahan corporate setting aur supernatural elements ka mix ek darawna mahol banata hai.\",\n  \"caption\": \"Kya aap raat ko akela office mein kaam karne ki himmat rakhte hain? \ud83c\udfe2\ud83d\udc80\\n\\nYe rules shayad aapki jaan bacha sakein... ya shayad nahi. Share kijiye un doston ke saath jo night shifts karte hain!\\n\\nSave this if you love urban legends.\",\n  \"hashtags\": [\n    \"#horror\",\n    \"#ruleshorror\",\n    =\"#urbanlegends\",\n    \"#nightshift\",\n    \"#ghoststories\",\n    \"#hindihorror\",\n    \"#raat3baje\",\n    \"#"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:20:16.248285",
+    "updated": "2026-09-28T02:20:16.248290"
+  },
+  {
+    "id": "06169cb7-6119-4b61-bab2-b0c2c907487f",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Rules horror (fiction)\", \"kind\": \"fiction\", \"format_key\": \"rules_horror\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, Palt",
+      "result_snippet": "```json\n{\n  \"title\": \"Kabristan ke 9 Maut ke Niyam \u26b0\ufe0f\",\n  \"title_en\": \"kabristan ke 9 maut ke niyam\",\n  \"hook_line\": \"Kabristan mein raat ki duty ke 9 sakht niyam... jinhe todne ka matlab hai maut.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ye kahani ek aise security guard ki hai, jise ek sunsan kabristan mein naukri mili. (pause) Use laga ye sirf ek high-paying job hai, lekin uske boss ne use 9 ajeeb rules diye... jo sirf Halloween ki raat ko follow karne the. (normal)\\n\\nBoss ne kaha: 'In rules ko word-for-word follow karna, warna tumhara agla din nahi aayega.'\\n\\nRule number ek: Raat 8:30 baje pahunchna. Ek minute pehle ya baad ka koi option nahi hai.\\nRule number do: 9:15 tak office ke andar hi rehna aur security cameras ko bilkul mat dekhna.\\nRule number teen: Agar koi rone ki awaaz aaye, toh uska jawab mat dena.\\nRule number char: Agar koi darwaze par dastak de, toh bahar mat nikalna.\\nRule number paanch: Agar kisi ka naam liya jaye, toh palat kar mat dekhna. (pause)\\n\\nEk raat, guard ne ek galti kar di. Use laga ki koi peeche se uska naam pukara hai... aur usne rule number paanch tod diya. (beat) Jaise hi wo muda, use dikha ki koi insaan nahi, balki sirf ek khali qabar thi jahan se hawa ka ek thanda jhonka aaya tha... lekin uski awaaz ab bhi wahan goonj rahi thi.\\n\\nAgli subah, office khali tha. Guard kahin nahi mila, bas uske cabin mein ek purani diary mili jispe likha tha: 'Rule number nau: Kabhi piche mat mudna.' (slow) Aaj bhi log kehte hain ki us kabristan mein ab do guard hote hain... ek jo zinda hai, aur ek jo hamesha peeche dekhta rehta hai.\",\n  \"meaning_note\": \"Ye ek fiction story hai jo 'Rules Horror' trope ka istemal karti hai, jahan ek haunted setting aur strict rules ka combination darr paida karta hai.\",\n  \"caption\": \"Kya aapne kabhi kisi aisi jagah ke niyam sune hain jahan unhe todna maut ko bulawa dena ho? \u26b0\ufe0f\\n\\nYe kabristan ke rules shayad aapki raaton ki neend uda dein. Share kijiye unke saath jo horror stories pasand karte hain! \\n\\nSave "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:20:45.841500",
+    "updated": "2026-09-28T02:20:45.841506"
+  },
+  {
+    "id": "ff090bae-cb38-471a-8567-346348e3087b",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Encounter file\", \"kind\": \"story\", \"format_key\": \"encounter\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania). India",
+      "result_snippet": "```json\n{\n  \"title\": \"Falcon Lake: Burning Encounter \ud83d\udd25\",\n  \"title_en\": \"falcon lake burning encounter\",\n  \"hook_line\": \"Ek aisa UFO encounter jisne ek insaan ko seriously burn kar diya, aur aaj tak science ke paas iska koi jawab nahi hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Falcon Lake... Canada ka ek sukoon bhara ilaka. Lekin yahan jo hua, wo kisi bhi scientist ya researcher ko hairan kar sakta hai. (pause) \\n\\nWitness ka naam tha Stefan Michalak. Unhone ek aisi cheez dekhi jo sirf ek 'sightings' nahi thi, balki ek physical encounter tha. (normal)\\n\\nKehte hain ki jab wo Falcon Lake ke paas the, unke saamne ek UFO prakat hua. Par ye koi normal sighting nahi thi... us cheez ne Stefan ko touch kiya, aur us contact se unhe severe burn injuries pahunchi. (pause) \\n\\nSochiye, agar wo sirf ek machine ya gas ka cloud hota, toh kya wo insaani jism ko is tarah zakhmi kar sakta tha? (beat) Is incident ne itne sawal khade kiye ki do alag-alag books likhi gayi jo isi encounter ki details ko cover karti hain. \\n\\nSkeptics kehte hain ki shayad ye koi accident tha, ya phir kuch aur... lekin Stefan ke badan par bane wo nishaan aaj bhi ek gehra rahasya hain. (slow) Kya ye sirf ek kissa hai, ya humne kisi aisi cheez se sampark kiya jo hamari samajh se bahar hai? \\n\\nAapko kya lagta hai, kya koi aur technology ya entity itni 'physical' ho sakti hai?\",\n  \"meaning_note\": \"Yeh video Falcon Lake ke us real-life encounter par focus karta hai jahan ek person ko physical injuries hui, jo ise normal UFO sightings se alag banata hai.\",\n  \"caption\": \"Kya ye sirf ek coincidence tha ya kisi doosri duniya ka sampark? \ud83d\udef8\\n\\nFalcon Lake ki ye burning incident aaj bhi science aur mystery ke beech ek badi deewar khadi karti hai. Aapka kya maanna hai? Comment mein bataiye.\\n\\nShare this with your space-lovers! \\ud83d\\u1e0e\",\n  \"hashtags\": [\n    \"#FalconLake\",\n    \"#UFO\",\n    \"#UAP\",\n    \"#AlienEncounter\",\n    \"#Paranormal\",\n    \"#Mystery\",\n    \"#SpaceMystery\",\n    \"#Beyond3Baje\",\n    \"#Unexpla"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:22:41.698161",
+    "updated": "2026-09-28T02:22:41.698168"
+  },
+  {
+    "id": "8453d9a4-9a50-461a-b16b-7be9a9cded9a",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Encounter file\", \"kind\": \"story\", \"format_key\": \"encounter\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania). India",
+      "result_snippet": "```json\n{\n  \"title\": \"The Bell Witch: Tennessee ka Shaitani Saaya \ud83c\udfda\ufe0f\",\n  \"title_en\": \"the bell witch tennessee\",\n  \"hook_line\": \"1817 ki ek Tennessee farmhouse mein ek aisi entity ne logon ko itna pareshan kiya, ki unhone apna ghar chhodne par majboor ho gaye.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Tennessee, America. Saal 1817. Ek farm house jahan sukoon hona chahiye tha, wahan ek aisi cheez panap rahi thi jo insaani samajh se bahar thi. (pause) \\n\\nIsse jana jata hai 'The Bell Witch' ke naam se\u2014ek itni violent aur malevolent poltergeist jo sirf darr nahi paida karti, balki physical harm pahunchati thi. (normal)\\n\\nKaha jata hai ki ye entity ghar ke andar chizon ko phenkti thi, deewaron par nishaan banati thi, aur logon se ajeeb baatein karti thi. Ye koi mamuli ghost nahi tha; ye itni aggressive thi ki log ise ek 'shaitani saaya' maante the. (pause) \\n\\nJo sabse hairan karne wali baat hai, wo ye hai ki is entity ne us waqt ke mashhoor logon ko bhi target kiya. Log darr ke maare ghar se bahar nahi nikal paate the. (beat) Itna zyada shorr aur violence thi ki log apna farmhouse chhodne par majboor ho gaye. \\n\\nSkeptics ise koi purani hadsa ya hallucination keh sakte hain, lekin 1817 ke records is 'Bell Witch' ke violent behavior ko ek documented history banate hain. (slow) Kya ye sirf ek shaitani saaya tha, ya kuch aisa jo hum aaj bhi nahi samajh paaye?\",\n  \"meaning_note\": \"Yeh video Tennessee ki mashhoor Bell Witch kaayanat par focus karta hai, jo 1800s mein ek bahut hi violent aur documented poltergeist case maana jata hai.\",\n  \"caption\": \"1817 ka wo farmhouse jahan 'Bell Witch' ne sabki zindagi badal di. \ud83c\udfda\ufe0f\\n\\nKya koi entity itni violent ho sakti hai ki log apna ghar chhod dein? Aapka kya maanna hai? Comment mein bataiye.\\n\\nShare with a friend who loves paranormal history! \ud83d\udd6f\ufe0f\",\n  \"hashtags\": [\n    \"#Bell Witch\",\n    \"#Tennessee\",\n    \"#Poltergeist\",\n    \"#HauntedHouse\",\n    \"#AmericanHistory\",\n    =\"#Paranormal\",\n    \"#GhostStories\",\n    \"#Beyond3Baje\",\n    "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:23:08.518802",
+    "updated": "2026-09-28T02:23:08.518806"
+  },
+  {
+    "id": "cf1a2748-3a31-49e3-86ca-ab53d15056be",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Encounter file\", \"kind\": \"story\", \"format_key\": \"encounter\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania). India",
+      "result_snippet": "```json\n{\n  \"title\": \"Falcon Lake: Burning Encounter \ud83d\udd25\",\n  \"title_en\": \"falcon lake burning encounter\",\n  \"hook_line\": \"Falcon Lake ke paas ek aise UFO sighting ne witness ko severe burn injuries pahunchayi, jo aaj bhi science ko challenge karti hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Canada ka Falcon Lake... ek sukoon bhara ilaaka. Lekin yahan jo hua, wo kisi bhi scientist ke liye ek bada sawal ban gaya hai. (pause) \\n\\nWitness ka naam tha Stefan Michalak. Unhone sirf koi 'flying object' nahi dekha, balki unka ek physical encounter hua. (normal) \\n\\nKehte hain jab wo Falcon Lake ke paas the, unke saamne ek UFO prakat hua. Par ye koi aam sighting nahi thi... us cheez ne Stefan ko touch kiya, aur us contact se unhe severe burn injuries pahunchi. (pause) \\n\\nSochiye, agar wo sirf koi machine ya gas ka cloud hota, toh kya wo insaani jism par is tarah ke nishaan chhod sakta tha? (beat) Is incident ki intensity itni zyada thi ki do alag-alag books likhi gayi jo sirf isi ek encounter ko detail mein cover karti hain. \\n\\nSkeptics ise koi accident ya hallucination keh sakte hain, lekin Stefan ke badan par bane wo burns aaj bhi ek gehra rahasya hain. (slow) Kya ye sirf ek kissa hai, ya humne kisi aisi cheez se sampark kiya jo hamari technology se kahin upar hai? \\n\\nAapko kya lagta hai, kya koi aur entity itni 'physical' ho sakti hai?\",\n  \"meaning_note\": \"Yeh video Falcon Lake ke us real-life encounter par focus karta hai jahan ek person ko physical burns hue, jo ise normal UFO sightings se alag banata hai.\",\n  \"caption\": \"Kya ye sirf ek coincidence tha ya kisi doosri duniya ka sampark? \ud83d\udc7d\\n\\nFalcon Lake ki ye burning incident aaj bhi science aur mystery ke beech ek badi deewar khadi karti hai. Aapka kya maanna hai? Comment mein bataiye.\\n\\nShare this with your space-lovers! \ud83d\ude80\",\n  \"hashtags\": [\n    \"#FalconLake\",\n    \"#UFO\",\n    \"#UAP\",\n    \"#AlienEncounter\",\n    \"#Paranormal\",\n    \"#Mystery\",\n    \"#SpaceMystery\",\n    \"#Beyond3Baje\",\n    \"#Canada\",\n    \"#UnsolvedMys"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:24:26.209518",
+    "updated": "2026-09-28T02:24:26.209525"
+  },
+  {
+    "id": "75c311a9-09da-4e54-94c5-baa0507436c8",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Rasm-e-Duniya Ko Todna \u26d3\ufe0f\",\n  \"title_en\": \"rasm duniya ko todna\",\n  \"hook_line\": \"Kya aap bhi ek purane raste par chal rahe hain, ya kuch naya banane ki himmat rakhte hain?\",\n  \"intro\": \"Faiz Ahmed Faiz ki ye khubsurat lines unke liye jo unconventional raasta chun rahe hain.\",\n  \"outro\": \"Apne sapno ke liye, kabhi-kabhi purani rasmon ko todna hi asli himmat hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye sher un logon ke liye hai jo 9-5 ki bheed se hatkar apna kuch naya banana chahte hain\u2014unke liye jo 'rasm' (tradition) todne ka hausla rakhte hain.\",\n  \"caption\": \"Kya aap bhi kisi purani parampara ko tod kar apna rasta bana rahe hain? \u26d3\ufe0f\\n\\nFaiz Ahmed Faiz ki ye nazm un sab ke liye hai jo bheed se hatkar kuch alag karne ka hosla rakhte hain. Share karein unke saath jo aaj apne sapno ke liye lad rahe hain.\\n\\nSave this for your daily reminder of courage.\",\n  \"hashtags\": [\n    \"#FaizAhmedFaiz\",\n    \"#UrduPoetry\",\n    \"#HindiPoetry\",\n    \"#Motivation\",\n    \"#Entrepreneurship\",\n    \"#NonTraditionalPath\",\n    =\"#Life3Baje\",\n    \"#Courage\",\n    \"#PoetryLover\",\n    \"#BreakTheNorms\"\n  ],\n  \"on_screen_text\": \"Rasm-e-Duniya Ko Todna \u26d3\ufe0f\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:27:13.149753",
+    "updated": "2026-09-28T02:27:13.149761"
+  },
+  {
+    "id": "a76cd0d2-9ba8-4017-a677-619961d7194f",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Sitaron Se Aage: Ek Naya Safar \ud83d\ude80\",\n  \"title_en\": \"sitaron se aage ek naya safar\",\n  \"hook_line\": \"Kya aapne kabhi socha hai ki ek platform ya ek maqsad ke alawa bhi kuch bada mumkin hai?\",\n  \"intro\": \"Allama Iqbal ki ye mashhoor nazm, un sabke liye jo badi soch rakhte hain.\",\n  \"outro\": \"Aaj ka safar sirf ek channel tak nahi, balki us vision ki taraf hai jo hadon ko todta hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye sher un logo ke liye hai jo 9-5 ya ek single platform se bahar nikal kar kuch bada build karna chahte hain\u2014unke liye jo 'sitaron' se aage dekhne ka hosla rakhte hain.\",\n  \"caption\": \"Kya aap bhi kisi ek hadd ko tod kar apna vision bada kar rahe hain? \ud83d\ude80\\n\\nAllama Iqbal ki ye lines un sab ke liye hain jo sirf ek creator nahi, balki kuch bada build karne ka jazba rakhte hain. Share karein unke saath jo aaj apne sapno ke liye lad rahe hain.\\n\\nSave this for your daily reminder of ambition.\",\n  \"hashtags\": [\n    \"#AllamaIqbal\",\n    \"#UrduPoetry\",\n    \"#HindiPoetry\",\n    \"#Ambition\",\n    \"#Entrepreneurship\",\n    \"#Visionary\",\n    \"#GrowthMindset\",\n    \"#Life3Baje\",\n    \"#BeyondTheLimits\",\n    \"#SuccessJourney\"\n  ],\n  \"on_screen_text\": \"Sitaron Se Aage \ud83d\ude80\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:27:32.872558",
+    "updated": "2026-09-28T02:27:32.872788"
+  },
+  {
+    "id": "f2a21e53-addf-45b9-899d-08fb96ffbc85",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Rules horror (fiction)\", \"kind\": \"fiction\", \"format_key\": \"rules_horror\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, Palt",
+      "result_snippet": "```json\n{\n  \"title\": \"Night Shift ke Khaufnak Rules \ud83c\udfe2\",\n  \"title_en\": \"night shift khaufnak rules\",\n  \"hook_line\": \"Agar aapko office mein cheekhne ki awaaz sunayi de, toh agle 30 minute tak bahar mat nikalna.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ek badi corporate building. Raat ke 2 baje. Poora floor khali hai, sirf aap aur aapka laptop hain. (pause) Lekin is office mein raat ki shift par kaam karne ke liye kuch aise rules hain, jinhe todne ka matlab hai... khud ko khatre mein daalna.\\n\\nYe ek kahani hai ek night-shift employee ki jise pehle din hi uske supervisor ne ek purani diary di. (normal) Usme likha tha: 'Agar yahan raat ko kaam karna hai, toh in 5 rules ka palan karein.'\\n\\nRule number ek: Agar corridor mein kisi ke chalne ki awaaz aaye, toh apni chair se hilein mat. \\nRule number do: Agar peeche se koi aapka naam pukaare, toh mud kar jawab na dein. \\nRule number teen: Agar lift ka darwaza apne aap khule, toh andar na jayein.\\nRule number char: Agar 3 baje koi rone ki awaaz aaye, toh headphone laga kar baith jayein. (pause)\\n\\nAur Rule number paanch... agar koi darwaze par dastak de aur kahe 'Kya main andar aa sakta hoon?', toh bilkul khamosh rahein.\\n\\nEk raat, us employee ne ek galti kar di. (beat) Usne rule number chaar ignore kiya. Use laga ki shayad wo sirf ek prank hai. Jaise hi usne headphone utara, use mehsoos hua ki koi uske theek peeche khada hai... aur uski saanso ki thandak uske gardan par thi.\\n\\nAgli subah, office ka cabin khula tha. Employee wahan nahi tha. Bas uski kursi par ek purana note rakha tha: 'Rule number paanch ko todne wale kabhi agle din tak nahi pahunchte.' (slow) Kya aap aaj raat ki shift ke liye taiyaar hain?\",\n  \"meaning_note\": \"Ye ek fiction story hai jo 'Rules Horror' trope ka istemal karti hai, jahan ek corporate setting mein eerie rules ka combination darr paida karta hai.\",\n  \"caption\": \"Kya aapne kabhi kisi aisi jagah ke niyam sune hain jahan unhe todna maut ko bulawa dena ho? \ud83c\udfe2\\n\\nYe office ke kuch raaz shayad a"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:29:19.274148",
+    "updated": "2026-09-28T02:29:19.274153"
+  },
+  {
+    "id": "c83ac66f-0ab1-4fb5-a58a-d825dcf0d230",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Rules horror (fiction)\", \"kind\": \"fiction\", \"format_key\": \"rules_horror\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, Palt",
+      "result_snippet": "```json\n{\n  \"title\": \"Night Guard ka Khaufnak Sach \ud83d\udee1\ufe0f\",\n  \"title_en\": \"night guard khaufnak sach\",\n  \"hook_line\": \"Ek smart guard ke liye bhi ye rules follow karna zaroori tha, warna kuch 'badal' jayega.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ek purani building... aur ek night-shift duty. (pause) Log sochte hain ki security guards ka kaam sirf darr se ladna hai, par asli darr tab hota hai jab aapko pata chale ki aap akele nahi hain. \\n\\nYe ek kahani hai ek guard ki jise ek purane warehouse mein duty di gayi thi. Use ek diary mili, jisme likha tha: 'Agar yahan raat ko rehna hai, toh in 5 rules ka palan karein.' (normal)\\n\\nRule number ek: Agar koi bahar se darwaza khatkhataye aur kahe ki wo 'delivery' dene aaya hai, toh bahar mat nikalna. Wo sirf ek awaaz hai.\\n\\nRule number do: Agar aapko lage ki koi corridor mein chal raha hai, toh apni flashlight band kar dein. Unhe dikhna nahi chahiye.\\n\\nRule number teen: Raat ke 3 baje agar koi aapka naam lekar pukare... bilkul khamosh rahein. Wo sirf check kar raha hai ki aap jaag rahe hain ya nahi. (pause)\\n\\nRule number chaar: Agar aapko apne peeche kisi ki saansein mehsoos hon, toh palat kar mat dekhna. Bas apni jagah par ruke rahein.\\n\\nAur Rule number paanch... sabse zaroori. Agar koi darwaze ke us paar se kahe 'Kya main andar aa sakta hoon?', toh bas ek baar jawab dein: 'Nahi, abhi niyam ka waqt hai.' (slow)\\n\\nEk raat, us guard ne galti se rule number teen ko ignore kar diya. Usne socha shayad koi dost hai jo use ched raha hai. Jaise hi usne apna naam sunne par piche mudna chaha... (beat) Use ehsas hua ki awaaz insaani nahi thi. Wo ek bhayankar, bhari aur ghisiti hui aawaz thi.\\n\\nAgli subah, guard wahan nahi tha. Sirf uski kursi par wo diary khuli padi thi, jisme naye panno par likha tha: 'Rule number paanch ko todne wale kabhi agle din tak nahi pahunchte.' (slow) Kya aap aaj raat ki shift ke liye taiyaar hain?\",\n  \"meaning_note\": \"Ye ek fiction story hai jo 'Rules Horror' trope ka istemal karti hai, jahan ek gua"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:29:50.344810",
+    "updated": "2026-09-28T02:29:50.344816"
+  },
+  {
+    "id": "8a6f5974-c197-4853-a442-4e21cf1d0e2e",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Encounter file\", \"kind\": \"story\", \"format_key\": \"encounter\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania). India",
+      "result_snippet": "```json\n{\n  \"title\": \"Falcon Lake: Burn Marks \ud83d\udd25\",\n  \"title_en\": \"falcon lake burn marks\",\n  \"hook_line\": \"Falcon Lake ke paas ek aisi sighting hui jahan witness ko physical burn injuries tak mili, jo normal insaano se nahi ho sakti.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Canada ka Falcon Lake... ek sukoon bhara ilaaka. Lekin yahan jo hua, wo kisi bhi scientist ke liye ek bada sawal ban gaya hai. (pause)\\n\\nWitness ka naam tha Stefan Michalak. Unhone sirf koi 'flying object' nahi dekha, balki unka ek physical encounter hua. (normal)\\n\\nKehte hain jab wo Falcon Lake ke paas the, unke saamne ek UFO prakat hua. Par ye koi aam sighting nahi thi... us cheez ne Stefan ko touch kiya, aur us contact se unhe severe burn injuries pahunchi. (pause)\\n\\nSochiye, agar wo sirf koi machine ya gas ka cloud hota, toh kya wo insaani jism par is tarah ke nishaan chhod sakta tha? (beat) Is incident ki intensity itni zyada thi ki do alag-alag books likhi gayi jo sirf isi ek encounter ko detail mein cover karti hain.\\n\\nSkeptics ise koi accident ya hallucination keh sakte hain, lekin Stefan ke badan par bane wo burns aaj bhi ek gehra rahasya hain. (slow) Kya ye sirf ek kissa hai, ya humne kisi aisi cheez se sampark kiya jo hamari technology se kahin upar hai?\\n\\nAapko kya lagta hai, kya koi aur entity itni 'physical' ho sakti hai?\",\n  \"meaning_note\": \"Yeh video Falcon Lake ke us real-life encounter par focus karta hai jahan ek person ko physical burns hue, jo ise normal UFO sightings se alag banata hai.\",\n  \"caption\": \"Kya ye sirf ek coincidence tha ya kisi doosri duniya ka sampark? \ud83d\udef8\\n\\nFalcon Lake ki ye burning incident aaj bhi science aur mystery ke beech ek badi deewar khadi karti hai. Aapka kya maanna hai? Comment mein bataiye.\\n\\nShare this with your space-lovers! \ud83d\ude80\",\n  \"hashtags\": [\n    \"#FalconLake\",\n    \"#UFO\",\n    \"#UAP\",\n    \"#AlienEncounter\",\n    \"#Paranormal\",\n    \"#Mystery\",\n    \"#SpaceMystery\",\n    \"#Beyond3Baje\",\n    \"#Canada\",\n    \"#UnsolvedMystery\"\n  ],\n  \"on_screen"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:31:28.554130",
+    "updated": "2026-09-28T02:31:28.554137"
+  },
+  {
+    "id": "5ef921f4-6fad-4000-aa49-b32934f059cc",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Encounter file\", \"kind\": \"story\", \"format_key\": \"encounter\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania). India",
+      "result_snippet": "```json\n{\n  \"title\": \"Kentucky ke 'Green Men' \ud83d\udc7d\",\n  \"title_en\": \"kentucky green men\",\n  \"hook_line\": \"1955 ki ek raat, Kentucky mein kuch aise cheezon ne ek ghar ko gher liya jo insaani dimaag se bahar thi.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"August 20, 1955. Kentucky ke ek farmhouse par... maut ka sannata tha. (pause) Tabhi kuch ajeeb cheezon ne ghar ko gher liya. Ye koi mamuli intruder nahi the. (normal)\\n\\nSutton aur Taylor naam ke do logon ne dawa kiya ki unhone 12 se 15 chhote, dark figures dekhe\u2014jinko aaj bhi 'Green Men' ya 'Hopkinsville Goblins' kaha jata hai. (pause) Ye makhlooq sirf khidkiyon par nahi dikhti thi, balki wo ghar ke andar ghusne ki koshish kar rahi thi. \\n\\nWitnesses ne bataya ki unke paas ye cheezein 'high-speed' par move kar rahi thi, jaise koi machine ya koi aisi technology jo hum samajh hi nahi sakte. (normal) Jab police aur military forces wahan pahunchi, toh unhe sirf toote hue sheeshe aur gunshots ke nishaan mile... lekin wo 'Green Men' kahin nahi thay. (pause)\\n\\nSkeptics ise ek mass hallucination ya koi prank kehte hain, par aaj bhi 1955 ki wo raat Kentucky ke itihaas mein ek gehra rahasya banki hui hai. (slow) Kya wo sirf mitti aur darr ka khel tha... ya phir humne kisi aisi cheez ko dekha jise dekhna hamare liye khatarnak tha? (beat) Aapko kya lagta hai, kya ye 'Green Men' aaj bhi kahin chhupi hui hain?\",\n  \"meaning_note\": \"Yeh video 1955 ke Kentucky incident par focus karta hai jahan logon ne ajeeb, non-human entities ko dekha. Yeh ek classic 'high-strangeness' case hai.\",\n  \"caption\": \"Kya ye sirf ek darr ka pal tha ya kisi aur duniya se sampark? \ud83d\udc7d\\n\\n1955 ki Kentucky ki ye report aaj bhi researchers ko hairan kar deti hai. Kya aapko lagta hai ki wo 'Green Men' sach mein wahan the? Comment mein bataiye.\\n\\nFollow for more global mysteries! \ud83c\udf0c\",\n  \"hashtags\": [\n    \"#Kentucky\",\n    \"#UFO\",\n    \"#GreenMen\",\n    \"#Hopkinsville\",\n    \"#AlienEncounter\",\n    \"#Paranormal\",\n    \"#Mystery\",\n    \"#Beyond3Baje\",\n    \"#Unsolved\",\n   "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T02:31:55.756070",
+    "updated": "2026-09-28T02:31:55.756074"
+  },
+  {
+    "id": "1c497b79-d466-4d68-8d57-3dad8a404f11",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "\nYou are executing the step 'Short Script' for the media project 'Night Guard ka Khaufnak Sach \ud83d\udee1\ufe0f' (Brand: Raat3Baje).\n\n### Brand Guidelines\n# Brand Style Guide: Raat3Baje\n\n## Essence (read first)\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\" It must never become a face-camera Khayal3Baje.\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalaw",
+      "result_snippet": "```json\n{\n  \"title\": \"Night Guard ke Khauf1nak Rules \ud83d\udee1\ufe0f\",\n  \"title_en\": \"night_guard_khaufnak_rules\",\n  \"hook_line\": \"Agar aapko raat ke 3 baje corridor se koi aapka naam pukare, toh bilkul mat mudna.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ek purani factory... aur ek akela guard. (pause) Log sochte hain ki night shift boring hoti hai, par kuch jagaho par ye sirf darr ka khel hota hai. (normal)\\n\\nYe kahani hai ek security guard ki jise ek abandoned warehouse mein duty di gayi thi. Use pehle din hi ek purana register mila jispe likha tha: 'Agar yahan raat ko rehna hai, toh in 5 rules ka palan karein.' (pause)\\n\\nRule number ek: Agar corridor se koi aapka naam pukaare, toh bilkul mud kar jawab mat dena. Wo sirf check kar raha hai ki aap jaag rahe hain ya nahi.\\n\\nRule number do: Raat ke 3 baje agar darwaze par koi dastak de aur kahe 'Kya main andar aa sakta hoon?', toh bas ek baar kehna... 'Abhi entry band hai.' (pause)\\n\\nRule number teen: Agar light flickers, toh apni jagah se hilein mat. Wo aapka movement track kar raha hai.\\n\\nRule number chaar: Agar koi bachha rone ki aawaz aaye, toh basement ki taraf bilkul mat jana.\\n\\nAur Rule number paanch... sabse zaroori. Agar aapko apne piche kisiki saansein mehsoos hon, toh apni aankhein band kar lo aur 10 tak ginn lo. (pause)\\n\\nEk raat, us guard ne ek badi galti kar di. Use laga koi dost uska naam le raha hai. Usne rule number teen ko ignore kiya aur piche mudha. (beat) Jaise hi usne peeche dekha... use koi insaan nahi dikha. Sirf ek kaali parchhayi thi jo uski gardan ke itni kareeb thi ki uske baal jhad rahe the. (slow)\\n\\nAgli subh, guard wahan nahi tha. Bas uska uniform aur wo register mila, jispe naye panno par likha tha: 'Rule number teen todne wale agle din tak nahi pahunchte.' (pause) Kya aap aaj ki night shift ke liye taiyaar hain?\",\n  \"meaning_note\": \"Ye ek fiction story hai jo 'Rules Horror' trope ka istemal karti hai, jahan ek abandoned warehouse aur strict rules ka combination darr paida karta hai.\",\n "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-28T21:24:10.345532",
+    "updated": "2026-09-28T21:24:10.345537"
+  },
+  {
+    "id": "d6cc23f9-4bac-4166-967b-1ce6c8062698",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Hindi poem (kavita)\", \"kind\": \"poem\", \"format_key\": \"poem\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube",
+      "result_snippet": "```json\n{\n  \"title\": \"Jab Tak Loha Garam Hai \ud83d\udd25\",\n  \"title_en\": \"jab_tak_loha_garam_hai\",\n  \"hook_line\": \"Garm loha peet, thanda peetne ko waqt bahutera paada hai.\",\n  \"intro\": \"Harivansh Rai Bachchan ki ye lines unke liye jo abhi apne sapno ke liye lad rahe hain.\",\n  \"outro\": \"Jab tak mauka saamne hai, tab tak mehnat karni hogi. Tabhi kuch bada banega.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye poem 'hustle' aur sahi waqt par action lene ki taqat ko dikhati hai\u2014ki jab mauka (loha) garam ho, tabhi uspar kaam karna chahiye.\",\n  \"caption\": \"Jab tak mauka saamne hai, tab tak mehnat karni hogi. \ud83d\udd28\\n\\nHarivansh Rai Bachchan ki ye lines humein yaad dilati hain ki sahi waqt par liya gaya faisla aur lagatar ki gayi mehnat hi safalta ka rasta hai. Kya aap bhi apne sapno ke liye 'garam loha' peet rahe hain? Bataiye niche! \ud83d\udc47\\n\\nSave this for your daily motivation.\",\n  \"hashtags\": [\n    \"#HarivanshRaiBachchan\",\n    \"#HindiPoetry\",\n    \"#Motivation\",\n    \"#Hustle\",\n    =\"#Life3Baje\",\n    \"#SuccessMindset\",\n    \"#UrduPoetry\",\n    \"#HindiQuotes\",\n    \"#Entrepreneurship\",\n    \"#HardWork\"\n  ],\n  \"on_screen_text\": \"Jab Tak Loha Garam Hai \ud83d\udd25\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:02:14.206527",
+    "updated": "2026-09-29T03:02:14.206533"
+  },
+  {
+    "id": "9e7df0a3-2089-44c7-a189-c1d40c98f7df",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Hindi poem (kavita)\", \"kind\": \"poem\", \"format_key\": \"poem\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube",
+      "result_snippet": "```json\n{\n  \"title\": \"Jab Sab Kuch Ruk Jaye... \ud83d\udc94\",\n  \"title_en\": \"jab_sab_kuch_ruk_jae\",\n  \"hook_line\": \"Yaadon se baat nahi banti / Kuch dard nigode aise hain, / jeena dubaar kar dete hain.\",\n  \"intro\": \"Prithvi Pal Raina ki ye lines un dino ke liye jab rasta mushkil lagne lage.\",\n  \"outro\": \"Kuch baatein sirf dil se kahi ja sakti hain, zubaan tak nahi pahunchti.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye poem un palon ko darshati hai jab setbacks aur purani yaadein humein andar se todti hain\u2014ek raw aur honest sachai jo har struggle ka hissa hai.\",\n  \"caption\": \"Kuch dard aise hote hain jinhe sirf mehsoos kiya ja sakta hai, bataya nahi. \ud83d\udc94\\n\\nPrithvi Pal Raina ki ye khoobsurat lines un mushkil raahon ke liye jo hum sab kabhi na kabhi tay karte hain. Kya aapne bhi kabhi aisa mehsoos kiya hai?\\n\\nSave this if it touched your heart.\",\n  \"hashtags\": [\n    \"#PrithviPalRaina\",\n    \"#HindiPoetry\",\n    \"#Poetry\",\n    \"#Shayari\",\n    \"#Life3Baje\",\n    \"#DeepLines\",\n    \"#UrduPoetry\",\n    \"#RealityOfLife\",\n    \"#Motivation\",\n    \"#HustleTruth\"\n  ],\n  \"on_screen_text\": \"Jab Sab Kuch Ruk Jaye... \ud83d\udc94\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:02:33.603759",
+    "updated": "2026-09-29T03:02:33.603796"
+  },
+  {
+    "id": "61f47c57-6c0f-429f-90e5-ff19c0d40c7b",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Alleged incident (India)\", \"kind\": \"story\", \"format_key\": \"horror_incident\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, P",
+      "result_snippet": "```json\n{\n  \"title\": \"Railway Track ke Raaz: Railroad Wraiths \ud83d\ude82\",\n  \"title_en\": \"railway_track_ke_raaz\",\n  \"hook_line\": \"Railway tracks par chalte waqt kuch log akele nahi hote; purane zamane ke 'railroad wraiths' aaj bhi wahan maujood hain.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Train ki patriyan... ek aisa raasta jo aksar sunsaan aur khaufnaak hota hai. (pause) Bengal Nagpur Railway se jude kuch purane kisse batate hain ki ye tracks sirf lohe ke tukde nahi, balki kai purani yaadon aur 'railroad wraiths' ka ghar hain. (normal)\\n\\nYe koi sirf kahani nahi hai. Purane zamane ke railway employees ne khud in 'wraiths' ke baare mein kafi warnings share ki hain. Kehte hain... (pause) ye wo aatmaein hain jo raste par bhatakti rehti hain, unka intezar karte hain jo kabhi pahunch hi nahi paate.\\n\\nEk sachhi ghatna ek driver ne sunayi thi\u2014ek sunsaan jungle ke raaste par raat ka waqt tha. Ek joda (couple) lift maang raha tha. Driver ne pehle toh ignore kiya, par phir dil ki sunkar peeche muda aur unhe pick kiya. (normal)\\n\\nLekin jaise hi usne car ko thoda aage badhaya aur headlights on ki... wo dono gayab the! (pause) Na koi insaan dikha, na koi gaadi. Sirah ka baal khada ho gaya kyunki pata tha ki unka wahan hona hi namumkin tha. (beat)\\n\\nRaat ke sannate mein jab train ki seeti sunayi deti hai... toh yaad rakhiye, har saaya insaan nahi hota. (slow) Kuch raaste sirf aapke liye nahi hote. Kya aapne kabhi raat ko kisi sunsaan track par kuch ajeeb mehsoos kiya hai?\",\n  \"meaning_note\": \"Ye video Bengal region ke 'Railroad Wraiths' folklore aur ek real-life driver encounter ko mix karta hai, jo railway tracks ke eerie atmosphere ko highlight karta hai.\",\n  \"caption\": \"Kya aapne kabhi suni hain in 'Railroad Wraiths' ki kahani? \ud83d\ude82\\n\\nBengal ke purane rail routes par aaj bhi kuch aisi cheezein maujood hain jo insaani nahi hain. Kya aap raat ko akela track par chalne ki himmat karenge?\\n\\nFollow for more haunting stories! \ud83d\udc80\",\n  \"hashtags\": [\n    \"#RailroadWraiths\",\n    \"#TrainHo"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:04:26.629656",
+    "updated": "2026-09-29T03:04:26.629664"
+  },
+  {
+    "id": "03fea289-a062-4581-b485-d031c0468f78",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Alleged incident (India)\", \"kind\": \"story\", \"format_key\": \"horror_incident\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, P",
+      "result_snippet": "```json\n{\n  \"title\": \"Bhangarh: Maut ka Kila \ud83c\udff0\",\n  \"title_en\": \"bhangarh_maut_ka_kila\",\n  \"hook_line\": \"Rajasthan ka wo kila jahan suryast ke baad insaano ka kadam rakhna maut ko dawat dena hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Rajasthan ka Bhangarh Fort... ek aisa naam jo sunte hi darr ki leher daud jaati hai. (pause) Ise India ka 'most haunted' kila maana jata hai, aur iski wajah sirf purani kahaniyan nahi, balki yahan ke kade niyam hain. (normal)\\n\\nKehte hain... suryast ke baad is kile ke andar kadam rakhna maut ko dawat dene jaisa hai. Local log aur authorities ise ek 'forbidden zone' maante hain. Log puchte hain ki itne saare mandiron ke beech bhoot kaise reh sakte hain? (pause) Lekin sacchai ye hai ki yahan ka mahol hi kuch alag hai. (normal)\\n\\nEk baar ek group ne is kile ki talash mein safar kiya. Jaise-jaise wo Bhangarh kareeb pahunche, mausam achanak badalne laga. Aasman par kaale baadal chha gaye aur dhoop gayab ho gayi, jaise koi shakti unhe rasta dikhana band kar rahi ho. (pause) Jab wo andar pahunche, toh unhone dekha ki yahan sirf khandhar nahi hain, balki ek ajeeb si khamoshi hai jo kaanon ko chubhti hai. (normal)\\n\\nWo log 'Bhoot Bangla' ke naam se mashhoor is jagah par ghoom rahe the, lekin piche mudkar dekhne par unhe ehsas hua ki sannate mein kuch aur bhi maujood hai. (pause) Bhangarh sirf ek kila nahi, balki sadiyon purani ek aisi dastan hai jise waqt ne rok diya hai. (beat) Kya aap himmat karenge yahan suryast ke baad rukne ki? (slow) Kuch jagahon par jana maut ko bulawa dena hota hai.\",\n  \"meaning_note\": \"Ye video Bhangarh Fort ke 'forbidden' atmosphere aur uske piche ke dar ko explore karta hai, jise India ka sabse haunted kila maana jata hai.\",\n  \"caption\": \"Bhangarh: Jahan suryast ke baad koi insaan nahi rukta. \ud83d\udeab\ud83c\udff0\\n\\nRajasthan ka ye kila aaj bhi ek bada rahasya hai. Kya aap yahan ki khamoshi ko mehsoos kar sakte hain?\\n\\nComment mein bataiye, kya aap Bhangarh jaana chahenge? \\ud83d\\udc4a\",\n  \"hashtags\": [\n    \"#BhangarhFort\",\n "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:04:56.289086",
+    "updated": "2026-09-29T03:04:56.289094"
+  },
+  {
+    "id": "ef95064f-bfe7-4b19-ae9c-0322faeeb4d4",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Paranormal case file\", \"kind\": \"story\", \"format_key\": \"case_file\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania).",
+      "result_snippet": "```json\n{\n  \"title\": \"London ki Shaitani Raat: Enfield Poltergeist \ud83d\udc7b\",\n  \"title_en\": \"london_ki_shaitani_raat\",\n  \"hook_line\": \"1970s ke London mein ek bachchi ne aisi cheezein dekhi jo science aur logic ko challenge karti hain.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"1970s ka London... ek purana ghar, Green Street par, jahan ki deewarein aaj bhi us khaufnaak waqt ki gawahi deti hain. (pause) Ye hai 'The Enfield Poltergeist' case\u2014ek aisi ghatna jisne poori duniya ke paranormal investigators ko hairan kar diya. (normal)\\n\\nPeggy Hodgson aur unki do betiyan, Janet aur Margaret, apne ghar mein kuch aisa mehsoos kar rahi thi jo insani samajh se bahar tha. (pause) Furniture khud se hil raha tha, bhari cheezein hawa mein ud rahi thi, aur sabse darawni baat... deewaron se aane wali wo 'guttural' awaazein, jaise koi bacha nahi balki koi rakshas bol raha ho. (normal)\\n\\nIs case ne itna dhyan kheencha ki famous investigators Ed aur Lorraine Warren bhi yahan pahunche. Par sabse bada saboot mila Maurice Grosse ke records se. (pause) Unhone asli recordings aur interviews ko archive kiya, jismein un bachiyon ki cheekh aur us ghar ke ajeeb mahinvon ko record kiya gaya tha. (normal)\\n\\nLog aaj bhi behas karte hain: kya ye sirf koi bacha darr raha tha, ya phir 284 Green Street par waqai koi shaitani taqat ka kabza tha? (pause) Kuch cheezein itni real hoti hain ki science unka jawab nahi de paati. (beat) Kya aapko lagta hai ki kuch gharon mein aaj bhi wo purani aawazein goonjti hain? (slow) Kabhi-kabhi, purane gharon ke raaz kabhi khatam nahi hote.\",\n  \"meaning_note\": \"Ye video Enfield Poltergeist case par focus karta hai, jo ek documented aur globally famous paranormal incident hai.\",\n  \"caption\": \"1970s ka London aur ek haunted ghar... \ud83c\udfe0\\n\\nEnfield Poltergeist sirf ek kahani nahi, balki ek documented reality hai jisne poori duniya ko hila kar rakh diya. Kya aap maante hain ki kuch jagahon par 'paranormal' forces aaj bhi maujood hain?\\n\\nComment mein batao aur follow karo mazee"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:06:24.316847",
+    "updated": "2026-09-29T03:06:24.316852"
+  },
+  {
+    "id": "d857c76f-b0a0-4fb4-84dd-d2b369d0d3c0",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Paranormal case file\", \"kind\": \"story\", \"format_key\": \"case_file\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceania).",
+      "result_snippet": "```json\n{\n  \"title\": \"South Shields: Ek Chupa Hua Poltergeist \ud83c\udfda\ufe0f\",\n  \"title_en\": \"south_shields_poltergeist\",\n  \"hook_line\": \"2005 mein England ke ek normal ghar mein achanak wo hone laga jo logic ko defy karta tha.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"England ka South Shields town. Saal 2005. Ek peaceful family apne ghar mein rehti thi, par unhe pata nahi tha ki unke saath kuch bahut hi ghinona hone wala hai. (pause) Ye koi aam bhoot ki kahani nahi, balki ek documented poltergeist case hai jise aaj bhi paranormal investigators hairani se dekhte hain. (normal)\\n\\nShuruat hui normal cheezon se\u2014darwaze apne aap khulna aur band hona, furniture ka hilna, aur chairs ka ajeeb tareeqe se stack hona. Lekin phir... ye sab aggressive hone laga. (pause) Marianne, jo ghar ki mother thi, unke sar par toys feke jane lage. Aur sabse darruni baat? Ye spirit unke 3 saal ke bete, Robert, ke favorite khilaunon ka istemaal kar rahi thi. (normal)\\n\\nEk raat, jab wo log so rahe the, unhe aisa mehsoos hua jaise koi unke blankets ke liye lad raha ho. Jab father ne check kiya, toh unki peeth par garmi dene wale laal nishaan (scratches) ban chaye the. (pause) Par asli darr tab shuru hua jab unke phones par anonymous death threats aane lageen. Aur ek din... jab unhone playroom ka darwaza khola, toh ek rocking horse ceiling fan se latka hua tha. (normal)\\n\\nSabse hairan kar dene wali cheez thi Robert ke writing board par likhe shabd: 'DIE', 'I WILL KILL YOU' aur 'YOU'RE DEAD'. Ek 3 saal ka bacha ye nahi likh sakta tha, phir wo likha kahan se aaya? (pause) Kya ye sirf ek purani shakti thi, ya koi aisi cheez jo unke ghar mein phans gayi thi? (beat) Kuch raaz aise hote hain jinhe science bhi poori tarah explain nahi kar paati. (slow) Kya aapko lagta hai ki kuch gharon mein aaj bhi aisi 'unseen' taaqtein maujood hain?\",\n  \"meaning_note\": \"Ye video UK ke South Shields poltergeist case par focus karta hai, jahan ek family ko 2005 mein extreme paranormal activity aur death threats ka samna ka"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-29T03:06:55.567244",
+    "updated": "2026-09-29T03:06:55.567249"
+  },
+  {
+    "id": "ee724730-a631-4c28-99ce-7ea477854827",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Junoon ki Aag: The Inner Drive \ud83d\udd25\",\n  \"title_en\": \"junoon_ki_aag\",\n  \"hook_line\": \"Hamara dil savere ka sunhera jaam ho jaaye...\",\n  \"intro\": \"Bashir Badr ki ye khoobsurat lines, un sabke liye jo apne sapno ke liye din-raat ek kar rahe hain.\",\n  \"outro\": \"Jab tak andar ki aag jal rahi hai, tab tak rukna mana hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye shayari us 'burning passion' ko darshati hai jo kisi naye business ya sapne ko banane ke liye zaroori hoti hai\u2014jahan neend qurban hoti hai aur sirf junoon bachta hai.\",\n  \"caption\": \"Junoon ki aag, jo kabhi bujhti nahi. \ud83d\udd25\\n\\nBashir Badr ki ye lines un logon ke liye jo apne sapno ko haqiqat banane ke liye din-raat ek kar rahe hain. Kya aap bhi kisi aise hi junoon se jude hain?\\n\\nSave this if it inspired you.\",\n  \"hashtags\": [\n    \"#BashirBadr\",\n    \"#HindiPoetry\",\n    \"#Shayari\",\n    \"#InnerDrive\",\n    \"#Life3Baje\",\n    \"#Motivation\",\n    \"#Passion\",\n    \"#UrduPoetry\",\n    \"#EntrepreneurMindset\",\n    \"#HindiQuotes\"\n  ],\n  \"on_screen_text\": \"Junoon ki Aag: The Inner Drive \ud83d\udd25\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:02:42.252355",
+    "updated": "2026-09-30T03:02:42.252363"
+  },
+  {
+    "id": "47cd7144-304d-46ca-8f40-4bc7cf23b3e9",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Sher-o-shayari\", \"kind\": \"poem\", \"format_key\": \"shayari\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube-g",
+      "result_snippet": "```json\n{\n  \"title\": \"Shehar ki Zindagi aur Hustle ka Sach \ud83c\udfd9\ufe0f\",\n  \"title_en\": \"shehar_ki_zindagi_hustle\",\n  \"hook_line\": \"Hai ajeeb shehar ki zindagi, na safar raha na qayam hai...\",\n  \"intro\": \"Bashir Badr sahab ki ye khoobsurat lines, un sabke liye jo sheher ki bheed mein apna rasta dhoond rahe hain.\",\n  \"outro\": \"Jab tak hausla baaki hai, tab tak rukna mana hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye shayari us 'hustle' aur urban struggle ko dikhati hai jahan insaan apne maqsad ke liye rozana ki bhag-daur mein khud ko kho deta hai\u2014ek kadwa magar sach reality.\",\n  \"caption\": \"Shehar ki bheed, aur apna sapna. \ud83c\udfd9\ufe0f\\n\\nBashir Badr ki ye lines us 'hustle' culture ko perfectly capture karti hain jise hum roz mehsoos karte hain. Kya aap bhi isi daud ka hissa hain?\\n\\nSave this if it resonates with your journey.\",\n  \"hashtags\": [\n    \"#BashirBadr\",\n    \"#HindiPoetry\",\n    \"#Shayari\",\n    \"#HustleCulture\",\n    \"#Life3Baje\",\n    \"#UrbanLife\",\n    \"#PoetryLovers\",\n    \"#UrduPoetry\",\n    \"#DeepLines\",\n    \"#SuccessMindset\"\n  ],\n  \"on_screen_text\": \"Shehar ki Zindagi aur Hustle ka Sach \ud83c\udfd9\ufe0f\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:03:01.195961",
+    "updated": "2026-09-30T03:03:01.195965"
+  },
+  {
+    "id": "4d34ade7-73d5-4298-9ac4-8f08dbb7aba3",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Regional folklore entity\", \"kind\": \"story\", \"format_key\": \"folklore_entity\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, P",
+      "result_snippet": "```json\n{\n  \"title\": \"Wakmangganchi: Garo Tribe ka Raaz \ud83d\udc80\",\n  \"title_en\": \"wakmangganchi_garo_monster\",\n  \"hook_line\": \"Northeast India ke ek door-daraaz ilaake mein, ek aisa naam hai jise sunte hi log gharon se bahar nahi nikalte.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Northeast India ka ek gehra raaz... Wakmangganchi Aragondi. (pause) Ye koi mamuli bhoot ya saaya nahi hai, balki Garo tribe ke folklore mein shamil ek aisi mahan aur bhayanak monster ki kahani hai jiska naam sunte hi aaj bhi log kapkapi mehsoos karte hain. (normal)\\n\\nKehte hain... ye ek primordial demon tha, ek aisa rakshas jo pahadiyon ko barbad kar deta tha. Iski shuruat ek chote se suar (pig) se hui thi jise ek surakshit jagah par rakha gaya tha, lekin wo itna bada ho gaya ki koi usey kabu nahi kar saka. (pause) Wo badhta gaya aur itna vishaal ho gaya ki uske sharir ka hissa zameen tak phaila hua tha. (normal)\\n\\nImagine kijiye ek aisa makhlooq jiske paas saat sir (seven heads) hon, har sar par saat bade daant hon, aur har maathe par ek aankh jo poore chand ki tarah chamke. (pause) Iski peeth par bamboo ke guchhe aur jhadiyan ugti thi, jaise wo koi zinda pahad ho. Ye sirf ek jaanwar nahi, balki prakriti ka ek bhayanak roop tha jisne kai bahadur logon ko nigal liya. (normal)\\n\\nAaj bhi, Garo folklore mein Wakmangganchi ka naam ek warning ki tarah diya jata hai\u2014ek aisi shakti jo itni badi aur purani hai ki usey rokna namumkin lagta hai. (pause) Kya aapne kabhi socha hai ki hamari dharti ke niche ya door pahadiyon mein aise rahasya aaj bhi chupe hue hain? (beat) Kuch kahaniyaan sirf darr nahi, balki un taqaton ka zikr karti hain jinhe hum samajh nahi paate. (slow) Kya aap is 'hidden' monster ki baat sunkar darr mahsoos kar rahe hain?\",\n  \"meaning_note\": \"Ye video Northeast India ke Garo tribe ke ek rare aur intimidating folklore creature, Wakmangganchi Aragondi par focus karta hai.\",\n  \"caption\": \"Northeast ka wo raaz jo itna bhayanak hai ki log uska naam lene se bhi darte hain. \ud83d\udc80\\n\\nWakmangga"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:04:48.229756",
+    "updated": "2026-09-30T03:04:48.229761"
+  },
+  {
+    "id": "63bacf8b-5176-44b4-9628-c17ee3008938",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Regional folklore entity\", \"kind\": \"story\", \"format_key\": \"folklore_entity\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalawa, P",
+      "result_snippet": "```json\n{\n  \"title\": \"Zunhindawt: Mizoram ka Khauf \ud83d\udca7\",\n  \"title_en\": \"zunhindawt_mizoram_ritual\",\n  \"hook_line\": \"Mizoram ke pahadon mein ek aisi makhlooq ka zikr hai jo insani fitrat se bilkul alag hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Mizoram ke pahado ki gehrayi mein ek aisa naam chupa hai, jise sunkar rounak nahi, sirf khauf mehsoos hota hai. (pause) Hum baat kar rahe hain 'Zunhindawt' ki. (normal)\\n\\nYe koi aam bhoot ya saaya nahi hai jo raaton mein darata hai. Zunhindawt ek aisa purana aur obscure entity hai jiska zikr Mizoram ke local folklore mein milta hai. Lekin iski kahani sunne ke baad aapka darr ka swaroop badal jayega. (pause) Kehte hain, ye makhlooq apni ek ajeeb aur behad ghinoni aadat ke liye jaana jata hai. (normal)\\n\\nZunhindawt... ye sirf ek naam nahi, balki ek darawni reality hai jo local kahaniyon mein saalon se dabi hui hai. Folklore ke mutabik, is creature ki sabse disturbing baat iska 'ritual' hai. (pause) Ye makhlooq zameen par bane un chhote puddles ya gaddhon mein apna munh dalta hai... jahan dusre logon ka peshab (urine) jama hota hai. (normal)\\n\\nSochiye, ek aisi cheez jo insani fitrat se bilkul bahar hai, wo in gandi jagahon ko apna shikar banati hai. Ye koi fictional horror nahi, balki Mizoram ke us purane folklore ka hissa hai jo batata hai ki kuch cheezein itni ghinoni aur ajeeb ho sakti hain ki unka tasavvur karna bhi mushkil hai. (pause) Kya aapne kabhi socha hai ki hamare aas-paas ki zameen ke niche aise rahasya chupe ho sakte hain? (beat) Kuch kahaniyan sirf darr nahi, balki us sach ka hissa hoti hain jise hum samajh nahi paate. (slow) Agar aapko lagta hai ki koi ajeeb cheez aapke peeche khadi hai... toh shayad wo Zunhindawt ho.\",\n  \"meaning_note\": \"Ye video Mizoram ke ek bahut hi rare aur disturbing folklore entity 'Zunhindawt' par focus karta hai, jo apne ghinone behavior ke liye jana jata hai.\",\n  \"caption\": \"Mizoram ka woh raaz jo sunne mein bhi ghinona lagta hai. \ud83d\udca7\\n\\nZunhindawt: Ek aisa naam jiska zikr Mizoram "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:05:19.008940",
+    "updated": "2026-09-30T03:05:19.008947"
+  },
+  {
+    "id": "de906a85-2b95-4997-9dcc-1a23d5a09149",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Haunted location\", \"kind\": \"story\", \"format_key\": \"haunted_location\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceani",
+      "result_snippet": "```json\n{\n  \"title\": \"H.H. Holmes ka Murder Castle \ud83c\udff0\",\n  \"title_en\": \"hh_holmes_murder_castle\",\n  \"hook_line\": \"Chicago ke ek hotel mein 1890s mein log sirf check-in karne nahi, balki maut ke jaal mein phansne gaye the.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Chicago, 1890s. Ek aisi building jise 'Murder Castle' kaha jata tha. (pause) Ye koi purani horror movie ki script nahi thi, balki ek real-life nightmare tha jo Chicago ke W. 63rd Street par bana tha. (normal)\\n\\nIs building ko design kiya tha H.H. Holmes ne\u2014jise 'The Beast of Chicago' bhi kaha jata hai. Holmes koi aam insaan nahi, balki ek doctor aur con artist tha jisne is teen-manzil ki building ko ek maut ke jaal yaani 'death trap' mein badal diya tha. (pause) Usne ise kaise banaya? (normal)\\n\\nRecords ke mutabik, Holmes ne is castle mein secret passages, trapdoors, aur gas vents ka istemaal kiya tha. Wo log jo yahan rukne aate the, wo aksar pata hi nahi laga paate the ki unke niche ya peeche koi raasta hai jahan se maut unka intezar kar rahi hai. (pause) Kuch experts kehte hain ki is building mein 200 se zyada log mare gaye, halanki documented history sirf kuch hi cases ko confirm karti hai. (normal)\\n\\nLekin jo cheez sabse zyada unsettling hai, wo hai Holmes ka dimaag. Usne 'business' ke naam par logo ko maut ke khel mein dhakela. Aaj bhi jab log is building ki purani floor plans dekhte hain, toh unhe samajh nahi aata ki ek insaan itna khatarnaak kaise ho sakta hai. (pause) Kya aap imagine kar sakte hain ki ek aisi jagah par rukna kaisa hoga jahan har mod par maut ka khauf chhupa ho? (beat) Kuch purani imaaratein sirf deewaron se nahi bani hoti... kabhi-kabhi wo kisi ke shaitani iradon ka nateeja hoti hain. (slow) Kya aapko lagta hai ki aaj bhi kuch rahasya un purani deewaron mein qaid hain?\",\n  \"meaning_note\": \"Ye video H.H. Holmes aur uske 'Murder Castle' par focus karta hai, jo ek real-life architectural trap tha jahan log maut ke jaal mein phans jaate the.\",\n  \"caption\": \"Chicago ka woh 'Death Tra"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:06:48.533583",
+    "updated": "2026-09-30T03:06:48.533589"
+  },
+  {
+    "id": "481b90dc-ccaf-4283-99cc-76ca292943e0",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Haunted location\", \"kind\": \"story\", \"format_key\": \"haunted_location\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, Oceani",
+      "result_snippet": "```json\n{\n  \"title\": \"Hotel Palliser: Calgary ka Haunted Castle \ud83c\udde8\ud83c\udde6\",\n  \"title_en\": \"hotel_palliser_calgary_haunted\",\n  \"hook_line\": \"Canada ke ek grand hotel mein kuch aisi cheezein hoti hain jo guests aur staff ko aaj bhi darati hain.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Canada ka Calgary... yahan ek bahut hi purana aur luxurious hotel hai jise 'Hotel Palliser' kaha jata hai. (pause) Isse log aksar 'Haunted Castle' ke naam se bhi pukaarte hain. Aur ye sirf koi internet afwah nahi, balki is jagah ki history aur paranormal reports ise kaafi eerie banati hain. (normal)\\n\\nIs hotel ki architecture hi aisi hai jo ek purane kile jaisa feel deti hai, lekin asli darr un deewaron ke peech chhupe rahasyon mein hai. (pause) Reports ke mutabik, kai guests ne yahan 'phantom footsteps' yaani kisike chalne ki awaaz suni hai, jabki corridors bilkul khaali hote hain. Kuch logon ne achanak temperature girne aur ajeeb si 'cold spots' ka experience share kiya hai. (normal)\\n\\nLekin sabse unsettling baat ye hai ki staff members ne bhi kai baar anjaan saayon ko hallways mein dekha hai. Yeh ek aisa hotel hai jahan luxury aur dar ka ek ajeeb mel milta hai. (pause) Kya aap yahan rukna pasand karenge, ya phir in deewaron ke raaz aapko darrane ke liye kafi hain? (beat) Kuch jagah sirf itihaas nahi rakhti... kabhi-kabhi wo kuch aur bhi 'saath' mein rakhti hain. (slow) Aapko kya lagta hai, ye haunted castle aaj bhi un purani roohon ko sambhale hue hai?\",\n  \"meaning_note\": \"Ye video Canada ke Hotel Palliser par focus karta hai, jo apni haunting history aur paranormal reports ki wajah se 'Haunted Castle' ke naam se jana jata hai.\",\n  \"caption\": \"Canada ka ek aisa hotel jise 'Haunted Castle' kaha jata hai. \ud83c\udde8\ud83c\udde6\\n\\nHotel Palliser ki deewaron mein aaj bhi kuch rahasya chupe hain jo guests aur staff ko darate hain. Kya aap yahan rukne ki himmat karenge?\\nFollow for more international mysteries.\",\n  \"hashtags\": [\n    \"#HotelPalliser\",\n    \"#HauntedCastle\",\n    \"#CanadaMystery\",\n    \"#Paranormal"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-09-30T03:07:14.937594",
+    "updated": "2026-09-30T03:07:14.937602"
+  },
+  {
+    "id": "fb9d388b-592f-43aa-a1cf-2e5536f9be8c",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Hindi poem (kavita)\", \"kind\": \"poem\", \"format_key\": \"poem\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube",
+      "result_snippet": "```json\n{\n  \"title\": \"Dheere Dheere Badhti Tamanna \u23f3\",\n  \"title_en\": \"dheere_dheere_badhti_tamanna\",\n  \"hook_line\": \"\u092c\u0922\u093c\u093e\u0924\u093e \u0939\u0948 \u0924\u092e\u0928\u094d\u0928\u093e \u0906\u0926\u092e\u0940 \u0906\u0939\u093f\u0938\u094d\u0924\u093e \u0906\u0939\u093f\u0938\u094d\u0924\u093e, / \u0917\u0941\u091c\u093c\u0930 \u091c\u093e\u0924\u0940 \u0939\u0948 \u0938\u093e\u0930\u0940 \u091c\u093c\u093f\u0902\u0926\u0917\u0940 \u0906\u0939\u093f\u0938\u094d\u0924\u093e \u0906\u0939\u093f\u0938\u094d\u0924\u093e\u0964\",\n  \"intro\": \"Hansraj 'Rehbar' sahab ki ye khoobsurat lines un sabke liye jo apni manzil ki taraf dheere magar pakke kadmon se badh rahe hain.\",\n  \"outro\": \"Safar lamba hai, par har ek chhota kadam aapko manzil ke kareeb le ja raha hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye poem us 'slow growth' aur patience ko darshati hai jo business building aur personal journey mein zaroori hoti hai\u2014jahan har din ki chhoti jeet aage bade sapne tak pahunchati hai.\",\n  \"caption\": \"Har badi kamyabi ek chote se kadam se shuru hoti hai. \u23f3\\n\\nHansraj 'Rehbar' ki ye lines us patience aur growth ko perfectly capture karti hain jo hum roz mehsoos karte hain. Kya aap bhi apni journey par dhairya ke saath aage badh rahe hain?\\nSave this if it resonates with your grind.\",\n  \"hashtags\": [\n    \"#HansrajRehbar\",\n    \"#HindiPoetry\",\n    \"#Shayari\",\n    \"#GrowthMindset\",\n    \"#Life3Baje\",\n    \"#Persistence\",\n    \"#SlowProgress\",\n    \"#UrduPoetry\",\n    \"#MotivationHindi\",\n    \"#Entrepreneurship\"\n  ],\n  \"on_screen_text\": \"Dheere Dheere Badhti Tamanna \u23f3\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:03:05.446641",
+    "updated": "2026-10-01T03:03:05.446649"
+  },
+  {
+    "id": "73dd9b7b-4946-4c20-b52b-01303d75ec4c",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Life3Baje\", \"format\": \"Hindi poem (kavita)\", \"kind\": \"poem\", \"format_key\": \"poem\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, including failures -- not a set of unrelated videos.\\n- **Never** generic productivity, motivation, business advice or YouTube",
+      "result_snippet": "```json\n{\n  \"title\": \"Asli Brand vs Fake Marketing \ud83c\udfad\",\n  \"title_en\": \"asli_brand_vs_fake_marketing\",\n  \"hook_line\": \"Uska bharosa kya yaaron, wo shabdon ka vyapari hai.\",\n  \"intro\": \"Hansraj 'Rehbar' sahab ki ye gehri baatein un sabke liye jo aaj ke digital daur mein asli aur nakli ke beech ka farq samajh rahe hain.\",\n  \"outro\": \"Sachaai kadvi ho sakti hai, par wahi ek mazboot brand ki buniyad banti hai.\",\n  \"script\": \"\",\n  \"meaning_note\": \"Ye poem 'fake' marketing vs 'authentic' branding ke beech ka antar dikhati hai. Ye unke liye hai jo sirf dikhawe ki duniya se hatkar sachai aur transparency ke saath apna kaam build kar rahe hain.\",\n  \"caption\": \"Sachi branding dikhawe mein nahi, sacchai mein hoti hai. \ud83c\udfad\\n\\nHansraj 'Rehbar' ki ye lines humein yaad dilati hain ki sirf shabdon ka khel hona kafi nahi, asliyat zaroori hai. Kya aap bhi ek authentic brand banane ki journey par hain?\\nSave this if you value honesty over hype.\",\n  \"hashtags\": [\n    \"#HansrajRehbar\",\n    \"#HindiPoetry\",\n    \"#Shayari\",\n    \"#Authenticity\",\n    \"#Life3Baje\",\n    \"#Branding\",\n    \"#Entrepreneurship\",\n    \"#ContentCreation\",\n    \"#Truth\",\n    \"#MarketingReality\"\n  ],\n  \"on_screen_text\": \"Asli Brand vs Fake Marketing \ud83c\udfad\",\n  \"estimated_seconds\": 60\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:03:24.623704",
+    "updated": "2026-10-01T03:03:24.623711"
+  },
+  {
+    "id": "607e937b-a2df-4efa-b906-d3f3e6dd67a0",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Original ghost story (fiction)\", \"kind\": \"fiction\", \"format_key\": \"ghost_story\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalaw",
+      "result_snippet": "```json\n{\n  \"title\": \"Guliga: Ek Khatarnak Shaitaan \ud83d\udd25\",\n  \"title_en\": \"guliga_aggressive_spirit\",\n  \"hook_line\": \"Kuch bhut sirf shant nahi hote, kuch ka swabhav hi behad aggressive aur khatarnak hota hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ek purani kahani hai... ek aise shaks ki jisne galti se uski seemaon ko paar kar diya. (pause) Hum baat kar rahe hain 'Guliga' ki. (normal)\\n\\nYe koi sadharan bhoot nahi, balki ek aisi shakti hai jise Tulu Nadu ke log behad samman dete hain, lekin unka darr bhi isi se juda hai. (pause) Folklore ke mutabik, Guliga ka swabhav 'ferocious' aur 'unpredictable' hota hai. Wo ek rakshak hai, par uska tarika... wo kafi khatarnak hai. (normal)\\n\\nMaano aap kisi sunsan raste se guzar rahe ho, aur achanak hawa mein ek bharipan mehsoos ho. Ek aisi urja jo aapko gussa dilaye, aapka shareer kaanpne lage... ye Guliga ki maujoodgi ka sanket ho sakta hai. (pause) Kehte hain jab ye shakti prakat hoti hai, toh mahol ek dum se badal jata hai\u2014ek aisa aggression jo insaan ko darr se paralyzed kar de. (normal)\\n\\nYe sirf ek kahani nahi, balki un purane vishwaso ka hissa hai jahan kuch shaitaan itne shaktishali hote hain ki unhe sirf pukaara nahi, balki unse dar kar doori banaye rakhi jati hai. (pause) Kya aapne kabhi mehsoos kiya hai ki koi cheez... koi taqat, aapko ghur rahi hai? (beat) Kuch shaitaanon ka swabhav hi ladna hota hai. (slow) Agar aapko aaj raat kuch ajeeb aur aggressive lage... toh yaad rakhna, har shakti ko samjhne ke liye insani dimaag kafi nahi hota.\",\n  \"meaning_note\": \"Ye kahani Guliga entity ki 'aggressive' aur 'fierce' nature par focus karti hai, jo use ek ordinary ghost se alag banati hai.\",\n  \"caption\": \"Kuch shaitaan sirf darate nahi, wo apna gussa dikhate hain. \ud83d\udc80\\n\\nGuliga ki ye kahani aapko us aggression ka ehsas karayegi jise sunne ke baad aap peeche mudkar dekhne se darenge. Kya aapne kabhi kisi aisi 'aggressive' energy ko mehsoos kiya hai?\\nSave this if you believe in the unseen.\",\n  \"hashtags\": [\n    \"#Guliga\",\n "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:06:22.083080",
+    "updated": "2026-10-01T03:06:22.083089"
+  },
+  {
+    "id": "bfde0fc3-9e2e-4e2b-bc94-bf5456b19ab6",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Original ghost story (fiction)\", \"kind\": \"fiction\", \"format_key\": \"ghost_story\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhalaw",
+      "result_snippet": "```json\n{\n  \"title\": \"Shraap Wala Gaon: Jahan Waqt Ruk Gaya \u23f3\",\n  \"title_en\": \"shraap_wala_gaon_time_stop\",\n  \"hook_line\": \"Ek aisa gaon jahan ek purane shraap ne waqt ko hi rok diya hai.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Ek aisi jagah ki kahani... jahan suraj dhalne ke baad maut ka sannata chha jata hai. (pause) Hum baat kar rahe hain ek aise gaon ki, jo map par toh dikhta hai, par jiske raaste se guzarna aaj bhi log ghabrahat mein darrte hain. (normal)\\n\\nYe koi kahani nahi, balki ek 'shrap' ka nateeja hai. Kehte hain saalon pehle, is gaon ke logon ne ek bade anuchit shakti ya kisi rakshak ko naraaz kar diya tha. (pause) Us din se lekar aaj tak, us gaon mein waqt jaise tham gaya hai. (normal)\\n\\nImagine kijiye... aap ek sunsan sadak par chal rahe hain aur achanak aapko dikhta hai ek purana gate. Gaon ke ghar wahi hain, lekin unmein koi jaan nahi hai. Log bolte hain ki yahan jo bhi raat ko rukta hai, wo agli subah kabhi nazar nahi aata. (pause) Kuch logon ne dawa kiya hai ki unhe sham ke waqt kisi ke rone ki awaaz aati hai, ya phir aise log dikhte hain jo sadiyon pehle mar chuke hain. (normal)\\n\\nLogon ka maanna hai ki ye shraap itna gehra hai ki gaon ki mitti ne purani roohon ko apne andar qaid kar liya hai. (pause) Kuch kehte hain ki waqt wahan ruk gaya hai, aur jo log wahan jaate hain, wo us ruke hue waqt ka hissa ban jaate hain. (normal)\\n\\nKya aap himmat karenge aise gaon mein kadam rakhne ki? (beat) Jahan har mod par ek purana raaz aapka intezaar kar raha hai. (pause) Kuch jagah sirf zameen ka tukda nahi hoti... kabhi-kabhi wo ek sadiyon purane shrap ka qila hoti hain. (slow) Kya aapko lagta hai ki kuch cheezein behtar hai ki unhe khamosh hi chhoda jaye?\",\n  \"meaning_note\": \"Ye fiction story ek aise 'cursed village' ke concept par aadharit hai jahan ek purane shraap ki wajah se waqt aur log dono ka ant ho gaya.\",\n  \"caption\": \"Ek aisa gaon jahan waqt ruk gaya... aur kuch raaz kabhi khatam nahi hote. \ud83d\udd6f\ufe0f\\n\\nKya aap aise 'cursed' ilakon mein jaane ki "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:07:02.564320",
+    "updated": "2026-10-01T03:07:02.564328"
+  },
+  {
+    "id": "f7100d68-2b7d-49e3-a4b8-81dbc6819e75",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"International urban legend\", \"kind\": \"story\", \"format_key\": \"urban_legend\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, ",
+      "result_snippet": "```json\n{\n  \"title\": \"West Virginia ka Khauf: The Mothman \ud83d\udc41\ufe0f\",\n  \"title_en\": \"west_virginia_mothman_mystery\",\n  \"hook_line\": \"West Virginia ke pahadon mein ek aisi aankh dekhi gayi jo insaani nahi thi, aur uske baad kuch bhi normal nahi raha.\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"West Virginia... Point Pleasant. (pause) 1960s ke end mein, yahan ki ek purani kahani ne duniya bhar ke log ko hairan kar diya. Ek aisi entity jisne logon ko darane se zyada, unhe 'aane wale khatre' ka sanket diya. (normal)\\n\\nHum baat kar rahe hain Mothman ki. Kehte hain ye ek bade size ka saaya tha, jiske pankh the aur uski aankhein... wo badi hi ajeeb thi. (pause) Log kehte hain ye sirf ek creature nahi tha, balki ek warning thi. (normal)\\n\\n1966 mein jab pehli baar ise dekha gaya, toh log darr gaye. Lekin asli dar tab shuru hua jab iske dikhne ke kuch waqt baad, 1967 mein Point Pleasant Bridge ka wo tragic collapse hua jisme kai logon ki jaan chali gayi. (pause) Is connection ne Mothman ko ek simple 'urban legend' se badhkar ek dark mystery bana diya. (normal)\\n\\nLogon ka maanna hai ki Mothman un jagaho par dikhta hai jahan koi badi tragedy hone wali hoti hai. Wo ek 'omen' hai, ek aish-shakti jo maut ke paigam lekar aati hai. (pause) Kya ye sirf ek coincidence tha, ya phir kuch aisa jo hum samajh nahi paa rahe? (beat) Kuch cheezein shayad isliye dikhti hain taaki hum taiyar reh sakein. (slow) Agar aapko bhi lagta hai ki kuch aankhein andhere mein aapko dekh rahi hain... toh yaad rakhiye, har nishaan ka ek matlab hota hai.\",\n  \"meaning_note\": \"Ye video Mothman urban legend par focus karta hai, specifically uske 'omen' aspect aur 1967 ke bridge collapse se uske connection ko highlight karta hai.\",\n  \"caption\": \"Ek aisi aankh jo maut ka paigam lekar aati hai. \ud83d\udc41\ufe0f\\n\\nWest Virginia ki Mothman ki kahani sirf ek bhoot ki nahi, balki ek 'warning' ki hai. Kya aapko lagta hai ki kuch cheezein pehle se hi khatre ka ishara deti hain? \\nFollow for more international mysteries.\",\n  \"hashtags\": "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:08:24.798573",
+    "updated": "2026-10-01T03:08:24.798580"
+  },
+  {
+    "id": "c988562e-38df-42f5-b9f1-4dcf4be0cd62",
+    "scope": "agent",
+    "owner": "ShortsWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"International urban legend\", \"kind\": \"story\", \"format_key\": \"urban_legend\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Australia, ",
+      "result_snippet": "```json\n{\n  \"title\": \"Urban Legends: Sach ya Sirf Kahani? \ud83c\udfad\",\n  \"title_en\": \"urban_myth_truth_or_fiction\",\n  \"hook_line\": \"Kya aapne kabhi kisi se suna hai, 'Mere ek dost ke dost ne bataya...'?\",\n  \"intro\": \"\",\n  \"outro\": \"\",\n  \"script\": \"Aapne shayad kai baar suni hongi wo kahaniyan jo 'ek dost ke dost' ya 'padosi ke bete' ke saath hui thi. (pause) Ye koi aam kahani nahi, ye hain Urban Legends\u2014wo modern-day folktales jo aaj ki urban aur suburban life mein darr paida karti hain. (normal)\\n\\nIn stories ka ek khaas pattern hota hai: ye hamesha 'true' lagti hain, par inka koi solid proof ya witness nahi hota. Ye word-of-mouth se chalti hain, aur har baar jab koi inhe sunata hai, toh thoda badal dete hain\u2014jaise ki kahani ko apne sheher ya ilake ke hisaab se fit karna. (pause) Is wajah se ye itni sensational lagti hain; kyunki inmein mysterious phenomena aur unexplained khatre hote hain. (normal)\\n\\nEk bada example hai 'Bloody Mary'. Mirror ke saamne ek naam baar-baar bolna aur kisi shaitani taqat ko bulana\u2014ye sirf ek kahani nahi, balki ek aisi urban myth hai jo sadiyon se badal-badal kar chali aa rahi hai. (pause) In stories ka maqsad aksar cautionary hota hai, ya phir bas darr paida karna. (normal)\\n\\nLekin sawal ye hai: kya hum in par sach mein yakeen karte hain? Ya fir ye sirf ek collective imagination hai jo waqt ke saath aur zyada darawni hoti ja rahi hai? (pause) Kuch kahaniyan itni purani ho chuki hain ki hum unhe sach maan lete hain, bhale hi wo sirf ek 'urban myth' hon. (beat) Kya aapne bhi kabhi aisi kisi story par yakeen kiya jo baad mein sirf ek afwah nikli? (slow) Yaad rakhiye, har darawni kahani ka koi asli chehra nahi hota... kabhi-kabhi wo sirf hamare dimaag ki banayi hui ek tasveer hoti hai.\",\n  \"meaning_note\": \"Ye video explore karta hai ki urban legends kaise kaam karte hain aur kyun hum 'friend of a friend' wali stories ko itna sach maante hain.\",\n  \"caption\": \"Kya aapne bhi suna hai 'mere dost ke dost' waali kahaniyan? \ud83c\udfad\\n\\nUrban legends aksar darr "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-01T03:09:03.437909",
+    "updated": "2026-10-01T03:09:03.437916"
+  }
+]

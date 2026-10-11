@@ -43,7 +43,7 @@ why the guardian exists, and why `exclusive_with` is in the app registry.
 | `CaliberAI/` | FastAPI + Vite + Ollama/LM Studio | **8000**, **5173** | `CaliberAI.vbs` / `Stop CaliberAI.vbs` | interactive (its Ollama runner is batch) | via Ollama 5–9 GB | 1 GB |
 | `BuzzFin/` | uv FastAPI behind an Edge kiosk | **8756** | `BuzzFin.bat` | interactive | none | 0.5 GB |
 | `BuzzcafCoffee/` | Ops dashboard (FastAPI, optional Next) | **8010**, **3000** | `python ops/run.py --assistant` | interactive | none | 0.3 GB |
-| `BuzzAnimate/` | Native wgpu app; **cargo builds on launch** | none | `BuzzAnimate.vbs` | interactive | 0.2–2 GB | 1–3 GB + cargo spike |
+| `BuzzAnimate/` | Native wgpu app with a local API (127.0.0.1 only, §7b); **cargo builds on launch** | **8840** (steps forward if busy) | `BuzzAnimate.vbs` | interactive | 0.2–2 GB | 1–3 GB + cargo spike |
 | `BuzzViolin/` | Tauri dev app (uses the mic) | **1420** | `BuzzViolin.bat` | interactive | none | 0.5 GB |
 | `BuzzWorlds/` | UE 5.7 + Blender scripts | none | open the editor yourself | batch | 8–16 GB | 8–16 GB |
 | `SmartCleaner/` | Disk cleaner: PySide6 GUI plus a headless CLI | none | `run.bat`, or `python -m smartcleaner --headless --json` | interactive | none | 0.2 GB |
@@ -145,6 +145,7 @@ keeps them honest.
 | MidnightBuzz | `midnightbuzz` | `/health` | `xtts`, `vite` |
 | CaliberAI | `caliberai` | **`/api/health`** | `vite` |
 | BuzzEdit | `buzzedit` | **`/api/health`** | `comfyui` |
+| BuzzAnimate | `buzzanimate` | `/health` | — |
 | BuzzViolin | `buzzviolin` | **`/health.json`** — a static file Vite serves; web mode only | — |
 | buzzcode | `buzzcode` | *none.* Its listener is a `llama-server`: it answers `/health`, but with llama.cpp's own body, which will never say `app`. Read the ledger entry directly (`entry("buzzcode")`) — this is the one app discovery cannot identify, and the registry record deliberately has no `health_path` so nothing tries. | — |
 
@@ -155,7 +156,7 @@ keeps them honest.
 |---|---|---|
 | Python | `dexter/backend/buzzcaf_ports.py` (stdlib only) | `BuzzcafAI/backend/integrations/`, `BuzzFin/server/buzzfin_server/`, `BuzzcafCoffee/ops/`, `MastGaane/mastgaane/`, `MidnightBuzz/backend/`, `CaliberAI/backend/app/`, `BuzzEdit/backend/` |
 | Node | `BuzzEdit/scripts/buzzcaf-ports.mjs` (no deps) | `BuzzViolin/scripts/`, `BuzzFin/scripts/`, `CaliberAI/scripts/`, `MidnightBuzz/scripts/` |
-| Rust | `cb-engine/src/ports.rs` | — |
+| Rust | `cb-engine/src/ports.rs` | `BuzzAnimate/crates/buzz-app/src/ports.rs` (adapted to buzz-app; its header lists each change) |
 
 ```python
 pick_port(preferred, span=20, host="127.0.0.1") -> int
@@ -325,7 +326,7 @@ BuzzEdit both prefer it).
 
 | Route | Direction | Does |
 |---|---|---|
-| `POST /api/projects/{id}/produce_video {recording_path, settings_override?, mode?}` | BuzzcafAI → BuzzEdit (Entry A) | Background thread: checks BuzzEdit + ComfyUI are up, imports the recording, transcribes, annotates the script with the visual plan's `[kind: arg]` directives, sets the script, enqueues a `presentation` render, polls to completion, stores `output_path` on the project |
+| `POST /api/projects/{id}/produce_video {recording_path, settings_override?, mode?, precut?}` | BuzzcafAI → BuzzEdit (Entry A) | Background thread: starts BuzzEdit if it is down, imports the recording, transcribes (with `precut`, the default, BuzzEdit keeps every frame — no fumble/pause cuts), reconciles the script with what was actually said, sets that spoken script, enqueues a `presentation` render, polls to completion, stores `output_path` on the project. The Studio starts it as soon as a recording is picked |
 | `GET /api/projects/{id}/produce_video/status` | poll | `{state: starting\|running\|ready\|failed, message, progress, ...}` — no job queue in this repo, so this is an in-memory dict, not a durable job record |
 | `POST /api/produce/plan {brand, script_text?, transcript?}` | BuzzEdit → BuzzcafAI (Entry B) | Synchronous: runs the `PromptEngineer` visual-plan agent, returns `{annotated_script, settings, visual_plan, skipped_beats}` for BuzzEdit's own backend to `PUT` onto its project |
 
@@ -338,9 +339,105 @@ kind, ...}]}`, where `anchor` is a short verbatim phrase from the script and
 BuzzEdit's inline directive (or a `# heading` line for `chapter`) immediately
 before it, leaving every spoken word untouched.
 
+**The recording is the truth, the script a guide.** `produce_video` does not
+send the written script. `backend/integrations/script_reconcile.py` aligns it
+to BuzzEdit's transcript and sends the *transcript*, paragraphed and spelled by
+the script where it was followed: a beat whose anchor line was skipped is
+dropped (never fired on the nearest word), and each unscripted run of 12+ words
+gets its own paragraph and its own visual plan (`production/adlib_visual_plan.json`).
+What happened is written to `production/script_deviation.json` and summarised
+in the Studio (share of script spoken, share ad-libbed, visuals placed/dropped).
+
+**Precut recordings.** BuzzEdit's `TranscribeJob.precut` stores `settings.precut`
+on its project and builds the timeline with `Timeline.keep_full_source`, which
+makes `rebuild_primary_tracks` lay the whole source down as one V1/A1 clip —
+so no later rebuild (a struck word, the presentation pass) can re-cut it.
+
+**GPU hand-off and resume.** Before enqueuing the render, `produce_video` runs
+`lms unload --all` (opt out: `produce_unload_llm: false`), and the Studio's
+health check never loads a model (it used to, in the background, whenever none
+was resident; the next real LLM call loads what it needs). A 12B model beside
+ComfyUI on the 16 GB card stalled a render and made BuzzEdit miss its health
+probes. The poll loop now tolerates up to 15 minutes of an unreachable
+BuzzEdit, and `POST /api/projects/{id}/produce_video/resume` (the **Resume
+render** button) re-attaches to a render that is still running without
+re-importing or re-transcribing.
+
+**One BuzzEdit per production, at the front of the queue.** Every
+`BuzzEditClient` shares one sticky address: once found, BuzzEdit keeps every
+Studio call until it refuses a connection (a slow answer does not move it).
+A dev BuzzEdit that rewrote the port ledger once took a render while the GPU
+hand-over and the polls went to the headless one; BuzzEdit's `main.py` also no
+longer publishes over a live instance's entry. A job BuzzEdit does not list
+fails the poll in 3 minutes, not after the 60-minute stall. Studio jobs are
+enqueued `priority: "urgent"`, ahead of anything queued from BuzzEdit's UI.
+While a scheduler job runs, BuzzEdit registers its backend, ComfyUI and every
+FFmpeg pass with Sentinel as `interactive` (`runtime/sentinel_priority.py`),
+so under memory pressure batch and unclassified processes yield first; the
+config alone had `ffmpeg.exe` as batch priority 10, the first victim.
+
 `output_path` on a finished render is a path on **BuzzEdit's own filesystem**
 — there is no proxy back to BuzzcafAI's UI, so the Studio shows it as text
 plus an "open on BuzzEdit's machine" note rather than a clickable link.
+
+**Which model plans the video.** Settings → *Claude API (video production)*
+points at the `claude-local-api` proxy (`../claudeAPI`, `127.0.0.1:8787/v1`,
+OpenAI-compatible, answers through the Claude Code login). With *Use Claude
+for video production* on (`produce_llm_provider: "claude"`), `produce_video`
+builds its PromptEngineer on `LLMService(forced_provider="claude")` and plans
+the take's windows **in parallel** (4 at once; a local model stays at 1), and
+the enqueued render carries `llm_provider: "openai_compat"` + base URL / key /
+model so BuzzEdit's director runs its own passes there too — genre, topics,
+*Reading the mood of each part*, thumbnail title, picture prompts — with no
+LM Studio load, no responsiveness probe and nothing to eject. ComfyUI still
+makes every picture and clip. A proxy that is down falls back to the normal
+provider order on both sides. `claude` is also a selectable provider/tier;
+under Strict Local it is only ever used when named, never as a fallback.
+
+**Stock footage.** Settings → *Stock footage (Pixabay)* stores the key and a
+switch. The key is pushed to BuzzEdit (`PUT /api/settings/stock_keys`) on
+save and again before any render with `allow_free_stock` on; the switch seeds
+`allow_free_stock: true` as a `studio_settings` layer between base and the
+channel profile, so a project's *Free stock fallback (Pixabay)* checkbox can
+still turn it off. Console children the Studio spawns (`lms`, PowerShell,
+BuzzEdit's launcher) run with `CREATE_NO_WINDOW`, so no cmd window flashes.
+
+---
+
+## 7b. BuzzAnimate bridge
+
+BuzzAnimate (native, Rust) serves a small JSON API on **127.0.0.1 only**
+(`BuzzAnimate/crates/buzz-app/src/api.rs`): ledger name `buzzanimate`,
+preferred port **8840** (`BUZZANIMATE_PORT` overrides, steps forward up to
++20), identity on `GET /health`. Document work happens on its UI thread; a
+request the window does not answer within 60 s gets an error. A request with
+a web page's `Origin` (including `null`) or a non-local `Host` is refused, so
+callers send no `Origin`. Plan and status: `BuzzAnimate/docs/ECOSYSTEM_BRIDGE_PLAN.md`.
+
+| Route | Direction | Does |
+|---|---|---|
+| `GET /health` | → BuzzAnimate | `{app: "buzzanimate", status, port, pid, version}` |
+| `GET /api/state` | → BuzzAnimate | The open document: path, title, dirty, frame, frames, fps, scenes, selection |
+| `GET /api/catalog` | → BuzzAnimate | Every tool the Assistant can call (the same JSON surface) |
+| `POST /api/call {tool, args}` | → BuzzAnimate | One tool call, one undo step `API: <tool>`; `{ok, value, error}`. 409 when it would ask the user to confirm, or while the Assistant is running |
+| `POST /api/open {path}` / `POST /api/save {path?}` | → BuzzAnimate | Open (read in the background; watch `/api/state`) / save |
+| `POST /api/export {path, format: mp4\|mov\|gif\|webp\|png, from?, to?}` | → BuzzAnimate | A job on its export queue → `{job_id}` |
+| `GET /api/jobs`, `GET /api/jobs/{id}` | → BuzzAnimate | `{id, kind, state: queued\|running\|done\|failed, progress, output, error, result}` |
+| `POST /api/episode {script_path\|script_text, casting_path?, scenes?, out_dir, render?}` | → BuzzAnimate | Screenplay (or a Studio narration script) → `.buzz` + report in `out_dir`; with `render`, one preview MP4 job per scene (`result.render_jobs`) |
+| `GET /api/buzzanimate/status[?start=true]` | BuzzEdit → BuzzAnimate | Up or not, where, what is open |
+| `POST /api/buzzanimate/call {tool, args, start?}` | BuzzEdit → BuzzAnimate | `/api/call` passed through |
+| `POST /api/buzzanimate/open {buzz_path, start?}` | BuzzEdit → BuzzAnimate | `/api/open` passed through |
+| `POST /api/buzzanimate/render {buzz_path, project_id?, format?, start?}` | BuzzEdit → BuzzAnimate | Background job: open, export (MP4 beside the `.buzz`), wait, add to that BuzzEdit project's media → `{job_id}`; poll `GET /api/buzzanimate/render/{job_id}` |
+| `GET /api/buzzanimate/status[?start=true]` | Studio → BuzzAnimate | Up or not, where, what is open |
+| `POST /api/buzzanimate/call {tool, args, start?}` | Studio → BuzzAnimate | `/api/call` passed through |
+| `POST /api/projects/{id}/animate {casting_path?, scenes?, render?, to_buzzedit?, start?}` | Studio → BuzzAnimate (→ BuzzEdit) | Background run: the project's script → `/api/episode` into `<project>/animation`, waits, stores `animation_output` on the project; SSE `animation_progress` / `animation_ready` / `animation_failed`. `to_buzzedit` (implies `render`) imports the MP4s into a new BuzzEdit project |
+| `GET /api/projects/{id}/animate/status` | poll | `{state: starting\|running\|ready\|failed, message, progress, animation_output?}` |
+
+BuzzAnimate → BuzzEdit (File ▸ Send to BuzzEdit…, Commands ▸ Transcribe with
+BuzzEdit…) and BuzzAnimate → Studio (File ▸ Import Script from Studio…) use the
+BuzzEdit and Studio routes already listed above. Down is a 503 that says so;
+`start: true` runs `BuzzAnimate.vbs` and waits for `/health` — its cargo build
+can take minutes.
 
 ---
 

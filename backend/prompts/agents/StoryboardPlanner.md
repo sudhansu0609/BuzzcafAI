@@ -27,6 +27,7 @@ Translates written narrative lines into a visual storyboard sequence to guide im
 - Deconstruct script paragraphs into discrete visual frames/shots.
 - Assign shot framing (e.g. "Medium Wide Shot", "Low Angle Close-up").
 - Describe character key poses, lighting direction, and camera movement.
+- Write every shot as what the viewer sees: the movement itself ("slow pan across the hall"), never "the camera ...". Image prompts built from these shots draw any camera, DSLR, tripod or film crew they name, so none appears unless the story is about one.
 - Deliver `storyboard_manifest` JSON.
 
 ## 5. Authority

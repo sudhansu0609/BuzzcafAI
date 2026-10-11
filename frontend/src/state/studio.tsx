@@ -19,6 +19,11 @@ interface StudioContextValue {
   settings: StudioSettings | null;
   selectedChannel: string;
   setSelectedChannel: (channel: string) => void;
+  // The header's channel picker: '' = all channels. List pages filter by it;
+  // picking a channel also makes it the selectedChannel the single-channel
+  // pages (chat, analyze, research, vault) work on.
+  channelFilter: string;
+  setChannelFilter: (channel: string) => void;
 
   refreshProjects: () => Promise<void>;
   refreshSettings: () => Promise<void>;
@@ -35,6 +40,7 @@ interface StudioContextValue {
 const StudioContext = createContext<StudioContextValue | null>(null);
 
 const CHANNEL_KEY = 'buzzcaf_selected_channel';
+const CHANNEL_FILTER_KEY = 'buzzcaf_channel_filter';
 const TAB_KEY = 'buzzcaf_active_tab';
 const HEALTH_POLL_MS = 15_000;
 
@@ -55,7 +61,11 @@ function writeStorage(key: string, value: string): void {
 }
 
 export function StudioProvider({ children }: { children: ReactNode }) {
-  const [tab, setTab] = useState<TabId>(() => (readStorage(TAB_KEY, 'studio_chat') as TabId) || 'studio_chat');
+  const [tab, setTab] = useState<TabId>(() => {
+    const saved = readStorage(TAB_KEY, 'studio_chat');
+    // 'shorts_desk' was renamed to 'scheduler_desk'; keep old remembered tabs working.
+    return (saved === 'shorts_desk' ? 'scheduler_desk' : saved) as TabId;
+  });
   const [health, setHealth] = useState<'unknown' | 'online' | 'offline'>('unknown');
   const [healthInfo, setHealthInfo] = useState<HealthInfo | null>(null);
   const [brands, setBrands] = useState<string[]>([]);
@@ -63,6 +73,7 @@ export function StudioProvider({ children }: { children: ReactNode }) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [settings, setSettings] = useState<StudioSettings | null>(null);
   const [selectedChannel, setSelectedChannelState] = useState<string>(() => readStorage(CHANNEL_KEY, 'Beyond3Baje'));
+  const [channelFilter, setChannelFilterState] = useState<string>(() => readStorage(CHANNEL_FILTER_KEY, ''));
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [confirmRequest, setConfirmRequest] = useState<ConfirmRequest | null>(null);
   const confirmResolver = useRef<((yes: boolean) => void) | null>(null);
@@ -76,6 +87,18 @@ export function StudioProvider({ children }: { children: ReactNode }) {
   const setSelectedChannel = useCallback((channel: string) => {
     setSelectedChannelState(channel);
     writeStorage(CHANNEL_KEY, channel);
+    // A channel picked on any page is the one the whole Studio shows.
+    setChannelFilterState(channel);
+    writeStorage(CHANNEL_FILTER_KEY, channel);
+  }, []);
+
+  const setChannelFilter = useCallback((channel: string) => {
+    setChannelFilterState(channel);
+    writeStorage(CHANNEL_FILTER_KEY, channel);
+    if (channel) {
+      setSelectedChannelState(channel);
+      writeStorage(CHANNEL_KEY, channel);
+    }
   }, []);
 
   const toast = useCallback((text: string, kind: ToastKind = 'info') => {
@@ -176,6 +199,8 @@ export function StudioProvider({ children }: { children: ReactNode }) {
       settings,
       selectedChannel,
       setSelectedChannel,
+      channelFilter,
+      setChannelFilter,
       refreshProjects,
       refreshSettings,
       refreshHealth,
@@ -186,7 +211,7 @@ export function StudioProvider({ children }: { children: ReactNode }) {
     }),
     [
       tab, navigate, health, healthInfo, brands, workflows, projects, settings, selectedChannel,
-      setSelectedChannel, refreshProjects, refreshSettings, refreshHealth, toast, confirm, groupChatAgentIds,
+      setSelectedChannel, channelFilter, setChannelFilter, refreshProjects, refreshSettings, refreshHealth, toast, confirm, groupChatAgentIds,
     ],
   );
 

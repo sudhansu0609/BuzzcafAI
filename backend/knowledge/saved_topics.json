@@ -1,5 +1,269 @@
 [
   {
+    "topic": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A fictionalized high-tension 'rules' story about a driver stranded at Gata Loops, followed by an investigation into the real folklore of mountain offerings and the spirits of the pass.",
+    "id": "topic_42e1c413",
+    "saved_at": "2026-10-01T03:14:32.803626",
+    "updated_at": "2026-10-01T03:14:56.551528",
+    "added_by": "nightly",
+    "stage": "in_progress"
+  },
+  {
+    "topic": "When did it stop being just 'videos'? (The Business Reality)",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A raw, honest look at the transition from content creation to building a media infrastructure and physical products while juggling a full-time career.",
+    "id": "topic_8a508453",
+    "saved_at": "2026-09-29T03:30:43.197796",
+    "updated_at": "2026-09-29T03:30:43.214504",
+    "added_by": "nightly",
+    "stage": "in_progress"
+  },
+  {
+    "topic": "Ariel School Encounter",
+    "channel": "Beyond3Baje",
+    "category": "Encounters",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #20 (Encounters). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_09d8bf0e",
+    "saved_at": "2026-09-28T22:25:00.759226",
+    "updated_at": "2026-09-28T22:25:00.759226",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Skinwalker Traditions",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #19 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_16a3d067",
+    "saved_at": "2026-09-28T22:25:00.754519",
+    "updated_at": "2026-09-28T22:25:00.754519",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Wendigo Folklore",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #18 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_c0c940be",
+    "saved_at": "2026-09-28T22:25:00.749252",
+    "updated_at": "2026-09-28T22:25:00.749252",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Amityville (Claims vs. Record)",
+    "channel": "Beyond3Baje",
+    "category": "Paranormal Case Files",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #17 (Paranormal Case Files). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_0b522b85",
+    "saved_at": "2026-09-28T22:25:00.743107",
+    "updated_at": "2026-09-28T22:25:00.743107",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Penanggalan",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #16 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_3f92dd1e",
+    "saved_at": "2026-09-28T22:25:00.737907",
+    "updated_at": "2026-09-28T22:25:00.737907",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Banshee",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #15 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_af4e2860",
+    "saved_at": "2026-09-28T22:25:00.731188",
+    "updated_at": "2026-09-28T22:25:00.731188",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Mary Celeste",
+    "channel": "Beyond3Baje",
+    "category": "Unsolved",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #14 (Unsolved). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_84bb4521",
+    "saved_at": "2026-09-28T22:25:00.725414",
+    "updated_at": "2026-09-28T22:25:00.725414",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Hat Man",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #13 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_04909bae",
+    "saved_at": "2026-09-28T22:25:00.718408",
+    "updated_at": "2026-09-28T22:25:00.718408",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Teke Teke",
+    "channel": "Beyond3Baje",
+    "category": "Urban Legends",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #12 (Urban Legends). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_0c0c7b73",
+    "saved_at": "2026-09-28T22:25:00.710319",
+    "updated_at": "2026-09-28T22:25:00.710319",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Rendlesham Forest",
+    "channel": "Beyond3Baje",
+    "category": "Encounters",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #11 (Encounters). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_d37f8433",
+    "saved_at": "2026-09-28T22:25:00.704027",
+    "updated_at": "2026-09-28T22:25:00.704027",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Bell Witch",
+    "channel": "Beyond3Baje",
+    "category": "Paranormal Case Files",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #10 (Paranormal Case Files). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_2ee7206f",
+    "saved_at": "2026-09-28T22:25:00.698100",
+    "updated_at": "2026-09-28T22:25:00.698100",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Aswang",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #9 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_f17217f2",
+    "saved_at": "2026-09-28T22:25:00.692693",
+    "updated_at": "2026-09-28T22:25:00.692693",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Flannan Isles",
+    "channel": "Beyond3Baje",
+    "category": "Unsolved",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #8 (Unsolved). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_0be17f91",
+    "saved_at": "2026-09-28T22:25:00.686409",
+    "updated_at": "2026-09-28T22:25:00.686409",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Pontianak / Kuntilanak",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #7 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_ab9d1a44",
+    "saved_at": "2026-09-28T22:25:00.681263",
+    "updated_at": "2026-09-28T22:25:00.681263",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Dyatlov Pass",
+    "channel": "Beyond3Baje",
+    "category": "Unsolved",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #6 (Unsolved). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_e9233d9f",
+    "saved_at": "2026-09-28T22:25:00.674272",
+    "updated_at": "2026-10-01T03:25:47.310428",
+    "added_by": "user",
+    "stage": "in_progress"
+  },
+  {
+    "topic": "Black-Eyed Children",
+    "channel": "Beyond3Baje",
+    "category": "Encounters",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #5 (Encounters). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_f2d04b5d",
+    "saved_at": "2026-09-28T22:25:00.668289",
+    "updated_at": "2026-09-30T03:17:07.525248",
+    "added_by": "user",
+    "stage": "in_progress"
+  },
+  {
+    "topic": "Enfield Poltergeist",
+    "channel": "Beyond3Baje",
+    "category": "Paranormal Case Files",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #4 (Paranormal Case Files). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_2cdab278",
+    "saved_at": "2026-09-28T22:25:00.663021",
+    "updated_at": "2026-09-28T22:25:00.663021",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Kuchisake-onna",
+    "channel": "Beyond3Baje",
+    "category": "Urban Legends",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #3 (Urban Legends). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_e816b7e9",
+    "saved_at": "2026-09-28T22:25:00.657063",
+    "updated_at": "2026-09-28T22:25:00.657063",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "La Llorona",
+    "channel": "Beyond3Baje",
+    "category": "Entities",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #2 (Entities). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_a77f7600",
+    "saved_at": "2026-09-28T22:25:00.651095",
+    "updated_at": "2026-09-28T22:25:00.651095",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Mothman (Point Pleasant)",
+    "channel": "Beyond3Baje",
+    "category": "Encounters",
+    "source_type": "initial_topic_pool",
+    "notes": "Initial topic pool #1 (Encounters). Prioritise by audience demand, available documentation and competition.",
+    "id": "topic_ded6629a",
+    "saved_at": "2026-09-28T22:25:00.649587",
+    "updated_at": "2026-09-29T03:13:41.812432",
+    "added_by": "user",
+    "stage": "in_progress"
+  },
+  {
     "id": "topic_c799bbbb",
     "topic": "I Killed One of My YouTube Channels — Here’s Why",
     "category": "General",
@@ -713,11 +977,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:26.359376",
-    "updated_at": "2026-09-23T00:47:26.359376"
+    "updated_at": "2026-09-30T03:22:18.014568"
   },
   {
     "id": "topic_8e571565",
@@ -749,11 +1013,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:16.836442",
-    "updated_at": "2026-09-23T00:47:16.836442"
+    "updated_at": "2026-10-01T05:42:31.191879"
   },
   {
     "id": "topic_3eaaaffc",
@@ -767,11 +1031,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:46:59.893815",
-    "updated_at": "2026-09-23T00:46:59.893815"
+    "updated_at": "2026-09-28T22:05:50.827852"
   },
   {
     "id": "topic_eec32371",
@@ -803,11 +1067,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:43:33.167543",
-    "updated_at": "2026-09-23T00:43:33.167543"
+    "updated_at": "2026-09-29T03:09:07.614642"
   },
   {
     "id": "topic_1cb2cf66",
@@ -983,11 +1247,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:21.094331",
-    "updated_at": "2026-09-23T00:42:21.094331"
+    "updated_at": "2026-09-30T03:10:26.551910"
   },
   {
     "id": "topic_11ca8116",
@@ -1073,11 +1337,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:40:39.184433",
-    "updated_at": "2026-09-23T00:40:39.184433"
+    "updated_at": "2026-09-28T21:57:06.894242"
   },
   {
     "id": "saved_topic_2",
@@ -1097,6 +1361,8 @@
     ],
     "exclusion_audit": "✓ EXCLUSION VERIFIED: 100% Real-World True Story in Hinglish",
     "notes": "Use 3D stability diagram for 45-second Hinglish opening hook",
-    "saved_at": "2026-08-12T19:35:40.655662"
+    "saved_at": "2026-08-12T19:35:40.655662",
+    "stage": "in_progress",
+    "updated_at": "2026-09-28T22:00:29.322243"
   }
 ]

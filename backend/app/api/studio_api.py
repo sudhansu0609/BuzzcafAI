@@ -347,6 +347,9 @@ def _shutdown_process() -> None:
     except Exception:
         logger.debug("shutdown: no pywebview to ask for windows", exc_info=True)
 
+    from app.services import process_cleanup
+
+    process_cleanup.shutdown_requested = True
     if windows:
         for window in windows:
             try:
@@ -361,6 +364,9 @@ def _shutdown_process() -> None:
         _clear_runtime()
     except Exception:
         logger.warning("shutdown: could not clear the runtime record", exc_info=True)
+    from app.services.process_cleanup import stop_everything
+
+    stop_everything()
     os._exit(0)
 
 

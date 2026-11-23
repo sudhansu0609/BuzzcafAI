@@ -27,7 +27,17 @@ GOLDEN = {
     "document": "[document: web | www.thesentinel.com | The Hidden Story of ==Operation Rakshak== | "
                 "Operations were led by the Army's ==Para Special Forces== units]",
     "timeline": "[timeline: 1975, 1980, *1985*, 1990 | 60 KG | weight gained in four weeks]",
+    "kinetic_text": "[kinetic: This is the *moment* everything changed | style=slam]",
     "transition": "[fx: whiteflash dur=0.5]",
+    "stick_scene": "[stick: action=swim | scene=crossing a dark sea at night | prop=ship | figures=2 "
+                   "| caption=Three hours in the water]",
+    "paper_collage": "[collage: a torn train ticket on a wooden table ; a rain-streaked window at dusk "
+                     "| caption=The last clue]",
+    "flow_diagram": "[flow: Water heats up ; Steam rises ; Clouds form ; Rain falls | layout=cycle]",
+    "icon_list": "[icons: + Easy to learn ; - Takes longer to master | mode=pros_cons]",
+    "ui_mockup": "[ui: chat | text=Did you hear about the ship? // > No, what happened | name=Alex "
+                 "| handle=@alex99]",
+    "callout": "[callout: a muddy boot print beside the fence | mark=circle | at=bottom_right | label=The print]",
 }
 
 
@@ -94,6 +104,7 @@ def test_a_starred_tick_becomes_the_active_one():
     ({"kind": "timeline", "ticks": ["1990"], "text": "x"}, "ticks"),
     ({"kind": "canvas_card"}, "image_prompt"),
     ({"kind": "transition", "effect": "explode"}, "transition"),
+    ({"kind": "kinetic_text", "text": "too short"}, "kinetic_text"),
 ])
 def test_unrenderable_beats_are_dropped_with_a_reason(beat, why):
     fixed, reason = E.normalize_beat(beat)
@@ -110,6 +121,88 @@ def test_an_unknown_look_is_removed_not_passed_on():
 def test_directive_syntax_characters_are_cleaned_out_of_fields():
     directive = E.directive_for({"kind": "name_title", "text": "A [B] | C", "subtext": "x"})
     assert directive == "[name: A (B) / C | x]"
+
+
+# --- M4: kinetic_text + the five new shape transitions ------------------------------------
+
+def test_kinetic_text_default_style_and_word_limits():
+    beat, _ = E.normalize_beat({"kind": "kinetic", "text": "Everything changed in a single heartbeat"})
+    assert beat["kind"] == "kinetic_text" and beat["style"] == "slam"
+    long_text = " ".join(f"word{i}" for i in range(20))
+    beat, _ = E.normalize_beat({"kind": "kinetic_text", "text": long_text, "style": "typewriter"})
+    assert len(beat["text"].split()) == 14 and beat["style"] == "typewriter"
+    beat, _ = E.normalize_beat({"kind": "kinetic_text", "text": "He never saw it coming", "style": "nonsense"})
+    assert beat["style"] == "slam", "an unknown style falls back to the default"
+
+
+def test_kinetic_text_highlight_is_added_when_missing():
+    beat, _ = E.normalize_beat({"kind": "kinetic_text", "text": "Everything changed in one moment"})
+    assert "*" in beat["text"]
+
+
+def test_new_shape_transitions_hold_0_8s_and_old_ones_are_unchanged():
+    for name in ("shape_wipe", "iris", "ink", "bars", "paper_tear"):
+        beat, _ = E.normalize_beat({"kind": "transition", "effect": name})
+        assert E.directive_for(beat) == f"[fx: {name} dur=0.8]"
+    assert E.directive_for({"kind": "transition", "effect": "whiteflash"}) == "[fx: whiteflash dur=0.5]"
+    assert E.directive_for({"kind": "transition", "effect": "glitch"}) == "[fx: glitch dur=0.5]"
+    assert E.directive_for({"kind": "transition", "effect": "flash"}) == "[fx: flash dur=0.4]"
+    assert E.directive_for({"kind": "transition", "effect": "shutter"}) == "[fx: shutter dur=0.4]"
+
+
+def test_documentary_still_defaults_to_whiteflash_first():
+    """TRANSITIONS lists whiteflash first; the new favourites below must not
+    reorder it away from being documentary's (and every other genre's) default."""
+    assert E.TRANSITIONS[0] == "whiteflash"
+
+
+def test_explainer_ish_genres_favour_kinetic_text_and_transitions():
+    for genre in ("vlog", "motivational", "education", "finance", "documentary"):
+        favourites = E.favourites_for(genre)
+        assert "kinetic_text" in favourites and "transition" in favourites
+    # Untouched genres stay as they were.
+    assert "kinetic_text" not in E.favourites_for("horror")
+
+
+# --- M8: stick_scene + paper_collage -------------------------------------------------------
+
+def test_stick_scene_and_paper_collage_pin_buzzedits_grammar():
+    beat, _ = E.normalize_beat({"kind": "stick", "action": "SWIM", "scene": "crossing a dark sea at night",
+                                 "prop": "ship", "figures": 2, "caption": "Three hours in the water"})
+    assert E.directive_for(beat) == GOLDEN["stick_scene"]
+    beat, _ = E.normalize_beat({
+        "kind": "collage",
+        "prompts": "a torn train ticket on a wooden table; a rain-streaked window at dusk",
+        "caption": "The last clue"})
+    assert E.directive_for(beat) == GOLDEN["paper_collage"]
+    # An unknown action/prop is a reason to drop, or repaired to "none".
+    assert E.normalize_beat({"kind": "stick_scene", "action": "fly", "scene": "x"})[0] is None
+    beat, _ = E.normalize_beat({"kind": "stick_scene", "action": "idle", "scene": "x", "prop": "spaceship"})
+    assert beat["prop"] == "none"
+    assert E.normalize_beat({"kind": "paper_collage", "prompts": "only one"})[0] is None
+
+
+# --- M12: flow_diagram + icon_list + ui_mockup + callout -----------------------------------
+
+def test_m12_flow_icons_ui_callout_pin_buzzedits_grammar():
+    beat, _ = E.normalize_beat({"kind": "flow", "steps": "Water heats up; Steam rises; Clouds form; Rain falls",
+                                 "layout": "CYCLE"})
+    assert E.directive_for(beat) == GOLDEN["flow_diagram"]
+    beat, _ = E.normalize_beat({"kind": "icons", "labels": ["+ Easy to learn", "- Takes longer to master"],
+                                 "mode": "pros_cons"})
+    assert E.directive_for(beat) == GOLDEN["icon_list"]
+    beat, _ = E.normalize_beat({"kind": "ui", "type": "CHAT",
+                                 "text": "Did you hear about the ship? // > No, what happened",
+                                 "name": "Alex", "handle": "@alex99"})
+    assert E.directive_for(beat) == GOLDEN["ui_mockup"]
+    beat, _ = E.normalize_beat({"kind": "callout", "image_prompt": "a muddy boot print beside the fence",
+                                 "mark": "CIRCLE", "at": "bottom_right", "label": "The print"})
+    assert E.directive_for(beat) == GOLDEN["callout"]
+    # Too few steps/labels, an unknown ui type, and a missing image_prompt are each a reason to drop.
+    assert E.normalize_beat({"kind": "flow_diagram", "steps": ["only one"]})[0] is None
+    assert E.normalize_beat({"kind": "icon_list", "labels": ["only one"]})[0] is None
+    assert E.normalize_beat({"kind": "ui_mockup", "type": "carrier_pigeon", "text": "hi"})[0] is None
+    assert E.normalize_beat({"kind": "callout"})[0] is None
 
 
 # --- the planner sees the catalog ---------------------------------------------------------
@@ -166,3 +259,43 @@ def test_a_sentence_is_not_a_name_title():
     assert fixed is None and "name" in reason
     fixed, _ = E.normalize_beat({"kind": "name_title", "text": "Major Mohit Sharma", "subtext": "1 PARA SF"})
     assert fixed["text"] == "Major Mohit Sharma"
+
+
+# --- SW3: stick_scene gains era/outfit/bg (Stick World) --------------------------------------
+
+def test_stick_scene_era_outfit_bg_pin_the_contract_grammar():
+    beat, _ = E.normalize_beat({
+        "kind": "stick", "action": "point", "scene": "a Greek library court", "era": "ANCIENT_GREECE",
+        "outfit": "chiton+laurel+scroll+beard; toga+staff",
+        "bg": "the camera pans across ancient Greek library courtyard, marble columns, scroll shelves",
+        "caption": "Athens, 399 BC"})
+    # figures defaults to the number of outfit specs given, era/outfit lower-cased,
+    # and the bg prompt has its camera wording rewritten out (story_visuals.without_camera).
+    assert beat["era"] == "ancient_greece" and beat["figures"] == 2
+    assert beat["outfit"] == "chiton+laurel+scroll+beard ; toga+staff"
+    assert "camera" not in beat["bg"]
+    directive = E.directive_for(beat)
+    assert directive.startswith("[stick: action=point | scene=a Greek library court | "
+                                "era=ancient_greece | outfit=chiton+laurel+scroll+beard ; toga+staff | ")
+    assert "caption=Athens, 399 BC" in directive
+    # An unknown era/outfit token is dropped, not passed on, and the
+    # untouched example still pins the old GOLDEN directive exactly.
+    beat2, _ = E.normalize_beat({"kind": "stick", "action": "idle", "scene": "x",
+                                  "era": "atlantis", "outfit": "spacesuit+laurel+nonsense_hat"})
+    # "nonsense_hat" is outside the vocabulary (dropped); "spacesuit" (body)
+    # and "laurel" (head) are different categories, so both are kept.
+    assert beat2["era"] == "" and beat2["outfit"] == "spacesuit+laurel"
+    assert E.directive_for({"kind": "stick_scene", "action": "swim", "scene": "crossing a dark sea at night",
+                            "prop": "ship", "figures": 2, "caption": "Three hours in the water"}) == \
+        GOLDEN["stick_scene"]
+
+
+def test_stick_world_vocabulary_pinned_against_buzzedit():
+    """`integrations/stick_world.json` is a byte-identical copy of BuzzEdit's
+    `motion/src/stick_world.json` (STICK_WORLD_PLAN.md); compared only when
+    the sibling checkout is there."""
+    buzzedit_path = Path(__file__).resolve().parents[3] / "BuzzEdit" / "motion" / "src" / "stick_world.json"
+    if not buzzedit_path.is_file():
+        pytest.skip("BuzzEdit checkout not beside this repo")
+    assert buzzedit_path.read_bytes() == E._STICK_WORLD_PATH.read_bytes()
+    assert "ancient_greece" in E.STICK_ERAS and len(E.STICK_ERAS) >= 20

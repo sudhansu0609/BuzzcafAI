@@ -1,0 +1,37 @@
+{
+  "m r james": {
+    "status": "public_domain",
+    "death_year": 1936,
+    "source": "wikidata",
+    "note": "Died 1936: public domain in India (death year <= 1965) (Q963715, M. R. James)",
+    "checked_at": "2026-10-23T01:13:09"
+  },
+  "tagore rabindranath 1861 1941": {
+    "status": "unknown",
+    "death_year": null,
+    "source": "wikidata",
+    "note": "No date of death on Wikidata: treated as protected",
+    "checked_at": "2026-10-23T23:12:07"
+  },
+  "crawford f marion 1854 1909": {
+    "status": "unknown",
+    "death_year": null,
+    "source": "wikidata",
+    "note": "No date of death on Wikidata: treated as protected",
+    "checked_at": "2026-10-23T23:13:42"
+  },
+  "w w jacobs": {
+    "status": "public_domain",
+    "death_year": 1943,
+    "source": "wikidata",
+    "note": "Died 1943: public domain in India (death year <= 1965) (Q1385758, W. W. Jacobs)",
+    "checked_at": "2026-10-23T23:33:52"
+  },
+  "bram stoker": {
+    "status": "public_domain",
+    "death_year": 1912,
+    "source": "wikidata",
+    "note": "Died 1912: public domain in India (death year <= 1965) (Q36184, Bram Stoker)",
+    "checked_at": "2026-10-23T23:35:56"
+  }
+}

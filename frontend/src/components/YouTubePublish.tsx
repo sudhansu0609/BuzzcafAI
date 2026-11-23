@@ -207,7 +207,7 @@ export default function YouTubePublish({ projectId, onToast }: Props) {
           )}
           <div className="form-group" style={{ minWidth: 0 }}>
             <label>Title <span style={small}>({titleBytes}/100)</span><CopyBtn what="title" text={title} /></label>
-            <input className="form-control" style={field} value={title} maxLength={100} onChange={(e) => setTitle(e.target.value)} />
+            <input className="form-control" style={field} value={title} maxLength={100} onChange={(e) => setTitle(e.target.value)} aria-label="Title" />
           </div>
           {draft.titles.length > 1 && (
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -221,11 +221,11 @@ export default function YouTubePublish({ projectId, onToast }: Props) {
           )}
           <div className="form-group" style={{ minWidth: 0 }}>
             <label>Description<CopyBtn what="description" text={description} /></label>
-            <textarea className="form-control" style={{ ...field, resize: 'vertical' }} rows={8} value={description} onChange={(e) => setDescription(e.target.value)} />
+            <textarea className="form-control" style={{ ...field, resize: 'vertical' }} rows={8} value={description} onChange={(e) => setDescription(e.target.value)} aria-label="Description" />
           </div>
           <div className="form-group" style={{ minWidth: 0 }}>
             <label>Tags <span style={small}>(comma separated; YouTube keeps 500 characters)</span><CopyBtn what="tags" text={tagText} /></label>
-            <textarea className="form-control" style={{ ...field, resize: 'vertical' }} rows={3} value={tags} onChange={(e) => setTags(e.target.value)} />
+            <textarea className="form-control" style={{ ...field, resize: 'vertical' }} rows={3} value={tags} onChange={(e) => setTags(e.target.value)} aria-label="Tags" />
           </div>
           {error && <p style={{ ...small, color: '#f87171', margin: 0 }}>{error}</p>}
 
@@ -255,7 +255,7 @@ export default function YouTubePublish({ projectId, onToast }: Props) {
               <li>
                 Once it is up, paste its link here:{' '}
                 <input className="form-control" style={{ display: 'inline-block', width: 260, maxWidth: '100%', boxSizing: 'border-box', padding: '4px 8px', fontSize: '0.78rem' }}
-                  placeholder="https://youtu.be/..." value={link} onChange={(e) => setLink(e.target.value)} />{' '}
+                  placeholder="https://youtu.be/..." value={link} onChange={(e) => setLink(e.target.value)} aria-label="YouTube link" />{' '}
                 <button type="button" className="btn btn-outline btn-sm" style={{ padding: '2px 10px', fontSize: '0.72rem' }}
                   disabled={!link.trim()} onClick={saveLink}>Save link</button>
               </li>
@@ -276,14 +276,14 @@ export default function YouTubePublish({ projectId, onToast }: Props) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
                 <div className="form-group" style={{ minWidth: 0 }}>
                   <label>Channel</label>
-                  <select className="form-control" style={field} value={channel} onChange={(e) => setChannel(e.target.value)}>
+                  <select className="form-control" style={field} value={channel} onChange={(e) => setChannel(e.target.value)} aria-label="Channel">
                     <option value="">— pick a channel —</option>
                     {signedIn.map((c) => <option key={c.id} value={c.id}>{c.title}{c.brand ? ` (${c.brand})` : ''}</option>)}
                   </select>
                 </div>
                 <div className="form-group" style={{ minWidth: 0 }}>
                   <label>Visibility</label>
-                  <select className="form-control" style={field} value={privacy} onChange={(e) => setPrivacy(e.target.value as typeof privacy)}>
+                  <select className="form-control" style={field} value={privacy} onChange={(e) => setPrivacy(e.target.value as typeof privacy)} aria-label="Visibility">
                     <option value="unlisted">Unlisted</option>
                     <option value="private">Private</option>
                     <option value="public">Public</option>
@@ -293,23 +293,23 @@ export default function YouTubePublish({ projectId, onToast }: Props) {
                 {privacy === 'schedule' && (
                   <div className="form-group" style={{ minWidth: 0 }}>
                     <label>Goes public at</label>
-                    <input type="datetime-local" className="form-control" style={field} value={when} onChange={(e) => setWhen(e.target.value)} />
+                    <input type="datetime-local" className="form-control" style={field} value={when} onChange={(e) => setWhen(e.target.value)} aria-label="Goes public at" />
                   </div>
                 )}
                 <div className="form-group" style={{ minWidth: 0 }}>
                   <label>Category</label>
-                  <select className="form-control" style={field} value={category} onChange={(e) => setCategory(e.target.value)}>
+                  <select className="form-control" style={field} value={category} onChange={(e) => setCategory(e.target.value)} aria-label="Category">
                     {Object.entries(yt?.categories || {}).map(([id, name]) => <option key={id} value={id}>{name}</option>)}
                   </select>
                 </div>
               </div>
               <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-                <input type="checkbox" checked={synthetic} onChange={(e) => setSynthetic(e.target.checked)} />
+                <input type="checkbox" checked={synthetic} onChange={(e) => setSynthetic(e.target.checked)} aria-label="Disclose synthetic content" />
                 Disclose altered or synthetic content (AI-made realistic pictures or clips)
               </label>
               {draft.thumbnail_path && (
                 <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-                  <input type="checkbox" checked={thumb} onChange={(e) => setThumb(e.target.checked)} />
+                  <input type="checkbox" checked={thumb} onChange={(e) => setThumb(e.target.checked)} aria-label="Use BuzzEdit's thumbnail" />
                   Use BuzzEdit's thumbnail <code style={{ fontSize: '0.72rem' }}>{draft.thumbnail_path}</code>
                 </label>
               )}

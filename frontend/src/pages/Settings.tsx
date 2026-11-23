@@ -1,21 +1,41 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { CheckCircle2, Settings as SettingsIcon, ShieldCheck, Globe, RefreshCw, Server, FastForward, Palette, RotateCcw, Sparkles, Film, Brain, Cpu } from 'lucide-react';
+import { CheckCircle2, Settings as SettingsIcon, ShieldCheck, Globe, RefreshCw, Server, FastForward, Palette, RotateCcw, Sparkles, Film, Brain, Cpu, Pencil, Trash2, Copy } from 'lucide-react';
 import { useStudio } from '../state/studio';
 import { useTheme } from '../state/ThemeContext';
 import { getThemeIcon } from '../components/ThemeSwitcher';
+import ThemeBuilder from '../components/ThemeBuilder';
+import ModelRoutingWindow from '../components/ModelRoutingWindow';
+import type { ThemeDefinition } from '../lib/theme';
 import { getJson, postJson, putJson, describeError } from '../services/api';
 import { GENRES, DENSITIES, VOICE_PRESETS } from '../lib/types';
 import type { ChannelProfile, ChannelProfilesResponse } from '../lib/types';
+import { ART_STYLES } from '../lib/artStyles';
 import SoundEffectsCard from '../components/SoundEffectsCard';
+import MotionGalleryCard from '../components/MotionGalleryCard';
+import InstagramSettingsCard from '../components/InstagramSettingsCard';
 
 const PROVIDERS = [
   { id: 'lm_studio', label: 'Local LM Studio' },
+  { id: 'gemini', label: 'Google Gemini (Local Harness @ 8001 / Cloud)' },
+  { id: 'claude', label: 'Claude (local proxy)' },
   { id: 'ollama', label: 'Local Ollama' },
   { id: 'llamacpp', label: 'Local llama.cpp' },
-  { id: 'gemini', label: 'Google Gemini' },
   { id: 'openai', label: 'OpenAI' },
-  { id: 'claude', label: 'Claude (local proxy)' },
 ];
+
+const GEMINI_MODELS = ['flash', 'argon', 'flash-lite', 'pro', 'gemini-2.5-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+
+// GET /api/gemini/status
+interface GeminiStatus {
+  url: string;
+  model: string;
+  key_set: boolean;
+  online: boolean;
+  is_local: boolean;
+  auth_mode: string;
+  models: string[];
+  message: string;
+}
 
 // Model names the claude-local-api proxy routes to Claude Code (its README,
 // "Models and effort"). Anything else it forwards to its Codex fallback.
@@ -99,12 +119,14 @@ function ModelPicker({
           type="text"
           className="form-control"
           placeholder={placeholder}
+          aria-label={label}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
       ) : (
         <select
           className="form-control"
+          aria-label={label}
           value={value}
           onChange={(e) => {
             if (e.target.value === '__custom__') {
@@ -133,12 +155,22 @@ function ModelPicker({
 
 export default function Settings() {
   const { settings, refreshSettings, toast, confirm } = useStudio();
-  const { theme, themeDef: currentThemeDef, setTheme, themes } = useTheme();
+  const { theme, themeDef: currentThemeDef, setTheme, themes, deleteCustomTheme } = useTheme();
+  // The Theme Builder starts from this theme; the key remounts it on every "Customise".
+  const [builderSeed, setBuilderSeed] = useState<{ def: ThemeDefinition; key: number } | null>(null);
+  const openBuilder = (def: ThemeDefinition) => {
+    setBuilderSeed((prev) => ({ def, key: (prev?.key ?? 0) + 1 }));
+    setTimeout(() => document.getElementById('theme-builder')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  };
   const [provider, setProvider] = useState('lm_studio');
   const [localOnly, setLocalOnly] = useState(true);
+  const [geminiUrl, setGeminiUrl] = useState('http://127.0.0.1:8001');
   const [geminiKey, setGeminiKey] = useState('');
+  const [geminiModel, setGeminiModel] = useState('flash');
+  const [geminiThinkingLevel, setGeminiThinkingLevel] = useState('high');
+  const [geminiStatus, setGeminiStatus] = useState<GeminiStatus | null>(null);
+  const [testingGemini, setTestingGemini] = useState(false);
   const [openaiKey, setOpenaiKey] = useState('');
-  const [geminiModel, setGeminiModel] = useState('');
   const [openaiModel, setOpenaiModel] = useState('');
   // Claude API (the claude-local-api proxy) and whether video production
   // (visual planning, BuzzEdit's moods/topics/prompts) is routed through it.
@@ -149,6 +181,10 @@ export default function Settings() {
   // Thinking (reasoning) for local thinking models: agents on, production off.
   const [thinkingAgents, setThinkingAgents] = useState(true);
   const [thinkingProduction, setThinkingProduction] = useState(false);
+  // Where the finished video goes once BuzzEdit has rendered it.
+  const [outputMode, setOutputMode] = useState<'beside_recording' | 'folder' | 'buzzedit'>('beside_recording');
+  const [outputDir, setOutputDir] = useState('');
+  const [revealOutput, setRevealOutput] = useState(true);
   // GPU memory: idle unload delay (minutes, 0 = never) and llama.cpp stop.
   const [idleOffloadMinutes, setIdleOffloadMinutes] = useState(5);
   const [offloadLlamacpp, setOffloadLlamacpp] = useState(true);
@@ -165,7 +201,8 @@ export default function Settings() {
   const [ollamaModel, setOllamaModel] = useState('');
   const [llamacppUrl, setLlamacppUrl] = useState('');
   const [llamacppModel, setLlamacppModel] = useState('');
-  const [tiers, setTiers] = useState<Record<string, TierSetting>>({ fast: {}, strong: {} });
+  const [tiers, setTiers] = useState<Record<string, TierSetting>>({ fast: {}, strong: {}, premium: {} });
+  const [routingOpen, setRoutingOpen] = useState(false);
   const [ownerChannels, setOwnerChannels] = useState('');
   const [allowAllSteps, setAllowAllSteps] = useState(false);
   const [webResearchEnabled, setWebResearchEnabled] = useState(true);
@@ -216,6 +253,7 @@ export default function Settings() {
         genre_secondary: profile.genre_secondary || null,
         density: profile.density,
         voice_preset: profile.voice_preset || 'studio_mic',
+        art_style: profile.art_style || 'real',
       });
       toast(`Channel profile saved for "${brand}".`, 'success');
       await fetchChannelProfiles();
@@ -294,7 +332,9 @@ export default function Settings() {
     if (settings.selected_provider) setProvider(String(settings.selected_provider));
     if (settings.local_only !== undefined) setLocalOnly(Boolean(settings.local_only));
     if (settings.allow_all_steps !== undefined) setAllowAllSteps(Boolean(settings.allow_all_steps));
-    setGeminiModel(str('gemini_model'));
+    setGeminiUrl(str('gemini_url') || 'http://127.0.0.1:8001');
+    setGeminiModel(str('gemini_model') || 'flash');
+    setGeminiThinkingLevel(str('gemini_thinking_level') || 'high');
     setOpenaiModel(str('openai_model'));
     setLmStudioUrl(str('lm_studio_url'));
     setLmStudioModel(str('lm_studio_model'));
@@ -307,6 +347,10 @@ export default function Settings() {
     setUseClaudeForProduction(String(settings.produce_llm_provider || 'auto') === 'claude');
     setThinkingAgents(settings.thinking_agents !== false);
     setThinkingProduction(Boolean(settings.thinking_production));
+    const mode = String(settings.produce_output_mode || 'beside_recording');
+    setOutputMode(mode === 'folder' || mode === 'buzzedit' ? mode : 'beside_recording');
+    setOutputDir(String(settings.produce_output_dir || ''));
+    setRevealOutput(settings.produce_reveal_output !== false);
     if (typeof settings.idle_offload_seconds === 'number') setIdleOffloadMinutes(Math.round(settings.idle_offload_seconds / 60));
     setOffloadLlamacpp(Boolean(settings.idle_offload_llamacpp));
     setPixabayEnabled(Boolean(settings.pixabay_enabled));
@@ -314,7 +358,7 @@ export default function Settings() {
     if (settings.search_provider) setSearchProvider(String(settings.search_provider));
     if (settings.searxng_url) setSearxngUrl(String(settings.searxng_url));
     const stored = settings.tiers as Record<string, TierSetting> | undefined;
-    setTiers({ fast: stored?.fast || {}, strong: stored?.strong || {} });
+    setTiers({ fast: stored?.fast || {}, strong: stored?.strong || {}, premium: stored?.premium || {} });
     const owners = settings.owner_channel_ids;
     setOwnerChannels(Array.isArray(owners) ? owners.join(', ') : '');
   }, [settings]);
@@ -333,26 +377,32 @@ export default function Settings() {
       tiers: {
         fast: { provider: tiers.fast?.provider || '', model: tiers.fast?.model || '' },
         strong: { provider: tiers.strong?.provider || '', model: tiers.strong?.model || '' },
+        premium: { provider: tiers.premium?.provider || '', model: tiers.premium?.model || '' },
       },
       owner_channel_ids: ownerChannels.split(',').map((s) => s.trim()).filter(Boolean),
       web_research_enabled: webResearchEnabled,
       search_provider: searchProvider,
       searxng_url: searxngUrl.trim(),
       produce_llm_provider: useClaudeForProduction ? 'claude' : 'auto',
+      gemini_thinking_level: geminiThinkingLevel,
       thinking_agents: thinkingAgents,
       thinking_production: thinkingProduction,
+      produce_output_mode: outputMode,
+      produce_output_dir: outputDir.trim(),
+      produce_reveal_output: revealOutput,
       idle_offload_seconds: Math.max(0, Math.round(idleOffloadMinutes * 60)),
       idle_offload_llamacpp: offloadLlamacpp,
       pixabay_enabled: pixabayEnabled,
     };
     // Only send a key when one was typed: blank means "keep the stored key".
     if (geminiKey.trim()) payload.gemini_api_key = geminiKey.trim();
+    if (geminiUrl.trim()) payload.gemini_url = geminiUrl.trim();
     if (openaiKey.trim()) payload.openai_api_key = openaiKey.trim();
     if (claudeKey.trim()) payload.claude_api_key = claudeKey.trim();
     if (claudeUrl.trim()) payload.claude_url = claudeUrl.trim();
-    if (claudeModel.trim()) payload.claude_model = claudeModel.trim();
     if (pixabayKey.trim()) payload.pixabay_api_key = pixabayKey.trim();
     if (geminiModel.trim()) payload.gemini_model = geminiModel.trim();
+    if (geminiThinkingLevel.trim()) payload.gemini_thinking_level = geminiThinkingLevel.trim();
     if (openaiModel.trim()) payload.openai_model = openaiModel.trim();
     if (lmStudioUrl.trim()) payload.lm_studio_url = lmStudioUrl.trim();
     if (lmStudioModel.trim()) payload.lm_studio_model = lmStudioModel.trim();
@@ -374,6 +424,31 @@ export default function Settings() {
       toast(`Could not save settings: ${describeError(err)}`, 'error');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const testGeminiConnection = async () => {
+    setTestingGemini(true);
+    try {
+      const payload: Record<string, unknown> = {};
+      if (geminiKey.trim()) payload.gemini_api_key = geminiKey.trim();
+      if (geminiUrl.trim()) payload.gemini_url = geminiUrl.trim();
+      if (geminiModel.trim()) payload.gemini_model = geminiModel.trim();
+      if (geminiThinkingLevel.trim()) payload.gemini_thinking_level = geminiThinkingLevel.trim();
+      if (Object.keys(payload).length > 0) {
+        await postJson('/api/settings', payload);
+        setGeminiKey('');
+        await refreshSettings();
+      }
+      const res = await getJson<GeminiStatus>('/api/gemini/status');
+      setGeminiStatus(res);
+    } catch (err) {
+      setGeminiStatus({
+        url: geminiUrl, model: geminiModel, key_set: false, online: false, is_local: true,
+        auth_mode: '', models: [], message: `Could not probe Gemini: ${describeError(err)}`,
+      });
+    } finally {
+      setTestingGemini(false);
     }
   };
 
@@ -433,7 +508,7 @@ export default function Settings() {
     }
   };
 
-  const tierRow = (name: 'fast' | 'strong', description: string) => {
+  const tierRow = (name: 'fast' | 'strong' | 'premium', description: string) => {
     const rawTierProv = tiers[name]?.provider || '';
     const tierProv = rawTierProv || (provider !== 'gemini' && provider !== 'openai' ? provider : 'lm_studio');
     const detectedForTier =
@@ -444,7 +519,7 @@ export default function Settings() {
         : tierProv === 'llamacpp'
         ? localModels.llamacpp
         : tierProv === 'gemini'
-        ? ['gemini-1.5-flash', 'gemini-1.5-pro']
+        ? GEMINI_MODELS
         : tierProv === 'openai'
         ? ['gpt-4o-mini', 'gpt-4o']
         : tierProv === 'claude'
@@ -457,6 +532,7 @@ export default function Settings() {
           <label style={{ textTransform: 'capitalize' }}>{name} tier</label>
           <select
             className="form-control"
+            aria-label={`${name} tier`}
             value={tiers[name]?.provider || ''}
             onChange={(e) => setTier(name, { provider: e.target.value })}
           >
@@ -546,18 +622,69 @@ export default function Settings() {
                     <span className="theme-dot" style={{ backgroundColor: t.colors.accent }} />
                     <span className="theme-dot" style={{ backgroundColor: t.colors.accentSecondary }} />
                   </div>
-                  {isActive ? (
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--border-highlight)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                      <CheckCircle2 size={14} /> Active
-                    </span>
-                  ) : (
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Click to activate</span>
-                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    {isActive ? (
+                      <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--border-highlight)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <CheckCircle2 size={14} /> Active
+                      </span>
+                    ) : (
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Click to activate</span>
+                    )}
+                    <button
+                      type="button"
+                      className="theme-card-tool"
+                      title={t.custom ? 'Edit this theme' : 'Customise a copy of this theme'}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openBuilder(t);
+                      }}
+                    >
+                      {t.custom ? <Pencil size={13} /> : <Copy size={13} />}
+                    </button>
+                    {t.custom && (
+                      <button
+                        type="button"
+                        className="theme-card-tool danger"
+                        title="Delete this theme"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (window.confirm(`Delete the theme "${t.name}"?`)) deleteCustomTheme(t.id);
+                        }}
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
+      </div>
+
+      {/* Theme Builder */}
+      <div className="panel-card" id="theme-builder" style={{ marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 8 }}>
+          <h3 className="panel-title" style={{ margin: 0, border: 'none', padding: 0 }}>
+            <Palette size={20} /> Theme Builder
+          </h3>
+          {!builderSeed && (
+            <button type="button" className="btn btn-outline btn-compact" onClick={() => openBuilder(currentThemeDef)}>
+              <Pencil size={14} /> Customise {currentThemeDef.name}
+            </button>
+          )}
+        </div>
+        <p style={{ margin: '4px 0 12px', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+          Pick the colours yourself. Start from any theme (the copy icon on a card), nudge the surfaces darker or lighter,
+          and the Studio previews every change live. Saved themes join the list above and the header switcher, and stay in this browser.
+        </p>
+        {builderSeed ? (
+          <ThemeBuilder key={builderSeed.key} seed={builderSeed.def} />
+        ) : (
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            Click the copy icon on any theme card, or the button above, to open the builder.
+          </div>
+        )}
       </div>
 
       {/* Privacy Guarantee & Strict Local Mode Banner */}
@@ -587,6 +714,7 @@ export default function Settings() {
               type="checkbox"
               checked={localOnly}
               onChange={(e) => setLocalOnly(e.target.checked)}
+              aria-label="Strict Local Privacy Mode"
               style={{ width: 18, height: 18, accentColor: '#4ade80' }}
             />
             <span>{localOnly ? 'Strict Local (Enforced)' : 'Allow Cloud Fallback'}</span>
@@ -617,7 +745,7 @@ export default function Settings() {
 
         <div className="form-group" style={{ marginBottom: 24 }}>
           <label>Selected Primary Provider</label>
-          <select className="form-control" value={provider} onChange={(e) => setProvider(e.target.value)}>
+          <select className="form-control" aria-label="Selected Primary Provider" value={provider} onChange={(e) => setProvider(e.target.value)}>
             {PROVIDERS.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.label}
@@ -649,6 +777,7 @@ export default function Settings() {
                 type="text"
                 className="form-control"
                 placeholder="http://localhost:1234/v1"
+                aria-label="LM Studio URL"
                 value={lmStudioUrl}
                 onChange={(e) => setLmStudioUrl(e.target.value)}
               />
@@ -686,6 +815,7 @@ export default function Settings() {
                 type="text"
                 className="form-control"
                 placeholder="http://localhost:11434/v1"
+                aria-label="Ollama URL"
                 value={ollamaUrl}
                 onChange={(e) => setOllamaUrl(e.target.value)}
               />
@@ -723,6 +853,7 @@ export default function Settings() {
                 type="text"
                 className="form-control"
                 placeholder="http://127.0.0.1:8089/v1"
+                aria-label="llama.cpp URL"
                 value={llamacppUrl}
                 onChange={(e) => setLlamacppUrl(e.target.value)}
               />
@@ -737,31 +868,110 @@ export default function Settings() {
           </div>
         </div>
 
-        {/* 4. Cloud Fallback Section (Visible only when localOnly is unchecked or configured) */}
+        {/* 4. Google Gemini Harness Section (Local server @ 8001 or Cloud API) */}
+        <div style={{ borderTop: '1px solid #1e293b', paddingTop: 16, marginBottom: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+            <strong style={{ color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Server size={16} style={{ color: '#60a5fa' }} /> Google Gemini (Local Harness / Cloud)
+            </strong>
+            {geminiStatus?.online ? (
+              <span className="status-badge status-completed" style={{ fontSize: '0.75rem' }}>
+                ✓ {geminiStatus.auth_mode || 'Online'}
+              </span>
+            ) : (
+              <span className="status-badge" style={{ fontSize: '0.75rem', opacity: 0.7 }}>
+                {geminiStatus ? 'Not detected on port 8001' : 'Port 8001'}
+              </span>
+            )}
+          </div>
+          <div className="form-row">
+            <div className="form-group" style={{ flex: '1 1 240px' }}>
+              <label>Gemini Server URL</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="http://127.0.0.1:8001"
+                aria-label="Gemini Server URL"
+                value={geminiUrl}
+                onChange={(e) => { setGeminiUrl(e.target.value); setGeminiStatus(null); }}
+              />
+            </div>
+            <ModelPicker
+              label="Gemini Model"
+              value={geminiModel}
+              onChange={(m) => { setGeminiModel(m); setGeminiStatus(null); }}
+              models={GEMINI_MODELS}
+              placeholder="flash"
+            />
+            <div className="form-group" style={{ flex: '0 1 180px' }}>
+              <label>Reasoning Effort</label>
+              <select
+                className="form-control"
+                value={geminiThinkingLevel}
+                onChange={(e) => { setGeminiThinkingLevel(e.target.value); setGeminiStatus(null); }}
+                aria-label="Gemini Reasoning Effort Level"
+              >
+                <option value="low">Low (Fast ~3s)</option>
+                <option value="medium">Medium (Balanced)</option>
+                <option value="high">High (Deep reasoning)</option>
+                <option value="max">Max (Exhaustive)</option>
+              </select>
+            </div>
+            <div className="form-group" style={{ flex: '0 0 auto', alignSelf: 'flex-end' }}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                disabled={testingGemini}
+                onClick={testGeminiConnection}
+              >
+                {testingGemini ? 'Testing…' : 'Test connection'}
+              </button>
+            </div>
+          </div>
+          {geminiStatus && (
+            <div
+              style={{
+                marginTop: 4,
+                marginBottom: 10,
+                fontSize: '0.8rem',
+                padding: '4px 8px',
+                borderRadius: 4,
+                backgroundColor: geminiStatus.online ? 'rgba(74, 222, 128, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                color: geminiStatus.online ? '#4ade80' : '#fca5a5',
+                border: `1px solid ${geminiStatus.online ? '#4ade80' : '#ef4444'}`,
+              }}
+            >
+              {geminiStatus.online ? '✓ ' : '✕ '}
+              {geminiStatus.message}
+            </div>
+          )}
+          <div className="form-row">
+            <div className="form-group" style={{ flex: '1 1 300px' }}>
+              <label>
+                Google Gemini Cloud API key (Optional cloud fallback)
+                {settings?.gemini_api_key_set && <span style={{ marginLeft: 8, fontSize: '0.75rem', color: '#4ade80' }}>✓ key saved</span>}
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder={settings?.gemini_api_key_set ? 'Saved — type a new key to replace it' : 'AIzaSy… (leave blank to use local harness on 8001)'}
+                aria-label="Google Gemini API key"
+                value={geminiKey}
+                onChange={(e) => setGeminiKey(e.target.value)}
+              />
+            </div>
+          </div>
+          <p style={{ color: '#64748b', fontSize: '0.78rem', margin: '4px 0 0' }}>
+            Your local Gemini harness running at <code>http://127.0.0.1:8001</code> answers via your Antigravity CLI keyring session with personal Google OAuth (Zero API keys required). Works under Strict Local Mode. Reasoning Effort (<code>low</code>, <code>medium</code>, <code>high</code>, <code>max</code>) controls thinking depth.
+          </p>
+        </div>
+
+        {/* 5. Cloud Fallback Section (Visible only when localOnly is unchecked) */}
         {!localOnly && (
           <div style={{ borderTop: '1px solid #1e293b', paddingTop: 16 }}>
             <p style={{ color: '#fca5a5', fontSize: '0.85rem', marginBottom: 12 }}>
               ⚠ Cloud providers enabled. Prompts will fall back to external servers if all local LLMs fail.
             </p>
-            <div className="form-row">
-              <div className="form-group">
-                <label>
-                  Google Gemini API key
-                  {settings?.gemini_api_key_set && <span style={{ marginLeft: 8, fontSize: '0.75rem', color: '#4ade80' }}>✓ key saved</span>}
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder={settings?.gemini_api_key_set ? 'Saved — type a new key to replace it' : 'AIzaSy…'}
-                  value={geminiKey}
-                  onChange={(e) => setGeminiKey(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>Gemini model</label>
-                <input type="text" className="form-control" placeholder="gemini-1.5-flash" value={geminiModel} onChange={(e) => setGeminiModel(e.target.value)} />
-              </div>
-            </div>
             <div className="form-row">
               <div className="form-group">
                 <label>
@@ -772,13 +982,14 @@ export default function Settings() {
                   type="password"
                   className="form-control"
                   placeholder={settings?.openai_api_key_set ? 'Saved — type a new key to replace it' : 'sk-…'}
+                  aria-label="OpenAI API key"
                   value={openaiKey}
                   onChange={(e) => setOpenaiKey(e.target.value)}
                 />
               </div>
               <div className="form-group">
                 <label>OpenAI model</label>
-                <input type="text" className="form-control" placeholder="gpt-4o-mini" value={openaiModel} onChange={(e) => setOpenaiModel(e.target.value)} />
+                <input type="text" className="form-control" placeholder="gpt-4o-mini" aria-label="OpenAI model" value={openaiModel} onChange={(e) => setOpenaiModel(e.target.value)} />
               </div>
             </div>
           </div>
@@ -789,10 +1000,16 @@ export default function Settings() {
       <div className="panel-card">
         <h3 className="panel-title"><SettingsIcon size={20} /> Model Tiers</h3>
         <p style={{ color: '#94a3b8', margin: '0 0 20px 0' }}>
-          Each persona declares a tier in its frontmatter. Fast work (tags, titles, checklists) runs on the fast tier, while research, narration, and scripts run on the strong tier.
+          Each persona declares a tier in its frontmatter. Fast work (tags, titles, checklists) runs on the fast tier, the rest on the strong tier, and the few that decide a video's quality -- the researcher, the script writer, the Shorts writer and the SEO manager -- on the premium tier (Claude Opus through the local Claude proxy by default; if the proxy is down the call falls back to the selected provider).
         </p>
         {tierRow('fast', 'Fast tasks: Tags, titles, checklists.')}
-        {tierRow('strong', 'Heavy tasks: Research, scripts, direction.')}
+        {tierRow('strong', 'Heavy tasks: Direction, editing, planning.')}
+        {tierRow('premium', 'Research, scripts, the session Shorts and SEO research (default: Claude, opus).')}
+        <p style={{ color: '#94a3b8', margin: '12px 0 8px 0' }}>
+          Model Routing overrides the tiers per kind of work (research, script, Shorts, SEO, ...): Claude, Gemma, Ollama or Gemini, with a fallback.
+        </p>
+        <button type="button" className="btn btn-outline" onClick={() => setRoutingOpen(true)}>Open Model Routing</button>
+        <ModelRoutingWindow open={routingOpen} onClose={() => setRoutingOpen(false)} />
       </div>
 
       {/* Web Research & SearXNG */}
@@ -806,6 +1023,7 @@ export default function Settings() {
               type="checkbox"
               checked={webResearchEnabled}
               onChange={(e) => setWebResearchEnabled(e.target.checked)}
+              aria-label="Enable Live Web Research"
               style={{ width: 18, height: 18, accentColor: '#38bdf8' }}
             />
             <span>Enable Live Web Research</span>
@@ -819,7 +1037,7 @@ export default function Settings() {
         <div className="form-row">
           <div className="form-group">
             <label>Search Provider</label>
-            <select className="form-control" value={searchProvider} onChange={(e) => setSearchProvider(e.target.value)}>
+            <select className="form-control" aria-label="Search Provider" value={searchProvider} onChange={(e) => setSearchProvider(e.target.value)}>
               <option value="auto">Auto (SearXNG + DuckDuckGo + Wikipedia)</option>
               <option value="searxng">SearXNG (Self-Hosted Metasearch)</option>
               <option value="duckduckgo">DuckDuckGo (Anonymous Instant Answers)</option>
@@ -843,6 +1061,7 @@ export default function Settings() {
               type="text"
               className="form-control"
               placeholder="http://localhost:8080"
+              aria-label="SearXNG URL"
               value={searxngUrl}
               onChange={(e) => {
                 setSearxngUrl(e.target.value);
@@ -902,6 +1121,7 @@ export default function Settings() {
               type="checkbox"
               checked={allowAllSteps}
               onChange={(e) => setAllowAllSteps(e.target.checked)}
+              aria-label="Allow All Workflow Steps"
               style={{ width: 18, height: 18, accentColor: '#10b981' }}
             />
             <span style={{ color: allowAllSteps ? '#34d399' : '#e2e8f0' }}>
@@ -919,13 +1139,14 @@ export default function Settings() {
         </h3>
         <p style={{ color: '#94a3b8', margin: '0 0 16px 0' }}>
           Thinking models reason step by step before answering: better judgement, but several times slower.
-          Applies to LM Studio; Claude and cloud providers are unaffected.
+          Applies to LM Studio and the local Gemini harness (port 8001); Claude and cloud providers are unaffected.
         </p>
         <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', marginBottom: 14 }}>
           <input
             type="checkbox"
             checked={thinkingAgents}
             onChange={(e) => setThinkingAgents(e.target.checked)}
+            aria-label="Agents, chat and writing"
             style={{ width: 18, height: 18, marginTop: 2, accentColor: '#a78bfa' }}
           />
           <span>
@@ -941,6 +1162,7 @@ export default function Settings() {
             type="checkbox"
             checked={thinkingProduction}
             onChange={(e) => setThinkingProduction(e.target.checked)}
+            aria-label="Video production"
             style={{ width: 18, height: 18, marginTop: 2, accentColor: '#a78bfa' }}
           />
           <span>
@@ -953,6 +1175,42 @@ export default function Settings() {
             </span>
           </span>
         </label>
+
+        <h4 style={{ margin: '18px 0 6px 0' }}>Save the final video</h4>
+        <p style={{ color: '#94a3b8', margin: '0 0 10px 0' }}>
+          Where the finished video is put once BuzzEdit has rendered it. It is named after the recording with
+          <code> _final</code>; BuzzEdit's own render stays where it was for re-renders and publishing.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+            <input type="radio" name="produce_output_mode" checked={outputMode === 'beside_recording'}
+              onChange={() => setOutputMode('beside_recording')} />
+            <span><strong>Next to the recording</strong> (recommended): the folder the source video came from.</span>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+            <input type="radio" name="produce_output_mode" checked={outputMode === 'folder'}
+              onChange={() => setOutputMode('folder')} />
+            <span>One folder for every video:</span>
+            <input
+              type="text"
+              value={outputDir}
+              onChange={(e) => setOutputDir(e.target.value)}
+              placeholder="B:\youtubeProjects\final"
+              disabled={outputMode !== 'folder'}
+              style={{ flex: 1, minWidth: 220 }}
+            />
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+            <input type="radio" name="produce_output_mode" checked={outputMode === 'buzzedit'}
+              onChange={() => setOutputMode('buzzedit')} />
+            <span>Leave it where BuzzEdit wrote it.</span>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginTop: 4 }}>
+            <input type="checkbox" checked={revealOutput} onChange={(e) => setRevealOutput(e.target.checked)}
+              style={{ width: 18, height: 18 }} />
+            <span>Open the folder in Explorer when a video is ready.</span>
+          </label>
+        </div>
       </div>
 
       {/* GPU memory: integrations/idle_offload.py. Models load on a cleared
@@ -971,6 +1229,7 @@ export default function Settings() {
             type="checkbox"
             checked={offloadLlamacpp}
             onChange={(e) => setOffloadLlamacpp(e.target.checked)}
+            aria-label="Also stop llama.cpp when offloading"
             style={{ width: 18, height: 18, marginTop: 2, accentColor: '#34d399' }}
           />
           <span>
@@ -989,6 +1248,7 @@ export default function Settings() {
             className="form-control"
             min={0}
             max={240}
+            aria-label="Unload idle models after"
             value={idleOffloadMinutes}
             onChange={(e) => setIdleOffloadMinutes(Math.max(0, Number(e.target.value) || 0))}
             style={{ width: 80 }}
@@ -1009,6 +1269,7 @@ export default function Settings() {
               type="checkbox"
               checked={useClaudeForProduction}
               onChange={(e) => setUseClaudeForProduction(e.target.checked)}
+              aria-label="Use Claude for video production"
               style={{ width: 18, height: 18, accentColor: '#f59e0b' }}
             />
             <span style={{ color: useClaudeForProduction ? '#fbbf24' : '#e2e8f0' }}>
@@ -1030,6 +1291,7 @@ export default function Settings() {
               type="text"
               className="form-control"
               placeholder="http://127.0.0.1:8787/v1"
+              aria-label="Proxy base URL"
               value={claudeUrl}
               onChange={(e) => { setClaudeUrl(e.target.value); setClaudeStatus(null); }}
             />
@@ -1043,6 +1305,7 @@ export default function Settings() {
               type="password"
               className="form-control"
               placeholder={settings?.claude_api_key_set ? 'Saved — type a new key to replace it' : 'sk-local-…'}
+              aria-label="Proxy API key"
               value={claudeKey}
               onChange={(e) => { setClaudeKey(e.target.value); setClaudeStatus(null); }}
             />
@@ -1103,6 +1366,7 @@ export default function Settings() {
               type="checkbox"
               checked={pixabayEnabled}
               onChange={(e) => setPixabayEnabled(e.target.checked)}
+              aria-label="Use Pixabay stock footage"
               style={{ width: 18, height: 18, accentColor: '#2dd4bf' }}
             />
             <span style={{ color: pixabayEnabled ? '#5eead4' : '#e2e8f0' }}>
@@ -1125,6 +1389,7 @@ export default function Settings() {
               type="password"
               className="form-control"
               placeholder={settings?.pixabay_api_key_set ? 'Saved — type a new key to replace it' : '12345678-abcdef…'}
+              aria-label="Pixabay API key"
               value={pixabayKey}
               onChange={(e) => setPixabayKey(e.target.value)}
             />
@@ -1153,6 +1418,10 @@ export default function Settings() {
 
       <SoundEffectsCard />
 
+      <MotionGalleryCard />
+
+      <InstagramSettingsCard />
+
       {/* Your Channels */}
       <div className="panel-card">
         <h3 className="panel-title"><SettingsIcon size={20} /> Your Channels</h3>
@@ -1162,6 +1431,7 @@ export default function Settings() {
             type="text"
             className="form-control"
             placeholder="UCxxxx, UCyyyy"
+            aria-label="Owned YouTube channel ids"
             value={ownerChannels}
             onChange={(e) => setOwnerChannels(e.target.value)}
           />
@@ -1225,6 +1495,7 @@ export default function Settings() {
                     <label>Genre</label>
                     <select
                       className="form-control"
+                      aria-label={`Genre for ${brand}`}
                       value={profile.genre}
                       onChange={(e) => setChannelProfileField(brand, { genre: e.target.value })}
                     >
@@ -1237,6 +1508,7 @@ export default function Settings() {
                     <label>Secondary genre</label>
                     <select
                       className="form-control"
+                      aria-label={`Secondary genre for ${brand}`}
                       value={profile.genre_secondary || ''}
                       onChange={(e) => setChannelProfileField(brand, { genre_secondary: e.target.value || null })}
                     >
@@ -1250,6 +1522,7 @@ export default function Settings() {
                     <label>Density</label>
                     <select
                       className="form-control"
+                      aria-label={`Density for ${brand}`}
                       value={profile.density}
                       onChange={(e) => setChannelProfileField(brand, { density: e.target.value })}
                     >
@@ -1262,11 +1535,25 @@ export default function Settings() {
                     <label>Voice preset</label>
                     <select
                       className="form-control"
+                      aria-label={`Voice preset for ${brand}`}
                       value={profile.voice_preset || 'studio_mic'}
                       onChange={(e) => setChannelProfileField(brand, { voice_preset: e.target.value })}
                     >
                       {VOICE_PRESETS.map((v) => (
                         <option key={v} value={v}>{v}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ flex: '1 1 200px' }} title="The medium every picture, clip, thumbnail scene and text card of this channel is made in. A project can pick its own.">
+                    <label>Art style</label>
+                    <select
+                      className="form-control"
+                      aria-label={`Art style for ${brand}`}
+                      value={profile.art_style || 'real'}
+                      onChange={(e) => setChannelProfileField(brand, { art_style: e.target.value })}
+                    >
+                      {ART_STYLES.map((s) => (
+                        <option key={s.id} value={s.id}>{s.label}</option>
                       ))}
                     </select>
                   </div>

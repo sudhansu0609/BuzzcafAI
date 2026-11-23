@@ -14,7 +14,14 @@
       (function() {
         try {
           var t = localStorage.getItem('buzzcaf_studio_theme') || 'dark';
-          document.documentElement.setAttribute('data-theme', t);
+          if (t.indexOf('custom_') === 0) {
+            // A Theme Builder theme: paint its cached tokens before the bundle loads.
+            document.documentElement.setAttribute('data-theme', 'custom');
+            var tokens = JSON.parse(localStorage.getItem('buzzcaf_studio_theme_tokens') || '{}');
+            for (var k in tokens) document.documentElement.style.setProperty(k, tokens[k]);
+          } else {
+            document.documentElement.setAttribute('data-theme', t);
+          }
         } catch(e) {}
       })();
     </script>

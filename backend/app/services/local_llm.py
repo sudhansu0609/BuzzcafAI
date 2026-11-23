@@ -78,6 +78,17 @@ class LocalLLMService:
         temperature: float = 0.7
     ) -> Dict[str, Any]:
         """Execute OpenAI-compatible chat completion on local LLM endpoint."""
+        from integrations import idle_offload
+
+        # The model this loads is unloaded with the Studio's own once idle.
+        if ":11434" in provider_endpoint:
+            idle_offload.mark_used("ollama")
+        elif ":1234" in provider_endpoint:
+            idle_offload.mark_used("lm_studio")
+        with idle_offload.busy():
+            return self._agent_chat(system_prompt, messages, model_name, provider_endpoint, temperature)
+
+    def _agent_chat(self, system_prompt, messages, model_name, provider_endpoint, temperature) -> Dict[str, Any]:
         endpoint_url = f"{provider_endpoint.rstrip('/')}/chat/completions"
         
         full_messages = [{"role": "system", "content": system_prompt}] + messages

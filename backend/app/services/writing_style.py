@@ -45,12 +45,14 @@ from collections import Counter
 from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Tuple
 
-from core.paths import KNOWLEDGE_DIR
+from core.paths import KNOWLEDGE_DIR, PROMPTS_DIR
 
 logger = logging.getLogger("buzzcaf_ai.writing_style")
 
 STYLE_DIR = os.path.join(str(KNOWLEDGE_DIR), "style")
-CHANNELS = ("Raat3Baje", "Beyond3Baje", "Khayal3Baje", "Life3Baje", "Originals")
+# The creator's story brief per channel (`<Channel>.md`), switched on or off per channel.
+STANDARDS_DIR = os.path.join(str(PROMPTS_DIR), "standards")
+CHANNELS = ("Raat3Baje", "Beyond3Baje", "Khayal3Baje", "Life3Baje", "Originals", "TheTallStoryteller")
 
 #: A draft scoring below this gets one rewrite pass toward the style.
 REVISE_BELOW = 75
@@ -144,6 +146,8 @@ def canonical_channel(brand: str) -> str:
         return "Originals"
     if "beyond" in lower:
         return "Beyond3Baje"
+    if "storyteller" in lower or "tallstoryteller" in lower:
+        return "TheTallStoryteller"
     return re.sub(r"[^A-Za-z0-9]", "", brand or "") or "General"
 
 
@@ -184,6 +188,38 @@ def _dir(channel: str, *parts: str) -> str:
     """A path inside the channel's SELECTED style: everything below -- samples,
     profile, notes, numbers -- reads and writes the style that is in use."""
     return os.path.join(_style_base(channel, active_style(channel)), *parts)
+
+
+#: A channel with nothing of its own yet -- no sample, recording, guide or rules --
+#: writes in another channel's style until it has some (2026-10-24: TheTallStoryteller
+#: had none, so its scripts got no style section, no score and the screenplay layout,
+#: and "not my style" was the result). Config `style_borrow` {channel: from} overrides.
+STYLE_BORROW: Dict[str, str] = {"TheTallStoryteller": "Raat3Baje"}
+
+
+def _has_own_style(channel: str) -> bool:
+    if _read(_dir(channel, "profile.md")).strip() or _read(_dir(channel, "notes.md")).strip():
+        return True
+    return any(_count(_style_base(channel, active_style(channel)), folder) for folder in _STYLE_FOLDERS)
+
+
+def style_source(brand: str) -> str:
+    """The channel whose style a brand writes in: its own, or -- while it has none --
+    the one `STYLE_BORROW` (or config `style_borrow`) names. Reads only: samples,
+    recordings and rules added for the brand still go to its own folder."""
+    channel = canonical_channel(brand)
+    if _has_own_style(channel):
+        return channel
+    borrow = dict(STYLE_BORROW)
+    try:
+        from integrations.llm import load_config
+        borrow.update({str(k): str(v) for k, v in (load_config().get("style_borrow") or {}).items() if v})
+    except Exception:  # noqa: BLE001
+        pass
+    if not borrow.get(channel):
+        return channel
+    source = canonical_channel(borrow[channel])
+    return source if source != channel and _has_own_style(source) else channel
 
 
 def _read(path: str) -> str:
@@ -314,6 +350,42 @@ def set_channel_mode(channel: str, mode: str) -> None:
     state = _root_state(channel)
     state["mode"] = mode
     _write(_root(channel, "state.json"), json.dumps(state, indent=1))
+
+
+# ---------------------------------------------------------- the story standard
+
+def _standard_path(channel: str) -> str:
+    return os.path.join(STANDARDS_DIR, f"{canonical_channel(channel)}.md")
+
+
+def has_standard(channel: str) -> bool:
+    return os.path.isfile(_standard_path(channel))
+
+
+def standard_on(brand: str, project: Any = None) -> bool:
+    """On by default whenever the channel has a standard file; channel-level only."""
+    if not has_standard(brand):
+        return False
+    return bool(_root_state(canonical_channel(brand)).get("story_standard", True))
+
+
+def set_standard(channel: str, on: bool) -> None:
+    state = _root_state(channel)
+    state["story_standard"] = bool(on)
+    _write(_root(channel, "state.json"), json.dumps(state, indent=1))
+
+
+def standard_section(brand: str, project: Any = None) -> str:
+    """The channel's story standard, for every script-writing step; empty when off."""
+    try:
+        if not standard_on(brand, project):
+            return ""
+        with open(_standard_path(brand), "r", encoding="utf-8") as fh:
+            text = re.sub(r"<!--.*?-->", "", fh.read(), flags=re.S).strip()
+        return "\n\n" + text + "\n" if text else ""
+    except Exception as exc:  # noqa: BLE001 - a missing file must not stop a step
+        logger.warning("Writing style: no story standard for %s (%s).", brand, exc)
+        return ""
 
 
 # ------------------------------------------------------------ saved styles
@@ -499,8 +571,12 @@ def stage_share(script: str) -> float:
 # -------------------------------------------------------------- the greeting
 
 def spoken_channel_name(brand: str) -> str:
-    """The channel's name as it is said: "Raat3Baje" -> "Raat 3 Baje"."""
-    return re.sub(r"(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])", " ", canonical_channel(brand))
+    """The channel's name as it is said: "Raat3Baje" -> "Raat 3 Baje",
+    "TheTallStoryteller" -> "The Tall Storyteller" (the letter-digit split plus
+    a camelCase word split, since 2026-10-23 for the first multi-word channel
+    name with no digit in it; no existing channel name has an internal
+    lowercase-to-uppercase transition, so this only ever adds a space here)."""
+    return re.sub(r"(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])|(?<=[a-z])(?=[A-Z])", " ", canonical_channel(brand))
 
 
 def greeting(brand: str) -> str:
@@ -975,7 +1051,7 @@ def ensure_current(brand: str, project: Any = None, llm: Any = None) -> Optional
     try:
         if not uses_my_style(brand, project):
             return None
-        channel = canonical_channel(brand)
+        channel = style_source(brand)
         if not needs_rebuild(channel):
             return None
         with _BUILD_LOCK:
@@ -1016,10 +1092,10 @@ def build_profile(channel: str, llm: Any = None) -> Dict[str, Any]:
                                pairs=_pairs_text(channel, 30), samples="\n\n".join(blocks))
     from core.agent import AgentFactory
     if llm is None:
-        # The precise read is worth the strongest model: Claude (the local
-        # claude-local-api proxy) first, the normal order if it is down.
+        # The persona's tier decides the model (every tier is local since
+        # 2026-10-21); the normal fallback order applies when it is down.
         from integrations.llm import LLMService
-        llm = LLMService(forced_provider="claude")
+        llm = LLMService()
     profile = str(AgentFactory.get_agent("StyleAnalyst", llm).execute(task) or "").strip()
     profile = re.sub(r"^```(?:markdown|md)?\s*|\s*```$", "", profile).strip()
     if "##" not in profile or len(profile) < 300:
@@ -1048,6 +1124,8 @@ def overview(channel: str) -> Dict[str, Any]:
         "built_at": state.get("built_at"),
         "stale": bool(state.get("stale")) or not _read(_dir(channel, "profile.md")),
         "mode": channel_mode(channel),
+        "story_standard": standard_on(channel),
+        "has_standard": has_standard(channel),
         "style": active_style(channel),
         "styles": list_styles(channel),
     }
@@ -1062,7 +1140,7 @@ def save_text(channel: str, which: str, text: str) -> Dict[str, Any]:
 
 # -------------------------------------------------------------- the section
 
-def _targets_text(fp: Dict[str, Any]) -> List[str]:
+def _targets_text(fp: Dict[str, Any], devanagari: bool = False) -> List[str]:
     lines = []
     if fp.get("sentence_avg"):
         lines.append(f"- Sentences: about {fp['sentence_avg']:g} words on average (median {fp['sentence_median']}); "
@@ -1073,7 +1151,10 @@ def _targets_text(fp: Dict[str, Any]) -> List[str]:
     if fp.get("english_share") is not None:
         lines.append(f"- Language: of the Hindi/English everyday words, about {round(100 * fp['english_share'])}% are English.")
     if fp.get("devanagari_share") is not None:
-        lines.append("- Script: " + ("Hindi in Devanagari." if fp["devanagari_share"] > 0.3 else
+        lines.append("- Script: " + ("Hindi in Devanagari (the channel's story standard is on; his samples are in Roman "
+                                     "letters -- take their manner, not their script). His fixed greeting stays in "
+                                     "Roman letters, word for word." if devanagari else
+                                     "Hindi in Devanagari." if fp["devanagari_share"] > 0.3 else
                                      "Hinglish in Roman letters -- no Devanagari." if fp["devanagari_share"] < 0.05 else
                                      "mixed Roman and Devanagari, as in his samples."))
     rates = [(fp.get("ellipsis_per_100"), "'...' pauses"), (fp.get("question_per_100"), "questions"),
@@ -1111,7 +1192,7 @@ def narration_format(brand: str, project: Any = None) -> bool:
     try:
         if not uses_my_style(brand, project):
             return False
-        fp = targets(canonical_channel(brand))
+        fp = targets(style_source(brand))
         return (fp.get("source") == "written" and fp.get("stage_share") is not None
                 and fp["stage_share"] <= NARRATION_STAGE_SHARE)
     except Exception as exc:  # noqa: BLE001
@@ -1183,7 +1264,8 @@ def style_section(brand: str, project: Any = None) -> str:
     try:
         if not uses_my_style(brand, project):
             return ""
-        channel = canonical_channel(brand)
+        own = canonical_channel(brand)
+        channel = style_source(own)
         profile = re.sub(r"<!--.*?-->", "", _read(_dir(channel, "profile.md")), flags=re.S).strip()
         notes = _read(_dir(channel, "notes.md")).strip()
         written = _samples_text(channel, "written")
@@ -1197,7 +1279,7 @@ def style_section(brand: str, project: Any = None) -> str:
             # sentences). Until it is rebuilt, his own words are quoted instead.
             profile = ""
         fp = targets(channel)
-        show = spoken_channel_name(channel)
+        show = spoken_channel_name(own)
         parts = [
             "### The Creator's Own Writing Style -- write the way he writes",
             f"Everything below is learned from the creator's own writing and recordings for {channel}. "
@@ -1206,20 +1288,23 @@ def style_section(brand: str, project: Any = None) -> str:
             "sign-off -- are used word for word. Everything else is manner only: never reuse a story line, "
             "time, place, character, object or image from his quoted examples; write this story's own.",
             "#### His greeting (fixed -- the first words of every full video, word for word, ONCE)\n"
-            f"> {greeting(channel)}\n"
+            f"> {greeting(own)}\n"
             f"The host is {CREATOR_NAME} and the show is {show}. An example of his may carry another host's or "
             "show's name: never write that name, and never reword this greeting. It is said once, at the very "
             "start of the video, and never again: no second greeting, no re-introduction of the host, the show or "
             "the story, and no subscribe request inside the story. A section or part that is not the opening "
             "begins inside the story, with no greeting at all.",
         ]
+        if channel != own:
+            parts.insert(1, f"{own} has no samples of his own yet, so this is his style from {channel}: "
+                            f"keep his manner, but write {own}'s own kind of story, not a {channel} episode.")
         if notes:
             parts.append(f"#### His own rules (follow exactly)\n{notes}")
         narration = (fp.get("source") == "written" and fp.get("stage_share") is not None
                      and fp["stage_share"] <= NARRATION_STAGE_SHARE)
         if narration:
             parts.append(_format_text(fp))
-        target_lines = _targets_text(fp)
+        target_lines = _targets_text(fp, devanagari=standard_on(own, project))
         if target_lines:
             parts.append("#### Measured from his writing -- land close to these\n" + "\n".join(target_lines))
         # Raw transcripts carry misheard words ("hila doshton"); once the
@@ -1265,7 +1350,7 @@ def check(text: str, brand: str, originality: bool = True) -> Optional[Dict[str,
     change, in plain words. None when there is nothing to compare with.
     `originality` also marks down lines copied from his samples (off only
     when measuring one of his own samples against itself)."""
-    channel = canonical_channel(brand)
+    channel = style_source(brand)
     fp = targets(channel)
     if not fp.get("words"):
         return None
@@ -1274,6 +1359,9 @@ def check(text: str, brand: str, originality: bool = True) -> Optional[Dict[str,
         return None
     parts: List[Tuple[float, float]] = []
     fixes: List[str] = []
+    # The story standard is written in Devanagari: the Roman word lists
+    # (English share, address, first person, phrases) do not apply to it.
+    standard = standard_on(brand)
 
     def add(weight: float, score: float, fix: Optional[str]) -> None:
         parts.append((weight, max(0.0, min(1.0, score))))
@@ -1290,17 +1378,18 @@ def check(text: str, brand: str, originality: bool = True) -> Optional[Dict[str,
         d = got["short_share"] - fp["short_share"]
         add(1.0, 1 - abs(d) / 0.3, f"{round(100 * got['short_share'])}% short sentences (6 words or fewer); "
                                    f"his is {round(100 * fp['short_share'])}%.")
-    if fp.get("english_share") is not None and got.get("english_share") is not None:
+    if not standard and fp.get("english_share") is not None and got.get("english_share") is not None:
         d = got["english_share"] - fp["english_share"]
         add(2.0, 1 - abs(d) / 0.25,
             f"About {round(100 * got['english_share'])}% English in the Hindi/English mix; his is "
             f"{round(100 * fp['english_share'])}%. " + ("Say more of it in everyday Hindi words, as he does."
                                                         if d > 0 else "He uses more everyday English words than this."))
     if fp.get("devanagari_share") is not None:
-        want_dev = fp["devanagari_share"] > 0.3
+        want_dev = standard or fp["devanagari_share"] > 0.3
         has_dev = got.get("devanagari_share", 0) > (0.3 if want_dev else 0.05)
         ok = has_dev == want_dev
         add(2.0, 1.0 if ok else 0.0, None if ok else (
+            "The story standard asks for Devanagari." if standard else
             "He writes Hindi in Devanagari." if want_dev else "He writes Hinglish in Roman letters: no Devanagari."))
     for key, weight, label in (("ellipsis_per_100", 0.5, "'...' pauses"), ("question_per_100", 0.5, "questions"),
                                ("exclaim_per_100", 0.3, "exclamations")):
@@ -1308,7 +1397,7 @@ def check(text: str, brand: str, originality: bool = True) -> Optional[Dict[str,
             want, have = fp[key], got[key]
             add(weight, 1 - abs(have - want) / max(6.0, want),
                 f"{have:g} {label} per 100 sentences; his is {want:g}.")
-    if fp.get("address_per_1000"):
+    if fp.get("address_per_1000") and not standard:
         want, have = fp["address_per_1000"], got.get("address_per_1000", 0)
         if want >= 2:
             add(1.0, min(1.0, have / (0.5 * want)) if have < want else 1 - min(1.0, (have - want) / (2 * want)),
@@ -1329,12 +1418,12 @@ def check(text: str, brand: str, originality: bool = True) -> Optional[Dict[str,
                 add(1.0, _closeness_ratio(have, want),
                     f"Paragraphs run about {have:g} sentences; his run about {want:g}. Write full paragraphs, "
                     "not one line at a time.")
-    if written and (fp.get("first_person_per_1000") or 0) >= FIRST_PERSON_PER_1000:
+    if written and not standard and (fp.get("first_person_per_1000") or 0) >= FIRST_PERSON_PER_1000:
         want, have = fp["first_person_per_1000"], got.get("first_person_per_1000", 0)
         add(1.5, min(1.0, have / (0.5 * want)),
             f"First-person words ('main', 'maine', 'mujhe', 'mere') {have:g} per 1000; his is {want:g}. He tells "
             "the story as the person it happened to: 'main', never 'woh' seen from outside.")
-    phrases = fp.get("phrases") or []
+    phrases = [] if standard else (fp.get("phrases") or [])
     if len(phrases) >= 3:
         low = " ".join(_WORD_RE.findall(text.lower()))
         used = [p for p in phrases if p in low]
@@ -1396,3 +1485,116 @@ def revise_task(brand: str, script: str, result: Dict[str, Any], project: Any = 
     return style_section(brand, project) + "\n\n" + REVISE_TASK.format(
         channel=canonical_channel(brand), fixes=fixes, script=script,
         keep=_KEEP_NARRATION if narration_format(brand, project) else _KEEP_CUES)
+
+
+# --------------------------------------------------- machine-writing tells
+
+#: "X, Y aur Z": a list of exactly three short items (one or two words each).
+_TRIAD_ITEM = r"[^\s,.;:!?()\[\]\"]+(?: [^\s,.;:!?()\[\]\"]+)?"
+_TRIAD_RE = re.compile(
+    rf"(?<![\w,])({_TRIAD_ITEM}), ({_TRIAD_ITEM}),? (?:aur|and|or|ya|tatha|और|या|तथा) ([^\s,.;:!?()\[\]\"]+)",
+    re.IGNORECASE)
+_CONTRAST_RES = (
+    re.compile(r"\bnot (?:just |only |merely |simply )?[^.!?\n,]{1,40},? but\b", re.IGNORECASE),
+    re.compile(r"\b(?:sirf|keval|kewal)\b[^.!?\n]{1,60}?\bnahi+n?\b(?:\s+(?:hai|hain|tha|thi|the|ho))?,?\s*"
+               r"(?:balki|bulki|balke)\b", re.IGNORECASE),
+    re.compile(r"(?:सिर्फ|केवल)[^.!?।\n]{1,60}?नहीं(?:\s+(?:है|हैं|था|थी|थे))?,?\s*बल्कि"),
+)
+_TRANSITION_RES = (
+    re.compile(r"\b(?:moreover|furthermore|additionally|ultimately|nevertheless|in conclusion|in summary|"
+               r"to sum up|on the other hand|all in all)\b", re.IGNORECASE),
+    re.compile(r"\bek taraf\b[^.!?\n]{0,200}?\b(?:doosri|dusri|duusri) taraf\b", re.IGNORECASE),
+    re.compile(r"एक तरफ[^।.!?\n]{0,200}?दूसरी तरफ"),
+    re.compile(r"\b(?:antatah|nishkarsh)\b|अंततः|निष्कर्ष", re.IGNORECASE),
+)
+_TAIL_RES = (
+    re.compile(r",\s*which means\b|\bthis means that\b|\bwhich is to say\b", re.IGNORECASE),
+    re.compile(r"\bya{1,2}ni\b(?: k[ie]\b)?|\bjiska matlab (?:hai|tha)\b|यानी|यानि|जिसका मतलब", re.IGNORECASE),
+)
+_HEDGE_RES = (
+    re.compile(r"\bit(?: is|'s) (?:important|worth|interesting) to (?:note|mention|remember)\b|"
+               r"\bit is worth noting\b|\bit should be noted\b|\bneedless to say\b|\barguably\b|"
+               r"\bin many ways\b", re.IGNORECASE),
+    re.compile(r"\bdhyan dene yogya\b|\bgaur karne (?:wali|waali) baat\b|\bkehna galat nahi(?:n)? hoga\b|"
+               r"\byeh kehna (?:uchit|sahi) hoga\b", re.IGNORECASE),
+    re.compile(r"यह ध्यान देने योग्य है|ध्यान देने योग्य|गौर करने वाली बात|कहना गलत नहीं होगा"),
+)
+_MORAL_RES = (
+    re.compile(r"\b(?:ye|yeh|is|iss) kahani (?:humein|hume|hamein|hame|hum(?:e|ein)?) "
+               r"(?:sikhati|sikhaati|batati|batlati) hai\b|\bis kahani se (?:humein|hume|hamein) [^.!?\n]{0,40}"
+               r"(?:seekh|sikh|sabak)|\bthe moral of\b|\bthis story teaches\b|\bthe lesson (?:here )?is\b",
+               re.IGNORECASE),
+    re.compile(r"यह कहानी (?:हमें )?सिखाती है|इस कहानी से (?:हमें )?(?:सीख|सबक)"),
+)
+_EM_DASH_RE = re.compile(r"—|–| -- ")
+_CONTRACTION_RE = re.compile(r"\b\w+(?:n't|'s|'re|'ll|'m|'ve|'d)\b", re.IGNORECASE)
+_ENGLISH_FUNCTION_WORDS = frozenset("the is was are were of to and that it this with for".split())
+
+#: Each tell's weight in the 0-100 score, and the rate per 1,000 words at
+#: which it counts in full (a rate of 0 means "present or not").
+_TELL_WEIGHTS = {
+    "triad": (15, 6.0), "contrast": (10, 3.0), "stock_transition": (10, 4.0),
+    "over_explaining": (10, 4.0), "uniform_length": (15, 0), "no_fragments": (10, 0),
+    "no_contractions": (5, 0), "hedge": (10, 2.0), "em_dash": (5, 8.0), "closing_moral": (10, 0),
+}
+
+
+def _tell_matches(text: str, patterns) -> List[str]:
+    found: List[str] = []
+    for pattern in patterns:
+        found.extend(m.group(0).strip() for m in pattern.finditer(text))
+    return found
+
+
+def ai_tells(text: str) -> Dict[str, Any]:
+    """How much a script reads like a machine wrote it, measured with regexes
+    and simple statistics: 0 = reads human, 100 = machine. Rates are per 1,000
+    spoken words. `tells` lists each tell that fired: {kind, count, examples}."""
+    spoken = narration_text(text or "")
+    words = _WORD_RE.findall(spoken)
+    n_words = len(words)
+    if not n_words:
+        return {"score": 0, "tells": []}
+    per_k = 1000.0 / max(n_words, 100)        # a short text is not judged on one hit
+    found: Dict[str, Tuple[int, List[str], float]] = {}  # kind -> (count, examples, strength 0-1)
+
+    def rate_tell(kind: str, hits: List[str]) -> None:
+        if not hits:
+            return
+        _, full = _TELL_WEIGHTS[kind]
+        strength = min(1.0, len(hits) * per_k / full) if full else 1.0
+        found[kind] = (len(hits), hits[:3], strength)
+
+    triads = []
+    for m in _TRIAD_RE.finditer(spoken):
+        before = spoken[:m.start()].rstrip()
+        if not before.endswith(","):          # exactly three, not the tail of a longer list
+            triads.append(m.group(0))
+    rate_tell("triad", triads)
+    rate_tell("contrast", _tell_matches(spoken, _CONTRAST_RES))
+    rate_tell("stock_transition", _tell_matches(spoken, _TRANSITION_RES))
+    rate_tell("over_explaining", _tell_matches(spoken, _TAIL_RES))
+    rate_tell("hedge", _tell_matches(spoken, _HEDGE_RES))
+    rate_tell("em_dash", [m.group(0) for m in _EM_DASH_RE.finditer(spoken)])
+    rate_tell("closing_moral", _tell_matches(spoken, _MORAL_RES))
+
+    sentences = [s for s in _sentences(spoken)]
+    if len(sentences) >= 5:
+        lengths = [len(s) for s in sentences]
+        mean = sum(lengths) / len(lengths)
+        cv = math.sqrt(sum((x - mean) ** 2 for x in lengths) / len(lengths)) / mean if mean else 0.0
+        if cv < 0.5:
+            strength = 1.0 if cv < 0.35 else (0.5 - cv) / 0.15
+            found["uniform_length"] = (len(sentences), [f"sentence length varies little (cv {cv:.2f})"]
+                                       + [" ".join(s) for s in sentences[:2]], strength)
+        if not any(x < 4 for x in lengths):
+            found["no_fragments"] = (len(sentences), [f"0 of {len(sentences)} sentences under 4 words"], 1.0)
+    lowered = [w.lower() for w in words]
+    english = sum(1 for w in lowered if w in _ENGLISH_FUNCTION_WORDS)
+    if n_words >= 80 and english / n_words > 0.15 and not _CONTRACTION_RE.search(spoken):
+        found["no_contractions"] = (0, ["English sentences without a single contraction"], 1.0)
+
+    score = sum(_TELL_WEIGHTS[kind][0] * strength for kind, (_, _, strength) in found.items())
+    tells = [{"kind": kind, "count": count, "examples": examples}
+             for kind, (count, examples, _) in found.items()]
+    return {"score": int(round(min(100.0, score))), "tells": tells}

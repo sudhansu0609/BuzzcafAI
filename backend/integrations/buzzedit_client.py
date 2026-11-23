@@ -2,7 +2,8 @@
 Talk to BuzzEdit, the ComfyUI-backed auto-editor that turns a recording plus
 an annotated script into a rendered video.
 
-BuzzcafAI and BuzzEdit are sibling desktop apps that both prefer port 8099 --
+BuzzcafAI prefers port 8099 and BuzzEdit prefers port 8100, but either can
+land on the other's port --
 `discover()` is how one finds the other without ever hardcoding a port (see
 `integrations/buzzcaf_ports.py`; rule 4 there, the health-body identity check,
 is what tells the two apart on a collision). This client is the
@@ -33,8 +34,12 @@ TRANSCRIBE_FIRST_WAIT_SECONDS = 20 * 60
 TRANSCRIBE_STALL_SECONDS = 2 * 60 * 60
 #: The outer ceiling on one transcription, however long the recording.
 TRANSCRIBE_MAX_SECONDS = 8 * 60 * 60
-#: How long a poll may go unanswered before BuzzEdit counts as gone.
-UNREACHABLE_GRACE_SECONDS = 3 * 60
+#: How long polls may be *refused* (no process on the port) before BuzzEdit
+#: counts as gone. A read timeout is not this: a busy BuzzEdit still accepts
+#: the connection, and a wait never ends on timeouts alone (see
+#: `wait_for_transcription`). Long enough for a BuzzEdit that crashed and is
+#: being relaunched by the keep-alive to come back on its own.
+UNREACHABLE_GRACE_SECONDS = 10 * 60
 #: An audio job (a voice conversion) whose progress and message have not
 #: changed for this long is stuck. There is no ceiling on the work itself.
 AUDIO_JOB_STALL_SECONDS = 30 * 60
@@ -66,6 +71,28 @@ class BuzzEditJobFailed(RuntimeError):
 _sticky_lock = threading.Lock()
 _sticky_url: Optional[str] = None
 
+#: When BuzzEdit last answered any request at all (`time.monotonic()`), or
+#: None before the first answer. The watchdogs read it: a BuzzEdit that
+#: answered a minute ago and times out now is busy, not hung.
+_last_answer_at: Optional[float] = None
+
+
+def _answered() -> None:
+    global _last_answer_at
+    _last_answer_at = time.monotonic()
+
+
+def seconds_since_answer() -> Optional[float]:
+    """How long since BuzzEdit last answered the Studio, or None if it never has
+    in this process."""
+    return None if _last_answer_at is None else time.monotonic() - _last_answer_at
+
+
+def answered_within(seconds: float) -> bool:
+    since = seconds_since_answer()
+    return since is not None and since <= seconds
+
+
 #: BuzzEdit's scheduler takes pending jobs by priority (urgent, normal, low),
 #: then age. A Studio production goes ahead of anything queued from
 #: BuzzEdit's own UI; a job already rendering is never pre-empted.
@@ -86,7 +113,7 @@ def _discover() -> Optional[str]:
     from core.config import config_manager
 
     env_url = os.environ.get("BUZZEDIT_URL") or config_manager.get("BUZZEDIT_URL")
-    return buzzcaf_ports.discover("buzzedit", 8099, health_path="/api/health", env_url=env_url)
+    return buzzcaf_ports.discover("buzzedit", 8100, health_path="/api/health", env_url=env_url)
 
 
 def base_url() -> Optional[str]:
@@ -143,7 +170,9 @@ class BuzzEditClient:
     def _send(self, method: str, path: str, timeout: Optional[Tuple[int, int]], **kwargs: Any) -> requests.Response:
         base = self._base()
         try:
-            return requests.request(method, f"{base}{path}", timeout=timeout or self.timeout, **kwargs)
+            resp = requests.request(method, f"{base}{path}", timeout=timeout or self.timeout, **kwargs)
+            _answered()
+            return resp
         except requests.ReadTimeout as exc:
             # Connected and sent, no answer in time: BuzzEdit is busy, not gone.
             raise BuzzEditTimeout(f"BuzzEdit did not answer {method} {path}: {exc}") from exc
@@ -230,6 +259,27 @@ class BuzzEditClient:
         that clip is already being corrected)."""
         resp = self._post(f"/api/eyecontact/projects/{project_id}/media/{media_id}", setup, timeout=(5, 30))
         resp.raise_for_status()
+        return resp.json()["job_id"]
+
+    def start_eye_contact_analyse(self, project_id: str, media_id: str, setup: Dict[str, Any]) -> str:
+        """`POST /api/eyecontact/projects/{id}/media/{mid}/analyse`: track the whole recording
+        and plan it without rendering. Followed with `eye_contact_status`; the result is
+        the measured numbers (where the prompter is, how much looks into the lens, how far
+        the eyes move) and the landmark cache every preview and the full run reuse."""
+        resp = self._post(f"/api/eyecontact/projects/{project_id}/media/{media_id}/analyse", setup, timeout=(5, 30))
+        if resp.status_code >= 400:
+            raise BuzzEditJobFailed(f"BuzzEdit could not analyse the recording: {_detail(resp) or resp.status_code}")
+        return resp.json()["job_id"]
+
+    def start_eye_contact_preview(self, project_id: str, media_id: str, setup: Dict[str, Any],
+                                  start_s: float, duration_s: float) -> str:
+        """`POST .../preview`: correct `duration_s` seconds from `start_s` into a before/after
+        pair in BuzzEdit's preview cache. The finished job's result carries `before_path`
+        and `after_path`."""
+        body = {**setup, "start_s": float(start_s), "duration_s": float(duration_s)}
+        resp = self._post(f"/api/eyecontact/projects/{project_id}/media/{media_id}/preview", body, timeout=(5, 30))
+        if resp.status_code >= 400:
+            raise BuzzEditJobFailed(f"BuzzEdit could not start the preview: {_detail(resp) or resp.status_code}")
         return resp.json()["job_id"]
 
     def eye_contact_status(self, job_id: str) -> Dict[str, Any]:
@@ -412,6 +462,18 @@ class BuzzEditClient:
             try:
                 job = self.transcription_status(project_id)
                 unreachable_since = None
+            except BuzzEditTimeout as exc:
+                # Connected, no answer in time: BuzzEdit is busy (ffmpeg, the
+                # planner, a save), not gone. That never counts towards the
+                # unreachable grace -- only the stall and the ceiling end a
+                # wait on a BuzzEdit that still accepts connections.
+                logger.info("BuzzEdit is busy (%s); still following the transcription of %s.", exc, project_id)
+                if time.monotonic() - last_change > stall_seconds:
+                    raise BuzzEditJobFailed(
+                        f"BuzzEdit has not answered about the transcription of {project_id} for "
+                        f"{int(stall_seconds // 60)} minutes.") from exc
+                time.sleep(poll_seconds)
+                continue
             except BuzzEditUnavailable as exc:
                 now = time.monotonic()
                 unreachable_since = unreachable_since or now
@@ -498,6 +560,17 @@ class BuzzEditClient:
         exists yet, else stores the text un-aligned."""
         resp = self._put(f"/api/projects/{project_id}/script", {"text": text}, timeout=(5, 60))
         resp.raise_for_status()
+        return resp.json()
+
+    def cut_program(self, project_id: str, start_frame: int, end_frame: int) -> Dict[str, Any]:
+        """`POST /api/timeline/{id}/program/cut`: delete a span of the edited
+        programme on every track (programme frames). It is kept as a manual
+        cut, so a later re-cut of the words does not bring it back -- how the
+        Shorts recorded before a long video are taken off it."""
+        resp = self._post(f"/api/timeline/{project_id}/program/cut",
+                          {"start_frame": int(start_frame), "end_frame": int(end_frame)}, timeout=(5, 120))
+        if resp.status_code >= 400:
+            raise RuntimeError(f"BuzzEdit could not cut the programme: {_detail(resp)}")
         return resp.json()
 
     def get_script(self, project_id: str) -> Dict[str, Any]:
@@ -824,6 +897,35 @@ class BuzzEditClient:
         return resp.json()
 
 
+    # ----------------------------------------------------------- motion gallery
+    #
+    # The Motion Gallery (docs/MOTION_GRAPHICS_PLAN.md M11): every registered
+    # motion composition rendered with sample props into a dated, browsable
+    # folder (BuzzEdit's routes/motion_gallery.py).
+
+    def start_motion_gallery(self, themes: Optional[List[str]] = None,
+                             width: Optional[int] = None, height: Optional[int] = None) -> Dict[str, Any]:
+        """`POST /api/motion/gallery`. Raises `RuntimeError` with BuzzEdit's
+        own detail on a non-2xx answer (409 while a production render is
+        running, 503 if the motion engine cannot be listed)."""
+        body: Dict[str, Any] = {}
+        if themes:
+            body["themes"] = themes
+        if width:
+            body["width"] = int(width)
+        if height:
+            body["height"] = int(height)
+        resp = self._post("/api/motion/gallery", body, timeout=(5, 30))
+        if resp.status_code >= 400:
+            raise RuntimeError(f"BuzzEdit could not start the motion gallery: {_detail(resp) or resp.status_code}")
+        return resp.json()
+
+    def motion_gallery_status(self) -> Dict[str, Any]:
+        """`GET /api/motion/gallery` -> `{state, folder, count, errors, ...}`."""
+        resp = self._get("/api/motion/gallery", timeout=(5, 15))
+        resp.raise_for_status()
+        return resp.json()
+
     def get_report(self, project_id: str) -> Optional[Dict[str, Any]]:
         """`GET /api/presentation/{id}/report`, None on a 404 (no render yet)."""
         resp = self._get(f"/api/presentation/{project_id}/report")
@@ -839,6 +941,114 @@ class BuzzEditClient:
             return None
         resp.raise_for_status()
         return resp.json()
+
+    # --------------------------------------------------------------- vibe reels
+    #
+    # BuzzEdit's recording-less vibe-reel renderer (REELS_DESK_PLAN.md §6, VR1):
+    # a plain portrait render from a shot list and couplet cards, no take, no
+    # presentation planner. `vibe_reel` starts the job; `vibe_reel_job` follows
+    # it -- `auto_story.make_mood_reel` polls it with no fixed ceiling, the way
+    # a narration job is followed.
+
+    def vibe_reel(self, body: Dict[str, Any], wait_s: float = 5400.0) -> Dict[str, Any]:
+        """`POST /api/reels/vibe` -> `{job_id}`. BuzzEdit renders one reel at a time and
+        answers 409 while another is rendering: wait for it (up to `wait_s`) instead of
+        failing the reel (2026-10-23: the storm reel arrived while moonlight still ran)."""
+        deadline = time.monotonic() + wait_s
+        resp = self._post("/api/reels/vibe", body, timeout=(10, 60))
+        while resp.status_code == 409 and time.monotonic() < deadline:
+            time.sleep(30)
+            resp = self._post("/api/reels/vibe", body, timeout=(10, 60))
+        if resp.status_code >= 400:
+            raise RuntimeError(f"BuzzEdit could not start the vibe reel: {_detail(resp) or resp.status_code}")
+        return resp.json()
+
+    def vibe_reel_busy(self) -> bool:
+        """`GET /api/reels/busy`: whether BuzzEdit is rendering a reel. A slow answer counts
+        as busy: BuzzEdit answers late exactly when ComfyUI owns the GPU, and reading a
+        timeout as "free" let an LLM load mid-clip (Fable review, 2026-10-24). A refused
+        connection (BuzzEdit not running) or an old BuzzEdit without the route is free."""
+        import requests as _rq
+        try:
+            resp = self._get("/api/reels/busy", timeout=(5, 30))
+            return resp.status_code == 200 and bool(resp.json().get("busy"))
+        except _rq.exceptions.Timeout:
+            return True
+        except Exception:  # noqa: BLE001 - not running / no route: nothing of its to protect
+            return False
+
+    def vibe_reel_job(self, job_id: str) -> Dict[str, Any]:
+        """`GET /api/reels/jobs/{id}` -> `{state, progress, message, result, error}`."""
+        resp = self._get(f"/api/reels/jobs/{job_id}", timeout=(5, 30))
+        if resp.status_code >= 400:
+            raise RuntimeError(f"BuzzEdit vibe reel job {job_id}: {resp.status_code} {resp.text[:300]}")
+        return resp.json()
+
+    def narration_busy(self) -> bool:
+        """`GET /api/narration/busy`: whether BuzzEdit is synthesising narration right
+        now -- same shape and the same "unsure/slow means busy" rule as `vibe_reel_busy`
+        (STUDIO_DIRECTOR_PLAN.md enhancement 2/5): a narration holds the GPU just as a
+        reel render does. A refused connection or an old BuzzEdit without the route is free."""
+        import requests as _rq
+        try:
+            resp = self._get("/api/narration/busy", timeout=(5, 30))
+            return resp.status_code == 200 and bool(resp.json().get("busy"))
+        except _rq.exceptions.Timeout:
+            return True
+        except Exception:  # noqa: BLE001 - not running / no route: nothing of its to protect
+            return False
+
+    # ------------------------------------------------------- supervisor (watchdog)
+
+    def set_supervisor_parent(self, pid: int) -> Optional[Dict[str, Any]]:
+        """`POST /api/supervisor/parent {pid}` (STUDIO_DIRECTOR_PLAN.md enhancement 4):
+        tell a headless BuzzEdit we adopted (it was already running on its port, so we
+        did not spawn it) to watch *our* pid instead of the one that started it. None
+        when BuzzEdit did not answer (an older BuzzEdit without the route) -- the
+        Electron watchdog then keeps following its original parent."""
+        try:
+            resp = self._post("/api/supervisor/parent", {"pid": int(pid)}, timeout=(5, 15))
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as exc:  # noqa: BLE001 - best effort, like the master pause mirror
+            logger.info("BuzzEdit supervisor re-parent not applied (%s).", exc)
+            return None
+
+    # -------------------------------------------------------- master pause
+    #
+    # The master pause/resume (docs/STUDIO_DIRECTOR_PLAN.md Part 1): BuzzEdit
+    # mirrors the Studio's own `/api/master/*` so one switch holds both apps.
+
+    def master_pause(self, mode: str = "soft", reason: str = "", by: str = "") -> Optional[Dict[str, Any]]:
+        """`POST /api/master/pause {mode, reason, by}`. None when BuzzEdit did
+        not answer -- the Studio's own pause still applies."""
+        try:
+            resp = self._post("/api/master/pause", {"mode": mode, "reason": reason, "by": by}, timeout=(5, 30))
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as exc:  # noqa: BLE001 - BuzzEdit down is not a reason to fail the pause
+            logger.info("BuzzEdit master pause not applied (%s).", exc)
+            return None
+
+    def master_resume(self) -> Optional[Dict[str, Any]]:
+        """`POST /api/master/resume`. None when BuzzEdit did not answer."""
+        try:
+            resp = self._post("/api/master/resume", {}, timeout=(5, 30))
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as exc:  # noqa: BLE001
+            logger.info("BuzzEdit master resume not applied (%s).", exc)
+            return None
+
+    def master_state(self) -> Optional[Dict[str, Any]]:
+        """`GET /api/master/state`, or None when BuzzEdit did not answer."""
+        try:
+            resp = self._get("/api/master/state", timeout=(5, 15))
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as exc:  # noqa: BLE001
+            logger.debug("BuzzEdit master state read failed (%s).", exc)
+            return None
 
     # ------------------------------------------------------------ sfx library
     #

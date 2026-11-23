@@ -1,0 +1,4 @@
+# Dheere Dheere Badhti Tamanna ⏳
+> Transcribed from the recording (speech-to-text: spelling is approximate, punctuation missing where he improvised).
+
+doston raat ke do bach rahe hain abhi kuch animation aur kuch aur kaam karke main utha hoon kahu.n aur uthane ke bad kuch chize dimag mein rahi thi aur hans raj rahabar sahab ki ye kuch khubasurat laine un sab ke liye jo apne manjal ke taraph bar rahe hain dheere lekin sade hue kadamon se bar rahe hain badhata hai tamanna aadmi ahishtha gujhar jati hai sari jindagi ahishtha ajal se silasala aisa hai ki gunche phul banate hain chatakati hai chaman ki had kali ahishtha bahare jindagani par khacha chupachap aati hai hamein mahasus hoti hai kami ahishta saphar mein bijaliya hai andhiya hai aur tupha hai gujar jata hai unase aadmi ahishta saphar lanba hai par har ek kadam hamein apne manjal ki or leke ja raha hai to ye sab unke liye jo dhir apne kadam aage baraha raha hain aur aise aage barate rahen

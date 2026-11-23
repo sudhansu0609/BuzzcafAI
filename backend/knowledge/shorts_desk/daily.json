@@ -1,52 +1,651 @@
 {
- "last_run": "2026-10-01",
- "ran_at": "2026-10-01T03:09:03",
+ "last_run": "2026-11-01",
+ "ran_at": "2026-11-01T03:31:05",
  "built": [
   {
    "channel": "Life3Baje",
-   "format": "poem",
-   "project_id": "2026-10-01_Life3Baje_ShortDheereDheereBadhtiTamanna",
-   "title": "Dheere Dheere Badhti Tamanna ⏳",
-   "score": 75
+   "format": "shayari",
+   "project_id": "2026-11-01_Life3Baje_ShortApniKaamiyonSeLadnaSeekho",
+   "title": "Apni Kamiyon Se Ladna Seekho 🎻",
+   "score": 82
   },
   {
    "channel": "Life3Baje",
-   "format": "poem",
-   "project_id": "2026-10-01_Life3Baje_ShortAsliBrandVsFakeMarketing",
-   "title": "Asli Brand vs Fake Marketing 🎭",
-   "score": 72
-  },
-  {
-   "channel": "Raat3Baje",
-   "format": "ghost_story",
-   "project_id": "2026-10-01_Raat3Baje_ShortGuligaAggressiveSpirit",
-   "title": "Guliga: Ek Khatarnak Shaitaan 🔥",
-   "score": 85
-  },
-  {
-   "channel": "Raat3Baje",
-   "format": "ghost_story",
-   "project_id": "2026-10-01_Raat3Baje_ShortShraapWalaGaonTimeStop",
-   "title": "Shraap Wala Gaon: Jahan Waqt Ruk Gaya ⏳",
-   "score": 75
-  },
-  {
-   "channel": "Beyond3Baje",
-   "format": "urban_legend",
-   "project_id": "2026-10-01_Beyond3Baje_ShortWestVirginiaMothmanMystery",
-   "title": "West Virginia ka Khauf: The Mothman 👁️",
+   "format": "shayari",
+   "project_id": "2026-11-01_Life3Baje_ShortKhayaleTaamirNayiShuruat",
+   "title": "Khayale-Taamir: Nayi Shuruat 🏗️",
    "score": 78
   },
   {
+   "channel": "Raat3Baje",
+   "format": "folklore_entity",
+   "project_id": "2026-11-01_Raat3Baje_ShortKeralaKaKhaufnakShaitanChaathan",
+   "title": "Kerala Ka Khaufnak Shaitan: Chaathan Ka Sach",
+   "score": 74
+  },
+  {
    "channel": "Beyond3Baje",
-   "format": "urban_legend",
-   "project_id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
-   "title": "Urban Legends: Sach ya Sirf Kahani? 🎭",
-   "score": 65
+   "format": "encounter",
+   "project_id": "2026-11-01_Beyond3Baje_ShortTravisWaltonArizonaAlienAbduction",
+   "title": "Travis Walton: Arizona ka Alien Abduction",
+   "score": 76
+  },
+  {
+   "channel": "TheTallStoryteller",
+   "format": "crime",
+   "project_id": "2026-11-01_TheTallStoryteller_Short8CroreLootAurSurrender",
+   "title": "8 Crore Loot Aur Surrender Ka Twist",
+   "score": 72
+  },
+  {
+   "channel": "TheTallStoryteller",
+   "format": "crime",
+   "project_id": "2026-11-01_TheTallStoryteller_ShortJewelThiefKaAakhiriTrap",
+   "title": "Jewel Thief Ka Aakhiri Trap",
+   "score": 70
   }
  ],
  "skipped": [],
  "history": [
+  {
+   "ran_at": "2026-11-01T03:31:05",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-11-01_Life3Baje_ShortApniKaamiyonSeLadnaSeekho",
+     "title": "Apni Kamiyon Se Ladna Seekho 🎻",
+     "score": 82
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-11-01_Life3Baje_ShortKhayaleTaamirNayiShuruat",
+     "title": "Khayale-Taamir: Nayi Shuruat 🏗️",
+     "score": 78
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-11-01_Raat3Baje_ShortKeralaKaKhaufnakShaitanChaathan",
+     "title": "Kerala Ka Khaufnak Shaitan: Chaathan Ka Sach",
+     "score": 74
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-11-01_Beyond3Baje_ShortTravisWaltonArizonaAlienAbduction",
+     "title": "Travis Walton: Arizona ka Alien Abduction",
+     "score": 76
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "crime",
+     "project_id": "2026-11-01_TheTallStoryteller_Short8CroreLootAurSurrender",
+     "title": "8 Crore Loot Aur Surrender Ka Twist",
+     "score": 72
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "crime",
+     "project_id": "2026-11-01_TheTallStoryteller_ShortJewelThiefKaAakhiriTrap",
+     "title": "Jewel Thief Ka Aakhiri Trap",
+     "score": 70
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-31T10:35:06",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-31_Life3Baje_ShortJabSaariRaaeinKhuliHon",
+     "title": "Jab Saari Raahein Khuli Hon",
+     "score": 84
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-31_Life3Baje_ShortKuchBaateinJoKarniThi",
+     "title": "Kuch Baatein Jo Karni Thi",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-31_Raat3Baje_ShortMumbaiParkKiWohMahila",
+     "title": "Mumbai Park Ki Woh Mahila",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-31_Raat3Baje_Short600BaccheEkSaathKyunBhage",
+     "title": "600 Bacche Ek Saath Kyun Bhage?",
+     "score": 65
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "entity",
+     "project_id": "2026-10-31_Beyond3Baje_ShortCanadaKeJungleMeinWingedBeings",
+     "title": "Canada ke Jungle mein Winged Beings?",
+     "score": 82
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "comedy",
+     "project_id": "2026-10-31_TheTallStoryteller_ShortShaadiKiDrunkChachi",
+     "title": "Shaadi ki Drunk Chachi 🍻",
+     "score": 85
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "comedy",
+     "project_id": "2026-10-31_TheTallStoryteller_ShortCakeCuttingKaMahaYudh",
+     "title": "Cake Cutting ka Maha-Yudh! 🎂",
+     "score": 80
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-30T03:10:16",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-30_Life3Baje_ShortJabLifeBoringLage",
+     "title": "Jab Life Boring Lage: Ek Sachi Baat",
+     "score": 78
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-30_Life3Baje_ShortNayeSafarKiKhushbu",
+     "title": "Naye Safar Ki Khushbu",
+     "score": 60
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "tantra",
+     "project_id": "2026-10-30_Raat3Baje_ShortShamshanMautKaDarwaza",
+     "title": "Shamshan: Maut Ka Ek Khaufnaak Darwaza",
+     "score": 80
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "tantra",
+     "project_id": "2026-10-30_Raat3Baje_ShortShamshanVidyaKaKhaufnaakSach",
+     "title": "Shamshan Vidya ka Khaufnaak Sach",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "anomaly_file",
+     "project_id": "2026-10-30_Beyond3Baje_ShortPentagonKiSecretFilesUapReality",
+     "title": "What If Pentagon ki Files se UAP Sach Samne Aaye?",
+     "score": 85
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "anomaly_file",
+     "project_id": "2026-10-30_Beyond3Baje_ShortRealityKeRulesTodneWaliCheez",
+     "title": "What If Reality ka Script hi Badalne Lage? (Narrative Anomaly)",
+     "score": 75
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "detective",
+     "project_id": "2026-10-30_TheTallStoryteller_ShortSomaliDiplomatAurEkRaaz",
+     "title": "Somali Diplomat Aur Ek Raaz",
+     "score": 85
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "detective",
+     "project_id": "2026-10-30_TheTallStoryteller_ShortDhakaSeAayiMysteryGirl",
+     "title": "Dhaka Se Aayi Mystery Girl",
+     "score": 65
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-29T03:26:39",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-29_Life3Baje_ShortAgnipathHarivanshRaiBachchan",
+     "title": "Agnipath: Harivansh Rai Bachchan",
+     "score": 85
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-29_Life3Baje_ShortJabIdeasKaBojhBadhJaye",
+     "title": "Jab Ideas Ka Bojh Badh Jaye",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "anomaly_file",
+     "project_id": "2026-10-29_Raat3Baje_ShortScienceKoChallengeKarneWalaAnomaly",
+     "title": "What If Science Ke Rules Todne Wala Ek Anomaly Mil Jaye?",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "what_if",
+     "project_id": "2026-10-29_Beyond3Baje_ShortJungleMeinWohAkeliSeedhi",
+     "title": "What If Jungle Ke Beech Ek Akeli Seedhi Aapko Bulaye?",
+     "score": 85
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "crime",
+     "project_id": "2026-10-29_TheTallStoryteller_ShortChaprasiBankRobberyHeist",
+     "title": "Jab 4 Chaprasiyon Ne Loota Bank",
+     "score": 80
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "crime",
+     "project_id": "2026-10-29_TheTallStoryteller_ShortCorruptCopKaFaisla",
+     "title": "Corrupt Cop Ka Faisla",
+     "score": 78
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-28T07:56:23",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-28_Life3Baje_ShortJadenKahinJamtiNahi",
+     "title": "Jaden Kahin Jamti Nahi",
+     "score": 80
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-28_Life3Baje_ShortAdhureMujsammeTheStartupCycle",
+     "title": "Adhure Mujsamme: The Startup Cycle",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "black_magic",
+     "project_id": "2026-10-28_Raat3Baje_ShortKaalaJaduKiBhayankarKeemat",
+     "title": "Kaala Jadu ki Bhayankar Keemat",
+     "score": 85
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "black_magic",
+     "project_id": "2026-10-28_Raat3Baje_ShortMayongKaalaJaduAdda",
+     "title": "Mayong: Kaala Jadu ka Asli Adda",
+     "score": 80
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "unsolved",
+     "project_id": "2026-10-28_Beyond3Baje_ShortArcticKhaufnaakRaazFranklin",
+     "title": "Arctic ka Khaufnaak Raaz: Franklin Expedition",
+     "score": 80
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "unsolved",
+     "project_id": "2026-10-28_Beyond3Baje_ShortFlannanIslesVanishingAct",
+     "title": "Flannan Isles: Vanishing Act",
+     "score": 75
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "comedy",
+     "project_id": "2026-10-28_TheTallStoryteller_ShortSundarYaBuddhuDebate",
+     "title": "Sundar ya Buddhu? The Ultimate Debate",
+     "score": 80
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "comedy",
+     "project_id": "2026-10-28_TheTallStoryteller_ShortWohSharaabiAuntyShaadiKaTadka",
+     "title": "Woh Sharaabi Aunty: Shaadi Ka Tadka",
+     "score": 75
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-24T07:10:53",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-24_Life3Baje_ShortSarabTheRealityOfDreams",
+     "title": "Sarab: The Reality of Dreams",
+     "score": 75
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-24_Life3Baje_ShortIshqTheArtOfDedication",
+     "title": "Ishq: The Art of Dedication",
+     "score": 70
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-24_Raat3Baje_ShortSarhadKeBhoota",
+     "title": "Sarhad Ke Bhoota",
+     "score": 80
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-24_Raat3Baje_ShortNagasSeZyadaKhatarnak",
+     "title": "Nagas Se Zyada Khatarnak",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-10-24_Beyond3Baje_ShortWestVirginiaKaBraxie",
+     "title": "West Virginia ka Braxie",
+     "score": 85
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-10-24_Beyond3Baje_ShortPhoenixLightsKaSach",
+     "title": "Phoenix Lights ka Sach",
+     "score": 65
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "classic_retold",
+     "project_id": "2026-10-24_TheTallStoryteller_ShortDoBailonKiKathaAzadi",
+     "title": "Do Bailon ki Katha: Azadi ka Junoon",
+     "score": 80
+    },
+    {
+     "channel": "TheTallStoryteller",
+     "format": "classic_retold",
+     "project_id": "2026-10-24_TheTallStoryteller_ShortThePitAndPendulumKhaufnaakRaat",
+     "title": "The Pit & Pendulum: Ek Khaufnaak Raat",
+     "score": 75
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-23T09:13:14",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-23_Life3Baje_ShortJoBeetGayiSoBaatGayi",
+     "title": "Jo Beet Gayi So Baat Gayi",
+     "score": 75
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-23_Life3Baje_ShortMeriZubanSeMeriDastan",
+     "title": "Meri Zuban Se Meri Dastan",
+     "score": 65
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-23_Raat3Baje_ShortTamhiniGhatKaKhauf",
+     "title": "Tamhini Ghat ka Khauf",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-23_Raat3Baje_ShortBrijRajBhawanSaaya",
+     "title": "Brij Raj Bhavan ka Saaya",
+     "score": 65
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "entity",
+     "project_id": "2026-10-23_Beyond3Baje_ShortTheInterdimensionalGuest",
+     "title": "Woh Interdimensional Mehmaan",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "entity",
+     "project_id": "2026-10-23_Beyond3Baje_ShortArchivesKaRaaz",
+     "title": "Archives Ka Raaz",
+     "score": 60
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-22T19:17:55",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-22_Life3Baje_ShortSuccessKeematStruggle",
+     "title": "Success Ki Keemat: The Hidden Struggle",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-22_Raat3Baje_ShortIndianSpirits12Roop",
+     "title": "12 Alag Roop: Indian Spirits",
+     "score": 80
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-22_Raat3Baje_ShortAssamBaansGhostDaula",
+     "title": "Assam ke Baans ka Saaya",
+     "score": 75
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "encounter",
+     "project_id": "2026-10-22_Beyond3Baje_ShortWestVirginiaFlatwoodsMystery",
+     "title": "West Virginia ka Alien Creature: Flatwoods Mystery",
+     "score": 78
+    }
+   ],
+   "skipped": [
+    {
+     "channel": "Beyond3Baje",
+     "reason": "build failed: The writer returned no script."
+    }
+   ]
+  },
+  {
+   "ran_at": "2026-10-21T07:08:53",
+   "built": [],
+   "skipped": [
+    {
+     "channel": "Life3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Raat3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Beyond3Baje",
+     "reason": "nothing scored >= 60"
+    }
+   ]
+  },
+  {
+   "ran_at": "2026-10-20T07:04:44",
+   "built": [
+    {
+     "channel": "Raat3Baje",
+     "format": "tantra",
+     "project_id": "2026-10-20_Raat3Baje_ShortShavaSadhanaLaashDarwaza",
+     "title": "Shava Sadhana: Ek Laash Jo Darwaza Ban Jati Hai",
+     "score": 85
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "tantra",
+     "project_id": "2026-10-20_Raat3Baje_ShortShamshanPaanchRaateinNiyam",
+     "title": "Shamshan Mein 5 Raatein: Paanchva Niyam Khaali Tha",
+     "score": 82
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "unsolved",
+     "project_id": "2026-10-20_Beyond3Baje_ShortFranklinExpeditionFrozenSilence",
+     "title": "Arctic Ka Wo Raaz Jo Barf Mein Dab Gaya: 128 Log, 2 Ships, Ek Note",
+     "score": 75
+    }
+   ],
+   "skipped": [
+    {
+     "channel": "Life3Baje",
+     "reason": "nothing scored >= 60"
+    }
+   ]
+  },
+  {
+   "ran_at": "2026-10-18T07:03:32",
+   "built": [],
+   "skipped": [
+    {
+     "channel": "Life3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Raat3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Beyond3Baje",
+     "reason": "nothing scored >= 60"
+    }
+   ]
+  },
+  {
+   "ran_at": "2026-10-17T07:04:04",
+   "built": [],
+   "skipped": [
+    {
+     "channel": "Life3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Raat3Baje",
+     "reason": "nothing scored >= 60"
+    },
+    {
+     "channel": "Beyond3Baje",
+     "reason": "nothing scored >= 60"
+    }
+   ]
+  },
+  {
+   "ran_at": "2026-10-16T00:02:13",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-15_Life3Baje_ShortAkelapanKiTakatBachchan",
+     "title": "Akelapan ki Takat: Harivansh Rai Bachchan",
+     "score": 85
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "poem",
+     "project_id": "2026-10-15_Life3Baje_ShortAbhiRuknaNahiHai",
+     "title": "Abhi Rukna Nahi Hai!",
+     "score": 80
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-16_Raat3Baje_ShortShaniwarwadaKhooniSach",
+     "title": "Shaniwarwada: Pune ka Khooni Sach 🩸",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "horror_incident",
+     "project_id": "2026-10-16_Raat3Baje_ShortDombivliStationKiRaat",
+     "title": "Dombivli Station ki Raat 🌑",
+     "score": 65
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "entity",
+     "project_id": "2026-10-16_Beyond3Baje_ShortWendigoEkBhayanakShaitaan",
+     "title": "Wendigo: Ek Bhayanak Shaitaan ❄️",
+     "score": 75
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "ran_at": "2026-10-12T07:07:53",
+   "built": [
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-12_Life3Baje_ShortBusinessKeZakhmEkSach",
+     "title": "Business ke Zakhm: Ek Sach 🩹",
+     "score": 85
+    },
+    {
+     "channel": "Life3Baje",
+     "format": "shayari",
+     "project_id": "2026-10-12_Life3Baje_ShortDaulatVsSapnePoetry",
+     "title": "Duniya ki Daulat vs. Apne Sapne 💎",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-12_Raat3Baje_ShortMuhnochwaFaceScratcherEntity",
+     "title": "Muhnochwa: Chehra Maangne Wali Dait 👺",
+     "score": 75
+    },
+    {
+     "channel": "Raat3Baje",
+     "format": "folklore_entity",
+     "project_id": "2026-10-12_Raat3Baje_ShortKeralaChaathanFolkloreEntity",
+     "title": "Kerala ke Khaufnaak Chaathan",
+     "score": 70
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "haunted_location",
+     "project_id": "2026-10-12_Beyond3Baje_ShortRaynhamHallBrownLadyMystery",
+     "title": "Raynham Hall ki Mystery: The Brown Lady 👗",
+     "score": 78
+    },
+    {
+     "channel": "Beyond3Baje",
+     "format": "haunted_location",
+     "project_id": "2026-10-12_Beyond3Baje_ShortArizonaHauntedHotelJeromeGrand",
+     "title": "Arizona ka Haunted Hotel: Jerome Grand 🏔️",
+     "score": 65
+    }
+   ],
+   "skipped": []
+  },
   {
    "ran_at": "2026-10-01T03:09:03",
    "built": [

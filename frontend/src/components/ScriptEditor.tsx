@@ -105,7 +105,7 @@ export default function ScriptEditor({ title, text, onSave, onClose, onToast }: 
         <button type="button" className="btn btn-outline btn-sm" style={BTN} onClick={() => fileRef.current?.click()} title="Replace the script with a corrected .txt / .md file">
           <FileUp size={14} /> Load file…
         </button>
-        <input ref={fileRef} type="file" accept=".txt,.md,text/plain,text/markdown" hidden onChange={(e) => loadFile(e.target.files)} />
+        <input ref={fileRef} type="file" accept=".txt,.md,text/plain,text/markdown" hidden onChange={(e) => loadFile(e.target.files)} aria-label="Script file" />
         <button type="button" className="btn btn-primary btn-sm" style={{ ...BTN, color: undefined, borderColor: undefined }}
           onClick={save} disabled={saving || !dirty} title="Save back to the project (Ctrl+S); the teleprompter uses it at once. The old version is kept.">
           {saving ? <Loader2 size={14} className="spin" /> : <Save size={14} />} Save back
@@ -118,6 +118,7 @@ export default function ScriptEditor({ title, text, onSave, onClose, onToast }: 
         ref={areaRef}
         value={draft}
         onChange={(e) => setDraft(e.target.value)}
+        aria-label="Script text"
         spellCheck
         style={{
           flex: 1, width: '100%', resize: 'none', background: '#0b0b0f', color: '#f3f4f6',

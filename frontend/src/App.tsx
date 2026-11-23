@@ -6,7 +6,9 @@ import {
   Building2,
   CalendarClock,
   ChevronUp,
+  Clapperboard,
   Compass,
+  Ear,
   FolderGit2,
   HeartPulse,
   LayoutDashboard,
@@ -28,6 +30,9 @@ import { StudioProvider, useStudio } from './state/studio';
 import { ThemeProvider } from './state/ThemeContext';
 import { ThemeSwitcher } from './components/ThemeSwitcher';
 import { ChannelPicker } from './components/ChannelPicker';
+import { MasterBadge } from './components/MasterControl';
+import { NeedsYou } from './components/NeedsYou';
+import { VideoBusyPopup } from './components/VideoBusyPopup';
 import type { TabId } from './lib/types';
 import StudioChat from './pages/StudioChat';
 import Dashboard from './pages/Dashboard';
@@ -40,6 +45,8 @@ import BulkEdit from './pages/BulkEdit';
 import Board from './pages/Board';
 import Analyze from './pages/Analyze';
 import Research from './pages/Research';
+import Audience from './pages/Audience';
+import StoryDesk from './pages/StoryDesk';
 import Workforce from './pages/Workforce';
 import Departments from './pages/Departments';
 import Health from './pages/Health';
@@ -75,6 +82,8 @@ const SECTIONS: NavSection[] = [
       { id: 'scheduler_desk', label: 'Scheduler Desk', icon: <CalendarClock size={18} style={{ color: '#f59e0b' }} />, title: 'Scheduler Desk: shorts and long-form schedulers' },
       { id: 'bulk_edit', label: 'Bulk Editor', icon: <PenLine size={18} style={{ color: '#38bdf8' }} />, title: 'Bulk Editor' },
       { id: 'topic_vault', label: 'Topic Vault', icon: <Compass size={18} />, title: 'Topic ideas and saved vault' },
+      { id: 'audience', label: 'Audience', icon: <Ear size={18} style={{ color: '#f472b6' }} />, title: 'What viewers ask for in the comments, with the evidence' },
+      { id: 'story_desk', label: 'Story Desk', icon: <Clapperboard size={18} style={{ color: '#fb7185' }} />, title: 'Videos made end to end in your voice: reels and audio stories' },
       { id: 'board', label: 'Board', icon: <LayoutGrid size={18} />, title: 'Topic board' },
       { id: 'analyze', label: 'Analyze', icon: <BarChart3 size={18} />, title: 'Why a video or channel performs, and how to model ours on it' },
       { id: 'research', label: 'Research', icon: <Newspaper size={18} />, title: 'Search public archives, books and newspapers' },
@@ -110,11 +119,16 @@ function Shell() {
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const [showTop, setShowTop] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // The Bulk Editor is a framed app: once opened it stays mounted (hidden) so
-  // switching tabs neither reloads it nor drops the progress of a running job.
-  const [bulkEditOpened, setBulkEditOpened] = useState(tab === 'bulk_edit');
+  // Once opened, tabs stay mounted (hidden) so switching tabs neither reloads
+  // them nor resets local UI pollers, timers, scroll position, or running jobs.
+  const [visitedTabs, setVisitedTabs] = useState<Set<TabId>>(() => new Set<TabId>([tab, 'bulk_edit']));
   useEffect(() => {
-    if (tab === 'bulk_edit') setBulkEditOpened(true);
+    setVisitedTabs((prev) => {
+      if (prev.has(tab)) return prev;
+      const next = new Set(prev);
+      next.add(tab);
+      return next;
+    });
   }, [tab]);
   // Desktop only: shrink the sidebar to an icon rail. Remembered per browser.
   const [collapsed, setCollapsed] = useState(() => {
@@ -228,6 +242,9 @@ function Shell() {
           </div>
 
           <div className="header-status">
+            <NeedsYou />
+            <VideoBusyPopup />
+            <MasterBadge />
             <ChannelPicker />
             <ThemeSwitcher />
             {(() => {
@@ -279,33 +296,111 @@ function Shell() {
             </div>
           )}
 
-          {tab === 'studio_chat' && <StudioChat />}
-          {tab === 'dashboard' && <Dashboard />}
-          {tab === 'projects' && <Projects />}
-          {tab === 'topic_vault' && <TopicVault />}
-          {tab === 'board' && <Board />}
-          {tab === 'analyze' && <Analyze />}
-          {tab === 'research' && <Research />}
-          {tab === 'music' && <Music />}
-          {tab === 'writing_style' && <WritingStyle />}
-          {tab === 'scheduler_desk' && <SchedulerDesk />}
-          {bulkEditOpened && <div hidden={tab !== 'bulk_edit'}><BulkEdit /></div>}
-          {tab === 'agent_creator_studio' && (
-            <AgentCreatorStudio
-              onLaunchGroupChat={(ids) => {
-                setGroupChatAgentIds(ids);
-                navigate('agents_group_chat');
-              }}
-            />
+          {visitedTabs.has('studio_chat') && (
+            <div key="studio_chat" style={{ display: tab === 'studio_chat' ? 'block' : 'none' }}>
+              <StudioChat />
+            </div>
           )}
-          {tab === 'agents_group_chat' && (
-            <AgentsGroupChat selectedAgentIds={groupChatAgentIds} onBackToStudio={() => navigate('agent_creator_studio')} />
+          {visitedTabs.has('dashboard') && (
+            <div key="dashboard" style={{ display: tab === 'dashboard' ? 'block' : 'none' }}>
+              <Dashboard />
+            </div>
           )}
-          {tab === 'ai_workforce' && <Workforce />}
-          {tab === 'departments' && <Departments />}
-          {tab === 'health' && <Health />}
-          {tab === 'settings' && <Settings />}
-          {tab === 'logs' && <Logs />}
+          {visitedTabs.has('projects') && (
+            <div key="projects" style={{ display: tab === 'projects' ? 'block' : 'none' }}>
+              <Projects />
+            </div>
+          )}
+          {visitedTabs.has('topic_vault') && (
+            <div key="topic_vault" style={{ display: tab === 'topic_vault' ? 'block' : 'none' }}>
+              <TopicVault />
+            </div>
+          )}
+          {visitedTabs.has('audience') && (
+            <div key="audience" style={{ display: tab === 'audience' ? 'block' : 'none' }}>
+              <Audience />
+            </div>
+          )}
+          {visitedTabs.has('story_desk') && (
+            <div key="story_desk" style={{ display: tab === 'story_desk' ? 'block' : 'none' }}>
+              <StoryDesk />
+            </div>
+          )}
+          {visitedTabs.has('board') && (
+            <div key="board" style={{ display: tab === 'board' ? 'block' : 'none' }}>
+              <Board />
+            </div>
+          )}
+          {visitedTabs.has('analyze') && (
+            <div key="analyze" style={{ display: tab === 'analyze' ? 'block' : 'none' }}>
+              <Analyze />
+            </div>
+          )}
+          {visitedTabs.has('research') && (
+            <div key="research" style={{ display: tab === 'research' ? 'block' : 'none' }}>
+              <Research />
+            </div>
+          )}
+          {visitedTabs.has('music') && (
+            <div key="music" style={{ display: tab === 'music' ? 'block' : 'none' }}>
+              <Music />
+            </div>
+          )}
+          {visitedTabs.has('writing_style') && (
+            <div key="writing_style" style={{ display: tab === 'writing_style' ? 'block' : 'none' }}>
+              <WritingStyle />
+            </div>
+          )}
+          {visitedTabs.has('scheduler_desk') && (
+            <div key="scheduler_desk" style={{ display: tab === 'scheduler_desk' ? 'block' : 'none' }}>
+              <SchedulerDesk />
+            </div>
+          )}
+          {visitedTabs.has('bulk_edit') && (
+            <div key="bulk_edit" style={{ display: tab === 'bulk_edit' ? 'block' : 'none' }}>
+              <BulkEdit />
+            </div>
+          )}
+          {visitedTabs.has('agent_creator_studio') && (
+            <div key="agent_creator_studio" style={{ display: tab === 'agent_creator_studio' ? 'block' : 'none' }}>
+              <AgentCreatorStudio
+                onLaunchGroupChat={(ids) => {
+                  setGroupChatAgentIds(ids);
+                  navigate('agents_group_chat');
+                }}
+              />
+            </div>
+          )}
+          {visitedTabs.has('agents_group_chat') && (
+            <div key="agents_group_chat" style={{ display: tab === 'agents_group_chat' ? 'block' : 'none' }}>
+              <AgentsGroupChat selectedAgentIds={groupChatAgentIds} onBackToStudio={() => navigate('agent_creator_studio')} />
+            </div>
+          )}
+          {visitedTabs.has('ai_workforce') && (
+            <div key="ai_workforce" style={{ display: tab === 'ai_workforce' ? 'block' : 'none' }}>
+              <Workforce />
+            </div>
+          )}
+          {visitedTabs.has('departments') && (
+            <div key="departments" style={{ display: tab === 'departments' ? 'block' : 'none' }}>
+              <Departments />
+            </div>
+          )}
+          {visitedTabs.has('health') && (
+            <div key="health" style={{ display: tab === 'health' ? 'block' : 'none' }}>
+              <Health />
+            </div>
+          )}
+          {visitedTabs.has('settings') && (
+            <div key="settings" style={{ display: tab === 'settings' ? 'block' : 'none' }}>
+              <Settings />
+            </div>
+          )}
+          {visitedTabs.has('logs') && (
+            <div key="logs" style={{ display: tab === 'logs' ? 'block' : 'none' }}>
+              <Logs />
+            </div>
+          )}
         </div>
       </div>
 

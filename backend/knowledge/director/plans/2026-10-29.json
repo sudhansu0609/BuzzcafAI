@@ -1,0 +1,142 @@
+{
+  "horizon": "day",
+  "generated_at": "2026-10-29T04:57:49",
+  "turns": 1,
+  "items": [
+    {
+      "channel": null,
+      "action": "fix_offload_models",
+      "params": {},
+      "when": "tonight",
+      "why": "Free 15+ GB VRAM from Ollama (gemma4) before rendering pipeline starts",
+      "goal": "One local model at a time: eject before loading, offload when done; never kill a busy BuzzEdit",
+      "needs_approval": false
+    },
+    {
+      "channel": null,
+      "action": "fix_restart_claude_proxy",
+      "params": {},
+      "when": "tonight",
+      "why": "Claude proxy reported down in recent self-check; restarting to restore local routing",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video",
+      "needs_approval": false
+    },
+    {
+      "channel": null,
+      "action": "fix_restart_gemini_harness",
+      "params": {},
+      "when": "tonight",
+      "why": "Gemini harness ping failed in self-check; restarting local endpoint",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video",
+      "needs_approval": false
+    },
+    {
+      "channel": null,
+      "action": "fix_kick_queue",
+      "params": {},
+      "when": "tonight",
+      "why": "Queue self-check reported stalled/failed records needing a kick",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "longform_run_slot",
+      "params": {
+        "format": "real_encounter"
+      },
+      "when": "tonight",
+      "why": "Long-form script drafting (0 GPU hours); rotating format from rules_horror to real encounter",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "longform_run_slot",
+      "params": {
+        "format": "anomaly_files"
+      },
+      "when": "tonight",
+      "why": "Drafting long-form Anomaly Files script (0 GPU hours) for creator morning review",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "action": "longform_run_slot",
+      "params": {
+        "format": "detective"
+      },
+      "when": "tonight",
+      "why": "Draft debut detective script (0 GPU hours) to prepare channel launch",
+      "goal": "Get The Tall Storyteller live: sign it in on the Bulk Editor, review its first video.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "real_encounter"
+      },
+      "when": "tonight",
+      "why": "Nightly story reel render (~2h GPU); format rotated to real encounter",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "what_if"
+      },
+      "when": "tonight",
+      "why": "Nightly What If story reel render (~2h GPU budget)",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "auto_story_make_mood_reel",
+      "params": {
+        "theme": "ghazal_motivational"
+      },
+      "when": "tonight",
+      "why": "Ghazal mood reel (~30m GPU); completes 4.5h spend, deferring Khayal3Baje/Originals to tomorrow",
+      "goal": "Life3Baje: vlog + motivational. Vibe reels are hyper-real AI clips with 2-4 ghazal lines, no voice.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "review_gate",
+      "params": {
+        "title": "SOYA SMASHAAN NEW"
+      },
+      "when": "today",
+      "why": "Packaged production waiting at review gate on dashboard for final creator approval",
+      "goal": "The Studio makes content by itself overnight; I review, and I approve every publish.",
+      "needs_approval": true
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "step_approval",
+      "params": {
+        "title": "SOYA SMASHAAN"
+      },
+      "when": "today",
+      "why": "Pipeline step approval waiting for creator decision on dashboard",
+      "goal": "The Studio makes content by itself overnight; I review, and I approve every publish.",
+      "needs_approval": true
+    },
+    {
+      "channel": null,
+      "action": "reboot_pc",
+      "params": {
+        "trigger": "post_harrison_okene_render"
+      },
+      "when": "today",
+      "why": "Open promise: reboot PC after Harrison Okene render so 128 GB pagefile takes effect",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video",
+      "needs_approval": true
+    }
+  ]
+}

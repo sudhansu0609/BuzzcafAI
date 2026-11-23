@@ -36,6 +36,7 @@ class StudioChatSchema(BaseModel):
     agent_name: Optional[str] = None
     history: Optional[List[Dict[str, str]]] = None
     context_topic: Optional[Dict[str, Any]] = None
+    turn_id: Optional[str] = None   # progress readable at /chat_progress/{turn_id} meanwhile
 
 
 class ResearchAndSaveSchema(BaseModel):
@@ -171,6 +172,7 @@ def studio_chat(payload: StudioChatSchema):
             agent_name=agent_name,
             history=payload.history,
             context_topic=payload.context_topic,
+            turn_id=payload.turn_id,
         )
     except Exception as exc:
         logger.error("studio chat failed for %s: %s", agent_name, exc, exc_info=True)
@@ -182,6 +184,20 @@ def studio_chat(payload: StudioChatSchema):
                 "agent_name": agent_name, "channel": channel, "reply": detail,
             },
         )
+
+
+@router.get("/chat_progress/{turn_id}")
+def studio_chat_progress(turn_id: str):
+    """What a Studio Assistant turn is doing right now (2026-10-22): the
+    strategist writing, each delegated specialist, each web lookup, vault
+    save and studio tool, with status and seconds. The page polls this while
+    its chat request is open; a finished turn stays readable for 30 minutes."""
+    from app.services import chat_progress
+
+    snap = chat_progress.snapshot(turn_id)
+    if snap is None:
+        return JSONResponse(status_code=404, content={"status": "unknown", "turn_id": turn_id, "steps": []})
+    return snap
 
 
 @router.get("/capabilities")
@@ -261,6 +277,12 @@ def studio_topic_update(payload: TopicUpdateSchema):
     fields = payload.dict(exclude_none=True, exclude={"id"})
     if "stage" in fields and fields["stage"] not in topic_store.STAGES:
         return JSONResponse(status_code=400, content={"status": "error", "message": "invalid stage"})
+    if "art_style" in fields:
+        from integrations.art_style import ART_STYLES
+        if fields["art_style"] == "":
+            fields["art_style"] = None      # back to the channel's own
+        elif fields["art_style"] not in ART_STYLES:
+            return JSONResponse(status_code=400, content={"status": "error", "message": "invalid art_style"})
     row = topic_store.update_topic(payload.id, fields)
     if row is None:
         return JSONResponse(status_code=404, content={"status": "error", "message": "topic not found"})

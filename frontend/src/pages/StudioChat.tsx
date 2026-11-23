@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Bot, Check, ChevronDown, ChevronRight, Copy, Send, Trash2, X, Compass, Cpu, Sparkles, FolderGit2, BarChart3, Newspaper, Search } from 'lucide-react';
+import { Bot, Check, ChevronDown, ChevronRight, Clock, Copy, Loader2, RotateCcw, Send, Trash2, X, Compass, Cpu, Sparkles, FolderGit2, BarChart3, Newspaper, Search } from 'lucide-react';
 import type { ToastKind } from '../lib/types';
 import { useStudio } from '../state/studio';
 import { getJson, postJson, describeError } from '../services/api';
 import { CHANNEL_META, strategistFor } from '../lib/channels';
 import Markdown from '../components/Markdown';
-import type { AgentInfo, ChatMessage, Invocation, Topic } from '../lib/types';
+import type { AgentInfo, ChatMessage, Invocation, ProgressStep, Topic, TurnProgress } from '../lib/types';
 
 // The Studio Assistant: one conversation per channel with that channel's
 // strategist persona. This is the landing tab (roadmap v5, 2.5) - before v5
@@ -31,6 +31,138 @@ interface ChatReply {
   status?: string;
   agent_name?: string;
   invocations?: Invocation[];
+  progress?: ProgressStep[];
+  turn_id?: string;
+}
+
+const PROGRESS_POLL_MS = 1500;
+
+function newTurnId(): string {
+  try {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID().replace(/-/g, '').slice(0, 20);
+  } catch {
+    // fall through
+  }
+  return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function fmtSeconds(value?: number | null): string {
+  if (value === undefined || value === null || Number.isNaN(value)) return '';
+  const s = Math.max(0, Math.round(value));
+  if (s < 60) return `${s} s`;
+  const m = Math.floor(s / 60);
+  const rest = s % 60;
+  return rest ? `${m} min ${rest} s` : `${m} min`;
+}
+
+function stepColour(status: string): string {
+  if (status === 'failed') return '#f87171';
+  if (status === 'skipped') return '#f59e0b';
+  if (status === 'running') return 'var(--accent-primary)';
+  return '#34d399';
+}
+
+function StepIcon({ status }: { status: string }) {
+  if (status === 'running') return <Loader2 size={13} style={{ animation: 'spin 1s linear infinite' }} />;
+  if (status === 'failed') return <X size={13} />;
+  if (status === 'skipped') return <ChevronRight size={13} />;
+  return <Check size={13} />;
+}
+
+// The list of what a turn did or is doing: one row per step with its
+// status, what it was about and how long it took (2026-10-22).
+function StepList({ steps, running }: { steps: ProgressStep[]; running: boolean }) {
+  if (steps.length === 0) {
+    return <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>{running ? 'Sending the request…' : 'No steps recorded.'}</div>;
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      {steps.map((s) => (
+        <div key={s.index} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: '0.78rem', lineHeight: 1.35 }}>
+          <span style={{ color: stepColour(s.status), display: 'inline-flex', marginTop: 2, flexShrink: 0 }}>
+            <StepIcon status={s.status} />
+          </span>
+          <span style={{ flex: 1, minWidth: 0 }}>
+            <span style={{ color: 'var(--text-primary)', fontWeight: s.status === 'running' ? 600 : 500 }}>{s.label}</span>
+            {s.detail && (
+              <span style={{ color: 'var(--text-secondary)', marginLeft: 6, overflowWrap: 'anywhere' }}>
+                {s.detail.length > 140 ? `${s.detail.slice(0, 140)}…` : s.detail}
+              </span>
+            )}
+            {s.note && (
+              <span style={{ color: s.status === 'failed' ? '#f87171' : 'var(--text-muted)', marginLeft: 6, fontStyle: 'italic' }}>
+                {s.note}
+              </span>
+            )}
+          </span>
+          <span style={{ color: 'var(--text-muted)', flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}>
+            {fmtSeconds(s.seconds)}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// What the Assistant is doing right now, in place of the old "is thinking…"
+// line: the strategist writing, then each delegated specialist, lookup and
+// tool as it starts and finishes, with the clock running.
+function LiveProgressBubble({ agent, progress, elapsed }: { agent: string; progress: TurnProgress | null; elapsed: number }) {
+  const steps = progress?.steps || [];
+  const current = [...steps].reverse().find((s) => s.status === 'running');
+  const headline = current ? current.label : steps.length > 0 ? 'Putting the reply together…' : `${agent} is thinking…`;
+  const delegations = steps.filter((s) => s.kind === 'delegation');
+  const doneDelegations = delegations.filter((s) => s.status !== 'running').length;
+  return (
+    <div className="chat-bubble-agent" style={{ borderLeft: '3px solid var(--accent-primary)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 600, fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+          <Loader2 size={14} style={{ animation: 'spin 1s linear infinite', color: 'var(--accent-primary)' }} />
+          {headline}
+        </span>
+        <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontVariantNumeric: 'tabular-nums' }}>
+          {delegations.length > 0 && `${doneDelegations}/${delegations.length} delegations · `}
+          {fmtSeconds(elapsed)}
+        </span>
+      </div>
+      <StepList steps={steps} running />
+    </div>
+  );
+}
+
+// Under a finished reply: how long it took and what ran, folded by default.
+function TurnSummary({ steps, elapsed }: { steps: ProgressStep[]; elapsed?: number }) {
+  const [open, setOpen] = useState(false);
+  if (!steps || steps.length === 0) return null;
+  const delegations = steps.filter((s) => s.kind === 'delegation');
+  const failed = steps.filter((s) => s.status === 'failed').length;
+  const total = elapsed ?? steps.reduce((acc, s) => acc + (s.seconds || 0), 0);
+  const parts: string[] = [];
+  if (delegations.length) parts.push(`${delegations.length} delegation${delegations.length === 1 ? '' : 's'}`);
+  const lookups = steps.filter((s) => ['web_search', 'web_fetch', 'lookup', 'video_intel'].includes(s.kind)).length;
+  if (lookups) parts.push(`${lookups} lookup${lookups === 1 ? '' : 's'}`);
+  if (failed) parts.push(`${failed} failed`);
+  return (
+    <div style={{ marginTop: 8, fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.75rem', padding: 0, display: 'inline-flex', alignItems: 'center', gap: 4 }}
+        title="What this turn did"
+      >
+        {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+        <Clock size={11} />
+        {fmtSeconds(total)}
+        {parts.length > 0 && ` · ${parts.join(' · ')}`}
+        {failed > 0 && <span style={{ color: '#f87171' }}> ⚠</span>}
+      </button>
+      {open && (
+        <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 8, backgroundColor: 'var(--bg-pill)', border: '1px solid var(--border-card)' }}>
+          <StepList steps={steps} running={false} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 // Copy text to the clipboard (with a fallback for non-secure contexts).
@@ -166,13 +298,13 @@ function SendToVaultPanel({ topics, channel, toast }: { topics: string[]; channe
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
         <strong style={{ color: 'var(--accent-primary)', fontSize: '0.8rem' }}>Send to Vault</strong>
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--text-secondary)' }}>
-          <input type="checkbox" checked={allChecked} onChange={() => setSelected(allChecked ? new Set() : new Set(topics))} />
+          <input type="checkbox" aria-label="All" checked={allChecked} onChange={() => setSelected(allChecked ? new Set() : new Set(topics))} />
           All
         </label>
       </div>
       {topics.map((t) => (
         <label key={t} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer', color: 'var(--text-primary)' }}>
-          <input type="checkbox" style={{ marginTop: 3 }} checked={selected.has(t)} onChange={() => toggle(t)} />
+          <input type="checkbox" aria-label={t} style={{ marginTop: 3 }} checked={selected.has(t)} onChange={() => toggle(t)} />
           <span style={{ userSelect: 'none' }}>{t}</span>
         </label>
       ))}
@@ -274,7 +406,7 @@ function writeChosenAgent(channel: string, agent: string): void {
 }
 
 export default function StudioChat() {
-  const { brands, selectedChannel, setSelectedChannel, toast, confirm, health, navigate, healthInfo } = useStudio();
+  const { brands, selectedChannel, setSelectedChannel, toast, confirm, health, navigate, healthInfo, settings, refreshSettings } = useStudio();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
@@ -282,7 +414,28 @@ export default function StudioChat() {
   const [loadedFor, setLoadedFor] = useState<string | null>(null);
   const [personas, setPersonas] = useState<AgentInfo[]>([]);
   const [chosenAgent, setChosenAgent] = useState<string>(() => readChosenAgent(selectedChannel));
+  const [effort, setEffort] = useState<string>(() => String(settings?.gemini_thinking_level || 'high'));
+  const [progress, setProgress] = useState<TurnProgress | null>(null);
+  const [elapsed, setElapsed] = useState(0);
   const feedRef = useRef<HTMLDivElement | null>(null);
+  const turnRef = useRef<{ id: string; startedAt: number } | null>(null);
+
+  useEffect(() => {
+    if (settings?.gemini_thinking_level) {
+      setEffort(String(settings.gemini_thinking_level));
+    }
+  }, [settings?.gemini_thinking_level]);
+
+  const changeEffort = async (newEffort: string) => {
+    setEffort(newEffort);
+    try {
+      await postJson('/api/settings', { gemini_thinking_level: newEffort });
+      await refreshSettings();
+      toast(`Reasoning effort set to ${newEffort}.`, 'info');
+    } catch {
+      // Local state still applies to active session
+    }
+  };
 
   const agent = chosenAgent || strategistFor(selectedChannel);
   const channelOptions = brands.length > 0 ? brands : CHANNEL_META.map((c) => c.id);
@@ -350,7 +503,34 @@ export default function StudioChat() {
 
   useEffect(() => {
     feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages, sending]);
+  }, [messages, sending, progress?.steps.length]);
+
+  // While a turn is open: ask the backend every couple of seconds what it is
+  // doing (the strategist writing, each delegation, each lookup) and keep a
+  // clock of our own, so the page is never silent for minutes.
+  useEffect(() => {
+    if (!sending || !turnRef.current) return;
+    const { id, startedAt } = turnRef.current;
+    let stopped = false;
+    const tick = () => setElapsed((Date.now() - startedAt) / 1000);
+    const clock = window.setInterval(tick, 1000);
+    const poll = async () => {
+      if (stopped) return;
+      try {
+        const snap = await getJson<TurnProgress>(`/api/studio/chat_progress/${encodeURIComponent(id)}`);
+        if (!stopped && snap && snap.turn_id === id) setProgress(snap);
+      } catch {
+        // 404 until the backend has started the turn; a poll miss is nothing.
+      }
+    };
+    poll();
+    const timer = window.setInterval(poll, PROGRESS_POLL_MS);
+    return () => {
+      stopped = true;
+      window.clearInterval(timer);
+      window.clearInterval(clock);
+    };
+  }, [sending]);
 
   const send = async (custom?: string) => {
     const text = (custom ?? input).trim();
@@ -358,7 +538,13 @@ export default function StudioChat() {
     const history = messages.map((m) => ({ role: m.sender === 'user' ? 'user' : 'assistant', content: m.text }));
     setMessages((prev) => [...prev, { sender: 'user', text, timestamp: stamp() }]);
     if (custom === undefined) setInput('');
+    const turnId = newTurnId();
+    const startedAt = Date.now();
+    turnRef.current = { id: turnId, startedAt };
+    setProgress(null);
+    setElapsed(0);
     setSending(true);
+    let finalSteps: ProgressStep[] | undefined;
     try {
       const data = await postJson<ChatReply>(
         '/api/topics/agent_chat',
@@ -368,9 +554,14 @@ export default function StudioChat() {
           message: text,
           context_topic: topic,
           chat_history: history,
+          turn_id: turnId,
+          effort,
         },
-        { signal: AbortSignal.timeout(300_000) },
+        // Three delegations on a local model can take a while; the progress
+        // bubble shows it is alive, so the wait is long on purpose.
+        { signal: AbortSignal.timeout(1_800_000) },
       );
+      finalSteps = data.progress && data.progress.length > 0 ? data.progress : progress?.steps;
       setMessages((prev) => [
         ...prev,
         {
@@ -381,14 +572,21 @@ export default function StudioChat() {
           error: data.status === 'error',
           agent: data.agent_name || agent,
           invocations: data.invocations || [],
+          progress: finalSteps,
+          elapsed: (Date.now() - startedAt) / 1000,
         },
       ]);
     } catch (err) {
       const detail = describeError(err);
-      setMessages((prev) => [...prev, { sender: 'agent', text: `Could not get a reply: ${detail}`, timestamp: stamp(), error: true }]);
+      setMessages((prev) => [...prev, {
+        sender: 'agent', text: `Could not get a reply: ${detail}`, timestamp: stamp(), error: true,
+        progress: progress?.steps, elapsed: (Date.now() - startedAt) / 1000, retryText: text,
+      }]);
       toast(detail, 'error');
     } finally {
       setSending(false);
+      turnRef.current = null;
+      setProgress(null);
     }
   };
 
@@ -423,6 +621,7 @@ export default function StudioChat() {
               <span>Channel</span>
               <select
                 className="form-control"
+                aria-label="Channel"
                 style={{ padding: '2px 8px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-secondary)', backgroundColor: 'var(--bg-pill)', borderColor: 'var(--border-card)', width: 'auto' }}
                 value={selectedChannel}
                 onChange={(e) => setSelectedChannel(e.target.value)}
@@ -434,6 +633,7 @@ export default function StudioChat() {
               <span>Persona</span>
               <select
                 className="form-control"
+                aria-label="Persona"
                 style={{ padding: '2px 8px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-primary)', backgroundColor: 'var(--bg-pill)', borderColor: 'var(--border-card)', width: 'auto', maxWidth: 260 }}
                 value={agent}
                 onChange={(e) => pickAgent(e.target.value)}
@@ -460,6 +660,20 @@ export default function StudioChat() {
                   back to the strategist
                 </button>
               )}
+              <span style={{ marginLeft: 6 }}>Effort</span>
+              <select
+                className="form-control"
+                aria-label="Reasoning Effort"
+                style={{ padding: '2px 8px', fontSize: '0.8rem', fontWeight: 700, color: '#38bdf8', backgroundColor: 'var(--bg-pill)', borderColor: 'var(--border-card)', width: 'auto' }}
+                value={effort}
+                onChange={(e) => changeEffort(e.target.value)}
+                title="Reasoning Effort: Low (~3s fast), Med, High (deep reasoning), Max (exhaustive)"
+              >
+                <option value="low">⚡ Low (~3s)</option>
+                <option value="medium">⚖ Medium</option>
+                <option value="high">🧠 High</option>
+                <option value="max">🔥 Max</option>
+              </select>
             </div>
           </div>
         </div>
@@ -518,6 +732,23 @@ export default function StudioChat() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span
+            title="Active reasoning effort level for Gemini and thinking models"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              padding: '2px 8px',
+              borderRadius: 9999,
+              backgroundColor: 'rgba(56, 189, 248, 0.12)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              color: '#38bdf8',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+            }}
+          >
+            <Sparkles size={11} /> Effort: {effort.toUpperCase()}
+          </span>
           <span style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -572,16 +803,25 @@ export default function StudioChat() {
                 </div>
               )}
               <div>{m.text}</div>
+              {m.error && m.retryText && (
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  style={{ marginTop: 8, padding: '4px 10px', fontSize: '0.75rem' }}
+                  disabled={sending}
+                  onClick={() => send(m.retryText)}
+                  title="Send the same message again"
+                >
+                  <RotateCcw size={12} style={{ marginRight: 4 }} /> Retry
+                </button>
+              )}
               {topics.length >= 2 && <SendToVaultPanel topics={topics} channel={selectedChannel} toast={toast} />}
               {(m.invocations || []).map((inv, j) => <InvocationCard key={`${i}-${j}`} item={inv} toast={toast} />)}
+              {isAgent && m.progress && m.progress.length > 0 && <TurnSummary steps={m.progress} elapsed={m.elapsed} />}
             </div>
           );
         })}
-        {sending && (
-          <div className="chat-bubble-agent" style={{ opacity: 0.7 }}>
-            <em>{agent} is thinking…</em>
-          </div>
-        )}
+        {sending && <LiveProgressBubble agent={agent} progress={progress} elapsed={elapsed} />}
       </div>
 
       
@@ -626,6 +866,7 @@ export default function StudioChat() {
         <input
           type="text"
           className="form-control"
+          aria-label={`Ask ${agent} about ${selectedChannel}`}
           placeholder={`Ask ${agent} about ${selectedChannel}…`}
           value={input}
           onChange={(e) => setInput(e.target.value)}

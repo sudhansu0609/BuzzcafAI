@@ -1,0 +1,72 @@
+{
+  "started_at": "2026-11-01T03:00:06",
+  "scope": "longform",
+  "tasks": [
+    {
+      "task": "longform",
+      "seconds": 37825,
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-11-01_Raat3Baje_GaonKiSadakParUltaChalneWalaAadmiRaat3Baje",
+          "title": "Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje",
+          "current_step": "Completed",
+          "format": "story"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-11-01_Beyond3Baje_MautKaCallDontAnswer",
+          "title": "Maut Ka Call / DON'T ANSWER",
+          "current_step": "Voice Recording",
+          "format": "what_if"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-11-01_Beyond3Baje_TheEndlessRoadb3b404",
+          "title": "THE ENDLESS ROAD (B3B-404)",
+          "current_step": "Voice Recording",
+          "format": "anomaly_file"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-11-01_Life3Baje_CanMySideProjectsPayAllMyMonthlyExpenses",
+          "title": "Can My Side Projects Pay All My Monthly Expenses?",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-11-01_Life3Baje_ImBuildingMultipleIncomeSourcesHeresWhatIsActuallyWorking",
+          "title": "I’m Building Multiple Income Sources — Here’s What Is Actually Working",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-11-01_TheTallStoryteller_SoneKaDhokhatheGoldDeception",
+          "title": "Sone ka Dhokha (The Gold Deception)",
+          "current_step": "Completed",
+          "format": "crime"
+        }
+      ],
+      "skipped": [
+        {
+          "channel": "Raat3Baje",
+          "topic": "Gaon Ke Ped Par Latki Ghanti Hawa Ke Bina Bajti Thi",
+          "reason": "No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again."
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "reason": "no topic in the vault or the Idea Dump"
+        }
+      ]
+    }
+  ],
+  "network": true,
+  "lm_studio": true,
+  "finished_at": "2026-11-01T13:33:23",
+  "hibernate": {
+    "hibernate": true,
+    "reasons": [],
+    "idle_minutes": 314.0,
+    "gpu_percent": 0.0
+  }
+}

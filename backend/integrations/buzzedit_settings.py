@@ -29,6 +29,7 @@ import threading
 from typing import Any, Dict, Optional, Tuple
 
 from core.paths import CONFIG_DIR
+from integrations.art_style import ART_STYLES, text_cards as _art_text_cards
 
 # BuzzEdit's own genre vocabulary (`presentation/genre.py`), copied literally
 # for the same reason `buzzedit_script.py` copies `_DIRECTIVES`: the two repos
@@ -115,6 +116,13 @@ _SEED_PROFILES: Dict[str, Dict[str, Any]] = {
     "beyond3baje": {"genre": "documentary", "genre_secondary": "mystery", "density": "busy", "voice_preset": "broadcast",
                     "visual_style": "story"},
     "originals": {"genre": "general", "genre_secondary": None, "density": "balanced", "voice_preset": "studio_mic"},
+    # TheTallStoryteller (2026-10-23): narrated, every genre, no face -- the
+    # same "story" visual rule as the other story channels (pictures and
+    # videos only, same characters, calm storyboard order), chosen here
+    # because it is narrated world-building exactly like them, not because
+    # it is horror. Not in FACE_LED_STORY_CHANNELS below: it has no face at all.
+    "thetallstoryteller": {"genre": "general", "genre_secondary": None, "density": "balanced",
+                           "voice_preset": "warm_radio", "visual_style": "story"},
 }
 
 # A profile's `visual_style` (absent = "full"):
@@ -132,6 +140,23 @@ _SEED_PROFILES: Dict[str, Dict[str, Any]] = {
 #            on per project or per request, since those layers apply after
 #            this one.
 VISUAL_STYLES: Tuple[str, ...] = ("full", "story")
+
+# The art style (2026-10-21, `integrations/art_style.py`): the medium the
+# pictures, clips, thumbnail scene and text cards are made in -- real
+# (photoreal, the default), explainer, stick_figure or cartoon. A separate
+# axis from the visual style: it says HOW things are drawn, the visual style
+# says WHICH layers exist. Resolved through the same layers (channel profile
+# -> project -> request) and sent to BuzzEdit as `art_style`.
+#
+# A drawn style whose medium includes short text (explainer, stick figure)
+# brings these layers back on a story channel, right after the story layer,
+# so a project or request can still turn any of them off.
+ART_TEXT_SETTINGS: Dict[str, Any] = {
+    "popups": True, "cards": True, "chapter_titles": True, "stat_callouts": True,
+    "definition_cards": True, "quote_cards": True,
+}
+# A drawn style on a full-style channel that keeps text off (cartoon) leaves
+# the full layers alone: the visual style owns them.
 
 STORY_STYLE_SETTINGS: Dict[str, Any] = {
     "captions": False, "title": False, "popups": False, "graphics": False,
@@ -268,6 +293,16 @@ def set_channel_profile(brand: str, profile: Dict[str, Any]) -> Dict[str, Any]:
         saved_style = (profiles.get(_brand_key(brand)) or {}).get("visual_style")
         if saved_style:
             cleaned["visual_style"] = saved_style
+    # `art_style` the same way: kept across a PUT that leaves it out.
+    if "art_style" in profile and profile.get("art_style") is not None:
+        if profile["art_style"] not in ART_STYLES:
+            raise InvalidChannelProfile(
+                f"Unknown art_style: {profile['art_style']!r}. Must be one of {', '.join(ART_STYLES)}.")
+        cleaned["art_style"] = profile["art_style"]
+    elif "art_style" not in profile:
+        saved_art = (profiles.get(_brand_key(brand)) or {}).get("art_style")
+        if saved_art in ART_STYLES:
+            cleaned["art_style"] = saved_art
     # `auto_edit` is optional: a payload that omits it keeps what is saved
     # (the Settings page only edits the four style fields); an explicit
     # `null` clears it; anything else is validated key by key.
@@ -296,9 +331,21 @@ def is_story_style(settings: Dict[str, Any]) -> bool:
     return (settings or {}).get("visual_style") == "story"
 
 
+def channel_art_style(brand: str) -> str:
+    """`brand`'s art style: its saved profile's, else "real"."""
+    saved = get_channel_profile(brand).get("art_style")
+    return saved if saved in ART_STYLES else "real"
+
+
+def art_style_of(settings: Dict[str, Any]) -> str:
+    style = (settings or {}).get("art_style")
+    return style if style in ART_STYLES else "real"
+
+
 def _base_settings() -> Dict[str, Any]:
     settings: Dict[str, Any] = {
         "visual_style": "full",
+        "art_style": "real",
         "genre": "general",
         "genre_secondary": None,
         "density": "balanced",
@@ -327,9 +374,44 @@ def _base_settings() -> Dict[str, Any]:
         # (2026-10-08): the disclosure is made in YouTube's upload form, not
         # burnt into every cutaway.
         "ai_label": False,
+        # How the creator's face is used (2026-10-16): "mixed" -- it comes
+        # back between the pictures all through (the mix sliders); or
+        # "face_intro" -- only his face for the first `face_intro_seconds`,
+        # then pictures and clips to the end. Studio-side: story_visuals
+        # times the shots, BuzzEdit gets `face_intro_s`.
+        "face_layout": "mixed",
+        "face_intro_seconds": 90,
     }
     settings.update(_DENSITY_PRESETS["balanced"])
     return settings
+
+
+FACE_LAYOUTS: Tuple[str, ...] = ("mixed", "face_intro")
+
+
+def _channel_face_layer(brand: str) -> Dict[str, Any]:
+    """The channel's face layout default (Long-form panel / channel formats)."""
+    try:
+        from app.services.session_format import channel_defaults
+        defaults = channel_defaults(brand)
+    except Exception:  # noqa: BLE001 - settings unreadable: the base layer's
+        return {}
+    return {"face_layout": defaults.get("face_layout"), "face_intro_seconds": defaults.get("face_intro_seconds")}
+
+
+def face_intro_seconds(settings: Dict[str, Any]) -> float:
+    """Seconds of face-only opening for a face-first video, 0 for "mixed"."""
+    if (settings or {}).get("face_layout") != "face_intro":
+        return 0.0
+    try:
+        value = float(settings.get("face_intro_seconds") if settings.get("face_intro_seconds") is not None else 90)
+    except (TypeError, ValueError):
+        return 90.0
+    # 0 is "no face at all" (2026-10-23: an auto story whose take has no
+    # intro clip is pictures from the first frame); anything else is 10-300 s.
+    if value <= 0:
+        return 0.0
+    return max(10.0, min(300.0, value))
 
 
 def _studio_settings_layer() -> Dict[str, Any]:
@@ -391,6 +473,7 @@ def resolve_settings(
     profile = get_channel_profile(brand)
     profile["visual_style"] = channel_visual_style(brand)
     settings = _apply_layer(settings, profile, "channel_profile", sources)
+    settings = _apply_layer(settings, _channel_face_layer(brand), "channel_format", sources)
     project_layer = None
     if project is not None:
         metadata = getattr(project, "metadata", None) or {}
@@ -408,6 +491,22 @@ def resolve_settings(
         settings = _apply_layer(settings, STORY_STYLE_SETTINGS, "visual_style", sources)
         if _brand_key(brand) in FACE_LED_STORY_CHANNELS:
             settings = _apply_layer(settings, FACE_LED_STORY_SETTINGS, "face_led", sources)
+    # The art style, decided the same way (channel profile, then the most
+    # specific layer that names one). A drawn style whose medium includes
+    # short text puts the text cards back on a story channel; a drawn style
+    # without text turns them off on a full one.
+    art = channel_art_style(brand)
+    art_source = "channel_profile" if art != "real" else "base"
+    for layer, name in ((project_layer, "project"), (overrides, "request")):
+        if layer and layer.get("art_style") in ART_STYLES:
+            art, art_source = layer["art_style"], name
+    settings["art_style"] = art
+    sources["art_style"] = art_source
+    wants_text = _art_text_cards(art)
+    if wants_text is True and style == "story":
+        settings = _apply_layer(settings, ART_TEXT_SETTINGS, "art_style", sources)
+    elif wants_text is False and style != "story":
+        settings = _apply_layer(settings, {key: False for key in ART_TEXT_SETTINGS}, "art_style", sources)
     settings = _apply_layer(settings, MIX_DEFAULTS, "mix_default", sources)
     settings = _apply_layer(settings, project_layer, "project", sources)
     settings = _apply_layer(settings, overrides, "request", sources)

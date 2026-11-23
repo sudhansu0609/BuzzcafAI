@@ -1,28 +1,481 @@
 {
-  "last_run": "2026-10-01",
-  "ran_at": "2026-10-01T05:45:27",
+  "last_run": "2026-11-01",
+  "ran_at": "2026-11-01T13:32:42",
   "built": [
     {
       "channel": "Raat3Baje",
-      "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
-      "title": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
-      "current_step": "Visual Plan"
+      "project_id": "2026-11-01_Raat3Baje_GaonKiSadakParUltaChalneWalaAadmiRaat3Baje",
+      "title": "Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje",
+      "current_step": "Completed",
+      "format": "story"
     },
     {
       "channel": "Beyond3Baje",
-      "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
-      "title": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
-      "current_step": "Visual Plan"
+      "project_id": "2026-11-01_Beyond3Baje_MautKaCallDontAnswer",
+      "title": "Maut Ka Call / DON'T ANSWER",
+      "current_step": "Voice Recording",
+      "format": "what_if"
+    },
+    {
+      "channel": "Beyond3Baje",
+      "project_id": "2026-11-01_Beyond3Baje_TheEndlessRoadb3b404",
+      "title": "THE ENDLESS ROAD (B3B-404)",
+      "current_step": "Voice Recording",
+      "format": "anomaly_file"
     },
     {
       "channel": "Life3Baje",
-      "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
-      "title": "When does a YouTube channel become an 'Actual Business'?",
-      "current_step": "Visual Plan"
+      "project_id": "2026-11-01_Life3Baje_CanMySideProjectsPayAllMyMonthlyExpenses",
+      "title": "Can My Side Projects Pay All My Monthly Expenses?",
+      "current_step": "Completed"
+    },
+    {
+      "channel": "Life3Baje",
+      "project_id": "2026-11-01_Life3Baje_ImBuildingMultipleIncomeSourcesHeresWhatIsActuallyWorking",
+      "title": "I’m Building Multiple Income Sources — Here’s What Is Actually Working",
+      "current_step": "Completed"
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "project_id": "2026-11-01_TheTallStoryteller_SoneKaDhokhatheGoldDeception",
+      "title": "Sone ka Dhokha (The Gold Deception)",
+      "current_step": "Completed",
+      "format": "crime"
     }
   ],
-  "skipped": [],
+  "skipped": [
+    {
+      "channel": "Raat3Baje",
+      "topic": "Gaon Ke Ped Par Latki Ghanti Hawa Ke Bina Bajti Thi",
+      "reason": "No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again."
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "reason": "no topic in the vault or the Idea Dump"
+    }
+  ],
   "history": [
+    {
+      "ran_at": "2026-11-01T13:32:42",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-11-01_Raat3Baje_GaonKiSadakParUltaChalneWalaAadmiRaat3Baje",
+          "title": "Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje",
+          "current_step": "Completed",
+          "format": "story"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-11-01_Beyond3Baje_MautKaCallDontAnswer",
+          "title": "Maut Ka Call / DON'T ANSWER",
+          "current_step": "Voice Recording",
+          "format": "what_if"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-11-01_Beyond3Baje_TheEndlessRoadb3b404",
+          "title": "THE ENDLESS ROAD (B3B-404)",
+          "current_step": "Voice Recording",
+          "format": "anomaly_file"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-11-01_Life3Baje_CanMySideProjectsPayAllMyMonthlyExpenses",
+          "title": "Can My Side Projects Pay All My Monthly Expenses?",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-11-01_Life3Baje_ImBuildingMultipleIncomeSourcesHeresWhatIsActuallyWorking",
+          "title": "I’m Building Multiple Income Sources — Here’s What Is Actually Working",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-11-01_TheTallStoryteller_SoneKaDhokhatheGoldDeception",
+          "title": "Sone ka Dhokha (The Gold Deception)",
+          "current_step": "Completed",
+          "format": "crime"
+        }
+      ],
+      "skipped": [
+        {
+          "channel": "Raat3Baje",
+          "topic": "Gaon Ke Ped Par Latki Ghanti Hawa Ke Bina Bajti Thi",
+          "reason": "No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again."
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "reason": "no topic in the vault or the Idea Dump"
+        }
+      ]
+    },
+    {
+      "ran_at": "2026-10-31T10:23:57",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-31_Raat3Baje_GataLoopsKeKhaufnaakRulesManalilehHighwayHorror",
+          "title": "Gata Loops ke Khaufnaak Rules | Manali-Leh Highway Horror",
+          "current_step": "Completed",
+          "format": "rules"
+        },
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-31_Raat3Baje_6GhanteTakBlinkNahiKiyaRaatKiTrainKaWohMusafir",
+          "title": "6 Ghante Tak Blink Nahi Kiya... | Raat Ki Train Ka Woh Musafir",
+          "current_step": "Completed",
+          "format": "real_encounter"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-31_Beyond3Baje_B3b412TheShunyachakratheZeroCircle",
+          "title": "B3B-412: The Shunya-Chakra (The Zero Circle)",
+          "current_step": "Voice Recording",
+          "format": "anomaly_file"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-31_Beyond3Baje_438DinSamundarKeBeechTheManWhoSurvivedTheImpossible",
+          "title": "438 Din Samundar Ke Beech: The Man Who Survived the Impossible",
+          "current_step": "Voice Recording",
+          "format": "investigation"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-31_Life3Baje_30DaysOfBuzzcafTheRealNumbersMistakesReality",
+          "title": "30 Days of Buzzcaf: The Real Numbers, Mistakes & Reality",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-31_Life3Baje_CanMySideProjectsPayAllMyMonthlyExpensestheRealityCheck",
+          "title": "Can My Side Projects Pay All My Monthly Expenses? (The Reality Check)",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-31_TheTallStoryteller_KolkataMansionKabhootEkChoriKiKahani",
+          "title": "Kolkata Mansion ka 'Bhoot': Ek Chori ki Kahani",
+          "current_step": "Completed",
+          "format": "detective"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-31_TheTallStoryteller_ShaadiWalaVipEkGalatPehchaan",
+          "title": "Shaadi Wala VIP: Ek Galat Pehchaan",
+          "current_step": "Completed",
+          "format": "comedy"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-30T14:45:18",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-30_Raat3Baje_RaatKoKhetMeinPapaKhadeTheHospitalSeAayePhoneNeHoshUdaDiye",
+          "title": "Raat Ko Khet Mein Papa Khade The — Hospital Se Aaye Phone Ne Hosh Uda Diye",
+          "current_step": "Completed",
+          "format": "black_magic"
+        },
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-30_Raat3Baje_NadiKaShraapWohJoRaatKoNahatiThi",
+          "title": "Nadi Ka Shraap: Woh Jo Raat Ko Nahati Thi",
+          "current_step": "Completed",
+          "format": "tantra"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-30_Beyond3Baje_PointPleasantKaSaayaTheMothmanMystery",
+          "title": "Point Pleasant ka Saaya: The Mothman Mystery",
+          "current_step": "Voice Recording",
+          "format": "investigation"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-30_Beyond3Baje_KalKiRecordingtomorrowsRecording",
+          "title": "Kal Ki Recording (Tomorrow's Recording)",
+          "current_step": "Voice Recording",
+          "format": "what_if"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-30_Life3Baje_IHaveToChooseYoutubeCoffeeOrMyCareer",
+          "title": "I Have to Choose: YouTube, Coffee or My Career?",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-30_Life3Baje_BuzzcafKePehle30DinEkHonestRealityCheck",
+          "title": "Buzzcaf ke Pehle 30 Din: Ek Honest Reality Check",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-30_TheTallStoryteller_GaltiSeViptheAccidentalCelebrity",
+          "title": "Galti Se VIP (The Accidental Celebrity)",
+          "current_step": "Completed",
+          "format": "comedy"
+        }
+      ],
+      "skipped": [
+        {
+          "channel": "TheTallStoryteller",
+          "topic": "Double Booking Ka Hungama",
+          "reason": "'Visual Plan' did not return valid JSON for its visual_plan (Expecting value: line 72 column 7 (char 3333)). Run the step again."
+        }
+      ]
+    },
+    {
+      "ran_at": "2026-10-29T11:34:17",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-29_Raat3Baje_HighwayParWohBacchiTheHauntingOfTheLongRoads",
+          "title": "Highway Par Woh Bacchi: The Haunting of the Long Roads",
+          "current_step": "Completed",
+          "format": "real_encounter"
+        },
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-29_Raat3Baje_PahadiHomestayKaBandKamraHorrorStory",
+          "title": "Pahadi Homestay Ka Band Kamra | Horror Story",
+          "current_step": "Completed",
+          "format": "story"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-29_Beyond3Baje_KalKaVideotomorrowsRecording",
+          "title": "KAL KA VIDEO (Tomorrow's Recording)",
+          "current_step": "Voice Recording",
+          "format": "what_if"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-29_Beyond3Baje_MallB3b802TheLoophinglishTitleMallJoKabhiKhatamNahiHota",
+          "title": "Mall B3B-802: The Loop | (Hinglish Title: Mall Jo Kabhi Khatam Nahi Hota)",
+          "current_step": "Voice Recording",
+          "format": "anomaly_file"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-29_Life3Baje_TheFirst30DaysOfBuzzcafRevenueMistakesReality",
+          "title": "The First 30 Days of Buzzcaf: Revenue, Mistakes & Reality",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-29_Life3Baje_SoftwareJobYoutubeAurBuzzcafKyaSabKuchManageKarnaPossibleHai",
+          "title": "Software Job, YouTube aur Buzzcaf: Kya Sab Kuch Manage Karna Possible Hai?",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-29_TheTallStoryteller_MallickNilaamgharKiAakhriBoliEkChoriJoHuiHiNahi",
+          "title": "Mallick Nilaamghar ki Aakhri Boli | Ek Chori Jo Hui Hi Nahi",
+          "current_step": "Completed",
+          "format": "crime"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-29_TheTallStoryteller_PuraniHaveliKaShorgulEkNakliBhoot",
+          "title": "Purani Haveli ka Shorgul: Ek Nakli Bhoot",
+          "current_step": "Completed",
+          "format": "detective"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-28T07:47:15",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-28_Raat3Baje_ShamshanKaKarzEkAdhooriSiddhi",
+          "title": "Shamshan Ka Karz: Ek Adhoori Siddhi",
+          "current_step": "Completed",
+          "format": "tantra"
+        },
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-28_Raat3Baje_PahadiHomestayEkKamraJiskaDarwazaKabhiNahiKhulta",
+          "title": "Pahadi Homestay: Ek Kamra Jiska Darwaza Kabhi Nahi Khulta",
+          "current_step": "Completed",
+          "format": "rules"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-28_Beyond3Baje_UttarakhandKaWohGaonJahaLightKabhiBandNahiHuib3b412",
+          "title": "Uttarakhand ka Woh Gaon Jaha Light Kabhi Band Nahi Hui (B3B-412)",
+          "current_step": "Voice Recording",
+          "format": "anomaly_file"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-28_Beyond3Baje_MothmanPointPleasantKaRaaz",
+          "title": "MOTHMAN: Point Pleasant ka Raaz",
+          "current_step": "Voice Recording",
+          "format": "investigation"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-28_Life3Baje_30DaysOfBuildingBuzzcafRevenueOrdersAndMistakes",
+          "title": "30 Days of Building Buzzcaf — Revenue, Orders and Mistakes",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-28_Life3Baje_HowMuchMoneyDoINeedToQuitMyJobtheHonestMath",
+          "title": "How Much Money Do I Need to Quit My Job? (The Honest Math)",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-28_TheTallStoryteller_KolkataMansionKabhootAurChoriKaSach",
+          "title": "Kolkata Mansion ka 'Bhoot' aur Chori ka Sach",
+          "current_step": "Completed",
+          "format": "detective"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-28_TheTallStoryteller_DoShaadiyanEkMohalla",
+          "title": "Do Shaadiyan, Ek Mohalla",
+          "current_step": "Completed",
+          "format": "comedy"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-25T16:21:41",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-25_Raat3Baje_NadiKaWoAuratRaatKoKyunKoiWahanNahiJaata",
+          "title": "Nadi Ka Wo Aurat | Raat Ko Kyun Koi Wahan Nahi Jaata?",
+          "current_step": "Completed",
+          "format": "story"
+        },
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-25_Raat3Baje_DadiKiKhaliKursiAurWohRaatKaBhojantheRitualOfTheEmptyChair",
+          "title": "Dadi Ki Khali Kursi aur Woh Raat ka Bhojan (The Ritual of the Empty Chair)",
+          "current_step": "Completed",
+          "format": "black_magic"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-25_Beyond3Baje_Mothman",
+          "title": "MOTHMAN",
+          "current_step": "Voice Recording",
+          "format": "investigation"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-25_Beyond3Baje_KalKaVideo",
+          "title": "KAL KA VIDEO",
+          "current_step": "Voice Recording",
+          "format": "what_if"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-25_Life3Baje_WhyImNotTryingToQuitMyJobyet",
+          "title": "Why I'm NOT Trying to Quit My Job (Yet)",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "Life3Baje",
+          "project_id": "2026-10-25_Life3Baje_IRealizedICouldntDoItAllAlonetheTruthAboutScaling",
+          "title": "I Realized I Couldn't Do It All Alone (The Truth About Scaling)",
+          "current_step": "Completed"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-25_TheTallStoryteller_BarishBandKamraAurNakliBhoot",
+          "title": "Barish, Band Kamra aur Nakli Bhoot",
+          "current_step": "Completed",
+          "format": "detective"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-25_TheTallStoryteller_BiryaniBaraatAurBadaJhooththeBigLie",
+          "title": "Biryani, Baraat aur Bada Jhooth (The Big Lie)",
+          "current_step": "Completed",
+          "format": "comedy"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-24T04:03:24",
+      "built": [
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-24_TheTallStoryteller_MandirKaShaitaanYaInsaanKiSaazish",
+          "title": "Mandir ka Shaitaan ya Insaan ki Saazish?",
+          "current_step": "Visual Plan",
+          "format": "folk_tale"
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "project_id": "2026-10-24_TheTallStoryteller_KolkataKiPuraniDeewarenAurChoriKaSaazishworkingTitle",
+          "title": "Kolkata ki Purani Deewaren aur Chori ka Saazish (Working Title)",
+          "current_step": "Visual Plan",
+          "format": "mystery"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-24T03:20:08",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-24_Raat3Baje_TrackParKhadiAurat",
+          "title": "Track Par Khadi Aurat",
+          "current_step": "Visual Plan",
+          "format": "real_encounter"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-24T02:47:38",
+      "built": [
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-24_Beyond3Baje_B3b409TheVanishingRoom",
+          "title": "B3B-409: THE VANISHING ROOM",
+          "current_step": "Visual Plan",
+          "format": "anomaly_file"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "ran_at": "2026-10-24T02:25:08",
+      "built": [
+        {
+          "channel": "Raat3Baje",
+          "project_id": "2026-10-24_Raat3Baje_DelhiCanttKiWarningTheRulesOfTheWhiteSaree",
+          "title": "Delhi Cantt ki Warning: The Rules of the White Saree",
+          "current_step": "Visual Plan",
+          "format": "rules"
+        },
+        {
+          "channel": "Beyond3Baje",
+          "project_id": "2026-10-24_Beyond3Baje_KalKiVideoCctvKaSach",
+          "title": "Kal Ki Video | CCTV ka Sach",
+          "current_step": "Visual Plan",
+          "format": "what_if"
+        }
+      ],
+      "skipped": []
+    },
     {
       "ran_at": "2026-10-01T05:45:27",
       "built": [

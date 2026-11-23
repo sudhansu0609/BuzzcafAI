@@ -30,5 +30,133 @@
     "source": "agent",
     "created": "2026-10-08T11:25:28.669746",
     "updated": "2026-10-08T11:25:28.669754"
+  },
+  {
+    "id": "f02d3ccf-e886-4305-9741-cf2ce32d79df",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\"world\":\"Early autumn, mostly night-time interiors lit by a single flickering oil lantern or small diya, with dim hazy daylight in between; damp, cool, smoky air; muted desaturated palette of earthy browns, soot black and faded ochre with warm amber pools of light; peeling lime-plaster walls with scratches, cracked mud-and-brick hearth, soot-stained clay, worn brass utensils, narrow stone lanes with wet mud, rusted iron latches, old tin trunks and dusty rooftop ledges.\",\"main_character\":\"Nikhil Tiwari\",\"characters\":[{\"name\":\"Nikhil Tiwari\",\"aliases\":[\"Nikhil\",\"Nikku\",\"main\",\"the narrator\",\"grandson\"],\"gender\":\"male\",\"look\":\"Indian man of 27, lean medium build, tired stubbled face with worried eyes, short dark hair, wearing a crumpled plain cotton shirt and dark trousers, a thin black thread tied around his left wrist.\"},{\"name\":\"Kaushalya Devi (Dadi)\",\"aliases\":[\"Dadi\",\"Kaushalya Devi\",\"grandmother\",\"the old widow\"],\"gender\":\"female\",\"look\":\"Frail Indian woman of 78, extremely thin with trembling hands, deeply lined gaunt face, thin white hair pulled back, wearing a faded plain white cotton sari with loose glass bangles hanging off her thin wrists.\"},{\"name\":\"Ramvati Kaki\",\"aliases\":[\"Kaki\",\"the neighbour\",\"the old woman next door\"],\"gender\":\"female\",\"look\":\"Indian woman of about 80, small stooped build, wrinkled kind face, grey hair under the sari border, wearing a worn pale printed cotton sari with the pallu draped over her head.\"},{\"name\":\"Pandit Girijashankar\",\"aliases\":[\"Pandit-ji\",\"the purohit\",\"the priest\"],\"gender\":\"male\",\"look\":\"Indian man of about 60, medium heavy build, serious lined face with a tilak on the forehead, shaved head with a small tuft, wearing a white dhoti and a sacred thread across his bare chest.\"},{\"name\":\"Sudhansu\",\"aliases\":[\"the host\"],\"gender\":\"male\",\"look\":\"Indian man in his 30s, neat short black hair, trimmed beard, wearing a dark casual jacket, seated in a dim studio with warm amber light.\"},{\"name\":\"Bholu\",\"aliases\":[\"Bhola Nath\""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:33:13.057921",
+    "updated": "2026-10-20T11:33:13.057930"
+  },
+  {
+    "id": "17cbfdd4-8295-4e05-b28c-790eabe93eb2",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\"world\":\"Late autumn night inside an old Indian village house, lit only by a single flickering oil lamp with warm amber pools of light and deep black shadows; cool, still, smoky air; muted desaturated palette of earthy browns, soot black and faded ochre; peeling lime-plaster walls with cracks, packed mud floor, worn brass utensils, dusty wooden beams and an old wall clock.\",\"main_character\":\"\",\"characters\":[{\"name\":\"Dadi\",\"aliases\":[\"grandmother\",\"the old woman\",\"dadi ma\"],\"gender\":\"female\",\"look\":\"Frail Indian woman of about 75, thin stooped build, deeply lined gaunt face, thin white hair pulled back, wearing a faded plain white cotton sari, with visibly trembling hands and loose glass bangles on her thin wrists.\"},{\"name\":\"Narrator\",\"aliases\":[\"main\",\"grandson\",\"poota\",\"the narrator\"],\"gender\":\"male\",\"look\":\"Indian man in his late 20s, lean medium build, tired stubbled face with wary eyes, short dark hair, wearing a crumpled plain cotton shirt and dark trousers, a thin black thread tied around his left wrist.\"},{\"name\":\"Dadaji\",\"aliases\":[\"grandfather\",\"tumhare dadaji\"],\"gender\":\"male\",\"look\":\"Elderly Indian man of about 80, thin frame, faint translucent and dimly seen figure, white stubble, bald head with thin white hair at the sides, wearing a plain white kurta and dhoti, always seated low and half hidden in shadow.\"}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:34:05.532867",
+    "updated": "2026-10-21T10:34:05.532876"
+  },
+  {
+    "id": "5f593ad3-d0a7-4331-956a-90c3ab1ee973",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\"world\":\"Late autumn bright but hazy afternoon in an old Indian village house, flat whitewashed concrete rooftops with low parapet walls, soft dusty sunlight with long pale shadows inside the kitchen; muted desaturated palette of earthy browns, faded ochre, dusty white and soot black; cracked lime-plaster walls, rough cement terrace floors, worn brass plates, small iron-barred kitchen window with dark interior.\",\"main_character\":\"Narrator\",\"characters\":[{\"name\":\"Narrator\",\"aliases\":[\"main\",\"I\",\"grandson\",\"poota\"],\"gender\":\"male\",\"look\":\"Indian man in his late 20s, lean medium build, tired stubbled face with wary eyes, short dark hair, wearing a crumpled plain cotton shirt and dark trousers, a thin black thread tied around his left wrist.\"},{\"name\":\"Kaki\",\"aliases\":[\"dadi ki saheli\",\"the old neighbour\",\"the old woman next door\"],\"gender\":\"female\",\"look\":\"Indian woman of about 78, small stooped build, wrinkled face with sharp watchful eyes, grey hair under the sari border, wearing a worn pale printed cotton sari with the pallu draped over her head, seated on the rooftop sorting grain on a wide flat tray.\"},{\"name\":\"Dadi\",\"aliases\":[\"grandmother\",\"dadi ma\"],\"gender\":\"female\",\"look\":\"Frail Indian woman of about 75, thin stooped build, deeply lined gaunt face, thin white hair pulled back, wearing a faded plain white cotton sari, with trembling hands and loose glass bangles on her thin wrists.\"}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:36:32.074000",
+    "updated": "2026-10-21T10:36:32.074007"
+  },
+  {
+    "id": "e725f40b-1c19-4ce4-8d4b-2f664c6ce777",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\"world\":\"Late autumn night inside an old Indian village house, lit only by faint dim lamplight with deep black shadows; cool, still, quiet air; muted desaturated palette of earthy browns, soot black and faded ochre; peeling lime-plaster walls with cracks, packed mud floor, soot-stained kitchen hearth, worn brass plates and utensils, a rope cot, dusty wooden beams.\",\"main_character\":\"Narrator\",\"characters\":[{\"name\":\"Narrator\",\"aliases\":[\"main\",\"I\",\"grandson\",\"poota\"],\"gender\":\"male\",\"look\":\"Indian man in his late 20s, lean medium build, tired stubbled face with wary eyes, short dark hair, wearing a crumpled plain cotton shirt and dark trousers, a thin black thread tied around his left wrist.\"},{\"name\":\"Dadi\",\"aliases\":[\"grandmother\",\"dadi ma\",\"the old woman\"],\"gender\":\"female\",\"look\":\"Frail Indian woman of about 75, thin stooped build, deeply lined gaunt face, thin white hair pulled back, wearing a faded plain white cotton sari, with trembling hands and loose glass bangles on her thin wrists.\"}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:38:30.143738",
+    "updated": "2026-10-21T10:38:30.143746"
+  },
+  {
+    "id": "5b7313e3-f79d-44ae-ab49-6f7c4aeb4c89",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\"world\":\"Cold night inside an old isolated bungalow far from the city, lit only by a dim flickering lamp with deep black shadows; damp chilly air with a faint haze; muted desaturated palette of earthy browns, soot black, mossy grey-green and faded ochre; peeling lime-plaster walls with damp stains, cracked stone floor, rusted iron taps, wet muddy ground outside, dusty wooden doors and windows.\",\"main_character\":\"Dost\",\"characters\":[{\"name\":\"Dost\",\"aliases\":[\"mere dost\",\"friend\",\"he\",\"the friend\"],\"gender\":\"male\",\"look\":\"Indian man in his late 20s, lean medium build, tired stubbled face with wary eyes, short dark hair, wearing a crumpled plain cotton shirt and dark trousers, a thin black thread tied around his right wrist.\"},{\"name\":\"Parchhaiyan\",\"aliases\":[\"shadows\",\"parchaiya\",\"the shadowy figures\",\"unseen presences\"],\"gender\":\"\",\"look\":\"Several tall thin dark shadow figures with no faces or features, standing still and half merged with the wall, always shown as black silhouettes with faintly glowing pale outlines.\"}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T01:23:29.084401",
+    "updated": "2026-10-23T01:23:29.084406"
+  },
+  {
+    "id": "607dac38-b311-4180-809e-fb2fcdb38a83",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "```json\n{\n  \"world\": \"Deep underwater shipwreck at 30 meters depth in cold dark saltwater, sealed metal compartments with only thin shafts of dim filtered blue-grey light, muted cold palette of rust-brown corroded metal, dark grey stone and deep blue darkness, condensation-covered surfaces, heavy pressurized air thick with faint oil and rust.\",\n  \"main_character\": \"Harrison Okene\",\n  \"characters\": [\n    {\n      \"name\": \"Harrison Okene\",\n      \"aliases\": [\"the cook\", \"the survivor\", \"the subject\", \"the tugboat worker\"],\n      \"gender\": \"male\",\n      \"look\": \"Indian man in his 30s, lean medium build, weathered dark face with stubble and tired wary eyes, short dark hair, wearing stained dark work clothes and a cook's uniform, thin metal identification card on his chest.\"\n    },\n    {\n      \"name\": \"Sudhansu\",\n      \"aliases\": [\"the narrator\", \"the host\", \"the voice\"],\n      \"gender\": \"male\",\n      \"look\": \"Indian man in his early 30s, neat short black hair, trimmed beard, wearing a dark casual jacket, seated in a dim investigation room lit with warm amber desk lamp light.\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:04:32.048315",
+    "updated": "2026-10-26T15:04:32.048321"
+  },
+  {
+    "id": "8523e686-cecf-435f-9406-11c92cc49e34",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "{\n  \"world\": \"Midnight during Amavasya in a desolate, overgrown cremation ground surrounded by dense dark jungle, lit only by a ritual ground fire shifting from orange to eerie white-blue with thick rising smoke and deep pitch-black shadows; cold misty air with a desaturated palette of charcoal grey, ash white, earth brown, and soot black; cracked ancient gravestones, dry overgrown grass, scattered broken rocks, and thick layers of grey ash covering the hard packed earth.\",\n  \"main_character\": \"Sadhak\",\n  \"characters\": [\n    {\n      \"name\": \"Sadhak\",\n      \"aliases\": [\"main\", \"the narrator\", \"the seeker\", \"the practitioner\"],\n      \"gender\": \"male\",\n      \"look\": \"Indian man in his late 20s, lean build, intense strained face covered in cold sweat and grey ash, unkempt short black hair, wearing a dark crumpled cloth dhoti, clutching a tarnished copper vessel with ash-stained shivering hands.\"\n    },\n    {\n      \"name\": \"Pishach\",\n      \"aliases\": [\"unseen presence\", \"the entity\", \"purani aur khatanak chij\", \"shadowy figure\"],\n      \"gender\": \"\",\n      \"look\": \"A tall amorphous shadowy silhouette rising from the ground ash, with shifting distorted edges, no clear facial features, and a faint sickly pale glow outlining its dark form.\"\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:41:02.755772",
+    "updated": "2026-10-29T02:41:02.755775"
+  },
+  {
+    "id": "852dbe46-02fa-4905-b775-ad0bdb54a999",
+    "scope": "agent",
+    "owner": "CharacterPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Read this story and write its visual cast sheet: what an image model must be told so every picture of the video shows the same people in the same world.\n\nReply with a single JSON object and nothing else:\n{\"world\": \"one English line of what the camera sees in EVERY frame of this story: season, time of day, weather, light, colour palette, and the textures of the place (vegetation, walls, roads). Never name animals or creatures, people, or named parks, reserves, cities or brands \u2014 a creature named here would be drawn into every picture.\",\n  \"main_character\": \"the name of the ONE character the sto",
+      "result_snippet": "```json\n{\n  \"world\": \"October 2022 inside a small rural Kerala village house under police forensic investigation, lit by harsh investigation lighting with CCTV footage and evidence collection visible, muted desaturated palette of concrete grey, earth brown, institutional white and deep shadows, sparse traditional furnishings with rough concrete floors and weathered lime-plaster walls\",\n  \"main_character\": \"\",\n  \"characters\": [\n    {\n      \"name\": \"Rosalie\",\n      \"aliases\": [\"first victim\", \"lottery ticket seller\", \"missing woman\"],\n      \"gender\": \"female\",\n      \"look\": \"Indian woman in her mid-40s, medium build, wearing simple everyday clothing typical of a village woman selling lottery tickets\"\n    },\n    {\n      \"name\": \"Padman\",\n      \"aliases\": [\"second victim\", \"Tamil woman\", \"lottery seller\", \"missing woman\"],\n      \"gender\": \"female\",\n      \"look\": \"Tamil woman in her mid-40s, medium build, wearing simple everyday sari and clothing typical of a lottery ticket seller\"\n    },\n    {\n      \"name\": \"Muhammad Shafi\",\n      \"aliases\": [\"Shafi\", \"accused perpetrator\", \"ritualist\"],\n      \"gender\": \"male\",\n      \"look\": \"Indian man in his 40s-50s, medium build, wearing simple village clothing\"\n    },\n    {\n      \"name\": \"Bhagaval Song\",\n      \"aliases\": [\"Song\", \"accused\", \"traditional healer\", \"house owner\"],\n      \"gender\": \"male\",\n      \"look\": \"Indian man in his 50s-60s, medium build, wearing simple traditional clothing, presented as a healer\"\n    },\n    {\n      \"name\": \"Laila\",\n      \"aliases\": [\"Song's wife\", \"accused\", \"Bhagaval's wife\"],\n      \"gender\": \"female\",\n      \"look\": \"Indian woman in her 40s-50s, medium build, wearing simple everyday sari\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:12:37.950934",
+    "updated": "2026-11-23T12:12:37.950937"
   }
 ]

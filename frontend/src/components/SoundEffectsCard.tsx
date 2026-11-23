@@ -246,6 +246,7 @@ export default function SoundEffectsCard() {
               placeholder="B:\path\to\sound\effects"
               onChange={(e) => updateRow(i, e.target.value)}
               onBlur={flushNow}
+              aria-label={`Folder ${i + 1}`}
             />
             <button
               type="button"
@@ -311,6 +312,7 @@ export default function SoundEffectsCard() {
               placeholder="a woman screams in a corridor"
               value={genText}
               onChange={(e) => setGenText(e.target.value)}
+              aria-label="Sound"
             />
           </div>
           <div className="form-group" style={{ flex: '0 0 190px' }}>
@@ -319,6 +321,7 @@ export default function SoundEffectsCard() {
               className="form-control"
               value={genKind}
               onChange={(e) => onKindChange(e.target.value as 'accent' | 'bed')}
+              aria-label="Kind"
             >
               <option value="accent">Scene sound (accent)</option>
               <option value="bed">Background bed</option>
@@ -334,6 +337,7 @@ export default function SoundEffectsCard() {
               step={0.5}
               value={genSeconds}
               onChange={(e) => setGenSeconds(Math.max(0.5, Math.min(47, Number(e.target.value) || 0.5)))}
+              aria-label="Seconds"
             />
           </div>
           <div className="form-group" style={{ flex: '0 0 auto', alignSelf: 'flex-end' }}>

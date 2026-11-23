@@ -1,0 +1,242 @@
+[
+  {
+    "id": "a4867514-d029-416c-a4fe-079c910b65da",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0924\u093e \u0939\u092e \u0915\u094b \u0936\u093f\u0915\u093e\u092f\u0924 \u0915\u0940 \u092d\u0940 \u092c\u093e\u0915\u093c\u0940 \u0928 \u0930\u0939\u0947 \u091c\u093e\", \"\u0938\u0941\u0928 \u0932\u0947\u0924\u0947 \u0939\u0948\u0902 \u0917\u094b \u091c\u093c\u093f\u0915\u094d\u0930 \u0939\u092e\u093e\u0930\u093e \u0928\u0939\u0940\u0902 \u0915\u0930\u0924\u0947\", \"\u0917\u093c\u093e\u0932\u093f\u092c \u0924\u093f\u0930\u093e \u0905\u0939\u0935\u093e\u0932 \u0938\u0941\u0928\u093e \u0926\u0947\u0902\u0917\u0947 \u0939\u092e \u0909\u0928 \u0915\u094b\", \"\u0935\u094b \u0938\u0941\u0928 \u0915\u0947 \u092c\u0941\u0932\u093e \u0932\u0947\u0902 \u092f\u0947 \u0907\u091c\u093e\u0930\u093e \u0928\u0939\u0940\u0902 \u0915\u0930\u0924\u0947\"], \"mood\": \"waqt: time passing gently, dusk turning to night\", \"seconds\": 23, \"style\": \"painterly\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a rustic balcony overlooking a silent courtyard, dusk transitioning into twilight, soft golden light fading into deep blue\",\n  \"shots\": [\n    {\n      \"n\": 1,\n      \"seconds\": 6,\n      \"image_prompt\": \"portrait 9:16 still: an old wooden chair beside a stone railing, warm evening glow on the wood, painterly style\",\n      \"video_prompt\": \"dust motes dancing slowly in the fading golden light\",\n      \"line\": \"\u0924\u093e \u0939\u092e \u0915\u094b \u0936\u093f\u0915\u093e\u092f\u0924 \u0915\u0940 \u092d\u0940 \u092c\u093e\u0915\u093c\u0940 \u0928 \u0930\u0939\u0947 \u091c\u093e\"\n    },\n    {\n      \"n\": 2,\n      \"seconds\": 6,\n      \"image_prompt\": \"portrait 9:16 still: a copper vessel on a stone ledge, shadows lengthening, painterly style\",\n      \"video_prompt\": \"shadows stretching slowly across the stone surface\",\n      \"line\": \"\u0938\u0941\u0928 \u0932\u0947\u0924\u0947 \u0939\u0948\u0902 \u0917\u094b \u091c\u093c\u093f\u0915\u094d\u0930 \u0939\u092e\u093e\u0930\u093e \u0928\u0939\u0940\u0902 \u0915\u0930\u0924\u0947\"\n    },\n    {\n      \"n\": 3,\n      \"seconds\": 6,\n      \"image_prompt\": \"portrait 9:16 still: a flickering oil lamp inside a niche, soft orange glow against deep blue shadows, painterly style\",\n      \"video_prompt\": \"the flame of the lamp swaying gently in a light breeze\",\n      \"line\": \"\u0917\u093c\u093e\u0932\u093f\u092c \u0924\u093f\u0930\u093e \u0905\u0939\u0935\u093e\u0932 \u0938\u0941\u0928\u093e \u0926\u0947\u0902\u0917\u0947 \u0939\u092e \u0909\u0928 \u0915\u094b\"\n    },\n    {\n      \"n\": 4,\n      \"seconds\": 5,\n      \"image_prompt\": \"portrait 9:16 still: distant silhouettes of trees against a darkening indigo sky, painterly style\",\n      \"video_prompt\": \"distant leaves trembling slightly in the evening wind\",\n      \"line\": \"\u0935\u094b \u0938\u0941\u0928 \u0915\u0947 \u092c\u0941\u0932\u093e \u0932\u0947\u0902 \u092f\u0947 \u0907\u091c\u093e\u0930\u093e \u0928\u0939\u0940\u0902 \u0915\u0930\u0924\u0947\"\n    }\n  ],\n  \"bed\": {\n    \"mood\": \"melancholic and timeless\",\n    \"instruments\": [\n      \"sitar\",\n      \"ambient night sounds\"\n    ],\n    \"bpm\": 60\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T02:49:24.122161",
+    "updated": "2026-10-23T02:49:24.122166"
+  },
+  {
+    "id": "7a62cb33-b20d-44f7-989f-ae6e32438087",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0939\u091c\u093c\u093e\u0930\u094b\u0902 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936\u0947\u0902 \u0910\u0938\u0940 \u0915\u093f \u0939\u0930 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936 \u092a\u0930 \u0926\u092e \u0928\u093f\u0915\u0932\u0947\", \"\u092c\u0939\u0941\u0924 \u0928\u093f\u0915\u0932\u0947 \u092e\u0947\u0930\u0947 \u0905\u0930\u092e\u093e\u0928 \u0932\u0947\u0915\u093f\u0928 \u092b\u093f\u0930 \u092d\u0940 \u0915\u092e \u0928\u093f\u0915\u0932\u0947\u0964\", \"\u092f\u0939\u0940 \u0939\u0948 \u0906\u091c\u093c\u092e\u093e\u0928\u093e \u0924\u094b \u0938\u0924\u093e\u0928\u093e \u0915\u093f\u0938\u0915\u094b \u0915\u0939\u0924\u0947 \u0939\u0948\u0902,\", \"\u0905\u0926\u0942 \u0915\u0947 \u0939\u094b \u0932\u093f\u090f \u091c\u092c \u0924\u0941\u092e \u0924\u094b \u092e\u0947\u0930\u093e \u0907\u092e\u094d\u0924\u0939\u093e\u0902 \u0915\u094d\u092f\u094b\u0902 \u0939\u094b\u0964\"], \"mood\": \"umeed: soft hope, first light after a long night\", \"theme\": \"moonlight over a quiet Indian hill town, old Indian houses with sloped tin roofs, silver light, long still shadows\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a village street in a hill town at dawn, moonlight fading as first light touches tin roofs, silver tones and long shadows\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a weathered tin roof of an old house, glistening under silver moonlight, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a stone walkway between two houses, long shadows stretching across the ground in silver light, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a heavy wooden door with iron studs, moonlight hitting the grain of the wood, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 6,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: mist drifting slowly over a distant hill peak at dawn, pale blue and silver light, real style\",\n      \"motion\": \"mist moving very slowly across the landscape\",\n      \"seconds\": 6,\n      \"kind\": \"video\"\n    }\n  ],\n  \"bed\": {\n    \"mood\": \"soft hope, awakening\",\n    \"instruments\": [\n      \"flute\",\n      \"ambient morning birds\",\n      \"santoor\"\n    ],\n    \"bpm\": 65\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T19:33:25.152771",
+    "updated": "2026-10-23T19:33:25.152778"
+  },
+  {
+    "id": "1034b09b-27c1-4270-89ed-88de88b7f5cf",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u091a\u0941\u092a\u0915\u0947 \u091a\u0941\u092a\u0915\u0947 \u0917\u093c\u092e \u0915\u093e \u0916\u093e\u0928\u093e \u0915\u094b\u0908 \u0939\u092e \u0938\u0947 \u0938\u0940\u0916 \u091c\u093e\u090f\", \"\u091c\u0940 \u0939\u0940 \u091c\u0940 \u092e\u0947\u0902 \u0924\u093f\u0932\u092e\u093f\u0932\u093e\u0928\u093e \u0915\u094b\u0908 \u0939\u092e \u0938\u0947 \u0938\u0940\u0916 \u091c\u093e\u090f\", \"\u0905\u092c\u094d\u0930 \u0915\u094d\u092f\u093e \u0906\u0901\u0938\u0942 \u092c\u0939\u093e\u0928\u093e \u0915\u094b\u0908 \u0939\u092e \u0938\u0947 \u0938\u0940\u0916 \u091c\u093e\u090f\", \"\u092c\u0930\u094d\u0915\u093c \u0915\u094d\u092f\u093e \u0939\u0948 \u0924\u093f\u0932\u092e\u093f\u0932\u093e\u0928\u093e \u0915\u094b\u0908 \u0939\u092e \u0938\u0947 \u0938\u0940\u0916 \u091c\u093e\u090f\"], \"mood\": \"tanhai: a quiet loneliness, late night, rain\", \"theme\": \"late night under a full moon high in a deep blue sky, a quiet Indian hill town like Shimla or Mussoorie, old Himachali houses with sloped tin roofs, silver moonlight, long still shadows\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a quiet hill town street at night, full moon in a deep blue sky, rain falling on old Himachali houses with tin roofs and silver moonlight\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a weathered tin roof of an old house, raindrops glistening under silver moonlight, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: rain falling on a stone balcony railing, water dripping steadily in the moonlight, real style\",\n      \"motion\": \"water droplets falling slowly from the edge of the stone\",\n      \"seconds\": 7,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a heavy wooden door with iron studs, silver moonlight casting long shadows across the wood grain, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 6,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: mist drifting slowly over a distant pine tree against a deep blue night sky, real style\",\n      \"motion\": \"mist moving very slowly through the trees\",\n      \"seconds\": 6,\n      \"kind\": \"video\"\n    }\n  ],\n  \"bed\": {\n    \"mood\": \"lonely and heavy\",\n    \"instruments\": [\n      \"flute\",\n      \"rain\",\n      \"santoor\"\n    ],\n    \"bpm\": 55\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T19:45:07.930889",
+    "updated": "2026-10-23T19:45:07.930894"
+  },
+  {
+    "id": "19526490-7fbf-4ccb-8260-15c43935ac6d",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0939\u091c\u093c\u093e\u0930\u094b\u0902 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936\u0947\u0902 \u0910\u0938\u0940 \u0915\u093f \u0939\u0930 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936 \u092a\u0930 \u0926\u092e \u0928\u093f\u0915\u0932\u0947\", \"\u092c\u0939\u0941\u0924 \u0928\u093f\u0915\u0932\u0947 \u092e\u0947\u0930\u0947 \u0905\u0930\u092e\u093e\u0928 \u0932\u0947\u0915\u093f\u0928 \u092b\u093f\u0930 \u092d\u0940 \u0915\u092e \u0928\u093f\u0915\u0932\u0947\u0964\"], \"mood\": \"ishq: tender longing, a lamp in the rain\", \"theme\": \"a cozy Indian home, rain on the window, a lamp, chai steaming in a glass, a shawl folded on a charpai\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a cozy indoor corner of an Indian home during a monsoon evening, rain hitting the windowpane, warm lamp light, and steam rising from tea.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: raindrops racing down a glass windowpane with a blurred rainy garden outside, soft golden light from a nearby lamp, real style\",\n      \"motion\": \"water droplets sliding slowly down the glass\",\n      \"seconds\": 7,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a glass of hot masala chai on a wooden ledge, steam rising in swirls, warm lamplight glowing in the background, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a heavy woolen shawl folded neatly on a woven charpai, soft shadows and warm highlights, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 6,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: an old brass oil lamp flickering on a windowsill, rain visible in the distance, real style\",\n      \"motion\": \"the flame of the lamp swaying gently\",\n      \"seconds\": 6,\n      \"kind\": \"video\"\n    }\n  ],\n  \"bed\": {\n    \"mood\": \"tender longing\",\n    \"instruments\": [\n      \"santoor\",\n      \"rain\",\n      \"flute\"\n    ],\n    \"bpm\": 58\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T20:45:28.018612",
+    "updated": "2026-10-23T20:45:28.018617"
+  },
+  {
+    "id": "aad142ff-b6f1-4ef3-8d46-9bf48ffbedb1",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u092f\u0947 \u0907\u0915\u093c\u093e\u092e\u0924 \u0939\u092e\u0947\u0902 \u092a\u0948\u0917\u093c\u093e\u092e-\u090f-\u0938\u092b\u093c\u0930 \u0926\u0947\u0924\u0940 \u0939\u0948\", \"\u091c\u093c\u093f\u0928\u094d\u0926\u0917\u0940 \u092e\u094c\u0924 \u0915\u0947 \u0906\u0928\u0947 \u0915\u0940 \u0916\u093c\u092c\u0930 \u0926\u0947\u0924\u0940 \u0939\u0948\", \"\u091c\u093c\u093e\u0932-\u090f-\u0926\u0941\u0928\u094d\u092f\u093e \u0939\u0948 \u0905\u091c\u092c \u0924\u0930\u0939 \u0915\u0940 \u0905\u0932\u094d\u0932\u093e\u092e\u093e-\u090f-\u0926\u0939\u0930\", \"\u092e\u0930\u094d\u0926-\u090f-\u0926\u0940\u0902-\u0926\u093e\u0930 \u0915\u094b \u092d\u0940 \u0926\u0939\u0930\u093f\u092f\u093e \u0915\u0930 \u0926\u0947\u0924\u0940 \u0939\u0948\"], \"mood\": \"tanhai: a quiet loneliness, late night, rain\", \"theme\": \"a monsoon storm over open Indian village fields, steady rain, distant lightning, wind in the paddy\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"an expansive rural landscape of an Indian village during a monsoon storm, heavy rain falling on vast fields, distant lightning, and wind whipping through the paddy.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: wide view of golden-green paddy fields under a dark, stormy sky, heavy rain falling in sheets, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a single old wooden fence post standing at the edge of a field, rain splashing against it, distant lightning illuminating the horizon, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 7,\n      \"kind\": \"still\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: close-up of heavy rain falling onto large green paddy leaves, water droplets dancing and splashing, real style\",\n      \"motion\": \"rain hitting the leaves and water dripping rapidly\",\n      \"seconds\": 6,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a distant silhouette of an old banyan tree against a dark sky, lightning flashing in the distance, real style\",\n      \"motion\": \"the same as prompt for a still\",\n      \"seconds\": 6,\n      \"kind\": \"still\"\n    }\n  ],\n  \"bed\": {\n    \"mood\": \"lonely and heavy\",\n    \"instruments\": [\n      \"santoor\",\n      \"rain\",\n      \"flute\"\n    ],\n    \"bpm\": 55\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T21:02:23.583776",
+    "updated": "2026-10-23T21:02:23.583781"
+  },
+  {
+    "id": "88d1b8d9-7579-4a1c-8823-572fe3884a0e",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u091c\u093c\u093f\u0902\u0926\u0917\u0940 \u0905\u092a\u0928\u0940 \u091c\u092c \u0907\u0938 \u0936\u0915\u094d\u0932 \u0938\u0947 \u0917\u0941\u091c\u093c\u0930\u0940\", \"\u0939\u092e \u092d\u0940 \u0915\u094d\u092f\u093e \u092f\u093e\u0926 \u0915\u0930\u0947\u0902\u0917\u0947 \u0915\u093f \u0916\u093c\u0941\u0926\u093e \u0930\u0916\u0924\u0947 \u0925\u0947\"], \"mood\": \"zindagi: calm reflection on life, an empty road at night\", \"theme\": \"a lone mud-and-thatch hut in the Indian hills, a lantern in the doorway, chimney smoke rising\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a lonely mud-and-thatch hut in the Indian hills at night, a lantern glowing in the doorway, and smoke rising from the chimney.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a rustic mud-and-thatch hut nestled against a dark hillside, a warm orange glow from a lantern visible in the open doorway, real style\",\n      \"motion\": \"the soft, steady flicker of the lantern light in the doorway\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a thin trail of smoke rising from a stone chimney against the dark night sky, distant hills visible in the shadows, real style\",\n      \"motion\": \"the smoke drifting slowly and curling upwards into the air\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a weathered wooden door frame of a hill cottage, a lantern hanging nearby casting long shadows on the mud wall, real style\",\n      \"motion\": \"the gentle swaying of the lantern's light against the textured wall\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T07:58:10.940541",
+    "updated": "2026-10-28T07:58:10.940545"
+  },
+  {
+    "id": "b8a573f8-bbfa-4fb9-9aa6-2fc91cffe24d",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0915\u094c\u0928 \u0935\u0915\u093c\u094d\u0924 \u0910 \u0935\u093e\u090f \u0917\u0941\u091c\u093c\u0930\u093e \u091c\u0940 \u0915\u094b \u0918\u092c\u0930\u093e\u0924\u0947 \u0939\u0941\u090f\", \"\u092e\u094c\u0924 \u0906\u0924\u0940 \u0939\u0948 \u0905\u091c\u0932 \u0915\u094b \u092f\u093e\u0901 \u0924\u0932\u0915 \u0906\u0924\u0947 \u0939\u0941\u090f\", \"\u0906\u0924\u093f\u0936-\u090f-\u0916\u093c\u0941\u0930\u094d\u0936\u0940\u0926 \u0938\u0947 \u0909\u0920\u0924\u093e \u0928\u0939\u0940\u0902 \u0926\u0947\u0916\u093e \u0927\u0941\u0935\u093e\u0901\", \"\u0906 \u0916\u0921\u093c\u0947 \u0939\u094b \u092c\u093e\u092e \u092a\u0930 \u0924\u0941\u092e \u092c\u093e\u0932 \u0938\u0941\u0916\u0932\u093e\u0924\u0947 \u0939\u0941\u090f\"], \"mood\": \"zindagi: calm reflection on life, an empty road at night\", \"theme\": \"a quiet Indian hill road at night, sodium streetlights, an empty stretch, slow mist\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"an empty asphalt road in a quiet Indian hill station at night, illuminated by orange sodium streetlights and veiled in a thin layer of mist.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: an empty stretch of asphalt road winding through hills at night, glowing under the warm orange light of a sodium lamp, real style\",\n      \"motion\": \"mist drifting slowly across the road surface\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a weathered concrete roadside railing with a distant hill silhouette in the background under orange streetlights, real style\",\n      \"motion\": \"the steady, slow movement of mist through the air\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a single old streetlamp casting a pool of warm light on a cracked pavement, heavy atmosphere, real style\",\n      \"motion\": \"the soft flickering or haze of the lamp's glow in the mist\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T10:13:04.727694",
+    "updated": "2026-10-28T10:13:04.727698"
+  },
+  {
+    "id": "931b42b9-26fa-42e1-8621-ad91ed10523c",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u091c\u093c\u093f\u0902\u0926\u0917\u0940 \u0905\u092a\u0928\u0940 \u091c\u092c \u0907\u0938 \u0936\u0915\u094d\u0932 \u0938\u0947 \u0917\u0941\u091c\u093c\u0930\u0940\", \"\u0939\u092e \u092d\u0940 \u0915\u094d\u092f\u093e \u092f\u093e\u0926 \u0915\u0930\u0947\u0902\u0917\u0947 \u0915\u093f \u0916\u093c\u0941\u0926\u093e \u0930\u0916\u0924\u0947 \u0925\u0947\"], \"mood\": \"zindagi: calm reflection on life, an empty road at night\", \"theme\": \"a tree-lined Indian street at golden hour, people cycling away, seen from behind, never facing forward\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"an old residential lane in an Indian town at golden hour, dust motes dancing in the light, and a long road lined with trees.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a dusty street lined with large neem trees, bathed in deep orange and gold sunlight of late afternoon, real style\",\n      \"motion\": \"dust motes dancing slowly in the golden light beams\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a distant view of people on bicycles moving away down a long sun-drenched lane, their backs to the camera, real style\",\n      \"motion\": \"the silhouettes of cyclists moving slowly into the distance\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a close-up of long shadows of tree branches stretching across a cracked pavement at golden hour, real style\",\n      \"motion\": \"the slight swaying of leaves causing the shadows to shift slowly\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T03:39:31.215382",
+    "updated": "2026-10-29T03:39:31.215386"
+  },
+  {
+    "id": "ae48f90a-d5e8-4a72-9853-5fc2d73061ee",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0909\u092e\u094d\u0930 \u092d\u0930 \u0939\u092e \u0930\u0939\u0947 \u0936\u0930\u093e\u092c\u0940 \u0938\u0947\", \"\u0926\u093f\u0932-\u090f-\u092a\u0941\u0930\u094d\u0916\u0942\u0902 \u0915\u0940 \u0907\u0915 \u0917\u0941\u0932\u093e\u092c\u0940 \u0938\u0947\", \"\u0916\u093f\u0932\u0928\u093e \u0915\u092e-\u0915\u092e \u0915\u0932\u0940 \u0928\u0947 \u0938\u0940\u0916\u093e \u0939\u0948\", \"\u0909\u0938\u0915\u0940 \u0906\u0901\u0916\u094b\u0902 \u0915\u0940 \u0928\u0940\u092e \u0916\u093c\u094d\u0935\u093e\u092c\u0940 \u0938\u0947\"], \"mood\": \"ishq: tender longing, a lamp in the rain\", \"theme\": \"a misty monsoon garden in Kerala, marigolds, steady rain falling straight down\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "{\n  \"world\": \"a quiet corner of an overgrown Kerala courtyard garden, twilight, steady straight rain and low ground mist.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: wet orange marigold blossoms bowing under heavy water droplets in a lush courtyard, steady monsoon rain falling vertically, dim twilight, real style\",\n      \"motion\": \"steady rain falling straight down as marigold petals tremble gently under the weight of water drops\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a mossy laterite stone step in the garden pooled with clear rainwater, fallen orange petals floating on the surface, misty twilight, real style\",\n      \"motion\": \"concentric ripples spreading softly as vertical raindrops disturb the pooled water on the stone\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T05:07:46.425836",
+    "updated": "2026-10-29T05:07:46.425844"
+  },
+  {
+    "id": "df09c1be-05a2-4ea7-ba11-4dd42e90a7b8",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0915\u094c\u0928 \u0935\u0915\u093c\u094d\u0924 \u0910 \u0935\u093e\u090f \u0917\u0941\u091c\u093c\u0930\u093e \u091c\u0940 \u0915\u094b \u0918\u092c\u0930\u093e\u0924\u0947 \u0939\u0941\u090f\", \"\u092e\u094c\u0924 \u0906\u0924\u0940 \u0939\u0948 \u0905\u091c\u0932 \u0915\u094b \u092f\u093e\u0901 \u0924\u0932\u0915 \u0906\u0924\u0947 \u0939\u0941\u090f\", \"\u0906\u0924\u093f\u0936-\u090f-\u0916\u093c\u0941\u0930\u094d\u0936\u0940\u0926 \u0938\u0947 \u0909\u0920\u0924\u093e \u0928\u0939\u0940\u0902 \u0926\u0947\u0916\u093e \u0927\u0941\u0935\u093e\u0901\", \"\u0906 \u0916\u0921\u093c\u0947 \u0939\u094b \u092c\u093e\u092e \u092a\u0930 \u0924\u0941\u092e \u092c\u093e\u0932 \u0938\u0941\u0916\u0932\u093e\u0924\u0947 \u0939\u0941\u090f\"], \"mood\": \"waqt: time passing gently, dusk turning to night\", \"theme\": \"crumbling brick walls of an abandoned Indian haveli, creepers, light through broken arches\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a crumbling courtyard of an abandoned Indian haveli at dusk, where golden evening light filters through broken brick arches and overgrown vines.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a weathered brick wall with cracks and creeping green vines, warm orange sunlight hitting the texture of the bricks, real style\",\n      \"motion\": \"dust motes dancing slowly in the shafts of light\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a crumbling archway of an old haveli, heavy shadows and golden highlights from the setting sun, real style\",\n      \"motion\": \"the slow movement of light as the sun sets further\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a close-up of dry leaves and vines caught in an old stone crevice, evening shadows deepening, real style\",\n      \"motion\": \"a slight breeze causing the vine leaves to tremble slowly\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T03:12:06.442722",
+    "updated": "2026-10-30T03:12:06.442725"
+  },
+  {
+    "id": "95fb3817-d193-42f4-9813-43f098727082",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0915\u093f\u0938\u0940 \u092c\u0947-\u0915\u0938 \u0915\u094b \u0910 \u092c\u0947-\u0926\u093e\u0926 \u0917\u0930 \u092e\u093e\u0930\u093e \u0924\u094b \u0915\u094d\u092f\u093e \u092e\u093e\u0930\u093e\", \"\u091c\u094b \u0906\u092a \u0939\u0940 \u092e\u0930 \u0930\u0939\u093e \u0939\u094b \u0909\u0938 \u0915\u094b \u0917\u0930 \u092e\u093e\u0930\u093e \u0924\u094b \u0915\u094d\u092f\u093e \u092e\u093e\u0930\u093e\", \"\u0928 \u092e\u093e\u0930\u093e \u0906\u092a \u0915\u094b \u091c\u094b \u0916\u093c\u093e\u0915 \u0939\u094b \u0907\u0915\u094d\u0938\u0940\u0930 \u092c\u0928 \u091c\u093e\u0924\u093e\", \"\u0905\u0917\u0930 \u092a\u093e\u0930\u0947 \u0915\u094b \u0910 \u0907\u0915\u094d\u0938\u0940\u0930 \u0917\u0930 \u092e\u093e\u0930\u093e \u0924\u094b \u0915\u094d\u092f\u093e \u092e\u093e\u0930\u093e\"], \"mood\": \"umeed: soft hope, first light after a long night\", \"theme\": \"gentle snowfall over a still Himalayan town of wooden houses, soft white light, quiet\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a serene Himalayan village with traditional wooden houses under a gentle snowfall at dawn, bathed in soft white morning light.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a row of weathered wooden houses in a mountain town, soft white snow falling gently over the rooftops and balconies, real style\",\n      \"motion\": \"the steady, slow descent of snowflakes through the air\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a close-up of a wooden balcony railing covered in a layer of fresh snow, soft morning light illuminating the texture of the wood, real style\",\n      \"motion\": \"snowflakes landing and accumulating on the ledge\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a distant view of a narrow mountain street between wooden buildings, soft white light filling the space as snow falls softly, real style\",\n      \"motion\": \"the subtle movement of snow drifting through the alleyway\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T05:37:56.769644",
+    "updated": "2026-10-30T05:37:56.769646"
+  },
+  {
+    "id": "039df5b6-6fa6-46e8-abbb-c0694a30c6ca",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0939\u091c\u093c\u093e\u0930\u094b\u0902 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936\u0947\u0902 \u0910\u0938\u0940 \u0915\u093f, \u0939\u0930 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936 \u092a\u0947 \u0926\u092e \u0928\u093f\u0915\u0932\u0947\", \"\u092c\u0939\u0941\u0924 \u0928\u093f\u0915\u0932\u0947 \u092e\u0947\u0930\u0947 \u0905\u0930\u092e\u093e\u0928, \u0932\u0947\u0915\u093f\u0928 \u092b\u093f\u0930 \u092d\u0940 \u0915\u092e \u0928\u093f\u0915\u0932\u0947\", \"\u0921\u0930\u0947 \u0915\u094d\u092f\u094b\u0902 \u092e\u0947\u0930\u093e \u0915\u093c\u093e\u0924\u093f\u0932, \u0915\u094d\u092f\u093e \u0930\u0939\u0947\u0917\u093e \u0909\u0938\u0915\u0940 \u0917\u0930\u094d\u0926\u0928 \u092a\u0930\", \"\u0935\u094b \u0916\u093c\u0942\u0901, \u091c\u094b \u091a\u0936\u094d\u092e\u0947-\u0924\u0930 \u0938\u0947 \u0909\u092e\u094d\u0930 \u092f\u0942\u0901 \u0926\u092e-\u092c-\u0926\u092e \u0928\u093f\u0915\u0932\u0947\"], \"mood\": \"zindagi: calm reflection on life, an empty road at night\", \"theme\": \"an Indian village lane in evening light, children far off, cattle returning home, no one up close\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a dusty, quiet Indian village lane at dusk, bathed in golden-orange evening light with long shadows.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a wide view of an unpaved village lane lined with neem trees, the ground glowing in orange sunset light, real style\",\n      \"motion\": \"dust motes dancing slowly in the golden shafts of light\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a distant view of cattle being led home along the lane, their silhouettes small against the warm evening glow, real style\",\n      \"motion\": \"the slow, rhythmic movement of the herd moving away into the distance\",\n      \"seconds\": 9,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a close-up of a weathered wooden gate at the edge of the lane, golden light hitting the texture of the wood, real style\",\n      \"motion\": \"the gentle swaying of nearby leaves casting shifting shadows on the gate\",\n      \"seconds\": 8,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T10:38:47.319403",
+    "updated": "2026-10-31T10:38:47.319406"
+  },
+  {
+    "id": "dff8e06b-fdbc-4c5a-a57b-de0adb79d1fd",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0924\u0941\u092e \u0905\u092a\u0928\u0947 \u0936\u093f\u0915\u0935\u0947 \u0915\u0940 \u092c\u093e\u0924\u0947\u0902 \u0928 \u0916\u094b\u0926 \u0916\u094b\u0926 \u0915\u0947 \u092a\u0942\u091b\u094b\", \"\u0939\u091c\u093c\u0930 \u0915\u0930\u094b \u092e\u093f\u0930\u0947 \u0926\u093f\u0932 \u0938\u0947 \u0915\u093f \u0909\u0938 \u092e\u0947\u0902 \u0906\u0917 \u0926\u092c\u0940 \u0939\u0948\", \"\u0926\u093f\u0932\u093e \u092f\u0947 \u0926\u0930\u094d\u0926 \u0913 \u0905\u0932\u092e \u092d\u0940 \u0924\u094b \u092e\u0941\u0917\u093c\u094d\u0924\u0928\u093f\u092e \u0939\u0948 \u0915\u093f \u0906\u0916\u093c\u093f\u0930\", \"\u0928 \u0917\u093f\u0930\u094d\u092f\u093e-\u090f-\u0938\u0939\u0930\u0940 \u0939\u0948 \u0928 \u0906\u0939-\u090f-\u0928\u0940\u092e-\u0936\u092c\u0940 \u0939\u0948\"], \"mood\": \"zindagi: calm reflection on life, an empty road at night\", \"theme\": \"an Indian village lane in evening light, children far off, cattle returning home, no one up close\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "{\n  \"world\": \"a quiet unpaved lane at the edge of an Indian village at sunset, bathed in amber dusk light with long shadows and dry dust in the air\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a dirt village road bordered by old banyan roots and mud boundary walls, distant small silhouettes of children playing far down the path, warm amber evening light, real style\",\n      \"motion\": \"dust motes drifting slowly in low golden sunbeams across the dirt path\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: silhouettes of cattle walking slowly away down the narrow unpaved lane towards distant thatched homes, bathed in fading orange twilight, real style\",\n      \"motion\": \"the slow rhythmic amble of cattle moving away into the distance as evening dust settles\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T11:16:56.420891",
+    "updated": "2026-10-31T11:16:56.420894"
+  },
+  {
+    "id": "736de380-6b19-4eb7-8d20-18c9549f5afc",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u092e\u091c\u093c\u093e \u0925\u093e \u0939\u092e \u0915\u094b \u091c\u094b \u0932\u0948\u0932\u093e \u0938\u0947 \u0926\u0942-\u092c-\u0926\u0942 \u0915\u0930\u0924\u0947\", \"\u0915\u0947 \u0917\u0941\u0932 \u0924\u0941\u092e\u094d\u0939\u093e\u0930\u0940 \u092c\u0939\u093e\u0930\u094b\u0902 \u092e\u0947\u0902 \u0906\u0930\u091c\u093c\u0942 \u0915\u0930\u0924\u0947\", \"\u092e\u091c\u093c\u0947 \u091c\u094b \u092e\u094c\u0924 \u0915\u0947 \u0906\u0936\u093f\u0915\u093c \u092c\u092f\u093e\u0901 \u0915\u092d\u0942 \u0915\u0930\u0924\u0947\", \"\u092e\u0938\u0940\u0939 \u0913 \u0916\u093c\u093f\u091c\u093c\u094d\u0930 \u092d\u0940 \u092e\u0930\u0928\u0947 \u0915\u0940 \u0906\u0930\u091c\u093c\u0942 \u0915\u0930\u0924\u0947\"], \"mood\": \"ishq: tender longing, a lamp in the rain\", \"theme\": \"a cozy Indian home, rain on the window, a lamp, a glass of hot chai on the sill, a shawl folded on a charpai\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "```json\n{\n  \"world\": \"a cozy interior corner of an Indian home during a monsoon evening, lit by the warm glow of a lamp with rain streaking against the window.\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: a glass of hot chai on a wooden windowsill, steam rising in soft curls, heavy raindrops racing down the pane of the window behind it, real style\",\n      \"motion\": \"the gentle, swirling motion of steam rising from the tea and the steady flow of rain on the glass\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a traditional brass lamp glowing warmly in a dim room, casting soft light onto a folded wool shawl nearby, real style\",\n      \"motion\": \"the subtle flicker of the flame and the slight movement of shadows on the fabric\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    }\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T03:39:34.075360",
+    "updated": "2026-11-01T03:39:34.075363"
+  },
+  {
+    "id": "a89430f1-b72c-4232-9364-ecd1b150f30f",
+    "scope": "agent",
+    "owner": "MoodReelPlanner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"lines\": [\"\u0939\u091c\u093c\u093e\u0930\u094b\u0902 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936\u0947\u0902 \u0910\u0938\u0940 \u0915\u093f \u0939\u0930 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936 \u092a\u0930 \u0926\u092e \u0928\u093f\u0915\u0932\u0947\", \"\u092c\u0939\u0941\u0924 \u0928\u093f\u0915\u0932\u0947 \u092e\u0947\u0930\u0947 \u0905\u0930\u092e\u093e\u0928 \u0932\u0947\u0915\u093f\u0928 \u092b\u093f\u0930 \u092d\u0940 \u0915\u092e \u0928\u093f\u0915\u0932\u0947\u0964\"], \"mood\": \"ishq: tender longing, a lamp in the rain\", \"theme\": \"a misty monsoon garden in Kerala, marigolds, steady rain falling straight down\", \"seconds\": 26, \"style\": \"real\", \"channel\": \"Life3Baje\"}",
+      "result_snippet": "{\n  \"world\": \"a quiet corner of an overgrown Kerala courtyard garden, twilight, steady straight rain and low ground mist\",\n  \"shots\": [\n    {\n      \"prompt\": \"portrait 9:16: wet orange marigold blossoms bowing under heavy water droplets in a lush courtyard, steady monsoon rain falling vertically, dim twilight, real style\",\n      \"motion\": \"steady rain falling straight down as marigold petals tremble gently under the weight of water drops\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    },\n    {\n      \"prompt\": \"portrait 9:16: a mossy laterite stone step in the garden pooled with clear rainwater, fallen orange petals floating on the surface, misty twilight, real style\",\n      \"motion\": \"concentric ripples spreading softly as vertical raindrops disturb the pooled water on the stone\",\n      \"seconds\": 13,\n      \"kind\": \"video\"\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T04:57:36.401140",
+    "updated": "2026-11-01T04:57:36.401143"
+  }
+]

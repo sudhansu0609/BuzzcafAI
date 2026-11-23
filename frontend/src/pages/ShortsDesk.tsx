@@ -189,10 +189,10 @@ export default function ShortsDesk() {
             <label key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.78rem', color: 'var(--text-muted)' }}>
               {f.label}
               {f.free ? (
-                <input className="form-control" value={filters[f.key] || ''} placeholder="Any"
+                <input className="form-control" aria-label={f.label} value={filters[f.key] || ''} placeholder="Any"
                   onChange={(e) => setFilters((x) => ({ ...x, [f.key]: e.target.value }))} style={{ width: 190 }} />
               ) : (
-                <select className="form-control" value={filters[f.key] || f.options?.[0] || ''}
+                <select className="form-control" aria-label={f.label} value={filters[f.key] || f.options?.[0] || ''}
                   onChange={(e) => setFilters((x) => ({ ...x, [f.key]: e.target.value }))} style={{ width: 210 }}>
                   {f.options?.map((o) => <option key={o} value={o}>{o}</option>)}
                 </select>
@@ -201,7 +201,7 @@ export default function ShortsDesk() {
           ))}
           <label style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.78rem', color: 'var(--text-muted)' }}>
             How many
-            <input type="number" className="form-control" min={1} max={12} value={count}
+            <input type="number" className="form-control" aria-label="How many" min={1} max={12} value={count}
               onChange={(e) => setCount(Math.max(1, Math.min(12, Number(e.target.value) || 1)))} style={{ width: 80 }} />
           </label>
           <button type="button" className="btn" onClick={runFind} disabled={finding || !spec}
@@ -319,18 +319,18 @@ export default function ShortsDesk() {
         {daily && (
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
             <label style={{ display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer' }}>
-              <input type="checkbox" checked={daily.enabled} onChange={(e) => saveDaily({ enabled: e.target.checked })} style={{ width: 18, height: 18 }} />
+              <input type="checkbox" aria-label="Daily batch enabled" checked={daily.enabled} onChange={(e) => saveDaily({ enabled: e.target.checked })} style={{ width: 18, height: 18 }} />
               <strong>{daily.enabled ? 'On' : 'Off'}</strong>
             </label>
             <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              at <input type="time" className="form-control" value={daily.time} onChange={(e) => saveDaily({ time: e.target.value })} style={{ width: 120 }} />
+              at <input type="time" className="form-control" aria-label="Daily batch time" value={daily.time} onChange={(e) => saveDaily({ time: e.target.value })} style={{ width: 120 }} />
             </label>
             <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <input type="number" className="form-control" min={1} max={5} value={daily.per_channel}
+              <input type="number" className="form-control" aria-label="Per channel" min={1} max={5} value={daily.per_channel}
                 onChange={(e) => saveDaily({ per_channel: Math.max(1, Math.min(5, Number(e.target.value) || 1)) })} style={{ width: 70 }} /> per channel
             </label>
             <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              min score <input type="number" className="form-control" min={0} max={100} value={daily.min_score}
+              min score <input type="number" className="form-control" aria-label="Min score" min={0} max={100} value={daily.min_score}
                 onChange={(e) => saveDaily({ min_score: Math.max(0, Math.min(100, Number(e.target.value) || 0)) })} style={{ width: 80 }} />
             </label>
             <button type="button" className="btn btn-outline" onClick={runDailyNow}>Run now</button>

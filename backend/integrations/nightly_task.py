@@ -73,6 +73,17 @@ def _first_day(hhmm: str) -> str:
     return first.strftime("%Y-%m-%d")
 
 
+def time_limit_hours() -> int:
+    """How long Windows lets a run go before it kills it (config
+    `nightly_time_limit_hours`, 12 by default). It was 4: on 2026-10-26 the
+    long-form run was killed at 07:00 with 1 of 8 videos done (0x41306)."""
+    try:
+        from integrations.llm import load_config
+        return max(1, min(23, int(load_config().get("nightly_time_limit_hours") or 12)))
+    except (TypeError, ValueError):
+        return 12
+
+
 def _task_xml(hhmm: str, scope: str = "shorts") -> str:
     user = f"{os.environ.get('USERDOMAIN', '')}\\{os.environ.get('USERNAME', '')}".strip("\\")
     return f"""<?xml version="1.0" encoding="UTF-16"?>
@@ -107,7 +118,7 @@ def _task_xml(hhmm: str, scope: str = "shorts") -> str:
     <Hidden>false</Hidden>
     <RunOnlyIfIdle>false</RunOnlyIfIdle>
     <WakeToRun>true</WakeToRun>
-    <ExecutionTimeLimit>PT4H</ExecutionTimeLimit>
+    <ExecutionTimeLimit>PT{time_limit_hours()}H</ExecutionTimeLimit>
     <Priority>7</Priority>
   </Settings>
   <Actions Context="Author">

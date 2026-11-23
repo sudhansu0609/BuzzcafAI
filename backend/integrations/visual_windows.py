@@ -28,6 +28,7 @@ import json
 import logging
 import re
 import threading
+import contextvars
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
@@ -124,6 +125,7 @@ _PROMPT_FIELDS = ("image_prompt", "video_prompt", "text", "place", "effect")
 _KIND_PROMPT_FIELD = {
     "broll_image": "image_prompt",
     "broll_video": "video_prompt",
+    "own_clip": "video_prompt",
     "canvas_card": "image_prompt",
     "map": "place",
     "fx": "effect",
@@ -625,8 +627,11 @@ def plan_visual_windows(
                 if progress_cb:
                     progress_cb(done - 1, total)
 
+        # Each window runs in the caller's context, so the step's model route
+        # (llm.llm_job) reaches the worker threads too.
+        ctx = contextvars.copy_context()
         with ThreadPoolExecutor(max_workers=min(workers, total), thread_name_prefix="visual-plan") as pool:
-            list(pool.map(_run, range(total)))
+            list(pool.map(lambda n: ctx.copy().run(_run, n), range(total)))
 
         # Parallel calls share the model's KV cache; under VRAM pressure LM
         # Studio fails them ("failed to decode") and the fallback chain ends

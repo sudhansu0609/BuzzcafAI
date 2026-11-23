@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-30",
+  "started_at": "2026-10-30T07:31:05",
+  "finished_at": "2026-10-30T14:45:59",
+  "headline": "7 videos written, 435 min",
+  "markdown": "# Last night: 2026-10-30\n\nStarted 07:31, took 435 min (longform).\n\n## Long videos (431 min)\n\n- Raat3Baje: **Raat Ko Khet Mein Papa Khade The — Hospital Se Aaye Phone Ne Hosh Uda Diye**, stopped at Completed -> `2026-10-30_Raat3Baje_RaatKoKhetMeinPapaKhadeTheHospitalSeAayePhoneNeHoshUdaDiye`\n- Raat3Baje: **Nadi Ka Shraap: Woh Jo Raat Ko Nahati Thi**, stopped at Completed -> `2026-10-30_Raat3Baje_NadiKaShraapWohJoRaatKoNahatiThi`\n- Beyond3Baje: **Point Pleasant ka Saaya: The Mothman Mystery**, stopped at Voice Recording -> `2026-10-30_Beyond3Baje_PointPleasantKaSaayaTheMothmanMystery`\n- Beyond3Baje: **Kal Ki Recording (Tomorrow's Recording)**, stopped at Voice Recording -> `2026-10-30_Beyond3Baje_KalKiRecordingtomorrowsRecording`\n- Life3Baje: **I Have to Choose: YouTube, Coffee or My Career?**, stopped at Completed -> `2026-10-30_Life3Baje_IHaveToChooseYoutubeCoffeeOrMyCareer`\n- Life3Baje: **Buzzcaf ke Pehle 30 Din: Ek Honest Reality Check**, stopped at Completed -> `2026-10-30_Life3Baje_BuzzcafKePehle30DinEkHonestRealityCheck`\n- TheTallStoryteller: **Galti Se VIP (The Accidental Celebrity)**, stopped at Completed -> `2026-10-30_TheTallStoryteller_GaltiSeViptheAccidentalCelebrity`\n- TheTallStoryteller: skipped, 'Visual Plan' did not return valid JSON for its visual_plan (Expecting value: line 72 column 7 (char 3333)). Run the step again.\n\n## Waiting for you\n\n- TheTallStoryteller: Double Booking Ka Hungama -- 'Visual Plan' did not return valid JSON for its visual_plan (Expecting value: line 72 column 7 (char 3333)). Run the step again.\n\n## Afterwards\n\n- Hibernated.\n",
+  "items": [
+    {
+      "task": "longform",
+      "state": "done",
+      "built": 7,
+      "seconds": 25854
+    }
+  ],
+  "problems": []
+}

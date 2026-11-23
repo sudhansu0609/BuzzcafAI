@@ -54,7 +54,7 @@ class Agent:
 def _tools(monkeypatch):
     """Tool tags resolve locally: no network."""
     from app.services import studio_chat as sc
-    monkeypatch.setattr(sc, "process_web_research_tags", lambda text: f"RESULT for {text.strip()}")
+    monkeypatch.setattr(sc, "process_web_research_tags", lambda text, **depth: f"RESULT for {text.strip()}")
 
 
 def test_searches_are_run_and_fed_back_before_the_dossier():
@@ -74,12 +74,26 @@ def test_searches_are_run_and_fed_back_before_the_dossier():
 
 
 def test_a_dossier_from_memory_is_sent_back_to_search_first():
-    llm = ChatLLM([json.dumps(DOSSIER), "[WEB_SEARCH: something]", json.dumps(DOSSIER)])
+    llm = ChatLLM([json.dumps(DOSSIER), "[WEB_SEARCH: something]", json.dumps(DOSSIER),
+                   "[WEB_FETCH: https://x/2]", json.dumps(DOSSIER)])
     logs = []
     out = rl.run(Agent(llm), "TASK", logs.append)
-    assert out["turns"] == 3 and out["calls"] == ["web search: something"]
+    # Searched but never read a page: sent back once more to fetch the best results.
+    assert out["turns"] == 5 and out["calls"] == ["web search: something", "fetch: https://x/2"]
     assert "memory is not research" in llm.seen[1][-1]["content"]
-    assert any("without a single search" in m for m in logs)
+    assert "not read a single page" in llm.seen[3][-1]["content"]
+    assert any("without a single search" in m for m in logs) and any("is thin" in m for m in logs)
+
+
+def test_youtube_searches_show_what_was_already_made(monkeypatch):
+    from app.services import video_intel
+    monkeypatch.setattr(video_intel, "search_youtube", lambda q, limit=8: [
+        {"id": "a", "title": "Masaan ki kahani", "channel": "X", "view_count": 120000, "upload_date": None,
+         "duration": 605, "url": "https://youtu.be/a"}])
+    llm = ChatLLM(["[YOUTUBE_SEARCH: masaan horror story]\n[WEB_FETCH: https://x/2]", json.dumps(DOSSIER)])
+    out = rl.run(Agent(llm), "TASK", lambda m: None)
+    assert out["calls"][0] == "youtube search: masaan horror story"
+    assert "Masaan ki kahani -- X (120,000 views, 10:05)" in llm.seen[1][-1]["content"]
 
 
 def test_the_last_chance_turn_forces_the_dossier():

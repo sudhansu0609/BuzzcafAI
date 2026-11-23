@@ -68,12 +68,13 @@ export default function MusicUpload({ onUploaded, onToast, disabled, compact }: 
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
       <select className="form-control" value={license} disabled={disabled || !!busy}
         onChange={(e) => setLicense(e.target.value)} style={{ width: compact ? 200 : 240 }}
-        title="Where the music comes from. Required: only licensed music goes into a video.">
+        title="Where the music comes from. Required: only licensed music goes into a video."
+        aria-label="Licence">
         <option value="">Licence…</option>
         {LICENSES.map((l) => <option key={l.value} value={l.value}>{l.label}</option>)}
       </select>
       <input ref={inputRef} type="file" accept={ACCEPT} multiple hidden
-        onChange={(e) => upload(e.target.files)} />
+        onChange={(e) => upload(e.target.files)} aria-label="Music files" />
       <button type="button" className="btn btn-outline btn-sm" disabled={disabled || !!busy}
         onClick={() => (license ? inputRef.current?.click()
           : onToast('Pick the licence for these tracks first: a track with no licence is never used.', 'error'))}

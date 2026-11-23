@@ -11,6 +11,7 @@ import {
   Zap,
   Sparkles,
   Leaf,
+  Palette,
 } from 'lucide-react';
 import { useTheme } from '../state/ThemeContext';
 import type { ThemeDefinition } from '../lib/theme';
@@ -33,6 +34,8 @@ export function getThemeIcon(iconName: ThemeDefinition['iconName'], size = 16) {
       return <Sparkles size={size} />;
     case 'Leaf':
       return <Leaf size={size} />;
+    case 'Palette':
+      return <Palette size={size} />;
     case 'Moon':
     default:
       return <Moon size={size} />;

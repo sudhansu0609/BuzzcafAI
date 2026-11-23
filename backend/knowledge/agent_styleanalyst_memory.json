@@ -94,5 +94,101 @@
     "source": "agent",
     "created": "2026-10-06T21:23:06.866098",
     "updated": "2026-10-06T21:23:06.866104"
+  },
+  {
+    "id": "00f194e1-5ad3-4b74-8ecc-720e44f379f7",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe is a first-person storyteller close to the mic. He tells the story as something that happened to him. He is calm and reportage-like, and he gives time and place as plain facts: \"Yeh baat 1999 ki hai. December ka mahina tha.\" He describes fear through literal, physical details: \"Mere gardan se khoon beh raha tha. Aankhein laal thi, shareer tharthar kaamp raha tha.\" His Hindi is Roman and fairly formal-spoken, with words like \"gasht,\" \"aadesh,\" \"nirnay\" and \"bandobast.\" English appears only as everyday nouns (\"jeep,\" \"duty,\" \"post-mortem\"). He greets the viewer, makes a short promise (\"Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain.\"), and then mostly stays in the story. He says \"Doston\" only at chosen moments, such as the closing moral. Tension comes from small facts piling up, not from commentary.\n\n## Format and point of view\n- The script is continuous narration in paragraphs of about 12-13 sentences (measured 12.7). It has no stage cues, no bracketed labels and no bullets (stage_share 0.0).\n- Short chapter titles sit on their own line, in Roman Hinglish, with no full stop: \"1999 ki wo daravani raat\", \"Sachayi ka khulasa\".\n- The narrator is \"main\", in the past tense: \"Yeh un dinon ki baat hai jab main bataur forest officer naya-naya duty par join hua tha.\" First person runs at about 39 per 1000 words. The most common sentence openers are \"main\", \"maine\", \"par\", \"woh\", \"meri\", \"kuch\", \"us\" and \"yeh\".\n- Dialogue is rare (2.8 per 100 sentences). It is inline, in double quotes, introduced by \"kaha\": Pawan ne apni nazar hatate hue kaha, \"Sar, koi bhi afsar yahan raat mein is chowki par nahi rukta hai.\" Characters address the narrator as \"Sar\" or \"Saab\".\n- His own questions are unquoted and run into the sentence: \"Maine uska chehra dekh usse poochha, kya hua? Tum aise kyun dekh rahe ho?\" Questions are about 4.4 per 100 sentences.\n- There are no exclamation marks (0.0) and no ellipses in his written text (0.0). Do not use \"."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-16T21:59:48.940182",
+    "updated": "2026-10-16T21:59:48.940187"
+  },
+  {
+    "id": "4ee50a04-9da0-46af-9fc2-8dd569f80700",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe is a first-person storyteller who speaks close to the mic and tells the story as if it happened to him. He is calm and reportage-like. He gives time and place as plain facts: \"Yeh baat 1999 ki hai. December ka mahina tha.\" He shows fear through literal physical details: \"Mere gardan se khoon beh raha tha. Aankhein laal thi, shareer tharthar kaamp raha tha.\" His Hindi is Roman and fairly formal-spoken, with words like \"gasht,\" \"aadesh,\" \"nirnay\" and \"bandobast.\" English appears only as everyday nouns (\"jeep,\" \"duty,\" \"post-mortem\"). He greets the viewer, makes a short promise (\"Toh chaliye ab bina waqt zaya kiye aaj ki kahani ko sunte hain.\"), and then mostly stays inside the story. Tension comes from small facts piling up, not from commentary. He says \"Doston\" at chosen moments, such as the closing moral.\n\n## Format and point of view\n- The script is continuous narration in paragraphs of about 12-13 sentences (measured 12.7). It has no stage cues, no bracketed labels and no bullets (stage_share 0.0).\n- Short chapter titles sit on their own line, in Roman Hinglish, with no full stop: \"1999 ki wo daravani raat\", \"Sachayi ka khulasa\". The recorded story uses the same form: \"Raat 11 baje se pehle ki baat\".\n- The narrator is \"main\", in the past tense: \"Yeh un dinon ki baat hai jab main bataur forest officer naya-naya duty par join hua tha.\" First person runs at about 39 per 1000 words. The most common sentence openers are \"main\", \"maine\", \"par\", \"woh\", \"meri\", \"kuch\", \"us\" and \"yeh\".\n- Dialogue is rare (2.8 per 100 sentences). It is inline, in double quotes, and introduced by \"kaha\": Pawan ne apni nazar hatate hue kaha, \"Sar, koi bhi afsar yahan raat mein is chowki par nahi rukta hai.\" Characters address the narrator as \"Sar\" or \"Saab\".\n- His own questions are unquoted and run into the sentence: \"Maine uska chehra dekh usse poochha, kya hua? Tum aise kyun dekh rahe ho?\" Questions are about 4.4 per 100 sentences.\n- There are no exclamation "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:47:56.502312",
+    "updated": "2026-10-21T10:47:56.502317"
+  },
+  {
+    "id": "ba27550b-67ca-4bc6-9bd4-494978ec5193",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nRaat3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe is a first-person storyteller who speaks close to the mic, presenting the narrative as an experience he personally lived through. He maintains a calm, reportage-like tone, avoiding over-dramatic commentary and instead letting the facts build the atmosphere. He describes fear and tension through literal, physical reactions rather than abstract adjectives (e.g., \"Mere gardan se khoon beh raha tha. Aankhein laal thi, shareer tharthar kaamp raha tha\"). His Hindi is formal yet spoken in a natural flow, utilizing specific vocabulary like \"gasht,\" \"aadesh,\" \"nirnay,\" and \"bandobast.\" English is used strictly as common nouns (e.g., \"jeep,\" \"duty,\" \"post-mortem\") rather than for sentence structure.\n\n## Format and point of view\n- **Structure:** Continuous narration in paragraphs of approximately 12\u201313 sentences (measured at 12.7).\n- **Cues:** No stage cues, bracketed labels, or bullet points are used; the text is a clean script.\n- **Chapter Titles:** Short titles sit on their own line in Roman Hinglish without full stops (e.g., \"1999 ki wo daravani raat\", \"Sachayi ka khulasa\").\n- **Point of View:** The narrator uses \"main\" (first person) in the past tense (e.g., \"Yeh un dinon ki baat hai jab main bataur forest officer naya-naya duty par join hua tha\"). \n- **Dialogue:** Rare (2.8 per 100 sentences). It is written inline, inside double quotes, and introduced by a tag like \"kaha\" or \"bola\" (e.g., Pawan ne apni nazar hatate hue kaha, \"Sar, koi bhi afsar yahan raat mein is chowki par nahi rukta hai.\").\n- **Questions:** His own questions are unquoted and flow directly into the sentence (e.g., \"Maine uska chehra dekh usse poochha, kya hua?\").\n\n## Sentence rhythm\n- **Fact Delivery:** He uses short segments for establishing facts or settings, typically 4\u201310 words per sentence (e.g., \"Uske peeche, metal ka ek darwaza hai.\" / \"Uske haath kaanp rahe hain.\").\n- **Suspense/Pause:** He uses a single ellipsis (...) before a reveal or to create a beat before a"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T02:34:11.729723",
+    "updated": "2026-10-23T02:34:11.729729"
+  },
+  {
+    "id": "514c3809-9341-4cd8-a612-d16e657b4d79",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nLife3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how he",
+      "result_snippet": "## His voice in one paragraph\nHe speaks like a friend sharing an idea, not a narrator reading a script. He is calm and reflective, using personal anecdotes to ground his points (e.g., \"mere saath bhi ek baar aisa hua tha\"). He uses a mix of poetic imagery when appropriate (\"ahishtha saphar,\" \"sadharan kadmon se\") but stays grounded in everyday conversation for the main body. His Hindi is natural and conversational, while English is reserved for specific concept labels and technical terms (e.g., \"The Art of starting small,\" \"software engineer\"). He builds a connection with the audience by using \"doston\" at key transition points or when offering a personal reflection.\n\n## Format and point of view\n- **Structure:** Continuous narration in paragraphs. No stage cues, bullet points, or bracketed labels are used. \n- **Point of View:** First-person (\"main,\" \"mera\"). He speaks from his own experience (e.g., \"mere saath bhi ek baar aisa hua tha\").\n- **Language:** Always use Roman Hinglish. Never use Devanagari script.\n- **Chapter Titles:** Short, descriptive titles on their own line in Roman Hinglish without full stops (e.g., \"The Art of Starting Small,\" \"Sachayi ka khulasa\").\n\n## Sentence rhythm\n- **Chained Thoughts:** He often links multiple ideas using conjunctions like \"aur,\" \"lekin,\" and \"ya phir\" to create a flowing, conversational stream (e.g., \"...aur main socha tha ki agar mera jo pehla chapter hai woh agar perfect nahi hua to sab barabat ho jaega\").\n- **Emphasis through Repetition:** He repeats words or phrases for emphasis when explaining a concept (e.g., \"ekdum perfect scenario hoga, perfect circumstance hoga\").\n- **Pauses:** Use \"...\" to indicate a pause before a new thought or a transition (e.g., \"lekin aksar... hum unhe shuru karne se darte hain\").\n\n## Hinglish: how he mixes Hindi and English\n- **Hindi:** Used for the primary narrative, connecting words, and emotional weight. He uses common connectors like \"kyun ki,\" \"ki wajah se,\" \"ke liye,\" and \"kaise.\"\n- **En"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T11:35:37.840211",
+    "updated": "2026-10-25T11:35:37.840217"
+  },
+  {
+    "id": "bf3b231b-ec03-4698-8d63-f108280f1e12",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nBeyond3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how ",
+      "result_snippet": "## His voice in one paragraph\nOn *Beyond 3 Baje*, he speaks as an investigative, forensic documentary narrator who treats extreme human events not as ghostly folklore, but as clinical, high-stakes case files. He maintains a calm, objective, and analytical tone, grounding the narrative in physiological thresholds, technical mechanisms, and situational paradoxes rather than theatrical melodrama. He explicitly states his analytical perspective: \"is report ka maqsad sirf ek doobte hue jahaz ki kahani sunana nahi hai balki us biological interaction ko analyze karna hai.\" When describing human survival on the brink of death, he strips away superstition and examines the body's actual mechanics: \"ye koi miracle nahi tha, ye ek biological survival mechanism ka extreme case tha.\" His delivery is measured, authoritative, and forensic\u2014letting the terrifying physical realities of extreme environments build the tension.\n\n## Format and point of view\n- **Page Layout & Script Structure:** Spoken as an investigative docket or forensic case report. Narration proceeds through structured case segments (e.g., initial case classification, location markers, environmental parameters, and biological consequence analysis), concluding with a docket wrap-up: \"File closed. Case number...\".\n- **Point of View:** Strictly third-person documentary perspective (\"woh\", \"unka\", \"unhein\", \"ek insaan\"). Unlike personal horror memoirs, his first-person usage is minimal (measured at 0.6 per 1,000 words). When he uses first person, it is exclusively collective or investigatory (\"hum baat kar rahe hain Gulf of Guinea ke us hisse ki...\", \"isko hum anomaly kyun keh rahe hain\"). The protagonist is the subject of the case: \"cook ke taur par Harrison Okene...\", \"unka rasta band ho chuka tha\", \"unka sharir maut se lad nahi raha tha.\"\n- **Tense:** Past tense for historical events and actions (\"jab ship ne tilt kiya aur paani andar ghusne laga\", \"darwaza band raha\"), transitioning into present tense for scientific e"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-27T03:02:59.010454",
+    "updated": "2026-10-27T03:02:59.010459"
+  },
+  {
+    "id": "713fd836-0993-4874-950a-6a4605fe9a07",
+    "scope": "agent",
+    "owner": "StyleAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Study how ONE creator writes and talks, from his own words below, and write\nthe style guide other writers will follow to sound exactly like him on the\nBeyond3Baje channel.\n\nRules:\n- Learn only from the samples. Quote him (short quotes, his exact words) as\n  evidence for every point. Never invent a habit you cannot quote.\n- \"Transcribed from the recording\" samples are speech-to-text and full of\n  MISHEARD words: \"hila doshton\" is \"Hello doston\", \"sar karte hain\" is\n  \"shuru karte hain\", \"naam\" where the script says \"niyam\" is the recogniser,\n  not him. Learn his phrasing, rhythm, openings, how ",
+      "result_snippet": "## His voice in one paragraph\nHe speaks as a clinical, investigative documentarian examining an anomalous case file, not as a horror survivor or casual vlogger. Close to the mic, his delivery is calm, methodical, and objective, treating extraordinary real-world survival events as technical paradoxes rather than sensational mysteries (\"is report ka maqsad sirf ek doobte hue jahaaz ki kahani sunana nahi hai balki us biological interaction ko analyse karna hai\"). He builds atmospheric tension by contrasting rigid institutional protocol with claustrophobic physical realities, using precise medical, nautical, and physiological terminology to deconstruct what happened. His Hinglish is composed of formal spoken Hindustani narrative structures interwoven with English scientific and classification concepts (\"anomaly\", \"anomalous zone\", \"force hibernate\", \"biological survival mechanism\"). He does not moralize or hype; he lets the empirical data and physical stakes carry the weight.\n\n## Format and point of view\n- **Structure:** Case dossier format divided into analytical beats, telemetry briefings, and incident segments. Unlike pure storytelling channels, the narrative is punctuated by case classifications, coordinates, and closed file statuses (ending on \"File closed. Case number...\").\n- **Point of view:** Third person (\"woh\", \"unka\", \"Harrison Okene\") for the subject of the incident. The narrator speaks from an institutional/analytical editorial standpoint using the collective first-person plural (\"hum\", \"humein\", e.g., \"hum baat kar rahe hain\", \"is case ki investigation mein humein The Pirate Rule protocol milta hai\"). Individual first person (\"main\") is almost non-existent (measured at 0.6 per 1000 words), reserved strictly for his fixed opening line.\n- **Tense:** Past tense for historical events and the sequence of the disaster (\"jab ship ne tilt kiya aur paani andar ghusne laga\", \"ek aise kamre mein phans gaye\"), shifting to present tense for technical analysis and case "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-27T03:03:12.581918",
+    "updated": "2026-10-27T03:03:12.581927"
   }
 ]

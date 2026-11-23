@@ -1,0 +1,51 @@
+{
+  "horizon": "day",
+  "generated_at": "2026-10-30T05:24:00",
+  "turns": 1,
+  "items": [
+    {
+      "channel": "Raat3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-24_Raat3Baje_ShortShyamKeWaqtKaNakamKarobar"
+      },
+      "when": "tonight",
+      "why": "Retrying failed rules_horror reel from previous session.",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-25_Beyond3Baje_Mothman"
+      },
+      "when": "tonight",
+      "why": "Resume production for Mothman after studio restart.",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-26_Beyond3Baje_B3b042_15_Saal_Se_Band_Station_Par_Har_Raat_Ek_Train_Aati_Hai_Anomaly_Files"
+      },
+      "when": "tonight",
+      "why": "Resume production for B3B-042 after studio restart.",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "auto_story_make_mood_reel",
+      "params": {
+        "project_id": "2026-10-30_Life3Baje_MoodReelBrokenwalls7e96"
+      },
+      "when": "tonight",
+      "why": "Retrying mood reel; fits within remaining budget.",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    }
+  ]
+}

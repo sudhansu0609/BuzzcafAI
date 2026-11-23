@@ -19,6 +19,10 @@ from app.services import produce_queue
 from core.models.project import Project
 
 
+#: The real wait, kept before the fixture below stubs it on the module.
+_REAL_AWAIT_RELOAD = produce_queue._await_buzzedit_reload
+
+
 class _Immediate:
     def __init__(self, target=None, name=None, args=(), kwargs=None, daemon=None):
         self._target, self._args, self._kwargs = target, args, kwargs or {}
@@ -31,6 +35,8 @@ class _Immediate:
 def isolated_queue(tmp_path, monkeypatch):
     monkeypatch.setattr(produce_queue, "QUEUE_PATH", str(tmp_path / "produce_queue.json"))
     monkeypatch.setattr(produce_queue.threading, "Thread", _Immediate)
+    monkeypatch.setattr(produce_queue, "AUTO_RETRY_DELAY_S", 0.0)
+    monkeypatch.setattr(produce_queue, "_await_buzzedit_reload", lambda: None)
     produce_queue.reset_for_tests()
     yield
     produce_queue.reset_for_tests()
@@ -165,17 +171,63 @@ def test_cancel_a_running_item_at_its_next_checkpoint(monkeypatch, projects):
 
 
 def test_failed_item_retries_from_its_last_checkpoint(monkeypatch, projects):
+    """A stage that keeps failing is retried by itself from its checkpoint,
+    AUTO_RETRY_ATTEMPTS runs in all; only then does the item stay failed, and
+    a manual retry still picks up from the checkpoint."""
     _, calls = _fake_pipeline(monkeypatch, fail_at="finalize")
     item = _add(projects[0])
     got = produce_queue.get(item["id"])
     assert got["status"] == "failed" and "boom" in got["error"]
     assert got["checkpoint"] == "plan"
+    assert got["attempts"] == produce_queue.AUTO_RETRY_ATTEMPTS
+    # The first run started from scratch; every automatic retry resumed at the plan.
+    assert calls[0] == ("queue_proj_a", "start")
+    assert calls[1:] == [("queue_proj_a", "plan")] * (produce_queue.AUTO_RETRY_ATTEMPTS - 1)
 
     _fake_pipeline(monkeypatch, calls=calls)
     produce_queue.retry(item["id"])
     assert calls[-1] == ("queue_proj_a", "plan")
     assert _status(item["id"]) == "done"
-    assert produce_queue.get(item["id"])["attempts"] == 2
+    assert produce_queue.get(item["id"])["attempts"] == produce_queue.AUTO_RETRY_ATTEMPTS + 1
+
+
+def test_a_passing_failure_is_retried_by_itself_and_finishes(monkeypatch, projects):
+    """The 2026-10-20 case: BuzzEdit went away once during transcription. The
+    item goes back in line on its own, resumes at the transcribe checkpoint
+    and finishes without anyone pressing Retry."""
+    failures = {"left": 1}
+
+    def run(item):
+        calls.append((item["project_id"], item["resume_from"]))
+        if item["resume_from"] == "start":
+            produce_queue.checkpoint(item["project_id"], "transcribe")
+        if failures["left"]:
+            failures["left"] -= 1
+            raise RuntimeError("BuzzEdit no longer has the transcription job (restarted?)")
+        produce_queue.checkpoint(item["project_id"], "plan")
+        produce_queue.checkpoint(item["project_id"], "finalize")
+        return "done"
+
+    calls = []
+    monkeypatch.setattr(produce_api, "run_queue_item", run)
+    item = _add(projects[0])
+    assert calls == [("queue_proj_a", "start"), ("queue_proj_a", "transcribe")]
+    got = produce_queue.get(item["id"])
+    assert got["status"] == "done"
+    assert got["attempts"] == 2
+    assert got["auto_retry"] is True
+
+
+def test_a_cancelled_run_is_not_retried(monkeypatch, projects):
+    def run(item):
+        produce_queue.checkpoint(item["project_id"], "transcribe")
+        produce_queue._update(item["id"], cancel_requested=True)
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(produce_api, "run_queue_item", run)
+    item = _add(projects[0])
+    got = produce_queue.get(item["id"])
+    assert got["status"] == "failed" and got["attempts"] == 1
 
 
 def test_restart_runs_from_scratch(monkeypatch, projects):
@@ -187,15 +239,40 @@ def test_restart_runs_from_scratch(monkeypatch, projects):
     assert _status(item["id"]) == "done"
 
 
-def test_a_run_cut_off_by_a_restart_comes_back_failed_and_retryable(monkeypatch, projects):
+def test_a_run_cut_off_by_a_restart_goes_back_in_line_from_its_checkpoint(monkeypatch, projects):
     produce_queue.set_paused(True)
     item = _add(projects[0])
-    produce_queue._update(item["id"], status="running", checkpoint="finalize")
+    produce_queue._update(item["id"], status="running", checkpoint="finalize", attempts=1)
     produce_queue.reset_for_tests()  # a fresh process reading the file
 
     got = produce_queue.get(item["id"])
-    assert got["status"] == "failed" and "Interrupted" in got["error"]
+    assert got["status"] == "queued" and "Interrupted" in got["error"]
+    assert got["resume_from"] == "finalize" and got["auto_retry"] is True
     assert produce_queue.snapshot()["paused"] is True
+
+
+def test_a_run_cut_off_after_its_last_attempt_stays_failed(monkeypatch, projects):
+    produce_queue.set_paused(True)
+    item = _add(projects[0])
+    produce_queue._update(item["id"], status="running", checkpoint="finalize",
+                          attempts=produce_queue.AUTO_RETRY_ATTEMPTS)
+    produce_queue.reset_for_tests()
+    got = produce_queue.get(item["id"])
+    assert got["status"] == "failed" and "Interrupted" in got["error"]
+
+
+def test_an_error_that_needs_the_creator_is_not_retried(monkeypatch, projects):
+    from app.services.session_split import SessionSplitError
+
+    def run(item):
+        produce_queue.checkpoint(item["project_id"], "transcribe")
+        raise SessionSplitError("the greeting was not found; set 'Long video starts at'")
+
+    monkeypatch.setattr(produce_api, "run_queue_item", run)
+    item = _add(projects[0])
+    got = produce_queue.get(item["id"])
+    assert got["status"] == "failed" and got["attempts"] == 1
+    assert "greeting" in got["error"]
 
 
 def test_move_reorders_waiting_items(projects):
@@ -290,3 +367,28 @@ def test_restart_clears_stage_times(monkeypatch, projects):
     produce_queue.set_paused(True)
     produce_queue.restart(item["id"])
     assert produce_queue.get(item["id"])["stage_times"] == []
+
+
+def test_the_queue_waits_for_a_buzzedit_restart_that_is_pending(monkeypatch):
+    # BuzzEdit restarts itself onto changed code only when idle, and a queue
+    # that starts the next item the instant the last ends never lets it. So
+    # before an item the queue waits until a new pid answers (or the flag goes).
+    from integrations import buzzedit_client
+
+    answers = iter([
+        {"pid": 100, "reload_pending": True},
+        {"pid": 100, "reload_pending": True},
+        None,                                   # restarting
+        {"pid": 200, "reload_pending": False},
+    ])
+    slept = []
+    monkeypatch.setattr(buzzedit_client.BuzzEditClient, "health", lambda self: next(answers, None))
+    monkeypatch.setattr(produce_queue.time, "sleep", lambda s: slept.append(s))
+    _REAL_AWAIT_RELOAD()
+    assert len(slept) == 3 and next(answers, "drained") == "drained"
+
+    # Nothing pending: no wait at all.
+    monkeypatch.setattr(buzzedit_client.BuzzEditClient, "health", lambda self: {"pid": 200, "reload_pending": False})
+    slept.clear()
+    _REAL_AWAIT_RELOAD()
+    assert slept == []

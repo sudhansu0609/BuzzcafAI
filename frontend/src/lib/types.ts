@@ -58,6 +58,81 @@ export interface Topic {
   added_by?: string;
   tags?: string[];
   updated_at?: string;
+  // The medium picked for this story (real / explainer / stick_figure /
+  // cartoon); carried into the project when it is started.
+  art_style?: string | null;
+  rank?: number;
+  scores?: { potential?: number; virality?: number };
+  // Audience Desk rows (source_type 'viewer_requests'): the comments behind it.
+  evidence?: AudienceEvidence;
+}
+
+export interface AudienceVideo {
+  id: string;
+  title?: string;
+  channel?: string;
+  views?: number;
+  duration?: number;
+  source?: 'own' | 'competitor' | 'search' | string;
+  comments_read?: number;
+  comment_count?: number;
+}
+
+export interface AudienceEvidence {
+  kind?: string;
+  mentions?: number;
+  likes?: number;
+  score?: number;
+  quotes?: string[];
+  videos?: AudienceVideo[];
+  found_at?: string;
+}
+
+// One thing the viewers asked for, from the Audience Desk's last run.
+export interface AudienceFinding {
+  topic: string;
+  kind: string;
+  kind_label?: string;
+  in_niche?: boolean;
+  why?: string;
+  mentions: number;
+  likes: number;
+  score: number;
+  quotes: string[];
+  videos: AudienceVideo[];
+  comment_ids?: number[];
+  saved_topic_id?: string;
+}
+
+export interface AudienceRun {
+  brand: string;
+  ran_at?: string;
+  seconds?: number;
+  videos: AudienceVideo[];
+  comments_read: number;
+  findings: AudienceFinding[];
+}
+
+export interface AudienceSources {
+  brand: string;
+  own: string[];
+  queries: string[];
+  competitors: { url: string; name?: string; source?: 'auto' | 'manual'; reason?: string; channel_id?: string }[];
+  default_queries: string[];
+}
+
+export interface AudienceSettings {
+  enabled: boolean;
+  max_videos: number;
+  per_video: number;
+  auto_save_top: number;
+  last_run: string;
+  last?: {
+    ran_at?: string;
+    done?: { brand: string; videos: number; comments: number; findings: number; seconds: number }[];
+    saved?: { brand: string; topic: string; mentions: number; id: string }[];
+    failed?: { brand: string; error: string }[];
+  } | null;
 }
 
 // One `[INVOKE_AGENT: X]` block the strategist emitted and the Studio ran
@@ -71,6 +146,30 @@ export interface Invocation {
   error?: string;
 }
 
+// One thing a Studio Assistant turn did (2026-10-22): the strategist writing,
+// a delegated specialist, a web lookup, a vault save, a studio tool. Served
+// live by GET /api/studio/chat_progress/{turn_id} while the turn runs and
+// returned with the reply once it is over.
+export interface ProgressStep {
+  index: number;
+  kind: string;
+  label: string;
+  detail?: string;
+  status: 'running' | 'done' | 'failed' | 'skipped' | string;
+  seconds?: number | null;
+  note?: string;
+}
+
+export interface TurnProgress {
+  turn_id: string;
+  agent: string;
+  channel: string;
+  status: 'running' | 'done' | 'failed' | string;
+  elapsed: number;
+  note?: string;
+  steps: ProgressStep[];
+}
+
 export interface ChatMessage {
   sender: 'user' | 'agent';
   text: string;
@@ -81,6 +180,10 @@ export interface ChatMessage {
   // turns, so the header cannot use the currently selected one.
   agent?: string;
   invocations?: Invocation[];
+  progress?: ProgressStep[];
+  elapsed?: number;
+  // The message a failed turn was answering, so a Retry can send it again.
+  retryText?: string;
 }
 
 export interface StudioSettings {
@@ -147,6 +250,8 @@ export type TabId =
   | 'dashboard'
   | 'projects'
   | 'topic_vault'
+  | 'audience'
+  | 'story_desk'
   | 'board'
   | 'analyze'
   | 'research'
@@ -252,6 +357,8 @@ export interface ProduceQueueItem {
   message?: string | null;
   progress?: number | null;
   stage_state?: string | null;
+  // Done items: the finished video, when it is still on disk.
+  final_output_path?: string | null;
 }
 
 export interface ProduceQueue {
@@ -282,6 +389,9 @@ export interface ProduceVideoStatus {
   warning?: string | null;
   buzzedit_job_id?: string;
   output_path?: string | null;
+  // The finished video where the creator works (next to the recording by
+  // default); `output_path` is the file BuzzEdit rendered.
+  final_output_path?: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   report?: Record<string, any> | null;
   // How the recording differed from the written script
@@ -357,12 +467,16 @@ export interface ChannelProfile {
   genre_secondary?: string | null;
   density: string;
   voice_preset?: string;
+  // The medium of the pictures: real / explainer / stick_figure / cartoon.
+  art_style?: string | null;
 }
 
 export interface ChannelProfilesResponse {
   profiles: Record<string, ChannelProfile>;
   genres: string[];
   densities: string[];
+  art_styles?: string[];
+  art_style_labels?: Record<string, string>;
 }
 
 // A project's style overrides and the fully resolved settings BuzzEdit will
@@ -370,6 +484,9 @@ export interface ChannelProfilesResponse {
 export interface VideoSettings {
   // "story": pictures and videos only (no captions, cards, sfx); "full": everything.
   visual_style?: "full" | "story";
+  // The medium of the pictures, clips, thumbnail and text cards:
+  // real / explainer / stick_figure / cartoon (null = the channel's own).
+  art_style?: string | null;
   genre?: string;
   genre_secondary?: string | null;
   density?: string;
@@ -405,6 +522,62 @@ export interface VideoSettings {
   // automatic music. Played layered ("together") or in turn ("sequence").
   music_tracks?: { file: string; volume_db: number; duck: boolean }[] | null;
   music_tracks_mode?: 'together' | 'sequence';
+  // How the creator's face is used: "mixed" (between the pictures all
+  // through, the mix sliders) or "face_intro" (only his face for the first
+  // face_intro_seconds, then pictures and clips only).
+  face_layout?: 'mixed' | 'face_intro' | null;
+  face_intro_seconds?: number | null;
+  // BuzzEdit motion graphics: off = every animated effect as its still card;
+  // parallax_share = share of stills given the 2.5D depth move (default 0.3).
+  motion_graphics?: boolean | null;
+  parallax_share?: number | null;
+}
+
+// Recording sessions (backend app/services/session_format.py): the Shorts are
+// recorded first, then the long video; the recording is split at the greeting.
+export interface ChannelFormatDefaults {
+  shorts_first: boolean;
+  shorts_count: number;
+  face_layout: 'mixed' | 'face_intro';
+  face_intro_seconds: number;
+}
+
+export interface ChannelFormatsState {
+  channels: Record<string, ChannelFormatDefaults>;
+  episode_formats: Record<string, { key: string; label: string }[]>;
+  next_format: Record<string, string | null>;
+  pinned_format: Record<string, string | null>;
+  locked_format?: Record<string, string | null>;
+}
+
+export interface SessionSplitShort {
+  index: number;
+  title: string;
+  from_s: number;
+  to_s: number;
+  clip: string;
+  project_id: string | null;
+  queued?: boolean;
+  error?: string;
+  matched_script?: boolean;
+}
+
+export interface SessionSplit {
+  buzzedit_project_id: string;
+  boundary_s: number;
+  how: 'greeting' | 'manual';
+  shorts: SessionSplitShort[];
+  warning: string | null;
+  programme_cut_s?: number;
+}
+
+export interface SessionParent {
+  project_id: string;
+  name: string;
+  index: number;
+  count: number;
+  from_s: number;
+  to_s: number;
 }
 
 export interface EffectsSample {
@@ -532,4 +705,228 @@ export interface SfxJob {
   path: string | null;
   duration_s: number | null;
   error: string | null;
+}
+
+// Auto Story (AUTO_STORY_PLAN.md §3.3, §3.6): videos made end to end in the
+// creator's voice -- /api/auto_story/*.
+export interface AutoStoryFormat {
+  key: string;
+  label: string;
+  // A mood reel's own pickers (REELS_DESK_PLAN.md §6): no face, no voice.
+  lengths?: string[];
+  styles?: string[];
+  themes?: { key: string; label: string }[];
+}
+
+export interface AutoStorySettings {
+  enabled: boolean;
+  per_channel: Record<string, number>;
+  formats: Record<string, string[]>;
+  publish: boolean;
+  voice: string;
+  last_run: string;
+  last: Record<string, unknown> | null;
+  face_intro_clips: Record<string, string>;
+  voice_style?: Record<string, VoiceStyle>;
+}
+
+// Voice and delivery (VOICE_DELIVERY_PLAN.md S1/S2): per-channel mood,
+// pacing and dramatic-moments settings, sent as `style` with every
+// auto-story narration -- /api/auto_story/moods, /api/auto_story/voice_preview.
+export interface VoiceStyle {
+  mood?: string;
+  pace?: number;
+  word_gap_ms?: number;
+  phrase_pause_s?: number;
+  sentence_pause_s?: number;
+  exaggeration?: number;
+  temperature?: number;
+  cfg_weight?: number;
+  dramatic?: 'off' | 'subtle' | 'strong';
+}
+
+export interface VoiceMood {
+  id: string;
+  label: string;
+  description?: string;
+  style: Record<string, number>;
+}
+
+export interface NarrationJobStatus {
+  job_id: string;
+  state: 'running' | 'done' | 'failed' | string;
+  message?: string;
+  result?: { wav?: string; seconds?: number; duration_s?: number } | null;
+}
+
+// Ask before publishing (STUDIO_DIRECTOR_PLAN.md; Fable review #10 /
+// enhancement 3): every record that reaches a publishable state defaults to
+// "needs_review" -- the schedulers and the YouTube auto-publish path wait
+// for "approved"; a "rejected" one carries why.
+export interface AutoStoryReview {
+  state: 'needs_review' | 'approved' | 'rejected' | string;
+  at?: string;
+  reason?: string | null;
+}
+
+export interface AutoStoryRecord {
+  project_id: string;
+  name: string;
+  brand: string;
+  format: string;
+  state: string;
+  started_at: string;
+  final: string | null;
+  posted: {
+    youtube?: string | { skipped?: string; url?: string; error?: string };
+    instagram?: string | { skipped?: string; url?: string; error?: string; permalink?: string; media_id?: string; at?: string };
+  };
+  package_dir?: string | null;
+  error?: string | null;
+  review?: AutoStoryReview | null;
+  cover?: string | null;
+  caption?: string | null;
+  archived?: boolean;
+}
+
+// Instagram Reels publishing (integrations/instagram_publish.py), REELS_DESK_PLAN.md R7.
+// Settings are named accounts, not one slot per channel: a channel can post
+// to more than one account (Life3Baje's mood reels go to a separate account,
+// @khayal3bajefeels, from its ordinary reels), routed by a
+// {"channel": "account", "channel/format": "account"} table where the
+// format-specific route wins.
+export interface InstagramAccountSettings {
+  ig_user_id: string;
+  username: string;
+  access_token_set: boolean;
+  app_id: string;
+  app_secret_set: boolean;
+  token_expires_at: number | null;
+  enabled: boolean;
+  post_times: string[];
+  caption_suffix: string;
+}
+
+export interface InstagramSettingsResponse {
+  channels: string[];
+  accounts: Record<string, InstagramAccountSettings>;
+  routes: Record<string, string>;
+}
+
+export interface InstagramDiscoveredAccount {
+  page_id: string;
+  page_name: string;
+  ig_user_id: string;
+  username: string;
+  access_token: string;
+}
+
+export interface InstagramAccountStatus {
+  connected: boolean;
+  username: string;
+  token_days_left: number | null;
+  token_expired: boolean;
+  publishing_limit: { used: number; total: number } | null;
+  enabled: boolean;
+  post_times: string[];
+}
+
+export interface InstagramRouteStatus extends InstagramAccountStatus {
+  account: string;
+  next_post: string | null;
+}
+
+export interface InstagramStatusResponse {
+  accounts: Record<string, InstagramAccountStatus>;
+  routes: Record<string, InstagramRouteStatus>;
+}
+
+export interface AutoStoryJob {
+  job_id: string;
+  kind: string;
+  state: 'running' | 'done' | 'failed';
+  message: string;
+  result: unknown;
+  error: string | null;
+}
+
+// Story Library (AUTO_STORY_PLAN.md §7, brief L3): found stories, their
+// rights verdict, and the adaptation into the creator's style.
+export interface StoryRights {
+  status: 'public_domain' | 'protected' | 'unknown' | string;
+  death_year?: number | null;
+  source?: string;
+  note?: string;
+}
+
+export interface StoryCandidate {
+  title: string;
+  author: string;
+  language: string;
+  source: string;
+  url: string;
+  snippet?: string;
+  rights?: StoryRights | string | null;
+  words_estimate?: number | null;
+  death_year?: number | null;
+  [key: string]: unknown;
+}
+
+export interface StoryEntry {
+  id: string;
+  title: string;
+  author: string;
+  language: string;
+  source: string;
+  source_url: string;
+  fetched_at: string;
+  words: number;
+  rights: StoryRights;
+  summary?: string;
+  first_lines?: string | string[];
+}
+
+export interface StoryJob<T = unknown> {
+  job_id: string;
+  kind: string;
+  state: 'running' | 'done' | 'failed';
+  message: string;
+  result: T | null;
+  error: string | null;
+}
+
+export interface AdaptJob {
+  job_id: string | null;
+  kind?: string;
+  project_id?: string;
+  state: 'running' | 'done' | 'failed' | 'created';
+  message: string;
+  result: { project_id?: string; [key: string]: unknown } | null;
+  error: string | null;
+}
+
+export interface AdaptStep {
+  name: string;
+  agent?: string;
+  status: string;
+  started_at?: string | null;
+  completed_at?: string | null;
+}
+
+export interface AdaptStatus {
+  project_id: string;
+  state: string;
+  human_score?: number | null;
+  parts?: number | null;
+  rights?: StoryRights | string | null;
+  mode?: string | null;
+  current_step?: string | null;
+  job_id?: string | null;
+  steps: AdaptStep[];
+}
+
+export interface StoryPiece {
+  index: number;
+  title: string;
+  words: number;
 }

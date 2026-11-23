@@ -59,6 +59,29 @@ def _never_touch_real_gpu_tenants(monkeypatch):
     for step in ("_unload_lm_studio", "_stop_llamacpp", "_unload_ollama"):
         monkeypatch.setattr(produce_api, step, lambda project_id, cfg: None)
     monkeypatch.setattr(produce_api.BuzzEditClient, "clear_vram", lambda self: {"comfyui_freed": False})
+    # The idle offload stops the headless BuzzEdit the Studio started.
+    from app.services import process_cleanup
+    monkeypatch.setattr(process_cleanup, "stop_headless_buzzedit", lambda: [])
+
+
+@pytest.fixture(autouse=True)
+def _no_real_sound_designer(request, monkeypatch):
+    """The render's sound-cue pass asks the real SoundDesigner model; a test
+    of the production flow reached the owner's LM Studio and loaded Gemma
+    beside a live render (2026-10-27). Its own tests keep the real pass."""
+    from integrations import llm
+    if not request.node.module.__name__.rsplit(".", 1)[-1] in (
+            "test_gpu_handover", "test_local_privacy_and_research", "test_llm", "test_model_routing", "test_router",
+            "test_studio_shutdown"):
+        # Every other test: a local model call that slips through its own
+        # stubs gets a refused connection at once, never the owner's model.
+        monkeypatch.setattr(llm.LLMService, "_local_url", lambda self, provider: "http://127.0.0.1:9/v1")
+    if request.node.module.__name__.endswith("test_sound_cues"):
+        return
+    from integrations import sound_cues
+    monkeypatch.setattr(sound_cues, "plan_sound_cues",
+                        lambda agent, windows, kept, beats, genre, secondary, progress_cb=None:
+                        {"beats": list(beats), "added": 0, "spans": 0, "ok": 0, "failed": []})
 
 
 @pytest.fixture(autouse=True)
@@ -94,6 +117,57 @@ def _never_load_a_real_lm_studio_model(monkeypatch):
     monkeypatch.setattr(llm, "ensure_local_model_loaded",
                         lambda provider="lm_studio", model_name=None: {"loaded": False, "message": "tests"})
     monkeypatch.setattr(llm, "reload_lm_studio_model", lambda model, context: False)
+    # The slot check runs `lms ps` and reloads a model held with several slots.
+    monkeypatch.setattr(llm, "lm_studio_loaded_parallel", lambda model: None)
+
+
+@pytest.fixture(autouse=True)
+def _no_render_owns_the_gpu_in_tests(monkeypatch):
+    """A real BuzzEdit job on the owner's PC moves local providers to the back
+    of every provider order (`_defer_gpu_providers`); tests that want that
+    patch it themselves."""
+    from integrations import llm
+
+    monkeypatch.setattr(llm, "_gpu_owned_by_render", lambda: False)
+    # The real card and RAM of the owner's PC must not hold a test's call.
+    monkeypatch.setattr(llm, "wait_for_local_headroom", lambda provider, model, loaded: None)
+
+
+@pytest.fixture(autouse=True)
+def _master_pause_is_the_tests_own(monkeypatch, tmp_path):
+    """The owner's real master pause (config/master_control.json) must not
+    hold a test's hold points -- tests that pause do it in their own file."""
+    from app.services import master_control
+
+    monkeypatch.setattr(master_control, "STATE_PATH", str(tmp_path / "master_control.json"))
+    monkeypatch.setattr(master_control, "_state_cache", None)
+
+
+@pytest.fixture(autouse=True)
+def _video_slot_starts_empty(request, monkeypatch):
+    """One video at a time is process-wide state: no test inherits a holder.
+    Outside its own tests the queue never holds the slot: other tests fake
+    `produce_queue.snapshot` for their own purposes (or would read the owner's
+    real queue)."""
+    from app.services import video_slot
+
+    if not request.node.module.__name__.endswith("test_video_slot"):
+        monkeypatch.setattr(video_slot, "_queue_blocker", lambda exclude: None)
+    # Never the owner's real BuzzEdit render.
+    monkeypatch.setattr(video_slot, "_buzzedit_blocker", lambda: None)
+    video_slot.reset_for_tests()
+    yield
+    video_slot.reset_for_tests()
+
+
+@pytest.fixture(autouse=True)
+def _usage_records_go_to_tmp(monkeypatch, tmp_path):
+    """Every model call is recorded (integrations/llm_usage.py); never into the
+    owner's real knowledge/usage."""
+    from integrations import llm_usage
+
+    monkeypatch.setattr(llm_usage, "USAGE_DIR", str(tmp_path / "usage"))
+    monkeypatch.setattr(llm_usage, "CALLS_PATH", str(tmp_path / "usage" / "llm_calls.jsonl"))
 
 
 @pytest.fixture(autouse=True)
@@ -107,3 +181,30 @@ def _never_rebuild_a_style_guide_with_a_real_model(monkeypatch):
         raise RuntimeError("no model in tests")
 
     monkeypatch.setattr(writing_style, "build_profile", no_model)
+
+
+@pytest.fixture(autouse=True)
+def _no_ollama_on_this_machine(monkeypatch):
+    """Tests never read or eject what Ollama holds (integrations.llm's one-model rule)."""
+    import integrations.llm as llm
+    monkeypatch.setattr(llm, "ollama_resident_models", lambda *a, **k: [])
+
+
+@pytest.fixture(autouse=True)
+def _never_call_the_real_instagram_api(monkeypatch):
+    """publish_reel's resumable upload hits graph.facebook.com and
+    rupload.facebook.com; no test may reach either for real."""
+    from integrations import instagram_publish as ig
+
+    def _refuse(*a, **k):
+        raise AssertionError("instagram_publish must not make a real HTTP call in tests")
+
+    monkeypatch.setattr(ig, "_request", _refuse)
+
+
+@pytest.fixture(autouse=True)
+def _no_live_reel_slot_wait(monkeypatch):
+    """`auto_story.wait_for_reel_slot` asks the live BuzzEdit whether a reel is rendering;
+    a test must never wait on (or even reach) the real one."""
+    from integrations.buzzedit_client import BuzzEditClient
+    monkeypatch.setattr(BuzzEditClient, "vibe_reel_busy", lambda self: False)

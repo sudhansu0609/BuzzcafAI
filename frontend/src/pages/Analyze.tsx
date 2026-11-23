@@ -142,12 +142,13 @@ export default function Analyze() {
           <input
             className="form-control"
             style={{ flex: '1 1 320px' }}
+            aria-label="Video or channel URL"
             placeholder="https://www.youtube.com/watch?v=… or https://www.youtube.com/@channel"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && run()}
           />
-          <select className="form-control" style={{ flex: '0 1 220px' }} value={selectedChannel} onChange={(e) => setSelectedChannel(e.target.value)}>
+          <select className="form-control" aria-label="Channel" style={{ flex: '0 1 220px' }} value={selectedChannel} onChange={(e) => setSelectedChannel(e.target.value)}>
             {channels.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.icon} model for {c.id}

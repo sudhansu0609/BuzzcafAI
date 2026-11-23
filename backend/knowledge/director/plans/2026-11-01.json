@@ -1,0 +1,90 @@
+{
+  "horizon": "day",
+  "generated_at": "2026-11-01T04:56:21",
+  "turns": 1,
+  "items": [
+    {
+      "channel": null,
+      "action": "fix_restart_gemini_harness",
+      "params": {},
+      "when": "tonight",
+      "why": "Self-check detected Gemini harness ping failed at 04:55:01; restarting service",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+      "needs_approval": false
+    },
+    {
+      "channel": null,
+      "action": "fix_start_buzzedit",
+      "params": {},
+      "when": "tonight",
+      "why": "BuzzEdit unreachable on shared port ledger causing Life3Baje vibe reel render failures",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "longform_run_slot",
+      "params": {
+        "format": "real_encounter"
+      },
+      "when": "tonight",
+      "why": "Long-form script first (uses 0 GPU); advances Raat3Baje rotation to real encounter",
+      "goal": "A Raat3Baje long video is a pure story (no analysis), and the five formats take turns: rules, real encounter, fiction, black magic, tantra.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "needs_intro",
+      "params": {
+        "project_id": "2026-10-23_Beyond3Baje_WhatIfAapkeCctvMeinAapKhudKalRaatGharMeinGhusteDikhowhatIfPilot1",
+        "title": "What If Aapke CCTV Mein Aap Khud Kal Raat Ghar Mein Ghuste Dikho (WHAT IF pilot 1)"
+      },
+      "when": "today",
+      "why": "Script complete; awaiting creator on-camera intro recording before production proceeds",
+      "goal": "Every long video opens with a few minutes I record fresh on camera; the rest is my cloned voice. Reels are fully cloned.",
+      "needs_approval": true
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "rules_horror"
+      },
+      "when": "tonight",
+      "why": "First reel in night order; consumes ~2h of 6h GPU budget",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "anomaly_files"
+      },
+      "when": "tonight",
+      "why": "Second reel in night order; consumes ~2h GPU render time",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "auto_story_make_mood_reel",
+      "params": {},
+      "when": "tonight",
+      "why": "Mood reel scheduled last (~30m GPU); Khayal3Baje deferred to tomorrow to preserve GPU safety margin",
+      "goal": "Life3Baje: vlog + motivational. Vibe reels are hyper-real AI clips with 2-4 ghazal lines, no voice.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "step_approval",
+      "params": {
+        "title": "SOYA SMASHAAN NEW"
+      },
+      "when": "today",
+      "why": "Pending step approval on Dashboard waiting for creator decision",
+      "goal": "The Studio makes content by itself overnight; I review, and I approve every publish.",
+      "needs_approval": true
+    }
+  ]
+}

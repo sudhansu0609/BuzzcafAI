@@ -9,6 +9,10 @@ class WorkflowStep:
     requires_approval: bool = False
     input_assets: List[str] = field(default_factory=list)  # asset keys required
     output_asset_type: Optional[str] = None  # asset key generated, e.g., "research"
+    # A condition on the project: the step runs only when it holds, else it is
+    # recorded as skipped and the workflow moves on. "shorts_first" = the
+    # project's recording session opens with its Shorts (app/services/session_format.py).
+    when: Optional[str] = None
 
 @dataclass
 class WorkflowDefinition:

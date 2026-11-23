@@ -16,7 +16,9 @@ from typing import Any, Dict, List
 
 def _h_produce_start(p: Dict[str, Any]) -> Any:
     from app.api.produce_api import produce_video, ProduceVideoSchema
-    return produce_video(p["project_id"], ProduceVideoSchema(**{k: v for k, v in p.items() if k != "project_id"}))
+    # Asked for in chat: it waits its turn behind a video being made.
+    return produce_video(p["project_id"], ProduceVideoSchema(**{k: v for k, v in p.items() if k != "project_id"}),
+                         when_free=True)
 
 
 def _h_produce_status(p: Dict[str, Any]) -> Any:
@@ -50,6 +52,63 @@ def _h_animate_start(p: Dict[str, Any]) -> Any:
 def _h_animate_status(p: Dict[str, Any]) -> Any:
     from app.api.buzzanimate_api import animate_status
     return animate_status(p["project_id"])
+
+
+# ─────────────────────────── director knowledge ───────────────────────────
+
+
+def _h_docs_index(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.knowledge_index()
+
+
+def _h_read_doc(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    try:
+        return director_knowledge.read_doc(p["path"], heading=p.get("heading"), start=p.get("start"),
+                                           end=p.get("end"), grep=p.get("grep"))
+    except ValueError as exc:
+        return f"refused: {exc}"
+
+
+def _h_health_report(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.health_report(p.get("state"))
+
+
+def _h_log_digest(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.log_digest(int(p.get("hours") or 24))
+
+
+def _h_llm_status(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.llm_status()
+
+
+def _h_persona_roster(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.persona_roster()
+
+
+def _h_settings_summary(p: Dict[str, Any]) -> Any:
+    from app.services import director_knowledge
+    return director_knowledge.settings_summary()
+
+
+def _h_failed_records(p: Dict[str, Any]) -> Any:
+    from app.services import director_fix
+    return director_fix.failed_records()
+
+
+def _h_incidents_search(p: Dict[str, Any]) -> Any:
+    from app.services import director_memory
+    return director_memory.search_incidents(str(p.get("query") or ""), 5)
+
+
+def _h_tickets_list(p: Dict[str, Any]) -> Any:
+    from app.services import director_fix
+    return director_fix.list_tickets()
 
 
 # ────────────────────────────── catalog ──────────────────────────────
@@ -254,6 +313,28 @@ def register_all(reg: List[Dict[str, Any]]) -> None:
          "summary": "Build a project's script into a BuzzAnimate episode.", "handler": _h_animate_start},
         {"name": "animate_status", "domain": "produce", "method": "GET", "path": "/api/projects/{id}/animate/status",
          "kind": "read", "params": {"project_id": "str"}, "summary": "Animation status.", "handler": _h_animate_status},
+        # director knowledge (read-only)
+        {"name": "docs_index", "domain": "director", "method": "GET", "path": "/api/director/docs",
+         "kind": "read", "params": {}, "summary": "Index of the project docs the Director may read.", "handler": _h_docs_index},
+        {"name": "read_doc", "domain": "director", "method": "GET", "path": "/api/director/docs/read",
+         "kind": "read", "params": {"path": "str", "heading": "str?", "start": "int?", "end": "int?", "grep": "str?"},
+         "summary": "Read part of one project doc by heading, line range or grep.", "handler": _h_read_doc},
+        {"name": "health_report", "domain": "director", "method": "GET", "path": "/api/health/checks",
+         "kind": "read", "params": {"state": "str?"}, "summary": "The Health page rows, optionally one state.", "handler": _h_health_report},
+        {"name": "log_digest", "domain": "director", "method": "GET", "path": "/api/director/log_digest",
+         "kind": "read", "params": {"hours": "int?"}, "summary": "Grouped recent log errors and warnings.", "handler": _h_log_digest},
+        {"name": "llm_status", "domain": "director", "method": "GET", "path": "/api/director/llm_status",
+         "kind": "read", "params": {}, "summary": "Which model providers are selected and online.", "handler": _h_llm_status},
+        {"name": "persona_roster", "domain": "director", "method": "GET", "path": "/api/agents",
+         "kind": "read", "params": {}, "summary": "Personas by department with role and model tier.", "handler": _h_persona_roster},
+        {"name": "settings_summary", "domain": "director", "method": "GET", "path": "/api/director/settings_summary",
+         "kind": "read", "params": {}, "summary": "Redacted Studio settings (no keys).", "handler": _h_settings_summary},
+        {"name": "failed_records", "domain": "director", "method": "GET", "path": "/api/director/memory",
+         "kind": "read", "params": {}, "summary": "Failed queue items and failed Auto Story records, with errors.", "handler": _h_failed_records},
+        {"name": "incidents_search", "domain": "director", "method": "GET", "path": "/api/director/memory",
+         "kind": "read", "params": {"query": "str"}, "summary": "Past incidents like this problem, and whether the fix worked.", "handler": _h_incidents_search},
+        {"name": "tickets_list", "domain": "director", "method": "GET", "path": "/api/director/memory",
+         "kind": "read", "params": {}, "summary": "Dev tickets the Director has written.", "handler": _h_tickets_list},
         # catalog
         {"name": "brands", "domain": "catalog", "method": "GET", "path": "/api/brands",
          "kind": "read", "params": {}, "summary": "List brands/channels.", "handler": _h_brands},

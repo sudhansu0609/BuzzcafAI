@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDown, ArrowUp, Minus, Pause, Play, Plus, RotateCcw, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, Gamepad2, Minus, Pause, Play, Plus, RotateCcw, X } from 'lucide-react';
 
 /* Full-screen teleprompter for a BuzzEdit-annotated script (or a raw draft).
  *
@@ -258,13 +258,78 @@ function measure(scroller: HTMLElement, content: HTMLElement): Metrics {
 // --- prefs -----------------------------------------------------------------
 
 const STORE_KEY = 'buzzcaf.teleprompter.v2';
-type Prefs = { wpm: number; fontSize: number; mode: Mode; natural: boolean };
-const DEFAULT_PREFS: Prefs = { wpm: 140, fontSize: 44, mode: 'full', natural: true };
+
+/* Controls. Every action can be bound to any number of inputs: a mouse
+ * button (`mouse:<button>`), a key (`key:<KeyboardEvent.code>`) or a gamepad
+ * button (`gp:<index>`, any connected pad -- USB foot pedals and presenter
+ * remotes that enumerate as a joystick land here). The two scroll actions are
+ * *hold* actions: the text moves while the input is held and stops on
+ * release, at `holdMult` times the reading pace, overriding auto-scroll until
+ * it is let go. The rest fire once on press.
+ */
+export type Action = 'scrollDown' | 'scrollUp' | 'playPause' | 'faster' | 'slower' | 'fontUp' | 'fontDown' | 'reverse' | 'top';
+export const ACTIONS: { id: Action; label: string; hold?: boolean }[] = [
+  { id: 'scrollUp', label: 'Scroll up (hold)', hold: true },
+  { id: 'scrollDown', label: 'Scroll down (hold)', hold: true },
+  { id: 'playPause', label: 'Play / pause' },
+  { id: 'faster', label: 'Pace +5' },
+  { id: 'slower', label: 'Pace -5' },
+  { id: 'fontUp', label: 'Text bigger' },
+  { id: 'fontDown', label: 'Text smaller' },
+  { id: 'reverse', label: 'Reverse direction' },
+  { id: 'top', label: 'Back to top' },
+];
+const HOLD_ACTIONS = new Set<Action>(['scrollUp', 'scrollDown']);
+type Bindings = Record<Action, string[]>;
+const DEFAULT_BINDINGS: Bindings = {
+  scrollUp: ['mouse:0', 'pen:2', 'key:PageUp', 'key:ArrowLeft'],
+  scrollDown: ['mouse:2', 'pen:0', 'key:PageDown', 'key:ArrowRight'],
+  playPause: ['key:Space'],
+  faster: ['key:ArrowUp'],
+  slower: ['key:ArrowDown'],
+  fontUp: ['key:Equal', 'key:NumpadAdd'],
+  fontDown: ['key:Minus', 'key:NumpadSubtract'],
+  reverse: ['key:KeyR'],
+  top: ['key:Home'],
+};
+const MOUSE_NAMES: Record<string, string> = { '0': 'Left click', '1': 'Middle click', '2': 'Right click', '3': 'Mouse back', '4': 'Mouse forward' };
+// Pen buttons as the browser reports them: tip = 0, barrel = 2, eraser = 5
+// (a Wacom pen's lower side switch is "right click" by default, so it is 2).
+const PEN_NAMES: Record<string, string> = { '0': 'Pen tip', '1': 'Pen button', '2': 'Pen side button', '5': 'Pen eraser' };
+export function bindingLabel(b: string): string {
+  const [kind, ...rest] = b.split(':');
+  const v = rest.join(':');
+  if (kind === 'mouse') return MOUSE_NAMES[v] ?? `Mouse ${v}`;
+  if (kind === 'pen') return PEN_NAMES[v] ?? `Pen button ${v}`;
+  if (kind === 'touch') return 'Touch';
+  if (kind === 'gp') return `Pad button ${v}`;
+  if (kind === 'key') {
+    if (v.startsWith('Key')) return v.slice(3);
+    if (v.startsWith('Digit')) return v.slice(5);
+    if (v.startsWith('Numpad')) return `Num ${v.slice(6)}`;
+    return v.replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+  return b;
+}
+
+type Prefs = { wpm: number; fontSize: number; mode: Mode; natural: boolean; holdMult: number; bindings: Bindings };
+const DEFAULT_PREFS: Prefs = { wpm: 140, fontSize: 44, mode: 'full', natural: true, holdMult: 1.5, bindings: DEFAULT_BINDINGS };
+const HOLD_MIN = 0.5, HOLD_MAX = 5;
 
 function loadPrefs(): Prefs {
   try {
     const raw = localStorage.getItem(STORE_KEY);
-    if (raw) return { ...DEFAULT_PREFS, ...JSON.parse(raw) };
+    if (raw) {
+      const saved = JSON.parse(raw) as Partial<Prefs>;
+      const bindings = { ...DEFAULT_BINDINGS } as Bindings;
+      if (saved.bindings && typeof saved.bindings === 'object') {
+        for (const a of ACTIONS) {
+          const v = (saved.bindings as Partial<Bindings>)[a.id];
+          if (Array.isArray(v)) bindings[a.id] = v.filter((x): x is string => typeof x === 'string');
+        }
+      }
+      return { ...DEFAULT_PREFS, ...saved, bindings };
+    }
   } catch { /* storage unavailable */ }
   return DEFAULT_PREFS;
 }
@@ -307,14 +372,23 @@ export default function Teleprompter({
   const [playing, setPlaying] = useState(false);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [holding, setHolding] = useState(0); // seconds of the cue being held, 0 = none
+  const [manual, setManual] = useState<0 | 1 | -1>(0); // a scroll input is held: 1 down, -1 up
+  const [showControls, setShowControls] = useState(false);
+  const [capturing, setCapturing] = useState<Action | null>(null);
   const [viewH, setViewH] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<Metrics>(EMPTY_METRICS);
   const wpmRef = useRef(prefs.wpm);
   const dirRef = useRef(direction);
+  const manualRef = useRef(manual);
+  const playingRef = useRef(playing);
+  const holdMultRef = useRef(prefs.holdMult);
   wpmRef.current = prefs.wpm;
   dirRef.current = direction;
+  manualRef.current = manual;
+  playingRef.current = playing;
+  holdMultRef.current = prefs.holdMult;
 
   useEffect(() => {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(prefs)); } catch { /* ignore */ }
@@ -366,10 +440,11 @@ export default function Teleprompter({
     }
   }, [prefs.fontSize]);
 
-  // Auto-scroll loop. scrollTop rounds to whole pixels, so fractional
-  // progress is kept in `pos` rather than read back each frame.
+  // Scroll loop: runs while auto-scroll plays or a scroll input is held.
+  // scrollTop rounds to whole pixels, so fractional progress is kept in
+  // `pos` rather than read back each frame.
   useEffect(() => {
-    if (!playing) return;
+    if (!playing && manual === 0) return;
     const el = scrollRef.current;
     if (!el) return;
     let pos = el.scrollTop;
@@ -391,6 +466,22 @@ export default function Teleprompter({
         nextPause = m.pauses.findIndex((q) => q.y > readY(pos));
         if (nextPause < 0) nextPause = m.pauses.length;
       }
+      const man = manualRef.current;
+      if (man !== 0) {
+        // Held input: move at holdMult x pace in that direction, through
+        // pauses, and leave the cues re-armed for wherever we land.
+        const hy = readY(pos);
+        const hp = m.paras.find((p) => hy >= p.top && hy < p.bottom);
+        const hppw = hp ? hp.ppw : m.avgPpw * 2;
+        pos = clamp(pos + (wpmRef.current * holdMultRef.current / 60) * hppw * man * dt, 0, el.scrollHeight - el.clientHeight);
+        el.scrollTop = pos;
+        nextPause = m.pauses.findIndex((q) => q.y > readY(pos));
+        if (nextPause < 0) nextPause = m.pauses.length;
+        if (holdUntil) { holdUntil = 0; setHolding(0); }
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      if (!playingRef.current) return;
       if (now < holdUntil) { raf = requestAnimationFrame(tick); return; }
       if (holdUntil) { holdUntil = 0; setHolding(0); }
 
@@ -428,7 +519,7 @@ export default function Teleprompter({
     };
     raf = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(raf); setHolding(0); };
-  }, [playing, prefs.fontSize]);
+  }, [playing, manual, prefs.fontSize]);
 
   const setWpm = useCallback((v: number) => setPrefs((p) => ({ ...p, wpm: clamp(Math.round(v), WPM_MIN, WPM_MAX) })), []);
   const setMode = (mode: Mode) => setPrefs((p) => ({ ...p, mode }));
@@ -446,29 +537,159 @@ export default function Teleprompter({
 
   const toTop = () => { if (scrollRef.current) scrollRef.current.scrollTop = 0; };
 
-  // Keyboard: Space play/pause, ↑/↓ speed, +/- font, R reverse, Home top, Esc close.
+  // Bindings -> actions. Hold actions start on press and stop on release;
+  // the rest fire on press. Escape always closes (or cancels a capture).
+  const bindingsRef = useRef(prefs.bindings);
+  bindingsRef.current = prefs.bindings;
+  const capturingRef = useRef(capturing);
+  capturingRef.current = capturing;
+  const fontRef = useRef(prefs.fontSize);
+  fontRef.current = prefs.fontSize;
+
+  const actionsFor = (input: string): Action[] =>
+    ACTIONS.filter((a) => bindingsRef.current[a.id].includes(input)).map((a) => a.id);
+
+  const addBinding = useCallback((action: Action, input: string) => {
+    setPrefs((p) => {
+      const bindings = { ...p.bindings };
+      // One input does one thing: drop it from every other action first.
+      for (const a of ACTIONS) bindings[a.id] = bindings[a.id].filter((b) => b !== input);
+      bindings[action] = [...bindings[action], input];
+      return { ...p, bindings };
+    });
+  }, []);
+  const removeBinding = (action: Action, input: string) =>
+    setPrefs((p) => ({ ...p, bindings: { ...p.bindings, [action]: p.bindings[action].filter((b) => b !== input) } }));
+  const resetBindings = () => setPrefs((p) => ({ ...p, bindings: DEFAULT_BINDINGS, holdMult: DEFAULT_PREFS.holdMult }));
+
+  const fire = useCallback((action: Action, phase: 'down' | 'up', repeat = false) => {
+    if (HOLD_ACTIONS.has(action)) {
+      const dir = action === 'scrollDown' ? 1 : -1;
+      if (phase === 'down') setManual(dir);
+      else setManual((m) => (m === dir ? 0 : m));
+      return;
+    }
+    if (phase !== 'down') return;
+    switch (action) {
+      case 'playPause': if (!repeat) togglePlay(); break;
+      case 'faster': setWpm(wpmRef.current + 5); break;
+      case 'slower': setWpm(wpmRef.current - 5); break;
+      case 'fontUp': changeFont(fontRef.current + 2); break;
+      case 'fontDown': changeFont(fontRef.current - 2); break;
+      case 'reverse': if (!repeat) setDirection((d) => (d === 1 ? -1 : 1)); break;
+      case 'top': if (!repeat) toTop(); break;
+      default: break;
+    }
+  }, [togglePlay, setWpm, changeFont]);
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement | null)?.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
-        if (e.key === 'Escape') onClose();
+    const isFormTarget = (t: EventTarget | null) => {
+      const tag = (t as HTMLElement | null)?.tagName;
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+    };
+    const isControl = (t: EventTarget | null) =>
+      !!(t as HTMLElement | null)?.closest?.('button, input, select, textarea, label, a, [data-no-hold]');
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (capturingRef.current) {
+        e.preventDefault();
+        if (e.key === 'Escape') setCapturing(null);
+        else if (!e.repeat) { addBinding(capturingRef.current, `key:${e.code}`); setCapturing(null); }
         return;
       }
-      switch (e.key) {
-        case ' ': e.preventDefault(); togglePlay(); break;
-        case 'ArrowUp': e.preventDefault(); setWpm(wpmRef.current + 5); break;
-        case 'ArrowDown': e.preventDefault(); setWpm(wpmRef.current - 5); break;
-        case '+': case '=': changeFont(prefs.fontSize + 2); break;
-        case '-': case '_': changeFont(prefs.fontSize - 2); break;
-        case 'r': case 'R': setDirection((d) => (d === 1 ? -1 : 1)); break;
-        case 'Home': toTop(); break;
-        case 'Escape': onClose(); break;
-        default: return;
+      if (e.key === 'Escape') { onClose(); return; }
+      if (isFormTarget(e.target)) return;
+      const acts = actionsFor(`key:${e.code}`);
+      if (!acts.length) return;
+      e.preventDefault();
+      for (const a of acts) {
+        if (HOLD_ACTIONS.has(a) && e.repeat) continue;
+        fire(a, 'down', e.repeat);
       }
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [togglePlay, setWpm, changeFont, prefs.fontSize, onClose]);
+    const onKeyUp = (e: KeyboardEvent) => {
+      for (const a of actionsFor(`key:${e.code}`)) if (HOLD_ACTIONS.has(a)) fire(a, 'up');
+    };
+    // Mouse, pen (a Wacom tip or side switch, hovering or touching) and touch
+    // each get their own binding ids, so the pen tip can do something other
+    // than a left click.
+    const inputOf = (e: PointerEvent) => {
+      const kind = e.pointerType === 'pen' ? 'pen' : e.pointerType === 'touch' ? 'touch' : 'mouse';
+      return `${kind}:${e.button < 0 ? 0 : e.button}`;
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      const input = inputOf(e);
+      if (capturingRef.current) {
+        if (isControl(e.target)) return; // let the panel's own buttons work
+        e.preventDefault();
+        addBinding(capturingRef.current, input);
+        setCapturing(null);
+        return;
+      }
+      if (isControl(e.target)) return;
+      const acts = actionsFor(input);
+      if (!acts.length) return;
+      e.preventDefault();
+      for (const a of acts) fire(a, 'down');
+    };
+    const onPointerUp = (e: PointerEvent) => {
+      for (const a of actionsFor(inputOf(e))) if (HOLD_ACTIONS.has(a)) fire(a, 'up');
+    };
+    // Keep the right button and the side buttons from opening a menu or
+    // navigating while they drive the prompter.
+    const onContextMenu = (e: MouseEvent) => { if (!isFormTarget(e.target)) e.preventDefault(); };
+    const onAux = (e: MouseEvent) => { if (actionsFor(`mouse:${e.button}`).length) e.preventDefault(); };
+    const release = () => setManual(0);
+
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', release);
+    window.addEventListener('blur', release);
+    window.addEventListener('contextmenu', onContextMenu);
+    window.addEventListener('mouseup', onAux);
+    window.addEventListener('auxclick', onAux);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup', onKeyUp);
+      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', release);
+      window.removeEventListener('blur', release);
+      window.removeEventListener('contextmenu', onContextMenu);
+      window.removeEventListener('mouseup', onAux);
+      window.removeEventListener('auxclick', onAux);
+    };
+  }, [fire, addBinding, onClose]);
+
+  // Gamepads (foot pedals, presenter remotes and controllers that show up as
+  // a joystick): polled while a pad binding exists or a capture is waiting.
+  const usesGamepad = capturing !== null || ACTIONS.some((a) => prefs.bindings[a.id].some((b) => b.startsWith('gp:')));
+  useEffect(() => {
+    if (!usesGamepad || typeof navigator === 'undefined' || !navigator.getGamepads) return;
+    const down = new Set<number>();
+    const id = window.setInterval(() => {
+      const now = new Set<number>();
+      for (const pad of navigator.getGamepads()) {
+        if (!pad) continue;
+        pad.buttons.forEach((b, i) => { if (b.pressed || b.value > 0.5) now.add(i); });
+      }
+      for (const i of now) {
+        if (down.has(i)) continue;
+        if (capturingRef.current) { addBinding(capturingRef.current, `gp:${i}`); setCapturing(null); continue; }
+        for (const a of actionsFor(`gp:${i}`)) fire(a, 'down');
+      }
+      for (const i of down) {
+        if (now.has(i)) continue;
+        for (const a of actionsFor(`gp:${i}`)) if (HOLD_ACTIONS.has(a)) fire(a, 'up');
+      }
+      down.clear();
+      for (const i of now) down.add(i);
+    }, 30);
+    return () => window.clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [usesGamepad, fire, addBinding]);
 
   const fs = prefs.fontSize;
   const hasText = !!text.trim();
@@ -608,28 +829,105 @@ export default function Teleprompter({
 
           <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }} title="Reading pace in words per minute (↑ / ↓). Cues in the script slow, speed up or pause it.">
             <span>Pace</span>
-            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => setWpm(prefs.wpm - 5)}><Minus size={12} /></button>
-            <input type="range" min={WPM_MIN} max={WPM_MAX} step={5} value={prefs.wpm} onChange={(e) => setWpm(Number(e.target.value))} style={{ width: 110 }} />
-            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => setWpm(prefs.wpm + 5)}><Plus size={12} /></button>
+            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => setWpm(prefs.wpm - 5)} aria-label="Decrease pace"><Minus size={12} /></button>
+            <input type="range" min={WPM_MIN} max={WPM_MAX} step={5} value={prefs.wpm} onChange={(e) => setWpm(Number(e.target.value))} aria-label="Pace" style={{ width: 110 }} />
+            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => setWpm(prefs.wpm + 5)} aria-label="Increase pace"><Plus size={12} /></button>
             <span style={{ minWidth: 64, fontVariantNumeric: 'tabular-nums' }}>{prefs.wpm} wpm</span>
           </label>
 
           <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }} title="Text size (+ / -). Lines re-wrap; the column keeps its width.">
             <span>Size</span>
-            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => changeFont(fs - 2)}><Minus size={12} /></button>
-            <input type="range" min={FONT_MIN} max={FONT_MAX} step={1} value={fs} onChange={(e) => changeFont(Number(e.target.value))} style={{ width: 110 }} />
-            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => changeFont(fs + 2)}><Plus size={12} /></button>
+            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => changeFont(fs - 2)} aria-label="Decrease text size"><Minus size={12} /></button>
+            <input type="range" min={FONT_MIN} max={FONT_MAX} step={1} value={fs} onChange={(e) => changeFont(Number(e.target.value))} aria-label="Size" style={{ width: 110 }} />
+            <button type="button" className="btn btn-outline btn-sm" style={{ ...ctrlBtn, padding: '3px 6px' }} onClick={() => changeFont(fs + 2)} aria-label="Increase text size"><Plus size={12} /></button>
             <span style={{ minWidth: 40, fontVariantNumeric: 'tabular-nums' }}>{fs}px</span>
           </label>
 
           <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, cursor: 'pointer' }} title="Add a short breath at each sentence end, dash and '...'">
-            <input type="checkbox" checked={prefs.natural} onChange={(e) => setPrefs((p) => ({ ...p, natural: e.target.checked }))} />
+            <input type="checkbox" checked={prefs.natural} onChange={(e) => setPrefs((p) => ({ ...p, natural: e.target.checked }))} aria-label="Natural pauses" />
             <span>Natural pauses</span>
           </label>
 
-          <span style={{ marginLeft: 'auto', color: '#9ca3af', fontVariantNumeric: 'tabular-nums' }} title="Estimated read time at this pace, including pauses">
+          <button
+            type="button"
+            className="btn btn-outline btn-sm"
+            onClick={() => setShowControls((v) => !v)}
+            style={{ ...ctrlBtn, marginLeft: 'auto', background: showControls ? 'rgba(250,204,21,0.15)' : undefined }}
+            title="Mouse, keyboard and gamepad controls. Hold a bound button to scroll."
+          >
+            <Gamepad2 size={14} />
+            <span>Controls</span>
+          </button>
+          <span style={{ color: '#9ca3af', fontVariantNumeric: 'tabular-nums' }} title="Estimated read time at this pace, including pauses">
             ≈ {fmtTime(estimate)}
           </span>
+        </div>
+      )}
+
+      {hasText && !busy && showControls && (
+        <div
+          data-no-hold=""
+          style={{
+            padding: '10px 12px', marginBottom: 12, borderRadius: 8,
+            background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+            color: '#d1d5db', fontSize: '0.8rem',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', marginBottom: 8 }}>
+            <span style={{ color: '#e5e7eb', fontWeight: 600 }}>Controls</span>
+            <span style={{ color: '#9ca3af' }}>
+              Hold a scroll button and the text moves while you hold it; let go and it stops (auto-scroll carries on if it was running).
+              Bind any mouse button, key, pen tip or pen side switch (Wacom), touch, or a button on a USB pedal / remote / gamepad.
+            </span>
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginLeft: 'auto' }} title="How fast a held button scrolls, as a multiple of the reading pace">
+              <span>Hold speed</span>
+              <input
+                type="range" min={HOLD_MIN} max={HOLD_MAX} step={0.25} value={prefs.holdMult}
+                onChange={(e) => setPrefs((p) => ({ ...p, holdMult: clamp(Number(e.target.value), HOLD_MIN, HOLD_MAX) }))}
+                aria-label="Hold speed" style={{ width: 110 }}
+              />
+              <span style={{ minWidth: 36, fontVariantNumeric: 'tabular-nums' }}>×{prefs.holdMult}</span>
+            </label>
+            <button type="button" className="btn btn-outline btn-sm" style={ctrlBtn} onClick={resetBindings}>Reset</button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '6px 18px' }}>
+            {ACTIONS.map((a) => (
+              <div key={a.id} style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', minHeight: 28 }}>
+                <span style={{ minWidth: 118, color: a.hold ? '#fde68a' : '#e5e7eb' }}>{a.label}</span>
+                {prefs.bindings[a.id].map((b) => (
+                  <span
+                    key={b}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 4, padding: '2px 6px 2px 8px', borderRadius: 5,
+                      background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.75rem',
+                    }}
+                  >
+                    {bindingLabel(b)}
+                    <button
+                      type="button"
+                      onClick={() => removeBinding(a.id, b)}
+                      aria-label={`Remove ${bindingLabel(b)}`}
+                      style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', padding: 0, lineHeight: 1 }}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setCapturing(capturing === a.id ? null : a.id)}
+                  style={{
+                    padding: '2px 8px', borderRadius: 5, fontSize: '0.75rem', cursor: 'pointer',
+                    border: '1px dashed rgba(255,255,255,0.35)',
+                    background: capturing === a.id ? '#facc15' : 'transparent',
+                    color: capturing === a.id ? '#111' : '#e5e7eb',
+                  }}
+                >
+                  {capturing === a.id ? 'Press a key or button… (Esc cancels)' : '+ Add'}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -644,6 +942,17 @@ export default function Teleprompter({
               background: 'rgba(250,204,21,0.04)', pointerEvents: 'none', zIndex: 1,
             }}
           >
+            {manual !== 0 && (
+              <span
+                style={{
+                  position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)',
+                  color: '#111', background: '#fde68a', borderRadius: 4, padding: '2px 8px',
+                  fontSize: '0.8rem', fontWeight: 700,
+                }}
+              >
+                {manual === 1 ? '\u25bc' : '\u25b2'} hold \u00d7{prefs.holdMult}
+              </span>
+            )}
             {holding > 0 && (
               <span
                 style={{

@@ -13,14 +13,14 @@ import { deleteJson, describeError, getJson, postForm, postJson, putJson } from 
  * and rules; the selected one is what the agents write in, and everything on
  * this page shows and edits that one. */
 
-const CHANNELS = ['Raat3Baje', 'Beyond3Baje', 'Khayal3Baje', 'Life3Baje', 'Originals'];
+const CHANNELS = ['Raat3Baje', 'Beyond3Baje', 'Khayal3Baje', 'Life3Baje', 'Originals', 'TheTallStoryteller'];
 
 type Sample = { id: string; kind: 'written' | 'spoken'; title: string; words: number; added: string };
 type Fingerprint = Record<string, unknown> & { phrases?: string[]; source?: string; words?: number };
 type SavedStyle = { id: string; name: string; active: boolean; written: number; spoken: number; built_at: string | null };
 type Overview = {
   channel: string; samples: Sample[]; profile: string; notes: string; fingerprint: Fingerprint;
-  rewrites: number; built_at: string | null; stale: boolean; mode?: 'mine' | 'agent'; skipped?: string[];
+  rewrites: number; built_at: string | null; stale: boolean; mode?: 'mine' | 'agent'; story_standard?: boolean; has_standard?: boolean; skipped?: string[];
   harvest?: { projects_with_recordings: number; kept: string[] };
   style?: string; styles?: SavedStyle[];
 };
@@ -114,6 +114,8 @@ export default function WritingStyle() {
   };
   const setMode = (mode: 'mine' | 'agent') => run('mode', () => putJson<Overview>(`/api/style/${channel}/mode`, { mode }),
     mode === 'mine' ? `${channel}: agents now write in your style.` : `${channel}: agents now write in their own style.`);
+  const setStandard = (on: boolean) => run('standard', () => putJson<Overview>(`/api/style/${channel}/standard`, { on }),
+    on ? `${channel}: scripts follow the story standard, in Devanagari.` : `${channel}: story standard off.`);
   const styles = view?.styles || [];
   const activeStyle = styles.find((s) => s.active);
   const pickStyle = (s: SavedStyle) => {
@@ -236,13 +238,34 @@ export default function WritingStyle() {
         </div>
       </div>
 
+      {view?.has_standard && (
+        <div className="panel-card">
+          <h3 className="panel-title"><Layers size={20} /> Story standard</h3>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }} role="radiogroup" aria-label={`Story standard for ${channel}`}>
+            {([[true, 'On'], [false, 'Off']] as const).map(([on, label]) => (
+              <button key={label} type="button" role="radio" aria-checked={(view?.story_standard ?? true) === on}
+                className={`btn ${(view?.story_standard ?? true) === on ? '' : 'btn-outline'}`} disabled={!!busy || !view}
+                onClick={() => setStandard(on)}>
+                {busy === 'standard' && (view?.story_standard ?? true) !== on ? <Loader2 size={14} className="spin" /> : null}
+                <span>{label}</span>
+              </button>
+            ))}
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+              {(view?.story_standard ?? true)
+                ? `Every script step for this channel gets your brief (prompts/standards/${channel}.md) and is written in Devanagari.`
+                : 'Scripts follow only the channel guide and your writing style.'}
+            </span>
+          </div>
+        </div>
+      )}
+
       <div className="panel-card">
         <h3 className="panel-title"><FileText size={20} /> Samples for {channel}{activeStyle ? ` · ${activeStyle.name}` : ''}</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <b style={{ fontSize: '0.85rem' }}>Add your own writing</b>
-            <input className="form-control" placeholder="Title (optional)" value={sampleTitle} onChange={(e) => setSampleTitle(e.target.value)} />
-            <textarea className="form-control" rows={8} value={sampleText} onChange={(e) => setSampleText(e.target.value)}
+            <input className="form-control" aria-label="Title" placeholder="Title (optional)" value={sampleTitle} onChange={(e) => setSampleTitle(e.target.value)} />
+            <textarea className="form-control" rows={8} aria-label="Sample text" value={sampleText} onChange={(e) => setSampleText(e.target.value)}
               placeholder="Paste a story, script or post you wrote yourself, exactly as you would write it (at least 40 words). Several different pieces teach it best." />
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <button type="button" className="btn" disabled={!!busy || sampleText.trim().split(/\s+/).length < 40} onClick={addSample}>
@@ -251,7 +274,7 @@ export default function WritingStyle() {
               <button type="button" className="btn btn-outline" disabled={!!busy} onClick={() => fileRef.current?.click()}>
                 {spin('upload') || <Upload size={14} />}<span>Upload .txt / .md</span>
               </button>
-              <input ref={fileRef} type="file" accept=".txt,.md" multiple hidden onChange={(e) => upload(e.target.files)} />
+              <input ref={fileRef} type="file" accept=".txt,.md" multiple hidden aria-label="Upload sample files" onChange={(e) => upload(e.target.files)} />
               <button type="button" className="btn btn-outline" disabled={!!busy} onClick={harvest}
                 title="Keep what you said in every produced video of this channel (new productions are kept automatically)">
                 {spin('harvest') || <Mic size={14} />}<span>Learn from my recordings</span>
@@ -308,7 +331,7 @@ export default function WritingStyle() {
             {!!fp.phrases?.length && <span>phrases: {fp.phrases.slice(0, 6).map((p) => `“${p}”`).join(', ')}</span>}
           </div>
         ) : null}
-        <textarea className="form-control" rows={16} value={profile} onChange={(e) => setProfile(e.target.value)}
+        <textarea className="form-control" rows={16} aria-label="Style profile" value={profile} onChange={(e) => setProfile(e.target.value)}
           placeholder="Build the profile from your samples. You can then edit it; Rebuild replaces it (your own rules below are never replaced)."
           style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.8rem' }} />
         <div style={{ marginTop: 8 }}>
@@ -325,7 +348,7 @@ export default function WritingStyle() {
           also enforced by the style check, and a line <code>Greeting: ...</code> replaces the fixed greeting every
           full script opens with (your name and the channel&apos;s).
         </p>
-        <textarea className="form-control" rows={6} value={notes} onChange={(e) => setNotes(e.target.value)}
+        <textarea className="form-control" rows={6} aria-label={`Rules for ${channel}`} value={notes} onChange={(e) => setNotes(e.target.value)}
           placeholder={'e.g.\n- Greeting: Hello doston, mera naam hai Sudhansu aur aap dekh rahe hain Raat 3 Baje.\n- Never use: bhayanak, khaufnak, rongte khade'} />
         <div style={{ marginTop: 8 }}>
           <button type="button" className="btn btn-outline" disabled={!!busy || notes === (view?.notes || '')} onClick={saveNotes}>
@@ -336,7 +359,7 @@ export default function WritingStyle() {
 
       <div className="panel-card">
         <h3 className="panel-title"><CheckCircle2 size={20} /> Check a draft</h3>
-        <textarea className="form-control" rows={6} value={checkText} onChange={(e) => setCheckText(e.target.value)}
+        <textarea className="form-control" rows={6} aria-label="Draft to check" value={checkText} onChange={(e) => setCheckText(e.target.value)}
           placeholder="Paste a script to see how close it is to your style (at least 60 words)." />
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 8, flexWrap: 'wrap' }}>
           <button type="button" className="btn btn-outline" disabled={!!busy || checkText.trim().split(/\s+/).length < 60} onClick={check}>

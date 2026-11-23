@@ -36,12 +36,16 @@ def sandbox(monkeypatch, tmp_path):
         def execute_next(self, project_id, allow_all=None):
             p = Project.load(project_id)
             ran.append((p.brand, p.current_step, allow_all))
-            steps = {"after_dark_narration": ["Account Collection", "Script Writing", "Visual Plan"],
-                     "beyond3baje_documentary": ["Research", "Scripting", "Visual Plan"],
+            # Since 2026-10-24 the run goes on past Visual Plan through the planning steps
+            # and stops at the first step that needs the creator (his recording) or at the end.
+            steps = {"after_dark_narration": ["Account Collection", "Script Writing", "Visual Plan",
+                                              "SEO & Thumbnail"],
+                     "beyond3baje_documentary": ["Research", "Scripting", "Visual Plan", "Shot List",
+                                                 "Voice Recording"],
                      "life3baje_video": ["Vlog Planning", "Vlog Script & Prompts", "Visual Plan"]}[p.workflow_name]
             # Like the real engine: an unknown current step means the first one.
             at = steps.index(p.current_step) if p.current_step in steps else 0
-            p.current_step = steps[at + 1]
+            p.current_step = steps[at + 1] if at + 1 < len(steps) else "Completed"
             p.save()
             return p
 
@@ -57,8 +61,10 @@ def test_without_a_strategist_it_falls_back_to_the_best_vault_topic_then_the_ide
     by_channel = {b["channel"]: b for b in record["built"]}
     assert by_channel["Raat3Baje"]["title"] == "Kuldhara Ki Raat"
     assert by_channel["Beyond3Baje"]["title"] == "Inkanyamba: Waterfall Serpent"   # oldest Idea Dump idea
-    assert all(b["current_step"] == "Visual Plan" for b in record["built"])
-    assert all(allow for _, _, allow in ran) and len(ran) == 6
+    # Past Visual Plan (2026-10-24): to the end of planning, or the first step that needs him.
+    steps = {b["channel"]: b["current_step"] for b in record["built"]}
+    assert steps["Raat3Baje"] == "Completed" and steps["Beyond3Baje"] == "Voice Recording"
+    assert all(allow for _, _, allow in ran) and len(ran) == 11   # Raat 4 + Beyond 4 + Life 3 steps
 
     stages = {t["topic"]: t["stage"] for t in topic_store.load_topics()}
     assert stages["Kuldhara Ki Raat"] == "in_progress" and stages["Low ghost"] == "backlog"
@@ -98,7 +104,8 @@ def test_the_strategists_plan_and_the_creators_instructions_reach_the_project(sa
     from core.models.project import Project
     p = Project.load(built["project_id"])
     assert p.name == "Impundulu: Bijli Wala Pakshi"
-    assert p.metadata["creator_instructions"] == "Only African myths. Open cold, no intro."
+    # Beyond3Baje has episode formats since 2026-10-23: the night's format direction follows the instructions.
+    assert p.metadata["creator_instructions"].startswith("Only African myths. Open cold, no intro.")
     assert "the bird that brings lightning" in p.metadata["creative_brief"]
     assert p.metadata["target_duration_minutes"] == 15
     assert p.assets["strategist_brief"] == "script/strategist_brief.md"
@@ -150,13 +157,13 @@ def test_longform_api_saves_settings_and_instructions(monkeypatch):
     c = TestClient(app)
     state = c.get("/api/longform/nightly").json()
     assert state["channels"] == ["Raat3Baje", "Beyond3Baje", "Life3Baje"]
-    assert state["minutes"] == {"Raat3Baje": 8.0, "Beyond3Baje": 8.0, "Life3Baje": 8.0}
+    assert state["minutes"] == {"Raat3Baje": 8.0, "Beyond3Baje": 8.0, "Life3Baje": 8.0, "TheTallStoryteller": 8.0}
     assert state["strategists"]["Raat3Baje"] == "AfterDarkStrategist" and "status" in state
     state = c.post("/api/longform/nightly", json={"channels": ["Life3Baje"], "per_channel": 9,
                                                    "minutes": {"Raat3Baje": 20, "Life3Baje": 0},
                                                    "instructions": {"Life3Baje": "Honest numbers."}}).json()
     assert state["channels"] == ["Life3Baje"] and state["per_channel"] == 5
-    assert state["minutes"] == {"Raat3Baje": 20.0, "Beyond3Baje": 8.0, "Life3Baje": 1.0}
+    assert state["minutes"] == {"Raat3Baje": 20.0, "Beyond3Baje": 8.0, "Life3Baje": 1.0, "TheTallStoryteller": 8.0}
     assert state["instructions"]["Life3Baje"] == "Honest numbers." and state["instructions"]["Raat3Baje"] == ""
     assert c.post("/api/longform/nightly", json={"channels": ["Khayal3Baje"]}).status_code == 400
     saved["longform_nightly_minutes"] = 10                                 # an old single number
@@ -203,7 +210,7 @@ def test_strategists_get_the_whole_channel_guide_and_other_agents_the_excerpt():
     assert "## Initial topic pool" not in studio_chat.build_system_extra("ResearchAgent", "Beyond3Baje", "hi", None)
 
 
-def test_raat3baje_alternates_rules_and_fictional_story_episodes(sandbox, monkeypatch):
+def test_raat3baje_takes_turns_between_its_five_story_formats(sandbox, monkeypatch):
     tmp_path, _, cfg = sandbox
     cfg.update(longform_nightly_channels=["Raat3Baje"], longform_nightly_per_channel=3,
                longform_nightly_instructions={"Raat3Baje": "Pure story."})
@@ -215,15 +222,45 @@ def test_raat3baje_alternates_rules_and_fictional_story_episodes(sandbox, monkey
 
     monkeypatch.setattr(strategist_runner, "run", fake_run)
     first = longform_nightly.run(trigger="manual")["built"]
-    assert [b["format"] for b in first] == ["rules", "story", "rules"]
-    assert "'RULES' HORROR" in tasks[0] and "FICTIONAL HORROR STORY" in tasks[1]
+    assert [b["format"] for b in first] == ["rules", "real_encounter", "story"]
+    assert "'RULES' HORROR" in tasks[0] and "REAL HORROR ENCOUNTER" in tasks[1]
+    assert "FICTIONAL HORROR STORY" in tasks[2]
 
     from core.models.project import Project
-    p = Project.load(first[1]["project_id"])
+    p = Project.load(first[2]["project_id"])
     assert p.metadata["episode_format"] == "story"
     assert p.metadata["creator_instructions"].startswith("Pure story.")
     assert "FICTIONAL HORROR STORY" in p.metadata["creator_instructions"]
 
     # The next run carries on from the last episode built.
     cfg["longform_nightly_per_channel"] = 1
-    assert [b["format"] for b in longform_nightly.run(trigger="manual")["built"]] == ["story"]
+    assert [b["format"] for b in longform_nightly.run(trigger="manual")["built"]] == ["black_magic"]
+    assert [b["format"] for b in longform_nightly.run(trigger="manual")["built"]] == ["tantra"]
+    assert [b["format"] for b in longform_nightly.run(trigger="manual")["built"]] == ["rules"]
+
+
+def test_minutes_and_instructions_are_re_read_before_each_slot(sandbox, monkeypatch):
+    """Fable review #9: `run()` used to read settings() once; a change to
+    minutes or instructions mid-run (Settings -> Long form) must reach every
+    slot still to come, not just the ones the run started with."""
+    tmp_path, _, cfg = sandbox
+    cfg.update(longform_nightly_channels=["Raat3Baje"], longform_nightly_per_channel=2,
+               longform_nightly_minutes={"Raat3Baje": 8}, longform_nightly_instructions={"Raat3Baje": "first"})
+    seen_tasks = []
+
+    def fake_run(agent, channel, task, system_extra="", on_event=None, **_):
+        seen_tasks.append(task)
+        if len(seen_tasks) == 1:
+            cfg["longform_nightly_minutes"] = {"Raat3Baje": 20}
+            cfg["longform_nightly_instructions"] = {"Raat3Baje": "second"}
+        return {"plan": {"topic_ref": "new", "title": f"Episode {len(seen_tasks)}", "brief": "b"},
+                "turns": 1, "calls": []}
+
+    monkeypatch.setattr(strategist_runner, "run", fake_run)
+    longform_nightly.run(trigger="manual")
+
+    assert "about 8 minutes" in seen_tasks[0] and "first" in seen_tasks[0] and "second" not in seen_tasks[0]
+    assert "about 20 minutes" in seen_tasks[1] and "second" in seen_tasks[1]
+
+    status = longform_nightly.read_status()
+    assert [t["minutes"] for t in status["tasks"]] == [8, 20]

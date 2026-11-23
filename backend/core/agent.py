@@ -63,7 +63,7 @@ class AgentRegistry:
 
                         def clean_tier(val):
                             tier = str(val or "strong").strip().lower()
-                            return tier if tier in ("fast", "strong") else "strong"
+                            return tier if tier in ("fast", "strong", "premium") else "strong"
 
                         def clean_temperature(val):
                             try:

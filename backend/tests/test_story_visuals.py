@@ -101,6 +101,48 @@ def test_filter_beats_and_planner_section():
     assert "About 50%" in section and "Ramesh: a thin man" in section
 
 
+def test_kinetic_text_kept_only_where_text_cards_are_and_transitions_never():
+    beats = [{"kind": "broll_image"}, {"kind": "kinetic_text"}, {"kind": "transition"}, {"kind": "fx"}]
+    assert [b["kind"] for b in V.filter_beats(beats, "real")] == ["broll_image"]
+    assert [b["kind"] for b in V.filter_beats(beats, "explainer")] == ["broll_image", "kinetic_text"]
+    section = V.planner_section(0.5, CAST, art_style="explainer")
+    assert "**kinetic_text**" in section
+    assert "**kinetic_text**" not in V.planner_section(0.5, CAST)
+
+
+def test_stick_scene_and_paper_collage_gated_by_art_style():
+    """M8: stick_scene only for stick_figure/mixed/mixed_quirky, paper_collage
+    only for explainer/mixed/mixed_quirky, neither for real."""
+    beats = [{"kind": "broll_image"}, {"kind": "stick_scene"}, {"kind": "paper_collage"}]
+    assert [b["kind"] for b in V.filter_beats(beats, "real")] == ["broll_image"]
+    assert [b["kind"] for b in V.filter_beats(beats, "stick_figure")] == ["broll_image", "stick_scene"]
+    assert [b["kind"] for b in V.filter_beats(beats, "explainer")] == ["broll_image", "paper_collage"]
+    assert [b["kind"] for b in V.filter_beats(beats, "mixed")] == ["broll_image", "stick_scene", "paper_collage"]
+    assert "stick" not in V.kept_directives("real") and "collage" not in V.kept_directives("real")
+
+
+def test_m12_flow_icons_ui_callout_gated_by_text_cards():
+    """M12: flow_diagram/icon_list/ui_mockup/callout only where text cards are
+    on (explainer/stick_figure/mixed/mixed_quirky); a plain picture-only story
+    channel keeps none of them (2026-10-28 review: no drawn marks on horror)."""
+    beats = [{"kind": "broll_image"}, {"kind": "flow_diagram"}, {"kind": "icon_list"},
+             {"kind": "ui_mockup"}, {"kind": "callout"}]
+    assert [b["kind"] for b in V.filter_beats(beats, "real")] == ["broll_image"]
+    assert [b["kind"] for b in V.filter_beats(beats, "explainer")] == \
+        ["broll_image", "flow_diagram", "icon_list", "ui_mockup", "callout"]
+    for d in ("flow", "icons", "ui", "callout"):
+        assert d not in V.kept_directives("real") and d in V.kept_directives("explainer")
+
+    out_real, _ = V.apply_to_script(
+        "[callout: a muddy boot print | mark=circle | at=center | label=The print] words\n", 1.0, None,
+        art_style="real")
+    assert "[callout:" not in out_real
+    out_explainer, _ = V.apply_to_script(
+        "[callout: a muddy boot print | mark=circle | at=center | label=The print] words\n", 1.0, None,
+        art_style="explainer")
+    assert "label=The print" in out_explainer
+
+
 def test_camera_filming_the_shot_is_never_named():
     # The still model drew a DSLR into every shot that said "the camera ...".
     assert V.without_camera("The camera slowly pans across Arjun's face as he waits.") == \
@@ -392,4 +434,33 @@ def test_story_style_keeps_the_scenes_own_sound_cues():
     assert [b["kind"] for b in V.filter_beats([{"kind": "sfx_cue"}, {"kind": "fx"}])] == ["sfx_cue"]
     settings, _ = S.resolve_settings("Raat3Baje")
     assert settings["sfx"] is False and settings["sfx_diegetic"] is True
+
+
+# ----------------------------------------------------------------- SW3: Stick World
+
+_WORLD_CAST = {"world": "a Greek port at dawn",
+               "characters": [{"name": "Nikos", "look": "an old philosopher with a grey beard",
+                               "outfit": "chiton+laurel+scroll+beard", "era": "ancient_greece"}]}
+
+
+def test_stick_world_keeps_stick_and_maps_not_collage():
+    assert set(V.kept_directives("stick_world")) >= {"stick", "map", "chart", "timeline", "broll", "video"}
+    assert "collage" not in V.kept_directives("stick_world")
+    assert set(V.kept_beat_kinds("stick_world")) >= {"stick_scene", "map", "chart", "timeline"}
+    assert "paper_collage" not in V.kept_beat_kinds("stick_world")
+    section = V.planner_section(0.5, _WORLD_CAST, art_style="stick_world")
+    assert "ART STYLE -- STICK WORLD" in section and "**stick_scene**" in section and "**map**" in section
+    assert "outfit=chiton+laurel+scroll+beard" in section
+
+
+def test_stick_world_who_resolves_from_the_cast_sheet_and_is_stripped():
+    text = "[stick: action=point | scene=a Greek library court | who=Nikos | caption=Athens] words\n"
+    out, _ = V.apply_to_script(text, 0.0, _WORLD_CAST, art_style="stick_world")
+    assert "who=" not in out
+    assert "era=ancient_greece" in out and "outfit=chiton+laurel+scroll+beard" in out
+    # A field already given on the beat is never overridden by the cast's
+    # (only a missing field -- here `outfit` -- is filled in).
+    text2 = "[stick: action=idle | scene=x | who=Nikos | era=victorian]\n"
+    out2, _ = V.apply_to_script(text2, 0.0, _WORLD_CAST, art_style="stick_world")
+    assert "era=victorian" in out2 and "outfit=chiton+laurel+scroll+beard" in out2
     assert S.resolve_settings("Life3Baje")[0]["sfx_diegetic"] is True

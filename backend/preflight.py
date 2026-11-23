@@ -31,7 +31,7 @@ _REQUIRED = [
     ("dotenv", "reading .env"),
 ]
 
-EXPECTED_PERSONAS = 105
+EXPECTED_PERSONAS = 110
 
 
 class Report:

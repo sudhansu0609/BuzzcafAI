@@ -27,8 +27,10 @@ annotated script, enqueue a presentation-pass render, and poll it to done.
 """
 
 import json
+from datetime import datetime
 import logging
 import os
+import re
 import subprocess
 import sys
 import threading
@@ -48,14 +50,18 @@ from core.paths import PROJECT_ROOT
 from integrations.buzzedit_client import (BuzzEditClient, BuzzEditJobFailed, BuzzEditUnavailable,
                                           base_url as buzzedit_base_url)
 from integrations.buzzedit_script import to_directive_script
-from integrations import story_visuals
+from integrations import idle_offload, story_visuals
 from integrations.buzzedit_settings import (
+    ART_STYLES,
     DENSITIES,
+    FACE_LAYOUTS,
     GENRES,
     InvalidChannelProfile,
     VISUAL_STYLES,
+    art_style_of,
     brand_key,
     clean_auto_edit,
+    face_intro_seconds,
     fx_palette_for,
     get_channel_profile,
     is_story_style,
@@ -74,6 +80,7 @@ from integrations.llm import (
     save_config as save_llm_config,
 )
 from integrations import sound_cues
+from app.services import footage
 from integrations.script_reconcile import Reconciliation, clean_spoken_script, extract_vocabulary, script_speakers
 from integrations.visual_windows import (
     apply_prompt_edit,
@@ -133,6 +140,44 @@ _MAX_UNREACHABLE_SECONDS = 15 * 60
 #: A job BuzzEdit answers about but does not list is gone; this is only grace
 #: for a list caught mid-save.
 _JOB_MISSING_SECONDS = 3 * 60
+#: Breathing room before visual-planning windows that failed are planned a
+#: second time (a model that timed out or answered broken JSON once).
+PLAN_RETRY_PAUSE_S = 30.0
+
+#: Per-project production log: every status line, warning and error of a run,
+#: appended as one JSON object per line to `production/produce_log.jsonl` in
+#: the project folder. `_produce_status` is in memory and keeps only the latest
+#: line; after a failure overnight this file is what says what happened when.
+_PRODUCE_LOG_NAME = "produce_log.jsonl"
+_produce_log_dirs: Dict[str, str] = {}
+
+
+def _produce_log_path(project_id: str) -> Optional[str]:
+    path = _produce_log_dirs.get(project_id)
+    if path is None:
+        try:
+            prod_dir = os.path.join(Project.load(project_id).get_project_dir(), "production")
+            os.makedirs(prod_dir, exist_ok=True)
+            path = os.path.join(prod_dir, _PRODUCE_LOG_NAME)
+        except Exception:  # noqa: BLE001 - a project without a folder has no log
+            path = ""
+        _produce_log_dirs[project_id] = path
+    return path or None
+
+
+def _append_produce_log(project_id: str, fields: Dict[str, Any]) -> None:
+    line = {k: fields[k] for k in ("state", "message", "progress", "warning", "error") if fields.get(k) is not None}
+    if not line:
+        return
+    path = _produce_log_path(project_id)
+    if not path:
+        return
+    line["at"] = datetime.now().isoformat(timespec="seconds")
+    try:
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(line, ensure_ascii=False) + "\n")
+    except Exception:  # noqa: BLE001 - the log must never fail the run
+        pass
 
 
 def _set_status(project_id: str, **fields: Any) -> None:
@@ -140,6 +185,7 @@ def _set_status(project_id: str, **fields: Any) -> None:
         current = dict(_produce_status.get(project_id) or {})
         current.update(fields)
         _produce_status[project_id] = current
+    _append_produce_log(project_id, fields)
 
 
 def _get_status(project_id: str) -> Dict[str, Any]:
@@ -300,6 +346,11 @@ def push_live_settings(project: Project, client: Optional[BuzzEditClient] = None
         return None
     if settings is None:
         settings, _ = resolve_settings(project.brand, None, project)
+    # A face-first render: the sliders split the pictures after the opening,
+    # whose coverage is fixed by the plan -- never trimmed to the slider mix.
+    face_first = face_intro_mix(project, settings)
+    if face_first:
+        settings = {**settings, **face_first}
     overrides = live_settings_for(settings)
     if not overrides:
         return None
@@ -311,6 +362,33 @@ def push_live_settings(project: Project, client: Optional[BuzzEditClient] = None
         return None
     logger.info("produce_video(%s): live settings sent to BuzzEdit: %s", project.id, overrides)
     return overrides
+
+
+def face_intro_mix(project: Project, settings: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """The runtime shares of a face-first render (`face_intro_render`, saved
+    when its shots were timed): the pictures cover everything after the
+    opening, split between clips and stills in the sliders' proportion. None
+    when this BuzzEdit project was not rendered face-first."""
+    meta = getattr(project, "metadata", None) or {}
+    info = meta.get("face_intro_render") or {}
+    if not info or info.get("buzzedit_project_id") != meta.get("buzzedit_project_id"):
+        return None
+    if face_intro_seconds(settings) <= 0:
+        return None
+    try:
+        cover = max(0.0, min(1.0, float(info.get("coverage") or 0.0)))
+    except (TypeError, ValueError):
+        return None
+    if cover <= 0:
+        return None
+    try:
+        video = max(0.0, float(settings.get("video_broll_share") or 0.0))
+        images = max(0.0, float(settings.get("image_broll_share") or 0.0))
+    except (TypeError, ValueError):
+        video = images = 0.0
+    ratio = video / (video + images) if video + images > 0 else story_visuals.FACE_INTRO_DEFAULT_VIDEO_RATIO
+    return {"video_broll_share": round(cover * ratio, 3), "image_broll_share": round(cover * (1.0 - ratio), 3),
+            "face_intro_s": float(info.get("intro_s") or 0.0)}
 
 
 def stock_settings() -> Dict[str, Any]:
@@ -676,8 +754,22 @@ def _clear_gate(project: Project) -> None:
 _BUSY_STATES = ("queued", "starting", "running", "awaiting_cut_review", "awaiting_plan_review")
 
 
+def _skip_script_steps_for_recording(project: Project) -> None:
+    """An already-recorded video needs no research, script or plans: those
+    steps are passed by, SEO stays. Never blocks the production."""
+    try:
+        from app.main import engine
+        from runtime.workflow import RECORDED_SKIPPED
+        wf = engine.get_workflow(project.workflow_name)
+        if wf:
+            project.metadata.setdefault("script_source", "recording")
+            engine.skip_steps(project, wf, RECORDED_SKIPPED, "the video is already recorded")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Could not skip the script steps for {project.id}: {exc}")
+
+
 @router.post("/api/projects/{project_id}/produce_video")
-def produce_video(project_id: str, payload: ProduceVideoSchema):
+def produce_video(project_id: str, payload: ProduceVideoSchema, when_free: bool = False):
     try:
         project = Project.load(project_id)
     except ValueError as e:
@@ -690,8 +782,18 @@ def produce_video(project_id: str, payload: ProduceVideoSchema):
     if project_id in active_executions or _get_status(project_id).get("state") in _BUSY_STATES \
             or project.metadata.get("produce_gate") or produce_queue.active_item_for(project_id):
         raise HTTPException(status_code=409, detail="This project already has work running or queued.")
+    if not when_free:
+        # One video at a time (2026-10-26): the page shows this as the
+        # "another video is running" pop-up, whose "Start after it" resends
+        # the request with `when_free` -- the item then waits in the queue.
+        from app.services import video_slot
+        busy = video_slot.active(project_id)
+        if busy:
+            raise HTTPException(status_code=409, detail=video_slot.busy_detail(busy))
 
     mode = payload.mode or ("script_first" if _has_script_first_assets(project) else "record_first")
+    if mode == "record_first":
+        _skip_script_steps_for_recording(project)
     precut = _resolve_precut(payload.precut, project)
     if payload.recording_path and project.metadata.get("recording_path") != payload.recording_path:
         # Remembered so a later batch queue (or a reopened panel) can offer it.
@@ -1041,6 +1143,7 @@ class ChannelProfileSchema(BaseModel):
     genre_secondary: Optional[str] = None
     density: str
     voice_preset: Optional[str] = None
+    art_style: Optional[str] = None
     # BuzzEdit auto-edit pacing for this channel; omitted = keep what is saved.
     auto_edit: Optional[Dict[str, Optional[float]]] = None
 
@@ -1049,7 +1152,9 @@ class ChannelProfileSchema(BaseModel):
 def get_channel_profiles():
     """Every brand's saved genre/density/voice-preset defaults -- the Studio
     Settings page's Channel Profiles section reads and edits these."""
-    return {"profiles": list_channel_profiles(), "genres": list(GENRES), "densities": list(DENSITIES)}
+    from integrations import art_style as art_mod
+    return {"profiles": list_channel_profiles(), "genres": list(GENRES), "densities": list(DENSITIES),
+            "art_styles": list(ART_STYLES), "art_style_labels": art_mod.labels()}
 
 
 @router.put("/api/channel_profiles/{brand}")
@@ -1072,6 +1177,9 @@ class MusicTrackSchema(BaseModel):
 
 class VideoSettingsSchema(BaseModel):
     visual_style: Optional[str] = None
+    # The medium the pictures, clips, thumbnail and text are made in:
+    # real / explainer / stick_figure / cartoon (integrations/art_style.py).
+    art_style: Optional[str] = None
     genre: Optional[str] = None
     genre_secondary: Optional[str] = None
     density: Optional[str] = None
@@ -1112,6 +1220,16 @@ class VideoSettingsSchema(BaseModel):
     # whole video, "sequence" plays them one after another, looping the list.
     music_tracks: Optional[List[MusicTrackSchema]] = None
     music_tracks_mode: Optional[str] = None
+    # How the creator's face is used: "mixed" (between the pictures all
+    # through, the mix sliders) or "face_intro" (only his face for the first
+    # `face_intro_seconds`, then pictures and clips only).
+    face_layout: Optional[str] = None
+    face_intro_seconds: Optional[float] = None
+    # BuzzEdit's motion graphics (docs/MOTION_GRAPHICS_PLAN.md): off renders
+    # every animated effect as its still card; `parallax_share` is the share
+    # of eligible stills given the 2.5D depth move (BuzzEdit default 0.3).
+    motion_graphics: Optional[bool] = None
+    parallax_share: Optional[float] = None
 
 
 def _load_project_or_404(project_id: str) -> Project:
@@ -1159,6 +1277,13 @@ def put_video_settings(project_id: str, payload: VideoSettingsSchema):
     if visual_style is not None and visual_style not in VISUAL_STYLES:
         raise HTTPException(status_code=400,
                              detail=f"Unknown visual_style: {visual_style!r}. Must be one of {', '.join(VISUAL_STYLES)}.")
+    art_style = provided.get("art_style")
+    if art_style is not None and art_style not in ART_STYLES:
+        raise HTTPException(status_code=400,
+                             detail=f"Unknown art_style: {art_style!r}. Must be one of {', '.join(ART_STYLES)}.")
+    parallax_share = provided.get("parallax_share")
+    if parallax_share is not None and not 0.0 <= parallax_share <= 1.0:
+        raise HTTPException(status_code=400, detail="parallax_share must be between 0 and 1.")
     review_mode = provided.get("review_mode")
     if review_mode is not None and review_mode not in REVIEW_MODES:
         raise HTTPException(status_code=400,
@@ -1189,6 +1314,17 @@ def put_video_settings(project_id: str, payload: VideoSettingsSchema):
         value = provided.get(key)
         if value is not None and not (1.0 <= float(value) <= 8.0):
             raise HTTPException(status_code=400, detail=f"{key} must be between 1 and 8 seconds.")
+    face = provided.get("face_layout")
+    if face is not None and face not in FACE_LAYOUTS:
+        raise HTTPException(status_code=400,
+                             detail=f"Unknown face_layout: {face!r}. Must be one of {', '.join(FACE_LAYOUTS)}.")
+    if provided.get("face_intro_seconds") is not None:
+        from app.services.session_format import FACE_INTRO_MAX, FACE_INTRO_MIN
+        seconds = float(provided["face_intro_seconds"])
+        if not (FACE_INTRO_MIN <= seconds <= FACE_INTRO_MAX):
+            raise HTTPException(status_code=400,
+                                 detail=f"face_intro_seconds must be between {FACE_INTRO_MIN} and {FACE_INTRO_MAX}.")
+        provided["face_intro_seconds"] = int(round(seconds))
 
     video_settings = dict(project.metadata.get("video_settings") or {})
     for key, value in provided.items():
@@ -1208,6 +1344,39 @@ def put_video_settings(project_id: str, payload: VideoSettingsSchema):
         live_applied = push_live_settings(project, settings=settings)
     return {"video_settings": video_settings, "effective": settings, "sources": sources,
             "mix": runtime_mix(settings), "live_applied": live_applied}
+
+
+class VisualDirectionSchema(BaseModel):
+    text: str = ""
+
+
+def visual_direction_section(project: Project) -> str:
+    """The creator's look for this one video (`metadata["visual_direction"]`, free text), shown to the
+    visual planner in every window. Kept out of `video_settings`, which is passed on to BuzzEdit."""
+    text = str(project.metadata.get("visual_direction") or "").strip()
+    if not text:
+        return ""
+    return ("### Visual direction for this video (from the creator -- follow it in every image, "
+            "video and map prompt)\n" + text)
+
+
+@router.get("/api/projects/{project_id}/visual_direction")
+def get_visual_direction(project_id: str):
+    project = _load_project_or_404(project_id)
+    return {"text": project.metadata.get("visual_direction") or ""}
+
+
+@router.put("/api/projects/{project_id}/visual_direction")
+def put_visual_direction(project_id: str, payload: VisualDirectionSchema):
+    """Set (or clear, with empty text) this video's visual direction. Applies to the next planning run."""
+    project = _load_project_or_404(project_id)
+    text = payload.text.strip()[:4000]
+    if text:
+        project.metadata["visual_direction"] = text
+    else:
+        project.metadata.pop("visual_direction", None)
+    project.save()
+    return {"text": text}
 
 
 @router.post("/api/projects/{project_id}/live_settings")
@@ -1239,27 +1408,133 @@ def get_buzzedit_dir() -> Optional[str]:
     return None
 
 
-#: A headless BuzzEdit that has not answered for this long since it started is
+#: A headless BuzzEdit that has never answered this long after it started is
 #: hung, not starting: it is stopped and a fresh one launched instead.
 BUZZEDIT_STARTUP_GRACE_S = 180.0
+#: A headless BuzzEdit that *has* answered before counts as busy, never hung,
+#: for this long after its last answer. Whisper, the AI cut planner, a
+#: 70-second ffmpeg join and a 10 MB project save all leave it silent for
+#: minutes at a time; on 2026-10-20 a 180 s grace measured from process
+#: start had the Studio kill a BuzzEdit 30 minutes into a transcription,
+#: three times in a row, and the production never finished.
+BUZZEDIT_HUNG_AFTER_S = 30 * 60.0
+
+
+def _studio_using_buzzedit() -> bool:
+    """Whether a production here is in flight on BuzzEdit right now: a queue
+    item running, or a project with a run going. While it is, BuzzEdit is
+    never stopped by a watchdog -- the production's own waits decide when it
+    has given up, and they relaunch it themselves."""
+    try:
+        if render_in_progress():
+            return True
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        return produce_queue.running_item() is not None
+    except Exception:  # noqa: BLE001
+        return False
+
+
+#: Set once the port ledger's BuzzEdit entry has been found stale and logged,
+#: so a watchdog that polls every few seconds does not flood the log with it.
+_stale_buzzedit_ledger_logged = False
+
+
+def _ledger_entry_age(started_at: Optional[str]) -> Optional[float]:
+    """Seconds since the ledger entry's `started_at`, or None if unparsable."""
+    if not started_at:
+        return None
+    try:
+        started = datetime.fromisoformat(str(started_at))
+    except ValueError:
+        return None
+    now = datetime.now(started.tzinfo) if started.tzinfo else datetime.now()
+    return (now - started).total_seconds()
+
+
+def _buzzedit_ledger_alive() -> bool:
+    """Whether the port ledger names a BuzzEdit backend that is actually
+    BuzzEdit. A live pid is not proof by itself -- pids are reused, and on
+    2026-10-20 BuzzEdit's ledger entry named a pid that was alive, but by then
+    belonged to the Studio's own backend, which had taken BuzzEdit's old port
+    while BuzzEdit was closed. So the entry's health route has to still answer
+    as BuzzEdit, unless it is too young to have answered at all yet."""
+    global _stale_buzzedit_ledger_logged
+    try:
+        from integrations import buzzcaf_ports
+
+        record = buzzcaf_ports.entry("buzzedit") or {}
+        pid = record.get("pid")
+        if not pid or not buzzcaf_ports._pid_alive(pid):
+            return False
+
+        health = record.get("health")
+        base = buzzcaf_ports._base_of(health) if health else None
+        if not base and record.get("port"):
+            base = f"http://127.0.0.1:{int(record['port'])}"
+
+        body = buzzcaf_ports._probe(f"{str(base).rstrip('/')}/health") if base else None
+        if body is not None:
+            if body.get("app") == "buzzedit":
+                return True
+            reason = f"its health route answers as {body.get('app')!r}, not BuzzEdit"
+        else:
+            age = _ledger_entry_age(record.get("started_at"))
+            if age is None or age < BUZZEDIT_STARTUP_GRACE_S:
+                return True
+            reason = f"its health route has not answered {age:.0f} s after it started"
+
+        if not _stale_buzzedit_ledger_logged:
+            logger.warning("The port ledger's BuzzEdit entry is stale (%s); treating it as offline.", reason)
+            _stale_buzzedit_ledger_logged = True
+        return False
+    except Exception:  # noqa: BLE001
+        return False
 
 
 def _headless_buzzedit_starting() -> bool:
-    """A BuzzEdit the Studio started is already running but not answering yet.
+    """A BuzzEdit the Studio started is already running but not answering now.
     Launching another then gave two (the second on the next port), and only one
-    was ever stopped when the Studio closed. One past its startup grace is hung:
-    it is stopped here and False returned, so a fresh one is launched."""
+    was ever stopped when the Studio closed. So while one is alive, True: the
+    caller waits for it instead of starting another.
+
+    It is stopped (and False returned, so a fresh one is launched) only when
+    it is hung by every measure: nothing of the Studio's is running on it, it
+    has never answered since it started and its startup grace is over, or it
+    answered once but not for `BUZZEDIT_HUNG_AFTER_S`. A BuzzEdit that is
+    busy is left alone."""
     try:
         from app.services import process_cleanup
+        from integrations import buzzedit_client as _client_mod
 
         roots = process_cleanup.headless_buzzedit_roots()
         if not roots:
             return False
         oldest = min(root.create_time() for root in roots)
-        if time.time() - oldest < BUZZEDIT_STARTUP_GRACE_S:
+        age = time.time() - oldest
+        if age < BUZZEDIT_STARTUP_GRACE_S:
             return True
-        logger.warning("A headless BuzzEdit has not answered for %.0f s; stopping it and starting a fresh one.",
-                       time.time() - oldest)
+        if _studio_using_buzzedit():
+            logger.info("A headless BuzzEdit is not answering, but a production is running on it; "
+                        "leaving it alone (%.0f s old).", age)
+            return True
+        since = _client_mod.seconds_since_answer()
+        if since is not None and since < BUZZEDIT_HUNG_AFTER_S:
+            logger.info("A headless BuzzEdit is not answering (last answer %.0f s ago); busy, not hung. "
+                        "Leaving it alone.", since)
+            return True
+        if since is None and age < BUZZEDIT_HUNG_AFTER_S and _buzzedit_ledger_alive():
+            # Never answered this Studio process (the Studio restarted under a
+            # BuzzEdit that was already working), but its backend is on the
+            # ledger and alive: give it the long grace too. One that never
+            # even published a port after its startup grace failed to start.
+            logger.info("A headless BuzzEdit (%.0f s old) has not answered this Studio yet but is on the "
+                        "port ledger; waiting.", age)
+            return True
+        logger.warning("A headless BuzzEdit has not answered for %.0f s (process %.0f s old, nothing running "
+                       "on it); stopping it and starting a fresh one.",
+                       since if since is not None else age, age)
         process_cleanup.stop_headless_buzzedit()
     except Exception as exc:  # noqa: BLE001 - when unsure, launch as before
         logger.debug("Could not check for a starting BuzzEdit (%s).", exc)
@@ -1272,6 +1547,19 @@ def launch_buzzedit_process() -> bool:
     if not buzzedit_dir:
         logger.warning("BuzzEdit directory not found; cannot auto-start.")
         return False
+    # Adopt a BuzzEdit that already answers on its port instead of spawning a
+    # second one (STUDIO_DIRECTOR_PLAN.md enhancement 4): its own Electron
+    # watchdog was started watching whichever Studio pid launched it, which
+    # may be gone by now (that Studio crashed, closed, or was restarted onto
+    # new code) -- re-parenting it to this Studio's own pid keeps it alive
+    # under this process instead of Electron quitting it once idle.
+    try:
+        if BuzzEditClient().health() is not None:
+            BuzzEditClient().set_supervisor_parent(os.getpid())
+            logger.info("A BuzzEdit is already answering on its port; adopted it instead of starting a new one.")
+            return True
+    except Exception as exc:  # noqa: BLE001 - unsure: fall through to the usual start checks
+        logger.debug("Could not check for an already-running BuzzEdit to adopt (%s).", exc)
     if _headless_buzzedit_starting():
         logger.info("A BuzzEdit the Studio started is still coming up; waiting for it instead of starting another.")
         return True
@@ -1297,6 +1585,8 @@ def launch_buzzedit_process() -> bool:
         env.pop("BUZZCAF_STUDIO_PID", None)
         if env.get("BUZZCAF_DESKTOP_PID") == str(os.getpid()):
             env["BUZZCAF_STUDIO_PID"] = str(os.getpid())
+        # Stopped again once the Studio has been idle (integrations/idle_offload.py).
+        idle_offload.mark_used("buzzedit")
 
         if os.path.exists(vbs) and sys.platform == "win32":
             logger.info("Auto-starting BuzzEdit (headless) via %s", vbs)
@@ -1322,9 +1612,12 @@ def launch_buzzedit_process() -> bool:
 #: (Hinglish). A channel profile may override it with a `language` key.
 TRANSCRIBE_LANGUAGE = "hi"
 #: How many times a BuzzEdit step (import, transcription) is attempted before
-#: the run fails, and how long to wait between attempts.
-BUZZEDIT_RETRY_ATTEMPTS = 3
-BUZZEDIT_RETRY_BACKOFF_SECONDS = (30, 90)
+#: the run fails, and how long to wait between attempts. A retry after a
+#: BuzzEdit crash is cheap since 2026-10-20: BuzzEdit checkpoints Whisper's
+#: words and the planned cut, so a re-run picks up after the last finished
+#: phase instead of transcribing the recording again.
+BUZZEDIT_RETRY_ATTEMPTS = 5
+BUZZEDIT_RETRY_BACKOFF_SECONDS = (30, 90, 180, 300)
 
 
 def _with_buzzedit_retries(project_id: str, what: str, fn: Callable[[], Any],
@@ -1358,13 +1651,58 @@ def _with_buzzedit_retries(project_id: str, what: str, fn: Callable[[], Any],
     raise last
 
 
+class ComfyUIUnavailableError(RuntimeError):
+    """ComfyUI did not come back online within the wait budget -- either
+    before a production could even start, or (see `check_broll_coverage`)
+    after a render finished with (almost) no B-roll because of it. The
+    production queue retries this automatically from its last checkpoint
+    (default `retryable`; see app/services/produce_queue.py)."""
+
+
+#: How long `ensure_buzzedit_running` waits for ComfyUI to answer before
+#: giving up and raising, and how often it polls while waiting. Extended
+#: while BuzzEdit's own status says ComfyUI is starting or repairing itself
+#: -- a self-repair can genuinely take this long. 2026-10-20: an 8-day
+#: ComfyUI outage was "waited" 35s and then rendered 263 beats with zero
+#: B-roll; waiting (ComfyUI now restarts and repairs itself) is almost
+#: always enough, and failing outright when it truly is not lets the queue
+#: retry later instead of shipping a face-only video.
+COMFY_WAIT_MINUTES_DEFAULT = 60.0
+COMFY_WAIT_MINUTES_EXTENDED = 120.0
+COMFY_WAIT_POLL_SECONDS = 15.0
+
+
 def ensure_buzzedit_running(status_callback: Optional[Callable[[str, float], None]] = None, timeout: float = 75.0) -> Dict[str, Any]:
     """Ensure BuzzEdit is running and reachable.
     If not running, attempts to launch it and waits for its health endpoint to answer."""
+    # Whatever the Studio asks of BuzzEdit next may load Whisper or ComfyUI:
+    # cleared once the Studio has been idle.
+    idle_offload.mark_used("comfyui")
     client = BuzzEditClient()
     health = client.health()
     if health is not None:
         return health
+
+    # BuzzEdit's own venv / engines / Electron build may be missing (a disk
+    # cleaner pass, an interrupted install): repair it before launching
+    # rather than watching the launch time out against a broken environment.
+    # This runs before `start_time` is set below, so the repair time is
+    # never counted against the `timeout` budget for the launch itself.
+    try:
+        from app.services import app_envs
+        be_status = app_envs.status("BuzzEdit")
+        if not be_status["ok"]:
+            logger.warning("ensure_buzzedit_running: BuzzEdit's environment is missing %s; repairing.",
+                           be_status["missing"])
+            if status_callback:
+                status_callback("Repairing BuzzEdit's environment...", 0.01)
+            outcome = app_envs.repair(
+                "BuzzEdit", wait=True, timeout=25 * 60,
+                status_callback=(lambda msg: status_callback(msg, 0.01)) if status_callback else None)
+            if outcome.get("status") != "done" or outcome.get("exit_code"):
+                logger.warning("ensure_buzzedit_running: BuzzEdit repair did not finish cleanly (%s).", outcome)
+    except Exception as exc:  # noqa: BLE001 - never block a launch attempt on this
+        logger.warning("ensure_buzzedit_running: app-env repair check failed (%s).", exc)
 
     if status_callback:
         status_callback("BuzzEdit is not running. Launching BuzzEdit...", 0.02)
@@ -1392,15 +1730,40 @@ def ensure_buzzedit_running(status_callback: Optional[Callable[[str, float], Non
             f"BuzzEdit was launched but did not answer health check within {int(timeout)} seconds."
         )
 
-    # Wait up to 35s for ComfyUI if not yet connected
-    comfy_start = time.time()
-    while not health.get("comfyui_connected") and time.time() - comfy_start < 35.0:
-        time.sleep(2.5)
-        if status_callback:
-            status_callback("BuzzEdit is up. Waiting for ComfyUI to connect...", 0.04)
-        health = client.health()
-        if not health:
-            break
+    # Wait for ComfyUI if not yet connected -- it restarts itself after a
+    # crash, and can now repair its own Python environment too, which takes
+    # far longer than a restart.
+    if not health.get("comfyui_connected"):
+        comfy_start = time.time()
+        elapsed = 0.0
+        while True:
+            state = health.get("comfyui_state")
+            budget_min = (COMFY_WAIT_MINUTES_EXTENDED if state in ("repairing", "starting")
+                         else COMFY_WAIT_MINUTES_DEFAULT)
+            elapsed = time.time() - comfy_start
+            if elapsed >= budget_min * 60.0:
+                break
+            detail = str(health.get("comfyui_detail") or "")
+            if state == "repairing":
+                message = "Waiting for ComfyUI (repairing its Python environment%s)..." % (
+                    f": {detail}" if detail else "")
+            elif detail:
+                message = f"Waiting for ComfyUI ({detail})..."
+            else:
+                message = "BuzzEdit is up. Waiting for ComfyUI to connect..."
+            if status_callback:
+                status_callback(message, 0.04)
+            time.sleep(COMFY_WAIT_POLL_SECONDS)
+            health = client.health()
+            if not health:
+                raise BuzzEditUnavailable("BuzzEdit stopped answering while waiting for ComfyUI.")
+            if health.get("comfyui_connected"):
+                break
+        if not health.get("comfyui_connected"):
+            state = health.get("comfyui_state")
+            raise ComfyUIUnavailableError(
+                f"ComfyUI did not come back after waiting {elapsed / 60:.0f} min "
+                f"(comfyui_state={state or 'unknown'}).")
 
     return health or {}
 
@@ -1826,9 +2189,10 @@ def _produce_video_steps(
     def _status_cb(msg: str, progress: float):
         _set_status(project_id, state="running", message=msg, progress=progress)
 
-    health = ensure_buzzedit_running(status_callback=_status_cb, timeout=75.0)
-    if not health.get("comfyui_connected"):
-        logger.warning("BuzzEdit online, but ComfyUI not marked connected; attempting to proceed.")
+    # `ensure_buzzedit_running` itself waits for ComfyUI and raises
+    # ComfyUIUnavailableError (a retriable error the production queue picks
+    # back up later) rather than let this proceed without it.
+    ensure_buzzedit_running(status_callback=_status_cb, timeout=75.0)
 
     # 3. Import the recording.
     _set_status(project_id, message="Importing the recording into BuzzEdit...", progress=0.05)
@@ -1970,6 +2334,12 @@ def _transcribe_and_continue(
                            status_cb=lambda msg: _set_status(project_id, message=msg))
     event_bus.publish("video_progress", {"project_id": project_id, "stage": "transcribed", "progress": 0.25})
 
+    # A Shorts-first session: the Shorts before the greeting become their own
+    # projects and come off the long edit -- before a cuts review, so the
+    # review shows the long video only.
+    _split_session(project_id, client)
+    project = Project.load(project_id)  # the split saved its record on the project
+
     review_mode = _resolve_review_mode(project)
     if review_mode == "cuts_and_plan":
         _save_gate(project, "cut_review", mode, settings_override, precut)
@@ -1983,6 +2353,43 @@ def _transcribe_and_continue(
     # into planning, which would skip a cuts review the creator asked for.
     produce_queue.checkpoint(project_id, "plan")
     _plan_and_render(project_id, mode, settings_override, precut)
+
+
+def _split_session(project_id: str, client: BuzzEditClient) -> None:
+    """A Shorts-first session recording (app/services/session_split.py): each
+    Short before the long video's greeting becomes its own project, queued to
+    produce after this one, and the Shorts are cut off the long edit. Nothing
+    happens for any other project; a session whose greeting cannot be found
+    stops here with what to do (set "Long video starts at", retry)."""
+    from app.services import session_split
+
+    project = Project.load(project_id)
+    record = session_split.split(project, client, log=lambda m: _set_status(project_id, message=m))
+    if not record:
+        return
+    queued = 0
+    for entry in record.get("shorts") or []:
+        if not entry.get("project_id") or entry.get("queued"):
+            continue
+        try:
+            child = Project.load(entry["project_id"])
+            produce_queue.add(child.id, brand=child.brand, title=child.name, recording_path=entry["clip"],
+                              settings_override=None, mode="record_first", precut=False)
+            _set_status(child.id, state="queued", message="Waiting in the production queue (from the session)...",
+                        progress=0.0, error=None, warning=None, planning=None)
+            entry["queued"] = True
+            queued += 1
+        except Exception as exc:  # noqa: BLE001 - a Short that cannot queue is left for the creator
+            logger.warning("produce_video(%s): could not queue session Short %s (%s).",
+                           project_id, entry.get("index"), exc)
+            entry["error"] = f"not queued: {exc}"[:300]
+    if queued:
+        project = Project.load(project_id)
+        project.metadata["session_split"] = record
+        project.save()
+        _set_status(project_id, message=f"{queued} Short(s) from the session queued after this video.")
+    _set_status(project_id, session=record,
+                **({"warning": record["warning"]} if record.get("warning") else {}))
 
 
 #: Script beats that are not pictures: still placed where the line is spoken.
@@ -2024,6 +2431,11 @@ def _plan_and_render(
         visual_plan = _load_visual_plan(project)
     else:
         script_text, visual_plan = "", {"beats": []}
+
+    # A Shorts-first session keeps its Shorts off the long edit (a cuts
+    # review or a re-cut may have brought words back): checked again here.
+    _split_session(project_id, client)
+    project = Project.load(project_id)  # the split saved its record on the project
 
     # 6. Build the directive-annotated script from what was actually SAID --
     # and, now that the cut is final, from what SURVIVED the cut. The kept
@@ -2108,7 +2520,8 @@ def _plan_and_render(
                 str(w.get("word") or w.get("text") or "") for w in kept_words)
             cast = story_visuals.ensure_cast_sheet(
                 project, story_text,
-                lambda: AgentFactory.get_agent("CharacterPlanner", produce_llm_service()))
+                lambda: AgentFactory.get_agent("CharacterPlanner", produce_llm_service()),
+                art_style=art_style_of(settings))
             # A cast sheet written just now can name characters whose `NAME:`
             # lines the match above took for production notes: match again.
             names = story_visuals.character_names(cast)
@@ -2116,15 +2529,73 @@ def _plan_and_render(
                 rec = Reconciliation(script_text, kept_words, speakers=names)
                 _place_script_cues(rec, visual_plan)
             catalog_section = story_visuals.planner_section(
-                float(settings.get("video_broll_share") or 0.0), cast)
-        planning = plan_visual_windows(agent, windows, kept_words, rec.placed, genre, genre_secondary,
+                float(settings.get("video_broll_share") or 0.0), cast, art_style=art_style_of(settings))
+        elif art_style_of(settings) != "real":
+            # A full-style video in a drawn medium: the effect catalog stays,
+            # the planner is told the medium (the catalog is the default when
+            # `catalog_section` is None, so it is spelled out here).
+            from integrations import art_style as art_mod, effect_catalog
+            catalog_section = (effect_catalog.prompt_section(genre, genre_secondary) + "\n\n"
+                               + art_mod.planner_section(art_style_of(settings)))
+        # Own footage (docs/OWN_FOOTAGE_PLAN.md): pictures are only his clips;
+        # a clip named for a script shot is pinned where that shot is said
+        # and handed to the planner as already covered.
+        own_clips: List[Dict[str, Any]] = []
+        own_pinned: List[Dict[str, Any]] = []
+        plan_placed = list(rec.placed)
+        if footage.is_own(project):
+            _set_status(project_id, message="Reading your own clips...")
+            own_clips = footage.catalog(project)
+            shots_text = _read_project_text_asset(project, ["script"]) or ""
+            own_pinned = footage.pinned_beats(own_clips, footage.shot_spans(shots_text, kept_words), kept_words)
+            plan_placed += [{"kind": "own_clip", "at_word": b["word_start"], "hint": f"clip {b['clip']} (fixed)"}
+                            for b in own_pinned]
+            catalog_section = footage.planner_section(own_clips, genre, genre_secondary, own_pinned)
+        # The script's scene ideas, then the creator's look for this video (`visual_direction`).
+        planner_reference = "\n\n".join(
+            x for x in (script_reference_section(visual_plan), visual_direction_section(project)) if x)
+        planning = plan_visual_windows(agent, windows, kept_words, plan_placed, genre, genre_secondary,
                                        fx_palette, bpm_target, progress_cb=_planning_progress,
                                        workers=workers, agent_factory=_agent,
                                        music_direction=music_direction,
                                        catalog_section=catalog_section,
-                                       reference_section=script_reference_section(visual_plan))
-        if catalog_section:
-            planning["beats"] = story_visuals.filter_beats(planning["beats"])
+                                       reference_section=planner_reference)
+        if planning["failed"]:
+            # A second pass over just the windows that failed, after a pause:
+            # most failures are a model timing out or answering with broken
+            # JSON once, and a window that stays unplanned is a minute of
+            # the video with nothing on screen. Only a window that fails
+            # twice is left out.
+            failed_idx = {f.get("window_index") for f in planning["failed"]}
+            again = [w for w in windows if w.index in failed_idx]
+            if again:
+                logger.info("produce_video(%s): %d planning window(s) failed; planning them again.",
+                            project_id, len(again))
+                _set_status(project_id, message=f"Planning {len(again)} window(s) again...")
+                time.sleep(PLAN_RETRY_PAUSE_S)
+                try:
+                    second = plan_visual_windows(agent, again, kept_words, plan_placed, genre, genre_secondary,
+                                                 fx_palette, bpm_target, workers=1, agent_factory=_agent,
+                                                 music_direction=music_direction,
+                                                 catalog_section=catalog_section,
+                                                 reference_section=planner_reference)
+                except Exception as exc:  # noqa: BLE001 - the first pass stands
+                    logger.warning("produce_video(%s): second planning pass failed (%s).", project_id, exc)
+                    second = None
+                if second:
+                    still_failed = {f.get("window_index") for f in second["failed"]}
+                    planning["beats"] = sorted(planning["beats"] + second["beats"],
+                                               key=lambda b: float(b.get("start") or 0.0))
+                    planning["ok"] += second["ok"]
+                    planning["failed"] = [f for f in planning["failed"] if f.get("window_index") in still_failed]
+                    logger.info("produce_video(%s): second pass planned %d of %d window(s).",
+                                project_id, second["ok"], len(again))
+        if footage.is_own(project):
+            planning["beats"], unused = footage.finalize_beats(planning["beats"], own_clips, own_pinned)
+            planning["unused_clips"] = unused
+            planning["own_footage"] = {"clips": len(own_clips), "pinned": len(own_pinned)}
+        elif catalog_section and is_story_style(settings):
+            planning["beats"] = story_visuals.filter_beats(planning["beats"], art_style_of(settings))
 
         # 6c. A dedicated SoundDesigner pass cues the scene's own sounds --
         # footsteps, a scream, a door, rain -- on top of whatever the window
@@ -2334,20 +2805,42 @@ def _finalize_and_render(
     from app.services import writing_style
     writing_style.harvest_from_reconciliation(project, rec)
     render_settings = settings_for_brand(project.brand, settings_override, project)
-    if is_story_style(render_settings):
+    story = is_story_style(render_settings)
+    face_s = face_intro_seconds(render_settings)
+    project.metadata.pop("face_intro_render", None)
+    own_footage = footage.is_own(project)  # his clips first, idea pictures in the art style, no story shots
+    if not story and not face_s and art_style_of(render_settings) != "real":
+        # A full-style video in a drawn medium keeps BuzzEdit's own timing;
+        # only the pictures' prompts take the medium (BuzzEdit stamps no look
+        # on a script's own pictures).
+        annotated_text = story_visuals.stamp_art_style(annotated_text, art_style_of(render_settings))
+    if (story or face_s) and not own_footage:
         # Pictures and clips only, the cast's looks on every shot, and the
         # clip share enforced here -- BuzzEdit renders every directive it is
         # handed and never turns a script's still into a clip. The share is
         # of the video's running time: every shot is timed from the edited
-        # programme's word times and carries its own length.
+        # programme's word times and carries its own length. A face-first
+        # video (any channel) is timed here too: only his face for the
+        # opening, then pictures to the end; a full-style one keeps its cards
+        # and its prompts as they are.
+        mix = runtime_mix(resolve_settings(project.brand, settings_override, project)[0])
         annotated_text, story_stats = story_visuals.apply_to_script(
-            annotated_text, float(render_settings.get("video_broll_share") or 0.0),
-            story_visuals.load_cast_sheet(project),
+            annotated_text, float(mix["video"]),
+            story_visuals.load_cast_sheet(project) if story else None,
             word_times=rec.word_times, duration_s=rec.duration_s,
             clip_max_s=float(render_settings.get("broll_seconds_max") or story_visuals.CLIP_MAX_SECONDS),
-            image_share=float(render_settings.get("image_broll_share") or 0.0))
+            image_share=float(mix["images"]), face_intro_s=face_s, story=story,
+            art_style=art_style_of(render_settings))
         logger.info("produce_video(%s): story visuals -- %s.", project_id, story_stats)
         _set_status(project_id, story_visuals=story_stats)
+        if face_s and story_stats.get("runtime_s"):
+            pictured = float(story_stats.get("video_s") or 0) + float(story_stats.get("image_s") or 0)
+            project.metadata["face_intro_render"] = {
+                "buzzedit_project_id": project.metadata.get("buzzedit_project_id"),
+                "intro_s": story_stats.get("face_intro_s"), "runtime_s": story_stats["runtime_s"],
+                "coverage": round(min(1.0, pictured / float(story_stats["runtime_s"])), 3)}
+            logger.info("produce_video(%s): face first for %.0f s, then pictures (%.0f%% of the video).", project_id,
+                        float(story_stats.get("face_intro_s") or 0), 100 * project.metadata["face_intro_render"]["coverage"])
     deviation = rec.report()
     prod_dir = os.path.join(project.get_project_dir(), "production")
     os.makedirs(prod_dir, exist_ok=True)
@@ -2382,7 +2875,16 @@ def _finalize_and_render(
     # the visual planning just loaded a local LLM, and ComfyUI beside it on a
     # 16 GB card crawls (ECOSYSTEM.md: at most one heavy GPU tenant).
     _free_gpu_for_render(project_id)
-    settings = settings_for_brand(project.brand, settings_override, project)
+    # A face-first render sends the shares its shots were timed to, and the
+    # opening BuzzEdit must leave to the face (`face_intro_s`).
+    resolved, _ = resolve_settings(project.brand, settings_override, project)
+    face_mix = face_intro_mix(project, resolved)
+    render_override = dict(settings_override or {})
+    if face_mix:
+        render_override.update({k: v for k, v in face_mix.items() if k != "face_intro_s"})
+    settings = settings_for_brand(project.brand, render_override or settings_override, project)
+    if face_mix:
+        settings["face_intro_s"] = face_mix["face_intro_s"]
     # Tell BuzzEdit which model to run its own passes (moods, topics, picture
     # prompts) on, and make sure it holds the Pixabay key before a render
     # that may fall back to stock footage.
@@ -2408,8 +2910,10 @@ def _finalize_and_render(
     # creator's narration stays his own.
     apply_voice_map_to_buzzedit(project, client, buzzedit_project_id)
     # The live file mirrors this pass's own mix from the start, so a change
-    # made during an earlier pass never leaks into this one unasked.
-    push_live_settings(project, client, settings=settings)
+    # made during an earlier pass never leaks into this one unasked. (The
+    # resolved settings: `live_settings_for` converts them to BuzzEdit's terms
+    # itself; handing it `settings`, already converted, converted twice.)
+    push_live_settings(project, client, settings=resolved)
     planner = " Â· planning with Claude" if llm_fields else ""
     _set_status(project_id, message=f"Enqueuing the render (genre={settings.get('genre')}{planner})...", progress=0.4)
     enqueue_resp = client.enqueue_presentation(buzzedit_project_id, settings, start_at="")
@@ -2439,7 +2943,9 @@ def _check_runtime_mix(project: Project, client: BuzzEditClient, buzzedit_projec
     try:
         from integrations.buzzedit_settings import achieved_mix, resolve_settings, runtime_mix
         achieved = achieved_mix(client.get_project(buzzedit_project_id))
-        target = runtime_mix(resolve_settings(project.brand, None, project)[0])
+        resolved = resolve_settings(project.brand, None, project)[0]
+        face_mix = face_intro_mix(project, resolved)
+        target = runtime_mix({**resolved, **face_mix} if face_mix else resolved)
     except Exception as exc:  # noqa: BLE001 - a report nicety; never fails the render
         logger.warning("produce_video(%s): could not measure the video share (%s).", project.id, exc)
         return None, None
@@ -2455,6 +2961,88 @@ def _check_runtime_mix(project: Project, client: BuzzEditClient, buzzedit_projec
     why = phase.get("skipped_reason") or "fewer clips were placed than planned"
     return mix, (f"Video clips are {100 * achieved['video']:.0f}% of the video, not the {100 * target['video']:.0f}% "
                  f"you set ({phase.get('made', achieved['clips'])} of {phase.get('planned', '?')} clips made): {why}.")
+
+
+#: Below this share of `beats_planned` covered by generated + cached assets,
+#: a render is treated as having (effectively) no B-roll.
+BROLL_COVERAGE_MIN = 0.5
+#: `assets_failed` reasons BuzzEdit records when ComfyUI itself was the
+#: problem (presentation/assets.py): a plain outage, or a beat the
+#: consecutive-failure guard gave up on without even trying.
+_COMFYUI_FAILURE_MARKERS = ("comfyui offline", "not attempted")
+
+
+def _is_comfyui_failure_reason(reason: Any) -> bool:
+    text = str(reason or "").lower()
+    return any(marker in text for marker in _COMFYUI_FAILURE_MARKERS)
+
+
+def check_broll_coverage(report: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    """Whether a finished render came back with (almost) no B-roll because
+    ComfyUI was offline during it -- the 2026-10-20 incident: 263 beats
+    planned, 0 B-roll placed, delivered anyway.
+
+    A pure function of BuzzEdit's presentation report (`beats_planned`,
+    `broll_placed`, `assets_generated`, `assets_cached`, `assets_failed`), so
+    it is testable without a render. Coverage counts as low when no cutaway
+    was placed at all, or generated+cached assets cover less than
+    `BROLL_COVERAGE_MIN` of the planned beats. When it is low AND most of
+    the recorded failures name ComfyUI as the reason, `should_fail` is set
+    with a `message` to raise (the caller must not deliver); when the
+    failures have other reasons, `warning` is set instead so the caller can
+    still deliver with a warning. Always stored verbatim on
+    `project.metadata["broll_check"]` by the caller."""
+    report = report or {}
+    beats_planned = int(report.get("beats_planned") or 0)
+    broll_placed = int(report.get("broll_placed") or 0)
+    assets_generated = int(report.get("assets_generated") or 0)
+    assets_cached = int(report.get("assets_cached") or 0)
+    failures = [f for f in (report.get("assets_failed") or []) if isinstance(f, dict)]
+    result: Dict[str, Any] = {
+        "beats_planned": beats_planned,
+        "broll_placed": broll_placed,
+        "assets_generated": assets_generated,
+        "assets_cached": assets_cached,
+        "coverage_low": False,
+        "should_fail": False,
+        "warning": None,
+        "message": None,
+    }
+    if beats_planned <= 0:
+        return result
+    made = assets_generated + assets_cached
+    coverage_low = broll_placed == 0 or made < BROLL_COVERAGE_MIN * beats_planned
+    result["coverage_low"] = coverage_low
+    if not coverage_low:
+        return result
+    comfy_failures = sum(1 for f in failures if _is_comfyui_failure_reason(f.get("reason")))
+    comfy_share = (comfy_failures / len(failures)) if failures else 0.0
+    result["comfyui_failure_share"] = round(comfy_share, 3)
+    if failures and comfy_share > 0.5:
+        result["should_fail"] = True
+        result["message"] = (
+            f"No pictures were generated: ComfyUI was offline during the render "
+            f"({broll_placed}/{beats_planned} cutaways placed, {made} asset(s) made/cached). "
+            "Retrying later, once ComfyUI is back.")
+    else:
+        result["warning"] = (
+            f"Only {broll_placed}/{beats_planned} cutaways got B-roll ({made} asset(s) made/cached) "
+            "for reasons other than ComfyUI being offline; check the render report.")
+    return result
+
+
+def _is_portrait_file(path: Optional[str]) -> bool:
+    """True when the video at `path` is taller than wide (unknown -> False)."""
+    if not path or not os.path.isfile(path):
+        return False
+    try:
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+             "-of", "csv=p=0", path], capture_output=True, text=True, timeout=30, creationflags=_NO_WINDOW)
+        w, h = (int(v) for v in out.stdout.strip().split(",")[:2])
+        return h > w
+    except Exception:  # noqa: BLE001 - a probe failure just keeps the main output
+        return False
 
 
 def _await_render(project_id: str, client: BuzzEditClient, buzzedit_project_id: str, job_id: str) -> None:
@@ -2543,6 +3131,15 @@ def _await_render(project_id: str, client: BuzzEditClient, buzzedit_project_id: 
     output_path = None
     if report:
         output_path = report.get("output_path")
+        if (Project.load(project_id).metadata.get("orientation") == "vertical"
+                and not _is_portrait_file(output_path)):
+            # A Short recorded on the landscape camera: BuzzEdit's main render
+            # is landscape and the 9:16 reframe is a separate output. The
+            # Short is the vertical file (2026-10-21: short 1 shipped at 1920x1080).
+            vertical = next((s.get("path") for s in (report.get("shorts") or [])
+                             if s.get("kind") == "vertical" and s.get("path")), None)
+            if vertical and os.path.isfile(vertical):
+                output_path = vertical
     if not output_path:
         buzzedit_project = client.get_project(buzzedit_project_id)
         output_path = (buzzedit_project or {}).get("output_path")
@@ -2561,12 +3158,33 @@ def _await_render(project_id: str, client: BuzzEditClient, buzzedit_project_id: 
     mix, mix_warning = _check_runtime_mix(project, client, buzzedit_project_id, report)
     if mix:
         project.metadata["runtime_mix_achieved"] = mix
+
+    # Never deliver a cutaway-planned video that has (almost) no B-roll
+    # because ComfyUI was offline during the render -- fail it instead, in a
+    # way the production queue retries automatically once ComfyUI is back.
+    broll_check = check_broll_coverage(report)
+    project.metadata["broll_check"] = broll_check
+    if broll_check["should_fail"]:
+        project.save()
+        raise ComfyUIUnavailableError(broll_check["message"])
+
+    # The finished file where the creator works: next to the recording by
+    # default (Settings -> Video production -> "Save the final video").
+    _set_status(project_id, message="Saving the final video next to the recording...", progress=0.98)
+    final_path, deliver_warning = _deliver_output(project, output_path)
+    if final_path:
+        project.metadata["final_output_path"] = final_path
     project.save()
 
-    _set_status(project_id, state="ready", message="Video ready.", progress=1.0, report=report, output_path=output_path,
-                **({"warning": mix_warning} if mix_warning else {}))
+    warnings = " ".join(w for w in (mix_warning, deliver_warning, broll_check.get("warning")) if w)
+    _set_status(project_id, state="ready",
+                message=f"Video ready: {final_path or output_path}", progress=1.0, report=report,
+                output_path=output_path, final_output_path=final_path,
+                **({"warning": warnings} if warnings else {}))
+    if final_path or output_path:
+        _reveal_in_explorer(final_path or output_path)
     event_bus.publish("video_ready", {
-        "project_id": project_id, "output_path": output_path,
+        "project_id": project_id, "output_path": output_path, "final_output_path": final_path,
         "report_summary": {
             "genre": (report or {}).get("genre"),
             "assets_generated": (report or {}).get("assets_generated"),
@@ -2594,15 +3212,140 @@ def _rerender_possible(client: BuzzEditClient, buzzedit_project_id: str, job: Di
     """True when the failed `job` saved its finished timeline before dying, so
     only the render has to run again. BuzzEdit stamps `presented_at` when the
     pass saves the timeline; one stamped after the job started is that job's."""
+    is_rerender = job.get("job_type") == "presentation_render"
     try:
         data = client.get_project(buzzedit_project_id) or {}
-    except Exception as exc:  # noqa: BLE001 - fall back to the full pass
+    except Exception as exc:  # noqa: BLE001
+        if is_rerender:
+            # Never a fresh pass for a failed re-render (it rebuilds the edit and loses
+            # every later change: 2026-11-23, 97 added pictures). Render the saved edit
+            # again; if BuzzEdit is down the attempt fails and the queue retries it.
+            logger.info("Could not read BuzzEdit project %s (%s); re-rendering the saved edit anyway.",
+                        buzzedit_project_id, exc)
+            return True
         logger.info("Could not read BuzzEdit project %s (%s); rendering from the plan.", buzzedit_project_id, exc)
         return False
+    if is_rerender:
+        # A re-render never saves a timeline, so the edit it failed on is still there to
+        # render again -- "rendered" (a finished pass, e.g. after a picture top-up) as
+        # well as "presented". Comparing times sent 674aefab back to a full pass on
+        # 2026-10-21, and the status check alone did it again on 2026-11-23 15:40
+        # (queue item 1b2633535183: render, render, render).
+        return data.get("status") in ("presented", "rendered")
     presented_at = str(data.get("presented_at") or "")
+    if data.get("status") != "presented" or not presented_at:
+        return False
     started = str(job.get("started_at") or job.get("created_at") or "")
-    return data.get("status") == "presented" and bool(presented_at) and bool(started) \
-        and presented_at[:19] >= started[:19]
+    return bool(started) and presented_at[:19] >= started[:19]
+
+
+#: Where the finished video is put once BuzzEdit has rendered it
+#: (`produce_output_mode`): next to the recording it was made from
+#: ("beside_recording", the default), in one folder for every video
+#: ("folder", `produce_output_dir`), or left where BuzzEdit wrote it
+#: ("buzzedit"). The copy is named after the recording with `_final`.
+OUTPUT_MODES = ("beside_recording", "folder", "buzzedit")
+FINAL_SUFFIX = "_final"
+
+
+def _output_settings() -> Dict[str, Any]:
+    cfg = load_llm_config()
+    mode = str(cfg.get("produce_output_mode") or "beside_recording")
+    if mode not in OUTPUT_MODES:
+        mode = "beside_recording"
+    return {"mode": mode, "dir": str(cfg.get("produce_output_dir") or "").strip(),
+            "reveal": cfg.get("produce_reveal_output", True) is not False}
+
+
+def _final_destination(project: Project, output_path: str) -> Optional[str]:
+    """The path the finished video is copied to, or None to leave it."""
+    settings = _output_settings()
+    recording = str(project.metadata.get("recording_path") or "")
+    if settings["mode"] == "buzzedit":
+        return None
+    if settings["mode"] == "folder":
+        dest_dir = settings["dir"]
+        if not dest_dir or not os.path.isdir(dest_dir):
+            logger.warning("produce_video(%s): output folder %r does not exist; leaving the video where "
+                           "BuzzEdit wrote it.", project.id, dest_dir)
+            return None
+    else:
+        dest_dir = os.path.dirname(recording) if recording else ""
+        if not dest_dir or not os.path.isdir(dest_dir):
+            # A project with no recording path (an old run): fall back to the
+            # project's own folder, which always exists.
+            dest_dir = os.path.join(project.get_project_dir(), "production")
+            os.makedirs(dest_dir, exist_ok=True)
+    stem = (os.path.splitext(os.path.basename(recording))[0] if recording
+            else re.sub(r"[^\w.-]+", "_", project.name)[:80])
+    ext = os.path.splitext(output_path)[1] or ".mp4"
+    return os.path.join(dest_dir, f"{stem}{FINAL_SUFFIX}{ext}")
+
+
+def _deliver_output(project: Project, output_path: Optional[str]) -> Tuple[Optional[str], Optional[str]]:
+    """Copy the rendered video to its final place. Returns (final path, warning).
+    The file BuzzEdit wrote stays: a re-render and the publish step still
+    read it there. A copy already made (same size) is kept, not rewritten."""
+    import shutil
+
+    if not output_path or not os.path.isfile(output_path):
+        return None, None
+    try:
+        dest = _final_destination(project, output_path)
+    except Exception as exc:  # noqa: BLE001 - the render is done; this must not undo it
+        return None, f"The final video stayed at {output_path} ({exc})."
+    if not dest:
+        return None, None
+    try:
+        if os.path.normcase(os.path.abspath(dest)) == os.path.normcase(os.path.abspath(output_path)):
+            return output_path, None
+        if os.path.isfile(dest) and os.path.getsize(dest) == os.path.getsize(output_path):
+            logger.info("produce_video(%s): final video already at %s.", project.id, dest)
+            return dest, None
+        tmp = dest + ".part"
+        shutil.copy2(output_path, tmp)
+        os.replace(tmp, dest)
+        logger.info("produce_video(%s): final video saved to %s.", project.id, dest)
+        return dest, None
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("produce_video(%s): could not copy the final video to %s (%s).", project.id, dest, exc)
+        try:
+            os.remove(dest + ".part")
+        except OSError:
+            pass
+        return None, f"The final video could not be saved to {dest} ({exc}); it is at {output_path}."
+
+
+def _reveal_in_explorer(path: str) -> bool:
+    """Show the finished file in Explorer (Windows), when the setting allows."""
+    if sys.platform != "win32" or not path or not os.path.isfile(path):
+        return False
+    if not _output_settings()["reveal"]:
+        return False
+    try:
+        subprocess.Popen(["explorer.exe", f"/select,{os.path.normpath(path)}"])
+        return True
+    except OSError as exc:
+        logger.info("Could not open Explorer for %s (%s).", path, exc)
+        return False
+
+
+@router.post("/api/projects/{project_id}/produce_video/reveal")
+def reveal_produced_video(project_id: str):
+    """Show this project's finished video in Explorer (the final copy, else
+    the file BuzzEdit wrote)."""
+    project = _load_project_or_404(project_id)
+    for key in ("final_output_path", "output_path"):
+        path = str(project.metadata.get(key) or "")
+        if path and os.path.isfile(path):
+            if sys.platform != "win32":
+                raise HTTPException(status_code=501, detail="Opening a folder is only available on Windows.")
+            try:
+                subprocess.Popen(["explorer.exe", f"/select,{os.path.normpath(path)}"])
+            except OSError as exc:
+                raise HTTPException(status_code=500, detail=f"Could not open Explorer: {exc}")
+            return {"status": "shown", "path": path}
+    raise HTTPException(status_code=404, detail="This project has no finished video on disk.")
 
 
 def _reattach_render(project_id: str, mode: str, settings_override: Optional[Dict[str, Any]],
@@ -2615,6 +3358,19 @@ def _reattach_render(project_id: str, mode: str, settings_override: Optional[Dic
     buzzedit_project_id = project.metadata.get("buzzedit_project_id")
     if not buzzedit_project_id:
         raise RuntimeError("This project has no BuzzEdit render to resume.")
+    if (project.metadata.get("broll_check") or {}).get("should_fail"):
+        # The last render finished but was rejected for having (almost) no
+        # pictures -- ComfyUI was down. Re-attaching to that completed job or
+        # re-rendering its saved edit would deliver the same face-only video,
+        # so run the presentation pass again from the plan: it generates the
+        # pictures and clips now (reusing any cached) and waits for ComfyUI.
+        project.metadata.pop("buzzedit_job_id", None)
+        project.metadata.pop("broll_check", None)
+        project.save()
+        _set_status(project_id, message="The last render had no pictures; generating them and rendering again...",
+                    progress=0.32)
+        _continue_after_plan_review(project_id, mode, settings_override, precut, None)
+        return
     job = _find_render_job(project, client)
     if job and job.get("status") in ("failed", "cancelled") and _rerender_possible(client, buzzedit_project_id, job):
         # The pass got as far as saving its timeline and only the ffmpeg render
@@ -2752,6 +3508,54 @@ def resume_produce_video(project_id: str):
         raise HTTPException(status_code=409, detail=str(exc))
     _set_status(project_id, state="queued", message="Waiting in the production queue to re-attach...", error=None)
     return {"status": "resumed", "project_id": project_id, "queue_item_id": item["id"]}
+
+
+@router.post("/api/projects/{project_id}/produce_video/rerender")
+def rerender_produce_video(project_id: str):
+    """Render this project's saved edit again on BuzzEdit -- after an eye-contact
+    fix, a changed music bed, anything that changed the sources but not the
+    plan -- and deliver the result like a fresh production (the final copy
+    next to the recording). Goes through the queue at the render stage, so
+    every picture and clip already generated is reused."""
+    try:
+        project = Project.load(project_id)
+    except (ValueError, FileNotFoundError):
+        raise HTTPException(status_code=404, detail="Project not found")
+    buzzedit_project_id = project.metadata.get("buzzedit_project_id")
+    if not buzzedit_project_id:
+        raise HTTPException(status_code=409, detail="This project has no BuzzEdit edit to render again.")
+
+    from app.main import active_executions
+
+    if project_id in active_executions or _get_status(project_id).get("state") in ("starting", "running"):
+        raise HTTPException(status_code=409, detail="This project already has work running.")
+    try:
+        ensure_buzzedit_running(timeout=120.0)
+        client = BuzzEditClient()
+        data = client.get_project(buzzedit_project_id) or {}
+        # The project summary carries no timeline; its status says whether the pass ran.
+        if data.get("status") not in ("presented", "rendered"):
+            raise HTTPException(status_code=409,
+                                detail="BuzzEdit has no finished edit for this project yet; produce the video first.")
+        job = (client.enqueue_rerender(buzzedit_project_id).get("job") or {})
+    except HTTPException:
+        raise
+    except BuzzEditUnavailable as exc:
+        raise HTTPException(status_code=503, detail=f"BuzzEdit is not running: {exc}")
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(status_code=502, detail=f"BuzzEdit could not queue the render: {exc}")
+    if not job.get("id"):
+        raise HTTPException(status_code=502, detail="BuzzEdit did not return a job id for the render.")
+    project = Project.load(project_id)
+    project.metadata["buzzedit_job_id"] = job["id"]
+    project.save()
+    try:
+        item = _queue_resume(project, "render")
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
+    _set_status(project_id, state="queued", message="Waiting in the production queue to render again...",
+                error=None, buzzedit_job_id=job["id"])
+    return {"status": "rerendering", "project_id": project_id, "queue_item_id": item["id"], "buzzedit_job_id": job["id"]}
 
 
 # ────────────────────────────── Review gates ──────────────────────────────
@@ -2897,6 +3701,13 @@ def _queue_view() -> Dict[str, Any]:
             item["stage_state"] = live.get("state")
         elif item["status"] == "done":
             item["progress"] = 1.0
+            # The finished file, so the queue can name it and open it in Explorer.
+            try:
+                meta = Project.load(item["project_id"]).metadata
+            except Exception:  # noqa: BLE001 - a missing project just shows no file
+                meta = {}
+            final = meta.get("final_output_path") or meta.get("output_path")
+            item["final_output_path"] = final if final and os.path.isfile(final) else None
         else:
             # The same words `produce_video/status` uses, so both panels agree.
             item["message"] = _queue_message(item)
@@ -2913,11 +3724,11 @@ class QueueAddSchema(ProduceVideoSchema):
 
 
 @router.post("/api/produce/queue")
-def add_to_produce_queue(payload: QueueAddSchema):
+def add_to_produce_queue(payload: QueueAddSchema, when_free: bool = False):
     """Queue a video for production -- any project, any channel. Same checks
     and defaults as `POST /api/projects/{id}/produce_video`."""
     body = ProduceVideoSchema(**payload.model_dump(exclude={"project_id"}))
-    return produce_video(payload.project_id, body)
+    return produce_video(payload.project_id, body, when_free=when_free)
 
 
 class QueueBatchItem(BaseModel):
@@ -2988,7 +3799,8 @@ def add_batch_to_produce_queue(payload: QueueBatchSchema):
                 raise ValueError(f"'{project.name}' has no recording yet.")
             if not os.path.exists(recording):
                 raise ValueError(f"Recording not found: {recording}")
-            queued = produce_video(project.id, ProduceVideoSchema(recording_path=recording))
+            # A batch is a request to queue: each item waits its turn.
+            queued = produce_video(project.id, ProduceVideoSchema(recording_path=recording), when_free=True)
             result.update(status="queued", queue_item_id=queued["queue_item_id"])
         except HTTPException as exc:
             result.update(status="error", error=str(exc.detail))

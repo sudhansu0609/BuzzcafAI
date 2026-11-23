@@ -38,6 +38,56 @@ FALLBACK_CATALOG: Dict[str, Any] = {
         "dark": "tense", "eerie": "tense", "mysterious": "tense", "suspenseful": "tense",
         "epic": "intense", "dramatic": "intense", "aggressive": "intense", "triumphant": "intense",
     },
+    # Morning and evening ragas for the Raga picker. Slow by nature (50-66 bpm
+    # default); BuzzEdit measures the actual take and regenerates toward this
+    # when it misses, once its own catalog answers -- this is only what is
+    # shown while it is offline or too old to know about ragas.
+    "ragas": {
+        "morning": [
+            {"name": "bhairav", "label": "Bhairav", "time": "morning",
+             "description": "The archetypal dawn raga -- grave and devotional, its komal Re and "
+                             "Dha giving it a solemn, awakening weight.",
+             "keyscale": "C Bhairav", "bpm": 56},
+            {"name": "ahir_bhairav", "label": "Ahir Bhairav", "time": "morning",
+             "description": "A gentler cousin of Bhairav -- devotional with a folk warmth, for "
+                             "soft, reflective mornings.",
+             "keyscale": "C Ahir Bhairav", "bpm": 60},
+            {"name": "lalit", "label": "Lalit", "time": "morning",
+             "description": "A hushed, almost static raga with no Pa -- meditative and suspended, "
+                             "for a still pre-dawn mood.",
+             "keyscale": "C Lalit", "bpm": 52},
+            {"name": "bilaskhani_todi", "label": "Bilaskhani Todi", "time": "morning",
+             "description": "A grave, deeply devotional early-morning raga built on Todi's komal "
+                             "swaras -- heavy and introspective.",
+             "keyscale": "C Bilaskhani Todi", "bpm": 54},
+            {"name": "bhatiyar", "label": "Bhatiyar", "time": "morning",
+             "description": "A brisk, open-hearted morning raga -- awakening and bright, often used "
+                             "for sunrise and travel scenes.",
+             "keyscale": "C Bhatiyar", "bpm": 64},
+        ],
+        "evening": [
+            {"name": "yaman", "label": "Yaman", "time": "evening",
+             "description": "A serene, romantic evening raga on a Lydian-like scale -- warm and "
+                             "settled, the most widely used evening raga.",
+             "keyscale": "C Yaman (Lydian)", "bpm": 62},
+            {"name": "puriya_dhanashri", "label": "Puriya Dhanashri", "time": "evening",
+             "description": "An introspective dusk raga -- tender and a little melancholic, for "
+                             "quiet reflection.",
+             "keyscale": "C Puriya Dhanashri", "bpm": 55},
+            {"name": "marwa", "label": "Marwa", "time": "evening",
+             "description": "A restless, twilight raga that leans hard on the upper register -- "
+                             "unsettled and longing, a sunset mood.",
+             "keyscale": "C Marwa", "bpm": 58},
+            {"name": "bageshree", "label": "Bageshree", "time": "evening",
+             "description": "A tender night raga, pentatonic in feel -- romantic and a little "
+                             "wistful.",
+             "keyscale": "C Bageshree", "bpm": 60},
+            {"name": "shree", "label": "Shree", "time": "evening",
+             "description": "A grand, devotional dusk raga traditionally played at evening aarti -- "
+                             "stately and resonant.",
+             "keyscale": "C Shree", "bpm": 50},
+        ],
+    },
     "bpm_range": [50, 180],
     "video_genres": sorted([
         "comedy", "cooking", "devotional", "documentary", "finance", "gaming", "general",
@@ -52,7 +102,9 @@ FALLBACK_CATALOG: Dict[str, Any] = {
 # The Music page's presets (BuzzEdit's MUSIC_STYLES keys), for the planner.
 STYLE_PRESETS = (
     "horror_dark", "horror_climax", "suspense", "true_crime", "sad_violin",
-    "morning_raga_flute", "happy_flute", "cinematic_epic", "dramatic", "motivational",
+    "morning_raga_flute", "morning_raga_violin", "morning_raga_sitar",
+    "evening_raga_flute", "evening_raga_violin", "evening_raga_sitar",
+    "happy_flute", "cinematic_epic", "dramatic", "motivational",
     "lofi_calm", "tech_minimal", "comedy_playful", "devotional_calm",
 )
 

@@ -12,6 +12,7 @@ class ResearchDepartment(Department):
             specialist_roles=[
                 "WebResearcher",
                 "ShortsScout",
+                "StoryScout",
                 "AcademicResearcher",
                 "FactChecker",
                 "CitationManager",
@@ -26,6 +27,7 @@ class ResearchDepartment(Department):
                 "SpilledCoffeeStudioStrategist",
                 "Life3BajeStrategist",
                 "Khayal3BajeStrategist",
+                "TheTallStorytellerStrategist",
                 "CoffeeBrandStrategist"
             ],
             llm_service=llm_service

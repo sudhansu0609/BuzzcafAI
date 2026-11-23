@@ -14,5 +14,1973 @@
     "source": "agent",
     "created": "2026-10-09T19:19:26.791477",
     "updated": "2026-10-09T19:20:12.509918"
+  },
+  {
+    "id": "ba779920-59df-4637-a99f-9ead6d208c42",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: general (secondary: motivational).\n\nAlready cued (do not repeat): quiet night crickets on 'raat ke do bach rahe hain'\nAlready cued (do not repeat): soft wind through garden leaves on 'chupachap aati hai'\nAlready cued (do not repeat): thunder rolling with strong wind on 'tupha hai'\nAlready cued (do not repeat): gentle morning breeze and birdsong on 'gujar'\nAlready cued (do not repeat): slow footsteps on dry dirt trail on 'kadam'\n\n### The words (quote anchors exactly)\nWindow 0:\ndoston raat ke do bach rahe hain abhi kuch animation aur kuch aur kaam karke main utha hoon kahu.n aur uthane ke",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"bijaliya hai andhiya hai\", \"effect\": \"distant lightning crackle and rumbling\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-12T01:20:54.004472",
+    "updated": "2026-10-12T01:20:54.004478"
+  },
+  {
+    "id": "e0c59c2f-4939-417d-a981-7af6fdd97beb",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): low night wind and distant crickets on 'raat ko jo thali lagti hai'\nAlready cued (do not repeat): old wooden door creaking open on 'daravaje pe kiraya'\nAlready cued (do not repeat): soft crackle of a small flame on 'ghi ki khada mehak'\nAlready cued (do not repeat): soft night crickets and distant dog bark on 'raat'\nAlready cued (do not repeat): old phone ringing softly on 'phone'\n\n### The words (quote anchors exactly)\nWindow 0:\naaj hi kahani hai khali kursi ki thali aaj ki ye kahani kalapani kahani hai jo main aapko us insaan ke",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"pital ka ek chota sa gilaas\", \"effect\": \"brass glass set down on surface\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"lakhanao se ma roz phone karti thi\", \"effect\": \"phone ringing\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:35:48.087248",
+    "updated": "2026-10-20T11:35:48.087256"
+  },
+  {
+    "id": "2d550499-e097-4a09-8f71-2af2f322b701",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): distant evening temple bells on 'shaam'\nAlready cued (do not repeat): gentle river water lapping at stone on 'Ganga'\nAlready cued (do not repeat): old wooden door creaking open on 'darwaza'\nAlready cued (do not repeat): soft glass bangles clinking on 'tharthar'\nAlready cued (do not repeat): embers crackling in a clay stove on 'khilaya'\nAlready cued (do not repeat): faint tiny bell tinkling in the night on 'baramde'\n\n### The words (quote anchors exactly)\nWindow 2:\nek raat main hisaab laga to peete chala ki do mahina se zyada main",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"geeli mein ghat ke chali mat aur gehon ki mehak rahi thi\", \"effect\": \"narrow alley ambience with distant river\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 8}, {\"anchor\": \"doodh ne darwaza khola\", \"effect\": \"old wooden door opening slowly\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:35:53.027824",
+    "updated": "2026-10-20T11:35:53.027831"
+  },
+  {
+    "id": "51eb6005-a153-45f3-887b-aae78d8519d8",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow wall clock ticking on 'ghari'\nAlready cued (do not repeat): soft clink of brass utensils on 'aawaz'\nAlready cued (do not repeat): embers crackling softly on 'chule'\nAlready cued (do not repeat): brass thali set on earthen floor on 'rakh'\nAlready cued (do not repeat): soft crackle of chulha embers on 'kheer'\nAlready cued (do not repeat): steel plate set down on floor on 'thali'\nAlready cued (do not repeat): glass bangles clinking sharply on 'pakar'\nAlready cued (do not repeat): clay lid scraping onto jar on 'vapas'\n\n### The ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Unhone mere kalai khud di\", \"effect\": \"brass plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"bartan ki halki si aawaz\", \"effect\": \"soft clatter of brass utensils\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"namak ka ek mat ka martbaan\", \"effect\": \"ceramic jar lid clinking\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:35:58.837896",
+    "updated": "2026-10-20T11:35:58.837903"
+  },
+  {
+    "id": "4ebd02eb-5ccd-4bda-a6db-5ef1f4f58daa",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): hurried bare footsteps on stone floor on 'jaldi'\nAlready cued (do not repeat): steel plate scraping on floor on 'thali'\nAlready cued (do not repeat): soft diya flame flicker and quiet courtyard breeze on 'tulase'\nAlready cued (do not repeat): night crickets and distant dog bark on 'Unhone sunte'\nAlready cued (do not repeat): small brass puja bell ringing softly on 'puja ke ghante bajane'\nAlready cued (do not repeat): soft cat paws and faint scratching on stone on 'rasoi mein ghus'\nAlready cued (do not repeat): flour sprinkling s",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kheer ka katodi bhi saaf tha\", \"effect\": \"ceramic bowl set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"deta ka gilaas bhi khali tha\", \"effect\": \"brass glass set down on surface\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"kanastar se thoda ata Nikhil\", \"effect\": \"flour tin lid opening, flour pouring\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:06.435533",
+    "updated": "2026-10-20T11:36:06.435540"
+  },
+  {
+    "id": "a9199289-cc6f-4254-9796-0b0e5a556000",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): soft wind through old wooden shutters on 'rasoi'\nAlready cued (do not repeat): distant glass bangles clinking softly on 'doodh'\nAlready cued (do not repeat): steel plate lifted from stone floor on 'uthaya'\nAlready cued (do not repeat): faint dry wind over rooftop on 'patli'\nAlready cued (do not repeat): soft crow caws in distance on 'paanch'\nAlready cued (do not repeat): faint glass bangles clinking on 'haath'\n\n### The words (quote anchors exactly)\nWindow 8:\nsab sabase pehle main rasoi mein gaya thali phir bhi khali thi main nee",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ate par billi ke panje ka ek bhi insaan nahi tha\", \"effect\": \"soft cat paw scuffs on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Unhone chay ke gilaas pakadaya\", \"effect\": \"glass tumbler handed over, light clink\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"paanch kavae baithi hue the\", \"effect\": \"crows cawing and wings flapping\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:10.395315",
+    "updated": "2026-10-20T11:36:10.395322"
+  },
+  {
+    "id": "80253940-d985-4507-b01f-50fd4f809414",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): soft evening crickets and distant stillness on 'shaam'\nAlready cued (do not repeat): small diya flame crackling softly on 'jala'\nAlready cued (do not repeat): night silence, faint wind through shutters on 'raat'\nAlready cued (do not repeat): steel thali set down on floor on 'neeche'\nAlready cued (do not repeat): soft creak of a rope cot on 'chaarpai'\nAlready cued (do not repeat): slow wall clock ticking in silence on 'Deewar'\n\n### The words (quote anchors exactly)\nWindow 10:\npar unki Nazar neeche hamari rasoi ki khiraki taraf ch",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"puja ke ale mein sirf ek tasveer aur ghante thi\", \"effect\": \"small brass bell faint ring\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"woh unane thali neeche kursi ke aage rakh di\", \"effect\": \"steel plate placed on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"phir woh apni chaarpai pe leta gayi\", \"effect\": \"rope cot creaking under weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:15.084953",
+    "updated": "2026-10-20T11:36:15.084961"
+  },
+  {
+    "id": "01bf9de3-a8b9-4b82-8a73-82365aae7859",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): distant dog barking in the night on 'kutta'\nAlready cued (do not repeat): cold night wind through the house on 'thandi'\nAlready cued (do not repeat): low wet chewing and grinding from the kitchen on 'aawaz'\nAlready cued (do not repeat): faint creaking of a cane chair on 'charamarahat'\nAlready cued (do not repeat): damp night air with distant crickets on 'aur kursi'\nAlready cued (do not repeat): faint clatter of utensils in dark kitchen on 'rasoi ki aawaz'\nAlready cued (do not repeat): labored breathing of an old woman on 'haph r",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"phone ki roshane chupa ke samay dekhta raha\", \"effect\": \"faint phone screen tap, soft bedsheet rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main dheere se utha\", \"effect\": \"slow rising from bed, mattress creaking\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"zameen pe para\", \"effect\": \"bare feet touching cold floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"dheere baad doodh Andar se bahar aai\", \"effect\": \"slow shuffling footsteps on stone floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"thali wahi rakhe hui thi\", \"effect\": \"steel plate resting on floor, light clink\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"katori dekhake main wahi rakh gaya\", \"effect\": \"metal bowl set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:20.841505",
+    "updated": "2026-10-20T11:36:20.841511"
+  },
+  {
+    "id": "fa9eb7d7-8144-48fb-b7cf-5a3abd255c19",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint crackle of a flickering diya flame on 'Saamne se jala dud'\nAlready cued (do not repeat): old wooden door creaking, dust shuffling on 'purane roz dhunane laga'\nAlready cued (do not repeat): faint night wind and crickets on 'uska thali khula hua tha'\nAlready cued (do not repeat): old iron trunk lid creaking open on 'trank khola'\nAlready cued (do not repeat): tiny silver bells jingling softly on 'ghungadu kam tha'\nAlready cued (do not repeat): low distant wheezing breath behind on 'doodh ki aawaz aai'\nAlready cued (do not rep",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"main senki to woh dud khatta ho\", \"effect\": \"gentle pot scraping, spoon on steel\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main katodi ko ungali se chua\", \"effect\": \"fingertip touching ceramic bowl, soft tap\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ek purana itni ka trank tha\", \"effect\": \"faint dusty room ambience, quiet\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}, {\"anchor\": \"karta bhi utha liya\", \"effect\": \"cloth snatched up, quick rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"thali laga diya\", \"effect\": \"metal latch clicking shut on trunk\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:26.276230",
+    "updated": "2026-10-20T11:36:26.276237"
+  },
+  {
+    "id": "2bdb30b4-43ef-4c9b-98d2-e4c4db2f941d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): still night air, faint crickets on 'shaam'\nAlready cued (do not repeat): tiny bell tinkling faintly on 'bholu'\nAlready cued (do not repeat): bangles clinking softly, slow footsteps leaving on 'rakh gayi,'\nAlready cued (do not repeat): slow bare footsteps fading on stone floor on 'chali gayi'\nAlready cued (do not repeat): soft crackle of dying embers on 'chule ke'\nAlready cued (do not repeat): distant temple bell striking slowly on 'bajaye'\nAlready cued (do not repeat): sharp breath and bangles clinking on 'pakadi'\n\n### The words",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"rasoi ke darwaza pe khari thi\", \"effect\": \"bare feet stopping at wooden doorway\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"bet ki kursi ke taraf\", \"effect\": \"cane chair creaking softly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"woh chule ke paas baithe rahi\", \"effect\": \"faint embers crackling in stove\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}, {\"anchor\": \"chapai se ot pe nahi pa rahi thi\", \"effect\": \"rope cot creaking under weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"mohalle ke ek chote se dava khane se\", \"effect\": \"hurried footsteps leaving on street\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"dus bajaye\", \"effect\": \"wall clock striking slowly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:30.026311",
+    "updated": "2026-10-20T11:36:30.026319"
+  },
+  {
+    "id": "a446ec29-211b-4b5b-97d8-12b99175a444",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow footsteps on earthen floor on 'rasoi mein gaya'\nAlready cued (do not repeat): low flame crackle of clay stove on 'garam ki poori'\nAlready cued (do not repeat): soft sizzle of ghee in pan on 'ghi ki mehak'\nAlready cued (do not repeat): wooden door latch clicking shut on 'diya doodh ke'\nAlready cued (do not repeat): quiet night crickets and still air on 'Raat karib ek'\nAlready cued (do not repeat): low wooden chair creaking and scraping on 'charamarahat ki aawaz'\nAlready cued (do not repeat): heavy strained wood creaking unde",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghi ki mehak poori rasoi mein phail gayi\", \"effect\": \"ghee sizzling gently in hot pan\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"pital ka chota sa class dud se bharatiya\", \"effect\": \"brass glass filled with milk\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"kursi ke aage zameen par rakh di\", \"effect\": \"steel plate placed on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main jaldi se bahar gaya\", \"effect\": \"hurried footsteps leaving kitchen\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"rasoi ke darwaza baad\", \"effect\": \"wooden door closing shut\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"bet ki kursi charamara rahi thi\", \"effect\": \"cane chair creaking repeatedly, growing longer\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 5}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:35.375863",
+    "updated": "2026-10-20T11:36:35.375870"
+  },
+  {
+    "id": "ba5fc7a1-76da-4bb0-b5e0-b86233680658",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow long scratching of nails on plaster on 'lanbi khurachane ki aawaz'\nAlready cued (do not repeat): single tiny anklet bell jingle on 'khungaru baja'\nAlready cued (do not repeat): deep silent night room tone on 'sananata cha gaya'\nAlready cued (do not repeat): low damp night wind and distant crickets on 'main'\nAlready cued (do not repeat): dry plaster crumbling and dust falling on 'plasta ka kachubara'\nAlready cued (do not repeat): steel glass scraping on wooden floor on 'main use uthaya'\nAlready cued (do not repeat): tiny ank",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Deewar ke plastar pe nakhun ghasit raha ho\", \"effect\": \"fingernails scraping slowly on plaster wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"poori jala ke sikud gayi thi\", \"effect\": \"dry burnt poori crackling shrivelled\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main use uthaya\", \"effect\": \"steel glass lifted from floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ek chota sa kundi ka ghungaru para hua tha\", \"effect\": \"tiny bell dropping and rolling on steel\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:46.135392",
+    "updated": "2026-10-20T11:36:46.135399"
+  },
+  {
+    "id": "3e30cd44-6f37-4810-8c1e-cfa3754aa50a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): auto-rickshaw engine rattling along lane on 'gaya'\nAlready cued (do not repeat): labored shivering breaths in quiet room on 'kapane'\nAlready cued (do not repeat): bangles clinking as hand grips wrist on 'pakadake'\nAlready cued (do not repeat): quiet sobbing in dark room on 'asu'\nAlready cued (do not repeat): faint river water lapping against stone on 'ghat'\nAlready cued (do not repeat): low urgent whisper close to ear on 'phusaphus'\nAlready cued (do not repeat): soft body thud on damp ground on 'gira'\nAlready cued (do not repeat",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"unane mera karta pakada\", \"effect\": \"cloth grabbed, rustling shirt grip\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ato ruka\", \"effect\": \"auto-rickshaw engine stopping, idling off\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"main utarane ke liye juga\", \"effect\": \"footsteps stepping down from rickshaw\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:49.298070",
+    "updated": "2026-10-20T11:36:49.298079"
+  },
+  {
+    "id": "b0d085d4-7efc-4128-bda2-34927fdd2baa",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint fingernail scratching on plaster on 'Deewar ki kharoch'\nAlready cued (do not repeat): tiny silver anklet bell jingling on 'bholo ka naam sunte'\nAlready cued (do not repeat): low night wind and distant crickets on 'Unhone ek lanbi sans li'\nAlready cued (do not repeat): slow long exhale in quiet room on 'lanbi sans li'\nAlready cued (do not repeat): faint night wind and distant crickets on 'ek'\nAlready cued (do not repeat): floor mat rustling, slow footsteps on 'uthe aur andar'\nAlready cued (do not repeat): hurried bare foots",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"poora pata baramde mein hua tha\", \"effect\": \"quiet veranda night ambience, faint wind\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}, {\"anchor\": \"pandit ji uthe aur andar Kamre mein chale gaye\", \"effect\": \"footsteps walking into inner room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"unhein kapde khola\", \"effect\": \"cloth wrapping unfolding, soft rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:52.794029",
+    "updated": "2026-10-20T11:36:52.794035"
+  },
+  {
+    "id": "7b1a6536-bd55-4bdc-abdf-1b6c8f82362a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): old paper rustling softly on 'juk ke'\nAlready cued (do not repeat): slow labored breathing of a sleeper on 'bukhar'\nAlready cued (do not repeat): sudden heavy silence, faint room tone on 'rukh'\nAlready cued (do not repeat): slow river water lapping softly on 'nadi'\nAlready cued (do not repeat): small wooden chair scraping on earth floor on 'rakhi'\nAlready cued (do not repeat): slow soft footsteps on dirt floor on 'chali'\nAlready cued (do not repeat): faint tiny bell tinkling in silence on 'bhog'\n\n### The words (quote anchors exa",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"use tej bukhar char gaya tha\", \"effect\": \"feverish heavy breathing in quiet room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"bina namak ki patli khichari khilai thi\", \"effect\": \"spoon scraping against steel plate\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Mirzapur ke naye ghar ke liye Dadi ji ne pehle hi ek choti si nichi bethi kursi card rakhi thi\", \"effect\": \"small wooden stool set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ghar lodate waqt\", \"effect\": \"slow footsteps walking on dirt path\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:36:58.218254",
+    "updated": "2026-10-20T11:36:58.218262"
+  },
+  {
+    "id": "48815f82-8475-483b-aa67-a9cf923a6bd0",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): quiet night crickets and distant stillness on 'adhi'\nAlready cued (do not repeat): slow nails scratching on plaster wall on 'khurochane'\nAlready cued (do not repeat): clay pot lid sliding off on 'dhakkan'\nAlready cued (do not repeat): steel plate set down on earthen floor on 'rakh diya'\nAlready cued (do not repeat): faint ghee sizzling in a pot on 'ghi ki mehak'\nAlready cued (do not repeat): lantern flame fluttering and puffing out on 'lantan ki laug kap ke buch gayi'\nAlready cued (do not repeat): old cane chair creaking under h",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"dipar neeche rakh diya\", \"effect\": \"metal container set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main pichi haathon laga to mere par kisi chij se dakhadaya\", \"effect\": \"foot bumping against wooden object\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"kisi marth ki bhari aawaz mein kisi ne kaha amma\", \"effect\": \"deep man's voice whispering hoarsely\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"sab hote hi aspatal se phone aaya\", \"effect\": \"phone ringing in quiet house\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:37:02.769459",
+    "updated": "2026-10-20T11:37:02.769467"
+  },
+  {
+    "id": "923610bf-3411-45fb-8480-bd8301ba2f89",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): old phone line crackle and faint hiss on 'phone'\nAlready cued (do not repeat): soft river water lapping steps on 'main isi'\nAlready cued (do not repeat): slow footsteps on packed earth on 'jate waqt'\nAlready cued (do not repeat): low anklet bell tinkle in distance on 'rasoi'\nAlready cued (do not repeat): crow cawing softly in the distance on 'kavae ko bhog'\nAlready cued (do not repeat): faint muffled woman weeping from below on 'rone ki aawaz aai'\nAlready cued (do not repeat): low wind and quiet house creaks on 'ghar mein ek'\n\n#",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"bholanath naam ka\", \"effect\": \"wooden chair scraping on earth floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"khir aur poori ki patli chhota ke mujhe pe rakh di\", \"effect\": \"steel plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"teen kavai utare\", \"effect\": \"crows flapping wings landing nearby\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"uth gaya shaam tak sir log chale gaye the\", \"effect\": \"crowd footsteps fading away\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:37:10.432177",
+    "updated": "2026-10-20T11:37:10.432184"
+  },
+  {
+    "id": "62631e29-79e4-4165-862a-52e6d5393151",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): iron latch hooking onto wooden door on 'baandh kar diya'\nAlready cued (do not repeat): low wind creeping through old house on 'neeche se ghi ki mehak'\nAlready cued (do not repeat): faint oil lantern flame flicker on 'lanten jala rahi thi'\nAlready cued (do not repeat): thin thread dropping onto stone on 'gira diya tha'\nAlready cued (do not repeat): low uneasy night wind through gaps on 'tharthar kap raha tha'\nAlready cued (do not repeat): tiny silver anklet bell jingling softly on 'ghungadu baja'\n\n### The words (quote anchors exa",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kursi charmarai\", \"effect\": \"wooden chair creaking under heavy weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main sir utar ke rasoi ke paas pahuncha\", \"effect\": \"slow footsteps approaching kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ek thali rakhe hui thi\", \"effect\": \"steel plate resting on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:37:15.185899",
+    "updated": "2026-10-20T11:37:15.185906"
+  },
+  {
+    "id": "8b87300d-cbce-4b73-802d-07a480cd481e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 34:\nbai\n\n\n### Required Output Format (JSON only)\nReply with a single JSON object and nothing else:\n\n{\"cues\": [{\"anchor\": \"exact words from the text\", \"effect\": \"diegetic sound, <= 8 words\",\n           \"kind\": \"accent|bed\", \"level\": \"subtle|normal\", \"seconds\": 3}]}\n\n`anchor` must quote this passage's own words exactly. `{\"cues\": []}` when this\npassage has no real sound to cue. Never music, whooshes, stingers or UI hits.\n",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-20T11:37:18.150572",
+    "updated": "2026-10-20T11:37:18.150578"
+  },
+  {
+    "id": "57036d77-0b06-4d44-b750-4938dd0a378e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): mobile phone vibrating on wood on 'ma roz phone karti thi'\nAlready cued (do not repeat): coins softly sliding across wood on 'main hisaab laga'\nAlready cued (do not repeat): river water gently lapping stone steps on 'Ganga ghat ke paas'\n\n### The words (quote anchors exactly)\nWindow 0:\npeedhe ab in baton pe yakin karta hoon main aaj bhi us raat ko yad karta hoon jab main us rasoi ke daravaje pe kiraya tha andar ghi ki khada mehak bhari hui thi Deewar ke saath ek nahi do kursi laga thi unke aage do logon ki thali saji hui thi thal",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"andar ghi ki khada mehak bhari hui thi\", \"effect\": \"faint ghee sizzling in a pot\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"main us rasoi ke daravaje pe kiraya tha\", \"effect\": \"knuckles knocking on wooden door\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:32:53.056669",
+    "updated": "2026-10-21T02:32:53.056675"
+  },
+  {
+    "id": "ec9651b7-7a62-4176-95f8-970f32e45975",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): old wooden door creaking slowly on 'darwaza khola'\nAlready cued (do not repeat): loose glass bangles softly clinking on 'haath tharthar kap rahe the'\nAlready cued (do not repeat): small hearth fire gently crackling on 'chule pe'\nAlready cued (do not repeat): glass bangles touching softly on 'mere kalai pe bina diya'\nAlready cued (do not repeat): woven charpai creaks under shifting weight on 'chaarpai pe leta gaya'\nAlready cued (do not repeat): old wall clock ticking on 'ek purani dival ghari thi'\nAlready cued (do not repeat): ol",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghar mein ek purani dival ghari thi jo har ghante Bachat thi\", \"effect\": \"old wall clock striking the hour\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:00.195424",
+    "updated": "2026-10-21T02:33:00.195430"
+  },
+  {
+    "id": "61fc8d0a-a816-43a6-916e-7df91fd0664e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): steel plate softly contacting earthen floor on 'zameen pe rakh diya'\nAlready cued (do not repeat): earthenware lid scraping against jar rim on 'martbaan ka dhakkan'\nAlready cued (do not repeat): glass bangles clinking during wrist grab on 'meri kalai pakar li'\nAlready cued (do not repeat): earthenware jar settling on wooden shelf on 'main martbaan vapas rakh diya'\nAlready cued (do not repeat): metal lid softly touching steel plate on 'phir thali ko'\nAlready cued (do not repeat): slow footsteps receding along bare floor on 'main ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"doodh ne thali us kursi ke aage zameen pe rakh diya\", \"effect\": \"steel plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main haath baad aur martbaan ka dhakkan\", \"effect\": \"clay jar lid lifting off\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main jaldi utha\", \"effect\": \"quick footsteps rising from floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:03.310109",
+    "updated": "2026-10-21T02:33:03.310114"
+  },
+  {
+    "id": "a9a0ff35-4979-491e-ac7d-d2cb89c2b5ac",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): Water trickling onto soil on 'tulase ko jala'\nAlready cued (do not repeat): Small brass prayer bell ringing on 'puja ke ghante bajane laga'\nAlready cued (do not repeat): Soft flour scooping inside metal container on 'kanastar se thoda ata'\nAlready cued (do not repeat): Fine flour pattering onto rough floor on 'zameen pe bhikher diya'\nAlready cued (do not repeat): soft footsteps receding across worn floor on 'main usne chala gaya'\nAlready cued (do not repeat): slow footsteps entering kitchen on 'main rasoi mein gaya'\nAlready cued",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kyunki purane ghar mein rasoi ki kaam nahi hai\", \"effect\": \"faint cat scratching and rustling in kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:05.899146",
+    "updated": "2026-10-21T02:33:05.899151"
+  },
+  {
+    "id": "4a3332a4-aace-4cfa-ae49-c9e5919cec25",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): soft glass handling and bangles clinking on 'gilaas pakadaya'\nAlready cued (do not repeat): slow footsteps on rough rooftop on 'main chhota pe gaya'\nAlready cued (do not repeat): dry grains pattering on plaster on 'unhein dhyan daali rahi thi'\nAlready cued (do not repeat): Slow footsteps on a worn floor on 'ghumata raha'\nAlready cued (do not repeat): Water trickling gently into soil on 'jala charahati thi'\nAlready cued (do not repeat): Woven cot creaks beneath settling weight on 'chapai pilet pe lete hue'\n\n### The words (quote a",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"paanch kavae baithi hue the\", \"effect\": \"crows cawing and flapping on rooftop ledge\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:08.388892",
+    "updated": "2026-10-21T02:33:08.388897"
+  },
+  {
+    "id": "bf276bc2-1686-4cc3-bcbd-d683bb9b4cd8",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): Soft bowl and tumbler clinks against steel on 'thali saji'\nAlready cued (do not repeat): Steel tray gently touching stone floor on 'rakh di'\nAlready cued (do not repeat): Woven cot creaks under shifting weight on 'apni chaarpai pe leta gayi'\nAlready cued (do not repeat): Steady wall clock ticking on 'Deewar ki ghari ki tak'\nAlready cued (do not repeat): Distant dog barking down the lane on 'ek kutta bhauk raha tha'\nAlready cued (do not repeat): Soft wind through a window gap on 'thandi hava rahi thi'\nAlready cued (do not repeat)",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"phone mein bhari class ho rahe the\", \"effect\": \"faint phone buzzing on wooden cot\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:10.874067",
+    "updated": "2026-10-21T02:33:10.874073"
+  },
+  {
+    "id": "74e347fa-d1da-4548-9192-5e011b9f2d35",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): Wooden chair creaks under heavy weight on 'kursi charamarai'\nAlready cued (do not repeat): Cot ropes strain with clothing rustle on 'dheere se utha'\nAlready cued (do not repeat): Soft footfall on hard earthen floor on 'zameen pe para'\nAlready cued (do not repeat): Slow soft footsteps across kitchen threshold on 'Andar se bahar aai'\nAlready cued (do not repeat): Frail labored breathing on 'haph rahi thi'\nAlready cued (do not repeat): Light cot creak and cotton rustle on 'chaarpai par leta gayi'\nAlready cued (do not repeat): Cotto",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"rasoi ki aawaz rakh gayi\", \"effect\": \"chair creaking falls silent\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main katodi ko ungali se chua\", \"effect\": \"fingertip tapping a metal bowl\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:16.981344",
+    "updated": "2026-10-21T02:33:16.981349"
+  },
+  {
+    "id": "e1d6c9d6-a120-4004-be6b-0264129d9753",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): Soft footsteps across dusty stone on 'stor rum mein gaya'\nAlready cued (do not repeat): Dry stored belongings rustling on 'purane roz dhunane laga'\nAlready cued (do not repeat): Old iron hinges creaking on 'main trank khola'\nAlready cued (do not repeat): Tiny anklet bells softly jingling on 'use haath mein lekar'\nAlready cued (do not repeat): Soft approaching footsteps on 'aage badhake'\nAlready cued (do not repeat): Silver anklet links gently clinking on 'payal mere haath se kone li'\nAlready cued (do not repeat): Old cotton soft",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ki peeche se doodh ki aawaz aai\", \"effect\": \"soft footsteps approaching from behind\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:20.570540",
+    "updated": "2026-10-21T02:33:20.570546"
+  },
+  {
+    "id": "c912e65f-1288-438b-b5f9-d9a73872f724",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): distant wind howling softly on 'chali gayi'\nAlready cued (do not repeat): crunching gravel under footsteps on 'daoktar ke paas'\nAlready cued (do not repeat): sharp rustle of fabric on 'pakadi'\nAlready cued (do not repeat): hissing of hot oil on 'khir poori'\nAlready cued (do not repeat): bubbling liquid in metal pot on 'doodh ne dopahar mein'\n\n### The words (quote anchors exactly)\nWindow 16:\nphir unhein bas itana kaha turn mein aur woh bina kuch bole wahan se chali gayi jis raat doodh nahi uthi us raat doodh phir uthi nahi gali d",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"unki pakar itni kis hui thi\", \"effect\": \"sharp breath and fabric grip on wrist\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main rasoi mein gaya\", \"effect\": \"slow footsteps entering kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"thali saji\", \"effect\": \"steel plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:32.616139",
+    "updated": "2026-10-21T02:33:32.616144"
+  },
+  {
+    "id": "29c112db-6ab4-4e88-b2ca-eccaeabc153d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): heavy footsteps on dirt floor on 'bahar gaya'\nAlready cued (do not repeat): slow scratching on stone on 'khurachane ki aawaz'\nAlready cued (do not repeat): distant heavy bell toll on 'khungaru baja'\n\n### The words (quote anchors exactly)\nWindow 18:\nnichi bet ki kursi ke aage zameen par rakh di kursi ki tarah dekhte hue mujhe jab sa laga main jaldi se bahar gaya aur rasoi ke darwaza baad diya doodh ke chaarpai ke paas apne bista laga liya woh bike -bike mein kuch bar -bar rahi thi ek bar mujhe laga jis Unhone bholu kaha par main ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"rasoi se charamarahat ki aawaz aai\", \"effect\": \"wicker chair creaking under heavy weight\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"rasoi ke darwaza baad diya\", \"effect\": \"wooden kitchen door shutting\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"main uthane chahta tha\", \"effect\": \"cot ropes creaking under shifting body\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Pehli rest main rasoi mein gaya\", \"effect\": \"footsteps entering the kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:38.538706",
+    "updated": "2026-10-21T02:33:38.538713"
+  },
+  {
+    "id": "2991fa4b-a5dc-464c-8b43-e4d4ef9e6785",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): metallic clink of glass on tray on 'uthaya'\nAlready cued (do not repeat): faint metallic jingle on 'ghungaru'\nAlready cued (do not repeat): fabric rustling sharply on 'pakadake'\n\n### The words (quote anchors exactly)\nWindow 20:\nmain Nazar uthai kursi ke tak peeche Deewar pe lanbi kharoche thi woh zameen se sir hoke par tak gayi thi woh doodh ke uchai se kaha par thi ek poore bade adame ke kundi jitane uchai pe plasta ka kachuda khada kachubara kutsi ki gaadhi pe gira hua tha meri Nazar dus ke gilaas pe peedhe woh khali tha main ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"plasta ka kachuda khada kachubara kutsi ki gaadhi pe gira hua tha\", \"effect\": \"plaster debris crumbling and falling onto chair\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main doodh ke paas gaya\", \"effect\": \"slow footsteps approaching a bedside\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"unke kholi leti hui thi\", \"effect\": \"cot creaking under a lying body\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"unka poora sharir kapane laga\", \"effect\": \"bedsheet rustling from trembling body\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"unki akhon se asu bah rahe the\", \"effect\": \"quiet sobbing and shaky breaths\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:47.360109",
+    "updated": "2026-10-21T02:33:47.360115"
+  },
+  {
+    "id": "585a7dbf-21f1-4fc7-b207-24603b0dd175",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): hushed whispering breath on 'phusaphus'\nAlready cued (do not repeat): fabric rustle on 'jataka'\nAlready cued (do not repeat): distant evening birds on 'ghar jane ke jaga'\nAlready cued (do not repeat): heavy wooden door creak on 'bar andar'\n\n### The words (quote anchors exactly)\nWindow 22:\nghat ke pase guzarate waqt unane akhe kholi unane mera karta pakada aur mere kan ke paas phusaphus ake kaha use bhukha mitti rakhna main pucha kis doodh par unki akhe phir baandh ho Kuch thi aspatal ke ghat pe ato ruka main utarane ke liye tab ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghat ke pase guzarate waqt\", \"effect\": \"slow footsteps passing along a riverbank\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ghar jane ki jaga main sidha pandit gi rajashankar ke ghar gaya\", \"effect\": \"footsteps walking along a lane\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"ek lanbi sans li\", \"effect\": \"long heavy exhale\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:54.800561",
+    "updated": "2026-10-21T02:33:54.800566"
+  },
+  {
+    "id": "198860ee-daa7-4631-8e6d-f5807a8b9073",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): rustle of old paper on 'unke haath mein'\nAlready cued (do not repeat): soft bubbling of thick liquid on 'khichari'\n\n### The words (quote anchors exactly)\nWindow 24:\nek din unhein doodh se uski aawaz puchi doodh ne bas itana kaha tha ki andar koi hai jo abhi gaya nahi hai pandit ji uthe aur andar Kamre mein chale gaye lod ke aye to unke haath mein lal kapde mein baandh ek purani bahi thi unane bataya ki unki pata ji Dadi ji ki purohit the gaya ke pande ke rejistar se apne haath se utar laye the unhein kapde khola kagaj pila peedh",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"pandit ji uthe aur andar Kamre mein chale gaye\", \"effect\": \"footsteps walking into inner room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"kapde khola\", \"effect\": \"cloth wrapping being unfolded\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:33:59.003355",
+    "updated": "2026-10-21T02:33:59.003360"
+  },
+  {
+    "id": "e1742139-eaab-4bdc-bed4-8588e5ff4ba1",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): heavy metallic clink of a lock on 'kundi'\nAlready cued (do not repeat): low, hollow echo of a heavy vessel moving on 'doodh ne adesh diya'\nAlready cued (do not repeat): clink of metal vessel on 'doodh khud uthake'\nAlready cued (do not repeat): heavy lid thud on 'dhakkan laga'\n\n### The words (quote anchors exactly)\nWindow 26:\nraat mein ki dipe mein uski sense rukh gayi thi gali steshan pe nadi ke kundi use Pune ko saup diya gaya na koi pandit tha na koi rasam hui uski teravi kabhi nahi hui Mirzapur ke naye ghar ke liye Dadi ji ne",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"adhi raat ke baad doodh khud uthake wahi daali kat thi\", \"effect\": \"footsteps shuffling, plate scraping in dark kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"Deewar pe khurochane ke insaan gaye the\", \"effect\": \"fingernails scratching on plaster wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"thali lagai\", \"effect\": \"steel plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"namak ka dipa utha ke\", \"effect\": \"small tin container being lifted\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:34:02.750102",
+    "updated": "2026-10-21T02:34:02.750107"
+  },
+  {
+    "id": "0f7e2393-bdeb-4fc3-89a9-05d917133c27",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): heavy wood creaking slowly on 'kursi charmarai'\nAlready cued (do not repeat): hiss of a dying flame on 'nahi jala'\n\n### The words (quote anchors exactly)\nWindow 28:\ndipa khola to Saamne namak nahi tha woh poora rak se bhari hua tha main dipar neeche rakh diya main thali kursi ke aage dakh di aur haath nahi laga main pichi haathon laga to mere par kisi chij se dakhadaya pehle kursi ke bagal mein ek dusari kursi Kuch hui rakhe hui thi shaam ko woh wahan nahi thi rasoi mein ghi ki mehak bharane laga phir lantan ki laug kap ke buch ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"main thali kursi ke aage dakh di\", \"effect\": \"steel plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"rasoi mein ghi ki mehak bharane laga\", \"effect\": \"ghee sizzling softly in a pan\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"aspatal se phone aaya\", \"effect\": \"phone ringing\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"main laknao phone kiya\", \"effect\": \"phone buttons being dialed\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:34:09.729200",
+    "updated": "2026-10-21T02:34:09.729206"
+  },
+  {
+    "id": "a51ce593-460b-4200-998d-82e7346a30e3",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 30:\nUnhone dopahar mein kutub muhurat ke waqt bholanath naam ka Pehli bar jhad se liya unhein dopar ramavati bhularath naam ko Kuch ram ramavatti Kuch ramavatika ki angan ke kone mein baithe thi naam sunte hain Unhone apna Mujhe palu se dhakh liya main khir aur poori ki patli chhota ke mujhe pe rakh di is bar main khir mein namak nahi daali thorahi dheere mein teen kavai utare unhein patli ko chua aur poori tarah utha ke leke chale gaye main wahin kiraya dekhta raha is ghar mein",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"main khir aur poori ki patli chhota ke mujhe pe rakh di\", \"effect\": \"steel plate placed on ground\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"neeche se ramavati Kuch ki rone ki aawaz aai\", \"effect\": \"woman sobbing and wailing downstairs\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 4}, {\"anchor\": \"main rasol ke darwaza bhi baandh kar diya\", \"effect\": \"wooden door latch being bolted\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"achanak se meri a.nkh chali\", \"effect\": \"bedsheet rustling as sleeper jolts awake\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"seedha main sir utar ke rasoi ke paas pahuncha\", \"effect\": \"bare footsteps descending stairs\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:34:13.875386",
+    "updated": "2026-10-21T02:34:13.875392"
+  },
+  {
+    "id": "08ea6928-ea66-46f9-95a9-5dca1d506237",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 32:\ndo katori khir thi aur ek chota sa deta ka gilaas tha thali ke bagal mein mera thuta hua kala dhaaga para hua tha woh dhaaga main aspatar ke ghat ke paas kahani gira diya tha main taravaje pe rakh gaya mera sharir tharthar kap raha tha Tab kursi ki paas ek ghungadu baja Pehli jis usko kursi charmarai jis us pe koi bhare adam baitha ho dusari kursi khali thi woh meri taraf ghume hui thi aur Pehli bar us kursi vale ne amma nahi kaha usne mera naam liya doshto kuch bhukh khane ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Tab kursi ki paas ek ghungadu baja\", \"effect\": \"small metallic anklet bell jingling\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"mera sharir tharthar kap raha tha\", \"effect\": \"clothes rustling from trembling body\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T02:34:16.793584",
+    "updated": "2026-10-21T02:34:16.793590"
+  },
+  {
+    "id": "b7d541be-6eee-4419-8a0f-1aecf0ddc57f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint glass bangles jingling on 'dadi ke haath'\nAlready cued (do not repeat): still night air, distant crickets, faint lamp hiss on 'us waqt'\nAlready cued (do not repeat): brass thali set down on mud floor on 'rakh di'\nAlready cued (do not repeat): match striking and oil lamp catching flame on 'jala diya'\nAlready cued (do not repeat): glass bangles clinking softly on 'pakar li'\nAlready cued (do not repeat): low oil lamp flame crackling on 'dhimi avaj mein kaha'\nAlready cued (do not repeat): faint night wind through village shut",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghar ki purani divar gharine gyara bajae\", \"effect\": \"old wall clock chiming eleven\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 4}, {\"anchor\": \"namak ka mardaban uthana chaha\", \"effect\": \"ceramic salt jar lifted from shelf\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:34:22.315119",
+    "updated": "2026-10-21T10:34:22.315127"
+  },
+  {
+    "id": "1c0a7adb-ce88-4e4f-8cd0-c2f43161e461",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint distant crow caw on 'kavava yam ka dudh hota hai'\nAlready cued (do not repeat): dry breeze over empty rooftop on 'idar nahi aata tha|'\nAlready cued (do not repeat): grain pattering on tray on 'dana dal rahi thi'\nAlready cued (do not repeat): slow soft footsteps on a stone floor on 'neeche'\nAlready cued (do not repeat): faint wind through an empty village house on 'chup'\n\n### The words (quote anchors exactly)\nWindow 0:\nmunder rakhi hui khir pe chitiya tak nahi aai thi, kahate hain ki kavava yam ka dudh hota hai aur pitron ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"dana dal rahi thi\", \"effect\": \"grain pattering on tray\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:36:45.845128",
+    "updated": "2026-10-21T10:36:45.845139"
+  },
+  {
+    "id": "8c49f353-513a-4400-877e-7d46fe039aa7",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint night wind and crickets outside on 'raat'\nAlready cued (do not repeat): slow heavy chewing and grinding in darkness on 'dhire'\nAlready cued (do not repeat): old wooden chair creaking slowly on 'charmarai,'\nAlready cued (do not repeat): bare foot thudding on mud floor on 'pada,'\nAlready cued (do not repeat): faint wind through an empty village house on 'khana'\n\n### The words (quote anchors exactly)\nWindow 0:\nraat ke bara class pe rasoe mein koi bahut dhiye dhire chaba raha tha, woh avaj bhari thi, jaise koi bare jabaron se",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"phir band ki kurasi charmarai\", \"effect\": \"wooden chair creaking under heavy weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"dadi ki charapai par dadi ka vajan\", \"effect\": \"rope cot creaking under weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"bahar aai\", \"effect\": \"slow shuffling footsteps on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T10:38:47.117773",
+    "updated": "2026-10-21T10:38:47.117780"
+  },
+  {
+    "id": "3a902b45-3014-4181-84b9-123e55439499",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint wind through an empty village house on 'raat'\nAlready cued (do not repeat): soft glass bangles clinking on 'chudiyan'\nAlready cued (do not repeat): old wooden door creaking open slowly on 'kiraya'\nAlready cued (do not repeat): faint wind through an empty village house on 'raat'\nAlready cued (do not repeat): distant soft phone ringing on 'phone'\n\n### The words (quote anchors exactly)\nWindow 0:\naaj hi kahani hai khali kursi ki thali aaj ki ye kahani kalapani kahani hai jo main aapko us insaan ke dubane sunaunga jiske saath y",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghi ki khada mehak bhari hui thi\", \"effect\": \"ghee sizzling softly in a pan\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"thali mein pital ka ek chota sa gilaas tha\", \"effect\": \"brass glass set down on plate\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ma roz phone karti thi\", \"effect\": \"phone ringing\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:18.203069",
+    "updated": "2026-10-21T12:56:18.203078"
+  },
+  {
+    "id": "e5eee111-3d1a-43a2-a8d3-3cc959967883",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint bus engine rumbling on a road on 'chala'\nAlready cued (do not repeat): soft river water lapping at stone steps on 'Ganga'\nAlready cued (do not repeat): old wooden door creaking open slowly on 'darwaza'\nAlready cued (do not repeat): faint glass bangles clinking softly on 'tharthar'\nAlready cued (do not repeat): embers crackling in a mud stove on 'chule'\nAlready cued (do not repeat): faint wind through an empty village house on 'Saamne'\n\n### The words (quote anchors exactly)\nWindow 2:\nek raat main hisaab laga to peete chala ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ek patli si geeli thi jisamen do manjila purana ghar kiraya tha\", \"effect\": \"narrow alley footsteps on damp stone\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"doodh ne darwaza khola\", \"effect\": \"old wooden door opening\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"Unhone mat ke chule pe khud Raat se ki\", \"effect\": \"pan clinking on mud stove\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:23.014854",
+    "updated": "2026-10-21T12:56:23.014862"
+  },
+  {
+    "id": "7843dc72-0d98-440b-81c3-cff065aafec9",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint wind through an empty village house on 'rasoi'\nAlready cued (do not repeat): soft clink of brass utensils on 'aawaz'\nAlready cued (do not repeat): brass thali set down on mud floor on 'rakha'\nAlready cued (do not repeat): thali placed on the ground on 'diya'\nAlready cued (do not repeat): faint wind through an empty village house on 'chay'\nAlready cued (do not repeat): clay lid scraping on earthen jar on 'diya'\nAlready cued (do not repeat): brass plate set down on mud floor on 'thali'\nAlready cued (do not repeat): glass ban",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghar mein ek purani dival ghari thi jo har ghante Bachat thi\", \"effect\": \"old wall clock chiming\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 4}, {\"anchor\": \"rasoi se bartan ki halki si aawaz\", \"effect\": \"faint brass utensils clinking in kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Unhone mere kalai khud di\", \"effect\": \"bangles jingling as wrist released\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:26.476085",
+    "updated": "2026-10-21T12:56:26.476092"
+  },
+  {
+    "id": "03205f9e-6209-43c5-a4e9-5635e169ae43",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow dragging of a chair on stone on 'chala'\nAlready cued (do not repeat): hurried footsteps on a mud floor on 'utha'\nAlready cued (do not repeat): faint wind through an empty village house on 'rasoi'\nAlready cued (do not repeat): soft crackle of a small diya flame on 'angan'\nAlready cued (do not repeat): faint wind through an empty village house on 'Unhone'\nAlready cued (do not repeat): small brass puja bell ringing softly on 'ghante'\nAlready cued (do not repeat): soft paws padding on a stone floor on 'ghus'\nAlready cued (do no",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"thali kutase ke aage waisi hi rakhe hui thi\", \"effect\": \"brass plate resting on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"baithi hue the kursi pe nahi\", \"effect\": \"wooden stool creaking under weight\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:31.012470",
+    "updated": "2026-10-21T12:56:31.012478"
+  },
+  {
+    "id": "9086a7a6-8a9c-4a17-96f3-0f2d2aa3b4ce",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint wind through an empty village house on 'rasoi'\nAlready cued (do not repeat): slow soft footsteps on a mud floor on 'neeche'\nAlready cued (do not repeat): brass plate scraping on mud floor on 'uthaya'\nAlready cued (do not repeat): steel glass clinking softly on 'chay'\nAlready cued (do not repeat): faint dry wind over a rooftop on 'munder'\nAlready cued (do not repeat): soft crow wing shuffles on 'kavae'\nAlready cued (do not repeat): soft cloth rustle of a bow on 'paranam'\n\n### The words (quote anchors exactly)\nWindow 8:\nsab ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"billi ke panje ka ek bhi insaan nahi tha\", \"effect\": \"soft cat paws padding on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"chap jaharo uthaya\", \"effect\": \"brass plate lifted from mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"paanch kavae baithi hue the\", \"effect\": \"crows shifting and cawing on wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:34.775705",
+    "updated": "2026-10-21T12:56:34.775714"
+  },
+  {
+    "id": "edd678ac-9cef-4a2e-b653-e065dd78dece",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow bare footsteps on a mud floor on 'chali'\nAlready cued (do not repeat): faint wind through an empty village house on 'shaam'\nAlready cued (do not repeat): soft crackle of a diya flame on 'jala'\nAlready cued (do not repeat): crickets chirping outside in the dark on 'raat'\nAlready cued (do not repeat): brass thali set down on mud floor on 'thali'\nAlready cued (do not repeat): rope cot creaking softly on 'chaarpai'\nAlready cued (do not repeat): slow wall clock ticking in silence on 'Deewar'\n\n### The words (quote anchors exactly",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghar mein na koi ramayan thi\", \"effect\": \"small brass puja bell ringing softly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"woh unane thali neeche kursi ke aage rakh di\", \"effect\": \"brass plate set down on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"phir woh apni chaarpai pe leta gayi\", \"effect\": \"rope cot creaking as someone lies down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:38.516659",
+    "updated": "2026-10-21T12:56:38.516667"
+  },
+  {
+    "id": "f5c25632-21c4-4c0e-9d0c-47330e13da9c",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): distant dog barking in cold night on 'kutta bhauk raha tha'\nAlready cued (do not repeat): cold night wind in the village lane on 'thandi hava'\nAlready cued (do not repeat): slow steady breathing of a sleeper on 'sas dhimi aur barabar chal rahi thi'\nAlready cued (do not repeat): heavy stone grinding slowly on stone on 'Khaane pis raha ho'\nAlready cued (do not repeat): old wooden chair creaking slowly on 'charamarahat'\nAlready cued (do not repeat): metal pot lid clanging on stone floor on 'rasoi ki aawaz'\nAlready cued (do not repe",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"rasoi ki taraf ek aawaz rahi thi\", \"effect\": \"faint scraping from kitchen in the dark\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"main dheere se utha\", \"effect\": \"rope cot creaking as someone rises\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"zameen pe para\", \"effect\": \"bare feet stepping on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"woh haph rahi thi\", \"effect\": \"heavy panting breath of tired woman\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"chaarpai par leta gayi\", \"effect\": \"rope cot creaking as she lies down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:42.581698",
+    "updated": "2026-10-21T12:56:42.581706"
+  },
+  {
+    "id": "741df118-a3c1-451a-9e8c-4539f4cf153e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): low flame crackle in still room on 'main senki'\nAlready cued (do not repeat): soft fingertip tap on metal pot on 'main katodi ko ungali se chua'\nAlready cued (do not repeat): creaking wooden door opening slowly on 'main stor rum mein gaya'\nAlready cued (do not repeat): old iron trunk lid creaking open on 'trank khola'\nAlready cued (do not repeat): tiny anklet bells jingling softly on 'ghungadu'\nAlready cued (do not repeat): night insects and faint wind on 'main usase haath'\nAlready cued (do not repeat): faint distant anklet bell",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kisi ne use ag par khud diya ho\", \"effect\": \"faint hiss of burnt milk on embers\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"dopar mein doodh paros mein gayi\", \"effect\": \"footsteps leaving on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Unhone sab kuch trank mein daali\", \"effect\": \"cloth and items dropped into iron trunk\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"trank mein daali\", \"effect\": \"iron trunk lid closing with thud\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:46.710594",
+    "updated": "2026-10-21T12:56:46.710601"
+  },
+  {
+    "id": "b59033d1-ea05-4e03-9e18-89899d37087e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint lantern crackle and low wind on 'rasoi ke darwaza pe khari thi'\nAlready cued (do not repeat): motorbike engine starting and fading away on 'bike mein rakh gayi,'\nAlready cued (do not repeat): tiny silver bell tinkling softly on 'neeche bet ki kursi'\nAlready cued (do not repeat): slow bare footsteps fading on dirt on 'chali gayi'\nAlready cued (do not repeat): low flickering lantern flame hush on 'chule ke paas baithe rahi'\nAlready cued (do not repeat): sharp glass bangles clinking on 'meri kalai pakadi'\n\n### The words (quot",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"us raat doodh phir uthi nahi\", \"effect\": \"bare footsteps walking away on dirt floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main gali kapara unke mat pe rakha\", \"effect\": \"wet cloth placed on forehead\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"woh bilkul tap raha tha\", \"effect\": \"heavy feverish breathing in quiet room\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:49.999053",
+    "updated": "2026-10-21T12:56:49.999061"
+  },
+  {
+    "id": "23f1d1e3-d409-493a-a7c1-89cd8ac27608",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): low quiet room tone, distant crickets on 'main chup raha,'\nAlready cued (do not repeat): slow footsteps on packed mud floor on 'rasoi mein gaya'\nAlready cued (do not repeat): soft sizzle of ghee frying on 'phail gayi'\nAlready cued (do not repeat): wooden door latch closing softly on 'rasoi ke darwaza baad diya'\nAlready cued (do not repeat): quiet night room tone, distant crickets on 'Raat karib ek bajaye'\nAlready cued (do not repeat): wooden chair creaking and scraping on dirt floor on 'charamarahat ki aawaz aai'\n\n### The words ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"pital ka chota sa class dud se bharatiya\", \"effect\": \"milk poured into brass glass\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"nichi bet ki kursi ke aage zameen par rakh di\", \"effect\": \"brass plate set down on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main jaldi se bahar gaya\", \"effect\": \"hurried footsteps on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"bet ki kursi charamara rahi thi\", \"effect\": \"wooden chair creaking under heavy weight\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:56:53.588596",
+    "updated": "2026-10-21T12:56:53.588603"
+  },
+  {
+    "id": "c8a1c2b5-ecff-4174-ae38-8d176aae989a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow fingernails scraping plaster wall on 'khurachane ki aawaz'\nAlready cued (do not repeat): single tiny anklet bell ringing on 'khungaru baja'\nAlready cued (do not repeat): deep silent night room tone on 'sananata cha gaya'\nAlready cued (do not repeat): low wind through village night on 'main'\nAlready cued (do not repeat): brass tumbler scraping on floor on 'uthaya'\nAlready cued (do not repeat): tiny bell tinkling softly on 'ghungaru'\n\n### The words (quote anchors exactly)\nWindow 20:\ndoodh apne chaarpai pe hi thi unki sas ko s",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"main subat tak akhe khola let raha\", \"effect\": \"heavy trembling breath in silent room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"Pehli rest main rasoi mein gaya\", \"effect\": \"footsteps on mud floor into kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main use uthaya aur andar kuch dekha\", \"effect\": \"steel tumbler lifted from floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"gilaas ke thali mein ek chota sa kundi ka ghungaru para hua tha\", \"effect\": \"tiny anklet bell rolling on plate\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main doodh ke paas gaya\", \"effect\": \"footsteps crossing mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:03.129476",
+    "updated": "2026-10-21T12:57:03.129483"
+  },
+  {
+    "id": "5e949a11-3714-4bcc-a1e8-5e4f78936063",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): low night wind and distant crickets on 'main'\nAlready cued (do not repeat): faint trembling breath, bangles jingling softly on 'kapane'\nAlready cued (do not repeat): quiet sobbing in a still room on 'asu'\nAlready cued (do not repeat): rickshaw creaking on a dirt lane on 'bulaya'\nAlready cued (do not repeat): low urgent whisper close to ear on 'phusaphus'\nAlready cued (do not repeat): thread dropping softly on stone on 'gira'\nAlready cued (do not repeat): quiet evening courtyard ambience, crickets on 'angan'\n\n### The words (quote",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"meri kalai pakadake\", \"effect\": \"hand gripping wrist, bangles clinking\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"mere kalai pe halki sa jataka laga\", \"effect\": \"small thread snapping against wrist\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"aspatal ke ghat pe ato ruka\", \"effect\": \"auto rickshaw engine stopping\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:07.130660",
+    "updated": "2026-10-21T12:57:07.130668"
+  },
+  {
+    "id": "b517afef-daae-477d-a365-0e19af7eb045",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): soft rustle of cloth and bangles on 'rok liya'\nAlready cued (do not repeat): long slow exhale in quiet room on 'lanbi sans li'\nAlready cued (do not repeat): oil lantern flame faintly crackling on 'Unhone hi pata kiya tha'\nAlready cued (do not repeat): cold night wind and distant crickets on 'daravaje bhi khai rehti thi'\nAlready cued (do not repeat): faint night wind through village lanes on 'ek din'\nAlready cued (do not repeat): old cot creaking as someone rises on 'uthe aur andar'\nAlready cued (do not repeat): quick bare footst",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Deewar ki kharoch\", \"effect\": \"fingernails scraping on plaster wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"dudh ke class mein\", \"effect\": \"milk poured into brass glass\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"bahi thi\", \"effect\": \"old cloth-bound ledger set down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:12.452682",
+    "updated": "2026-10-21T12:57:12.452690"
+  },
+  {
+    "id": "32765caf-44a7-4fb6-98cc-e599be65080a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): night insects humming outside, faint wind on 'pandi ji ne bataya'\nAlready cued (do not repeat): old paper rustling softly on 'likha hua tha'\nAlready cued (do not repeat): labored childlike breathing in a quiet room on 'tej bukhar'\nAlready cued (do not repeat): distant river water flowing softly on 'gali steshan pe nadi'\nAlready cued (do not repeat): old wooden door creaking open on 'ghar pahuncha'\nAlready cued (do not repeat): soft sip of hot tea on 'chay pite the'\n\n### The words (quote anchors exactly)\nWindow 26:\npandi ji ne ba",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"bukhar mein namak main tha\", \"effect\": \"spoon scraping thin khichdi in bowl\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ghar lodate waqt\", \"effect\": \"footsteps walking on dirt path\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:15.281302",
+    "updated": "2026-10-21T12:57:15.281309"
+  },
+  {
+    "id": "4cb11191-fecd-45bf-84f7-7214e292851d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): tiny silver anklet bell jingling softly on 'dheere'\nAlready cued (do not repeat): quiet night crickets and still air on 'adhi'\nAlready cued (do not repeat): fingernails scratching slowly on plaster on 'khurochane'\nAlready cued (do not repeat): clay pot lid scraping open on 'dhakkan'\nAlready cued (do not repeat): old wooden lid scraping off a pot on 'khola'\nAlready cued (do not repeat): brass thali set down on mud floor on 'rakh'\nAlready cued (do not repeat): low night wind and distant crickets on 'Andar'\nAlready cued (do not rep",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghi ki mehak aati thi\", \"effect\": \"soft sizzle of ghee in pan\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"poori\", \"effect\": \"puri frying in hot oil\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"lantan ki laug kap ke buch gayi\", \"effect\": \"lantern flame fluttering and puffing out\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"Andar mein kursi charmarai\", \"effect\": \"wooden chair creaking under heavy weight\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"kisi ne kaha amma\", \"effect\": \"deep male voice whisper in dark\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"aspatal se phone aaya\", \"effect\": \"phone ringing in quiet house\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:18.959752",
+    "updated": "2026-10-21T12:57:18.959760"
+  },
+  {
+    "id": "fa121b51-b1c2-4131-af37-0988df64e86d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): old phone ringing softly in quiet room on 'phone kiya'\nAlready cued (do not repeat): faint silver anklet bell tinkling on 'rasoi ki taraf dekhe'\nAlready cued (do not repeat): lantern flame crackling, still night air on 'chup rahe'\nAlready cued (do not repeat): dry wind through village courtyard on 'Unhone dopahar mein'\nAlready cued (do not repeat): crow cawing in courtyard on 'Pehli bar kisi kavae ko'\nAlready cued (do not repeat): distant old woman sobbing softly on 'rone ki aawaz aai'\n\n### The words (quote anchors exactly)\nWind",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Pehli bar kisi kavae ko bhog kat hue dekha tha\", \"effect\": \"crow pecking at food on ground\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"teen kavai utare\", \"effect\": \"crows flapping wings landing in courtyard\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"poori tarah utha ke leke chale gaye\", \"effect\": \"footsteps walking away on dirt\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:26.360578",
+    "updated": "2026-10-21T12:57:26.360585"
+  },
+  {
+    "id": "23caf87b-540e-404c-8646-788bca5fdc6c",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): rope knotting around a wooden door on 'baandh kar diya'\nAlready cued (do not repeat): sudden quiet breath in a dark room on 'meri a.nkh chali'\nAlready cued (do not repeat): old wooden door creaking open on 'khula hua tha'\nAlready cued (do not repeat): soft oil lantern flame crackling on 'lanten jala rahi thi'\nAlready cued (do not repeat): shaky nervous breathing in silence on 'tharthar kap raha tha'\nAlready cued (do not repeat): cane chair creaking slowly on 'kursi'\nAlready cued (do not repeat): tiny silver anklet bell jingling ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"thali rakhe hui thi\", \"effect\": \"brass plate set on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"mera sharir tharthar kap raha tha\", \"effect\": \"trembling breath, shaky exhale\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:31.505943",
+    "updated": "2026-10-21T12:57:31.505948"
+  },
+  {
+    "id": "bf154a80-cec1-4db3-b8e0-d9d94b65b378",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'milta'\n\n### The words (quote anchors exactly)\nWindow 34:\nmilta hoon bahut jald ek nai kahani ke saath tab tak ke liye bai\n\n\n### Required Output Format (JSON only)\nReply with a single JSON object and nothing else:\n\n{\"cues\": [{\"anchor\": \"exact words from the text\", \"effect\": \"diegetic sound, <= 8 words\",\n           \"kind\": \"accent|bed\", \"level\": \"subtle|normal\", \"seconds\": 3}]}\n\n`anchor` must quote this passage's own words exactly. `{\"cues\": []}` when this\npassage has no real soun",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T12:57:33.587592",
+    "updated": "2026-10-21T12:57:33.587597"
+  },
+  {
+    "id": "99569720-73c2-4c5b-9749-ac704b6a89e7",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint lamp flame crackling, still night air on 'namak'\nAlready cued (do not repeat): old wall clock ticking softly on 'bajae,'\nAlready cued (do not repeat): brass thali set down on mud floor on 'rakh'\nAlready cued (do not repeat): match striking, small flame catching on 'jala'\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'tabhi'\nAlready cued (do not repeat): glass bangles clinking softly on 'pakar'\nAlready cued (do not repeat): hushed whisper in a still room on 'dhimi'\n\n### The words (quote an",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"dadi ne pital ki thali mein do poori\", \"effect\": \"brass plate with puris set down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"jamin par rakh di\", \"effect\": \"plate placed on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:03:37.611289",
+    "updated": "2026-10-21T21:03:37.611297"
+  },
+  {
+    "id": "1c33e7c3-b6cf-4fdc-ab4c-322ee483d1c3",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'Kuch'\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'rasoi'\nAlready cued (do not repeat): old wooden door creaking open slowly on 'daravaje'\nAlready cued (do not repeat): soft phone vibration on wood on 'phone'\n\n### The words (quote anchors exactly)\nWindow 0:\nKuch karta\n\nWindow 1:\nhoon jab main us rasoi ke daravaje pe kiraya tha andar ghi ki khada mehak bhari hui thi Deewar ke saath ek nahi do kursi laga thi unke aage do logon ki thali saji hui ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghi ki khada mehak bhari hui thi\", \"effect\": \"soft sizzle of ghee in pan\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"thali saji hui thi\", \"effect\": \"brass plates set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"lakhanao se ma roz phone karti thi\", \"effect\": \"phone ringing in quiet room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:18.603329",
+    "updated": "2026-10-21T21:34:18.603334"
+  },
+  {
+    "id": "1d185e97-f687-495a-83d5-a42f711a8cb4",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'raat'\nAlready cued (do not repeat): distant temple bell, evening wind on 'shaam'\nAlready cued (do not repeat): slow river water lapping against stone steps on 'Ganga'\nAlready cued (do not repeat): faint night wind, still village air on 'Deewaron'\nAlready cued (do not repeat): old wooden door creaking open slowly on 'darwaza khola'\nAlready cued (do not repeat): embers crackling softly in clay stove on 'chule'\n\n### The words (quote anchors exactly)\nWindow 2:\nwoh har bar ek hi baat",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"doodh ne darwaza khola\", \"effect\": \"old wooden door opening\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"Unhone mat ke chule pe khud Raat se ki\", \"effect\": \"cooking on clay stove, pan sizzling\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:21.931352",
+    "updated": "2026-10-21T21:34:21.931359"
+  },
+  {
+    "id": "403913a8-8653-41a2-9e14-9ac820db715f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): still night air, distant crickets on 'Pehli'\nAlready cued (do not repeat): slow wall clock ticking on 'ghari'\nAlready cued (do not repeat): faint clink of brass utensils on 'halki'\nAlready cued (do not repeat): slow footsteps on packed mud floor on 'daravaje'\nAlready cued (do not repeat): glass bangles softly jingling on 'Unhone'\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'doodh'\nAlready cued (do not repeat): brass thali set down on mud floor on 'rakh'\nAlready cued (do not repeat): match stri",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ghar mein ek purani dival ghari thi jo har ghante Bachat thi\", \"effect\": \"old wall clock chiming the hour\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"main utha aur rasoi ki daravaje tak gaya\", \"effect\": \"footsteps walking across floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"namak ka ek mat ka martbaan rakha hua tha\", \"effect\": \"clay jar lid scraping open\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:25.190355",
+    "updated": "2026-10-21T21:34:25.190363"
+  },
+  {
+    "id": "381d2aec-693f-4510-83c2-53d242f9c9ee",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): still night air, faint lantern flame on 'us waqt'\nAlready cued (do not repeat): low whisper, faint lantern crackle on 'Unhone dhimi aawaz mein kaha'\nAlready cued (do not repeat): clay jar set down on wood on 'rakh diya'\nAlready cued (do not repeat): brass thali scraping on mud floor on 'thali'\nAlready cued (do not repeat): hurried footsteps on packed earth on 'main jaldi utha'\nAlready cued (do not repeat): small brass puja bell ringing softly on 'ghante'\nAlready cued (do not repeat): faint lantern flame crackling, still night ai",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"woh kha lete hain itana kahake woh puja ke ghante bajane laga\", \"effect\": \"puja bell ringing repeatedly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"doodh angan mein tulase ko jala kiraya rahi thi\", \"effect\": \"water poured on tulsi plant\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"phir kursi ke charo taraf zameen\", \"effect\": \"flour sprinkled on floor around chair\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:28.774694",
+    "updated": "2026-10-21T21:34:28.774700"
+  },
+  {
+    "id": "2eb33def-fbcc-483c-b34f-de3466e17598",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'aur'\nAlready cued (do not repeat): slow footsteps fading on packed earth on 'chala'\nAlready cued (do not repeat): brass thali scraping on mud floor on 'uthaya'\nAlready cued (do not repeat): faint glass clink, quiet room on 'chay'\nAlready cued (do not repeat): low crow caws, still morning air on 'kavae'\nAlready cued (do not repeat): single wing flutter, then silence on 'udake'\n\n### The words (quote anchors exactly)\nWindow 8:\naur phir kursi ke charo taraf zameen pe bhikher diya bi",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kursi ke charo taraf zameen pe bhikher diya\", \"effect\": \"flour sprinkled on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"tab hi doodh rasoi mein aai\", \"effect\": \"footsteps entering kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"paanch kavae baithi hue the\", \"effect\": \"crows cawing softly on wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:32.110013",
+    "updated": "2026-10-21T21:34:32.110021"
+  },
+  {
+    "id": "3e6cd0ba-67c8-4e1b-9714-9985f78616d2",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): glass bangles clinking softly on 'rok'\nAlready cued (do not repeat): faint lantern flame crackling, still evening air on 'shaam'\nAlready cued (do not repeat): soft match strike, diya catching flame on 'jala'\nAlready cued (do not repeat): old wooden door creaking slowly on 'alamari'\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'raat'\nAlready cued (do not repeat): rope cot creaking softly on 'lete'\nAlready cued (do not repeat): slow bare footsteps on packed earth on 'uth'\n\n### The words (quote an",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ek haath rok liya\", \"effect\": \"hand grabbing wrist, bangles clinking\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"puja ke ale mein sirf ek tasveer aur ghante\", \"effect\": \"small brass bell faint ring\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"raat ko chaarpai\", \"effect\": \"wooden cot creaking as he lies\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"thali saji\", \"effect\": \"brass plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:35.877830",
+    "updated": "2026-10-21T21:34:35.877835"
+  },
+  {
+    "id": "77ba0ff8-a789-4a28-8a54-3131b1d0837f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): distant dog barking in the night on 'kutta bhauk'\nAlready cued (do not repeat): cold night wind, faint rustling on 'thandi hava'\nAlready cued (do not repeat): faint whisper from the kitchen on 'aawaz'\nAlready cued (do not repeat): faint lantern flame crackling, still night air on 'jis'\nAlready cued (do not repeat): quiet slow chewing, faint clink of brass on 'Khaane'\nAlready cued (do not repeat): creaking wooden chair under weight on 'charamarai'\nAlready cued (do not repeat): kitchen clatter fading into silence on 'rasoi'\nAlread",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"meri nind tuti\", \"effect\": \"phone screen tapping, bedsheet rustling awake\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main dheere se utha\", \"effect\": \"slow footsteps rising from cot\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"zameen pe para\", \"effect\": \"foot landing on floor, rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"chaarpai par leta gayi\", \"effect\": \"rope cot creaking as she lies\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:41.740072",
+    "updated": "2026-10-21T21:34:41.740077"
+  },
+  {
+    "id": "36718421-c029-43d1-a6d8-966596c6f888",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): soft oil lamp flame crackling on 'diva'\nAlready cued (do not repeat): brass thali scraping on mud floor on 'rakhe'\nAlready cued (do not repeat): glass touching brass softly on 'chua'\nAlready cued (do not repeat): quiet wind and distant crickets at dusk on 'jab'\nAlready cued (do not repeat): old trunk lid creaking open on 'trank khola'\nAlready cued (do not repeat): tiny anklet bells jingling softly on 'ghungadu'\nAlready cued (do not repeat): soft footsteps on mud floor behind on 'doodh ki aawaz aai'\n\n### The words (quote anchors ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kat ki katori dekhake main wahi rakh gaya\", \"effect\": \"metal bowl set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main stor rum mein gaya\", \"effect\": \"footsteps walking into storeroom\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"purane roz dhunane laga\", \"effect\": \"rummaging through old clothes, rustling\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"aage badhake payal mere haath se kone li\", \"effect\": \"anklet snatched from hand, faint jingle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:45.961422",
+    "updated": "2026-10-21T21:34:45.961428"
+  },
+  {
+    "id": "117928a4-3171-4697-af47-f5197baed75f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint glass bangles jingling softly on 'kap rahe the'\nAlready cued (do not repeat): distant scooter engine fading away on 'bike'\nAlready cued (do not repeat): low night wind and distant crickets on 'kursi'\nAlready cued (do not repeat): slow bare footsteps fading on packed earth on 'chali gayi'\nAlready cued (do not repeat): faint ember crackle in cold hearth on 'chule ke paas'\nAlready cued (do not repeat): glass bangles rattling softly on 'kapane laga'\n\n### The words (quote anchors exactly)\nWindow 16:\nkarta bhi utha liya unke haa",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"Unhone sab trank mein daali\", \"effect\": \"items dropped into metal trunk\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"baithe rahi\", \"effect\": \"faint ember crackle in cold hearth\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main unka mat chua\", \"effect\": \"bangles rattling faintly at touch\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:49.023719",
+    "updated": "2026-10-21T21:34:49.023725"
+  },
+  {
+    "id": "3040c74f-a7f3-460e-802f-2b89930a38a5",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): night insects and faint still air on 'main'\nAlready cued (do not repeat): wet cloth being wrung into a bowl on 'kapara'\nAlready cued (do not repeat): soft dry cough from an old woman on 'sir'\nAlready cued (do not repeat): soft sizzle of ghee fading in silence on 'rasoi mein phail gayi'\nAlready cued (do not repeat): hurried bare footsteps on mud floor on 'jaldi se bahar gaya'\nAlready cued (do not repeat): distant night insects and still air on 'Raat karib ek bajaye'\n\n### The words (quote anchors exactly)\nWindow 18:\nunki akhi chal",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"woh ne achanak se meri kalai pakadi\", \"effect\": \"hand grabbing wrist, faint bangles clink\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main thali saji\", \"effect\": \"brass plate set down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"rasoi ke darwaza baad diya\", \"effect\": \"wooden kitchen door closing\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"karahai charahai ho\", \"effect\": \"iron pan clinking on stove\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:53.283179",
+    "updated": "2026-10-21T21:34:53.283188"
+  },
+  {
+    "id": "6da92d6a-7a6f-4c82-a0a5-e51022c57be0",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): creaking cane chair under heavy weight on 'charamarahat'\nAlready cued (do not repeat): fingernails scraping slowly on plaster wall on 'nakhun'\nAlready cued (do not repeat): single tiny silver anklet bell chime on 'khungaru'\nAlready cued (do not repeat): deep silent night room tone, faint crickets on 'sananata'\nAlready cued (do not repeat): faint crackle of lantern flame on 'poori jala ke sikud gayi thi'\nAlready cued (do not repeat): tiny silver bell jingling softly on 'ek chota sa kundi ka ghungaru'\n\n### The words (quote anchors",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"phir ek lanbi khurachane ki aawaz aai\", \"effect\": \"long slow scraping on plaster wall\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"mere par zameen se chipak gay the\", \"effect\": \"bare feet sticking on mud floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main rasoi mein gaya\", \"effect\": \"footsteps entering kitchen\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main use uthaya\", \"effect\": \"glass lifted from floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:34:57.002892",
+    "updated": "2026-10-21T21:34:57.002898"
+  },
+  {
+    "id": "c3b8392d-52f6-49a4-af94-0888c85df477",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): tiny silver anklet bell jingling faintly on 'ghungaru'\nAlready cued (do not repeat): low night room tone, faint lantern crackle on 'main'\nAlready cued (do not repeat): glass bangles trembling softly on 'kapane'\nAlready cued (do not repeat): three-wheeler engine idling rattle on 'ato bulaya'\nAlready cued (do not repeat): faint dry whisper near ear on 'phusaphus'\nAlready cued (do not repeat): light thread dropping on stone on 'gira'\n\n### The words (quote anchors exactly)\nWindow 22:\nwahi ghungaru jo trank wala payal se gayab tha ma",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kholi leti hui thi\", \"effect\": \"bedsheet rustling as she lies down\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"meri kalai pakadake\", \"effect\": \"hand grabbing wrist, bangles clinking\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"unke akhon se asu bah rahe the\", \"effect\": \"soft sobbing and sniffling\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}, {\"anchor\": \"aspatal ke ghat pe ato ruka\", \"effect\": \"three-wheeler engine stopping, brakes squeak\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}, {\"anchor\": \"halki sa jataka laga\", \"effect\": \"small tug and thread snapping\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:04.519595",
+    "updated": "2026-10-21T21:35:04.519601"
+  },
+  {
+    "id": "45c0b609-ab2c-4877-8f09-90c1f4991fa4",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): slow footsteps on dusty village lane on 'main shaam ko'\nAlready cued (do not repeat): low murmured prayer chanting on 'unke ghadi tak kar rahe the'\nAlready cued (do not repeat): fingernails scratching dry plaster on 'Deewar ki kharoch'\nAlready cued (do not repeat): tiny silver bell tinkling softly on 'bholo ka naam sunte hi'\nAlready cued (do not repeat): faint night crickets and still air on 'main'\nAlready cued (do not repeat): long slow exhale in quiet night on 'lanbi'\nAlready cued (do not repeat): wooden stool scraping on mud ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"woh angan mein baithi\", \"effect\": \"quiet courtyard night ambience, faint insects\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 8}, {\"anchor\": \"unke haath rok liya\", \"effect\": \"prayer beads stopping, faint wooden click\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"pandit ji uthe\", \"effect\": \"man rising from floor, cloth rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"andar Kamre mein chale gaye\", \"effect\": \"footsteps walking into inner room\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"lod ke aye\", \"effect\": \"footsteps returning, cloth bundle rustling\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:08.510871",
+    "updated": "2026-10-21T21:35:08.510887"
+  },
+  {
+    "id": "baa37232-5b68-471a-badc-947288de05cb",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): old paper unfolding, soft rustle on 'kagaj'\nAlready cued (do not repeat): slow faint clock ticking in silent room on 'ghadi'\nAlready cued (do not repeat): heavy labored breathing of feverish child on 'bukhar'\nAlready cued (do not repeat): low fevered breathing in a quiet room on 'bukhar'\nAlready cued (do not repeat): faint tiny anklet bell tinkle on 'bethi'\nAlready cued (do not repeat): slow bare footsteps on dry earth on 'chali'\n\n### The words (quote anchors exactly)\nWindow 26:\nunhein kapde khola kagaj pila peedhe Kuch tha aur ",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kapde khola kagaj\", \"effect\": \"cloth wrapping unfolded, old paper rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main juk ke peedhe\", \"effect\": \"person bending down, cloth rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"mere haath tend peedhe gay the\", \"effect\": \"hands trembling, paper shaking faintly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"gali steshan pe nadi ke kundi\", \"effect\": \"flowing river water, distant\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}, {\"anchor\": \"ghar lodate waqt\", \"effect\": \"slow footsteps on dirt path\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:17.425055",
+    "updated": "2026-10-21T21:35:17.425060"
+  },
+  {
+    "id": "3cf64b62-0394-4af7-b56a-13627a48b942",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint glass bangles clinking softly on 'Dadi ji hamesha'\nAlready cued (do not repeat): low night wind through village courtyard on 'adhi raat ke baad'\nAlready cued (do not repeat): faint sizzle of burning milk pot on 'khir'\nAlready cued (do not repeat): metal lid scraping off container on 'dhakkan'\nAlready cued (do not repeat): quiet night air, distant crickets on 'rasoi'\nAlready cued (do not repeat): lantern flame guttering and dying on 'lantan'\nAlready cued (do not repeat): cane chair creaking under heavy weight on 'charmarai'",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"poori jala ke\", \"effect\": \"burnt kheer sizzling in pot\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main thali kursi ke aage dakh di\", \"effect\": \"brass plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"dipa khola\", \"effect\": \"tin jar lid opening\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"main dipar neeche rakh diya\", \"effect\": \"jar set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"kisi marth ki bhari aawaz mein kisi ne kaha amma\", \"effect\": \"heavy man's voice whispering 'amma'\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:21.490482",
+    "updated": "2026-10-21T21:35:21.490487"
+  },
+  {
+    "id": "4bc05551-b9c3-4c0e-9ec0-0304ad0ecd77",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): low wind through empty kitchen on 'lanten dobara nahi jala'\nAlready cued (do not repeat): old telephone ringing sharply on 'phone aaya'\nAlready cued (do not repeat): gentle river water lapping stone steps on 'ghat pe karunga'\nAlready cued (do not repeat): slow bare footsteps on dry earth on 'jate waqt'\nAlready cued (do not repeat): dry straw broom sweeping mud floor on 'Pehli bar jhad se liya'\nAlready cued (do not repeat): low wind through courtyard, distant dogs on 'kone mein baithe thi'\nAlready cued (do not repeat): faint ankl",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"rasoi ke daravaje pe baitha raha\", \"effect\": \"quiet night air, distant crickets\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 8}, {\"anchor\": \"Unhone apna Mujhe palu se dhakh liya\", \"effect\": \"cloth pallu pulled over face, soft rustle\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"patli chhota ke mujhe pe rakh di\", \"effect\": \"leaf plate set down on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"teen kavai utare\", \"effect\": \"small morsels dropped onto leaf plate\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:25.170046",
+    "updated": "2026-10-21T21:35:25.170050"
+  },
+  {
+    "id": "3bef493f-7318-41b2-a4d9-03b1b21b2981",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): muffled old woman sobbing from below on 'neeche se ramavati'\nAlready cued (do not repeat): wooden door latch rope tying on 'rasol ke darwaza'\nAlready cued (do not repeat): quiet night crickets and still air on 'mehak'\nAlready cued (do not repeat): hurried footsteps on dry mud ground on 'pahuncha'\nAlready cued (do not repeat): old wooden door creaking open on 'khula'\nAlready cued (do not repeat): quiet night insects and faint lantern flicker on 'lanten'\nAlready cued (do not repeat): tiny anklet bell jingling once on 'ghungadu'\nAl",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"main par ke kamade mein jake leta gaya\", \"effect\": \"person lying down on wooden cot, creak\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"mera sharir tharthar kap raha tha\", \"effect\": \"trembling breath, shaky exhale\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ek thali rakhe hui thi\", \"effect\": \"metal plate resting on floor\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"ek ghungadu baja\", \"effect\": \"single small bell ringing in silence\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:28.568151",
+    "updated": "2026-10-21T21:35:28.568158"
+  },
+  {
+    "id": "3b687fa1-99e1-44e9-9dd6-c36a8bb6693f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: horror).\n\nAlready cued (do not repeat): faint silver anklet bell jingling on 'dhunati hai'\nAlready cued (do not repeat): soft crackle of lantern flame on 'bait rahi thi'\n\n### The words (quote anchors exactly)\nWindow 34:\nusne mera naam liya doshto kuch bhukh khane se nahi mitati woh sirf saath baitane vale ko dhunati hai aur saadi abhi tak doodh saath bait rahi thi to doshto kaisi lage aapko ye kahani agar aapko ye kahani pasand aai hai to plij isko like kijie agar channel par nahi hai to channel ko sabaskraib kar lijie milta hoon bahut jald ek nai kahani ke saath tab ",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-21T21:35:32.256158",
+    "updated": "2026-10-21T21:35:32.256164"
+  },
+  {
+    "id": "ecd25ff1-73b8-4988-98fd-e8a21454d276",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): low cold wind hum through old walls on 'pani ka tapaman achanak gir gaya'\nAlready cued (do not repeat): slow breath close behind on 'kisi ke mune ka ehasas hua'\nAlready cued (do not repeat): wet cloth dripping on stone on 'mitti se'\n\n### The words (quote anchors exactly)\nWindow 0:\nkya aapko pata hai ki raat mein khapade duna sirph ek tabu nahi, balaki kuch purani section ko jagane ka rasta ho sakata hai, yeh baat mere ek dost ke saath hui thi, jo shahar se door ek purane bangalon mein shiphat hua tha, usane usane uski jindagi u",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kapade dhone vale bayati ke paas\", \"effect\": \"water splashing in washing basin\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T01:23:47.199904",
+    "updated": "2026-10-23T01:23:47.199909"
+  },
+  {
+    "id": "f2141a2a-eaac-4f0d-bb41-8b9849cdf6e7",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): low wind whistling through old bungalow on 'raat mein'\nAlready cued (do not repeat): slow water drips into stone basin on 'pani ka tap'\nAlready cued (do not repeat): wet cloth slapping on stone on 'kapadon par mitti'\nAlready cued (do not repeat): low wind moaning through old bungalow on 'hoti hai'\nAlready cued (do not repeat): faint creak of old wooden floorboards on 'dekh nahi sakate'\n\n### The words (quote anchors exactly)\nWindow 0:\nkya aapko pata hai ki raat mein kapade dona siph ek tabu nahi balaki kuch purani section ko jag",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"kisi ki hone ka ehasas hua\", \"effect\": \"slow breath close behind\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T01:55:29.776851",
+    "updated": "2026-10-23T01:55:29.776856"
+  },
+  {
+    "id": "af127ab5-5f63-4cc1-9b59-8bb4fd14fc8e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: vlog (secondary: motivational).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 0:\nta hamko shikayat ki bhi baki na rahe ja.n sun lete hain ko jikkar hamara nahi karte gali tira hisso na denge ham unako woh sun ke bula lige jara nahi karte\n\n\n### Required Output Format (JSON only)\nReply with a single JSON object and nothing else:\n\n{\"cues\": [{\"anchor\": \"exact words from the text\", \"effect\": \"diegetic sound, <= 8 words\",\n           \"kind\": \"accent|bed\", \"level\": \"subtle|normal\", \"seconds\": 3}]}\n\n`anchor` must quote this passage's own words exactly. `{\"cues",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-23T02:50:19.720041",
+    "updated": "2026-10-23T02:50:19.720046"
+  },
+  {
+    "id": "3c823828-541a-4f38-9dd0-102a488a1c6d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): distant ocean waves, low wind, atmospheric rumble on 'Hello doston,'\nAlready cued (do not repeat): water rushing, metal hull groaning, ship descending into on 'pani ke neeche jage raha tha'\nAlready cued (do not repeat): silence, pressure, faint metallic creak of the wreck on 'ek insani jaan'\nAlready cued (do not repeat): deep underwater ambient, creaking metal, slow pressure sounds, on 'shurvival, phijikal aur environmintal always ke ekstrim limits par dekhi gayi thi'\nAlready cued (do not repeat): water rushing, hull groan",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:15:19.292530",
+    "updated": "2026-10-26T15:15:19.292544"
+  },
+  {
+    "id": "3a746b57-6d04-4133-957e-e92f746245cd",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): watertight hatch slamming shut with heavy metallic impact, on 'ye darvaja band raha'\nAlready cued (do not repeat): deep groaning of pressurized metal, water pressure bearing on 'extreme pressure aur carbon dioxide toxicity'\nAlready cued (do not repeat): shallow controlled breathing, faint heartbeat in the ears, on 'sans li karte hain'\nAlready cued (do not repeat): mechanical gauge needle clicking softly on 'sabajekt ke paas'\nAlready cued (do not repeat): shallow breathing, labored exhalation on 'diyoksait taoksisiti'\nAlrea",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:15:33.936420",
+    "updated": "2026-10-26T15:15:33.936425"
+  },
+  {
+    "id": "7a97035e-7779-4388-bd58-a528072172a5",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): deep water pressure creaking through metal hull on 'exponential dekh diyoksaid naretar'\nAlready cued (do not repeat): water dripping slowly onto corroded metal on 'taoksik hoti gayi,'\nAlready cued (do not repeat): shallow careful breathing in confined space on 'ek bharik liniy hoti hai|'\nAlready cued (do not repeat): water pressure hum, low subsonic rumble on 'pani ki woh tale'\nAlready cued (do not repeat): breathing, shallow and measured in confined space on 'baharajikar bunked ko kansyun'\nAlready cued (do not repeat): he",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:15:48.998543",
+    "updated": "2026-10-26T15:15:48.998547"
+  },
+  {
+    "id": "487e3272-8a69-4116-87cc-c55d206de04d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): metal grinding and crushing under pressure, deep groaning on 'shipt ka structure kalaps'\nAlready cued (do not repeat): muffled silence, water muffling all sound, eerie quiet on 'light poori tarah khatab ho chuki thi|'\nAlready cued (do not repeat): diver regulator breathing, equipment clicking on 'hul ke andhar enthare ki|'\n\n### The words (quote anchors exactly)\nWindow 6:\nthe environment vas nut mirilya under vateda| et vas ahik bhrasure chanber ver human phijiyolaoji vas dested agensak the| viddhe rul klited alitharal keja",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:16:03.771709",
+    "updated": "2026-10-26T15:16:03.771714"
+  },
+  {
+    "id": "aef21a9e-2c6b-4803-afa0-0a5602a69322",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): low metallic resonance emanating from the sealed compartment on 'ye door koi aksiring nahi tha|'\nAlready cued (do not repeat): violent rush of water and sediment displacement as on 'unhonne ek inpaosibal riyalitte dekhi'\nAlready cued (do not repeat): eerie silence of the air pocket, faint pressurized on 'wahan ek er paoket maujud thi'\nAlready cued (do not repeat): water pressure ambient, metal groaning subtly under deep-sea on 'the sailing'\nAlready cued (do not repeat): slow, controlled breathing in confined space, air rec",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:16:17.710886",
+    "updated": "2026-10-26T15:16:17.710892"
+  },
+  {
+    "id": "976f1f19-e103-45e7-b6b6-75a44595a5b5",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): shallow rapid breathing slowing to labored gasping, heartbeat on 'jab bhute pharti gue aur hibaoksiya ka mukbala karti hai'\nAlready cued (do not repeat): water pressure creaking and groaning through metal, deep on 'hig bresthure janber ver human phijiyolaoji aur vas deste agensat'\nAlready cued (do not repeat): slow labored breathing, oxygen-heavy and conscious on 'kliyeted a litheral kej bat dat kej'\nAlready cued (do not repeat): each breath a deliberate effort, slight strain audible on 'subject ka focus siraph agale inahi",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:16:30.599505",
+    "updated": "2026-10-26T15:16:30.599510"
+  },
+  {
+    "id": "d933ca10-9e2e-4346-afb1-15fad9a2141f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): heavy labored breathing, struggling for air on 'sabajit ke lungas par pressure'\nAlready cued (do not repeat): frost crystallizing on metal surfaces on 'tenprechar bhi ek bada factor tha'\nAlready cued (do not repeat): pressure gauge ticking downward, metal creaking under stress on 'oksijan ka level har minute'\nAlready cued (do not repeat): metal hull groaning, rivets straining, water rushing through on 'samandar ki gahari ond mein dhuba'\n\n### The words (quote anchors exactly)\nWindow 12:\naur bhari bana raha tha jise teknikal",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:16:45.671674",
+    "updated": "2026-10-26T15:16:45.671693"
+  },
+  {
+    "id": "26eb9aa1-ae91-4a77-8c13-31f0b446721f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): water rushing through hull breaches with violent force on 'ship ne tilat kiya aur phani andar ghusane laga'\nAlready cued (do not repeat): metal groaning and creaking under immense water pressure on 'shor, khab grahat'\nAlready cued (do not repeat): deep silence with faint water pressure hum and on 'gehara sanna tha'\nAlready cued (do not repeat): heavy metal lock mechanisms and seal integrity on 'kaben ke dharvaji hamesha laokt rakhe jate the'\nAlready cued (do not repeat): metal tin scraping on steel floor, hollow metallic o",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"ek kola ki botale\", \"effect\": \"glass bottle clinking softly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:17:00.128398",
+    "updated": "2026-10-26T15:17:00.128405"
+  },
+  {
+    "id": "04c75b0d-9769-401b-a1ff-70f493992c53",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): slow drip of water in absolute darkness on 'unki skin ko jala raha tha'\nAlready cued (do not repeat): metal straining and creaking under immense water pressure, on 'bhari dabao vala sannata'\nAlready cued (do not repeat): gasping breath, labored and increasingly desperate, each inhale on 'har sans ke saath'\n\n### The words (quote anchors exactly)\nWindow 16:\nlake ek baondar hai bhan gayi naratar, har, chij ka apna ek tekstar tha saradine din ki dhandi metal, kola ki miththi jaisi jabak, test aur un lakadi ke dhukadun bharapak",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:17:14.805974",
+    "updated": "2026-10-26T15:17:14.805979"
+  },
+  {
+    "id": "33e4f6a7-ea73-4178-bd75-b4762f58c444",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): labored breathing becoming deeper gasps for air on 'unhein mahisus ho raha tha ki'\nAlready cued (do not repeat): wet condensation dripping on corroded metal surfaces on 'hava ab rahale jaisi halaki nahi rahi'\nAlready cued (do not repeat): heartbeat slowing irregular with labored strained breathing on 'oksijan ki khami se dhun tod dega'\nAlready cued (do not repeat): silence deepening all sound fading to faintest breath on 'ummid dheere dheere ek active hakikat mein'\nAlready cued (do not repeat): metal groaning under pressur",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:17:27.411999",
+    "updated": "2026-10-26T15:17:27.412003"
+  },
+  {
+    "id": "109d0e62-d9e7-489f-884c-4229c560c59e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): ragged desperate breathing, gasping for air on 'ek agali sans ke liye lat rahe the'\nAlready cued (do not repeat): water dripping continuously, condensation falling on metal on 'yeh seraph ek jaga par phansane ka saval nahi tha'\nAlready cued (do not repeat): body shuddering, muscle tension, subtle involuntary trembling on 'pani itana thanda tha ki har movement ek buch lagti'\nAlready cued (do not repeat): breathing, labored and shallow, struggling on 'unni thodi aur kam'\nAlready cued (do not repeat): hands scraping and slidi",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:17:41.457021",
+    "updated": "2026-10-26T15:17:41.457025"
+  },
+  {
+    "id": "59d0e086-d299-430d-b5cd-c16be9170256",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): labored breathing, wet and shallow on 'har pal jo nikal raha tha'\nAlready cued (do not repeat): metal groaning and water dripping on 'unka sardi ne tin aur kola'\nAlready cued (do not repeat): heartbeat, faint and irregular on 'maut bas ek arale sans ke biche'\nAlready cued (do not repeat): low sustained hum of the shipwreck settling, metal on 'teknikal analysis ke mudbhik'\nAlready cued (do not repeat): Harrison's labored breathing, slow and deliberate in the on 'survival ko siraph ek medical'\nAlready cued (do not repeat): c",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:17:55.818975",
+    "updated": "2026-10-26T15:17:55.818979"
+  },
+  {
+    "id": "5581266e-0353-4022-bc10-a3e618828294",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): sharp panicked gasp, air sucked through clenched teeth on 'unke Nervous'\nAlready cued (do not repeat): slow rhythmic heartbeat accelerating, thudding in ears, blood on 'biological countdown'\nAlready cued (do not repeat): fingertips scraping against cold corroded metal, brief contact on 'unki jaan bachane'\nAlready cued (do not repeat): heavy metal lock mechanism sealing shut with deep on 'sekiriti mein hai sure jo piratis ko bhar rakhane ke liye'\nAlready cued (do not repeat): steady water dripping from corroded metal surfac",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:18:08.613627",
+    "updated": "2026-10-26T15:18:08.613644"
+  },
+  {
+    "id": "b1a09493-b324-45e3-9c41-7c253a19516f",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): heavy metallic water drops echoing on 'freezing temperature'\nAlready cued (do not repeat): deep low ocean hull groan on '90 ghante'\nAlready cued (do not repeat): underwater diver breathing regulator burst on 'rescue the hamane'\nAlready cued (do not repeat): compressed air hissed release on 'pressure ka drop'\nAlready cued (do not repeat): metallic hatch locking clamp click on 'during dikanpreshan'\n\n### The words (quote anchors exactly)\nWindow 26:\naur freezing temperature ke bich apani biological limits ko push kar raha tha ",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:18:21.586375",
+    "updated": "2026-10-26T15:18:21.586379"
+  },
+  {
+    "id": "f5844834-ad67-408b-ba1e-dbdeb12dde6c",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): faint muffled sonar ping echoing underwater on 'klinikali deya dekhalar'\nAlready cued (do not repeat): deep heavy heartbeat thudding slowly in water on 'nidbulisam slo ho gaya tha'\nAlready cued (do not repeat): metal groan under deep sea pressure on 'maut aur jindagi ke bich'\nAlready cued (do not repeat): slow water drip echoing in small air pocket on '60 ghante kaise gujare'\nAlready cued (do not repeat): distant hollow metal creak underwater on 'kis tarah maut se'\n\n### The words (quote anchors exactly)\nWindow 28:\nki daokt",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T15:18:34.847888",
+    "updated": "2026-10-26T15:18:34.847893"
+  },
+  {
+    "id": "7ec9d745-8fc0-4a84-8dae-c8e0762b3476",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): crackling ritual fire with embers on 'siddhi pane ke liye'\nAlready cued (do not repeat): eerie nocturnal wind rustling dry leaves on 'maut ko harane ke liye'\nAlready cued (do not repeat): slow deliberate footsteps on damp earth on 'mere kadam ab us rase pe'\nAlready cued (do not repeat): cold eerie wind rustling dead leaves on 'raat ki thandi hava'\n\n### The words (quote anchors exactly)\nWindow 0:\nachi kahane ek aise insan ke bare mein hai jisane siddhi pane ke liye kuch aisa jo ki uske soch se zyada tha jisane maut ko harane ke ",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:01.294797",
+    "updated": "2026-10-29T02:43:01.294799"
+  },
+  {
+    "id": "41ae26cb-8fa2-439d-aabd-4053df12f94a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): low eerie midnight wind through dense trees on 'hava bhari aur thami hui'\nAlready cued (do not repeat): heavy boots crunching in thick dry ash on 'juton mein fas jati'\nAlready cued (do not repeat): coarse cloth bundle rustling and moving on 'purani potali pakadi hui thi'\nAlready cued (do not repeat): metallic clink of heavy copper vessels on 'kaopar visals the'\nAlready cued (do not repeat): chilling nocturnal wind howling through trees on 'mera jism tend se'\n\n### The words (quote anchors exactly)\nWindow 2:\nrojana ka koi kaam na",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"purane patthar tut ke bikhre pare the\", \"effect\": \"loose stones shifting and crumbling subtly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:11.476465",
+    "updated": "2026-10-29T02:43:11.476469"
+  },
+  {
+    "id": "178d2853-1797-4735-b20b-d921298d2b2a",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): distant rotting wood beam snapping and collapsing on 'purani kadi ke girane ki avaj aai'\nAlready cued (do not repeat): shaky deep breath inhale on 'lanbi sas li'\nAlready cued (do not repeat): low crackle of ritual embers and wind on 'uski lapton se nikalata dhua'\nAlready cued (do not repeat): ritual fire sizzle and crackle on 'ghi ki mahak ab kaphi tej thi'\nAlready cued (do not repeat): hollow distant night wind whistling through trees on 'kuch anjan chije mujhe door se'\n\n### The words (quote anchors exactly)\nWindow 4:\nmagar me",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"dheere mantr ke shabd mere hoton se nikalane lage\", \"effect\": \"low rhythmic occult chanting whisper\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 6}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:23.278181",
+    "updated": "2026-10-29T02:43:23.278184"
+  },
+  {
+    "id": "d491cd7a-a731-4fbf-a42e-0535108618a3",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): slow crunching footstep on hard ash on 'apna kadam aage badhaya'\nAlready cued (do not repeat): hollow night wind blowing through mist on 'yahan ki havaon mein'\nAlready cued (do not repeat): heavy iron chain dragging across stones on 'bhari janjir, pe khich rahi ho'\nAlready cued (do not repeat): eerie dead silence with faint wind on 'sirph dhua aur sanata tha'\n\n### The words (quote anchors exactly)\nWindow 6:\nwoh koi insan nahi thi balaki kuch aur hi thi mainne ek gahari sans li aur apna kadam aage badhaya jahan mere pailon ke ne",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"mainne ek gahari sans li\", \"effect\": \"deep shaky breath inhale\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:34.647162",
+    "updated": "2026-10-29T02:43:34.647164"
+  },
+  {
+    "id": "829ae895-adfb-47c8-833e-693f1ebe10d4",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): hands scraping ash and dry earth on 'rakh aur gay ka gobar'\nAlready cued (do not repeat): deep sinister breathing in cold mist on 'mere peeche koi khara hai'\nAlready cued (do not repeat): low sinister nocturnal wind gust on 'baundare ka dhyan rakhna'\nAlready cued (do not repeat): thick liquid spilling and sizzling on hot embers on 'andar rakha ghi ab phail raha tha'\n\n### The words (quote anchors exactly)\nWindow 8:\njab tak ki mera sharir tharthar kapana band nahi hua mainne apne haath mein pakada hua tambe ka bartan phir se tham",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"tambe ka bartan phir se thama\", \"effect\": \"metallic rattle of copper vessel\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"meri sans ka jur badhata gaya\", \"effect\": \"heavy labored rapid breathing\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 4}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:44.962391",
+    "updated": "2026-10-29T02:43:44.962394"
+  },
+  {
+    "id": "7a9a3db9-9e86-4b86-aa12-050c424adfc6",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): cold whispering night breeze through trees on 'hava mere chehare ko chu rahi thi'\nAlready cued (do not repeat): heavy muffled heartbeat pulsing slowly on 'dil jor se dark raha tha'\nAlready cued (do not repeat): deep eerie wind howling through dead trees on 'raat ka sannata aur bhi gahara'\nAlready cued (do not repeat): tarnished copper vessel vibrating against stones on 'mere haath thar kap rahe the'\nAlready cued (do not repeat): low rhythmic guttural chanting whisper on 'pahala mantr jab mere hothon se nikla'\nAlready cued (do n",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"koi daravaza khatakega\", \"effect\": \"distant hollow wooden door knock\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}, {\"anchor\": \"koi mere naam ko pukar raha hai\", \"effect\": \"faint eerie whisper calling out\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:43:56.138480",
+    "updated": "2026-10-29T02:43:56.138483"
+  },
+  {
+    "id": "f1100667-52e7-4e07-8cd8-a72b2c0e1257",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): choked dry raspy breathing on 'gala aur bhi jata sukh raha tha'\nAlready cued (do not repeat): sudden ominous chilling wind gust on 'hava ke mausam mein badalav aaya'\nAlready cued (do not repeat): unnatural ritual fire hiss and low hum on 'ag ki lapto ka range badal raha tha'\nAlready cued (do not repeat): eerie low sub-bass drone and subtle wind on 'jo parachaya ban rahi thi'\n\n### The words (quote anchors exactly)\nWindow 12:\nhar ek shabd ke saath mera gala aur bhi jata sukh raha tha mujhe aisa lag raha tha jaise mantr ki alaphaj",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"mashan ki mitti se ab kuch bahar nikal raha\", \"effect\": \"earth shifting and soil crumbling subtly\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:06.409231",
+    "updated": "2026-10-29T02:44:06.409236"
+  },
+  {
+    "id": "3904c245-bdb7-47d0-8c73-5fa7bae75f38",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): hollow metal vessel crashing against cold stone on 'chikh ki avaj gunji'\nAlready cued (do not repeat): sudden icy gust of freezing wind on 'hava mein achchanak se tend utar aai'\nAlready cued (do not repeat): shivering exhaled frosty breath on 'meri sans se bhap nikalane lagi'\nAlready cued (do not repeat): hollow metallic chime ringing into silence on 'tanbe ki bartan ki avaj phir se gu.nji'\nAlready cued (do not repeat): unnatural low hum of burning ritual flames on 'ag ab bilkul saphed aur neli'\n\n### The words (quote anchors ex",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"meri dil ki dharakan teji se barane lagi\", \"effect\": \"rapid muffled heavy heartbeat throbbing\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 4}, {\"anchor\": \"mera har ek sas ab bahut bhari\", \"effect\": \"labored strained raspy breathing\", \"kind\": \"bed\", \"level\": \"subtle\", \"seconds\": 4}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:17.428689",
+    "updated": "2026-10-29T02:44:17.428693"
+  },
+  {
+    "id": "9d78e295-93f2-4187-8715-29ef16cab378",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): unsettling low hiss of cold wind on 'hava mein ek sa sarahat paida hui'\nAlready cued (do not repeat): low guttural animalistic growl vibrating in distance on 'janavar ke gujane jaise avaj thi'\nAlready cued (do not repeat): labored choked breathing and wheeze on 'sans lena mushkil lag raha tha'\nAlready cued (do not repeat): deep subterranean rumbling vibration in earth on 'ek bhari chij ke jamin ke andar khisakane'\nAlready cued (do not repeat): heavy stifling night wind drone on 'jaise hava mein koi bhari parada'\nAlready cued (d",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"dharti thodi jada hilati\", \"effect\": \"low ground tremor vibration\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:27.759858",
+    "updated": "2026-10-29T02:44:27.759861"
+  },
+  {
+    "id": "307367c3-95d9-4f05-b472-f56abf3cd5c8",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): low hollow wind whistling through dark trees on 'unka chehara kyun hamesha itana thaka hua'\nAlready cued (do not repeat): sinister raspy exhale in cold mist on 'mere peeche'\nAlready cued (do not repeat): unnatural hollow wind vacuum sucking sound on 'hava mein koi bada sa ched'\nAlready cued (do not repeat): low sub bass rumble vibrating slowly on 'dhundali parati ja rahi thi'\nAlready cued (do not repeat): faint eerie sizzling and crackling ash on 'rakh ka range ab badal'\n\n### The words (quote anchors exactly)\nWindow 18:\niska ma",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"usamen ek ajib si gunj aur bhari pan\", \"effect\": \"deep distorted vocal resonance and subtle echo\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:37.738726",
+    "updated": "2026-10-29T02:44:37.738729"
+  },
+  {
+    "id": "6926150d-589b-493b-b9c5-6cf52d67b607",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): stiff dry joint cracking sound on 'mere hathon ke ungaliyan mur nahi rahi thi'\nAlready cued (do not repeat): faint creeping flesh sizzling whisper on 'woh meri chamri ke andar ghus'\nAlready cued (do not repeat): muffled high-pitched ringing tinnitus on 'dimag sun hone laga tha'\nAlready cued (do not repeat): heavy suffocating wind swirling dust on 'gahara andhera aur dhul'\n\n### The words (quote anchors exactly)\nWindow 20:\nwoh hava mein khula ghula hua ek aisa jahar jaisa shakti ban gaya tha, jitane mere madad jisane mere poore m",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"mere pair jamin mein dhas gay the\", \"effect\": \"feet sinking into loose dry earth\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 2}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:47.539829",
+    "updated": "2026-10-29T02:44:47.539832"
+  },
+  {
+    "id": "8bbc4c5b-72ac-4858-8274-b5802e538543",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint agonized breath trembling in cold air on 'khud ko khatm hote hue'\nAlready cued (do not repeat): hollow unnatural low wind whistling through graves on 'masan aur pisach mainne'\nAlready cued (do not repeat): faint sizzling hiss of ash on cold dirt on 'rak banake jamin par gir raha tha'\nAlready cued (do not repeat): deep sinister low rumble vibrating the ground on 'samashan ki mitti ne mujhe apna hissa'\nAlready cued (do not repeat): dry brittle bones cracking and joints popping on 'mere haath ab ek janavar jaise'\n\n### The wo",
+      "result_snippet": "{\"cues\": [{\"anchor\": \"woh shayad kisi aur ki hi avaj lag rahi thi\", \"effect\": \"eerie distorted dual voice vocal whisper\", \"kind\": \"accent\", \"level\": \"subtle\", \"seconds\": 3}]}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:44:58.136827",
+    "updated": "2026-10-29T02:44:58.136830"
+  },
+  {
+    "id": "3883c111-a07d-4bae-981d-163da4361871",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): faint hiss of dying ritual embers on 'sirph rak dikhai de rahi thi'\nAlready cued (do not repeat): deep muffled hollow heartbeat thudding slowly on 'waqt ki rafatar dhimi ho gayi'\nAlready cued (do not repeat): cold midnight wind whistling softly through trees on 'is samashan mein kadam rakha tha'\n\n### The words (quote anchors exactly)\nWindow 24:\njaise woh patthar ya purane lakdi ke bane ho meri akhon ke samane ka manjar ab dun laparata ja raha tha mujhe bas ab sirph rak dikhai de rahi thi waqt ki rafatar dhimi ho gayi aur mujhe ",
+      "result_snippet": "{\"cues\": []}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:45:08.260395",
+    "updated": "2026-10-29T02:45:08.260398"
+  },
+  {
+    "id": "8d8ede25-19e4-47f8-8265-c55b56d90343",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): temple bells ringing softly on 'ki ramayan khatm ho chuki hai,'\nAlready cued (do not repeat): whispers and confused murmuring on 'dheere dheere muskura rahi hai'\nAlready cued (do not repeat): deep ominous droning sound on 'sahasr mukh ravan'\nAlready cued (do not repeat): horse hooves and chariot wheels on stone, slow on 'ram ji, sita ji, lakshma ji aur sab hi koi ayodha pahunch chuke the'\nAlready cued (do not repeat): temple bell resonates and fades on 'sita ji ke chehare pe ek small aati hai'\n\n### The words (quote anchors",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-13T18:45:18.410707",
+    "updated": "2026-11-13T18:45:18.410710"
+  },
+  {
+    "id": "bdb9602f-70f9-433e-915a-47cc208c1f55",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): war drums fading to silence on 'ram ji ki poori sena khatm ho jati hai'\nAlready cued (do not repeat): body falling, dust cloud settling on 'ram ram ji behosh ho jate hain'\nAlready cued (do not repeat): massive army clash, swords ringing, war cries, dust on 'ghamasan yud hua'\n\n### The words (quote anchors exactly)\nWindow 2:\nwoh ravan ravan ka bada bhai tha uske das nahi balki is ravan ka bada bhai tha aur uske das nahi mein mujhe se pucha jata hai ki iske bare mein rahate hain tab woh batati hai ki bachchapan mein iske bare",
+      "result_snippet": "```json\n{\"cues\": [{\"anchor\": \"apni sena leke nikal gaye\", \"effect\": \"thousands of soldiers marching with footsteps\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 3}]}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-13T18:46:00.223149",
+    "updated": "2026-11-13T18:46:00.223152"
+  },
+  {
+    "id": "5fb84dc0-89eb-44e8-9b3e-53de67b0d9fa",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): soldiers moving in retreat, shuffling feet on dust, on 'aur dhir dhir karke sab bhi peeche'\nAlready cued (do not repeat): swords and weapons clashing violently, arrows whistling through on 'yuddh shuru hua'\nAlready cued (do not repeat): arrow streaking through air, sharp impact into body, on 'ek ban se ram ji behosh ho gaye'\n\n### The words (quote anchors exactly)\nWindow 4:\naur dhir dhir karke sab bhi peeche hat gaye ab amane samane the sahasr mukharavan aur ram ji aur in done mein yuddh shuru hua par dheere dheere sahasr m",
+      "result_snippet": "```json\n{\"cues\": [{\"anchor\": \"neeche gid pare\", \"effect\": \"body falling and hitting ground\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}, {\"anchor\": \"apni shakti pe has raha tha\", \"effect\": \"mocking triumphant laughter\", \"kind\": \"accent\", \"level\": \"normal\", \"seconds\": 2}]}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-13T18:47:23.202059",
+    "updated": "2026-11-13T18:47:23.202062"
+  },
+  {
+    "id": "b9ea15d3-61c2-4ccf-88f0-7cf37ea8e4b2",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): soft wind through stone corridors, distant temple bells on 'par yahan pe sahasamukravan ne koi bhi apahar nahi kiya tha'\nAlready cued (do not repeat): ancient manuscript pages turning gently on 'ye kahani is tarah samane aai'\n\n### The words (quote anchors exactly)\nWindow 6:\npar yahan pe sahasamukravan ne koi bhi apahar nahi kiya tha aur ram ji bas usase harane ke liye bas ek is motiph se kahe the aur ye kahani is tarah samane aai to ab ye question uthata hai ki agar ye kahani itani special hai to iske bare mein ham kyun na",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-13T18:47:32.084081",
+    "updated": "2026-11-13T18:47:32.084084"
+  },
+  {
+    "id": "85265bcc-e02c-4db2-8890-d7daf1d9bd80",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): footsteps on concrete, slow deliberate walking on hard on 'pulis ek ghar ki chanabin kar rahi thi|'\nAlready cued (do not repeat): soil being moved, earth shift, digging sounds muffled on 'is ghar mein kuch khudai ka kaam kar rahi thi'\nAlready cued (do not repeat): wind through old house, creaking wooden beams, distant on 'pulis ko shak tha ki is ghar mein do lashe dephan ho sakati hain|'\nAlready cued (do not repeat): papers rustling, forensic footsteps on concrete on 'pulis ko pahale ek mahila ke gayab hone ki invistikeshan'\nAl",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:16:34.774070",
+    "updated": "2026-11-23T12:16:34.774073"
+  },
+  {
+    "id": "73fec951-f2f6-4b6b-b6ec-c34fdd33d42e",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): lottery ticket papers rustling and shuffling gently on 'woh lotari tikats bech ke apne roji roti quality thi|'\nAlready cued (do not repeat): ambient sound fading to silence and stillness on 'woh achanak se lapata ho gai|'\nAlready cued (do not repeat): papers turning and pen scratching on documents softly on 'reports mein thoda variation milta hai|'\nAlready cued (do not repeat): evidence bags rustling, forensic markers clicking on tile on 'uske rimens ko chupane ke liye'\nAlready cued (do not repeat): file drawer opening, papers ",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:16:54.122676",
+    "updated": "2026-11-23T12:16:54.122678"
+  },
+  {
+    "id": "ae4ea649-2a8c-478d-a947-560cfa36cdc2",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): car door creaking open slowly on 'pulis ko padaman ek skaorpiyo gari mein baithe hui dikhai thi'\nAlready cued (do not repeat): footsteps on concrete and gravel on 'inivistikeshan ilanthur tak pahu.nchi'\nAlready cued (do not repeat): subtle ambient sounds of parked vehicles and distant on 'najar rakhane shuru kar di'\nAlready cued (do not repeat): pen writing on notebook paper on 'pulis ne bhagaval song aur laila se pushtach ki'\nAlready cued (do not repeat): rustling papers, evidence handling, clipboard notes on 'pulis ne donon m",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:17:22.965086",
+    "updated": "2026-11-23T12:17:22.965088"
+  },
+  {
+    "id": "56489ea4-aaf2-46b1-85d8-89412df0e962",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): wind through buildings, paper rustling, empty village street on 'do riyal woman apne apne deli life se achanak gayab ho gayi'\nAlready cued (do not repeat): papers rustling and evidence bags shifting on 'sabut mitane ki koshish'\nAlready cued (do not repeat): official document stamp pressing on 'charchit phail ki gayi'\n\n### The words (quote anchors exactly)\nWindow 6:\nmain is episode mein unke rimens ke graphik ditels nahi dikhaunga kyunki ye kuch jada ho jaega aur is episode ka jenar gor nahi hai is episode ka horror is baat mein",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:17:39.999540",
+    "updated": "2026-11-23T12:17:39.999542"
+  },
+  {
+    "id": "e69f3e06-5ac3-43dc-9fcd-78fb5cb483b9",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): papers rustling, pen on institutional desk on 'investigating officer,'\nAlready cued (do not repeat): ticket papers, coins, rural ambient voices on 'donon apni jindagi ji rahi thi'\nAlready cued (do not repeat): wind, silence on 'phir donon lapata ho gayi'\n\n### The words (quote anchors exactly)\nWindow 8:\nis case ka aisa kaonklujan kuch nahi nikla. jo public record aur reporting samani aai usamen pulish ne alleged ritual murders, manipulation, conspiracy aur financial prosperity ke naam pe human sacrifice ke allegations lagae leki",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:17:51.668186",
+    "updated": "2026-11-23T12:17:51.668188"
+  },
+  {
+    "id": "e3716614-a3e0-44e0-bc95-042c6e747eb9",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: horror (secondary: mystery).\n\nAlready cued (do not repeat): papers shuffling, case files turning pages, evidence bags on 'us ghar se nikalane vale evidens ne pulis'\n\n### The words (quote anchors exactly)\nWindow 10:\nunki parivar unhein dhunte rahen lekin unka anjam aapko pata hai ek mising parasan kanpret se shuru hui invistikeshan CCTV phutej ke thu.n ek ek ghar pe ake pahu.nchi aur us ghar se nikalane vale evidens ne pulis pulis ko ek dusari mising woman case ke tak pahu.ncha case kahani mein suparanechul ka calm jarur tha tak documented investigation ka center pahucha insanon ke actio",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T12:18:06.284236",
+    "updated": "2026-11-23T12:18:06.284238"
+  },
+  {
+    "id": "6fe5f525-1741-4e22-a7c9-5cf7bfc11c1d",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): papers shuffling, files opening (bureaucratic documents being processed) on 'aur isi doran desh mein ek aisa sterilajeshan kaimpein chala'\nAlready cued (do not repeat): crowd murmur, distant protest chants, urban restlessness on 'indiya mein political tension bar rahi thi'\nAlready cued (do not repeat): official stamp striking paper with authority (gavel-like impact) on 'Emergency proklem kar di'\n\n### The words (quote anchors exactly)\nWindow 0:\nsochie, aap apne ghar se apne kaam ke liye nikalate hain, aur rest mein kuch adh",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:40:07.822510",
+    "updated": "2026-11-23T19:40:07.822512"
+  },
+  {
+    "id": "7aba4a01-691a-4058-bf20-c1580d97f907",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\n(nothing cued yet in this passage)\n\n### The words (quote anchors exactly)\nWindow 2:\nCivil Liberties Restrict ho gayi position ke kai Leaders rest hue Newspapers pe Censorship lagu ho gayi aur Democracy ke Normal Checks and Balances bahut zyada kharab ho gaye Emergency 21 march 1977 sasatar ko ko khatm hui lekin in 21 mahinon ke doran jo kuch hua uska asar indiyan politics aur sosaiti pe bahut lanbe samay tak raha aur isi pired mein ek aisa program apne pik tak pahuncha jise aaj bhi log ek hi naam se yad karte hain nasabandi yahan ek important baat sama",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:40:20.603128",
+    "updated": "2026-11-23T19:40:20.603130"
+  },
+  {
+    "id": "667cee54-3ba7-4454-9191-c2d4a424d774",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): typewriter clicking, office machinery, paper shuffling on 'Administrative machinery ko target diye jane lage'\nAlready cued (do not repeat): file cabinet closing heavy, ominous on 'threats dhamakya diye jane lagi'\nAlready cued (do not repeat): rubber stamp pressing on paper on 'ye namabar badh ke'\nAlready cued (do not repeat): typewriter keys and paper shuffling on 'target driven administrative system'\n\n### The words (quote anchors exactly)\nWindow 4:\nSanjay Gandhi ka apne ek four point program tha is program mein family pla",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:40:32.078680",
+    "updated": "2026-11-23T19:40:32.078682"
+  },
+  {
+    "id": "fe9eb31d-e241-4917-a123-4c901f44f0ec",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): papers shuffling, files closing with dull thuds, office on 'senior officers neeche ke officers pe bhi pressure dalate rahe'\nAlready cued (do not repeat): rubber stamp impact on paper (heavy official stamp) on 'number achieve karna priority ban gaya'\nAlready cued (do not repeat): typewriter keys clacking out official order on 'January 1976 sachi atar mein'\nAlready cued (do not repeat): papers shuffling, documents being reviewed on 'ek death be report ki gayi'\n\n### The words (quote anchors exactly)\nWindow 6:\nsenior officers ",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:40:44.609729",
+    "updated": "2026-11-23T19:40:44.609732"
+  },
+  {
+    "id": "c32a6c64-7f2d-4afe-b16d-09b6bbdf0513",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): papers rustling, institutional doors closing, pen scratching on on 'dhamakae hue aur jabarasti'\nAlready cued (do not repeat): newspaper pages turning, radio static crackling, official announcement on 'march 1977'\nAlready cued (do not repeat): official gavel tap, commission seal stamp, filing cabinet on 'shah ki cheyarmenship mein'\nAlready cued (do not repeat): papers shuffling, documents being examined on 'Commission ne Arrests, Censorship,'\nAlready cued (do not repeat): institutional fluorescent hum, faint echo on 'Steril",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:40:59.715059",
+    "updated": "2026-11-23T19:40:59.715061"
+  },
+  {
+    "id": "bfd4e86e-96b0-427f-9ac1-ba19df9bcf94",
+    "scope": "agent",
+    "owner": "SoundDesigner",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Genre: documentary (secondary: mystery).\n\nAlready cued (do not repeat): archival papers rustling, files being sorted and shuffled on 'research ne iske peeche public trust ka decline'\nAlready cued (do not repeat): heavy rubber stamp hitting paper with bureaucratic authority on 'government ke target insan ki dignity'\nAlready cued (do not repeat): filing cabinet drawer slamming shut heavily on 'thousands of reported deaths linked to procedures'\n\n### The words (quote anchors exactly)\nWindow 10:\nresearch ne iske peeche public trust ka decline intaravyut ko par dekh sakate hain aur ek sakate hain au",
+      "result_snippet": "```json\n{\"cues\": []}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-23T19:41:07.934682",
+    "updated": "2026-11-23T19:41:07.934684"
   }
 ]

@@ -1,6 +1,7 @@
 """Shorts Desk: find, score and build ready-to-record 1-2 minute vertical
 shorts for Life3Baje (Hindi poems, sher-o-shayari), Raat3Baje (horror
-incidents) and Beyond3Baje (entities / anomalies).
+incidents), Beyond3Baje (entities / anomalies) and TheTallStoryteller (one
+genre format per idea, across folk tales to comedy -- see its channel guide).
 
 Pipeline for one "find":
 1. Live web search (the Studio's SearXNG, `ddgs` fallback) for the format +
@@ -48,6 +49,11 @@ WORKFLOW = "shorts_ready"
 RECITE_WPM = 95          # poems are recited slowly
 NARRATE_WPM = 140        # stories are narrated
 MAX_SECONDS = 120
+#: A narrated reel's length pick is a target, not a cap (REELS_DESK_PLAN.md VR9, creator
+#: follow-up 2026-10-24): a script up to 50% over the chosen length is fine; only one that
+#: exceeds it by more than that gets the one rewrite-to-length call. 60 s -> fine to 90 s
+#: (~185 horror words).
+REWRITE_LENGTH_FACTOR = 1.5
 
 # --- formats ------------------------------------------------------------------
 
@@ -118,6 +124,45 @@ FORMATS: Dict[str, Dict[str, Dict[str, Any]]] = {
                        "rules horror story {setting} creepy rules"],
            "defaults": {"setting": "night shift"},
            "yt_suffix": "horror shorts", "genre": "horror", "music_hint": "horror_dark"},
+        # A first-hand account someone published (a forum, Reddit, Quora, a news
+        # interview, a book of collected accounts), told as a story -- the
+        # reported core kept as reported.
+        "real_encounter": {"label": "Real encounter, told as a story", "kind": "story", "filters": [
+            {"key": "setting", "label": "Setting", "options": ["Any", "Highway / night drive", "Hostel / PG", "Hospital night shift",
+                                                             "Village", "Old house", "Railway", "Forest / trek", "Cremation ground"]},
+            {"key": "region", "label": "Region / state (optional)", "free": True},
+        ], "queries": ["{setting} {region} India real paranormal experience first hand account reddit",
+                       "{setting} {region} मेरे साथ हुई सच्ची भूतिया घटना अनुभव",
+                       "{setting} {region} India true horror experience shared forum"],
+           "news": "{setting} {region} India ghost experience", "defaults": {"setting": "night", "region": ""},
+           "yt_suffix": "real horror story shorts", "genre": "horror", "music_hint": "horror_dark"},
+        "black_magic": {"label": "Black magic (kala jadu) story (fiction)", "kind": "fiction", "filters": [
+            {"key": "theme", "label": "Theme", "options": ["Any", "Totka at the door", "Cursed object", "Jealous relative's ritual",
+                                                         "Possession", "Vashikaran gone wrong", "Cursed food or water", "Doll and needles"]},
+        ], "queries": ["{theme} kala jadu black magic India belief signs remedy", "{theme} काला जादू टोटका संकेत मान्यता",
+                       "black magic India folk belief {theme} village"],
+           "defaults": {"theme": "black magic"},
+           "yt_suffix": "kala jadu horror shorts", "genre": "horror", "music_hint": "horror_dark"},
+        # The Anomaly Files on Raat3Baje too (2026-10-23: "scp horror" reels for
+        # Instagram): the same SCP-style report form, an original Indian anomaly.
+        "anomaly_file": {"label": "Anomaly file (SCP-style report)", "kind": "fiction", "writer": "WhatIfWriter", "filters": [
+            {"key": "object", "label": "Anomaly", "options": ["Any", "Object", "Place", "Person / entity", "Phenomenon / event",
+                                                            "Recording / broadcast", "Organism"]},
+            {"key": "setting", "label": "Where it was found", "options": ["Any", "Village", "Railway", "Government office",
+                                                                        "Hospital", "Apartment block", "Temple town",
+                                                                        "Highway", "Lake / well"]},
+            {"key": "length", "label": "Length", "options": ["75 seconds (Short)", "2 minutes", "3 minutes"]},
+        ], "queries": ["{object} anomalous {setting} unexplained documented India", "{object} {setting} strange object legend India",
+                       "containment style anomaly story {object} rules", "{object} unexplained phenomenon case file India"],
+           "defaults": {"object": "object", "setting": "village", "length": "75 seconds (Short)"},
+           "yt_suffix": "anomaly file horror shorts", "genre": "horror", "music_hint": "horror_dark"},
+        "tantra": {"label": "Tantra story (fiction)", "kind": "fiction", "filters": [
+            {"key": "theme", "label": "Theme", "options": ["Any", "Shamshan sadhna at night", "A tantrik's bargain", "Aghori",
+                                                         "A siddhi with a price", "Masaan / pishach sadhna", "A ritual interrupted"]},
+        ], "queries": ["{theme} tantrik shamshan sadhna Indian folk belief", "{theme} तांत्रिक श्मशान साधना मान्यता कहानी",
+                       "tantra folklore India {theme} cremation ground night belief"],
+           "defaults": {"theme": "tantrik"},
+           "yt_suffix": "tantrik horror shorts", "genre": "horror", "music_hint": "horror_dark"},
     },
     "Beyond3Baje": {
         # OUTSIDE INDIA ONLY, one format per pillar (prompts/channels/Beyond3Baje.md).
@@ -133,7 +178,8 @@ FORMATS: Dict[str, Dict[str, Dict[str, Any]]] = {
         "case_file": {"label": "Paranormal case file", "kind": "story", "filters": [_WORLD_REGION],
                       "queries": ["{region} famous paranormal case investigation", "{region} haunting case claims vs evidence",
                                   "{region} poltergeist possession case investigator archive"],
-                      "defaults": {"region": "world"}, "yt_suffix": "paranormal shorts", "genre": "mystery", "music_hint": "suspense"},
+                      "defaults": {"region": "world"}, "yt_suffix": "paranormal shorts", "genre": "mystery", "music_hint": "suspense",
+                      "art_style": "stick_world"},
         "haunted_location": {"label": "Haunted location", "kind": "story", "filters": [_WORLD_REGION],
                              "queries": ["{region} haunted place history origin incident", "{region} haunted hotel castle hospital investigation",
                                          "{region} haunted location witness accounts"],
@@ -145,7 +191,70 @@ FORMATS: Dict[str, Dict[str, Dict[str, Any]]] = {
         "unsolved": {"label": "Unsolved / strange case", "kind": "story", "filters": [_WORLD_REGION],
                      "queries": ["{region} unsolved eerie mystery disappearance", "{region} strange unexplained historical mystery",
                                  "{region} vanished expedition ship mystery"],
-                     "defaults": {"region": "world"}, "yt_suffix": "mystery shorts", "genre": "mystery", "music_hint": "suspense"},
+                     "defaults": {"region": "world"}, "yt_suffix": "mystery shorts", "genre": "mystery", "music_hint": "suspense",
+                     "art_style": "stick_world"},
+        # "What If this happened to you?" (the creator's 2026-10-23 direction):
+        # second-person Hinglish psychological horror, an international uncanny
+        # mechanic rebuilt in an everyday Indian night. Written by WhatIfWriter
+        # on its six-beat blueprint; the research is the mechanic, never the text.
+        "what_if": {"label": "What If... (second-person horror)", "kind": "fiction", "writer": "WhatIfWriter", "filters": [
+            {"key": "anomaly", "label": "Anomaly", "options": ["Any", "Time slip / loop", "Mimic / doppelganger", "Cursed object",
+                                                             "Spatial anomaly (rooms, doors, corridors)", "Sensory glitch",
+                                                             "Prophecy / countdown", "Repressed memory", "Mass event"]},
+            {"key": "setting", "label": "Setting", "options": ["Any", "2 BHK flat", "Ancestral village house", "Night highway",
+                                                             "Train compartment", "Hostel / PG", "Mall after closing",
+                                                             "Hospital night", "Old school"]},
+            {"key": "length", "label": "Length", "options": ["75 seconds (Short)", "2 minutes", "3 minutes"]},
+        ], "queries": ["{anomaly} glitch in the matrix true story reddit", "{anomaly} {setting} nosleep story rule",
+                       "{anomaly} urban legend mechanic explained", "{anomaly} unexplained phenomenon documented cases"],
+           "defaults": {"anomaly": "uncanny", "setting": "night", "length": "75 seconds (Short)"},
+           "yt_suffix": "what if horror shorts", "genre": "horror", "music_hint": "horror_dark",
+           "art_style": "stick_world"},
+        # The Anomaly Files (2026-10-23): SCP-style containment reports about
+        # ORIGINAL anomalies in India -- item number, class, containment,
+        # description, discovery and incident logs, a redaction that is the
+        # twist. The SCP wiki is the inspiration for the form, never a source of
+        # text or entries (its entries are CC BY-SA: nothing is copied).
+        "anomaly_file": {"label": "Anomaly file (SCP-style report)", "kind": "fiction", "writer": "WhatIfWriter", "filters": [
+            {"key": "object", "label": "Anomaly", "options": ["Any", "Object", "Place", "Person / entity", "Phenomenon / event",
+                                                            "Recording / broadcast", "Organism"]},
+            {"key": "setting", "label": "Where it was found", "options": ["Any", "Village", "Railway", "Government office",
+                                                                        "Hospital", "Apartment block", "Temple town",
+                                                                        "Highway", "Lake / well"]},
+            {"key": "length", "label": "Length", "options": ["75 seconds (Short)", "2 minutes", "3 minutes"]},
+        ], "queries": ["{object} anomalous {setting} unexplained documented India", "{object} {setting} strange object legend India",
+                       "containment style anomaly story {object} rules", "{object} unexplained phenomenon case file"],
+           "defaults": {"object": "object", "setting": "village", "length": "75 seconds (Short)"},
+           "yt_suffix": "anomaly file shorts", "genre": "horror", "music_hint": "horror_dark",
+           "art_style": "stick_world"},
+    },
+    "TheTallStoryteller": {
+        # Mostly detective and comedy, sometimes crime -- never horror (creator,
+        # 2026-10-24; prompts/channels/TheTallStoryteller.md): a narrated, no-face
+        # Short, one complete beat, never a trailer.
+        "detective": {"label": "Detective", "kind": "fiction", "filters": [
+            {"key": "setting", "label": "Setting", "options": ["Any", "Kolkata para", "Old mansion", "Train",
+                                                               "Hill station", "Office", "Village fair",
+                                                               "Old haveli"]},
+            {"key": "case", "label": "Case (optional)", "free": True},
+        ], "queries": ["{setting} short detective story clue twist {case}", "{setting} जासूसी कहानी सुराग {case}",
+                       "{setting} detective puzzle short story inspiration {case}"],
+           "defaults": {"setting": "Kolkata para", "case": ""}, "yt_suffix": "detective story shorts",
+           "genre": "mystery", "music_hint": "suspense", "art_style": "stick_world"},
+        "comedy": {"label": "Comedy", "kind": "fiction", "filters": [
+            {"key": "setting", "label": "Setting", "options": ["Any", "Wedding", "Office", "Family function",
+                                                               "Neighbourhood", "College", "Train journey"]},
+        ], "queries": ["{setting} short funny story idea", "{setting} मजेदार कहानी हास्य",
+                       "{setting} comedy short story inspiration"],
+           "defaults": {"setting": "wedding"}, "yt_suffix": "comedy story shorts", "genre": "comedy",
+           "music_hint": "playful", "art_style": "stick_world"},
+        "crime": {"label": "Crime", "kind": "fiction", "filters": [
+            {"key": "kind_of_crime", "label": "Kind", "options": ["Any", "Heist", "Con", "Cover-up", "Chase",
+                                                                  "Robbery gone wrong"]},
+        ], "queries": ["{kind_of_crime} short crime story idea twist", "{kind_of_crime} क्राइम कहानी ट्विस्ट",
+                       "{kind_of_crime} crime short story inspiration"],
+           "defaults": {"kind_of_crime": "heist"}, "yt_suffix": "crime story shorts", "genre": "mystery",
+           "music_hint": "tense_strings", "art_style": "stick_world"},
     },
 }
 
@@ -232,6 +341,30 @@ def _parse_json(raw: Any) -> Optional[Dict[str, Any]]:
         return data if isinstance(data, dict) and data else None
     except Exception:
         return None
+
+
+def _score_list(judged: Any) -> List[Dict[str, Any]]:
+    """The judge is asked for `{"scores": [{id, score, ...}, ...]}`. A small
+    local model answers in other shapes: one bare `{id, score}` object, the
+    list under another key (`candidates`, `results`, `ranking`), or the
+    candidates keyed by id. All of them are read; nothing scored was the
+    outcome of every Shorts batch after 16 Oct 2026 until this was tolerant."""
+    if isinstance(judged, list):
+        return [s for s in judged if isinstance(s, dict) and "id" in s]
+    if not isinstance(judged, dict):
+        return []
+    for key in ("scores", "candidates", "results", "ranking", "scored", "items"):
+        value = judged.get(key)
+        if isinstance(value, list) and any(isinstance(s, dict) and "id" in s for s in value):
+            return [s for s in value if isinstance(s, dict) and "id" in s]
+        if isinstance(value, dict) and value and all(isinstance(v, dict) for v in value.values()):
+            return [{"id": k, **v} for k, v in value.items()]
+    if "id" in judged and "score" in judged:
+        return [judged]
+    by_id = {k: v for k, v in judged.items() if isinstance(v, dict) and "score" in v}
+    if by_id:
+        return [{"id": k, **v} for k, v in by_id.items()]
+    return []
 
 
 def _clean_text(value: Any) -> Any:
@@ -607,7 +740,7 @@ def find(channel: str, fmt_key: str, filters: Optional[Dict[str, str]] = None, c
                             "evidence": {**{k: v for k, v in g["evidence"].items() if k not in ("top", "query")},
                                          "top": g["evidence"]["top"][:2]}} for g in grounded],
         }) or {}
-        scores = {s.get("id"): s for s in judged.get("scores") or [] if isinstance(s, dict)}
+        scores = {s.get("id"): s for s in _score_list(judged) if isinstance(s, dict)}
         for g in grounded:
             s = scores.get(g["id"]) or {}
             g["score"] = int(s.get("score") or 0)
@@ -618,6 +751,10 @@ def find(channel: str, fmt_key: str, filters: Optional[Dict[str, str]] = None, c
             g["subscores"] = {k: s.get(k) for k in ("hook", "payoff", "demand", "fit", "freshness")}
         grounded.sort(key=lambda g: -g.get("score", 0))
 
+    # Each candidate carries the filters it was found with (a length pick
+    # reaches the writer through build()).
+    for g in grounded[:count]:
+        g.setdefault("filters", dict(filters))
     result = {
         "channel": channel, "format": fmt_key, "filters": filters, "candidates": grounded[:count],
         "dropped_unverified": dropped, "seconds": round(time.time() - t0),
@@ -654,10 +791,26 @@ def build(channel: str, fmt_key: str, cand: Dict[str, Any]) -> Dict[str, Any]:
     """Write the package and create the project. Returns the project dict."""
     from core.models.project import Project, StepExecution
     from executive.project import project_manager
+    from app.services import auto_story
 
     fmt = _fmt(channel, fmt_key)
     is_poem = fmt["kind"] == "poem"
-    pkg = _agent_json("ShortsWriter", {
+    writer = fmt.get("writer") or "ShortsWriter"
+    # The creator's length pick for this Short (what_if / anomaly_file: "75 seconds (Short)", "2 minutes", "3
+    # minutes"; a reel Auto Story made with no pick of its own defaults to "1 minute (60 seconds)").
+    length = (cand.get("filters") or {}).get("length") or (fmt.get("defaults") or {}).get("length")
+    # A narrated reel's spoken-word target (REELS_DESK_PLAN.md VR9): target seconds x the
+    # channel's resolved words/s. None for a poem (verbatim text, never a free script) or a length
+    # with no seconds in it (a poem's line-count pick, or no length pick at all).
+    target_seconds = None if is_poem else auto_story.length_seconds(length)
+    budget = None if is_poem else auto_story.word_budget(channel, length)
+    target_length = length
+    if budget and target_seconds:
+        # A target, not a cap (2026-10-24 creator follow-up): running a bit long is fine.
+        target_length = (f"{length} -- about {budget} spoken words "
+                         f"({round(target_seconds)}-{round(target_seconds * REWRITE_LENGTH_FACTOR)} s is fine).")
+
+    task = {
         "channel": channel, "format": fmt["label"], "kind": fmt["kind"], "format_key": fmt_key,
         "channel_guide": _guide(channel),
         # How the creator himself writes and talks (app/services/writing_style.py):
@@ -668,9 +821,13 @@ def build(channel: str, fmt_key: str, cand: Dict[str, Any]) -> Dict[str, Any]:
         "poem_text_inserted_verbatim": cand.get("text") if is_poem else None,
         "word_meanings": cand.get("glosses") if is_poem else None,
         "research_notes": cand.get("notes") if not is_poem else None,
-    }) or {}
+        "target_length": target_length,
+    }
+    # A format may name its own writer (what_if -> WhatIfWriter); the rest is ShortsWriter.
+    pkg = _agent_json(writer, task) or {}
 
     title = pkg.get("title") or cand.get("best_title") or cand.get("title")
+    word_counts: Optional[Dict[str, Any]] = None
     if is_poem:
         parts = [f"# {title}", ""]
         if pkg.get("intro"):
@@ -685,6 +842,28 @@ def build(channel: str, fmt_key: str, cand: Dict[str, Any]) -> Dict[str, Any]:
         if not body:
             raise RuntimeError("The writer returned no script.")
         script = f"# {title}\n\n{body}\n"
+        if budget:
+            # The writer was already told the target; a script that clears `REWRITE_LENGTH_FACTOR`
+            # x it (REELS_DESK_PLAN.md VR9 -- a target, not a cap) gets one rewrite-to-length call,
+            # and whichever of the two is shorter is kept -- a failed or longer rewrite never
+            # replaces a usable draft.
+            from app.services import writing_style
+            written = writing_style.narration_words(script)
+            word_counts = {"budget": budget, "written": written, "final": written}
+            if written > budget * REWRITE_LENGTH_FACTOR:
+                rewrite = _agent_json(writer, {
+                    **task, "previous_script": body, "rewrite_to_words": budget,
+                    "instruction": f"This script is {written} spoken words, over its {budget}-word budget. "
+                                   f"Cut it to about {budget} words: keep the hook line, the rule/turn and the "
+                                   f"last line; cut description first.",
+                }) or {}
+                shorter_body = (rewrite.get("script") or "").strip()
+                if shorter_body:
+                    shorter_script = f"# {title}\n\n{shorter_body}\n"
+                    shorter_words = writing_style.narration_words(shorter_script)
+                    word_counts["rewritten"] = shorter_words
+                    if shorter_words < written:
+                        body, script, word_counts["final"] = shorter_body, shorter_script, shorter_words
 
     working = _ascii_slug(pkg.get("title_en") or cand.get("search_query") or "", f"{fmt_key} {uuid.uuid4().hex[:4]}")
     project = None
@@ -718,10 +897,14 @@ def build(channel: str, fmt_key: str, cand: Dict[str, Any]) -> Dict[str, Any]:
     project.current_step = "Ready to record"
     project.assets["script"] = "script/short_script.md"
     project.assets["short_package"] = "publish/short_package.json"
+    logs = [f"Built by the Shorts Desk ({fmt['label']}), score {cand.get('score')}"]
+    if word_counts:
+        logs.append(f"Word budget {word_counts['budget']}: wrote {word_counts['written']}" + (
+            f", kept {word_counts['final']} after one rewrite to {word_counts['rewritten']}"
+            if "rewritten" in word_counts else " (within budget)"))
     project.steps_history.append(StepExecution(
         step_name="Short Script", agent_name="ShortsWriter", status="completed", started_at=now,
-        completed_at=now, output_files={"script": "script/short_script.md"},
-        logs=[f"Built by the Shorts Desk ({fmt['label']}), score {cand.get('score')}"]))
+        completed_at=now, output_files={"script": "script/short_script.md"}, logs=logs))
     project.metadata.update({
         "short_format": fmt_key, "short_channel": channel, "orientation": "vertical",
         "target_duration_minutes": 2, "shorts_desk": {"score": cand.get("score"), "verdict": cand.get("verdict")},
@@ -729,6 +912,8 @@ def build(channel: str, fmt_key: str, cand: Dict[str, Any]) -> Dict[str, Any]:
         "video_settings": {"shorts_clips": 0, "shorts_full": False, "genre": fmt["genre"],
                            "density": "busy", "broll_seconds_min": 2.5, "broll_seconds_max": 4.0},
     })
+    if word_counts:
+        project.metadata["word_budget"] = word_counts
     project.save()
     _mark_used(channel, cand.get("title") or title)
     try:
@@ -800,6 +985,10 @@ def run_daily(progress=None) -> Dict[str, Any]:
     day = datetime.now().timetuple().tm_yday
     built, skipped = [], []
     for channel, fmts in FORMATS.items():
+        # Master pause (docs/STUDIO_DIRECTOR_PLAN.md Part 1): between
+        # channels, before the next one's find+build starts.
+        from app.services import master_control
+        master_control.wait_if_paused(f"shorts_desk: daily batch, {channel}", progress)
         keys = list(fmts)
         fmt_key = keys[day % len(keys)]
         try:
@@ -811,6 +1000,7 @@ def run_daily(progress=None) -> Dict[str, Any]:
         if not good:
             skipped.append({"channel": channel, "reason": f"nothing scored >= {settings['min_score']}"})
         for cand in good:
+            master_control.wait_if_paused(f"shorts_desk: daily batch, {channel} build", progress)
             try:
                 proj = build(channel, fmt_key, cand)
                 built.append({"channel": channel, "format": fmt_key, "project_id": proj["id"], "title": proj["name"],
@@ -852,6 +1042,38 @@ def _daily_due(now: datetime) -> bool:
     return (now.hour, now.minute) >= (hh, mm)
 
 
+_AUTO_STORY_RUNNING = threading.Event()
+
+
+def _maybe_auto_story_fallback() -> None:
+    """In-app fallback for the nightly auto_story task: once the daily batch has
+    run today and the nightly process is not running, run Auto Story if it has
+    not run today."""
+    from app.services import auto_story, master_control
+    if master_control.is_paused() or _AUTO_STORY_RUNNING.is_set():
+        return
+    today = datetime.now().date().isoformat()
+    a = auto_story.settings()
+    if not a.get("enabled") or a.get("last_run") == today:
+        return
+    if daily_settings().get("last_run") != today:
+        return
+    if os.path.exists(NIGHTLY_LOCK) and time.time() - os.path.getmtime(NIGHTLY_LOCK) < 4 * 3600:
+        return
+    _AUTO_STORY_RUNNING.set()
+
+    def _run() -> None:
+        try:
+            logger.info("Shorts Desk: starting Auto Story (in-app fallback)")
+            auto_story.run_all(progress=lambda m: logger.info("auto_story: %s", m))
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("auto_story fallback failed: %s", exc)
+        finally:
+            _AUTO_STORY_RUNNING.clear()
+
+    threading.Thread(target=_run, name="auto-story-fallback", daemon=True).start()
+
+
 _scheduler: Optional[threading.Thread] = None
 
 
@@ -864,10 +1086,12 @@ def start_scheduler() -> None:
     def loop() -> None:
         while True:
             try:
-                if _daily_due(datetime.now()) and not any(
+                from app.services import master_control
+                if not master_control.is_paused() and _daily_due(datetime.now()) and not any(
                         j["kind"] == "daily" and j["state"] == "running" for j in _jobs.values()):
                     logger.info("Shorts Desk: starting the daily batch")
                     start_job("daily", run_daily)
+                _maybe_auto_story_fallback()
             except Exception as exc:  # noqa: BLE001
                 logger.warning("shorts scheduler tick failed: %s", exc)
             time.sleep(60)

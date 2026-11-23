@@ -49,6 +49,13 @@ export const CHANNEL_META: ChannelMeta[] = [
     strategist: 'Khayal3BajeStrategist',
     workflow: 'khayal3baje_horror',
   },
+  {
+    id: 'TheTallStoryteller',
+    icon: '📖',
+    desc: 'Narrated stories of every genre',
+    strategist: 'TheTallStorytellerStrategist',
+    workflow: 'thetallstoryteller_story',
+  },
 ];
 
 const DEFAULT_META = CHANNEL_META[2];
@@ -64,6 +71,7 @@ export function metaFor(channel: string | undefined | null): ChannelMeta {
   if (lower.includes('spilled coffee')) return CHANNEL_META[0];
   if (lower.includes('life')) return CHANNEL_META[3];
   if (lower.includes('khayal')) return CHANNEL_META[4];
+  if (lower.includes('storyteller')) return CHANNEL_META[5];
   return DEFAULT_META;
 }
 

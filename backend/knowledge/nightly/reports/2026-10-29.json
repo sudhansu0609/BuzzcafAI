@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-29",
+  "started_at": "2026-10-29T03:00:02",
+  "finished_at": "2026-10-29T06:38:30",
+  "headline": "6 videos written, 1 problem, 218 min",
+  "markdown": "# Last night: 2026-10-29\n\n## Problems\n\n- auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\nStarted 03:00, took 218 min (shorts).\n\n## Shorts (24 min)\n\n- Life3Baje: **Agnipath: Harivansh Rai Bachchan** (score 85) -> `2026-10-29_Life3Baje_ShortAgnipathHarivanshRaiBachchan`\n- Life3Baje: **Jab Ideas Ka Bojh Badh Jaye** (score 75) -> `2026-10-29_Life3Baje_ShortJabIdeasKaBojhBadhJaye`\n- Raat3Baje: **What If Science Ke Rules Todne Wala Ek Anomaly Mil Jaye?** (score 75) -> `2026-10-29_Raat3Baje_ShortScienceKoChallengeKarneWalaAnomaly`\n- Beyond3Baje: **What If Jungle Ke Beech Ek Akeli Seedhi Aapko Bulaye?** (score 85) -> `2026-10-29_Beyond3Baje_ShortJungleMeinWohAkeliSeedhi`\n- TheTallStoryteller: **Jab 4 Chaprasiyon Ne Loota Bank** (score 80) -> `2026-10-29_TheTallStoryteller_ShortChaprasiBankRobberyHeist`\n- TheTallStoryteller: **Corrupt Cop Ka Faisla** (score 78) -> `2026-10-29_TheTallStoryteller_ShortCorruptCopKaFaisla`\n\n## Made by itself (88 min)\n\n- Nothing made.\n- Life3Baje (mood_reel): failed, BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\n## Archived\n\n- None: Skinwalker Traditions (untouched None days)\n\n## Afterwards\n\n- Stayed awake: ComfyUI has queued work; GPU is busy (96% average)\n",
+  "items": [
+    {
+      "task": "shorts_daily",
+      "state": "done",
+      "built": 6,
+      "skipped": 0,
+      "seconds": 1453
+    },
+    {
+      "task": "auto_story",
+      "state": "done",
+      "made": 0,
+      "failed": 1,
+      "seconds": 5278
+    },
+    {
+      "task": "director",
+      "state": "done"
+    },
+    {
+      "task": "archive",
+      "state": "done",
+      "archived": 1
+    }
+  ],
+  "problems": [
+    "auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes."
+  ]
+}

@@ -1,0 +1,960 @@
+{
+    "id": "2026-11-13_Beyond3Baje_Sita",
+    "name": "Sita",
+    "brand": "Beyond3Baje",
+    "workflow_name": "beyond3baje_documentary",
+    "status": "active",
+    "current_step": "Scene Breakdown",
+    "created_at": "2026-11-13T18:24:36.878842",
+    "updated_at": "2026-11-13T20:34:06.576063",
+    "metadata": {
+        "video_settings": {
+            "art_style": "real",
+            "visual_style": "full",
+            "precut": true,
+            "review_mode": "plan",
+            "motion_graphics": true,
+            "allow_free_stock": false,
+            "video_broll_share": 0.4,
+            "image_broll_share": 0.45,
+            "music": true,
+            "music_brief": "Indian mythological epic: bansuri, tanpura drone, temple bells, soft deep choir, slow 70 bpm; grand dhol and pakhawaj only for battle",
+            "parallax_share": 0.4
+        },
+        "script_source": "recording",
+        "recording_path": "B:\\youtubeProjects\\beyond3baje\\ep12\\sitaTemp1.mp4",
+        "buzzedit_project_id": "02045937",
+        "visual_direction": "Indian mythology (the Ramayana; Sita's story), REALISTIC MYTHOLOGICAL look -- write it into every image and video prompt:\n- Cinematic photoreal scenes of the epic age, like a big-budget historical film: forests and ashrams, palaces of carved sandstone, rivers, oil lamps and fire light, period clothing, silk, gold ornaments, warm golden light or dusk, mist and dust, painterly epic grandeur.\n- Gods and heroes look human and dignified: real faces, natural skin, no blue plastic skin, no cartoon, no TV-serial costume look, no glowing halos unless he describes divine light.\n- Sita: a graceful young woman of ancient India, long black hair, simple saffron or ivory silk, gold ornaments -- keep her look the same in every shot. Ram: a calm young prince-ascetic, dark skin, bow on his shoulder.\n- Video beats get slow, steady movement (wind in cloth, flames, water, a figure walking through the forest) -- no fast action unless he describes it.\n- Maps only where he names a journey or places (Ayodhya, Chitrakoot, Panchavati, Kishkindha, Lanka, Rameswaram): make them as a PICTURE beat -- an aged hand-painted map on parchment or palm leaf with those names in old ink and a drawn route -- never a modern flat map card.\n- No modern objects, no text inside pictures except the map names.",
+        "script_deviation": {
+            "script_spoken_share": 0.0,
+            "adlib_share": 1.0,
+            "beats_placed": 97,
+            "beats_dropped": 0,
+            "skipped_paragraphs": 0
+        },
+        "precut": true,
+        "buzzedit_job_id": "job_1106e606",
+        "buzzedit_report": {
+            "project_id": "02045937",
+            "started_at": "2026-11-13T18:49:24.580360",
+            "finished_at": "2026-11-13T20:34:04.022770",
+            "settings": {
+                "broll": true,
+                "broll_video": true,
+                "character_consistency": true,
+                "main_character": null,
+                "art_style": "real",
+                "popups": true,
+                "graphics": false,
+                "motion_graphics": true,
+                "motion_concurrency": 4,
+                "parallax_share": 0.4,
+                "face_zoom": true,
+                "captions": true,
+                "caption_preset": "karaoke_pop",
+                "title": true,
+                "title_preset": "overlay_hook",
+                "atmosphere": "auto",
+                "thumbnail": true,
+                "render": true,
+                "verify": true,
+                "shorts_clips": 3,
+                "shorts_full": false,
+                "cards": true,
+                "location_cards": true,
+                "character_cards": true,
+                "stat_callouts": true,
+                "source_cards": true,
+                "definition_cards": true,
+                "quote_cards": true,
+                "chapter_titles": true,
+                "end_screen": true,
+                "end_screen_text": "SUBSCRIBE",
+                "progress_bar": false,
+                "progress_bar_style": "auto",
+                "maps": true,
+                "split_screens": true,
+                "newspapers": true,
+                "case_files": true,
+                "recreations": true,
+                "map_style": "auto",
+                "structure": true,
+                "cold_open": true,
+                "metadata": true,
+                "moods": true,
+                "mood_strength": 1.0,
+                "mood_hits": true,
+                "grade": "auto",
+                "topic_transitions": true,
+                "topic_transition": "auto",
+                "music": true,
+                "music_volume": 0.08,
+                "music_duck": 0.85,
+                "music_synth_fallback": true,
+                "music_by_act": true,
+                "music_brief": "Indian mythological epic: bansuri, tanpura drone, temple bells, soft deep choir, slow 70 bpm; grand dhol and pakhawaj only for battle",
+                "music_cues": true,
+                "music_engine": "ace_step",
+                "music_tracks": [],
+                "music_tracks_mode": "together",
+                "caption_emphasis": true,
+                "captions_bilingual": "auto",
+                "pip": "auto",
+                "pip_min_seconds": 4.0,
+                "freeze_on_stats": true,
+                "style_profile": null,
+                "sfx": true,
+                "sfx_volume": 0.45,
+                "sfx_diegetic": true,
+                "sfx_diegetic_volume": 0.35,
+                "sfx_library_dirs": [],
+                "ambience": true,
+                "ambience_kind": "auto",
+                "ambience_volume": 0.05,
+                "voice_preset": "broadcast",
+                "loudness_lufs": -14.0,
+                "voice_enhance": "auto",
+                "voice_fx": [],
+                "sfx_source": "auto",
+                "music_source": "auto",
+                "fade_in_s": 0.5,
+                "fade_out_s": 1.5,
+                "target_coverage": 0.85,
+                "face_intro_s": 0.0,
+                "min_oncamera_gap_s": 0.8,
+                "broll_seconds_min": 3.0,
+                "broll_seconds_max": 5.0,
+                "video_broll_share": 0.471,
+                "max_broll_per_minute": null,
+                "popup_preset": "youtube_pop",
+                "zoom_depth": 0.12,
+                "base_zoom": 1.0,
+                "seed": null,
+                "genre": "documentary",
+                "genre_secondary": "mystery",
+                "density": "busy",
+                "punch_rate_per_minute": 2.5,
+                "text_fx_per_minute": 3.0,
+                "allow_free_stock": false,
+                "llm_provider": "auto",
+                "llm_base_url": "",
+                "llm_model": "",
+                "text_fx": true,
+                "text_fx_styles": null,
+                "ai_label": false,
+                "person_matte": "auto",
+                "emoji_reactions": "auto",
+                "emoji_density": 1.0,
+                "emoji_style": "pop"
+            },
+            "settings_sources": {
+                "genre": "studio",
+                "genre_secondary": "studio",
+                "density": "studio",
+                "target_coverage": "studio",
+                "video_broll_share": "studio",
+                "broll_seconds_min": "studio",
+                "broll_seconds_max": "studio",
+                "min_oncamera_gap_s": "studio",
+                "zoom_depth": "studio",
+                "punch_rate_per_minute": "studio",
+                "text_fx_per_minute": "studio",
+                "voice_preset": "studio",
+                "voice_enhance": "studio",
+                "sfx_source": "studio",
+                "music_source": "studio",
+                "allow_free_stock": "studio"
+            },
+            "live_overrides": {
+                "settings": {
+                    "target_coverage": 0.85,
+                    "video_broll_share": 0.471,
+                    "image_broll_share": 0.45,
+                    "broll_seconds_min": 3.0,
+                    "broll_seconds_max": 5.0
+                },
+                "coverage": {
+                    "from": 0.85,
+                    "to": 0.85
+                },
+                "video_share": {
+                    "from": 0.471,
+                    "to": 0.471
+                },
+                "beats_dropped": 0,
+                "clips_kept": 24
+            },
+            "program": {
+                "duration_s": 499.0,
+                "word_count": 1819,
+                "segment_count": 1,
+                "has_energy": true
+            },
+            "beats_planned": 64,
+            "beats_dropped": [
+                {
+                    "topic": "Photorealistic ancient India at dusk: Ram, Sita in saffron s",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Maybe the most powerful demon was *never* actually defeated",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Royal procession moving slowly toward the gates of Ayodhya p",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Jubilant courtiers in ornate silk garments celebrating in th",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Sita, a graceful young woman with long black hair, wearing i",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "A divine mythological warrior of immense power, majestic and",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "armies of warriors slowly backing away and retreating from t",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Ravana standing triumphant over fallen Ram, laughing with ar",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Sita Ji *KALI MA* Hai | style=slam",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Ram Ji seated in meditation pose on the ground of an ancient",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Multiple ancient Indian manuscripts and texts arranged toget",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Montage of different Indian regional temples\u2014Tamil Nadu gran",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "too close to another cutaway"
+                }
+            ],
+            "plan_source": "llm",
+            "genre": "documentary",
+            "genre_secondary": "mystery",
+            "assets_generated": 53,
+            "assets_cached": 0,
+            "assets_failed": [
+                {
+                    "beat_id": "e04",
+                    "reason": "no content for motion beat"
+                },
+                {
+                    "beat_id": "b03",
+                    "reason": "no content for motion beat; drew a static card instead"
+                },
+                {
+                    "beat_id": "e04",
+                    "reason": "unknown place 'Ayodhya'"
+                }
+            ],
+            "stock_used": [],
+            "broll_placed": 58,
+            "popups_placed": 0,
+            "graphics_placed": 0,
+            "cards_placed": {
+                "character_card": 1,
+                "location_card": 1,
+                "definition_card": 1,
+                "end_screen": 1
+            },
+            "entities_found": 7,
+            "maps_placed": 0,
+            "newspapers_placed": 0,
+            "case_files_placed": 0,
+            "recreations_placed": 0,
+            "splits_placed": 0,
+            "pip_placed": 0,
+            "freezes_placed": 0,
+            "caption_emphasis": 7,
+            "caption_translations": 491,
+            "style_profile_applied": "",
+            "beats_placement_rejected": [
+                {
+                    "beat": "b00",
+                    "topic": "Cinematic photoreal scene: the epic aftermath at Lanka bathe",
+                    "reason": "clip needed 5 s; its still was placed"
+                },
+                {
+                    "beat": "e01_l",
+                    "topic": "Victory Celebration in Ayodhya",
+                    "reason": "would overlap or crowd the previous cutaway"
+                },
+                {
+                    "beat": "b01",
+                    "topic": "Grand court of Ayodhya at dusk: carved sandstone pillars, oi",
+                    "reason": "clip needed 5 s; its still was placed"
+                },
+                {
+                    "beat": "b02",
+                    "topic": "Mythological vision of Ravana: ten-headed demon king with fi",
+                    "reason": "clip needed 5 s; its still was placed"
+                }
+            ],
+            "coverage_target": 0.85,
+            "coverage_achieved": 0.451,
+            "jump_cuts_total": 0,
+            "jump_cuts_covered": 0,
+            "comfyui_online": true,
+            "zooms_segment": 0,
+            "zooms_windowed": 0,
+            "zooms_punch_in": 0,
+            "zooms_punch_out": 0,
+            "zooms_suppressed_by_broll": 11,
+            "base_zoom": 1.0,
+            "faces_detected_pct": 100.0,
+            "captions": 491,
+            "caption_script": "native",
+            "title_text": "SAHASR MUKHARAVAN KI KAHANI \u0938\u0939\u0938\u094d\u0924\u094d\u0930 \u092e\u0941\u0916 \u0930\u093e\u0935\u0923 Sita smiles mys",
+            "atmosphere_applied": "grain",
+            "progress_bar": null,
+            "grade_applied": "cinematic",
+            "topic_transitions": 0,
+            "acts": [
+                "hook"
+            ],
+            "cold_open": {
+                "text": "bhi thoda confused ho gaye chali janate hain iski peeche ki poori kahani par uski poori kahani janane ke liye hamein thoda peeche jaana padega halo doshto",
+                "seconds": 8.08,
+                "from_s": 58.7,
+                "source": "llm"
+            },
+            "metadata_written": true,
+            "moods": [
+                "build"
+            ],
+            "mood_layers": 1,
+            "mood_hits": 0,
+            "script_aligned_words": 1819,
+            "script_spelling_fixed": 0,
+            "script_directives": 97,
+            "music_used": "custom_ace_step15_124154822.wav [cue] \u2192 dramatic_ace_step15_778448031.wav [cue] \u2192 devotional_calm_ace_step15_90129167.wav [cue]",
+            "sfx_placed": 15,
+            "ambience_used": "",
+            "voice_preset": "broadcast",
+            "voice_enhance_used": "rnnoise",
+            "sfx_source_used": {
+                "generated": 15
+            },
+            "music_source_used": "library",
+            "diegetic_placed": 39,
+            "diegetic_sources": {
+                "library": 27,
+                "generated": 12,
+                "none": 2
+            },
+            "diegetic_unresolved": [
+                "swords and weapons clashing violently, arrows whistling through",
+                "muffled clanking of armor and spears"
+            ],
+            "thumbnail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\02045937\\thumbnail.jpg",
+            "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\02045937_presented.mp4",
+            "verification": [
+                {
+                    "name": "speaker_on_screen",
+                    "ok": true,
+                    "detail": "cutaways cover 45% of the programme (target 85%)",
+                    "value": 0.451
+                },
+                {
+                    "name": "text_clear_of_face",
+                    "ok": false,
+                    "detail": "SAHASR MUKHARAVAN KI KAHANI \u0938\u0939\u0938\u094d\u0924\u094d\u0930 \u092e\u0941\u0916  @ 8.7s",
+                    "value": 1.0
+                },
+                {
+                    "name": "text_not_stacked",
+                    "ok": true,
+                    "detail": "526 text items",
+                    "value": 0.0
+                },
+                {
+                    "name": "music_under_voice",
+                    "ok": true,
+                    "detail": "62 mix items",
+                    "value": 0.0
+                },
+                {
+                    "name": "assets_present",
+                    "ok": true,
+                    "detail": "all cutaway files exist",
+                    "value": 0.0
+                },
+                {
+                    "name": "render_exists",
+                    "ok": true,
+                    "detail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\02045937_presented.mp4",
+                    "value": null
+                },
+                {
+                    "name": "loudness",
+                    "ok": true,
+                    "detail": "-14.0 LUFS against -14.0 target, peak -1.1 dBFS",
+                    "value": -14.0
+                },
+                {
+                    "name": "av_length",
+                    "ok": true,
+                    "detail": "picture 507.54s, sound 507.70s",
+                    "value": -0.161
+                },
+                {
+                    "name": "length_matches_timeline",
+                    "ok": true,
+                    "detail": "rendered 507.54s, timeline 507.67s",
+                    "value": -0.128
+                },
+                {
+                    "name": "frozen_clip_frames",
+                    "ok": false,
+                    "detail": "b04 @ 43.5s for 0.50s; b05 @ 64.5s for 0.50s; b06 @ 78.2s for 0.50s; b12 @ 125.0s for 0.50s; b23 @ 206.3s for 0.50s; b28 @ 244.6s for 0.50s",
+                    "value": 15.0
+                }
+            ],
+            "shorts": [
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\02045937_short1.mp4",
+                    "topic": "Victory Celebration in Ayodhya",
+                    "from_s": 464.36,
+                    "seconds": 43.31
+                }
+            ],
+            "text_fx_placed": {
+                "typewriter": 14,
+                "glitch": 9,
+                "annotation": 1,
+                "behind_head": 1
+            },
+            "person_matte_used": "torchvision",
+            "text_fx_skipped": [],
+            "emoji_reactions": 0,
+            "designed_graphics": {
+                "speaker_slots": 4,
+                "statement_card": 2,
+                "source_quote": 1,
+                "canvas_card": 2
+            },
+            "ai_labels": 0,
+            "degraded": [
+                "video_broll: video share set to 47% during the run; 0 planned clip(s) kept as stills",
+                "check:text_clear_of_face",
+                "check:frozen_clip_frames"
+            ],
+            "generation": {
+                "image_phase": {
+                    "phase": "images",
+                    "need_vram_mb": 9000.0,
+                    "need_ram_mb": 4000.0,
+                    "ready": true,
+                    "reason": "",
+                    "free_vram_mb": 11561,
+                    "available_ram_mb": 23860
+                },
+                "video_phase": {
+                    "planned": 15,
+                    "made": 19,
+                    "kept_still": -4,
+                    "skipped_reason": "video share set to 47% during the run; 0 planned clip(s) kept as stills",
+                    "handover": {
+                        "phase": "video",
+                        "need_vram_mb": 11000.0,
+                        "need_ram_mb": 10000.0,
+                        "ready": true,
+                        "reason": "",
+                        "free_vram_mb": 14204,
+                        "available_ram_mb": 23403
+                    },
+                    "budget_s": 5400,
+                    "live": {
+                        "video_broll_share": 0.471,
+                        "quota_s": 93,
+                        "made_s_when_applied": 0
+                    },
+                    "promoted": 4
+                },
+                "prompt_drift": {},
+                "parallax": {
+                    "candidates": 37,
+                    "selected": 15,
+                    "rendered": 14,
+                    "skipped_contrast": 1,
+                    "failed": 0
+                }
+            },
+            "prompt_drift": {},
+            "timings": [
+                {
+                    "stage": "script",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shotplan",
+                    "seconds": 31.45,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail_title",
+                    "seconds": 6.04,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "moods",
+                    "seconds": 6.54,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "entities",
+                    "seconds": 18.19,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "translate",
+                    "seconds": 85.73,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata",
+                    "seconds": 7.35,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "eject_llm",
+                    "seconds": 1.03,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "assets",
+                    "seconds": 5061.68,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "maps_charts",
+                    "seconds": 40.18,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "parallax",
+                    "seconds": 150.59,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_broll",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_popups",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "face_detect",
+                    "seconds": 11.19,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "layout_speakers",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "overlays",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_cards",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "pip",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "freezes",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "base_zoom",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "plan_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "captions",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_emphasis",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_translations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "title",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "atmosphere",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "script_fx",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "cold_open",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata_reshift",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "progress_bar",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_moods",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "grade",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "recreations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "topic_transitions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_generation",
+                    "seconds": 298.11,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_design",
+                    "seconds": 52.32,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_effects_generation",
+                    "seconds": 83.2,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound",
+                    "seconds": 7.35,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "voice_master",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "text_fx",
+                    "seconds": 4.33,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "emoji_reactions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail",
+                    "seconds": 26.74,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "render",
+                    "seconds": 338.99,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shorts",
+                    "seconds": 36.7,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_timeline",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_render",
+                    "seconds": 27.55,
+                    "ok": true,
+                    "note": ""
+                }
+            ]
+        },
+        "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\02045937_presented.mp4",
+        "broll_check": {
+            "beats_planned": 64,
+            "broll_placed": 58,
+            "assets_generated": 53,
+            "assets_cached": 0,
+            "coverage_low": false,
+            "should_fail": false,
+            "warning": null,
+            "message": null
+        },
+        "final_output_path": "B:\\youtubeProjects\\beyond3baje\\ep12\\sitaTemp1_final.mp4"
+    },
+    "steps_history": [
+        {
+            "step_name": "Research",
+            "agent_name": "ResearchAgent",
+            "status": "completed",
+            "started_at": "2026-11-13T18:24:36.954421",
+            "completed_at": "2026-11-13T18:24:36.954421",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Scripting",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-11-13T18:24:36.954421",
+            "completed_at": "2026-11-13T18:24:36.954421",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Visual Plan",
+            "agent_name": "PromptEngineer",
+            "status": "completed",
+            "started_at": "2026-11-13T18:24:36.954421",
+            "completed_at": "2026-11-13T18:24:36.954421",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Voice Recording",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-11-13T18:24:36.954421",
+            "completed_at": "2026-11-13T18:24:36.954421",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "visual_plan_take": "production/visual_plan_take.json",
+        "visual_plan": "production/visual_plan_take.json",
+        "script_deviation": "production/script_deviation.json",
+        "buzzedit_script": "script/buzzedit_script.md"
+    }
+}

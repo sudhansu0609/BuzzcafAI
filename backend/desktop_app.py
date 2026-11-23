@@ -1,8 +1,9 @@
 """
 Buzzcaf Studio desktop shell: FastAPI in-process plus a native WebView2 window.
 
-Launched by "Buzzcaf Studio.vbs" (hidden, via pythonw - no console), by
-start_buzzcafai.bat (console, --dev), or by Dexter's `buzzcaf_start_studio`
+Launched by "Buzzcaf Studio.exe" in the root (hidden, via pythonw - no console;
+scripts/Buzzcaf Studio.vbs is the same without an icon), by
+scripts/start_buzzcafai.bat (console, --dev), or by Dexter's `buzzcaf_start_studio`
 tool. The Studio used to be two console windows (Vite + uvicorn --reload) that
 the owner had to keep open behind a browser tab; now the only thing that
 appears is the app window (roadmap v5, 2.2).
@@ -42,6 +43,9 @@ if BACKEND_DIR not in sys.path:
     sys.path.insert(0, BACKEND_DIR)
 if sys.argv:
     sys.argv[0] = os.path.abspath(__file__)
+if "--dev" not in sys.argv:
+    from core import no_console  # no console flashes from child programs (pythonw has no console)
+    no_console.apply()
 os.chdir(BACKEND_DIR)  # app.main resolves prompts/knowledge relative to core.paths, but tests/tools assume cwd=backend
 
 # The checkout's .env is read here (without overriding a real environment) so a
@@ -266,7 +270,7 @@ def _preflight_or_exit(dev: bool) -> None:
             "Buzzcaf Studio cannot start",
             "Preflight found problems that stop the Studio from working:\n\n"
             + "\n".join(report.problem_lines())
-            + "\n\nFix them and launch again (start_buzzcafai.bat shows the full report).",
+            + "\n\nFix them and launch again (scripts/start_buzzcafai.bat shows the full report).",
         )
         sys.exit(1)
 
@@ -511,6 +515,90 @@ def _running_production(port: int) -> Optional[str]:
         return None
 
 
+# ───────────────────────── restart onto new code ─────────────────────────
+
+#: Written by a Studio that restarts itself (app/services/code_reload.py) and
+#: read by the one it starts, which waits for its predecessor to be gone.
+RESTART_RECORD = os.path.join(os.getenv("LOCALAPPDATA") or os.path.expanduser("~"), "BuzzcafStudio", "restart.json")
+PREDECESSOR_WAIT_S = 90.0
+
+
+def _await_predecessor() -> None:
+    """A Studio started by its predecessor's code reload begins while that one
+    is still closing. Wait until its pid is gone and its port is silent, so
+    the new one binds the same port (the window's storage origin, so the theme
+    and every preference stay) instead of stepping past a port that is only
+    being released."""
+    try:
+        with open(RESTART_RECORD, encoding="utf-8") as f:
+            record = json.load(f)
+        os.remove(RESTART_RECORD)
+    except (OSError, ValueError):
+        return
+    if time.time() - float(record.get("at") or 0) > 300:
+        return
+    pid, port = record.get("pid"), int(record.get("port") or PORT)
+    url = f"http://{HOST}:{port}/health"
+    deadline = time.time() + PREDECESSOR_WAIT_S
+    while time.time() < deadline and (buzzcaf_ports._pid_alive(pid) or _studio_answering(url, timeout=1.0)):
+        time.sleep(0.5)
+    log.info("Restarted onto new code: the previous Studio (pid %s) is gone after %.1f s.",
+             pid, PREDECESSOR_WAIT_S - (deadline - time.time()))
+
+
+def _relaunch_command() -> str:
+    exe = os.path.join(ROOT_DIR, "Buzzcaf Studio.exe")
+    if os.path.isfile(exe):
+        return subprocess.list2cmdline([exe])
+    return subprocess.list2cmdline([sys.executable, "-X", "utf8", os.path.abspath(__file__)] + sys.argv[1:])
+
+
+def _ps_quote(text: str) -> str:
+    return "'" + text.replace("'", "''") + "'"
+
+
+def _spawn_detached(cmdline: str) -> bool:
+    """Start the next Studio outside this process tree. The launcher keeps its
+    Python in a job object with KILL_ON_JOB_CLOSE, so a plain child would die
+    with this process; a process WMI creates belongs to the WMI service."""
+    script = ("$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine="
+              + _ps_quote(cmdline) + "; CurrentDirectory=" + _ps_quote(ROOT_DIR) + "}; $r.ReturnValue")
+    try:
+        done = subprocess.run(["powershell", "-NoProfile", "-NonInteractive", "-Command", script],
+                              capture_output=True, text=True, timeout=60, creationflags=_hidden_flags())
+    except (OSError, subprocess.SubprocessError) as exc:
+        log.warning("Could not start the next Studio: %s", exc)
+        return False
+    ok = done.returncode == 0 and (done.stdout or "").strip() == "0"
+    if not ok:
+        log.warning("Could not start the next Studio (rc %s): %s %s", done.returncode,
+                    (done.stdout or "").strip()[:200], (done.stderr or "").strip()[:200])
+    return ok
+
+
+def restart_onto_new_code(port: int) -> bool:
+    """Start a fresh Studio and close this one the way its X does (geometry
+    saved, headless BuzzEdit stopped, the port ledger withdrawn)."""
+    from app.api.studio_api import _shutdown_process
+
+    try:
+        os.makedirs(os.path.dirname(RESTART_RECORD), exist_ok=True)
+        with open(RESTART_RECORD, "w", encoding="utf-8") as f:
+            json.dump({"pid": os.getpid(), "port": port, "at": time.time()}, f)
+    except OSError as exc:
+        log.warning("Code reload: could not write %s (%s); staying on the old code.", RESTART_RECORD, exc)
+        return False
+    if not _spawn_detached(_relaunch_command()):
+        try:
+            os.remove(RESTART_RECORD)
+        except OSError:
+            pass
+        return False
+    log.warning("Code reload: the backend source changed and the Studio is idle; restarting onto it.")
+    _shutdown_process()
+    return True
+
+
 def _shutdown_backend(port: int) -> None:
     """Ask a backend this window did not start to shut down (loopback only)."""
     try:
@@ -552,6 +640,7 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
         except Exception as exc:
             log.debug("Could not set AppUserModelID: %s", exc)
     _preflight_or_exit(dev)
+    _await_predecessor()
     # Marks this process as the desktop Studio: a BuzzEdit it starts headless is
     # told this pid and quits by itself once the pid is gone, so a crash or a
     # killed Studio cannot leave it holding the GPU (produce_api.launch_buzzedit_process).
@@ -607,20 +696,23 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
             _message_box(
                 "Buzzcaf Studio UI is not built",
                 "backend/app/static/index.html is missing.\n\nRun `npm run build` in frontend/, "
-                "or launch start_buzzcafai.bat for developer mode.",
+                "or launch scripts/start_buzzcafai.bat for developer mode.",
             )
             sys.exit(1)
         if state == "stale":
-            if os.getenv("BUZZCAF_AUTOBUILD", "0") == "1" and _rebuild_bundle():
+            # A stale bundle is rebuilt here, by default (2026-10-22): the
+            # self-restart fires whenever backend source changes, which is
+            # often between an edit under frontend/src and its build, and
+            # the modal warning this used to show blocked launch_desktop
+            # itself -- backend up, no window, no reload watcher -- until
+            # someone clicked OK. Never a modal here; a failed build is a
+            # log line and a Health row, and the window shows the old build.
+            if os.getenv("BUZZCAF_AUTOBUILD", "1") != "0" and _rebuild_bundle():
                 log.info("UI bundle was stale; rebuilt.")
             else:
-                _message_box(
-                    "Buzzcaf Studio UI bundle is out of date",
-                    "Files under frontend/src are newer than the built bundle. The window will "
-                    "show the previous build.\n\nRun `npm run build` in frontend/ (or set "
-                    "BUZZCAF_AUTOBUILD=1) to pick up the changes.",
-                    MB_WARNING,
-                )
+                log.warning("Buzzcaf Studio UI bundle is out of date: files under frontend/src are newer "
+                            "than the built bundle; the window shows the previous build. Run `npm run build` "
+                            "in frontend/.")
         target_url = f"http://{HOST}:{port}/"
 
     # Without this WebView2 silently drops every download -- the Music page's
@@ -656,12 +748,31 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
         return None
 
     window.events.closing += on_closing
+    if not dev and not already_running:
+        # A fix to the backend applies by itself: once the source is newer than
+        # this process and the Studio has been idle a while, it restarts.
+        from app.services import code_reload
+
+        threading.Thread(target=lambda: code_reload.watch(lambda: restart_onto_new_code(port)),
+                         name="studio-code-reload", daemon=True).start()
     log.info("Window opening after %.1fs (%s).", time.perf_counter() - started, target_url)
     print(f"READY port={port}", flush=True)  # rule 6: whoever launched us opens what we report
     show_devtools = devtools or os.getenv("BUZZCAF_DEVTOOLS", "0").lower() in ("1", "true", "yes")
     icon_path = _window_icon()
+    # pywebview opens WebView2 in private mode unless told otherwise, which
+    # throws away localStorage with the window: the theme, the collapsed
+    # panels, every per-browser preference came back reset at each start
+    # (2026-10-21). A profile of our own keeps them.
+    storage_dir = os.path.join(os.getenv("LOCALAPPDATA") or os.path.expanduser("~"), "BuzzcafStudio", "webview")
     try:
-        webview.start(debug=show_devtools, icon=icon_path or None)
+        os.makedirs(storage_dir, exist_ok=True)
+    except OSError as exc:
+        log.warning("Could not create the WebView2 profile folder %s (%s); preferences will not persist.",
+                    storage_dir, exc)
+        storage_dir = None
+    try:
+        webview.start(debug=show_devtools, icon=icon_path or None,
+                      private_mode=storage_dir is None, storage_path=storage_dir)
     finally:
         # The window is gone: take every backend process with it. Ours runs in
         # this process, so its children (and a headless BuzzEdit it started)
@@ -679,7 +790,25 @@ def launch_desktop(dev: bool = False, devtools: bool = False) -> None:
         os._exit(0)
 
 
+def _remove_replaced_launchers() -> None:
+    """Delete `Buzzcaf Studio.exe.old*` left beside the launcher.
+
+    A rebuilt launcher is installed while the old one is still running by
+    renaming the running exe aside (Windows allows a rename, not a delete).
+    By the time this runs the old one has exited, so the leftover can go:
+    the app folder keeps exactly one launcher."""
+    import glob
+
+    for leftover in glob.glob(os.path.join(ROOT_DIR, "Buzzcaf Studio.exe.old*")):
+        try:
+            os.remove(leftover)
+            log.info("Removed the replaced launcher %s.", os.path.basename(leftover))
+        except OSError:
+            pass  # still running (an older Studio is open); next start retries
+
+
 def main() -> int:
+    _remove_replaced_launchers()
     parser = argparse.ArgumentParser(description="Buzzcaf Studio desktop app")
     parser.add_argument("--dev", action="store_true", help="show the Vite dev server instead of the built bundle")
     parser.add_argument("--devtools", action="store_true", help="automatically open the Edge DevTools window")

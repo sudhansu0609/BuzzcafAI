@@ -1,0 +1,56 @@
+{
+  "id": "thetallstoryteller_story",
+  "name": "TheTallStoryteller Narrated Story",
+  "description": "Narrated, no-face storytelling production: research/world-building, script, optional Shorts, visual plan and SEO.",
+  "steps": [
+    {
+      "name": "Story Research",
+      "agent_role": "ResearchAgent",
+      "description": "Research before writing anything, following this episode's format (detective, comedy or crime -- see the format and the channel guide; never horror): for a public-domain classic retold, find and read the source text and cite it; for an original detective case, research the real world it is set in (the city, the para, the trade, how the police and the courts work, the period details) and the kind of trick or crime at its heart, so every clue is plausible; for a comedy, the everyday world and its real texture; for a crime story, how such a crime really unfolds (never a how-to). Deliver the cited dossier with story material (world, real details, story seeds, twists) used silently in the story.",
+      "requires_approval": true,
+      "input_assets": [],
+      "output_asset_type": "research"
+    },
+    {
+      "name": "Script Writing",
+      "agent_role": "WriterAgent",
+      "description": "Write the complete story episode from the research package, in this episode's format (detective, comedy or crime; never horror -- see the channel guide): hook, setup, rising stakes, turn, payoff, scaled to the target runtime. Told by ONE narrator in the first person, the way the creator tells a story to a friend: continuous narration paragraphs, no [VISUAL]/[SOUND] lines, no speaker labels, no tour-guide description of buildings or customs -- every detail serves the case or the joke. A detective story plays fair: the detective early, 3-5 clues each said plainly once, one red herring, a reveal that explains every clue. Pure story from the first word to the last; the greeting once, at the start, folded into the opening.",
+      "requires_approval": true,
+      "input_assets": [
+        "research"
+      ],
+      "output_asset_type": "script"
+    },
+    {
+      "name": "Human Touch",
+      "agent_role": "HumanTouch",
+      "description": "Rewrite the script only where the `ai_tells` report (input asset, saved at script/ai_tells.md) flags a machine-writing tell: break triads, remove stock transitions, hedges and closing morals, cut over-explaining tails and decorative description, vary sentence length with his fragments and asides. Keep meaning, every event, clue and joke and their order, the length within 10% and every fixed line verbatim; add no new facts. Output the complete script only.",
+      "requires_approval": false,
+      "input_assets": [
+        "script",
+        "ai_tells"
+      ],
+      "output_asset_type": "script_final"
+    },
+    {
+      "name": "Visual Plan",
+      "agent_role": "PromptEngineer",
+      "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI, following this channel's story-visual rules: no face, same characters in every shot, no camera named or seen.",
+      "requires_approval": false,
+      "input_assets": [
+        "script_final"
+      ],
+      "output_asset_type": "visual_plan"
+    },
+    {
+      "name": "SEO & Publishing Pack",
+      "agent_role": "SEOManagerAgent",
+      "description": "Research before writing: what people type into YouTube about this story's subject or genre (autocomplete in English, Hindi and Hinglish), what already ranks and how it performs (views, age, views per day), how this channel's own uploads did; score its pull honestly. Then warm, curiosity-led titles, thumbnail text, description, tags and hashtags that fit the genre, with the evidence kept in the package.",
+      "requires_approval": true,
+      "input_assets": [
+        "script_final"
+      ],
+      "output_asset_type": "seo_package"
+    }
+  ]
+}

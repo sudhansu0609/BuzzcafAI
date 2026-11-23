@@ -91,5 +91,21 @@
     "source": "agent",
     "created": "2026-09-09T20:25:47.423064",
     "updated": "2026-09-09T20:25:47.423067"
+  },
+  {
+    "id": "2af73f68-2a98-47b6-9754-6b3881b97d2a",
+    "scope": "agent",
+    "owner": "FactChecker",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by AfterDarkStrategist to perform the following task:\n\nVerify that none of the stories chosen contain fabricated details like fake newspaper dates or specific village names unless they are part of the original reported account, to ensure we maintain 100% integrity as per the Raat3Baje guidelines.",
+      "result_snippet": "Mainne instructions samajh liye hain. Main ensure karunga ki script mein koi bhi fabricated details, jaise fake newspaper dates ya galat village names, include na hon, unless wo original reported account ka hissa hain. Raat3Baje guidelines ke mutabiq 100% integrity aur accuracy maintain karna meri priority hai.\n\nPlease provide the `script_claims` and `source_references` taaki main audit process shuru kar sakoon aur har ek claim ko verify kar saku."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T08:37:24.047435",
+    "updated": "2026-10-29T08:37:24.047438"
   }
 ]

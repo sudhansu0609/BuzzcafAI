@@ -21,7 +21,9 @@ class WritingDepartment(Department):
                 "HorrorWriter",
                 "NarrationOptimizer",
                 "ShortsWriter",
-                "StyleAnalyst"
+                "WhatIfWriter",
+                "StyleAnalyst",
+                "NarrationDirector", "StoryAdapter", "HumanTouch"
             ],
             llm_service=llm_service
         )

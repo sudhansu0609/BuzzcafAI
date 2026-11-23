@@ -1,0 +1,48 @@
+{
+  "id": "raat3baje_adaptation",
+  "name": "Raat3Baje Story Adaptation",
+  "description": "A Story Library entry adapted into a Raat3Baje script in the creator's own voice (multi-part when long), then de-machined by HumanTouch against the ai_tells report. The service (app/services/story_adapt.py) writes the source text to research/source_story.md before the run.",
+  "steps": [
+    {
+      "name": "Adaptation",
+      "agent_role": "StoryAdapter",
+      "description": "The source is the input asset `source_story` (saved at research/source_story.md). Its header gives the title, author, rights line and which part to write (\"Part k of N\"), with the story so far and the previous part's last three lines when k > 1; below the `---` is ONLY this part's section of the story. The number of parts, the minutes per part and the rights status are also in the creator's instructions above (project metadata `adaptation`). Write ONLY the part named in the header, under its `# Part k` heading, in the creator's own spoken Hinglish, following the rights rules exactly: `public_domain` -> a free retelling; `protected` or `unknown` -> an original story keeping only the premise, the mechanic and the fear (Part 1 opens with the line `[inspired-by: <author>, <title>; original story]`), never a translated sentence. Each part is a complete sitting ending on a cliff except the last; Part 2 onward opens with a two-line recap and continues from the previous part's last lines; the greeting only at the start of Part 1. Narration paragraphs with `(pause)` marks, no screenplay cues, no moral at the end.",
+      "requires_approval": false,
+      "input_assets": [
+        "source_story"
+      ],
+      "output_asset_type": "script"
+    },
+    {
+      "name": "Human Touch",
+      "agent_role": "HumanTouch",
+      "description": "Rewrite the script only where the `ai_tells` report (input asset, saved at script/ai_tells.md) flags a machine-writing tell: break triads, remove stock transitions, hedges and closing morals, cut over-explaining tails, vary sentence length with his fragments and asides. Keep meaning, every event and its order, the length within 10%, every `# Part N` heading, the `[inspired-by: ...]` line if present and every fixed line verbatim; add no new facts. Output the complete script only.",
+      "requires_approval": false,
+      "input_assets": [
+        "script",
+        "ai_tells"
+      ],
+      "output_asset_type": "script_final"
+    },
+    {
+      "name": "Visual Plan",
+      "agent_role": "PromptEngineer",
+      "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+      "requires_approval": false,
+      "input_assets": [
+        "script_final"
+      ],
+      "output_asset_type": "visual_plan"
+    },
+    {
+      "name": "SEO & Thumbnail",
+      "agent_role": "SEOManagerAgent",
+      "description": "Research before writing: what people type into YouTube about this story's subject (autocomplete in English, Hindi and Hinglish), what already ranks and how it performs (views, age, views per day), how this channel's own uploads did, and whether the subject is in the news; score its virality honestly. Then the dark, curiosity-led titles, thumbnail text, description, tags and hashtags that hit the demand found, with the evidence kept in the package.",
+      "requires_approval": true,
+      "input_assets": [
+        "script_final"
+      ],
+      "output_asset_type": "seo_package"
+    }
+  ]
+}

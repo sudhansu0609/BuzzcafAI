@@ -12,8 +12,9 @@ still to a `[video:]` clip (`shotplan.balance_video_share` only moves beats its
 own model planned). So for this style the Studio does both itself, on the
 finished directive script (`apply_to_script`):
 
-1. every directive except `[broll:]`, `[video:]`, `[music:]` and `[sfx:]` (the
-   scene's own sounds), and every `# heading` line, is removed;
+1. every directive except `[broll:]`, `[video:]`, `[music:]`, `[sfx:]` (the
+   scene's own sounds) -- plus the art style's own extras below -- and every
+   `# heading` line, is removed;
 2. every picture of a character from the cast sheet carries that character's
    fixed look, and every picture the story's world, so the image model draws
    the same people in the same place from shot to shot;
@@ -48,6 +49,7 @@ import re
 import unicodedata
 from typing import Any, Dict, List, Optional, Tuple
 
+from integrations import art_style as art_mod
 from integrations.script_reconcile import LABEL_LINE_RE, speaker_key, speaker_name
 
 logger = logging.getLogger("buzzcaf_ai.story_visuals")
@@ -59,6 +61,80 @@ KEPT_DIRECTIVES = ("broll", "video", "music", "sfx")
 _AS_WRITTEN = ("music", "sfx")
 #: Plan beat kinds the story style keeps (the planner-side names of the above).
 KEPT_BEAT_KINDS = ("broll_image", "broll_video", "music_cue", "sfx_cue")
+#: The short text an explainer or stick-figure video keeps as well
+#: (`art_style.text_cards`): directive kinds, beat kinds, and headings.
+#: `kinetic` (M4, 2026-10-27) is text-like too -- kept wherever these are,
+#: never on a plain picture-only story channel. M12 (2026-10-28) adds
+#: `flow`/`icons`/`ui` (flow_diagram/icon_list/ui_mockup) the same way: text-
+#: like motion cards, kept only where short text cards are allowed, on any
+#: medium whose text flag is on (not gated to one drawn style the way
+#: stick_scene/paper_collage are). Transitions (`fx`) are never kept on a
+#: story channel, drawn or not. `callout` (a still with a circled/pointed/
+#: magnified detail) goes here too, 2026-10-28 review: a drawn mark on a plain
+#: picture-only story channel (Raat3Baje horror) breaks the calm storyboard.
+TEXT_DIRECTIVES = ("text", "stat", "definition", "quote", "chapter", "statement", "title", "kinetic",
+                   "flow", "icons", "ui", "callout")
+TEXT_BEAT_KINDS = ("popup", "stat_callout", "definition_card", "quote_card", "chapter_title", "statement",
+                   "kinetic_text", "flow_diagram", "icon_list", "ui_mockup", "callout")
+#: `mixed` alone also keeps these: a map/chart/timeline beat is a picture of
+#: a kind other than a photo or a doodle, timed as a still like any other
+#: (`_apply_timed`'s `still_only`). Every other style still removes them.
+MIXED_DIRECTIVES = ("map", "chart", "timeline")
+MIXED_BEAT_KINDS = ("map", "chart", "timeline")
+#: `stick_scene` (M8, 2026-10-28) is an animated drawing, picture-like like
+#: the above -- kept on a story channel for the `stick_figure` style itself,
+#: or either per-shot mix (`mixed`/`mixed_quirky`, via `is_mixed`) since a
+#: stick-figure shot there may become this instead of a plain still; never
+#: for a photoreal or any other drawn style.
+STICK_DIRECTIVES = ("stick",)
+STICK_BEAT_KINDS = ("stick_scene",)
+#: `paper_collage` is likewise picture-like -- kept for `explainer` directly,
+#: or either per-shot mix; never for a plain story channel otherwise (a
+#: horror channel like Raat3Baje stays real/stick_figure only unless its own
+#: art style is switched to a mix). A `caption` on either beat is text, not a
+#: picture: `_apply_timed`/the untimed pass below keep the directive itself
+#: (it is still a picture) but drop `caption` wherever this style's text
+#: cards are off, same as every other kind here.
+COLLAGE_DIRECTIVES = ("collage",)
+COLLAGE_BEAT_KINDS = ("paper_collage",)
+#: `callout` (M10/M12) is kept only where text cards are (in `TEXT_DIRECTIVES`
+#: above). Named here only so `_apply_timed`/
+#: `apply_to_script` can give it the same "timed like a still, never
+#: promoted, split or looked" treatment and drop its `label` (text) wherever
+#: this style's text cards are off, same as `caption` on stick/collage.
+CALLOUT_DIRECTIVES = ("callout",)
+CALLOUT_BEAT_KINDS = ("callout",)
+
+
+def kept_directives(art_style: str = "real") -> Tuple[str, ...]:
+    extra = TEXT_DIRECTIVES if art_mod.text_cards(art_style) else ()
+    name = art_mod.normalise(art_style)
+    if art_mod.is_mixed(art_style):
+        extra += MIXED_DIRECTIVES + STICK_DIRECTIVES + COLLAGE_DIRECTIVES
+    elif name == "stick_figure":
+        extra += STICK_DIRECTIVES
+    elif name == "explainer":
+        extra += COLLAGE_DIRECTIVES
+    elif name == "stick_world":
+        # Dressed stick figures (people moments) plus maps/timelines/charts
+        # (documentary/case-study moments) -- never paper_collage, which is
+        # this style's own hand-painted place pictures' job instead.
+        extra += STICK_DIRECTIVES + MIXED_DIRECTIVES
+    return KEPT_DIRECTIVES + extra
+
+
+def kept_beat_kinds(art_style: str = "real") -> Tuple[str, ...]:
+    extra = TEXT_BEAT_KINDS if art_mod.text_cards(art_style) else ()
+    name = art_mod.normalise(art_style)
+    if art_mod.is_mixed(art_style):
+        extra += MIXED_BEAT_KINDS + STICK_BEAT_KINDS + COLLAGE_BEAT_KINDS
+    elif name == "stick_figure":
+        extra += STICK_BEAT_KINDS
+    elif name == "explainer":
+        extra += COLLAGE_BEAT_KINDS
+    elif name == "stick_world":
+        extra += STICK_BEAT_KINDS + MIXED_BEAT_KINDS
+    return KEPT_BEAT_KINDS + extra
 
 CAST_SHEET_ASSET = "production/cast_sheet.json"
 
@@ -80,11 +156,20 @@ _CAST_SOURCE_CHARS = 24000
 
 # ------------------------------------------------------------------ prompt
 
-def planner_section(share: float, cast: Optional[Dict[str, Any]] = None) -> str:
+def planner_section(share: float, cast: Optional[Dict[str, Any]] = None,
+                    art_style: str = "real") -> str:
     """The planner instructions that replace the effect catalog for a story
     channel: which kinds exist, how many clips, and how the shots hang
-    together."""
+    together. A drawn `art_style` (explainer, stick figure, cartoon) adds
+    its medium, and the ones whose medium includes text allow the short
+    text kinds too."""
     pct = int(round(max(0.0, min(1.0, share)) * 100))
+    with_text = bool(art_mod.text_cards(art_style))
+    mixed = art_mod.is_mixed(art_style)
+    name = art_mod.normalise(art_style)
+    world_style = name == "stick_world"
+    allow_stick = mixed or name in ("stick_figure", "stick_world")
+    allow_collage = mixed or name == "explainer"
     lines = [
         "### Story visuals -- pictures and videos only",
         "This channel tells a story with pictures and moving clips and nothing else on "
@@ -96,9 +181,91 @@ def planner_section(share: float, cast: Optional[Dict[str, Any]] = None) -> str:
         "scene). Needs `video_prompt` (the scene and its slow motion) and `image_prompt` "
         "(the same scene as a still).",
         "- **music_cue** -- only where the music should change.",
-        "No text on screen, no captions, cards, headings, chapter titles, newspapers, "
-        "case files, maps, charts, documents, fx, atmos or grade beats -- they are removed "
-        "before the render.",
+    ]
+    if with_text:
+        lines += [
+            "- **callout** -- a picture with a detail circled, pointed at or magnified. Needs "
+            "`image_prompt`. Optional `mark` (circle, arrow or magnify), `at` (the 3x3 grid region) "
+            "and a short `label`. Good for evidence or a 'look at this' moment.",
+            "- **popup** -- at most six words naming a number, a name or a term. Needs `text`.",
+            "- **stat_callout** -- one number with its unit. Needs `text` (and `subtext` for the label).",
+            "- **definition_card** -- a term and its one-line meaning. Needs `text` and `subtext`.",
+            "- **kinetic_text** -- a key line springs onto the full frame, word by word, the key "
+            "words punched in the accent colour. Needs `text` (4-14 words, key words in "
+            "*asterisks*). Optional `style`: slam, stack, reveal or typewriter. About once every "
+            "60-90 seconds. No transitions (`fx`) on this channel either way.",
+            "- **flow_diagram** -- 2-6 boxes draw in one at a time, connected as a chain, a cycle "
+            "or a branch. Needs `steps` (2-6 of 1-5 words each). Optional `layout`: chain, cycle "
+            "or branch. Use when the narration explains a process or a cause-and-effect chain.",
+            "- **icon_list** -- 2-6 short labels pop in with icons, as a plain list or a "
+            "pros/cons layout (+ / - prefix). Needs `labels`. Optional `mode`: list or pros_cons.",
+            "- **ui_mockup** -- a generic post, forum, chat, search or headline mockup -- no real "
+            "logos. Needs `type` (post, forum, chat, search or headline) and `text`. Optional "
+            "`name`, `handle`, `meta`. ONLY for a real, sourced post/headline/search quoted from "
+            "the research, or a clearly fictional/illustrative exchange with generic names -- "
+            "never invent a post, quote or headline attributed to a real person or outlet.",
+        ]
+        if world_style:
+            lines.append(
+                "- **stick_scene** -- a dressed stick figure (or two or three) acting out one pose "
+                "(idle, walk, run, point, shrug, think, cheer, fall, sit, scared, swim, climb) in an "
+                "illustrated period world. Needs `action` and `scene` (picks the ground only, never "
+                "drawn). Give `era` (the stick-world vocabulary's period key, e.g. \"ancient_greece\", "
+                "\"victorian\", \"wartime_1940s\") to dress every figure for it, or write `who` with a "
+                "cast character's name to dress them in that character's own fixed outfit instead "
+                "(never retype their spec). Optional `bg` -- an English picture prompt for the "
+                "illustrated place behind them, written like any `image_prompt`: the place itself, "
+                "no people, no camera words -- whenever that place has not already been shown as a "
+                "plain picture. `figures` (1-3, default: the number of outfits given) and a short "
+                "`caption`. A person moment belongs here, never in a plain picture.")
+        elif allow_stick:
+            lines.append(
+                "- **stick_scene** -- a short animated stick-figure doodle: one pose (idle, walk, "
+                "run, point, shrug, think, cheer, fall, sit, scared, swim, climb) against a "
+                "whiteboard, paper, night or underwater ground. Needs `action` and `scene` (the "
+                "scene text only picks the ground, it is never drawn). Optional `prop` (ship, "
+                "wave, house, tree, phone, money, car, mountain, door, table, book, sun, moon, "
+                "rain), `figures` (1-3) and a short `caption`.")
+        if allow_collage:
+            lines.append(
+                "- **paper_collage** -- 2-4 pictures cut out like paper photographs on a paper "
+                "texture, stepping in with a stop-motion jitter. Needs `prompts` (2-4 English "
+                "picture prompts, as a list). Optional short `caption`.")
+        if mixed:
+            media = art_mod.MIXES[art_mod.normalise(art_style)]["media"]
+            art_values = " or ".join(f'`"{m}"`' for m in media)
+            lines += [
+                "- **map** -- a drawn map of a place. Needs `place`.",
+                "- **chart** -- an animated bar/pie/line chart. Needs `data` ({labels, values, "
+                "chart_type: bar|line|pie}) and `text` (its title).",
+                f"Every broll_image and broll_video beat also carries `art`: {art_values} "
+                "(which medium that one shot is drawn in -- see this video's art style below).",
+                "No newspapers, case files, documents, fx, atmos or grade beats -- they are "
+                "removed before the render.",
+            ]
+        elif world_style:
+            lines += [
+                "- **map** -- a drawn map of a place. Needs `place`.",
+                "- **chart** -- an animated bar/pie/line chart. Needs `data` ({labels, values, "
+                "chart_type: bar|line|pie}) and `text` (its title).",
+                "- **timeline** -- a big figure over a ruler of dates. Needs `ticks` (2-9 dates or "
+                "labels, in order) and `text` (the big figure).",
+                "Reach for these on a documentary, case-study or What If moment: a map for a place "
+                "or a route, a chart for numbers that change, a timeline for when things happened.",
+                "No captions, newspapers, case files, documents, fx, atmos or grade beats -- they "
+                "are removed before the render.",
+            ]
+        else:
+            lines.append(
+                "No captions, newspapers, case files, maps, charts, documents, fx, atmos or grade "
+                "beats -- they are removed before the render.")
+    else:
+        lines += [
+            "No text on screen, no captions, cards, headings, chapter titles, newspapers, "
+            "case files, maps, charts, documents, fx, atmos or grade beats -- they are removed "
+            "before the render.",
+        ]
+    lines += [
         f"About {pct}% of the pictures should be `broll_video`; choose the moments where "
         "something moves: a door easing open, a figure walking away, fog crossing a road, "
         "a lantern swinging.",
@@ -121,10 +288,13 @@ def planner_section(share: float, cast: Optional[Dict[str, Any]] = None) -> str:
         "appears only when the story itself is about one (a CCTV camera on the wall).",
         "`image_prompt` and `video_prompt` are always written in English.",
     ]
-    cast_block = cast_prompt_block(cast)
+    art_block = art_mod.planner_section(art_style)
+    if art_block:
+        lines.append(art_block)
+    cast_block = cast_prompt_block(cast, art_style)
     if cast_block:
         lines.append(cast_block)
-    face_block = main_face_section(cast)
+    face_block = main_face_section(cast) if art_mod.uses_face_swap(art_style) else ""
     if face_block:
         lines.append(face_block)
     try:
@@ -135,16 +305,26 @@ def planner_section(share: float, cast: Optional[Dict[str, Any]] = None) -> str:
     return "\n".join(lines)
 
 
-def cast_prompt_block(cast: Optional[Dict[str, Any]]) -> str:
+def cast_prompt_block(cast: Optional[Dict[str, Any]], art_style: str = "real") -> str:
+    """The cast and world shown to the planner. Stick World (STICK_WORLD_PLAN.md)
+    shows each character's fixed `outfit`/`era` instead of a realistic `look`
+    -- the spec a `stick_scene` beat's `who` is resolved against."""
     if not cast:
         return ""
     lines = ["### Cast and world (use these looks word for word)"]
     if cast.get("world"):
         lines.append(f"World: {cast['world']}")
     main = main_character(cast)
+    world_style = art_mod.normalise(art_style) == "stick_world"
     for person in cast.get("characters") or []:
-        if isinstance(person, dict) and person.get("name") and person.get("look"):
-            tag = " (MAIN CHARACTER)" if person is main else ""
+        if not isinstance(person, dict) or not person.get("name"):
+            continue
+        tag = " (MAIN CHARACTER)" if person is main else ""
+        if world_style and person.get("outfit"):
+            era_part = f", era={person['era']}" if person.get("era") else ""
+            lines.append(f"- {person['name']}{tag}: outfit={person['outfit']}{era_part} "
+                         f"(write `who={person['name']}` on their stick_scene beats)")
+        elif person.get("look"):
             lines.append(f"- {person['name']}{tag}: {person['look']}")
     return "\n".join(lines) if len(lines) > 1 else ""
 
@@ -327,6 +507,20 @@ def _clean_cast(data: Any) -> Dict[str, Any]:
         gender = _GENDERS.get(str(person.get("gender") or "").strip().lower())
         if gender:
             entry["gender"] = gender
+        # Stick World (STICK_WORLD_PLAN.md): the character's own fixed
+        # outfit spec + era, validated against the shared vocabulary so a
+        # `stick_scene` beat's `who` always resolves to something real.
+        outfit = person.get("outfit")
+        if outfit:
+            from integrations.effect_catalog import _norm_outfit_spec
+            norm_outfit = _norm_outfit_spec(outfit)
+            if norm_outfit:
+                entry["outfit"] = norm_outfit
+        era = " ".join(str(person.get("era") or "").split()).lower()
+        if era:
+            from integrations.effect_catalog import STICK_ERAS
+            if era in STICK_ERAS:
+                entry["era"] = era
         if "voice" in person:
             # Present means decided (None = the creator's own voice); absent
             # means never proposed, which a production proposes once.
@@ -682,7 +876,8 @@ def load_cast_sheet(project: Any) -> Dict[str, Any]:
     return cast
 
 
-def ensure_cast_sheet(project: Any, story_text: str, agent_factory: Any) -> Dict[str, Any]:
+def ensure_cast_sheet(project: Any, story_text: str, agent_factory: Any,
+                      art_style: str = "real") -> Dict[str, Any]:
     """The project's cast sheet, written by the CharacterPlanner the first
     time it is needed. A failure returns {} -- the video still renders, just
     without the continuity hints."""
@@ -698,7 +893,8 @@ def ensure_cast_sheet(project: Any, story_text: str, agent_factory: Any) -> Dict
         from integrations.llm import clean_json_response
 
         agent = agent_factory()
-        prompt = CAST_PROMPT.format(main_rules=MAIN_RULES, bible=_bible_text(project),
+        prompt = CAST_PROMPT.format(main_rules=MAIN_RULES,
+                                    bible=art_mod.cast_direction(art_style) + _bible_text(project),
                                     story=story[:_CAST_SOURCE_CHARS])
         raw = agent.execute(prompt, require_json=True)
         if getattr(getattr(agent, "llm_service", None), "last_response_simulated", False):
@@ -740,7 +936,10 @@ def _split_arg(arg: str) -> Tuple[str, Dict[str, str]]:
 
 
 def _join_arg(prompt: str, options: Dict[str, str]) -> str:
-    return " | ".join([prompt] + [f"{k}={v}" for k, v in options.items()])
+    """`prompt` (dropped when empty -- a `stick_scene` beat's own grammar is
+    every field `key=value`, so `_split_arg` returns no leading field at
+    all) followed by its options as `key=value`."""
+    return " | ".join(([prompt] if prompt else []) + [f"{k}={v}" for k, v in options.items()])
 
 
 def _mentions(prompt: str, words: List[str]) -> bool:
@@ -831,12 +1030,59 @@ def _face_suffix(options: Dict[str, str]) -> str:
     return f" | {FACE_OPTION}=main" if options.get(FACE_OPTION) == "main" else ""
 
 
+def _resolve_stick_who(options: Dict[str, str], cast: Optional[Dict[str, Any]]) -> Dict[str, str]:
+    """A `stick_scene` beat naming `who` (a cast character) takes that
+    character's own fixed `outfit`/`era` when it gives none of its own --
+    the Stick World equivalent of `_with_continuity`'s same-characters rule.
+    `who` is never emitted: it is Studio-internal, not part of BuzzEdit's
+    directive grammar."""
+    options = dict(options)
+    who = options.pop("who", "").strip()
+    if not who or not cast:
+        return options
+    person = next((p for p in cast.get("characters") or []
+                   if isinstance(p, dict) and str(p.get("name", "")).strip().lower() == who.lower()), None)
+    if person:
+        if not options.get("outfit") and person.get("outfit"):
+            options["outfit"] = str(person["outfit"])
+        if not options.get("era") and person.get("era"):
+            options["era"] = str(person["era"])
+    return options
+
+
+#: Private option key `_picture` carries the beat's own per-shot medium on
+#: (`art_style.shot_style`), so a caller can give `_video_prompt` that shot's
+#: own motion instead of the whole video's style; never a real directive
+#: option, and always popped off before anything is emitted.
+_SHOT_OPTION = "_shot"
+
+
 def _picture(prompt: str, options: Dict[str, str], cast: Optional[Dict[str, Any]],
-             infer: bool) -> Tuple[str, Dict[str, str]]:
-    """One picture directive's prompt and options, ready for BuzzEdit."""
+             infer: bool, art_style: str = "real") -> Tuple[str, Dict[str, str]]:
+    """One picture directive's prompt and options, ready for BuzzEdit: the
+    cast's continuity, the art style's medium, and the main character's
+    face mark -- only in a photoreal shot, since a real face swapped onto a
+    drawing is a mistake, not continuity. `mixed` picks the medium per shot
+    from the beat's own `art` option (popped here, never emitted); the shot
+    it picked comes back under `_SHOT_OPTION` for `_video_prompt`."""
     beat_text = prompt
-    prompt, options = _with_face(prompt, options, cast, infer)
-    return lint_prompt(without_camera(_with_continuity(prompt, cast)), beat_text), options
+    options = dict(options)
+    shot = art_mod.shot_style(art_style, options.pop("art", None))
+    if art_mod.uses_face_swap(shot):
+        prompt, options = _with_face(prompt, options, cast, infer)
+    else:
+        options = {k: v for k, v in options.items() if k != FACE_OPTION}
+    if art_mod.is_mixed(art_style) and shot == "stick_figure":
+        # A stick-figure shot inside a mixed video skips the cast's realistic
+        # continuity (a real face or outfit drawn into a doodle is a mistake);
+        # the beat's own prompt already names the character. An illustrated
+        # shot keeps it, as the plain illustrated style does: same people.
+        text = lint_prompt(without_camera(prompt), beat_text)
+    else:
+        text = lint_prompt(without_camera(_with_continuity(prompt, cast)), beat_text)
+    text = art_mod.apply_look(text, shot)
+    options[_SHOT_OPTION] = shot
+    return text, options
 
 
 # --------------------------------------------------------------- no camera
@@ -920,13 +1166,14 @@ def without_camera(prompt: str) -> str:
     return text[:1].upper() + text[1:] if text else prompt
 
 
-def _video_prompt(prompt: str, options: Dict[str, str]) -> str:
+def _video_prompt(prompt: str, options: Dict[str, str], art_style: str = "real") -> str:
     look = options.get("look")
     text = prompt.rstrip(" .,;")
     if look:
         text += f", {look} look"
-    if CALM_MOTION not in text:
-        text += f", {CALM_MOTION}"
+    motion = CALM_MOTION if art_mod.normalise(art_style) == "real" else art_mod.motion_for(art_style)
+    if motion not in text:
+        text += f", {motion}"
     return text
 
 
@@ -973,15 +1220,58 @@ def _floor2(seconds: float) -> float:
     return math.floor(max(0.0, seconds) * 100.0 + 1e-6) / 100.0
 
 
+#: Face-first videos: clips' part of the pictures when the sliders give none.
+FACE_INTRO_DEFAULT_VIDEO_RATIO = 0.3 / 0.85
+#: Where the face-first opening may end around the second asked for: on the
+#: longest breath between words in this window (seconds before, after).
+FACE_INTRO_WINDOW = (8.0, 12.0)
+
+
+def face_intro_word(word_starts: List[float], intro_s: float,
+                    word_ends: Optional[List[float]] = None) -> Optional[int]:
+    """The word the pictures start on in a face-first video: the one after
+    the longest pause near `intro_s` (so the cut lands between sentences),
+    else the first word at or after it. None when the video is shorter."""
+    n = len(word_starts)
+    first = bisect.bisect_left(word_starts, intro_s)
+    if first >= n:
+        return None
+    before, after = FACE_INTRO_WINDOW
+    lo = bisect.bisect_left(word_starts, max(0.0, intro_s - before))
+    hi = bisect.bisect_right(word_starts, intro_s + after)
+    best, best_gap = first, -1.0
+    for j in range(max(1, lo), min(n, hi)):
+        prev_end = word_ends[j - 1] if word_ends else word_starts[j - 1]
+        gap = word_starts[j] - prev_end
+        if gap > best_gap + 0.05:
+            best, best_gap = j, gap
+    return best
+
+
 def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: float,
                      share: float, clip_max_s: float = CLIP_MAX_SECONDS,
-                     image_share: float = 0.0) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+                     image_share: float = 0.0, face_intro_s: float = 0.0,
+                     still_only: Optional[set] = None
+                     ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """Every shot's start word, length and kind.
+
+    `still_only` is the set of `anchors` indexes that may never become a clip
+    (a mixed video's map/chart/timeline beats, timed like pictures but never
+    promoted): their whole stretch goes to stills, and if that still is split
+    into more than one piece (a long stretch, `clip_max_s`), the parts are
+    merged back into one shot -- a map is drawn once, not repeated. `None`
+    (the default) is today's behaviour exactly: nothing is forced to a still.
 
     `share` and `image_share` are the shares of the RUNNING TIME that are
     generated clips and still images; the creator's face gets the rest. Video
     has priority, then images (an image share past what video leaves is cut
     to fit), then the face.
+
+    `face_intro_s` > 0 is the face-first layout: the creator's face alone up
+    to about that second (the cut lands on a pause near it), then pictures
+    only, to the end -- clips and stills in the proportion of the two shares.
+    The picture that owns the narration at the cut starts on it; pictures
+    planned for the opening are dropped.
 
     `anchors` are the pictures' word indexes in story order; `word_starts`
     each word's programme time. Each picture owns the narration from its word
@@ -996,9 +1286,33 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
     share_i = max(0.0, min(1.0 - share_v, image_share))
     clip_max_s = max(MIN_CLIP_SECONDS, min(CLIP_MAX_SECONDS, clip_max_s))
     n_words = len(word_starts)
+    anchors = list(anchors)
+
+    # Face first: nothing but the face up to the cut, then pictures only.
+    intro_word: Optional[int] = None
+    intro_t = 0.0
+    face_first = bool(face_intro_s and face_intro_s > 0)
+    if face_first:
+        total = share_v + share_i
+        ratio = share_v / total if total > 0 else FACE_INTRO_DEFAULT_VIDEO_RATIO
+        share_v, share_i = ratio, 1.0 - ratio
+        intro_word = face_intro_word(word_starts, float(face_intro_s))
+        if intro_word is None:
+            anchors = [n_words] * len(anchors)          # shorter than the opening: all face
+            intro_t = duration_s
+        else:
+            intro_t = word_starts[intro_word]
+            owner = max((i for i, j in enumerate(anchors) if j < intro_word), default=None)
+            anchors = [intro_word if i == owner else (n_words if j < intro_word else j)
+                       for i, j in enumerate(anchors)]
 
     def at(j: int) -> float:
         return word_starts[j] if j < n_words else duration_s
+
+    def elapsed(t: float) -> float:
+        """The running time the shares are measured over: from the cut, in a
+        face-first video."""
+        return max(0.0, t - intro_t)
 
     kept: List[int] = []
     merged = 0
@@ -1010,12 +1324,11 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
             merged += 1
             continue
         kept.append(i)
-    anchors = list(anchors)
     full = share_v + share_i >= FULL_COVER
     if kept and full:
-        # Everything is pictures: the first one starts on the first word, so
-        # the opening before it is covered too.
-        anchors[kept[0]] = 0
+        # Everything is pictures: the first one starts on the first word (in
+        # a face-first video, on the cut), so the opening before it is covered too.
+        anchors[kept[0]] = intro_word if face_first and intro_word is not None else 0
 
     def word_near(after: int, target: float, lo: float, hi: float) -> Optional[int]:
         """The word nearest `target` starting within [lo, hi], past `after`."""
@@ -1041,9 +1354,9 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
         # its share first and images the rest. Tracking the images' own deficit
         # instead starved them: at 80/20 video left gaps too short for a still
         # in most stretches, and the images ended at 14%.
-        want_all = min(window, max(0.0, (share_v + share_i) * end - done[True] - done[False]))
-        behind_v = share_v * end - done[True]
-        behind_i = share_i * end - done[False]
+        want_all = min(window, max(0.0, (share_v + share_i) * elapsed(end) - done[True] - done[False]))
+        behind_v = share_v * elapsed(end) - done[True]
+        behind_i = share_i * elapsed(end) - done[False]
         if want_all < MIN_CLIP_SECONDS + MIN_STILL_SECONDS:
             # Too short to split into a clip and a still: the whole stretch
             # goes to whichever is further behind its share (video on a tie),
@@ -1057,6 +1370,11 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
             want_v = want_v if want_v >= MIN_CLIP_SECONDS else 0.0
             want_i = want_all - want_v if share_i > 0 else 0.0
         want_i = want_i if want_i >= MIN_STILL_SECONDS else 0.0
+        if still_only and i in still_only:
+            # A map/chart/timeline beat is never a clip: whatever this
+            # stretch would have given to video goes to the still instead.
+            want_i += want_v
+            want_v = 0.0
         if want_i == 0.0 and 0 < want_all - want_v and want_v and share_i <= 0:
             want_v = want_all
         if want_v + want_i <= 0:
@@ -1094,16 +1412,36 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
                 break
             j, start = next_j, at(next_j)
 
+    if still_only:
+        # A still forced here in more than one piece (a long stretch, over
+        # `clip_max_s`) is one map/chart/timeline, not a repeat: fold every
+        # piece's seconds into the first, in place.
+        merged_shots: List[Dict[str, Any]] = []
+        totals: Dict[int, Dict[str, Any]] = {}
+        for s in shots:
+            if s["picture"] in still_only:
+                first = totals.get(s["picture"])
+                if first is None:
+                    first = dict(s, part=0)
+                    totals[s["picture"]] = first
+                    merged_shots.append(first)
+                else:
+                    first["seconds"] = _floor2(first["seconds"] + s["seconds"])
+            else:
+                merged_shots.append(s)
+        shots = merged_shots
+
     clips = [s for s in shots if s["video"]]
     stills = [s for s in shots if not s["video"]]
     video_s = sum(s["seconds"] for s in clips)
     image_s = sum(s["seconds"] for s in stills)
+    pictured_s = elapsed(duration_s)
     stats = {
         "runtime_s": round(duration_s, 1),
-        "video_target_s": round(share_v * duration_s, 1),
+        "video_target_s": round(share_v * pictured_s, 1),
         "video_s": round(video_s, 1),
         "video_runtime_share": round(video_s / duration_s, 3) if duration_s else 0.0,
-        "image_target_s": round(share_i * duration_s, 1),
+        "image_target_s": round(share_i * pictured_s, 1),
         "image_s": round(image_s, 1),
         "image_runtime_share": round(image_s / duration_s, 3) if duration_s else 0.0,
         "face_runtime_share": round(max(0.0, 1.0 - (video_s + image_s) / duration_s), 3) if duration_s else 1.0,
@@ -1113,18 +1451,30 @@ def plan_timed_shots(anchors: List[int], word_starts: List[float], duration_s: f
         "still_s": round(image_s, 1),
         "pictures_merged": merged,
     }
+    if face_first:
+        stats["face_intro_s"] = round(min(intro_t, duration_s), 1)
     return shots, stats
 
 
 def _apply_timed(text: str, share: float, cast: Optional[Dict[str, Any]],
                  word_times: List[float], duration_s: float, clip_max_s: float,
-                 image_share: float, stats: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
+                 image_share: float, stats: Dict[str, Any], face_intro_s: float = 0.0,
+                 story: bool = True, art_style: str = "real") -> Tuple[str, Dict[str, Any]]:
     """`apply_to_script` when the programme's word times are known: the
     pictures are lifted out of the text, timed by `plan_timed_shots` and put
-    back before the words they now start on, each with its `seconds=`."""
+    back before the words they now start on, each with its `seconds=`.
+    `story=False` (a full-style video timed for its face-first opening) keeps
+    every other directive where it is and the pictures' prompts as written."""
     infer = not _FACE_MARK_RE.search(text)
+    kept = kept_directives(art_style)
+    mixed = art_mod.is_mixed(art_style)
+    world_style = art_mod.normalise(art_style) == "stick_world"
     pieces: List[Tuple[str, str]] = []                      # ("word"|"space"|"keep", text)
-    pictures: List[Tuple[int, str, Dict[str, str]]] = []   # (word index, prompt, options)
+    # (word index, prompt-or-arg, options, kind, shot): `kind` is "" for a
+    # normal broll/video picture (its medium is in `shot`), or "map"/"chart"/
+    # "timeline"/"stick"/"collage"/"callout" for a beat timed like a still
+    # but never promoted, split or looked -- those kinds are written as-is.
+    pictures: List[Tuple[int, str, Dict[str, str], str, str]] = []
     # A character's speaker label on its own line ("MAYA:", script_reconcile)
     # is not a spoken word: it must not shift the words onto the wrong times.
     label_spans = [(m.start(), m.end()) for m in LABEL_LINE_RE.finditer(text) if m.group(0).strip()]
@@ -1134,13 +1484,54 @@ def _apply_timed(text: str, share: float, cast: Optional[Dict[str, Any]],
         piece = m.group(0)
         if m.group(1) is not None:
             kind = m.group(1).lower()
-            if kind not in KEPT_DIRECTIVES:
-                stats["removed"] += 1
-            elif kind in _AS_WRITTEN:
+            if kind not in kept:
+                if story:
+                    stats["removed"] += 1
+                else:
+                    pieces.append(("keep", piece))
+            elif kind in _AS_WRITTEN or kind in TEXT_DIRECTIVES:
                 pieces.append(("keep", piece))
+            elif (mixed or world_style) and kind in MIXED_DIRECTIVES:
+                arg, options = _split_arg(m.group(2))
+                pictures.append((n_words, arg, options, kind, ""))
+            elif kind in STICK_DIRECTIVES:
+                # Timed like a still, never promoted, split or looked -- same
+                # as a mixed map/chart/timeline beat -- but its `caption` is
+                # text, dropped wherever this style's text cards are off, and
+                # a `who` (a cast character) is resolved to that character's
+                # fixed outfit/era -- never emitted itself (Stick World's
+                # same-characters rule).
+                arg, options = _split_arg(m.group(2))
+                if not art_mod.text_cards(art_style):
+                    options.pop("caption", None)
+                options = _resolve_stick_who(options, cast)
+                pictures.append((n_words, arg, options, kind, ""))
+            elif kind in COLLAGE_DIRECTIVES:
+                # Timed like a still, never promoted, split or looked -- same
+                # as a mixed map/chart/timeline beat -- but its `caption` is
+                # text, dropped wherever this style's text cards are off.
+                arg, options = _split_arg(m.group(2))
+                if not art_mod.text_cards(art_style):
+                    options.pop("caption", None)
+                pictures.append((n_words, arg, options, kind, ""))
+            elif kind in CALLOUT_DIRECTIVES:
+                # Timed like a still, never promoted, split or looked (only
+                # reached where text cards keep it); the label drop is a guard.
+                arg, options = _split_arg(m.group(2))
+                if not art_mod.text_cards(art_style):
+                    options.pop("label", None)
+                pictures.append((n_words, arg, options, kind, ""))
+            elif story:
+                prompt, options = _picture(*_split_arg(m.group(2)), cast, infer, art_style)
+                shot = options.pop(_SHOT_OPTION, art_style)
+                pictures.append((n_words, prompt, options, "", shot))
             else:
-                prompt, options = _picture(*_split_arg(m.group(2)), cast, infer)
-                pictures.append((n_words, prompt, options))
+                prompt, options = _split_arg(m.group(2))
+                options.pop("seconds", None)
+                # A full-style video keeps its prompts as written, plus the
+                # medium: BuzzEdit stamps no look on a script's own pictures.
+                shot = art_mod.shot_style(art_style, options.pop("art", None))
+                pictures.append((n_words, art_mod.apply_look(prompt, shot), options, "", shot))
         elif piece.isspace():
             pieces.append(("space", piece))
         elif label_spans and _inside(m.start(), label_starts, label_spans):
@@ -1159,17 +1550,28 @@ def _apply_timed(text: str, share: float, cast: Optional[Dict[str, Any]],
     for j in range(1, len(starts)):
         starts[j] = max(starts[j], starts[j - 1])
 
+    # A map/chart/timeline is timed like a still but may never become a clip
+    # or be split into a repeated "continuation" shot (`plan_timed_shots`'s
+    # `still_only` merges its parts' seconds into one).
+    still_only = {i for i, p in enumerate(pictures) if p[3]} or None
     shots, timing = plan_timed_shots([p[0] for p in pictures], starts, duration_s, share,
-                                     clip_max_s, image_share)
+                                     clip_max_s, image_share, face_intro_s=face_intro_s,
+                                     still_only=still_only)
     inserts: Dict[int, List[str]] = {}
     for shot in shots:
-        _, prompt, options = pictures[shot["picture"]]
+        _, prompt, options, kind, shot_style = pictures[shot["picture"]]
+        seconds = f"seconds={shot['seconds']:g}"
+        if kind:
+            directive = f"[{kind}: {_join_arg(prompt, options)} | {seconds}]"
+            inserts.setdefault(shot["word"], []).append(directive)
+            continue
         if shot["part"]:
             prompt = f"{prompt.rstrip(' .,;')}, {CONTINUATIONS[(shot['part'] - 1) % len(CONTINUATIONS)]}"
-        seconds = f"seconds={shot['seconds']:g}"
         stats["main_face"] += 1 if options.get(FACE_OPTION) == "main" else 0
-        if shot["video"]:
-            directive = f"[video: {_video_prompt(prompt, options)} | {seconds}{_face_suffix(options)}]"
+        if shot["video"] and story:
+            directive = f"[video: {_video_prompt(prompt, options, shot_style)} | {seconds}{_face_suffix(options)}]"
+        elif shot["video"]:
+            directive = f"[video: {_join_arg(prompt, options)} | {seconds}]"
         else:
             directive = f"[broll: {_join_arg(prompt, options)} | {seconds}]"
         inserts.setdefault(shot["word"], []).append(directive)
@@ -1200,7 +1602,8 @@ def _inside(position: int, starts: List[int], spans: List[Tuple[int, int]]) -> b
 def apply_to_script(text: str, share: float, cast: Optional[Dict[str, Any]] = None,
                     word_times: Optional[List[float]] = None, duration_s: Optional[float] = None,
                     clip_max_s: float = CLIP_MAX_SECONDS,
-                    image_share: float = 0.0) -> Tuple[str, Dict[str, Any]]:
+                    image_share: float = 0.0, face_intro_s: float = 0.0,
+                    story: bool = True, art_style: str = "real") -> Tuple[str, Dict[str, Any]]:
     """The directive script BuzzEdit is handed, rewritten for the story style.
     Returns `(text, stats)`; spoken words are never touched.
 
@@ -1208,18 +1611,33 @@ def apply_to_script(text: str, share: float, cast: Optional[Dict[str, Any]] = No
     `duration_s`, `share` and `image_share` are the shares of the whole
     video's RUNNING TIME that are generated clips and still images (the face
     gets the rest), and every shot is timed to make it so (`_apply_timed`).
-    Without them it is the share of the pictures that are clips."""
+    Without them it is the share of the pictures that are clips.
+
+    `face_intro_s` > 0 times the pictures for a face-first video (the face
+    alone for the opening, then pictures only -- `plan_timed_shots`).
+    `story=False` does only that timing, for a full-style video: headings,
+    cards and every other directive stay as written.
+
+    `art_style` is the medium (`integrations/art_style.py`): every picture
+    prompt carries its look, clips move its way, a drawn style gets no real
+    face swapped in, and a style whose medium includes text (explainer,
+    stick figure) keeps the short text directives and headings."""
     stats: Dict[str, Any] = {"removed": 0, "headings_removed": 0, "pictures": 0, "videos": 0,
                              "made_video": 0, "main_face": 0}
 
-    headings = _HEADING_LINE_RE.findall(text)
-    stats["headings_removed"] = len(headings)
-    text = _HEADING_LINE_RE.sub("\n", text)
+    if story and not art_mod.text_cards(art_style):
+        headings = _HEADING_LINE_RE.findall(text)
+        stats["headings_removed"] = len(headings)
+        text = _HEADING_LINE_RE.sub("\n", text)
     if word_times and duration_s and duration_s > 0:
         return _apply_timed(text, share, cast, word_times, float(duration_s),
-                            clip_max_s, image_share, stats)
+                            clip_max_s, image_share, stats, face_intro_s=face_intro_s, story=story,
+                            art_style=art_style)
 
     infer = not _FACE_MARK_RE.search(text)
+    kept = kept_directives(art_style)
+    mixed = art_mod.is_mixed(art_style)
+    world_style = art_mod.normalise(art_style) == "stick_world"
     matches = list(_DIRECTIVE_RE.finditer(text))
     pictures = [m for m in matches if m.group(1).lower() in ("broll", "video")]
     make_video = _video_positions(len(pictures), share)
@@ -1231,20 +1649,57 @@ def apply_to_script(text: str, share: float, cast: Optional[Dict[str, Any]] = No
         out.append(text[pos:m.start()])
         pos = m.end()
         kind = m.group(1).lower()
-        if kind not in KEPT_DIRECTIVES:
+        if kind not in kept:
             stats["removed"] += 1
             continue
-        if kind in _AS_WRITTEN:
+        if kind in _AS_WRITTEN or kind in TEXT_DIRECTIVES:
             out.append(m.group(0))
             continue
-        prompt, options = _picture(*_split_arg(m.group(2)), cast, infer)
+        if (mixed or world_style) and kind in MIXED_DIRECTIVES:
+            # Untimed: a map/chart/timeline is left exactly as written.
+            out.append(m.group(0))
+            continue
+        if kind in STICK_DIRECTIVES:
+            # Untimed: left as written, minus `caption` wherever this
+            # style's text cards are off (same rule as the timed pass), and
+            # always with `who` (a cast character) resolved to that
+            # character's fixed outfit/era -- `who` itself is never
+            # emitted, it is not part of the directive's grammar.
+            arg, options = _split_arg(m.group(2))
+            if not art_mod.text_cards(art_style):
+                options.pop("caption", None)
+            options = _resolve_stick_who(options, cast)
+            out.append(f"[{kind}: {_join_arg(arg, options)}] ")
+            continue
+        if kind in COLLAGE_DIRECTIVES:
+            # Untimed: left as written, minus `caption` wherever this
+            # style's text cards are off (same rule as the timed pass).
+            if art_mod.text_cards(art_style):
+                out.append(m.group(0))
+            else:
+                arg, options = _split_arg(m.group(2))
+                options.pop("caption", None)
+                out.append(f"[{kind}: {_join_arg(arg, options)}] ")
+            continue
+        if kind in CALLOUT_DIRECTIVES:
+            # Untimed: left as written (only reached where text cards keep
+            # it); the label drop is a guard.
+            if art_mod.text_cards(art_style):
+                out.append(m.group(0))
+            else:
+                arg, options = _split_arg(m.group(2))
+                options.pop("label", None)
+                out.append(f"[{kind}: {_join_arg(arg, options)}] ")
+            continue
+        prompt, options = _picture(*_split_arg(m.group(2)), cast, infer, art_style)
+        shot = options.pop(_SHOT_OPTION, art_style)
         stats["pictures"] += 1
         stats["main_face"] += 1 if options.get(FACE_OPTION) == "main" else 0
         if kind == "video" or make_video[picture_index[m.start()]]:
             if kind == "broll":
                 stats["made_video"] += 1
             stats["videos"] += 1
-            out.append(f"[video: {_video_prompt(prompt, options)}{_face_suffix(options)}] ")
+            out.append(f"[video: {_video_prompt(prompt, options, shot)}{_face_suffix(options)}] ")
         else:
             out.append(f"[broll: {_join_arg(prompt, options)}] ")
     out.append(text[pos:])
@@ -1254,7 +1709,39 @@ def apply_to_script(text: str, share: float, cast: Optional[Dict[str, Any]] = No
     return rewritten, stats
 
 
-def filter_beats(beats: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def stamp_art_style(text: str, art_style: str) -> str:
+    """Every `[broll:]` and `[video:]` prompt in `text` with the medium's look
+    (and a clip's motion), nothing else touched -- for a full-style video
+    that is not timed here. `mixed` picks the look per shot from the beat's
+    own `art` option (popped, never emitted); a real shot is left exactly
+    as written, the way `real` itself is for every other style."""
+    name = art_mod.normalise(art_style)
+    if name == "real":
+        return text
+    mixed = art_mod.is_mixed(art_style)
+
+    def one(m: "re.Match[str]") -> str:
+        kind = m.group(1).lower()
+        if kind not in ("broll", "video"):
+            return m.group(0)
+        prompt, options = _split_arg(m.group(2))
+        shot = art_mod.shot_style(art_style, options.pop("art", None)) if mixed else name
+        if not art_mod.uses_face_swap(shot):
+            options = {k: v for k, v in options.items() if k != FACE_OPTION}
+        if mixed and shot == "real":
+            return f"[{kind}: {_join_arg(prompt, options)}]"
+        prompt = art_mod.apply_look(prompt, shot)
+        if kind == "video":
+            prompt = _video_prompt(prompt, options, shot)
+            options.pop("look", None)
+        return f"[{kind}: {_join_arg(prompt, options)}]"
+
+    return _DIRECTIVE_RE.sub(lambda m: one(m) + (" " if m.group(0).endswith(" ") else ""), text)
+
+
+def filter_beats(beats: List[Dict[str, Any]], art_style: str = "real") -> List[Dict[str, Any]]:
     """Plan beats the story style keeps (for the plan-review screen, so the
-    creator is not shown cards that will never render)."""
-    return [b for b in beats if str(b.get("kind") or "").strip().lower() in KEPT_BEAT_KINDS]
+    creator is not shown cards that will never render); an explainer or
+    stick-figure video keeps its short text beats too."""
+    kinds = kept_beat_kinds(art_style)
+    return [b for b in beats if str(b.get("kind") or "").strip().lower() in kinds]

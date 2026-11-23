@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-31",
+  "started_at": "2026-10-31T10:24:16",
+  "finished_at": "2026-10-31T11:32:23",
+  "headline": "7 videos written, 1 problem, 68 min",
+  "markdown": "# Last night: 2026-10-31\n\n## Problems\n\n- auto story Life3Baje/mood_reel: BuzzEdit stopped answering about the vibe reel job b89a5f11a5a2: BuzzEdit is not reachable (not running, or not discoverable on the shared port ledger).\n\nStarted 10:24, took 68 min (shorts).\n\n## Shorts (9 min)\n\n- Life3Baje: **Jab Saari Raahein Khuli Hon** (score 84) -> `2026-10-31_Life3Baje_ShortJabSaariRaaeinKhuliHon`\n- Life3Baje: **Kuch Baatein Jo Karni Thi** (score 75) -> `2026-10-31_Life3Baje_ShortKuchBaateinJoKarniThi`\n- Raat3Baje: **Mumbai Park Ki Woh Mahila** (score 75) -> `2026-10-31_Raat3Baje_ShortMumbaiParkKiWohMahila`\n- Raat3Baje: **600 Bacche Ek Saath Kyun Bhage?** (score 65) -> `2026-10-31_Raat3Baje_Short600BaccheEkSaathKyunBhage`\n- Beyond3Baje: **Canada ke Jungle mein Winged Beings?** (score 82) -> `2026-10-31_Beyond3Baje_ShortCanadaKeJungleMeinWingedBeings`\n- TheTallStoryteller: **Shaadi ki Drunk Chachi 🍻** (score 85) -> `2026-10-31_TheTallStoryteller_ShortShaadiKiDrunkChachi`\n- TheTallStoryteller: **Cake Cutting ka Maha-Yudh! 🎂** (score 80) -> `2026-10-31_TheTallStoryteller_ShortCakeCuttingKaMahaYudh`\n\n## Made by itself (31 min)\n\n- Nothing made.\n- Life3Baje (mood_reel): failed, BuzzEdit stopped answering about the vibe reel job b89a5f11a5a2: BuzzEdit is not reachable (not running, or not discoverable on the shared port ledger).\n\n## Archived\n\n- None: Jo Beet Gayi So Baat Gayi (untouched None days)\n- None: Meri Zuban Se Meri Dastan (untouched None days)\n- None: Tamhini Ghat ka Khauf (untouched None days)\n- None: Brij Raj Bhavan ka Saaya (untouched None days)\n- None: Woh Interdimensional Mehmaan (untouched None days)\n- None: Archives Ka Raaz (untouched None days)\n- None: चुपके चुपके ग़म का खाना कोई हम से सीख जाए (untouched None days)\n- None: हज़ारों ख़्वाहिशें ऐसी कि हर ख़्वाहिश पर दम निकले (untouched None days)\n- None: ये इक़ामत हमें पैग़ाम-ए-सफ़र देती है (untouched None days)\n- None: Dadi Ne Kaha, Namak Mat Daalna, Unhe Nahi Bhaata (untouched None days)\n- None: Raat 12:40 Par Rasoi Mein Koi Chaba Raha Tha (untouched None days)\n- None: Sarab: The Reality of Dreams (untouched None days)\n- None: Ishq: The Art of Dedication (untouched None days)\n- None: Sarhad Ke Bhoota (untouched None days)\n- None: Nagas Se Zyada Khatarnak (untouched None days)\n- None: West Virginia ka Braxie (untouched None days)\n- None: Phoenix Lights ka Sach (untouched None days)\n- None: Raat ko Nakhun Kaatne ka Sach (untouched None days)\n\n## Afterwards\n\n- Stayed awake: someone used the PC 9.0 min ago (needs 10 min idle)\n",
+  "items": [
+    {
+      "task": "shorts_daily",
+      "state": "done",
+      "built": 7,
+      "skipped": 0,
+      "seconds": 535
+    },
+    {
+      "task": "auto_story",
+      "state": "done",
+      "made": 0,
+      "failed": 1,
+      "seconds": 1880
+    },
+    {
+      "task": "director",
+      "state": "done"
+    },
+    {
+      "task": "archive",
+      "state": "done",
+      "archived": 18
+    }
+  ],
+  "problems": [
+    "auto story Life3Baje/mood_reel: BuzzEdit stopped answering about the vibe reel job b89a5f11a5a2: BuzzEdit is not reachable (not running, or not discoverable on the shared port ledger)."
+  ]
+}

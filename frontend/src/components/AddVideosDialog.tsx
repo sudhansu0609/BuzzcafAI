@@ -153,7 +153,7 @@ export default function AddVideosDialog({
   );
 
   const iconBtn = (Icon: typeof Plus, title: string, onClick: () => void, disabled = false) => (
-    <button type="button" className="btn btn-outline btn-sm" title={title} onClick={onClick} disabled={disabled || busy}
+    <button type="button" className="btn btn-outline btn-sm" title={title} aria-label={title} onClick={onClick} disabled={disabled || busy}
       style={{ padding: '2px 7px', fontSize: '0.72rem' }}>
       <Icon size={11} />
     </button>
@@ -175,7 +175,7 @@ export default function AddVideosDialog({
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 14 }}>
           <label style={{ fontSize: '0.82rem', fontWeight: 600 }}>Channel</label>
           <select className="form-control" value={brand} onChange={(e) => { setBrand(e.target.value); setPicked({}); }}
-            style={{ width: 'auto', minWidth: 160 }} disabled={busy}>
+            style={{ width: 'auto', minWidth: 160 }} disabled={busy} aria-label="Channel">
             {brands.map((b) => <option key={b} value={b}>{b}</option>)}
           </select>
           <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
@@ -200,6 +200,7 @@ export default function AddVideosDialog({
                 onChange={(e) => setPastePath(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') { addPaths([pastePath]); setPastePath(''); } }}
                 style={{ flex: 1, minWidth: 200, fontSize: '0.8rem' }}
+                aria-label="Recording path"
               />
               <button type="button" className="btn btn-outline btn-sm" disabled={!pastePath.trim() || busy}
                 onClick={() => { addPaths([pastePath]); setPastePath(''); }} style={{ padding: '4px 10px', fontSize: '0.78rem' }}>
@@ -223,6 +224,7 @@ export default function AddVideosDialog({
                     onChange={(e) => setRows((prev) => prev.map((r, i) => (i === idx ? { ...r, title: e.target.value } : r)))}
                     style={{ fontSize: '0.8rem', padding: '3px 8px' }}
                     title="Project title"
+                    aria-label={`Project title for recording ${idx + 1}`}
                   />
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                     title={row.recording_path}>
@@ -254,6 +256,7 @@ export default function AddVideosDialog({
                     onChange={(e) => setPicked((prev) => ({ ...prev, [p.id]: e.target.checked }))}
                     disabled={busy || !rec}
                     title={rec ? 'Queue this video' : 'Pick its recording first'}
+                    aria-label={rec ? `Queue ${p.name}` : `Pick a recording for ${p.name}`}
                     style={{ width: 16, height: 16 }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>

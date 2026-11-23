@@ -1,5 +1,10 @@
+import contextlib
+import contextvars
+import functools
+import math
 import os
 import json
+import threading
 import logging
 import re
 import subprocess
@@ -7,7 +12,7 @@ import sys
 import time
 import requests
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 
 from core.errors import LLMUnavailable
@@ -15,6 +20,46 @@ from integrations import idle_offload
 from core.paths import CONFIG_PATH
 
 logger = logging.getLogger("buzzcaf_ai.llm")
+
+# One LM Studio request at a time: parallel slots share one KV cache.
+_LM_STUDIO_GATE = threading.BoundedSemaphore(1)
+# model -> when its slot count was last checked (`_lm_studio_ready`).
+_PARALLEL_CHECKED: Dict[str, float] = {}
+# The `usage` block of this thread's latest OpenAI-style reply (`_metered`).
+_CALL = threading.local()
+
+
+def _metered(fn):
+    """Record every generate call -- which model answered, for which job, its
+    tokens and how long it took -- in `integrations.llm_usage`. Never lets the
+    record get in the way of the answer."""
+    @functools.wraps(fn)
+    def wrapper(self, *args, **kwargs):
+        _CALL.usage = None
+        start, text, ok = time.time(), "", False
+        try:
+            text = fn(self, *args, **kwargs)
+            ok = not self.last_response_simulated
+            return text
+        finally:
+            try:
+                from integrations import llm_usage
+                usage = getattr(_CALL, "usage", None) or {}
+                # (system_prompt, user_prompt | messages, require_json, tier, ...)
+                system_prompt = kwargs.get("system_prompt", args[0] if args else "")
+                prompt = kwargs.get("user_prompt", kwargs.get("messages", args[1] if len(args) > 1 else ""))
+                messages = prompt if isinstance(prompt, list) else [{"role": "user", "content": str(prompt)}]
+                tier = kwargs.get("tier", args[3] if len(args) > 3 else None)
+                llm_usage.record(
+                    provider=self.last_provider if ok else None, model=getattr(self, "last_model", ""),
+                    job=_CURRENT_JOB.get(), step=_CURRENT_STEP.get(), tier=tier,
+                    prompt_tokens=usage.get("prompt_tokens") or estimate_tokens(system_prompt, messages),
+                    completion_tokens=usage.get("completion_tokens") or len(str(text or "")) // 3,
+                    cached_tokens=(usage.get("prompt_tokens_details") or {}).get("cached_tokens") or 0,
+                    estimated=not usage, seconds=time.time() - start, ok=ok)
+            except Exception as exc:  # noqa: BLE001
+                logger.debug("usage record skipped: %s", exc)
+    return wrapper
 
 # Environments where falling back to canned text is acceptable. Anywhere else,
 # an unreachable provider raises instead of fabricating an answer.
@@ -26,7 +71,9 @@ def _simulation_enabled() -> bool:
 
 
 # Every provider we know how to reach, in the order we fall back through them.
-FALLBACK_ORDER = ["claude", "gemini", "openai", "lm_studio", "llamacpp", "ollama"]
+# Claude is last: its usage allowance is shared with the creator's own Claude Code use,
+# so it is asked for by name (a tier or the Director) and is a last resort, not a default.
+FALLBACK_ORDER = ["gemini", "openai", "lm_studio", "llamacpp", "ollama", "claude"]
 LOCAL_PROVIDERS = {"lm_studio", "ollama", "llamacpp"}
 LOCAL_FALLBACK_ORDER = ["lm_studio", "llamacpp", "ollama"]
 DEFAULT_TEMPERATURE = 0.7
@@ -43,6 +90,16 @@ CLAUDE_DEFAULT_MODEL = "sonnet"
 # Answers from the proxy are fast, but a cold Claude Code worker plus a long
 # planning prompt can take a while on the first call.
 CLAUDE_TIMEOUT_SECONDS = 240
+
+# "gemini" can talk to a local harness server (http://127.0.0.1:8001) that answers
+# through the user's logged-in personal Google OAuth credentials in their OS keyring
+# (zero API keys required), or to the official Google Gemini API when an API key is set.
+GEMINI_DEFAULT_URL = "http://127.0.0.1:8001"
+GEMINI_RETRY_WAIT_S = 20
+GEMINI_DEFAULT_MODEL = "flash"
+GEMINI_EFFORT_LEVELS = ("low", "medium", "high", "max")
+GEMINI_DEFAULT_EFFORT = "high"
+GEMINI_TIMEOUT_SECONDS = 120
 
 # Console programs (the `lms` CLI, PowerShell) spawned from the desktop app
 # would otherwise each flash a black cmd window on Windows mid-render.
@@ -78,10 +135,136 @@ def estimate_model_mib(name: str) -> int:
 # Two tiers, so cheap work (tags, titles, checklists) can go to the local model
 # and the writing stays on the strong one (roadmap v9, F1). An empty provider
 # means "use the globally selected one". Defaults to local on-device models.
+#
+# A third tier, "premium" (2026-10-16), is for the few personas whose quality
+# decides the video -- the researcher, the script writer, the Shorts writer
+# and the SEO manager. It defaults to Claude Opus through the local proxy
+# (the creator's call: "the script writer and the researcher must be very
+# good ... with Opus"); when the proxy is down or has no key the call falls
+# through to the selected provider like any other tier. Settings -> Model
+# tiers changes it (an empty provider = the selected one).
+#
+# 2026-10-27 the creator: "all the scripts, every other agent works on Gemma
+# 12B, even in the day; keep the Claude functionality but put Gemma as
+# default" -- premium now starts on the selected provider (LM Studio's Gemma)
+# too; Claude stays one click away per tier and as every job route's fallback.
 DEFAULT_TIERS = {
     "fast": {"provider": "llamacpp", "model": ""},
     "strong": {"provider": "", "model": ""},
+    "premium": {"provider": "", "model": ""},
 }
+MODEL_TIERS = tuple(DEFAULT_TIERS)
+
+# Per-job model routing (2026-10-26): on the Model Routing window the creator
+# picks, per kind of work, which model does it -- Claude, Gemma (LM Studio),
+# Ollama or Gemini -- and what to fall back to. A job with no provider ("auto")
+# keeps the persona's tier as before. The workflow engine names each step's job
+# from its output asset (`job_for_asset`); the strategist loop and the chats
+# name theirs with `llm_job(...)`. Stored in config `job_routes`.
+LLM_JOBS = {
+    "research": "Research",
+    "script": "Script writing",
+    "rewrite": "Rewrites & polish",
+    "shorts": "Shorts scripts",
+    "seo": "SEO & titles",
+    "planning": "Visual & production plans",
+    "strategist": "Nightly planner & Director",
+    "assistant": "Studio Assistant chat",
+}
+_ASSET_JOBS = {
+    "research": "research",
+    "script": "script", "screenplay": "script", "story": "script", "outline": "script", "vlog_plan": "script",
+    "script_final": "rewrite", "narration_optimized": "rewrite",
+    "shorts_set": "shorts",
+    "seo_package": "seo", "publish_details": "seo",
+    "visual_plan": "planning", "sound_plan": "planning", "scene_breakdown": "planning",
+    "shot_list": "planning", "clip_plan": "planning", "image_plan": "planning",
+    "character_plan": "planning", "thumbnail_plan": "planning", "edit_plan": "planning",
+}
+ROUTE_PROVIDERS = ("", "claude", "lm_studio", "ollama", "gemini")
+# Jobs that use Claude only when their route names it as the provider -- never as a
+# fallback (config `claude_manual_only_jobs` replaces the list).
+CLAUDE_MANUAL_ONLY_JOBS = ("research", "script", "rewrite", "shorts", "seo", "planning")
+_CURRENT_JOB: "contextvars.ContextVar[Optional[str]]" = contextvars.ContextVar("llm_job", default=None)
+# "workflow/step name" of the workflow step making the calls, for the usage record.
+_CURRENT_STEP: "contextvars.ContextVar[str]" = contextvars.ContextVar("llm_step", default="")
+
+
+@contextlib.contextmanager
+def llm_job(job: Optional[str], step: str = ""):
+    """Calls made inside this block (in this thread) follow `job`'s route;
+    `step` labels them in the usage record (the forecasts read it back)."""
+    token = _CURRENT_JOB.set(job if job in LLM_JOBS else None)
+    step_token = _CURRENT_STEP.set(step or _CURRENT_STEP.get())
+    try:
+        yield
+    finally:
+        _CURRENT_STEP.reset(step_token)
+        _CURRENT_JOB.reset(token)
+
+
+def current_job() -> Optional[str]:
+    return _CURRENT_JOB.get()
+
+
+def job_for_asset(asset_type: Optional[str]) -> Optional[str]:
+    return _ASSET_JOBS.get((asset_type or "").strip().lower())
+
+
+# Day and Night routes (2026-10-26, the creator: "make Gemma write scripts at
+# night, by day Claude is ok, a bit slow is fine"). `job_routes_night` holds the
+# night ones (a job missing there keeps its day route); they apply inside the
+# night hours (`night_hours`, 22:00-09:00 by default) and always in the nightly
+# run's own process (nightly_run.py sets BUZZCAF_ROUTE_PROFILE=night).
+ROUTE_PROFILES = ("day", "night")
+DEFAULT_NIGHT_HOURS = {"start": "22:00", "end": "09:00"}
+_PROFILE: "contextvars.ContextVar[Optional[str]]" = contextvars.ContextVar("llm_route_profile", default=None)
+
+
+def night_hours(config: Optional[Dict[str, Any]] = None) -> Dict[str, str]:
+    saved = (config if config is not None else load_config()).get("night_hours") or {}
+    return {k: str(saved.get(k) or DEFAULT_NIGHT_HOURS[k]) for k in ("start", "end")}
+
+
+def route_profile(config: Optional[Dict[str, Any]] = None) -> str:
+    """"night" or "day": forced (the nightly run, `route_profile_as`), else by the clock."""
+    forced = (_PROFILE.get() or os.environ.get("BUZZCAF_ROUTE_PROFILE", "")).strip().lower()
+    if forced in ROUTE_PROFILES:
+        return forced
+    cfg = config if config is not None else load_config()
+    if not cfg.get("job_routes_night"):
+        return "day"
+    hours, now = night_hours(cfg), datetime.now().strftime("%H:%M")
+    start, end = hours["start"], hours["end"]
+    inside = (start <= now < end) if start < end else (now >= start or now < end)
+    return "night" if inside else "day"
+
+
+@contextlib.contextmanager
+def route_profile_as(profile: str):
+    """Calls (and forecasts) inside this block use the `profile` routes."""
+    token = _PROFILE.set(profile if profile in ROUTE_PROFILES else None)
+    try:
+        yield
+    finally:
+        _PROFILE.reset(token)
+
+
+def job_routes(config: Optional[Dict[str, Any]] = None, profile: Optional[str] = None) -> Dict[str, Dict[str, str]]:
+    """Every job's {provider, model, fallback} for `profile` (the current one by
+    default), blanks filled in."""
+    cfg = config if config is not None else load_config()
+    profile = profile or route_profile(cfg)
+    day = cfg.get("job_routes") or {}
+    night = (cfg.get("job_routes_night") or {}) if profile == "night" else {}
+    out = {}
+    for job in LLM_JOBS:
+        entry = night.get(job) if isinstance(night.get(job), dict) else day.get(job)
+        entry = entry if isinstance(entry, dict) else {}
+        out[job] = {k: str(entry.get(k) or "").strip() for k in ("provider", "model", "fallback")}
+        if entry.get("fallback_model"):
+            out[job]["fallback_model"] = str(entry["fallback_model"]).strip()
+    return out
 
 
 def normalize_model_name(name: str) -> str:
@@ -181,6 +364,44 @@ def exact_model_id(name: Optional[str], ids: List[str]) -> Optional[str]:
     return next((i for i in ids if i and i.strip().lower() == wanted), None) if wanted else None
 
 
+def ollama_resident_models(base_url: str = "http://127.0.0.1:11434") -> List[Dict[str, Any]]:
+    """[{name, context_length}] for the models Ollama holds in memory (empty when it is down)."""
+    try:
+        r = requests.get(f"{base_url}/api/ps", timeout=1.5)
+        if r.status_code != 200:
+            return []
+        return [{"name": str(m.get("name") or m.get("model") or ""),
+                 "context_length": int(m.get("context_length") or 0)}
+                for m in (r.json().get("models") or [])]
+    except Exception:  # noqa: BLE001 - Ollama down is "nothing resident"
+        return []
+
+
+def ollama_copy_of(model_name: str, min_context: int = 16384) -> Optional[str]:
+    """The name Ollama serves `model_name` under when it already holds that model with at
+    least `min_context` of context. The creator's rule (2026-10-21): one model in memory, and
+    a copy already loaded is used rather than loading another."""
+    if not model_name:
+        return None
+    for m in ollama_resident_models():
+        if m["context_length"] >= min_context and (
+                models_match(model_name, m["name"]) or models_match(m["name"], model_name)):
+            return m["name"]
+    return None
+
+
+def unload_ollama_models(base_url: str = "http://127.0.0.1:11434") -> int:
+    """Eject every model Ollama holds (keep_alive 0): one model in memory at a time."""
+    count = 0
+    for m in ollama_resident_models(base_url):
+        try:
+            requests.post(f"{base_url}/api/generate", json={"model": m["name"], "keep_alive": 0}, timeout=30)
+            count += 1
+        except Exception as exc:  # noqa: BLE001 - best effort before a load
+            logger.info("Could not unload Ollama model %s (%s)", m["name"], exc)
+    return count
+
+
 def is_model_already_loaded(target_model: Optional[str], loaded_models: List[str]) -> Tuple[bool, Optional[str]]:
     """Determine if target_model is already loaded in memory.
     Returns (True, matched_id) if loaded, or (False, None)."""
@@ -210,11 +431,28 @@ def is_model_already_loaded(target_model: Optional[str], loaded_models: List[str
     return False, None
 
 
+def free_idle_comfyui(base_url: str = "http://127.0.0.1:8188") -> bool:
+    """Ask ComfyUI to drop its cached models (VRAM and RAM) before an LLM loads -- only
+    when nothing is queued or running there, so a render is never cut. ComfyUI keeps
+    Wan/Z-Image resident after a job (2026-10-23: ~30 GB committed while idle, then
+    Gemma loaded on top and the PC ran out of memory). True when it was asked."""
+    try:
+        q = requests.get(f"{base_url}/queue", timeout=3).json()
+        if q.get("queue_running") or q.get("queue_pending"):
+            return False
+        r = requests.post(f"{base_url}/free", json={"unload_models": True, "free_memory": True}, timeout=10)
+        return r.status_code < 400
+    except Exception:  # noqa: BLE001 - ComfyUI not running: nothing to free
+        return False
+
+
 def ensure_local_model_loaded(provider: str = "lm_studio", model_name: Optional[str] = None) -> Dict[str, Any]:
     """Ensure that the requested local model is loaded in LM Studio or Ollama.
     If already loaded, returns status immediately without calling load again.
     If not loaded, attempts to bring it up automatically."""
     import subprocess
+
+    idle_offload.mark_used(provider)  # unloaded again once the Studio is idle
 
     if provider == "lm_studio":
         try:
@@ -298,11 +536,16 @@ def ensure_local_model_loaded(provider: str = "lm_studio", model_name: Optional[
                     logger.info("Unloading LM Studio model '%s' to make room for '%s'.", other, target_key)
                     subprocess.run([lms_bin, "unload", other], capture_output=True, text=True, timeout=60,
                                    creationflags=NO_WINDOW)
+                ejected = unload_ollama_models()
+                if ejected:
+                    logger.info("Unloaded %d Ollama model(s) before loading '%s' into LM Studio.", ejected, target_key)
+                if free_idle_comfyui():
+                    logger.info("Freed ComfyUI's cached models before loading '%s' into LM Studio.", target_key)
                 logger.info("Attempting to auto-load LM Studio model '%s' via lms CLI...", target_key)
-                # Enough context for two ~8k-token planning windows at once
-                # (LM Studio's parallel slots share one KV cache).
-                ctx = int(load_config().get("lm_studio_context_length") or 32768)
-                cmd = [lms_bin, "load", target_key, "-c", str(ctx), "-y"]
+                # One request slot (`_LM_STUDIO_GATE`): the whole context
+                # belongs to a single prompt; it grows to fit when needed.
+                ctx = int(load_config().get("lm_studio_context_length") or 65536)
+                cmd = [lms_bin, "load", target_key, "-c", str(ctx), "--parallel", "1", "-y"]
                 proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180, creationflags=NO_WINDOW)
                 if proc.returncode == 0:
                     logger.info("Successfully loaded LM Studio model '%s'", target_key)
@@ -338,9 +581,9 @@ def lm_studio_context_length() -> int:
     32k by default). LM Studio's own just-in-time load uses its default instead
     (16k for Gemma), which a full script's visual plan does not fit."""
     try:
-        return max(4096, int(load_config().get("lm_studio_context_length") or 32768))
+        return max(4096, int(load_config().get("lm_studio_context_length") or 65536))
     except (TypeError, ValueError):
-        return 32768
+        return 65536
 
 
 def lm_studio_loaded_context(model: str, base_url: str = "http://localhost:1234") -> Optional[int]:
@@ -356,6 +599,96 @@ def lm_studio_loaded_context(model: str, base_url: str = "http://localhost:1234"
     return None
 
 
+def lm_studio_loaded_parallel(model: str) -> Optional[int]:
+    """How many request slots `model` is loaded with (`lms ps --json`), or None.
+    LM Studio splits the loaded context between the slots: a 64k model loaded
+    with its default 4 gives each prompt 16k, and long prompts were refused with
+    "Context size has been exceeded" although they fit 64k (2026-10-26)."""
+    lms_bin = find_lms_binary()
+    if not lms_bin:
+        return None
+    try:
+        proc = subprocess.run([lms_bin, "ps", "--json"], capture_output=True, text=True, timeout=20,
+                              creationflags=NO_WINDOW)
+        for m in json.loads(proc.stdout or "[]"):
+            if model in (m.get("identifier"), m.get("modelKey")) and m.get("parallel"):
+                return int(m["parallel"])
+    except Exception as exc:  # noqa: BLE001
+        logger.debug("Could not read LM Studio's parallel slots: %s", exc)
+    return None
+
+
+class ContextTooLarge(Exception):
+    """The prompt does not fit even the largest context the Studio allows."""
+
+
+class GeminiRateLimited(Exception):
+    """Google's rate limit is on (the harness said so, or the Studio is waiting for the window)."""
+
+
+def _harness_gate() -> None:
+    """No request to the harness while its rate-limit window is open."""
+    from integrations import gemini_limit
+    rec = gemini_limit.active()
+    if rec:
+        raise GeminiRateLimited(f"Gemini is rate-limited until {rec.get('until')}")
+
+
+def _harness_rate_limited(response) -> None:
+    """Record a 429 from the harness (its detail carries until/estimated) and raise."""
+    from datetime import datetime, timedelta
+    from integrations import gemini_limit
+    detail: dict = {}
+    try:
+        d = response.json().get("detail")
+        detail = d if isinstance(d, dict) else {"message": str(d or "")}
+    except Exception:
+        detail = {"message": (response.text or "")[:300]}
+    until = detail.get("until")
+    estimated = bool(detail.get("estimated", False))
+    if not until:
+        until, estimated = (datetime.now().astimezone() + timedelta(seconds=60)).isoformat(timespec="seconds"), True
+    gemini_limit.record(until, estimated, str(detail.get("message") or ""))
+    try:
+        hhmm = datetime.fromisoformat(until).astimezone().strftime("%H:%M")
+    except ValueError:
+        hhmm = str(until)
+    logger.warning("Gemini hit its rate limit; next window about %s", hhmm)
+    raise GeminiRateLimited(f"Gemini rate limit; next window about {hhmm}")
+
+
+_OVERFLOW_TOKENS_RE = re.compile(r"request \((\d+) tokens\)")
+
+
+def estimate_tokens(system: str, messages: List[Dict[str, str]]) -> int:
+    from runtime.context_budget import estimate_tokens as _est  # lazy: runtime imports this module
+    return _est(system, messages)
+
+
+def lm_studio_max_context_length() -> int:
+    """The most context a prompt may grow the model to (`lm_studio_max_context_length`)."""
+    try:
+        return max(4096, int(load_config().get("lm_studio_max_context_length") or 131072))
+    except (TypeError, ValueError):
+        return 131072
+
+
+def local_max_output_tokens() -> int:
+    try:
+        return max(256, int(load_config().get("local_max_output_tokens") or 8192))
+    except (TypeError, ValueError):
+        return 8192
+
+
+def _overflow_tokens(err: Any) -> Optional[int]:
+    m = _OVERFLOW_TOKENS_RE.search(str(err))
+    return int(m.group(1)) if m else None
+
+
+def _round_ctx(n: int) -> int:
+    return min(lm_studio_max_context_length(), max(lm_studio_context_length(), math.ceil(n / 8192) * 8192))
+
+
 def reload_lm_studio_model(model: str, context: int) -> bool:
     """Load `model` again with `context` tokens (unload first: LM Studio keeps
     the old instance otherwise)."""
@@ -365,8 +698,8 @@ def reload_lm_studio_model(model: str, context: int) -> bool:
         return False
     try:
         subprocess.run([lms_bin, "unload", model], capture_output=True, text=True, timeout=60, creationflags=NO_WINDOW)
-        proc = subprocess.run([lms_bin, "load", model, "-c", str(context), "-y"], capture_output=True, text=True,
-                              timeout=180, creationflags=NO_WINDOW)
+        proc = subprocess.run([lms_bin, "load", model, "-c", str(context), "--parallel", "1", "-y"],
+                              capture_output=True, text=True, timeout=180, creationflags=NO_WINDOW)
         if proc.returncode != 0:
             logger.warning("lms load -c %d failed for '%s': %s", context, model, (proc.stderr or proc.stdout).strip()[:300])
         return proc.returncode == 0
@@ -377,8 +710,10 @@ def reload_lm_studio_model(model: str, context: int) -> bool:
 
 def load_config() -> Dict[str, Any]:
     default_config = {
+        "gemini_url": GEMINI_DEFAULT_URL,
         "gemini_api_key": "",
-        "gemini_model": "gemini-1.5-flash",
+        "gemini_model": "flash",
+        "gemini_thinking_level": GEMINI_DEFAULT_EFFORT,
         "openai_api_key": "",
         "openai_model": "gpt-4o-mini",
         "lm_studio_url": "http://localhost:1234/v1",
@@ -394,18 +729,29 @@ def load_config() -> Dict[str, Any]:
         # produce_video model calls (visual planning, and BuzzEdit's moods,
         # topics and picture prompts) through the Claude proxy above.
         "produce_llm_provider": "auto",
+        # The finished video: copied next to the recording ("beside_recording"),
+        # into one folder ("folder" + produce_output_dir), or left where
+        # BuzzEdit wrote it ("buzzedit"); Explorer shows it when done.
+        "produce_output_mode": "beside_recording",
+        "produce_output_dir": "",
+        "produce_reveal_output": True,
         "tiers": {k: dict(v) for k, v in DEFAULT_TIERS.items()},
         "local_only": True,
         "prefer_gemini": False,
-        "selected_provider": "lm_studio"
+        "selected_provider": "lm_studio",
+        "lm_studio_context_length": 32768,
+        "lm_studio_max_context_length": 65536,
+        "local_max_output_tokens": 8192,
     }
 
     config = dict(default_config)
 
     # 1. Environment variables provide baseline defaults
     env_keys = {
+        "GEMINI_URL": "gemini_url",
         "GEMINI_API_KEY": "gemini_api_key",
         "GEMINI_MODEL": "gemini_model",
+        "GEMINI_THINKING_LEVEL": "gemini_thinking_level",
         "OPENAI_API_KEY": "openai_api_key",
         "OPENAI_MODEL": "openai_model",
         "LM_STUDIO_URL": "lm_studio_url",
@@ -514,6 +860,60 @@ def probe_claude(config: Optional[Dict[str, Any]] = None, timeout: float = 5.0) 
     return result
 
 
+def gemini_settings(config: Dict[str, Any]) -> Dict[str, str]:
+    """`{url, api_key, model, thinking_level}` for Gemini (local harness or cloud API)."""
+    return {
+        "url": str(config.get("gemini_url") or GEMINI_DEFAULT_URL).rstrip("/"),
+        "api_key": str(config.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "") or ""),
+        "model": str(config.get("gemini_model") or GEMINI_DEFAULT_MODEL),
+        "thinking_level": str(config.get("gemini_thinking_level") or GEMINI_DEFAULT_EFFORT).lower(),
+    }
+
+
+def is_local_gemini(config: Optional[Dict[str, Any]] = None) -> bool:
+    cfg = gemini_settings(config or load_config())
+    url = cfg["url"].lower()
+    return "127.0.0.1" in url or "localhost" in url
+
+
+def probe_gemini(config: Optional[Dict[str, Any]] = None, timeout: float = 3.0) -> Dict[str, Any]:
+    """Is the local Gemini harness server (http://127.0.0.1:8001) or Google Gemini API reachable? Never raises."""
+    cfg = gemini_settings(config or load_config())
+    is_local = is_local_gemini(cfg)
+    result: Dict[str, Any] = {
+        "url": cfg["url"],
+        "model": cfg["model"],
+        "thinking_level": cfg.get("thinking_level", GEMINI_DEFAULT_EFFORT),
+        "thinking_levels": list(GEMINI_EFFORT_LEVELS),
+        "key_set": bool(cfg["api_key"]),
+        "online": False,
+        "is_local": is_local,
+        "auth_mode": "",
+        "models": ["flash", "argon", "flash-lite", "pro", "gemini-2.5-flash"],
+        "message": "",
+    }
+    if is_local:
+        try:
+            resp = requests.get(f"{cfg['url']}/openapi.json", timeout=timeout)
+            if resp.status_code == 200:
+                result["online"] = True
+                result["auth_mode"] = "oauth-personal (Antigravity CLI keyring)"
+                result["message"] = f"Gemini harness online at {cfg['url']} (Zero API keys — Personal OAuth)."
+                return result
+        except requests.RequestException as exc:
+            result["message"] = f"Gemini harness not reachable at {cfg['url']} ({exc.__class__.__name__})."
+
+    if cfg["api_key"]:
+        result["online"] = True
+        result["auth_mode"] = "api_key"
+        result["message"] = "Google Gemini Cloud API configured with API key."
+        return result
+
+    if not result["message"]:
+        result["message"] = f"Gemini harness not reachable at {cfg['url']} and no Gemini API key configured."
+    return result
+
+
 _gpu_busy_cache: Dict[str, float] = {"at": 0.0, "busy": 0.0}
 
 
@@ -552,9 +952,158 @@ def _defer_gpu_providers(order: List[str]) -> List[str]:
     return [p for p in order if p not in LOCAL_PROVIDERS] + [p for p in order if p in LOCAL_PROVIDERS]
 
 
+
+#: A local model call waits for BuzzEdit's reel as long as the reel keeps moving; it
+#: only gives up when the reel's progress has not changed for this long (a stuck
+#: job). A fixed 45-min ceiling let Gemma load beside Wan on every long story reel
+#: (19-45 shots run hours) -- Fable review, 2026-10-24.
+REEL_RENDER_STALL_S = 40 * 60.0
+
+
+def wait_for_reel_render() -> None:
+    """Hold a local-model call while BuzzEdit is generating a reel: loading the LLM
+    then takes the VRAM ComfyUI is using (2026-10-23: a clip timed out three times
+    while a reel's poem search and an overnight story batch loaded Gemma). The
+    reel's own model steps run before its render starts, so they never wait here."""
+    try:
+        from integrations.buzzedit_client import BuzzEditClient
+        client = BuzzEditClient()
+        last_seen, last_change = None, time.time()
+        told = False
+        while client.vibe_reel_busy():
+            try:
+                busy = client._get("/api/reels/busy", timeout=(5, 30)).json()
+                job = client.vibe_reel_job(busy["job_id"]) if busy.get("job_id") else {}
+                seen = (job.get("progress"), job.get("message"))
+            except Exception:  # noqa: BLE001 - cannot read progress: count it as unchanged
+                seen = last_seen
+            # The master pause (docs/STUDIO_DIRECTOR_PLAN.md Part 1) holds the
+            # reel between shots on purpose -- that is not a stall, and this
+            # wait must not give up while it is on, however long it lasts.
+            try:
+                from app.services import master_control
+                paused = master_control.is_paused()
+            except Exception:  # noqa: BLE001
+                paused = False
+            if paused:
+                last_change = time.time()
+            elif seen != last_seen:
+                last_seen, last_change = seen, time.time()
+            elif time.time() - last_change > REEL_RENDER_STALL_S:
+                logger.warning("Reel render shows no progress for %d min; the model call goes ahead",
+                               int(REEL_RENDER_STALL_S // 60))
+                break
+            if not told:
+                logger.info("Local model call waiting: BuzzEdit is rendering a reel")
+                told = True
+            time.sleep(20)
+    except Exception as e:  # noqa: BLE001 - never block a call on the check itself
+        logger.debug("reel render check skipped: %s", e)
+
+
+#: What the PC keeps free when a local model loads (creator rule 2026-10-26:
+#: "models one at a time, or at least 1-2 GB VRAM and 4-5 GB RAM remain; the
+#: PC must not lag or hang"). Tonight a Gemma load beside a render and a voice
+#: timed out after 600 s and the fallback loaded a second model on Ollama.
+MIN_FREE_VRAM_MIB = 1536
+MIN_FREE_RAM_MIB = 5120
+#: A call waits this long for room at most, then goes ahead with a warning --
+#: a stuck GPU job must not wedge every script forever.
+LOCAL_HEADROOM_MAX_WAIT_S = 6 * 3600.0
+LOCAL_HEADROOM_POLL_S = 20.0
+
+_free_cache: Dict[str, Any] = {"at": 0.0, "value": (None, None)}
+
+
+def free_memory_mib() -> Tuple[Optional[int], Optional[int]]:
+    """(free VRAM, free RAM) in MiB; None for what cannot be read. Cached 5 s."""
+    now = time.monotonic()
+    if now - _free_cache["at"] < 5.0:
+        return _free_cache["value"]
+    vram: Optional[int] = None
+    ram: Optional[int] = None
+    try:
+        import shutil
+        exe = shutil.which("nvidia-smi")
+        if exe:
+            text = subprocess.run([exe, "--query-gpu=memory.used,memory.total", "--format=csv,noheader,nounits"],
+                                  capture_output=True, text=True, timeout=5,
+                                  creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)).stdout.strip()
+            used, total = (float(p.strip()) for p in text.splitlines()[0].split(","))
+            vram = int(total - used)
+    except Exception:  # noqa: BLE001 - no NVIDIA card or driver busy: unknown, not full
+        vram = None
+    try:
+        import psutil
+        ram = int(psutil.virtual_memory().available / (1024 * 1024))
+    except Exception:  # noqa: BLE001
+        ram = None
+    _free_cache.update(at=now, value=(vram, ram))
+    return vram, ram
+
+
+def local_headroom_problem(need_mib: int, loaded: bool) -> Optional[str]:
+    """Why loading (or, `loaded`, using) a local model now would leave the PC
+    too little room, or None. A model already in memory adds no VRAM; only
+    the RAM floor applies to it."""
+    vram, ram = free_memory_mib()
+    if not loaded and vram is not None and vram < need_mib + MIN_FREE_VRAM_MIB:
+        return (f"{vram} MiB VRAM free; the model needs ~{need_mib} MiB and {MIN_FREE_VRAM_MIB} MiB must "
+                "stay free")
+    if ram is not None and ram < MIN_FREE_RAM_MIB:
+        return f"{ram} MiB RAM free; {MIN_FREE_RAM_MIB} MiB must stay free"
+    return None
+
+
+def _ollama_model_loaded(model: str) -> bool:
+    try:
+        resp = requests.get("http://127.0.0.1:11434/api/ps", timeout=2)
+        names = {str(m.get("name") or "") for m in (resp.json().get("models") or [])}
+        return model in names or any(n.split(":")[0] == model.split(":")[0] for n in names if model)
+    except Exception:  # noqa: BLE001 - Ollama down: nothing of it is loaded
+        return False
+
+
+def wait_for_local_headroom(provider: str, model: str, loaded: bool) -> None:
+    """Hold a local model call until it fits with room to spare (above)."""
+    need = estimate_model_mib(model)
+    started = time.time()
+    told = False
+    asked_free = False
+    while True:
+        problem = local_headroom_problem(need, loaded)
+        if not problem:
+            if told:
+                logger.info("Local %s call goes ahead: there is room now (%s).", provider, model)
+            return
+        if not asked_free and not _gpu_owned_by_render():
+            # Nothing is rendering: the card is full of models cached from the
+            # last job, not work. BuzzEdit hands it back once, then we measure.
+            asked_free = True
+            try:
+                from integrations.buzzedit_client import BuzzEditClient
+                client = BuzzEditClient()
+                if client.narration_busy() or client.vibe_reel_busy():
+                    raise RuntimeError("BuzzEdit is making a voice or a reel")
+                client.clear_vram()
+                _free_cache["at"] = 0.0
+                continue
+            except Exception as exc:  # noqa: BLE001 - BuzzEdit down: nothing of its to free
+                logger.debug("headroom: could not ask BuzzEdit to free the GPU (%s)", exc)
+        if time.time() - started > LOCAL_HEADROOM_MAX_WAIT_S:
+            logger.warning("Local %s call waited %d h for room (%s); going ahead.", provider,
+                           int(LOCAL_HEADROOM_MAX_WAIT_S // 3600), problem)
+            return
+        if not told:
+            logger.info("Local %s call for %s waits for room: %s.", provider, model, problem)
+            told = True
+        time.sleep(LOCAL_HEADROOM_POLL_S)
+        _free_cache["at"] = 0.0
+
+
 class LLMService:
     def __init__(self, forced_provider: Optional[str] = None, purpose: str = "agents",
-                 fallback_provider: Optional[str] = None):
+                 fallback_provider: Optional[str] = None, effort: Optional[str] = None):
         self.config = load_config()
         # "production" (video planning) or "agents" (everything else): picks
         # which of the two Settings thinking switches applies to local calls.
@@ -563,6 +1112,8 @@ class LLMService:
         # because every configured provider failed. Callers must surface this
         # rather than presenting fabricated output as a model response.
         self.last_response_simulated = False
+        # Which provider answered the most recent call (None when simulated).
+        self.last_provider: Optional[str] = None
         # A provider to try before anything else -- how produce_video routes
         # its planning calls to Claude without touching the global selection.
         # The normal order still follows, so a proxy that is down falls back.
@@ -572,11 +1123,43 @@ class LLMService:
         # Strict Local because the caller named it (produce_video adds the
         # Claude proxy this way when the production switch is on "auto").
         self.fallback_provider = (fallback_provider or "").strip().lower() or None
+        # Explicit reasoning/effort override for Gemini harness ("low", "medium", "high", "max")
+        self.forced_effort = (effort or "").strip().lower() or None
+        # True only for forecasts: the provider order as it is with no render on the GPU.
+        self.ignore_render = False
 
     def reload_config(self):
         self.config = load_config()
 
+    def gemini_effort_level(self, override: Optional[str] = None) -> str:
+        """Determines the Gemini thinking/effort level (low, medium, high, max).
+        Valid levels: low, medium, high, max.
+        Explicit override or forced_effort is honored first.
+        If not explicitly overridden and thinking_enabled() is False, returns 'low'.
+        Otherwise returns config['gemini_thinking_level'] (default 'high')."""
+        choice = (override or self.forced_effort or "").strip().lower()
+        if choice in GEMINI_EFFORT_LEVELS:
+            return choice
+        if not self.thinking_enabled():
+            return "low"
+        cfg_level = str(self.config.get("gemini_thinking_level") or GEMINI_DEFAULT_EFFORT).strip().lower()
+        if cfg_level in GEMINI_EFFORT_LEVELS:
+            return cfg_level
+        return GEMINI_DEFAULT_EFFORT
+
+    def _route(self) -> Dict[str, str]:
+        """The current job's route when it names a provider, else {}."""
+        job = _CURRENT_JOB.get()
+        if not job:
+            return {}
+        route = job_routes(self.config).get(job) or {}
+        return route if route.get("provider") else {}
+
     def _tier_settings(self, tier: Optional[str]) -> Dict[str, Any]:
+        # A routed job overrides the persona's tier (the Model Routing window).
+        route = self._route()
+        if route:
+            return route
         entry = (self.config.get("tiers") or {}).get(tier) if tier else None
         return entry if isinstance(entry, dict) else {}
 
@@ -594,9 +1177,19 @@ class LLMService:
             order.append(self.forced_provider)
             explicit.append(self.forced_provider)
         tier_provider = str(self._tier_settings(tier).get("provider") or "").strip().lower()
+        # A copy of the wanted local model already in Ollama is used as it is (one model
+        # in memory at a time); `_model_for("ollama")` answers with that copy's name.
+        wanted = str(self._tier_settings(tier).get("model") or self.config.get("lm_studio_model") or "")
+        if tier_provider in ("", "lm_studio", "llamacpp") and ollama_copy_of(wanted):
+            order.append("ollama")
+            explicit.append("ollama")
         if tier_provider:
             order.append(tier_provider)
             explicit.append(tier_provider)
+        route_fallback = str(self._route().get("fallback") or "").strip().lower()
+        if route_fallback:
+            order.append(route_fallback)
+            explicit.append(route_fallback)
 
         provider = self.config.get("selected_provider") or os.environ.get("SELECTED_PROVIDER")
         if not provider:
@@ -613,26 +1206,47 @@ class LLMService:
         else:
             order.extend(FALLBACK_ORDER)
 
+        # Writing jobs never reach Claude by themselves (the creator, 2026-10-29: "remove
+        # Claude from script writing altogether, no fallback, a manual switch only"): only a
+        # route that names Claude as the job's own provider, or a forced Claude call, uses it.
+        job = _CURRENT_JOB.get()
+        no_auto_claude = (job in self.config.get("claude_manual_only_jobs", CLAUDE_MANUAL_ONLY_JOBS)
+                          and tier_provider != "claude" and self.forced_provider != "claude")
+
         seen, unique = set(), []
         for name in order:
             if not name or name in seen:
                 continue
+            if name == "claude" and no_auto_claude:
+                continue
             if is_local_only and name not in LOCAL_PROVIDERS:
-                # The Claude proxy is the one exception: allowed under Strict
-                # Local when the user asked for it by name, never as an
-                # implicit fallback (see CLAUDE_DEFAULT_URL above).
-                if not (name == "claude" and name in explicit):
+                # The Claude proxy and local Gemini harness are exceptions: allowed under Strict
+                # Local when the user asked for them by name, never as an implicit fallback.
+                if name == "claude" and name in explicit:
+                    pass
+                elif name == "gemini" and name in explicit and is_local_gemini(self.config):
+                    pass
+                else:
                     continue
             seen.add(name)
             unique.append(name)
-        return _defer_gpu_providers(unique)
+        return unique if getattr(self, "ignore_render", False) else _defer_gpu_providers(unique)
 
     def _model_for(self, provider: str, tier: Optional[str]) -> str:
+        route = self._route()
+        if route and provider == "claude" and route.get("fallback") == "claude" and route.get("provider") != "claude":
+            # A routed job that falls back to Claude (Gemma busy or down) gets a
+            # model fit to write with, not the cheap default (haiku).
+            return route.get("fallback_model") or "sonnet"
         tier_cfg = self._tier_settings(tier)
         tier_p = str(tier_cfg.get("provider") or "").strip().lower()
         override = str(tier_cfg.get("model") or "").strip()
         if override and (not tier_p or tier_p == provider.lower()):
             return override
+        if provider.lower() == "ollama":
+            copy = ollama_copy_of(override or str(self.config.get("lm_studio_model") or ""))
+            if copy:
+                return copy
         return {
             "gemini": self.config.get("gemini_model", "gemini-1.5-flash"),
             "openai": self.config.get("openai_model", "gpt-4o-mini"),
@@ -738,26 +1352,74 @@ class LLMService:
         try:
             if model and not self._is_lm_studio_model_loaded(model):
                 ensure_local_model_loaded("lm_studio", model)
+            elif model and time.time() - _PARALLEL_CHECKED.get(model, 0) > 300:
+                # Loaded by someone else (LM Studio's own JIT load, its UI) with
+                # several slots: one prompt then gets only a share of the context.
+                _PARALLEL_CHECKED[model] = time.time()
+                slots = lm_studio_loaded_parallel(model)
+                if slots and slots > 1:
+                    ctx = lm_studio_loaded_context(model) or lm_studio_context_length()
+                    logger.warning("LM Studio holds '%s' with %d parallel slots (%d tokens each); "
+                                   "reloading with one slot.", model, slots, ctx // slots)
+                    reload_lm_studio_model(model, ctx)
         except Exception as exc:  # noqa: BLE001
             logger.debug("Could not pre-load LM Studio model '%s': %s", model, exc)
 
-    def _grow_lm_studio_context(self, model: str, error: Exception) -> bool:
-        """After a "prompt exceeds the context" refusal: when the model is
-        loaded with less context than the Studio's setting (a just-in-time
-        load, or loaded by hand), reload it with the setting. True when the
-        call is worth one retry."""
+    def _grow_lm_studio_context(self, model: str, error: Optional[Exception] = None,
+                                need: Optional[int] = None) -> bool:
+        """Reload `model` with more context. After a "prompt exceeds the
+        context" refusal (`error`) or when the prompt is known to need `need`
+        tokens: the context wanted is the size of the prompt (+15%, + the
+        output reserve) rounded up to 8k, never above the maximum. With no
+        count it is the Studio's setting. True when the call is worth a retry."""
         try:
-            if not _CONTEXT_OVERFLOW_RE.search(str(error)):
+            if need is None and not _CONTEXT_OVERFLOW_RE.search(str(error)):
                 return False
-            wanted, have = lm_studio_context_length(), lm_studio_loaded_context(model)
-            if have is None or have >= wanted:
+            count = need or _overflow_tokens(error) or 0
+            out_reserve = local_max_output_tokens()
+            max_ctx = lm_studio_max_context_length()
+            wanted = _round_ctx(int(count * 1.15) + out_reserve) if count else lm_studio_context_length()
+            have = lm_studio_loaded_context(model)
+            if have is None or not (have < wanted <= max_ctx):
                 return False
-            logger.warning("LM Studio has '%s' loaded with %d tokens of context and the prompt does not fit; "
-                           "reloading it with %d and retrying.", model, have, wanted)
+            logger.warning("LM Studio context for '%s': %d -> %d tokens (prompt does not fit); reloading and retrying.",
+                           model, have, wanted)
             return reload_lm_studio_model(model, wanted)
         except Exception as exc:  # noqa: BLE001
             logger.debug("Could not grow LM Studio's context for '%s': %s", model, exc)
             return False
+
+    def _lm_studio_fit(self, model: str, system_prompt: str, messages: List[Dict[str, str]]):
+        """Inside the gate, before the request: grow the loaded context to the
+        prompt, or compress the prompt when it exceeds the maximum. Returns
+        (system, messages); raises ContextTooLarge when nothing makes it fit."""
+        out_reserve = local_max_output_tokens()
+        max_ctx = lm_studio_max_context_length()
+        need = estimate_tokens(system_prompt, messages) + out_reserve
+        if need > max_ctx:
+            from runtime.context_budget import fit_messages
+            system_prompt, messages = fit_messages(system_prompt, messages, max_ctx - out_reserve)
+            after = estimate_tokens(system_prompt, messages) + out_reserve
+            if after > max_ctx:
+                raise ContextTooLarge(f"prompt ~{need} tok > {max_ctx}")
+            logger.warning("Prompt ~%d tokens exceeds the %d maximum: trimmed to ~%d.", need, max_ctx, after)
+            need = after
+        loaded = lm_studio_loaded_context(model) or lm_studio_context_length()
+        if need > loaded:
+            self._grow_lm_studio_context(model, need=max(1, need - out_reserve))
+        return system_prompt, messages
+
+    def _wait_for_room(self, provider: str, model: str) -> None:
+        """Hold the call until the model fits with room to spare
+        (`wait_for_local_headroom`). A llama.cpp server that answers has its
+        model loaded already."""
+        if provider == "lm_studio":
+            loaded = self._is_lm_studio_model_loaded(model)
+        elif provider == "ollama":
+            loaded = _ollama_model_loaded(model)
+        else:
+            loaded = True
+        wait_for_local_headroom(provider, model, loaded)
 
     def _sentinel_allows(self, provider: str, tier: Optional[str] = None) -> bool:
         """May we send a request that could make a model load? (roadmap v10, S1)"""
@@ -795,6 +1457,7 @@ class LLMService:
         return False
 
     @idle_offload.tracked
+    @_metered
     def generate_chat(
         self,
         system_prompt: str,
@@ -802,6 +1465,7 @@ class LLMService:
         require_json: bool = False,
         tier: Optional[str] = None,
         temperature: Optional[float] = None,
+        effort: Optional[str] = None,
     ) -> str:
         """
         Multi-turn generation: `messages` is an ordered list of
@@ -811,13 +1475,37 @@ class LLMService:
         """
         self.reload_config()
         self.last_response_simulated = False
+        self.last_provider = None
         temp = DEFAULT_TEMPERATURE if temperature is None else float(temperature)
+        too_large: Optional[ContextTooLarge] = None
 
         for current_p in self._provider_order(tier):
+            self.last_provider = current_p
             model = self._model_for(current_p, tier)
+            self.last_model = model
             if current_p == "gemini":
+                gem_url = self.config.get("gemini_url") or GEMINI_DEFAULT_URL
+                if is_local_gemini(self.config):
+                    try:
+                        thinking_lvl = self.gemini_effort_level(effort)
+                        logger.info("Attempting chat via local Gemini harness at %s (model: %s, effort: %s)...", gem_url, model, thinking_lvl)
+                        return self._chat_gemini_harness(gem_url, model, system_prompt, messages, require_json, temp, effort=effort)
+                    except Exception as e:
+                        logger.warning(f"Local Gemini harness chat failed: {e}.")
+                        # A one-off empty reply or rate-limit blip (2026-10-26) sent whole
+                        # strategist turns to the local model, which then fought the
+                        # narration engine for the GPU. Wait once and try Gemini again --
+                        # but not after a timeout: the same prompt times out again, and
+                        # every chat turn waited 4.5 min before falling back (2026-10-26).
+                        if "timed out" not in str(e).lower() and not isinstance(e, GeminiRateLimited):
+                            try:
+                                time.sleep(GEMINI_RETRY_WAIT_S)
+                                logger.info("Retrying the local Gemini harness once after %ss...", GEMINI_RETRY_WAIT_S)
+                                return self._chat_gemini_harness(gem_url, model, system_prompt, messages, require_json, temp, effort=effort)
+                            except Exception as e2:
+                                logger.warning(f"Local Gemini harness retry failed: {e2}.")
                 api_key = self.config.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
-                if api_key:
+                if api_key and not self.config.get("local_only", False):
                     try:
                         logger.info("Attempting chat via Google Gemini API...")
                         return self._chat_gemini(api_key, system_prompt, messages, require_json, model, temp)
@@ -845,30 +1533,47 @@ class LLMService:
             elif current_p in LOCAL_PROVIDERS:
                 if not self._sentinel_allows(current_p, tier):
                     continue
+                wait_for_reel_render()
                 if current_p == "lm_studio":
                     model = self._resolve_lm_studio_model(model)
+                self._wait_for_room(current_p, model)
+                if current_p == "lm_studio":
                     self._lm_studio_ready(model)
                 idle_offload.mark_used(current_p)
                 url = self._local_url(current_p)
 
                 def chat_local():
-                    return self._chat_openai_compat(
-                        f"{url}/chat/completions", {}, model,
-                        system_prompt, messages, False, temp, timeout=self._local_timeout(),
-                        reasoning_effort=self._local_reasoning_effort(current_p),
-                    )
+                    with (_LM_STUDIO_GATE if current_p == "lm_studio" else contextlib.nullcontext()):
+                        sp, ms = system_prompt, messages
+                        if current_p == "lm_studio":
+                            sp, ms = self._lm_studio_fit(model, sp, ms)
+
+                        def send():
+                            return self._with_local_json_mode(require_json, lambda json_mode: self._chat_openai_compat(
+                                f"{url}/chat/completions", {}, model,
+                                sp, ms, json_mode, temp, timeout=self._local_timeout(),
+                                reasoning_effort=self._local_reasoning_effort(current_p),
+                                max_tokens=local_max_output_tokens(),
+                            ))
+
+                        try:
+                            return send()
+                        except Exception as e:  # noqa: BLE001
+                            if current_p == "lm_studio" and self._grow_lm_studio_context(model, e):
+                                return send()
+                            raise
 
                 try:
                     logger.info(f"Attempting chat via local {current_p} at {url} (model: {model})...")
                     return chat_local()
+                except ContextTooLarge as e:
+                    logger.warning(f"{current_p} chat failed: {e}.")
+                    too_large = e
                 except Exception as e:
                     logger.warning(f"{current_p} chat failed: {e}.")
-                    if current_p == "lm_studio" and self._grow_lm_studio_context(model, e):
-                        try:
-                            return chat_local()
-                        except Exception as again:
-                            logger.warning(f"{current_p} chat failed again with the larger context: {again}.")
 
+        if too_large is not None:
+            raise too_large
         if not _simulation_enabled():
             msg = (
                 "No local LLM provider is reachable (LM Studio / Ollama / llama.cpp). "
@@ -879,6 +1584,7 @@ class LLMService:
             raise LLMUnavailable(msg)
         logger.warning("No LLM provider succeeded; returning simulated content.")
         self.last_response_simulated = True
+        self.last_provider = None
         from dev.fixtures import generate_simulated_response
 
         last_user = next((m.get("content", "") for m in reversed(messages) if m.get("role") == "user"), "")
@@ -895,6 +1601,7 @@ class LLMService:
         temperature: float = DEFAULT_TEMPERATURE,
         timeout: int = 90,
         reasoning_effort: Optional[str] = None,
+        max_tokens: Optional[int] = None,
     ) -> str:
         payload_messages = []
         if system_prompt:
@@ -907,14 +1614,19 @@ class LLMService:
             payload["response_format"] = {"type": "json_object"}
         if reasoning_effort:
             payload["reasoning_effort"] = reasoning_effort
+        if max_tokens:
+            payload["max_tokens"] = int(max_tokens)
         response = requests.post(
             url, headers={"Content-Type": "application/json", **headers}, json=payload, timeout=timeout
         )
         if response.status_code != 200:
             raise Exception(f"{url} returned code {response.status_code}: {response.text[:300]}")
         resp_json = response.json()
+        _CALL.usage = resp_json.get("usage") if isinstance(resp_json.get("usage"), dict) else None
         try:
-            return _non_empty_reply(resp_json["choices"][0]["message"]["content"], model)
+            msg = resp_json["choices"][0]["message"]
+            text = msg.get("content") or msg.get("reasoning_content") or ""
+            return _non_empty_reply(text, model)
         except (KeyError, IndexError) as e:
             raise Exception(f"Failed to parse chat response payload: {resp_json}. Error: {e}")
 
@@ -955,6 +1667,7 @@ class LLMService:
         raise Exception(f"All Gemini models failed. Last error: {last_error}")
 
     @idle_offload.tracked
+    @_metered
     def generate_text(
         self,
         system_prompt: str,
@@ -962,16 +1675,29 @@ class LLMService:
         require_json: bool = False,
         tier: Optional[str] = None,
         temperature: Optional[float] = None,
+        effort: Optional[str] = None,
     ) -> str:
         self.reload_config()
         self.last_response_simulated = False
+        self.last_provider = None
         temp = DEFAULT_TEMPERATURE if temperature is None else float(temperature)
+        too_large: Optional[ContextTooLarge] = None
 
         for current_p in self._provider_order(tier):
+            self.last_provider = current_p
             model = self._model_for(current_p, tier)
+            self.last_model = model
             if current_p == "gemini":
+                gem_url = self.config.get("gemini_url") or GEMINI_DEFAULT_URL
+                if is_local_gemini(self.config):
+                    try:
+                        thinking_lvl = self.gemini_effort_level(effort)
+                        logger.info("Attempting generation via local Gemini harness at %s (model: %s, effort: %s)...", gem_url, model, thinking_lvl)
+                        return self._call_gemini_harness(gem_url, model, system_prompt, user_prompt, require_json, temp, effort=effort)
+                    except Exception as e:
+                        logger.warning(f"Local Gemini harness call failed: {e}.")
                 api_key = self.config.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
-                if api_key:
+                if api_key and not self.config.get("local_only", False):
                     try:
                         logger.info("Attempting generation via Google Gemini API...")
                         return self._call_gemini(api_key, system_prompt, user_prompt, require_json, model, temp)
@@ -998,28 +1724,46 @@ class LLMService:
                     continue
                 if current_p == "lm_studio":
                     model = self._resolve_lm_studio_model(model)
+                self._wait_for_room(current_p, model)
+                if current_p == "lm_studio":
                     self._lm_studio_ready(model)
                 idle_offload.mark_used(current_p)
                 url = self._local_url(current_p)
 
                 def call_local():
-                    return self._call_local(url, model, system_prompt, user_prompt, temp,
-                                            reasoning_effort=self._local_reasoning_effort(current_p),
-                                            timeout=self._local_timeout())
+                    with (_LM_STUDIO_GATE if current_p == "lm_studio" else contextlib.nullcontext()):
+                        sp, up = system_prompt, user_prompt
+                        if current_p == "lm_studio":
+                            sp, ms = self._lm_studio_fit(model, sp, [{"role": "user", "content": up}])
+                            up = ms[-1]["content"]
+
+                        def send():
+                            return self._with_local_json_mode(require_json, lambda json_mode: self._call_local(
+                                url, model, sp, up, temp,
+                                reasoning_effort=self._local_reasoning_effort(current_p),
+                                timeout=self._local_timeout(), require_json=json_mode,
+                                max_tokens=local_max_output_tokens()))
+
+                        try:
+                            return send()
+                        except Exception as e:  # noqa: BLE001
+                            if current_p == "lm_studio" and self._grow_lm_studio_context(model, e):
+                                return send()
+                            raise
 
                 try:
                     logger.info(f"Attempting generation via local {current_p} at {url} (model: {model})...")
                     return call_local()
+                except ContextTooLarge as e:
+                    logger.warning(f"{current_p} API call failed: {e}.")
+                    too_large = e
                 except Exception as e:
                     logger.warning(f"{current_p} API call failed: {e}.")
-                    if current_p == "lm_studio" and self._grow_lm_studio_context(model, e):
-                        try:
-                            return call_local()
-                        except Exception as again:
-                            logger.warning(f"{current_p} API call failed again with the larger context: {again}.")
 
 
         # Every provider failed or none was configured.
+        if too_large is not None:
+            raise too_large
         if not _simulation_enabled():
             msg = (
                 "No local LLM provider is reachable (LM Studio / Ollama / llama.cpp). "
@@ -1036,6 +1780,7 @@ class LLMService:
             "Check API keys and provider availability in Settings."
         )
         self.last_response_simulated = True
+        self.last_provider = None
         from dev.fixtures import generate_simulated_response
         return generate_simulated_response(system_prompt, user_prompt, require_json)
 
@@ -1134,14 +1879,159 @@ class LLMService:
                 
         raise Exception(f"All Gemini models failed. Last error: {last_error}")
 
+    def _call_gemini_harness(
+        self,
+        endpoint_url: str,
+        model: str,
+        system_prompt: str,
+        user_prompt: str,
+        require_json: bool,
+        temperature: float = DEFAULT_TEMPERATURE,
+        timeout: int = GEMINI_TIMEOUT_SECONDS,
+        effort: Optional[str] = None,
+    ) -> str:
+        full_input = f"{system_prompt}\n\n{user_prompt}".strip() if system_prompt else user_prompt
+        alias = (model or "").strip()
+        if not alias or alias.lower() in ("gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-flash"):
+            alias = "flash"
+        elif alias.lower() in ("gemini-1.5-pro", "gemini-2.0-pro", "gemini-pro"):
+            alias = "pro"
+
+        chosen_effort = self.gemini_effort_level(effort)
+        if (alias == "flash" or "flash" in (model or "").lower()) and chosen_effort == "max":
+            chosen_effort = "high"
+
+        payload = {
+            "model": alias or "flash",
+            "input": full_input,
+            "thinking_level": chosen_effort,
+            "output_format": "json" if require_json else "text",
+        }
+
+        url = endpoint_url.rstrip("/")
+        if not url.endswith("/api/gemini"):
+            url = f"{url}/api/gemini"
+
+        _harness_gate()
+        response = requests.post(url, json=payload, timeout=timeout)
+        if response.status_code == 429:
+            _harness_rate_limited(response)
+        if response.status_code != 200:
+            raise Exception(f"Gemini harness ({url}) returned code {response.status_code}: {response.text[:300]}")
+
+        from integrations import gemini_limit
+        gemini_limit.clear()
+        resp_json = response.json()
+        output = resp_json.get("output")
+        if isinstance(output, dict):
+            status = output.get("status")
+            if status and status != "SUCCESS":
+                err = output.get("error") or output.get("message") or status
+                raise Exception(f"Gemini harness execution error: {err}")
+            text = output.get("response") or ""
+        elif isinstance(output, str):
+            text = output
+        else:
+            text = str(output or "")
+
+        if require_json:
+            text = clean_json_response(text)
+        return _non_empty_reply(text, model)
+
+    def _chat_gemini_harness(
+        self,
+        endpoint_url: str,
+        model: str,
+        system_prompt: str,
+        messages: List[Dict[str, str]],
+        require_json: bool,
+        temperature: float = DEFAULT_TEMPERATURE,
+        timeout: int = GEMINI_TIMEOUT_SECONDS,
+        effort: Optional[str] = None,
+    ) -> str:
+        parts = []
+        if system_prompt:
+            parts.append(f"System: {system_prompt}")
+        for m in messages:
+            role = "User" if m.get("role") == "user" else "Assistant"
+            parts.append(f"{role}: {m.get('content', '')}")
+        full_input = "\n\n".join(parts)
+
+        alias = (model or "").strip()
+        if not alias or alias.lower() in ("gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-flash"):
+            alias = "flash"
+        elif alias.lower() in ("gemini-1.5-pro", "gemini-2.0-pro", "gemini-pro"):
+            alias = "pro"
+
+        chosen_effort = self.gemini_effort_level(effort)
+        if (alias == "flash" or "flash" in (model or "").lower()) and chosen_effort == "max":
+            chosen_effort = "high"
+
+        payload = {
+            "model": alias or "flash",
+            "input": full_input,
+            "thinking_level": chosen_effort,
+            "output_format": "json" if require_json else "text",
+        }
+
+        url = endpoint_url.rstrip("/")
+        if not url.endswith("/api/gemini"):
+            url = f"{url}/api/gemini"
+
+        _harness_gate()
+        response = requests.post(url, json=payload, timeout=timeout)
+        if response.status_code == 429:
+            _harness_rate_limited(response)
+        if response.status_code != 200:
+            raise Exception(f"Gemini harness ({url}) returned code {response.status_code}: {response.text[:300]}")
+
+        from integrations import gemini_limit
+        gemini_limit.clear()
+        resp_json = response.json()
+        output = resp_json.get("output")
+        if isinstance(output, dict):
+            status = output.get("status")
+            if status and status != "SUCCESS":
+                err = output.get("error") or output.get("message") or status
+                raise Exception(f"Gemini harness execution error: {err}")
+            text = output.get("response") or ""
+        elif isinstance(output, str):
+            text = output
+        else:
+            text = str(output or "")
+
+        if require_json:
+            text = clean_json_response(text)
+        return _non_empty_reply(text, model)
+
     def thinking_enabled(self) -> bool:
-        """Settings -> Thinking: `thinking_agents` (default on) for agents,
-        chat and writing; `thinking_production` (default off) for video
-        production's visual planning -- many repetitive JSON calls where
-        thinking made each window ~5x slower (~225 s vs ~45 s)."""
+        """Settings -> Thinking: `thinking_agents` (default on) for agents
+        and writing; `thinking_production` (default off) for video
+        production's visual planning; `thinking_chat` (default off) for
+        interactive chat and Studio Director -- chat requires immediate replies
+        and must not be blocked by 7-minute reasoning loops that exceed HTTP
+        timeouts."""
         if self.purpose == "production":
             return bool(self.config.get("thinking_production", False))
+        if self.purpose in ("chat", "director_chat"):
+            return bool(self.config.get("thinking_chat", False))
         return bool(self.config.get("thinking_agents", True))
+
+    @staticmethod
+    def _with_local_json_mode(require_json: bool, call):
+        """Run `call(json_mode)` with JSON mode when the caller requires JSON.
+        A local server that rejects `response_format` (an older build, a
+        model without a JSON grammar) answers 4xx; the call is then made once
+        more without it, so JSON mode can only help, never strand a call."""
+        if not require_json:
+            return call(False)
+        try:
+            return call(True)
+        except Exception as e:  # noqa: BLE001 - only a client-side refusal is retried
+            if not re.search(r"returned code 4\d\d", str(e)):
+                raise
+            logger.info("Local server refused JSON mode (%s); retrying without it.", str(e)[:120])
+            return call(False)
 
     def _local_reasoning_effort(self, provider: str) -> Optional[str]:
         """`"none"` turns a thinking model's reasoning off in LM Studio; with
@@ -1164,8 +2054,13 @@ class LLMService:
         temperature: float = DEFAULT_TEMPERATURE,
         reasoning_effort: Optional[str] = None,
         timeout: int = 180,
+        require_json: bool = False,
+        max_tokens: Optional[int] = None,
     ) -> str:
-        """LM Studio and llama.cpp both speak the OpenAI chat API."""
+        """LM Studio, Ollama and llama.cpp all speak the OpenAI chat API.
+        `require_json` asks the server for JSON mode: a small local model
+        (Gemma 4 e4b on Ollama) otherwise answers a "reply with one JSON
+        object" task with prose, a script or a Markdown plan."""
         url = f"{base_url.rstrip('/')}/chat/completions"
         headers = {
             "Content-Type": "application/json"
@@ -1183,6 +2078,10 @@ class LLMService:
         }
         if reasoning_effort:
             payload["reasoning_effort"] = reasoning_effort
+        if require_json:
+            payload["response_format"] = {"type": "json_object"}
+        if max_tokens:
+            payload["max_tokens"] = int(max_tokens)
 
         response = requests.post(url, headers=headers, json=payload, timeout=timeout)
 
@@ -1190,8 +2089,10 @@ class LLMService:
             raise Exception(f"{url} returned code {response.status_code}: {response.text[:300]}")
 
         resp_json = response.json()
+        _CALL.usage = resp_json.get("usage") if isinstance(resp_json.get("usage"), dict) else None
         try:
-            text = resp_json["choices"][0]["message"]["content"]
+            msg = resp_json["choices"][0]["message"]
+            text = msg.get("content") or msg.get("reasoning_content") or ""
             return _non_empty_reply(text, model)
         except (KeyError, IndexError) as e:
             raise Exception(f"Failed to parse local model response payload: {resp_json}. Error: {e}")

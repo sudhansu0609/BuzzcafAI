@@ -99,10 +99,7 @@ def save_topics(topics: List[Dict[str, Any]]) -> None:
 def add_topic(fields: Dict[str, Any], *, added_by: str = "user", stage: Optional[str] = None) -> Dict[str, Any]:
     """Save (or update, if the same topic+channel already exists) a row."""
     topic_data = dict(fields)
-    if not topic_data.get("id"):
-        topic_data["id"] = f"topic_{uuid.uuid4().hex[:8]}"
     now = datetime.now().isoformat()
-    topic_data["saved_at"] = now
     topic_data["updated_at"] = now
     topic_data["added_by"] = topic_data.get("added_by") or added_by
     topic_data["stage"] = _normalize_stage(topic_data.get("stage") or stage)
@@ -113,9 +110,17 @@ def add_topic(fields: Dict[str, Any], *, added_by: str = "user", stage: Optional
         -1,
     )
     if existing_idx >= 0:
+        # An existing row keeps its id and its first save date (it used to be
+        # given a fresh id on every re-add, which orphaned links to it).
+        topic_data.pop("id", None)
+        topic_data.pop("saved_at", None)
+        topics[existing_idx].setdefault("saved_at", now)
         topics[existing_idx].update(topic_data)
         stored = topics[existing_idx]
     else:
+        if not topic_data.get("id"):
+            topic_data["id"] = f"topic_{uuid.uuid4().hex[:8]}"
+        topic_data["saved_at"] = now
         topics.insert(0, topic_data)
         stored = topic_data
 

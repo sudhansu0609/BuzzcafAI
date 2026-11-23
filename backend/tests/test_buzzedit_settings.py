@@ -182,6 +182,16 @@ def test_put_project_video_settings_null_clears_a_field(client, profiles_file, p
     assert resp.json()["video_settings"] == {"genre": "vlog"}
 
 
+def test_put_project_video_settings_carries_motion_switches(client, profiles_file, project):
+    resp = client.put(f"/api/projects/{project.id}/video_settings",
+                      json={"motion_graphics": False, "parallax_share": 0})
+    assert resp.status_code == 200
+    eff = resp.json()["effective"]
+    assert eff["motion_graphics"] is False and eff["parallax_share"] == 0
+    assert client.put(f"/api/projects/{project.id}/video_settings",
+                      json={"parallax_share": 1.5}).status_code == 400
+
+
 # ---------------------------------------------------------- precut default
 
 

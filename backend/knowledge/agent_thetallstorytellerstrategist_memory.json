@@ -1,0 +1,34 @@
+[
+  {
+    "id": "874285e7-337a-4243-89de-d6503339033c",
+    "scope": "agent",
+    "owner": "TheTallStorytellerStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'TheTallStoryteller'.\n\n## Brand guide for TheTallStoryteller\n# Brand Style Guide: TheTallStoryteller\n\n## Essence (read first)\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\nway he would tell it to a friend late at night. Default length: a long story is\n15-25 minutes (20 by default); a Short/reel is one minute (60 seconds).\n- **Genres (creato",
+      "result_snippet": "```json\n{\n  \"topics\": [\n    {\n      \"topic\": \"Killa Number 5 Ka Khufiya Chor\",\n      \"category\": \"detective\",\n      \"viral_potential\": 8,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\"Old city blueprints\", \"Fort architecture photos\", \"Map of historical lanes\"],\n      \"notes\": \"A clever detective solving a series of high-stakes thefts in a restricted heritage zone.\"\n    },\n    {\n      \"topic\": \"Chor Jo Sirf Sone Ke Chammach Churata Tha\",\n      \"category\": \"comedy\",\n      \"viral_potential\": 9,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\"Vintage dining hall images\", \"Comedy sketches of a clumsy thief\"],\n      \"notes\": \"A lighthearted mystery about a thief with very specific, absurd tastes.\"\n    },\n    {\n      \"topic\": \"Pahadi Raaste Ki Gayab Caravan\",\n      \"category\": \"detective\",\n      \"viral_potential\": 8,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\"Mountain pass footage\", \"Old caravan sketches\", \"Foggy road visuals\"],\n      \"notes\": \"A classic detective setup where a caravan disappears and is found 20 years later with a twist.\"\n    },\n    {\n      \"topic\": \"Fake Maharaj Ki Asli Daulat\",\n      \"category\": \"crime\",\n      \"viral_prompt\": 7,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\"Palace interiors\", \"Ancient coins imagery\", \"Period-accurate jewelry\"],\n      \"notes\": \"A crime investigation into a fraudster posing as royalty to steal land deeds.\"\n    },\n    {\n      \"topic\": \"Chashmish Chor Aur Shahi Mehmaan\",\n      \"category\": \"comedy\",\n      \"viral_potential\": 8,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\"Grand ballroom visuals\", \"Character portraits of comical guests\"],\n    "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T09:09:04.654851",
+    "updated": "2026-10-25T09:09:04.654855"
+  },
+  {
+    "id": "cbcce91d-05dc-4d89-a37d-f481dcfa9c2b",
+    "scope": "agent",
+    "owner": "TheTallStorytellerStrategist",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "Propose fresh video topics for the channel 'TheTallStoryteller'.\n\n## Brand guide for TheTallStoryteller\n# Brand Style Guide: TheTallStoryteller\n\n## Essence (read first)\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\nway he would tell it to a friend late at night. Default length: a long story is\n15-25 minutes (20 by default); a Short/reel is one minute (60 seconds).\n- **Genres (creato",
+      "result_snippet": "{\n  \"topics\": [\n    {\n      \"topic\": \"Mumbai Ki Aisi Daulat Jo Kabhi Billionaires Ke Paas Nahi Thi\",\n      \"category\": \"crime\",\n      \"viral_potential\": 8,\n      \"country\": \"India\",\n      \"source_type\": \"original fiction\",\n      \"sources_used\": [],\n      \"visual_requirements\": [\n        \"Vintage Mumbai street footage\",\n        \"Black and white archival photos of city life\",\n        \"Illustration of an old, hidden safe\"\n      ],\n      \"notes\": \"A crime story about a humble family whose hidden treasure is misunderstood by modern society.\"\n    },\n    {\n      \"topic\": \"Passport Ki Chori Aur Woh Ladka Jo Sirf Ghadi Theek Karta Tha\",\n      \"category\": \"detective\",\n      \"viral_potential\": 9,"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T09:16:46.383426",
+    "updated": "2026-10-25T09:16:46.383431"
+  }
+]

@@ -1,0 +1,56 @@
+{
+ "enabled": false,
+ "per_channel": {
+  "Raat3Baje": 2,
+  "Life3Baje": 1,
+  "Beyond3Baje": 0,
+  "TheTallStoryteller": 2
+ },
+ "formats": {
+  "Raat3Baje": [
+   "rules_horror",
+   "ghost_story",
+   "anomaly_file",
+   "folklore_entity"
+  ],
+  "Life3Baje": [
+   "mood_reel"
+  ],
+  "Beyond3Baje": [
+   "what_if",
+   "anomaly_file"
+  ],
+  "TheTallStoryteller": [
+   "folk_tale",
+   "mystery",
+   "history",
+   "mythology",
+   "comedy"
+  ]
+ },
+ "publish": false,
+ "voice_clone_paused": true,
+ "mood_reel_stills": false,
+ "face_intro_clips": {},
+ "voice_style": {},
+ "last_run": "2026-11-01",
+ "last": {
+  "ran_at": "2026-11-01T04:54:38",
+  "summary": "Made 0, 1 failed",
+  "made": [],
+  "failed": [
+   {
+    "channel": "Life3Baje",
+    "format": "mood_reel",
+    "error": "BuzzEdit's vibe reel has shown no progress for 75 minutes."
+   }
+  ]
+ },
+ "rotation": {
+  "mood_reel_theme": [
+   "village_evening",
+   "cozy",
+   "monsoon_garden"
+  ]
+ }
+}

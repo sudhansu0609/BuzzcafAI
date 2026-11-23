@@ -1,66 +1,66 @@
 {
-    "id": "after_dark_narration",
-    "name": "After Dark Audio Story Narration",
-    "description": "Audio-first workflow focusing on paranormal account collection, script layout, and voice optimization.",
-    "steps": [
-        {
-            "name": "Account Collection",
-            "agent_role": "ResearchAgent",
-            "description": "Research the topic on the live web before writing anything: search from several angles (the legend or event, the real place/job/setting and how it works, the folklore entity and its regional rules, what has been told about it before), read the best pages, and deliver the cited dossier with story material (world, folklore, real details, story seeds, twists) for a Raat3Baje story episode.",
-            "requires_approval": true,
-            "input_assets": [],
-            "output_asset_type": "research"
-        },
-        {
-            "name": "Script Writing",
-            "agent_role": "WriterAgent",
-            "description": "Write the complete story episode from the research package: a layered, specific Indian horror story (surface events, a hidden history underneath, a truth at the end that re-reads the earlier scenes), with plants that pay off, incidents that escalate, named characters with a reason to stay, and real texture from the research. Pure story from the first word to the last; the greeting once, at the start; mark long pauses and cues where the format allows.",
-            "requires_approval": true,
-            "input_assets": [
-                "research"
-            ],
-            "output_asset_type": "script"
-        },
-        {
-            "name": "Visual Plan",
-            "agent_role": "PromptEngineer",
-            "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
-            "requires_approval": false,
-            "input_assets": [
-                "script"
-            ],
-            "output_asset_type": "visual_plan"
-        },
-        {
-            "name": "Sound Design Plan",
-            "agent_role": "CreativeDirectorAgent",
-            "description": "List sound effects and compile dark drone background tracks to blend under V.O.",
-            "requires_approval": false,
-            "input_assets": [
-                "script"
-            ],
-            "output_asset_type": "sound_plan"
-        },
-        {
-            "name": "Narration Check",
-            "agent_role": "EditorAgent",
-            "description": "Read draft out loud, adjust pacing pauses, check pronunciations, and optimize flow.",
-            "requires_approval": false,
-            "input_assets": [
-                "script",
-                "sound_plan"
-            ],
-            "output_asset_type": "narration_optimized"
-        },
-        {
-            "name": "SEO & Thumbnail",
-            "agent_role": "SEOManagerAgent",
-            "description": "Generate dark-themed titles, tags, and custom YouTube metadata packages.",
-            "requires_approval": true,
-            "input_assets": [
-                "narration_optimized"
-            ],
-            "output_asset_type": "seo_package"
-        }
-    ]
+  "id": "after_dark_narration",
+  "name": "After Dark Audio Story Narration",
+  "description": "Audio-first workflow focusing on paranormal account collection, script layout, and voice optimization.",
+  "steps": [
+    {
+      "name": "Account Collection",
+      "agent_role": "ResearchAgent",
+      "description": "Research the topic on the live web before writing anything: search from several angles (the legend or event, the real place/job/setting and how it works, the folklore entity and its regional rules, what has been told about it before, on the web and on YouTube), read the best pages in full, and deliver the cited dossier with story material (world, folklore, real details, story seeds, twists) for a Raat3Baje story episode. A real-encounter episode needs the first-hand accounts themselves (fetched, with their reported core and URL); a black magic or tantra episode needs the beliefs as people hold them (signs, remedies, days, places, words) -- never instructions.",
+      "requires_approval": true,
+      "input_assets": [],
+      "output_asset_type": "research"
+    },
+    {
+      "name": "Script Writing",
+      "agent_role": "WriterAgent",
+      "description": "Write the complete story episode from the research package, in this episode's format (rules horror, a real encounter told as a story, a fictional story, a black magic story or a tantra story -- see the format and the channel guide): a layered, specific Indian horror story (surface events, a hidden history underneath, a truth at the end that re-reads the earlier scenes), with plants that pay off, incidents that escalate, named characters with a reason to stay, and real texture from the research. Pure story from the first word to the last; the greeting once, at the start; mark long pauses and cues where the format allows.",
+      "requires_approval": true,
+      "input_assets": [
+        "research"
+      ],
+      "output_asset_type": "script"
+    },
+    {
+      "name": "Visual Plan",
+      "agent_role": "PromptEngineer",
+      "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+      "requires_approval": false,
+      "input_assets": [
+        "script"
+      ],
+      "output_asset_type": "visual_plan"
+    },
+    {
+      "name": "Sound Design Plan",
+      "agent_role": "CreativeDirectorAgent",
+      "description": "List sound effects and compile dark drone background tracks to blend under V.O.",
+      "requires_approval": false,
+      "input_assets": [
+        "script"
+      ],
+      "output_asset_type": "sound_plan"
+    },
+    {
+      "name": "Narration Check",
+      "agent_role": "EditorAgent",
+      "description": "Read draft out loud, adjust pacing pauses, check pronunciations, and optimize flow.",
+      "requires_approval": false,
+      "input_assets": [
+        "script",
+        "sound_plan"
+      ],
+      "output_asset_type": "narration_optimized"
+    },
+    {
+      "name": "SEO & Thumbnail",
+      "agent_role": "SEOManagerAgent",
+      "description": "Research before writing: what people type into YouTube about this story's subject (autocomplete in English, Hindi and Hinglish), what already ranks and how it performs (views, age, views per day), how this channel's own uploads did, and whether the subject is in the news; score its virality honestly. Then the dark, curiosity-led titles, thumbnail text, description, tags and hashtags that hit the demand found, with the evidence kept in the package.",
+      "requires_approval": true,
+      "input_assets": [
+        "narration_optimized"
+      ],
+      "output_asset_type": "seo_package"
+    }
+  ]
 }

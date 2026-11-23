@@ -80,6 +80,106 @@ def test_build_inserts_the_poem_verbatim_and_makes_a_short_project(faked, monkey
     assert package["hashtags"] == ["#ghalib"] and package["rights"] == "public_domain"
 
 
+def test_narrated_reel_over_budget_script_is_rewritten_once_and_the_shorter_wins(monkeypatch, tmp_path):
+    """REELS_DESK_PLAN.md VR9 (creator follow-up 2026-10-24): the length pick is a
+    target, not a cap -- a script well past REWRITE_LENGTH_FACTOR x it gets one
+    rewrite-to-length call, and the shorter of the two scripts is kept."""
+    from executive.project import project_manager
+
+    monkeypatch.setattr(shorts_desk, "STORE_DIR", str(tmp_path / "desk"))
+    monkeypatch.setattr(project_manager, "projects_dir", str(tmp_path / "projects"))
+    monkeypatch.setattr("core.models.project._project_dir_for", lambda pid: str(tmp_path / "projects" / pid))
+
+    long_script = " ".join(["ek"] * 300)    # 300 spoken words: well past 124 * 1.5 = 186
+    short_script = " ".join(["ek"] * 110)   # back inside the target
+    calls = []
+
+    def agent(name, task):
+        calls.append((name, task))
+        if "previous_script" in task:
+            return {"title": "Raat ke niyam", "script": short_script}
+        return {"title": "Raat ke niyam", "script": long_script}
+
+    monkeypatch.setattr(shorts_desk, "_agent_json", agent)
+    cand = {"title": "Raat ke niyam", "filters": {"length": "1 minute (60 seconds)"}}
+    project = shorts_desk.build("Raat3Baje", "rules_horror", cand)
+
+    assert len(calls) == 2
+    assert "about 135 spoken words (60-90 s is fine)" in calls[0][1]["target_length"]
+    assert calls[1][1]["previous_script"] == long_script and calls[1][1]["rewrite_to_words"] == 135
+
+    pdir = tmp_path / "projects" / project["id"]
+    script = (pdir / "script" / "short_script.md").read_text(encoding="utf-8")
+    assert short_script in script and long_script not in script
+
+    wb = project["metadata"]["word_budget"]
+    assert wb["budget"] == 135 and wb["written"] == 300 and wb["rewritten"] == 110 and wb["final"] == 110
+    logs = project["steps_history"][0]["logs"]
+    assert any("Word budget 135" in l and "kept 110" in l for l in logs)
+
+
+def test_over_budget_script_keeps_the_original_when_the_rewrite_is_not_shorter(monkeypatch, tmp_path):
+    from executive.project import project_manager
+
+    monkeypatch.setattr(shorts_desk, "STORE_DIR", str(tmp_path / "desk"))
+    monkeypatch.setattr(project_manager, "projects_dir", str(tmp_path / "projects"))
+    monkeypatch.setattr("core.models.project._project_dir_for", lambda pid: str(tmp_path / "projects" / pid))
+
+    long_script = " ".join(["ek"] * 300)
+    still_long_script = " ".join(["ek"] * 280)   # the rewrite barely trims it: still over budget
+
+    def agent(name, task):
+        if "previous_script" in task:
+            return {"title": "Raat ke niyam", "script": still_long_script}
+        return {"title": "Raat ke niyam", "script": long_script}
+
+    monkeypatch.setattr(shorts_desk, "_agent_json", agent)
+    cand = {"title": "Raat ke niyam", "filters": {"length": "1 minute (60 seconds)"}}
+    project = shorts_desk.build("Raat3Baje", "rules_horror", cand)
+
+    pdir = tmp_path / "projects" / project["id"]
+    script = (pdir / "script" / "short_script.md").read_text(encoding="utf-8")
+    # The rewrite did shorten it (280 < 300), so it still wins over the first draft.
+    assert still_long_script in script and long_script not in script
+    assert project["metadata"]["word_budget"]["final"] == 280
+
+
+def test_a_script_inside_the_fine_range_is_never_rewritten(monkeypatch, tmp_path):
+    """2026-10-24 creator follow-up: the length is a target, not a cap -- a script
+    under REWRITE_LENGTH_FACTOR (1.5) x the budget (186 words for a 60 s/124-word
+    target) is kept as written, even though it runs past the target itself."""
+    from executive.project import project_manager
+
+    monkeypatch.setattr(shorts_desk, "STORE_DIR", str(tmp_path / "desk"))
+    monkeypatch.setattr(project_manager, "projects_dir", str(tmp_path / "projects"))
+    monkeypatch.setattr("core.models.project._project_dir_for", lambda pid: str(tmp_path / "projects" / pid))
+
+    fine_script = " ".join(["ek"] * 180)   # over the 124-word target, still under 186
+    calls = []
+
+    def agent(name, task):
+        calls.append((name, task))
+        return {"title": "Raat ke niyam", "script": fine_script}
+
+    monkeypatch.setattr(shorts_desk, "_agent_json", agent)
+    cand = {"title": "Raat ke niyam", "filters": {"length": "1 minute (60 seconds)"}}
+    project = shorts_desk.build("Raat3Baje", "rules_horror", cand)
+
+    assert len(calls) == 1   # no rewrite call
+    wb = project["metadata"]["word_budget"]
+    assert wb == {"budget": 135, "written": 180, "final": 180}
+
+
+def test_a_poem_or_a_length_with_no_seconds_gets_no_word_budget(faked, monkeypatch, tmp_path):
+    from executive.project import project_manager
+
+    monkeypatch.setattr(project_manager, "projects_dir", str(tmp_path / "projects"))
+    monkeypatch.setattr("core.models.project._project_dir_for", lambda pid: str(tmp_path / "projects" / pid))
+    cand = shorts_desk.find("Life3Baje", "shayari", {"poet": "ग़ालिब"}, count=1)["candidates"][0]
+    project = shorts_desk.build("Life3Baje", "shayari", cand)
+    assert "word_budget" not in project["metadata"]
+
+
 def test_a_story_without_a_readable_source_is_dropped(faked, monkeypatch):
     monkeypatch.setattr(shorts_desk, "_story_pool", lambda fmt_key, fmt, filters, say: [
         {"title": "NH-17", "snippet": "s", "url": "https://blog.example/nh17", "source": "t"},
@@ -109,8 +209,14 @@ def test_original_fiction_survives_thin_sources_and_is_labelled(faked, monkeypat
 
 def test_beyond3baje_formats_are_international_and_raat3baje_indian():
     assert set(shorts_desk.FORMATS["Beyond3Baje"]) == {"entity", "encounter", "case_file", "haunted_location",
-                                                       "urban_legend", "unsolved"}
-    for fmt in shorts_desk.FORMATS["Beyond3Baje"].values():
+                                                       "urban_legend", "unsolved", "what_if", "anomaly_file"}
+    for key, fmt in shorts_desk.FORMATS["Beyond3Baje"].items():
+        # The What If stories and the Anomaly Files (2026-10-23) happen in the
+        # viewer's own Indian setting; the investigations stay outside India.
+        if key in ("what_if", "anomaly_file"):
+            assert fmt["writer"] == "WhatIfWriter" and fmt["kind"] == "fiction"
+            assert any(f["key"] == "length" for f in fmt["filters"]), "the length is the creator's pick"
+            continue
         assert "India" not in " ".join(fmt["queries"])
     assert all("India" in " ".join(f["queries"]) or "लोककथा" in " ".join(f["queries"]) or "रात" in " ".join(f["queries"])
                for f in shorts_desk.FORMATS["Raat3Baje"].values())
@@ -153,3 +259,23 @@ def test_agent_json_repairs_local_model_slips_and_strips_half_emoji():
     assert shorts_desk._parse_json(raw) == {"title": "X", "hashtags": ["#Ghost", "#Real", "#Haunted"], "script": "a"}
     assert shorts_desk._clean_text({"t": ["ok \ud83d end"]}) == {"t": ["ok  end"]}
     assert shorts_desk._parse_json("no json here") is None
+
+
+# --- the judge's reply is read in whatever shape a local model gives it ------------------
+
+@pytest.mark.parametrize("judged", [
+    {"scores": [{"id": "c4", "score": 90}]},
+    {"id": "c4", "score": 90, "verdict": "strong"},
+    [{"id": "c4", "score": 90}],
+    {"candidates": [{"id": "c4", "score": 90}]},
+    {"results": {"c4": {"score": 90}}},
+    {"c4": {"score": 90}, "c1": {"score": 40}},
+])
+def test_score_list_reads_every_shape_a_small_model_answers_in(judged):
+    scores = {s["id"]: s for s in shorts_desk._score_list(judged)}
+    assert scores["c4"]["score"] == 90
+
+
+def test_score_list_is_empty_for_prose_or_nothing():
+    assert shorts_desk._score_list(None) == []
+    assert shorts_desk._score_list({"analysis": {"overall": "too generic"}}) == []

@@ -1,0 +1,119 @@
+{
+  "horizon": "day",
+  "generated_at": "2026-10-25T01:29:41",
+  "turns": 2,
+  "items": [
+    {
+      "channel": "Raat3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling daily long-form slots.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling second long-form slot.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling daily long-form slots.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling second long-form slot.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling daily long-form slots.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling second long-form slot.",
+      "needs_approval": false
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling daily long-form slots.",
+      "needs_approval": false
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "action": "longform_run_slot",
+      "params": {},
+      "when": "tonight",
+      "why": "Filling second long-form slot.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "rules_horror"
+      },
+      "when": "tonight",
+      "why": "Daily story reel production (1/2).",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "rules_horror"
+      },
+      "when": "tonight",
+      "why": "Daily story reel production (2/2).",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "auto_story_make_mood_reel",
+      "params": {},
+      "when": "tonight",
+      "why": "Daily mood reel production.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-24_Raat3Baje_ShortRaatKaNakhunKaatna"
+      },
+      "when": "tonight",
+      "why": "Retrying failed narration.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-24_Raat3Baje_ShortRaatKaNakhunKaatna"
+      },
+      "when": "tonight",
+      "why": "Retrying failed vibe reel.",
+      "needs_approval": false
+    }
+  ]
+}

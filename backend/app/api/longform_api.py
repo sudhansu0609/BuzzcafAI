@@ -121,6 +121,13 @@ def set_nightly(payload: LongformSchema):
     return _state()
 
 
+@router.post("/continue/{project_id}")
+def continue_project(project_id: str):
+    """Run a long-form project's remaining planning steps (up to the first that needs the creator)."""
+    longform_nightly.continue_preproduction(project_id)
+    return {"started": True, "project_id": project_id}
+
+
 @router.post("/nightly/run")
 def run_now():
     try:

@@ -1,0 +1,1492 @@
+{"state": "queued", "message": "Waiting in the production queue...", "progress": 0.0, "at": "2026-11-23T12:06:12"}
+{"state": "running", "message": "Starting...", "progress": 0.0, "at": "2026-11-23T12:06:13"}
+{"message": "Importing the recording into BuzzEdit...", "progress": 0.05, "at": "2026-11-23T12:06:13"}
+{"message": "Fixing eye contact on BuzzEdit: Waiting for the GPU (0%)", "progress": 0.05, "at": "2026-11-23T12:06:15"}
+{"message": "Fixing eye contact on BuzzEdit: Waiting for the GPU (0%)", "progress": 0.05, "at": "2026-11-23T12:06:17"}
+{"message": "Fixing eye contact on BuzzEdit: Waiting for the GPU (0%)", "progress": 0.05, "at": "2026-11-23T12:06:19"}
+{"message": "Fixing eye contact on BuzzEdit: Waiting for the GPU (0%)", "progress": 0.05, "at": "2026-11-23T12:06:21"}
+{"message": "Fixing eye contact on BuzzEdit: Waiting for the GPU (0%)", "progress": 0.05, "at": "2026-11-23T12:06:23"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (0%)", "progress": 0.050035, "at": "2026-11-23T12:06:25"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (1%)", "progress": 0.050745000000000005, "at": "2026-11-23T12:06:27"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (2%)", "progress": 0.051445000000000005, "at": "2026-11-23T12:06:29"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (4%)", "progress": 0.052155, "at": "2026-11-23T12:06:31"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (5%)", "progress": 0.052865, "at": "2026-11-23T12:06:33"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (7%)", "progress": 0.0536, "at": "2026-11-23T12:06:35"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (8%)", "progress": 0.05435, "at": "2026-11-23T12:06:37"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (10%)", "progress": 0.055060000000000005, "at": "2026-11-23T12:06:39"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (11%)", "progress": 0.055745, "at": "2026-11-23T12:06:41"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (12%)", "progress": 0.056470000000000006, "at": "2026-11-23T12:06:43"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (14%)", "progress": 0.05716500000000001, "at": "2026-11-23T12:06:45"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (15%)", "progress": 0.057855000000000004, "at": "2026-11-23T12:06:47"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (17%)", "progress": 0.0586, "at": "2026-11-23T12:06:49"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (18%)", "progress": 0.059335000000000006, "at": "2026-11-23T12:06:51"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (20%)", "progress": 0.060070000000000005, "at": "2026-11-23T12:06:53"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (21%)", "progress": 0.060820000000000006, "at": "2026-11-23T12:06:55"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (23%)", "progress": 0.061555000000000006, "at": "2026-11-23T12:06:57"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (24%)", "progress": 0.062275000000000004, "at": "2026-11-23T12:06:59"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (26%)", "progress": 0.06301000000000001, "at": "2026-11-23T12:07:01"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (27%)", "progress": 0.06372, "at": "2026-11-23T12:07:03"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (28%)", "progress": 0.064445, "at": "2026-11-23T12:07:05"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (30%)", "progress": 0.06518, "at": "2026-11-23T12:07:07"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (31%)", "progress": 0.065915, "at": "2026-11-23T12:07:09"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (33%)", "progress": 0.066635, "at": "2026-11-23T12:07:11"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (34%)", "progress": 0.067385, "at": "2026-11-23T12:07:13"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (36%)", "progress": 0.06812, "at": "2026-11-23T12:07:15"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (37%)", "progress": 0.06886500000000001, "at": "2026-11-23T12:07:17"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (39%)", "progress": 0.06960000000000001, "at": "2026-11-23T12:07:19"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (40%)", "progress": 0.07033500000000001, "at": "2026-11-23T12:07:21"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (42%)", "progress": 0.07107000000000001, "at": "2026-11-23T12:07:23"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (43%)", "progress": 0.07182000000000001, "at": "2026-11-23T12:07:25"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (45%)", "progress": 0.07255500000000001, "at": "2026-11-23T12:07:27"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (46%)", "progress": 0.0733, "at": "2026-11-23T12:07:29"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (48%)", "progress": 0.074035, "at": "2026-11-23T12:07:31"}
+{"message": "Fixing eye contact on BuzzEdit: Finding your eyes (49%)", "progress": 0.07477, "at": "2026-11-23T12:07:33"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (50%)", "progress": 0.07500000000000001, "at": "2026-11-23T12:07:35"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (50%)", "progress": 0.07500000000000001, "at": "2026-11-23T12:07:37"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (53%)", "progress": 0.07655500000000001, "at": "2026-11-23T12:07:39"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (55%)", "progress": 0.07777, "at": "2026-11-23T12:07:41"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (57%)", "progress": 0.07887000000000001, "at": "2026-11-23T12:07:43"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (60%)", "progress": 0.08003500000000001, "at": "2026-11-23T12:07:45"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (62%)", "progress": 0.08117500000000001, "at": "2026-11-23T12:07:47"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (64%)", "progress": 0.08234, "at": "2026-11-23T12:07:49"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (66%)", "progress": 0.08346500000000001, "at": "2026-11-23T12:07:51"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (69%)", "progress": 0.08465500000000001, "at": "2026-11-23T12:07:53"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (71%)", "progress": 0.085755, "at": "2026-11-23T12:07:55"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (73%)", "progress": 0.08691, "at": "2026-11-23T12:07:57"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (76%)", "progress": 0.08806, "at": "2026-11-23T12:07:59"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (78%)", "progress": 0.089285, "at": "2026-11-23T12:08:01"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (80%)", "progress": 0.090425, "at": "2026-11-23T12:08:03"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (83%)", "progress": 0.091835, "at": "2026-11-23T12:08:05"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (86%)", "progress": 0.09306, "at": "2026-11-23T12:08:07"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (88%)", "progress": 0.09422, "at": "2026-11-23T12:08:09"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (90%)", "progress": 0.09542500000000001, "at": "2026-11-23T12:08:11"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (93%)", "progress": 0.096635, "at": "2026-11-23T12:08:13"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (95%)", "progress": 0.09786, "at": "2026-11-23T12:08:15"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (98%)", "progress": 0.09910000000000001, "at": "2026-11-23T12:08:17"}
+{"message": "Fixing eye contact on BuzzEdit: Re-aiming and encoding (100%)", "progress": 0.1, "at": "2026-11-23T12:08:19"}
+{"message": "Fixing eye contact on BuzzEdit: Done (100%)", "progress": 0.1, "at": "2026-11-23T12:08:21"}
+{"message": "Transcribing on BuzzEdit (keeping your cut)...", "progress": 0.15, "at": "2026-11-23T12:08:21"}
+{"message": "Matching your recording against the script...", "progress": 0.3, "at": "2026-11-23T12:12:08"}
+{"message": "Writing the cast sheet so characters stay the same...", "at": "2026-11-23T12:12:08"}
+{"message": "Planning visuals for your take (1/11)...", "progress": 0.3045454545454545, "at": "2026-11-23T12:13:19"}
+{"message": "Planning visuals for your take (2/11)...", "progress": 0.3090909090909091, "at": "2026-11-23T12:13:22"}
+{"message": "Planning visuals for your take (3/11)...", "progress": 0.3136363636363636, "at": "2026-11-23T12:13:57"}
+{"message": "Planning visuals for your take (4/11)...", "progress": 0.3181818181818182, "at": "2026-11-23T12:14:01"}
+{"message": "Planning visuals for your take (5/11)...", "progress": 0.3227272727272727, "at": "2026-11-23T12:14:19"}
+{"message": "Planning visuals for your take (6/11)...", "progress": 0.32727272727272727, "at": "2026-11-23T12:14:22"}
+{"message": "Planning visuals for your take (7/11)...", "progress": 0.3318181818181818, "at": "2026-11-23T12:15:08"}
+{"message": "Planning visuals for your take (8/11)...", "progress": 0.33636363636363636, "at": "2026-11-23T12:15:15"}
+{"message": "Planning visuals for your take (9/11)...", "progress": 0.3409090909090909, "at": "2026-11-23T12:15:22"}
+{"message": "Planning visuals for your take (10/11)...", "progress": 0.34545454545454546, "at": "2026-11-23T12:16:07"}
+{"message": "Planning visuals for your take (11/11)...", "progress": 0.35, "at": "2026-11-23T12:16:20"}
+{"message": "Cueing the scene's sounds...", "at": "2026-11-23T12:16:20"}
+{"message": "Cueing the scene's sounds (1/6)...", "at": "2026-11-23T12:16:20"}
+{"message": "Cueing the scene's sounds (2/6)...", "at": "2026-11-23T12:16:34"}
+{"message": "Cueing the scene's sounds (3/6)...", "at": "2026-11-23T12:16:54"}
+{"message": "Cueing the scene's sounds (4/6)...", "at": "2026-11-23T12:17:22"}
+{"message": "Cueing the scene's sounds (5/6)...", "at": "2026-11-23T12:17:40"}
+{"message": "Cueing the scene's sounds (6/6)...", "at": "2026-11-23T12:17:51"}
+{"state": "awaiting_plan_review", "message": "Visual plan ready for review.", "progress": 0.35, "at": "2026-11-23T12:18:06"}
+{"state": "queued", "message": "Continuing -- waiting in the production queue...", "at": "2026-11-23T12:25:57"}
+{"state": "running", "message": "Resuming...", "at": "2026-11-23T12:25:57"}
+{"message": "Resuming after plan review...", "progress": 0.32, "at": "2026-11-23T12:25:57"}
+{"message": "Sending the annotated script to BuzzEdit...", "progress": 0.35, "at": "2026-11-23T12:25:57"}
+{"message": "Freeing the GPU for the render (unloading local LLMs)...", "at": "2026-11-23T12:25:57"}
+{"message": "Enqueuing the render (genre=horror)...", "progress": 0.4, "at": "2026-11-23T12:25:58"}
+{"message": "Rendering (pending)...", "progress": 0.4, "at": "2026-11-23T12:25:58"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T12:26:02"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T12:26:06"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T12:26:10"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T12:26:14"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:18"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:22"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:26"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:30"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:34"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:38"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T12:26:42"}
+{"message": "Reading the mood of each part", "progress": 0.5045000000000001, "at": "2026-11-23T12:26:46"}
+{"message": "Writing the listing", "progress": 0.5155000000000001, "at": "2026-11-23T12:26:50"}
+{"message": "Generating pictures", "progress": 0.5375000000000001, "at": "2026-11-23T12:26:54"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:26:58"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:02"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:07"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:11"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:15"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:19"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:23"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:27"}
+{"message": "Generating picture 1/61", "progress": 0.5375000000000001, "at": "2026-11-23T12:27:31"}
+{"message": "Generating picture 2/61", "progress": 0.5397647058823529, "at": "2026-11-23T12:27:35"}
+{"message": "Generating picture 2/61", "progress": 0.5397647058823529, "at": "2026-11-23T12:27:39"}
+{"message": "Generating picture 3/61", "progress": 0.542029411764706, "at": "2026-11-23T12:27:43"}
+{"message": "Generating picture 3/61", "progress": 0.542029411764706, "at": "2026-11-23T12:27:47"}
+{"message": "Generating picture 3/61", "progress": 0.542029411764706, "at": "2026-11-23T12:27:51"}
+{"message": "Generating picture 4/61", "progress": 0.5442941176470588, "at": "2026-11-23T12:27:55"}
+{"message": "Generating picture 4/61", "progress": 0.5442941176470588, "at": "2026-11-23T12:27:59"}
+{"message": "Generating picture 5/61", "progress": 0.5465588235294118, "at": "2026-11-23T12:28:03"}
+{"message": "Generating picture 5/61", "progress": 0.5465588235294118, "at": "2026-11-23T12:28:07"}
+{"message": "Generating picture 5/61", "progress": 0.5465588235294118, "at": "2026-11-23T12:28:11"}
+{"message": "Generating picture 6/61", "progress": 0.5488235294117647, "at": "2026-11-23T12:28:15"}
+{"message": "Generating picture 6/61", "progress": 0.5488235294117647, "at": "2026-11-23T12:28:19"}
+{"message": "Generating picture 7/61", "progress": 0.5510882352941177, "at": "2026-11-23T12:28:23"}
+{"message": "Generating picture 7/61", "progress": 0.5510882352941177, "at": "2026-11-23T12:28:27"}
+{"message": "Generating picture 7/61", "progress": 0.5510882352941177, "at": "2026-11-23T12:28:31"}
+{"message": "Generating picture 8/61", "progress": 0.5533529411764706, "at": "2026-11-23T12:28:35"}
+{"message": "Generating picture 8/61", "progress": 0.5533529411764706, "at": "2026-11-23T12:28:39"}
+{"message": "Generating picture 9/61", "progress": 0.5556176470588235, "at": "2026-11-23T12:28:44"}
+{"message": "Generating picture 9/61", "progress": 0.5556176470588235, "at": "2026-11-23T12:28:48"}
+{"message": "Generating picture 9/61", "progress": 0.5556176470588235, "at": "2026-11-23T12:28:52"}
+{"message": "Generating picture 10/61", "progress": 0.5578823529411765, "at": "2026-11-23T12:28:56"}
+{"message": "Generating picture 10/61", "progress": 0.5578823529411765, "at": "2026-11-23T12:29:00"}
+{"message": "Generating picture 11/61", "progress": 0.5601470588235294, "at": "2026-11-23T12:29:04"}
+{"message": "Generating picture 11/61", "progress": 0.5601470588235294, "at": "2026-11-23T12:29:08"}
+{"message": "Generating picture 11/61", "progress": 0.5601470588235294, "at": "2026-11-23T12:29:12"}
+{"message": "Generating picture 12/61", "progress": 0.5624117647058824, "at": "2026-11-23T12:29:16"}
+{"message": "Generating picture 12/61", "progress": 0.5624117647058824, "at": "2026-11-23T12:29:20"}
+{"message": "Generating picture 13/61", "progress": 0.5646764705882353, "at": "2026-11-23T12:29:24"}
+{"message": "Generating picture 13/61", "progress": 0.5646764705882353, "at": "2026-11-23T12:29:28"}
+{"message": "Generating picture 13/61", "progress": 0.5646764705882353, "at": "2026-11-23T12:29:32"}
+{"message": "Generating picture 14/61", "progress": 0.5669411764705883, "at": "2026-11-23T12:29:36"}
+{"message": "Generating picture 14/61", "progress": 0.5669411764705883, "at": "2026-11-23T12:29:40"}
+{"message": "Generating picture 15/61", "progress": 0.5692058823529412, "at": "2026-11-23T12:29:44"}
+{"message": "Generating picture 15/61", "progress": 0.5692058823529412, "at": "2026-11-23T12:29:48"}
+{"message": "Generating picture 15/61", "progress": 0.5692058823529412, "at": "2026-11-23T12:29:52"}
+{"message": "Generating picture 16/61", "progress": 0.5714705882352942, "at": "2026-11-23T12:29:56"}
+{"message": "Generating picture 16/61", "progress": 0.5714705882352942, "at": "2026-11-23T12:30:00"}
+{"message": "Generating picture 17/61", "progress": 0.5737352941176471, "at": "2026-11-23T12:30:04"}
+{"message": "Generating picture 17/61", "progress": 0.5737352941176471, "at": "2026-11-23T12:30:08"}
+{"message": "Generating picture 17/61", "progress": 0.5737352941176471, "at": "2026-11-23T12:30:12"}
+{"message": "Generating picture 18/61", "progress": 0.5760000000000001, "at": "2026-11-23T12:30:16"}
+{"message": "Generating picture 18/61", "progress": 0.5760000000000001, "at": "2026-11-23T12:30:20"}
+{"message": "Generating picture 19/61", "progress": 0.5782647058823529, "at": "2026-11-23T12:30:25"}
+{"message": "Generating picture 19/61", "progress": 0.5782647058823529, "at": "2026-11-23T12:30:29"}
+{"message": "Generating picture 19/61", "progress": 0.5782647058823529, "at": "2026-11-23T12:30:33"}
+{"message": "Generating picture 20/61", "progress": 0.580529411764706, "at": "2026-11-23T12:30:37"}
+{"message": "Generating picture 20/61", "progress": 0.580529411764706, "at": "2026-11-23T12:30:41"}
+{"message": "Generating picture 21/61", "progress": 0.5827941176470588, "at": "2026-11-23T12:30:45"}
+{"message": "Generating picture 21/61", "progress": 0.5827941176470588, "at": "2026-11-23T12:30:49"}
+{"message": "Generating picture 21/61", "progress": 0.5827941176470588, "at": "2026-11-23T12:30:53"}
+{"message": "Generating picture 22/61", "progress": 0.5850588235294119, "at": "2026-11-23T12:30:57"}
+{"message": "Generating picture 22/61", "progress": 0.5850588235294119, "at": "2026-11-23T12:31:01"}
+{"message": "Generating picture 23/61", "progress": 0.5873235294117647, "at": "2026-11-23T12:31:05"}
+{"message": "Generating picture 23/61", "progress": 0.5873235294117647, "at": "2026-11-23T12:31:09"}
+{"message": "Generating picture 23/61", "progress": 0.5873235294117647, "at": "2026-11-23T12:31:13"}
+{"message": "Generating picture 24/61", "progress": 0.5895882352941177, "at": "2026-11-23T12:31:17"}
+{"message": "Generating picture 24/61", "progress": 0.5895882352941177, "at": "2026-11-23T12:31:21"}
+{"message": "Generating picture 25/61", "progress": 0.5918529411764706, "at": "2026-11-23T12:31:25"}
+{"message": "Generating picture 25/61", "progress": 0.5918529411764706, "at": "2026-11-23T12:31:29"}
+{"message": "Generating picture 25/61", "progress": 0.5918529411764706, "at": "2026-11-23T12:31:33"}
+{"message": "Generating picture 26/61", "progress": 0.5941176470588235, "at": "2026-11-23T12:31:37"}
+{"message": "Generating picture 26/61", "progress": 0.5941176470588235, "at": "2026-11-23T12:31:41"}
+{"message": "Generating picture 27/61", "progress": 0.5963823529411765, "at": "2026-11-23T12:31:45"}
+{"message": "Generating picture 27/61", "progress": 0.5963823529411765, "at": "2026-11-23T12:31:50"}
+{"message": "Generating picture 27/61", "progress": 0.5963823529411765, "at": "2026-11-23T12:31:54"}
+{"message": "Generating picture 28/61", "progress": 0.5986470588235294, "at": "2026-11-23T12:31:58"}
+{"message": "Generating picture 28/61", "progress": 0.5986470588235294, "at": "2026-11-23T12:32:02"}
+{"message": "Generating picture 29/61", "progress": 0.6009117647058824, "at": "2026-11-23T12:32:06"}
+{"message": "Generating picture 29/61", "progress": 0.6009117647058824, "at": "2026-11-23T12:32:10"}
+{"message": "Generating picture 29/61", "progress": 0.6009117647058824, "at": "2026-11-23T12:32:14"}
+{"message": "Generating picture 30/61", "progress": 0.6031764705882353, "at": "2026-11-23T12:32:18"}
+{"message": "Generating picture 30/61", "progress": 0.6031764705882353, "at": "2026-11-23T12:32:22"}
+{"message": "Generating picture 31/61", "progress": 0.6054411764705883, "at": "2026-11-23T12:32:26"}
+{"message": "Generating picture 31/61", "progress": 0.6054411764705883, "at": "2026-11-23T12:32:30"}
+{"message": "Generating picture 31/61", "progress": 0.6054411764705883, "at": "2026-11-23T12:32:34"}
+{"message": "Generating picture 32/61", "progress": 0.6077058823529412, "at": "2026-11-23T12:32:38"}
+{"message": "Generating picture 32/61", "progress": 0.6077058823529412, "at": "2026-11-23T12:32:42"}
+{"message": "Generating picture 33/61", "progress": 0.6099705882352942, "at": "2026-11-23T12:32:46"}
+{"message": "Generating picture 33/61", "progress": 0.6099705882352942, "at": "2026-11-23T12:32:50"}
+{"message": "Generating picture 33/61", "progress": 0.6099705882352942, "at": "2026-11-23T12:32:54"}
+{"message": "Generating picture 34/61", "progress": 0.6122352941176471, "at": "2026-11-23T12:32:58"}
+{"message": "Generating picture 34/61", "progress": 0.6122352941176471, "at": "2026-11-23T12:33:02"}
+{"message": "Generating picture 34/61", "progress": 0.6122352941176471, "at": "2026-11-23T12:33:06"}
+{"message": "Generating picture 35/61", "progress": 0.6145, "at": "2026-11-23T12:33:11"}
+{"message": "Generating picture 35/61", "progress": 0.6145, "at": "2026-11-23T12:33:15"}
+{"message": "Generating picture 36/61", "progress": 0.616764705882353, "at": "2026-11-23T12:33:19"}
+{"message": "Generating picture 36/61", "progress": 0.616764705882353, "at": "2026-11-23T12:33:23"}
+{"message": "Generating picture 36/61", "progress": 0.616764705882353, "at": "2026-11-23T12:33:27"}
+{"message": "Generating picture 37/61", "progress": 0.6190294117647059, "at": "2026-11-23T12:33:31"}
+{"message": "Generating picture 37/61", "progress": 0.6190294117647059, "at": "2026-11-23T12:33:35"}
+{"message": "Generating picture 38/61", "progress": 0.6212941176470589, "at": "2026-11-23T12:33:39"}
+{"message": "Generating picture 38/61", "progress": 0.6212941176470589, "at": "2026-11-23T12:33:43"}
+{"message": "Generating picture 38/61", "progress": 0.6212941176470589, "at": "2026-11-23T12:33:47"}
+{"message": "Generating picture 39/61", "progress": 0.6235588235294118, "at": "2026-11-23T12:33:51"}
+{"message": "Generating picture 39/61", "progress": 0.6235588235294118, "at": "2026-11-23T12:33:55"}
+{"message": "Generating picture 40/61", "progress": 0.6258235294117648, "at": "2026-11-23T12:33:59"}
+{"message": "Generating picture 40/61", "progress": 0.6258235294117648, "at": "2026-11-23T12:34:03"}
+{"message": "Generating picture 40/61", "progress": 0.6258235294117648, "at": "2026-11-23T12:34:07"}
+{"message": "Generating picture 41/61", "progress": 0.6280882352941177, "at": "2026-11-23T12:34:11"}
+{"message": "Generating picture 41/61", "progress": 0.6280882352941177, "at": "2026-11-23T12:34:15"}
+{"message": "Generating picture 42/61", "progress": 0.6303529411764706, "at": "2026-11-23T12:34:20"}
+{"message": "Generating picture 42/61", "progress": 0.6303529411764706, "at": "2026-11-23T12:34:24"}
+{"message": "Generating picture 42/61", "progress": 0.6303529411764706, "at": "2026-11-23T12:34:28"}
+{"message": "Generating picture 43/61", "progress": 0.6326176470588236, "at": "2026-11-23T12:34:32"}
+{"message": "Generating picture 43/61", "progress": 0.6326176470588236, "at": "2026-11-23T12:34:36"}
+{"message": "Generating picture 44/61", "progress": 0.6348823529411765, "at": "2026-11-23T12:34:40"}
+{"message": "Generating picture 44/61", "progress": 0.6348823529411765, "at": "2026-11-23T12:34:44"}
+{"message": "Generating picture 44/61", "progress": 0.6348823529411765, "at": "2026-11-23T12:34:48"}
+{"message": "Generating picture 45/61", "progress": 0.6371470588235294, "at": "2026-11-23T12:34:52"}
+{"message": "Generating picture 45/61", "progress": 0.6371470588235294, "at": "2026-11-23T12:34:56"}
+{"message": "Generating picture 46/61", "progress": 0.6394117647058823, "at": "2026-11-23T12:35:00"}
+{"message": "Generating picture 46/61", "progress": 0.6394117647058823, "at": "2026-11-23T12:35:04"}
+{"message": "Generating picture 46/61", "progress": 0.6394117647058823, "at": "2026-11-23T12:35:08"}
+{"message": "Generating picture 47/61", "progress": 0.6416764705882353, "at": "2026-11-23T12:35:12"}
+{"message": "Generating picture 47/61", "progress": 0.6416764705882353, "at": "2026-11-23T12:35:16"}
+{"message": "Generating picture 48/61", "progress": 0.6439411764705882, "at": "2026-11-23T12:35:20"}
+{"message": "Generating picture 48/61", "progress": 0.6439411764705882, "at": "2026-11-23T12:35:24"}
+{"message": "Generating picture 48/61", "progress": 0.6439411764705882, "at": "2026-11-23T12:35:28"}
+{"message": "Generating picture 49/61", "progress": 0.6462058823529412, "at": "2026-11-23T12:35:32"}
+{"message": "Generating picture 49/61", "progress": 0.6462058823529412, "at": "2026-11-23T12:35:36"}
+{"message": "Generating picture 50/61", "progress": 0.6484705882352941, "at": "2026-11-23T12:35:40"}
+{"message": "Generating picture 50/61", "progress": 0.6484705882352941, "at": "2026-11-23T12:35:45"}
+{"message": "Generating picture 50/61", "progress": 0.6484705882352941, "at": "2026-11-23T12:35:49"}
+{"message": "Generating picture 51/61", "progress": 0.6507352941176471, "at": "2026-11-23T12:35:53"}
+{"message": "Generating picture 51/61", "progress": 0.6507352941176471, "at": "2026-11-23T12:35:57"}
+{"message": "Generating picture 52/61", "progress": 0.653, "at": "2026-11-23T12:36:01"}
+{"message": "Generating picture 52/61", "progress": 0.653, "at": "2026-11-23T12:36:05"}
+{"message": "Generating picture 52/61", "progress": 0.653, "at": "2026-11-23T12:36:09"}
+{"message": "Generating picture 53/61", "progress": 0.655264705882353, "at": "2026-11-23T12:36:13"}
+{"message": "Generating picture 53/61", "progress": 0.655264705882353, "at": "2026-11-23T12:36:17"}
+{"message": "Generating picture 54/61", "progress": 0.6575294117647059, "at": "2026-11-23T12:36:21"}
+{"message": "Generating picture 54/61", "progress": 0.6575294117647059, "at": "2026-11-23T12:36:25"}
+{"message": "Generating picture 54/61", "progress": 0.6575294117647059, "at": "2026-11-23T12:36:29"}
+{"message": "Generating picture 55/61", "progress": 0.6597941176470588, "at": "2026-11-23T12:36:33"}
+{"message": "Generating picture 55/61", "progress": 0.6597941176470588, "at": "2026-11-23T12:36:37"}
+{"message": "Generating picture 56/61", "progress": 0.6620588235294118, "at": "2026-11-23T12:36:41"}
+{"message": "Generating picture 56/61", "progress": 0.6620588235294118, "at": "2026-11-23T12:36:45"}
+{"message": "Generating picture 56/61", "progress": 0.6620588235294118, "at": "2026-11-23T12:36:49"}
+{"message": "Generating picture 57/61", "progress": 0.6643235294117648, "at": "2026-11-23T12:36:53"}
+{"message": "Generating picture 57/61", "progress": 0.6643235294117648, "at": "2026-11-23T12:36:58"}
+{"message": "Generating picture 58/61", "progress": 0.6665882352941177, "at": "2026-11-23T12:37:02"}
+{"message": "Generating picture 58/61", "progress": 0.6665882352941177, "at": "2026-11-23T12:37:06"}
+{"message": "Generating picture 58/61", "progress": 0.6665882352941177, "at": "2026-11-23T12:37:10"}
+{"message": "Generating picture 59/61", "progress": 0.6688529411764705, "at": "2026-11-23T12:37:14"}
+{"message": "Generating picture 59/61", "progress": 0.6688529411764705, "at": "2026-11-23T12:37:18"}
+{"message": "Generating picture 60/61", "progress": 0.6711176470588236, "at": "2026-11-23T12:37:22"}
+{"message": "Generating picture 60/61", "progress": 0.6711176470588236, "at": "2026-11-23T12:37:26"}
+{"message": "Generating picture 60/61", "progress": 0.6711176470588236, "at": "2026-11-23T12:37:30"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T12:37:34"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T12:37:38"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T12:37:42"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:37:46"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:37:50"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:37:54"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:37:58"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:02"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:06"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:10"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:14"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:18"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:22"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:26"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:31"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:35"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:39"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:43"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:47"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:51"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:55"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:38:59"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:03"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:07"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:11"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:15"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:19"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:23"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:27"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:31"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:35"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:39"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:43"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:47"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:51"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:39:55"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:00"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:04"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:08"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:12"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:16"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:20"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:24"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:28"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:32"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:36"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:40"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:44"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:48"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:52"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:40:56"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:41:00"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:41:04"}
+{"message": "Generating video clip 1: 0 s of 56 s moving, 56 s to go (live share 19%)", "progress": 0.6756470588235295, "at": "2026-11-23T12:41:08"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:12"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:16"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:20"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:24"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:28"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:33"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:37"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:41"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:45"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:49"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:53"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:41:57"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:01"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:05"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:09"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:13"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:17"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:21"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:25"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:29"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:33"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:37"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:41"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:45"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:50"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:54"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:42:58"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:02"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:06"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:10"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:14"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:18"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:22"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:26"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:30"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:34"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:38"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:42"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:46"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:50"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:54"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:43:59"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:03"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:07"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:11"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:15"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:19"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:23"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:27"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:31"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:35"}
+{"message": "Generating video clip 2: 4 s of 56 s moving, 52 s to go (live share 19%)", "progress": 0.6779117647058823, "at": "2026-11-23T12:44:39"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:44:43"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:44:47"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:44:51"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:44:55"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:44:59"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:03"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:07"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:11"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:15"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:20"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:24"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:28"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:32"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:36"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:40"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:44"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:48"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:52"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:45:56"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:00"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:04"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:08"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:12"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:16"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:20"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:24"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:28"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:32"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:36"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:41"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:45"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:49"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:53"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:46:57"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:01"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:05"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:09"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:13"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:17"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:21"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:25"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:29"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:33"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:37"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:41"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:45"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:49"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:53"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:47:57"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:48:02"}
+{"message": "Generating video clip 3: 7 s of 56 s moving, 49 s to go (live share 19%)", "progress": 0.6801764705882354, "at": "2026-11-23T12:48:06"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:10"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:14"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:18"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:22"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:26"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:30"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:34"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:38"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:42"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:46"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:50"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:54"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:48:58"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:02"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:06"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:10"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:14"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:19"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:23"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:27"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:31"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:35"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:39"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:43"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:47"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:51"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:55"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:49:59"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:03"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:07"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:11"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:15"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:19"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:23"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:27"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:31"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:35"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:39"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:43"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:47"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:52"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:50:56"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:00"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:04"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:08"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:12"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:16"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:20"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:24"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:28"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:32"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:36"}
+{"message": "Generating video clip 4: 12 s of 56 s moving, 44 s to go (live share 19%)", "progress": 0.6824411764705882, "at": "2026-11-23T12:51:40"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:51:44"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:51:48"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:51:52"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:51:56"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:01"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:05"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:09"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:13"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:17"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:21"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:25"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:29"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:33"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:37"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:41"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:45"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:49"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:53"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:52:57"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:01"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:05"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:09"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:13"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:17"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:21"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:26"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:30"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:34"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:38"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:42"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:46"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:50"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:54"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:53:58"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:02"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:06"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:10"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:14"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:19"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:23"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:27"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:31"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:35"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:39"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:43"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:47"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:51"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:55"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:54:59"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:55:03"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:55:07"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:55:11"}
+{"message": "Generating video clip 5: 15 s of 56 s moving, 41 s to go (live share 19%)", "progress": 0.6847058823529412, "at": "2026-11-23T12:55:15"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:19"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:24"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:28"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:32"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:36"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:40"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:44"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:48"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:52"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:55:56"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:00"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:04"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:08"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:12"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:16"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:20"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:24"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:28"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:32"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:36"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:40"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:44"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:48"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:53"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:56:57"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:01"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:05"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:09"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:13"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:17"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:21"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:25"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:29"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:33"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:37"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:41"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:45"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:49"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:53"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:57:57"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:01"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:05"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:09"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:14"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:18"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:22"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:26"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:30"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:34"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:38"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:42"}
+{"message": "Generating video clip 6: 20 s of 56 s moving, 36 s to go (live share 19%)", "progress": 0.6869705882352941, "at": "2026-11-23T12:58:46"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:58:50"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:58:54"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:58:58"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:02"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:06"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:10"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:14"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:18"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:22"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:27"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:31"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:35"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:39"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:43"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:47"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:51"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:55"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T12:59:59"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:03"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:07"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:11"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:15"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:19"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:23"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:27"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:31"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:35"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:39"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:43"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:47"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:51"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:00:55"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:00"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:04"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:08"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:12"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:16"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:20"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:24"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:28"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:32"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:36"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:40"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:44"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:48"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:52"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:01:56"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:00"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:04"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:08"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:12"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:16"}
+{"message": "Generating video clip 7: 23 s of 56 s moving, 33 s to go (live share 19%)", "progress": 0.6892352941176472, "at": "2026-11-23T13:02:20"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:24"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:28"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:32"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:37"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:41"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:45"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:49"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:53"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:02:57"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:01"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:05"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:09"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:13"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:17"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:21"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:25"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:29"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:33"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:37"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:41"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:45"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:49"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:53"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:03:57"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:01"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:05"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:09"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:14"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:18"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:22"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:26"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:30"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:34"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:38"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:42"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:46"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:50"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:54"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:04:58"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:02"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:06"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:10"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:14"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:18"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:22"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:26"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:30"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:34"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:38"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:42"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:46"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:50"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:55"}
+{"message": "Generating video clip 8: 27 s of 56 s moving, 29 s to go (live share 19%)", "progress": 0.6915, "at": "2026-11-23T13:05:59"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:03"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:07"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:11"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:15"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:19"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:23"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:27"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:31"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:35"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:39"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:43"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:47"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:51"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:55"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:06:59"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:03"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:07"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:11"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:15"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:19"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:23"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:28"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:32"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:36"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:40"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:44"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:48"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:52"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:07:56"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:00"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:04"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:08"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:12"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:16"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:20"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:24"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:28"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:32"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:36"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:40"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:44"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:48"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:52"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:08:56"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:00"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:04"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:08"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:13"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:17"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:21"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:25"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:29"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:33"}
+{"message": "Generating video clip 9: 31 s of 56 s moving, 25 s to go (live share 19%)", "progress": 0.6937647058823531, "at": "2026-11-23T13:09:37"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:09:41"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:09:45"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:09:49"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:09:53"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:09:57"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:01"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:05"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:09"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:13"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:17"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:21"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:25"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:29"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:33"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:37"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:41"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:46"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:50"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:54"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:10:58"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:02"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:06"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:10"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:14"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:18"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:22"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:26"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:30"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:34"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:38"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:42"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:46"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:50"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:54"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:11:58"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:02"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:06"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:10"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:14"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:18"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:22"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:26"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:31"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:35"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:39"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:43"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:47"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:51"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:55"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:12:59"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:13:03"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:13:07"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:13:11"}
+{"message": "Generating video clip 10: 35 s of 56 s moving, 21 s to go (live share 19%)", "progress": 0.6960294117647059, "at": "2026-11-23T13:13:15"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:19"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:23"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:27"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:31"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:35"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:39"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:43"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:47"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:52"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:13:56"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:00"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:04"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:08"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:12"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:16"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:20"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:24"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:28"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:32"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:36"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:40"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:44"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:48"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:52"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:14:56"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:00"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:04"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:08"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:12"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:16"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:20"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:24"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:28"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:33"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:37"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:41"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:45"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:49"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:53"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:15:57"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:01"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:05"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:09"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:13"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:17"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:21"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:25"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:29"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:33"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:37"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:41"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:45"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:49"}
+{"message": "Generating video clip 11: 39 s of 56 s moving, 17 s to go (live share 19%)", "progress": 0.698294117647059, "at": "2026-11-23T13:16:53"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:16:57"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:02"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:06"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:10"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:14"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:18"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:22"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:26"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:30"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:34"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:38"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:42"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:46"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:50"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:54"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:17:58"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:02"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:06"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:10"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:14"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:18"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:22"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:26"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:30"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:35"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:39"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:43"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:47"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:51"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:55"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:18:59"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:03"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:07"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:11"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:15"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:19"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:23"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:27"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:31"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:35"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:39"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:43"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:47"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:51"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:55"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:19:59"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:03"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:07"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:11"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:15"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:19"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:24"}
+{"message": "Generating video clip 12: 43 s of 56 s moving, 13 s to go (live share 19%)", "progress": 0.7005588235294118, "at": "2026-11-23T13:20:28"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:32"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:36"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:40"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:44"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:48"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:52"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:20:56"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:00"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:04"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:08"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:12"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:16"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:20"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:24"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:28"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:32"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:36"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:40"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:44"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:49"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:53"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:21:57"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:01"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:05"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:09"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:13"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:17"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:21"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:25"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:29"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:33"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:37"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:41"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:45"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:49"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:53"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:22:57"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:01"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:05"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:09"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:13"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:17"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:21"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:25"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:29"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:34"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:38"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:42"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:46"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:50"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:54"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:23:58"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:24:02"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:24:06"}
+{"message": "Generating video clip 13: 47 s of 56 s moving, 9 s to go (live share 19%)", "progress": 0.7028235294117647, "at": "2026-11-23T13:24:10"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:14"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:18"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:22"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:26"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:30"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:34"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:38"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:42"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:46"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:50"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:54"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:24:58"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:02"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:06"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:10"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:15"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:19"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:23"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:27"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:31"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:35"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:39"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:43"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:47"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:51"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:55"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:25:59"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:03"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:07"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:11"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:15"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:19"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:23"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:27"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:31"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:35"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:39"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:44"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:48"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:52"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:26:56"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:00"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:04"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:08"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:12"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:16"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:20"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:24"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:28"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:32"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:36"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:40"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:44"}
+{"message": "Generating video clip 14: 50 s of 56 s moving, 6 s to go (live share 19%)", "progress": 0.7050882352941177, "at": "2026-11-23T13:27:48"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:27:52"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:27:56"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:00"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:04"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:08"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:12"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:17"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:21"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:25"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:29"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:33"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:37"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:41"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:45"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:49"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:53"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:28:57"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:01"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:05"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:09"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:13"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:17"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:21"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:25"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:29"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:33"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:37"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:41"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:46"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:50"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:54"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:29:58"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:02"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:06"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:10"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:14"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:18"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:22"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:26"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:30"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:34"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:38"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:42"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:46"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:50"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:54"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:30:58"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:02"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:06"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:10"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:14"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:18"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:22"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:27"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:31"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:35"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:39"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:43"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:47"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:51"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:31:55"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:00"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:04"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:08"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:12"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:16"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:20"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:24"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:28"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:32"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:36"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:40"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:44"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:48"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:52"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:32:56"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:00"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:04"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:08"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:12"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:16"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:20"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:24"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:28"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:32"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:36"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:41"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:45"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:49"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:53"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:33:57"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:01"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:05"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:09"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:13"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:17"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:21"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:25"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:29"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:33"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:37"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:41"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:45"}
+{"message": "Generating video clip 15: 54 s of 56 s moving, 2 s to go (live share 19%)", "progress": 0.7073529411764706, "at": "2026-11-23T13:34:49"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:34:53"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:34:57"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:35:01"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:35:05"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:35:09"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T13:35:13"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:17"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:22"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:26"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:30"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:34"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:38"}
+{"message": "Making the music: track 1 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:42"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:48"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:52"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:35:56"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:01"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:05"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:09"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:13"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:17"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:21"}
+{"message": "Making the music: track 2 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:25"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:31"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:35"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:39"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:43"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:47"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:52"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:36:56"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:00"}
+{"message": "Making the music: track 3 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:04"}
+{"message": "Making the music: track 4 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:10"}
+{"message": "Making the music: track 4 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:14"}
+{"message": "Making the music: track 4 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:18"}
+{"message": "Making the music: track 5 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:23"}
+{"message": "Making the music: track 5 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:27"}
+{"message": "Making the music: track 5 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:31"}
+{"message": "Making the music: track 5 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:35"}
+{"message": "Making the music: track 6 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:41"}
+{"message": "Making the music: track 6 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:45"}
+{"message": "Making the music: track 6 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:49"}
+{"message": "Making the music: track 6 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:53"}
+{"message": "Making the music: track 7 of 14", "progress": 0.86475, "at": "2026-11-23T13:37:57"}
+{"message": "Making the music: track 7 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:01"}
+{"message": "Making the music: track 7 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:05"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:09"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:13"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:17"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:21"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:25"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:29"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:33"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:38"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:42"}
+{"message": "Making the music: track 8 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:46"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:52"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:38:56"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:00"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:04"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:08"}
+{"message": "Making the music: track 9 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:12"}
+{"message": "Making the music: track 10 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:16"}
+{"message": "Making the music: track 10 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:20"}
+{"message": "Making the music: track 10 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:24"}
+{"message": "Making the music: track 10 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:28"}
+{"message": "Making the music: track 10 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:32"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:36"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:40"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:44"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:48"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:52"}
+{"message": "Making the music: track 11 of 14", "progress": 0.86475, "at": "2026-11-23T13:39:56"}
+{"message": "Making the music: track 12 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:04"}
+{"message": "Making the music: track 12 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:08"}
+{"message": "Making the music: track 12 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:12"}
+{"message": "Making the music: track 12 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:16"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:20"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:24"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:28"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:32"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:36"}
+{"message": "Making the music: track 13 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:40"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:45"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:49"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:53"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:40:57"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:41:01"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:41:05"}
+{"message": "Making the music: track 14 of 14", "progress": 0.86475, "at": "2026-11-23T13:41:10"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:14"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:18"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:22"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:26"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:30"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:34"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:38"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:42"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:46"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:50"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:54"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:41:58"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:02"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:06"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:10"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:14"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:19"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:23"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:27"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:31"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:35"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:39"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:43"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:47"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:51"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:55"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:42:59"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:03"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:07"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:11"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:15"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:19"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:23"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:27"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:32"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:36"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:40"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:44"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:48"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:52"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:43:56"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:44:00"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:44:04"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:44:08"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:44:12"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T13:44:16"}
+{"message": "Keeping his face on screen at the camera looks", "progress": 0.87025, "at": "2026-11-23T13:44:30"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:34"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:38"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:42"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:46"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:50"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T13:44:54"}
+{"message": "Rendering", "progress": 0.895, "at": "2026-11-23T13:44:58"}
+{"message": "Rendering", "progress": 0.895, "at": "2026-11-23T13:45:02"}
+{"message": "Rendering", "progress": 0.8952147072210794, "at": "2026-11-23T13:45:07"}
+{"message": "Rendering", "progress": 0.8963823613853525, "at": "2026-11-23T13:45:11"}
+{"message": "Rendering", "progress": 0.8981764900459419, "at": "2026-11-23T13:45:15"}
+{"message": "Rendering", "progress": 0.8999412067381318, "at": "2026-11-23T13:45:19"}
+{"message": "Rendering", "progress": 0.9019353365297177, "at": "2026-11-23T13:45:23"}
+{"message": "Rendering", "progress": 0.9040206434445183, "at": "2026-11-23T13:45:27"}
+{"message": "Rendering", "progress": 0.9059735966074046, "at": "2026-11-23T13:45:31"}
+{"message": "Rendering", "progress": 0.9072118395099542, "at": "2026-11-23T13:45:35"}
+{"message": "Rendering", "progress": 0.907855961126133, "at": "2026-11-23T13:45:39"}
+{"message": "Rendering", "progress": 0.9086471424196019, "at": "2026-11-23T13:45:43"}
+{"message": "Rendering", "progress": 0.9099530327718225, "at": "2026-11-23T13:45:47"}
+{"message": "Rendering", "progress": 0.9117148082459958, "at": "2026-11-23T13:45:51"}
+{"message": "Rendering", "progress": 0.9135148192720295, "at": "2026-11-23T13:45:55"}
+{"message": "Rendering", "progress": 0.915441301684533, "at": "2026-11-23T13:45:59"}
+{"message": "Rendering", "progress": 0.9175148437978562, "at": "2026-11-23T13:46:03"}
+{"message": "Rendering", "progress": 0.9190972064553826, "at": "2026-11-23T13:46:07"}
+{"message": "Rendering", "progress": 0.9201266244787676, "at": "2026-11-23T13:46:11"}
+{"message": "Rendering", "progress": 0.9204148615855511, "at": "2026-11-23T13:46:15"}
+{"message": "Rendering", "progress": 0.9210001592414017, "at": "2026-11-23T13:46:19"}
+{"message": "Rendering", "progress": 0.9215766333843799, "at": "2026-11-23T13:46:23"}
+{"message": "Rendering", "progress": 0.9227619347861636, "at": "2026-11-23T13:46:28"}
+{"message": "Rendering", "progress": 0.9243795917069453, "at": "2026-11-23T13:46:32"}
+{"message": "Rendering", "progress": 0.9263443096713091, "at": "2026-11-23T13:46:36"}
+{"message": "Rendering", "progress": 0.9281443206738133, "at": "2026-11-23T13:46:40"}
+{"message": "Rendering", "progress": 0.9297825659795333, "at": "2026-11-23T13:46:44"}
+{"message": "Rendering", "progress": 0.9313649286370598, "at": "2026-11-23T13:46:48"}
+{"message": "Rendering", "progress": 0.9327031721286371, "at": "2026-11-23T13:46:52"}
+{"message": "Rendering", "progress": 0.9331267041347627, "at": "2026-11-23T13:46:56"}
+{"message": "Rendering", "progress": 0.9336855311108191, "at": "2026-11-23T13:47:00"}
+{"message": "Rendering", "progress": 0.9342590640357807, "at": "2026-11-23T13:47:04"}
+{"message": "Rendering", "progress": 0.935064951278155, "at": "2026-11-23T13:47:08"}
+{"message": "Rendering", "progress": 0.9363943712333305, "at": "2026-11-23T13:47:12"}
+{"message": "Rendering", "progress": 0.9380796756743719, "at": "2026-11-23T13:47:16"}
+{"message": "Rendering", "progress": 0.9399061574743179, "at": "2026-11-23T13:47:20"}
+{"message": "Rendering", "progress": 0.9410296937212864, "at": "2026-11-23T13:47:24"}
+{"message": "Rendering", "progress": 0.9423061721521667, "at": "2026-11-23T13:47:28"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:32"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:36"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:40"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:44"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:49"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:53"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:47:57"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T13:48:01"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:05"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:09"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:13"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:17"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:21"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:25"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:29"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:33"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:37"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:41"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:45"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:49"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T13:48:53"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T13:48:57"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T13:49:01"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T13:49:05"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T13:49:09"}
+{"message": "Done", "progress": 0.95, "at": "2026-11-23T13:49:13"}
+{"message": "Fetching the render report...", "progress": 0.97, "at": "2026-11-23T13:49:13"}
+{"message": "Saving the final video next to the recording...", "progress": 0.98, "at": "2026-11-23T13:49:13"}
+{"state": "ready", "message": "Video ready: B:/youtubeProjects/Raat3Baje/elanthoor/elanthoor-videos\\elanthoorTemp1_final.mp4", "progress": 1.0, "at": "2026-11-23T13:49:14"}
+{"state": "queued", "message": "Waiting in the production queue to render again...", "at": "2026-11-23T15:37:20"}
+{"state": "running", "message": "Resuming...", "at": "2026-11-23T15:40:46"}
+{"message": "The previous render did not finish; rendering again from the saved plan...", "progress": 0.32, "at": "2026-11-23T15:40:46"}
+{"message": "Resuming after plan review...", "progress": 0.32, "at": "2026-11-23T15:40:46"}
+{"message": "Sending the annotated script to BuzzEdit...", "progress": 0.35, "at": "2026-11-23T15:40:47"}
+{"message": "Freeing the GPU for the render (unloading local LLMs)...", "at": "2026-11-23T15:40:47"}
+{"message": "Enqueuing the render (genre=horror)...", "progress": 0.4, "at": "2026-11-23T15:40:48"}
+{"message": "Rendering (pending)...", "progress": 0.4, "at": "2026-11-23T15:40:48"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T15:40:52"}
+{"message": "Working out what kind of video this is", "progress": 0.47150000000000003, "at": "2026-11-23T15:40:56"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:00"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:04"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:08"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:12"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:16"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:20"}
+{"message": "Working out the topics", "progress": 0.48250000000000004, "at": "2026-11-23T15:41:24"}
+{"message": "Reading the mood of each part", "progress": 0.5045000000000001, "at": "2026-11-23T15:41:28"}
+{"message": "Writing the listing", "progress": 0.5155000000000001, "at": "2026-11-23T15:41:32"}
+{"message": "Generating pictures", "progress": 0.5375000000000001, "at": "2026-11-23T15:41:36"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:41:43"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:41:48"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:41:52"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:41:56"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:00"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:05"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:09"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:13"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:17"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:21"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:25"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:29"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:33"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:37"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:41"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:45"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:49"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:53"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:42:57"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:01"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:05"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:09"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:13"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:17"}
+{"message": "Generating picture 61/61", "progress": 0.6733823529411765, "at": "2026-11-23T15:43:21"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:25"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:30"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:34"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:38"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:42"}
+{"message": "Cutting in the B-roll", "progress": 0.7410000000000001, "at": "2026-11-23T15:43:46"}
+{"message": "Applying the moods", "progress": 0.8620000000000001, "at": "2026-11-23T15:43:50"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:43:54"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:43:58"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:02"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:06"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:10"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:14"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:18"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:22"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:26"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:30"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:34"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:38"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:42"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:46"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:51"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:55"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:44:59"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:03"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:07"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:11"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:15"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:19"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:23"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:27"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:31"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:35"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:39"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:43"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:47"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:51"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:45:56"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:46:00"}
+{"message": "Sound design", "progress": 0.8675, "at": "2026-11-23T15:46:04"}
+{"message": "Keeping his face on screen at the camera looks", "progress": 0.87025, "at": "2026-11-23T15:46:12"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T15:46:16"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T15:46:20"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T15:46:24"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T15:46:28"}
+{"message": "Making a thumbnail", "progress": 0.8840000000000001, "at": "2026-11-23T15:46:32"}
+{"message": "Rendering", "progress": 0.895, "at": "2026-11-23T15:46:36"}
+{"message": "Rendering", "progress": 0.895, "at": "2026-11-23T15:46:40"}
+{"message": "Rendering", "progress": 0.8954000024031707, "at": "2026-11-23T15:46:44"}
+{"message": "Rendering", "progress": 0.8964558913416454, "at": "2026-11-23T15:46:49"}
+{"message": "Rendering", "progress": 0.8978558998233311, "at": "2026-11-23T15:46:53"}
+{"message": "Rendering", "progress": 0.899291202780038, "at": "2026-11-23T15:46:57"}
+{"message": "Rendering", "progress": 0.9007823883849385, "at": "2026-11-23T15:47:01"}
+{"message": "Rendering", "progress": 0.9023647509718764, "at": "2026-11-23T15:47:05"}
+{"message": "Rendering", "progress": 0.9039353488279254, "at": "2026-11-23T15:47:09"}
+{"message": "Rendering", "progress": 0.9054530051832086, "at": "2026-11-23T15:47:13"}
+{"message": "Rendering", "progress": 0.9064735997172509, "at": "2026-11-23T15:47:17"}
+{"message": "Rendering", "progress": 0.9073765463776956, "at": "2026-11-23T15:47:21"}
+{"message": "Rendering", "progress": 0.9081000802450231, "at": "2026-11-23T15:47:25"}
+{"message": "Rendering", "progress": 0.908805966921899, "at": "2026-11-23T15:47:29"}
+{"message": "Rendering", "progress": 0.909955973989839, "at": "2026-11-23T15:47:33"}
+{"message": "Rendering", "progress": 0.9113030409707591, "at": "2026-11-23T15:47:37"}
+{"message": "Rendering", "progress": 0.9126824612086837, "at": "2026-11-23T15:47:41"}
+{"message": "Rendering", "progress": 0.9141765880316006, "at": "2026-11-23T15:47:46"}
+{"message": "Rendering", "progress": 0.9157501271056662, "at": "2026-11-23T15:47:50"}
+{"message": "Rendering", "progress": 0.9172589598069, "at": "2026-11-23T15:47:54"}
+{"message": "Rendering", "progress": 0.9185883797620754, "at": "2026-11-23T15:47:58"}
+{"message": "Rendering", "progress": 0.9196589745788669, "at": "2026-11-23T15:48:02"}
+{"message": "Rendering", "progress": 0.9202589782306818, "at": "2026-11-23T15:48:06"}
+{"message": "Rendering", "progress": 0.9207060398397624, "at": "2026-11-23T15:48:10"}
+{"message": "Rendering", "progress": 0.9210795714925502, "at": "2026-11-23T15:48:14"}
+{"message": "Rendering", "progress": 0.9216501631994953, "at": "2026-11-23T15:48:18"}
+{"message": "Rendering", "progress": 0.9227148756508423, "at": "2026-11-23T15:48:22"}
+{"message": "Rendering", "progress": 0.9240913546707504, "at": "2026-11-23T15:48:26"}
+{"message": "Rendering", "progress": 0.9254472453057201, "at": "2026-11-23T15:48:30"}
+{"message": "Rendering", "progress": 0.9268943130639045, "at": "2026-11-23T15:48:34"}
+{"message": "Rendering", "progress": 0.9283707926493109, "at": "2026-11-23T15:48:38"}
+{"message": "Rendering", "progress": 0.9298943313465091, "at": "2026-11-23T15:48:42"}
+{"message": "Rendering", "progress": 0.9310825739663094, "at": "2026-11-23T15:48:47"}
+{"message": "Rendering", "progress": 0.9322825813169986, "at": "2026-11-23T15:48:51"}
+{"message": "Rendering", "progress": 0.9330796450465005, "at": "2026-11-23T15:48:55"}
+{"message": "Rendering", "progress": 0.9334472943338439, "at": "2026-11-23T15:48:59"}
+{"message": "Rendering", "progress": 0.9337737669218991, "at": "2026-11-23T15:49:03"}
+{"message": "Rendering", "progress": 0.934194357710008, "at": "2026-11-23T15:49:07"}
+{"message": "Rendering", "progress": 0.9347443611731922, "at": "2026-11-23T15:49:11"}
+{"message": "Rendering", "progress": 0.9357178965013244, "at": "2026-11-23T15:49:15"}
+{"message": "Rendering", "progress": 0.9367326085993336, "at": "2026-11-23T15:49:19"}
+{"message": "Rendering", "progress": 0.9377326146778487, "at": "2026-11-23T15:49:23"}
+{"message": "Rendering", "progress": 0.9386208554364472, "at": "2026-11-23T15:49:27"}
+{"message": "Rendering", "progress": 0.9393414481328173, "at": "2026-11-23T15:49:31"}
+{"message": "Rendering", "progress": 0.9400532171751376, "at": "2026-11-23T15:49:35"}
+{"message": "Rendering", "progress": 0.9408355748851456, "at": "2026-11-23T15:49:39"}
+{"message": "Rendering", "progress": 0.9415767558958653, "at": "2026-11-23T15:49:43"}
+{"message": "Rendering", "progress": 0.9422002891035762, "at": "2026-11-23T15:49:47"}
+{"message": "Rendering", "progress": 0.9427914691954598, "at": "2026-11-23T15:49:52"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T15:49:56"}
+{"message": "Rendering", "progress": 0.943015, "at": "2026-11-23T15:50:00"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:04"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:08"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:12"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:16"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:20"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:24"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:28"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:32"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:36"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:40"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:44"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:48"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:52"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:50:56"}
+{"message": "Cutting Shorts", "progress": 0.9417500000000001, "at": "2026-11-23T15:51:00"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T15:51:04"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T15:51:08"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T15:51:12"}
+{"message": "Checking the result", "progress": 0.9445, "at": "2026-11-23T15:51:17"}
+{"message": "Done", "progress": 0.95, "at": "2026-11-23T15:51:21"}
+{"message": "Fetching the render report...", "progress": 0.97, "at": "2026-11-23T15:51:21"}
+{"message": "Saving the final video next to the recording...", "progress": 0.98, "at": "2026-11-23T15:51:21"}
+{"state": "ready", "message": "Video ready: B:/youtubeProjects/Raat3Baje/elanthoor/elanthoor-videos\\elanthoorTemp1_final.mp4", "progress": 1.0, "at": "2026-11-23T15:51:21"}

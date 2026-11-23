@@ -1,0 +1,530 @@
+[
+  {
+    "id": "74e03d73-00f4-4fe0-8817-d422dd1ee7db",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Khayal3Baje\", \"channel_guide\": \"# Brand Style Guide: Khayal3Baje\\n\\n## Overview\\nKhayal3Baje is the premium horror, folklore, and supernatural storytelling brand of Buzzcaf Media.\\n\\n## Core Identity\\n- **Topic Focus**: Urban legends, dark folklore, original horror fiction, and psychological thrillers.\\n- **Narrative Archetype**: The Whispering Storyteller. Intimate, haunting, and ominous.\\",
+      "result_snippet": "```json\n{\n  \"queries\": [\n    \"horror stories in hindi\",\n    \"real ghost incidents in india\",\n    \"raat ki horror kahaniyan\",\n    \"urban legends of india hindi\",\n    \"hindi horror story narration\",\n    \"paranormal activity hindi videos\",\n    \"bhoot pret ki sacchi kahaniyan\",\n    \"scary tales and dark folklore hindi\"\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:29:01.444391",
+    "updated": "2026-10-29T11:29:01.444394"
+  },
+  {
+    "id": "b5073d73-308d-4bf8-bede-76c7776ee465",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"Khayal3Baje\", \"channel_guide\": \"# Brand Style Guide: Khayal3Baje\\n\\n## Overview\\nKhayal3Baje is the premium horror, folklore, and supernatural storytelling brand of Buzzcaf Media.\\n\\n## Core Identity\\n- **Topic Focus**: Urban legends, dark folklore, original horror fiction, and psychological thrillers.\\n- **Narrative Archetype**: The Whispering Storyteller. Intimate, h",
+      "result_snippet": "{\n  \"keep\": [\n    {\n      \"channel_id\": \"UCCe6naZ5Gen2aWmS2-4V00w\",\n      \"reason\": \"Direct competitor producing real-life and folklore Hindi horror story narrations with dramatic suspense.\"\n    },\n    {\n      \"channel_id\": \"UCz67TNWBqU38S8VRvjDO2wg\",\n      \"reason\": \"Direct competitor creating serialized, dark Hindi horror narrations and cursed legends.\"\n    },\n    {\n      \"channel_id\": \"UC2OE2tbj4O3wo14M-tspGzw\",\n      \"reason\": \"Direct competitor focusing on long-form, atmospheric Hindi paranormal and ghost story narrations.\"\n    },\n    {\n      \"channel_id\": \"UCPGNioeYrJq4nyAt-DVIHZg\",\n      \"reason\": \"Direct competitor narrating regional folklore, urban legends, and true horror incidents in Hindi.\"\n    },\n    {\n      \"channel_id\": \"UCH3pkLXHGkc64_kOaqym4lg\",\n      \"reason\": \"Direct competitor delivering true-incident horror storytelling and Indian urban legends in Hindi.\"\n    },\n    {\n      \"channel_id\": \"UCcRG8SULYwwpLoGakLgmCNg\",\n      \"reason\": \"Direct competitor creating atmospheric, suspenseful Hindi storytelling around horror and mystery encounters.\"\n    },\n    {\n      \"channel_id\": \"UCHa1_v_jRPdJFdU9tmOwxDA\",\n      \"reason\": \"Competitor focusing on dark folklore, mysterious occult topics, and scary urban legends in Hindi.\"\n    },\n    {\n      \"channel_id\": \"UCesf_Ttdmim4ATL-mFrhcdg\",\n      \"reason\": \"Direct competitor producing atmospheric Hindi horror and true supernatural story narrations.\"\n    },\n    {\n      \"channel_id\": \"UCWcQCJHYOK2ZZRA2Sym0mOw\",\n      \"reason\": \"Direct competitor focused on immersive regional Indian horror storytelling and personal paranormal experiences.\"\n    },\n    {\n      \"channel_id\": \"UC8N2tbBI96wNKh65xQUlTaw\",\n      \"reason\": \"Competitor covering Indian and Asian urban legends, dark folklore, and mysterious horror tales in Hindi.\"\n    },\n    {\n      \"channel_id\": \"UCCO0MhdO_5SOdFJqtiO-dog\",\n      \"reason\": \"Competitor creating late-night dark horror narrations matching the intimate, eerie storytelling vibe.\"\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:33:03.234309",
+    "updated": "2026-10-29T11:33:03.234311"
+  },
+  {
+    "id": "497eb45d-66aa-45a3-9238-03e161a14c6d",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Raat3Baje\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:**",
+      "result_snippet": "```json\n{\n  \"queries\": [\n    \"real ghost incidents in hindi\",\n    \"indian haunted places mystery\",\n    \"kala jadu aur tantra ki sacchi kahaniyan\",\n    \"village horror stories hindi\",\n    \"urban legends of india hindi\",\n    \"bhoot pret ki sachhi ghatna\",\n    \"shaman sadhna and black magic stories\",\n    \"hindi horror storytelling\"\n  ]\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:36:40.040154",
+    "updated": "2026-10-29T11:36:40.040157"
+  },
+  {
+    "id": "d426b9f4-da4c-41c4-8ac7-abfbee4c37d2",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"Raat3Baje\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"channel_id\": \"UCz67TNWBqU38S8VRvjDO2wg\",\n          \"reason\": \"Direct competitor focused on high-quality Hindi horror narratives and folklore.\"\n        },\n        {\n          \"channel_id\": \"UCCe6naZ5Gen2aWmS2-4V00w\",\n          \"reason\": \"Strong focus on real-life paranormal encounters and regional horror stories.\"\n        },\n        {\n          \"channel_id\": \"UC0XWC2_UZMkXPGn4bj0R2Uw\",\n          \"reason\": \"Specializes in black magic (Kala Jaadu) and traditional horror storytelling.\"\n        },\n        {\n          \"channel_id\": \"UCH3pkLXHGkc64_kOaqym4lg\",\n          \"reason\": \"Focuses on authentic local incidents and specific regional haunted locations.\"\n        },\n        {\n          \"channel_id\": \"UCPGNioeYrJq4nyAt-DVIHZg\",\n          \"reason\": \"Core competitor in the niche of regional folklore and black magic stories.\"\n        },\n        {\n          \"channel_id\": \"UCDADSgwWozDnBVkD6YvwVBQ\",\n          \"reason\": \"High alignment with 'Raat3Baje' brand regarding rural horror and ritualistic content.\"\n        },\n        {\n          \"channel_id\": \"UCkOhyFunM8NpDkNlghy3Y9g\",\n          \"reason\": \"Focused on authentic tantric rituals and real-life supernatural occurrences.\"\n        },\n        {\n          \"channel_id\": \"UCVIq229U5A54UVzHQJqZCPQ\",\n          \"reason\": \"Specializes in regional urban legends and local spiritual mysteries.\"\n        },\n        {\n          \"channel_id\": \"UC8pAvaOkC0IGxXVyR-DktGw\",\n          \"reason\": \"Strong focus on black magic, jinns, and authentic horror storytelling.\"\n        },\n        {\n          \"channel_id\": \"UCMqUAnJCV1hMjgcifWQ4JCQ\",\n          \"reason\": \"Focuses on specific regional haunted locations and ritual-based content.\"\n        },\n        {\n          \"channel_id\": \"UCesf_Ttdmim4ATL-mFrhcdg\",\n          \"reason\": \"High overlap in traditional horror storytelling and rural folklore theme"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:40:26.476267",
+    "updated": "2026-10-29T11:40:26.476269"
+  },
+  {
+    "id": "b108c1b1-1c4d-46ea-ae1d-e39be1420b6e",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China,",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"international paranormal cases in hindi\",\n        \"scary global urban legends hindi\",\n        \"real ghost sightings overseas hindi\",\n        \"unsolved mystery stories in hindi\",\n        \"haunted places around the world hindi\",\n        \"true supernatural encounters hindi\",\n        \"western horror story hindi\",\n        \"international haunted locations hindi\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:40:44.338697",
+    "updated": "2026-10-29T11:40:44.338699"
+  },
+  {
+    "id": "2cd6a351-f250-4d8a-95f5-f079f99e8118",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japa",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"channel_id\": \"UCs_ineLBnNTGjrArNzjSLZg\",\n          \"reason\": \"Focuses on international unsolved mysteries and global cases in a similar narrative style.\"\n        },\n        {\n          \"channel_id\": \"UCOEfL1_wMW4RefP3w66dTUQ\",\n          \"reason\": \"Covers global mystery categories with an emphasis on unexplained events.\"\n        },\n        {\n          \"channel_id\": \"UC_JRvXSHNoVTl1I7mqzYWDg\",\n          \"reason\": \"Focuses on international mysteries like the 'Bloop' and ancient secrets.\"\n        },\n        {\n          \"channel_id\": \"UCcpUF1OeXBwmhc_87-N69vQ\",\n          \"reason\": \"Covers specific historical mystery cases with a narrative focus.\"\n        },\n        {\n          \"channel_id\": \"UC2uWDoWjt5RxLiGZt3C3VOw\",\n          \"reason\": \"Dedicated to global unsolved mysteries and high-interest strange cases.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:41:11.104075",
+    "updated": "2026-10-29T11:41:11.104077"
+  },
+  {
+    "id": "4b4aaa1e-d4e3-46db-9874-99fcc04b6810",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provoking literature.\\n- **Narrative Archetype**: The Caf\u00e9 philosopher. Warm, introspective, creative, and relat",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"hindi storytelling videos\",\n        \"original hindi stories and poetry\",\n        \"aesthetic hindi storytelling\",\n        \"heart touching story narration in hindi\",\n        \"urdu poetry and shayari hindi\",\n        \"emotional audiobooks in hindi\",\n        \"slice of life stories hindi\",\n        \"deep thoughts and reflections hindi\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:41:28.671751",
+    "updated": "2026-10-29T11:41:28.671754"
+  },
+  {
+    "id": "2db8f258-1b7e-4595-8a72-7969cd19bf8f",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provoking literature.\\n- **Narrative Archetype**: The Caf\u00e9 philosopher. Warm, introspectiv",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"channel_id\": \"UCzGbe7WmkQPW3gcbhN0G2gw\",\n          \"reason\": \"High alignment with original poetry, Hindi storytelling, and artistic aesthetic.\"\n        },\n        {\n          \"channel_id\": \"UCgI26KNITusiGOFL6MLz_8Q\",\n          \"reason\": \"Focuses on book summaries and literary content in a structured format.\"\n        },\n        {\n          \"channel_id\": \"UCg5WjzrwxRRUUDf7WHKPzsA\",\n          \"reason\": \"Focuses on the art of storytelling and narrative techniques.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:41:49.384412",
+    "updated": "2026-10-29T11:41:49.384415"
+  },
+  {
+    "id": "c0c428c2-10a2-4f2b-91b7-35cbdbd02538",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\\nway he would tell it t",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"detective mystery stories in hindi\",\n        \"suspense full story hindi\",\n        \"crime thriller kahaniyan\",\n        \"funny comedy stories in hindi\",\n        \"real life crime cases hindi\",\n        \"mystery solving stories hinglish\",\n        \"hindi detective stories narration\",\n        \"kahani suno suspense aur mystery\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:42:07.830768",
+    "updated": "2026-10-29T11:42:07.830771"
+  },
+  {
+    "id": "b5a734e1-8291-4a7f-a564-40f467d1c8aa",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\\n",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"channel_id\": \"UC2YjbW_Zz0Fl6LJBgN5ubcQ\",\n          \"reason\": \"Shares the core focus on comedy-driven narrative storytelling in a Hindi context.\"\n        },\n        {\n          \"channel_id\": \"UCf-UXsmb4y6Uqf4cqe9tJRQ\",\n          \"reason\": \"Strong alignment with high-engagement comedy and situational story formats.\"\n        },\n        {\n          \"channel_id\": \"UC-0JL9tLo7SysFFyz0wubLA\",\n          \"reason\": \"Focuses on narrative storytelling, though content is more animation-centric.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:42:40.325713",
+    "updated": "2026-10-29T11:42:40.325715"
+  },
+  {
+    "id": "04c658ff-32f9-4c0d-9cfc-6a3a807f3bb7",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, inc",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"how to build a business while working 9-5 hindi\",\n        \"youtube channel monetization aur costs reality\",\n        \"building a media company journey hindi\",\n        \"how to manage multiple youtube channels\",\n        \"software engineer's side hustle journey\",\n        \"startup struggle and failures in hindi\",\n        \"real numbers of running youtube channels\",\n        \"honest business growth journey hindi\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:42:58.665608",
+    "updated": "2026-10-29T11:42:58.665610"
+  },
+  {
+    "id": "ec4b747a-d859-4849-9287-ef1998349d33",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, and news, music or kids channels unless the brand is one.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"channel_id\": \"UCwrzhaGy4oAHu8clPCVol3g\",\n          \"reason\": \"Focuses on personal journey and life lessons in a similar narrative format.\"\n        },\n        {\n          \"channel_id\": \"UCneyi-aYq4VIBYIAQgWmk_w\",\n          \"reason\": \"High alignment with the entrepreneurship and growth journey niche.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:43:21.766822",
+    "updated": "2026-10-29T11:43:21.766824"
+  },
+  {
+    "id": "8900a9f5-20c8-4a61-a28c-b2800b0f7be5",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Raat3Baje\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 1,\n          \"reason\": \"High alignment with face-led investigation and long-form Hindi horror storytelling.\"\n        },\n        {\n          \"n\": 2,\n          \"reason\": \"Strong focus on realer-life paranormal encounters and regional horror narratives.\"\n        },\n        {\n          \"n\": 3,\n          \"reason\": \"Matches the niche of black magic (kala jadu) and specific local folklore stories.\"\n        },\n        {\n          \"n\": 10,\n          \"reason\": \"Focuses on regional ghost encounters and specific 'real' horror locations.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Aligns with the investigation of black magic and real-life haunted incidents.\"\n        },\n        {\n          \"n\": 15,\n          \"reason\": \"Features high-quality narrative storytelling focused on specific regional horror.\"\n        },\n        {\n          \"n\": 21,\n          \"reason\": \"Focuses on raw, localized real-life ghost encounters and ritualistic content.\"\n        },\n        {\n          \"n\": 24,\n          \"reason\": \"Deep dive into tantra, black magic, and occult entities similar to the brand's core focus.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:47:17.761445",
+    "updated": "2026-10-29T11:47:17.761447"
+  },
+  {
+    "id": "952ee168-4656-4f19-a33a-9b88be816fad",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Raat3Baje\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 1,\n          \"reason\": \"High alignment with face-led investigation and long-form Hindi horror storytelling.\"\n        },\n        {\n          \"n\": 2,\n          \"reason\": \"Strong focus on real-life paranormal encounters and regional horror narratives.\"\n        },\n        {\n          \"n\": 3,\n          \"reason\": \"Matches the niche of black magic (kala jadu) and specific local folklore stories.\"\n        },\n        {\n          \"n\": 10,\n          \"reason\": \"Focuses on regional ghost encounters and specific 'real' horror locations.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Aligns with the investigation of black magic and real-life haunted incidents.\"\n        },\n        {\n          \"n\": 15,\n          \"reason\": \"Features high-quality narrative storytelling focused on specific regional horror.\"\n        },\n        {\n          \"n\": 21,\n          \"reason\": \"Focuses on raw, localized real-life ghost encounters and ritualistic content.\"\n        },\n        {\n          \"n\": 24,\n          \"reason\": \"Deep dive into tantra, black magic, and occult entities similar to the brand's core focus.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:47:32.324746",
+    "updated": "2026-10-29T11:47:32.324748"
+  },
+  {
+    "id": "74333e0d-3e99-4861-be0b-cb3bf19aa032",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China,",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"international paranormal stories in hindi\",\n        \"scary urban legends from around the world hinglish\",\n        \"haunted places outside india documentary\",\n        \"real ghost encounters worldwide hindi\",\n        \"mysterious entities and cases hindi\",\n        \"unsolved mysteries of the world in hindi\",\n        \"strange things caught on camera abroad hindi\",\n        \"scary true stories from different countries hinglish\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:47:40.842455",
+    "updated": "2026-10-29T11:47:40.842457"
+  },
+  {
+    "id": "0587543a-f026-4791-92a9-397506b0fe88",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **G",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 2,\n          \"reason\": \"Focuses on high-quality investigation of global mysteries and survival cases.\"\n        },\n        {\n          \"n\": 3,\n          \"reason\": \"Covers international mysterious events in a narrative format.\"\n        },\n        {\n          \"n\": 9,\n          \"reason\": \"Strong focus on unsolved mysteries and international case files.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Dedicated to global mystery storytelling with an investigation vibe.\"\n        },\n        {\n          \"n\": 13,\n          \"reason\": \"Narrative-driven coverage of intense survival and mysterious situations.\"\n        },\n        {\n          \"n\": 17,\n          \"reason\": \"Focuses on high-stakes mystery narratives and survival stories.\"\n        },\n        {\n          \"n\": 20,\n          \"reason\": \"Niche focus on historical mysteries and maritime/survival enigmas.\"\n        },\n        {\n          \"n\": 22,\n          \"reason\": \"Dedicated to a 'case file' style presentation of unsolved global mysteries.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:48:09.414318",
+    "updated": "2026-10-29T11:48:09.414320"
+  },
+  {
+    "id": "5dd2e5c1-d3f3-46ba-afc4-d164ab88e7ea",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **G",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 2,\n          \"reason\": \"High alignment with international mystery investigations and survival cases.\"\n        },\n        {\n          \"n\": 3,\n          \"reason\": \"Focuses on global mysteries in a narrative format.\"\n        },\n        {\n          \"n\": 9,\n          \"reason\": \"Dedicated to high-quality exploration of global unsolved mysteries.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Strong focus on investigation-style storytelling for international mystery cases.\"\n        },\n        {\n          \"n\": 13,\n          \"reason\": \"Narrative-driven coverage of intense and mysterious survival situations.\"\n        },\n        {\n          \"n\": 17,\n          \"reason\": \"Focuses on atmospheric, high-stakes mystery narratives.\"\n        },\n        {\n          \"n\": 20,\n          \"reason\": \"Niche focus on international maritime and historical mysteries.\"\n        },\n        {\n          \"n\": 22,\n          \"reason\": \"Dedicated to a 'case file' style presentation of global unsolved mysteries.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:48:22.672762",
+    "updated": "2026-10-29T11:48:22.672764"
+  },
+  {
+    "id": "c0a9791d-d92f-47c8-89db-14219c9b0201",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provoking literature.\\n- **Narrative Archetype**: The Caf\u00e9 philosopher. Warm, introspective, creative, and relat",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"original hindi stories and poetry\",\n        \"aesthetic hindi storytelling videos\",\n        \"heart touching hindi kahaniyan\",\n        \"deep thoughts and poetry in hindi\",\n        \"hindi audiobooks for emotional stories\",\n        \"relatable slice of life stories hindi\",\n        \"lofi hindi poetry and shayari\",\n        \"inspiring hindi literature and fiction\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:48:30.935865",
+    "updated": "2026-10-29T11:48:30.935867"
+  },
+  {
+    "id": "c59c5d5a-8d74-435e-926c-0774e112a6e9",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provo",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": []\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:48:46.316450",
+    "updated": "2026-10-29T11:48:52.956089"
+  },
+  {
+    "id": "ba89ee39-6508-44bf-b98c-c065df50aef4",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\\nway he would tell it t",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"detective stories in hindi\",\n        \"suspenseful crime stories hinglish\",\n        \"mystery case files hindi\",\n        \"funny comedy stories in hindi\",\n        \"investigation cases hindi narration\",\n        \"crime thriller stories hindi\",\n        \"unsolved mystery detective cases hindi\",\n        \"dilchasp kahaniyan aur suspense story\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:49:01.326430",
+    "updated": "2026-10-29T11:49:01.326433"
+  },
+  {
+    "id": "96b56e96-8f5a-4463-8797-47e1998ad5c5",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 2,\n          \"reason\": \"Focuses on comedy and humorous storytelling in a similar narrative style.\"\n        },\n        {\n          \"n\": 15,\n          \"reason\": \"Features comedy-centric stories with a focus on situational humor.\"\n        },\n        {\n          \"n\": 18,\n          \"reason\": \"Focuses on humorous and relatable human-interest storytelling in Hindi/Hinglish.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:49:35.296660",
+    "updated": "2026-10-29T11:52:36.971260"
+  },
+  {
+    "id": "7d5f9c06-2d00-43e2-832f-8b7b224cec1c",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, inc",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"how to build a media company in india\",\n        \"managing multiple youtube channels part time\",\n        \"software engineer's journey of building business\",\n        \"youtube channel income and expenses real talk\",\n        \"hindi vlogs on startup journey and failures\",\n        \"how to balance 9-5 job and youtube career\",\n        \"building a brand from scratch hindi vlog\",\n        \"real results of starting a youtube business\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:52:45.730385",
+    "updated": "2026-10-29T11:52:45.730388"
+  },
+  {
+    "id": "53fcae33-bbbe-433c-9aaa-dfc5c8e026d2",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a f",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": []\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:53:07.013029",
+    "updated": "2026-10-29T11:53:13.449947"
+  },
+  {
+    "id": "3af8482c-2d67-49c1-8b4c-cb06fd901155",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand. Answer with the candidates' numbers.\", \"brand\": \"Raat3Baje\", \"candidates\": [{\"n\": 1, \"name\": \"Khooni Monday\", \"sample_titles\": [\"Haunted highway story\"]}, {\"n\": 2, \"name\": \"Zee TV\", \"sample_titles\": [\"Kumkum Bhagya episode 2000\"]}], \"answer_format\": {\"keep\": [{\"n\": 1, \"reason\": \"one short line\"}]}}",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 1,\n          \"reason\": \"Focuses on horror and mystery stories in a similar niche.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:53:57.019985",
+    "updated": "2026-10-29T11:53:57.019988"
+  },
+  {
+    "id": "868faaae-c054-4456-a81d-86a693796489",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Raat3Baje\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 1,\n          \"reason\": \"High-quality Hindi horror storytelling with heavy focus on 'real' incidents and folklore.\"\n        },\n        {\n          \"n\": 2,\n          \"reason\": \"Focuses on atmospheric, narrated 'true' paranormal encounters in a similar niche.\"\n        },\n        {\n          \"n\": 3,\n          \"reason\": \"Strong focus on black magic (Kala Jaadu) and urban legends matching core content pillars.\"\n        },\n        {\n          \"n\": 10,\n          \"reason\": \"Focuses on specific regional horror cases and localized paranormal stories.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Content covers black magic, exorcisms, and local folklore in a similar narrative style.\"\n        },\n        {\n          \"n\": 13,\n          \"reason\": \"Dedicated horror storytelling format that aligns with the 'story behind the story' vibe.\"\n        },\n        {\n          \"n\": 14,\n          \"reason\": \"Covers specific folklore and regional haunted locations in a similar narrative style.\"\n        },\n        {\n          \"n\": 20,\n          \"reason\": \"Focuses on traditional Indian entities like Karn Pishachini and local horror lore.\"\n        },\n        {\n          \"n\": 23,\n          \"reason\": \"Strong focus on 'Kala Jaudu' and 'Totka', which are key pillars for Raat3Baje.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:56:03.850628",
+    "updated": "2026-10-29T11:56:03.850630"
+  },
+  {
+    "id": "5d2861c6-1647-46e5-abfb-d04bcbe774d6",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China,",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"international paranormal cases in hindi\",\n        \"scary mystery stories from abroad hinglish\",\n        \"real haunted places outside india documentary\",\n        \"unsolved international mysteries hindi\",\n        \"strange entity sightings real stories hindi\",\n        \"western urban legends and myths hindi\",\n        \"haunted locations around the world hindi\",\n        \"paranormal investigation cases in english and hindi\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:56:20.667400",
+    "updated": "2026-10-29T11:56:20.667402"
+  },
+  {
+    "id": "ddfe6eb0-b394-43e5-8e09-3b4524cbc11d",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Beyond3Baje\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **G",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 4,\n          \"reason\": \"Covers international haunted locations and mystery cases in a similar narrative style.\"\n        },\n        {\n          \"n\": 7,\n          \"reason\": \"Features specific international paranormal cases (e.g., Mexico) with high-quality production.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Focuses on global unsolved mysteries and atmospheric mystery storytelling.\"\n        },\n        {\n          \"n\": 14,\n          \"reason\": \"Covers international urban legends (Japan) and dark, eerie cases in Hindi/Hinglish.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:57:13.354127",
+    "updated": "2026-10-29T11:57:13.354129"
+  },
+  {
+    "id": "058a90fd-d085-4770-8a99-2baaac95339d",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provoking literature.\\n- **Narrative Archetype**: The Caf\u00e9 philosopher. Warm, introspective, creative, and relat",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"aesthetic hindi storytelling videos\",\n        \"hindi poetry and shayari collection\",\n        \"deep hindi stories for soul\",\n        \"original fiction in hindi\",\n        \"lofi hindi aesthetic stories\",\n        \"emotional story telling hindi\",\n        \"heart touching hindi kahaniyan\",\n        \"hindi audiobooks and literature\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:57:25.403418",
+    "updated": "2026-10-29T11:57:25.403420"
+  },
+  {
+    "id": "5159c5c6-086f-490d-b771-c09f714e038b",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Originals\", \"channel_guide\": \"# Brand Style Guide: Originals\\n\\n## Overview\\nOriginals focuses on original fiction, poetry, books, and interactive storytelling.\\n\\n## Core Identity\\n- **Topic Focus**: Creative stories, original poetry, slice-of-life vlogs, audiobooks, and thought-provo",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 2,\n          \"reason\": \"Focuses on high-quality Hindi poetry and storytelling with a sophisticated narrative style.\"\n        },\n        {\n          \"n\": 10,\n          \"reason\": \"Offers heart-touching stories and emotional narratives in the Hindi language.\"\n        },\n        {\n          \"n\": 12,\n          \"reason\": \"Provides aesthetic Hindi content that aligns with the brand's visual and atmospheric goals.\"\n        },\n        {\n          \"n\": 16,\n          \"reason\": \"Dedicated to deep, intimate Hindi storytelling and emotional character arcs.\"\n        },\n        {\n          \"n\": 25,\n          \"reason\": \"Focuses on romantic and emotional Hindi stories with a narrative focus.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:58:15.001345",
+    "updated": "2026-10-29T11:58:15.001348"
+  },
+  {
+    "id": "f14782d1-7048-42a0-b938-15a788970ecb",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no live\\nset. The viewer is listening to one voice tell a good story, in Hinglish, the\\nway he would tell it t",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"detective story in hindi\",\n        \"suspense crime stories hinglish\",\n        \"mystery solving kahaniyan\",\n        \"funny comedy stories in hindi\",\n        \"crime thriller hindi narration\",\n        \"interesting detective cases hindi\",\n        \"hindi storytelling stories like a friend\",\n        \"real life crime mystery hindi\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:58:23.254678",
+    "updated": "2026-10-29T11:58:23.254680"
+  },
+  {
+    "id": "c4589554-b739-4c01-9ca7-1e3b7b1d855b",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"TheTallStoryteller\", \"channel_guide\": \"# Brand Style Guide: TheTallStoryteller\\n\\n## Essence (read first)\\nA storytelling channel of detective, comedy and crime stories, narrated start to finish in the creator's\\nown cloned voice (`sudhansu_story`) -- no face, no recording session, no ",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 1,\n          \"reason\": \"Focuses on detective mysteries and jasoosi stories in Hindi/Hinglish.\"\n        },\n        {\n          \"n\": 8,\n          \"reason\": \"Offers high-quality mystery and crime thriller breakdowns in Hindi.\"\n        },\n        {\n          \"n\": 13,\n          \"reason\": \"Dedicated to detective puzzles and riddle-based storytelling.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:59:20.785234",
+    "updated": "2026-10-29T11:59:20.785237"
+  },
+  {
+    "id": "2323c428-766d-4faf-bdf1-7acf8244d1b4",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Write 8 YouTube search phrases (Hindi in Roman letters, Hinglish and English) that viewers of this channel's niche really type to find videos like ours. Phrases only, no channel names.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a full-time software career. Viewers follow a continuing story -- what he attempts, what actually happens, inc",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"queries\": [\n        \"how to build a media company from scratch hindi\",\n        \"running multiple youtube channels reality in hindi\",\n        \"software job ke saath business kaise kare\",\n        \"youtube channel revenue and costs real numbers\",\n        \"making money from multiple youtube channels hinglish\",\n        \"building a brand while working 9-5 hindi\",\n        \"real struggles of a content creator hindi\",\n        \"how to scale a small media house in india\"\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T11:59:29.205414",
+    "updated": "2026-10-29T11:59:29.205416"
+  },
+  {
+    "id": "589870d8-febe-4ec3-ae2c-8dfa50f0f7bd",
+    "scope": "agent",
+    "owner": "CompetitorAnalyst",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Pick the channels that are real competitors of this brand: the same niche, format and language audience. Drop compilations of other people's videos, general entertainment/TV networks, celebrities, and news, music or kids channels unless the brand is one. Answer with the candidates' numbers.\", \"brand\": \"Life3Baje\", \"channel_guide\": \"# Brand Style Guide: Life3Baje\\n\\n## Essence (read first)\\nThe creator's personal-brand DOCUMENTARY channel: his real, ongoing journey of building businesses, YouTube channels and eventually a media company (Buzzcaf Media, Buzzcaf Coffee) while keeping a f",
+      "result_snippet": "```json\n{\n  \"status\": \"success\",\n  \"agent\": \"CompetitorAnalyst\",\n  \"results\": {\n    \"competitor_analysis_report\": {\n      \"keep\": [\n        {\n          \"n\": 15,\n          \"reason\": \"Focuses on building a real agency/business with transparency and personal journey.\"\n        },\n        {\n          \"n\": 19,\n          \"reason\": \"Shares actual business growth stories and content creation journeys in Hinglish.\"\n        }\n      ]\n    }\n  }\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T12:00:18.654262",
+    "updated": "2026-10-29T12:00:18.654264"
+  }
+]

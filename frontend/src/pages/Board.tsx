@@ -169,7 +169,7 @@ export default function Board() {
         <h3 className="panel-title" style={{ margin: 0, border: 'none', padding: 0 }}>
           <LayoutGrid size={22} /> Topic board
         </h3>
-        <select className="form-control" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={channelFilter} onChange={(e) => setChannelFilter(e.target.value)}>
+        <select className="form-control" aria-label="Filter by channel" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={channelFilter} onChange={(e) => setChannelFilter(e.target.value)}>
           <option value="all">All channels ({topics.length})</option>
           {channels.map((ch) => <option key={ch.id} value={ch.id}>{ch.id}</option>)}
         </select>
@@ -196,6 +196,7 @@ export default function Board() {
                 <input
                   type="text"
                   className="form-control"
+                  aria-label={`Quick add to ${stage.label}`}
                   placeholder="Quick add…"
                   style={{ padding: '6px 10px', fontSize: '0.78rem' }}
                   value={quickAdd[stage.id] || ''}

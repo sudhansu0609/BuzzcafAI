@@ -54,6 +54,7 @@ def channels():
         view = writing_style.overview(channel) if samples else {"built_at": None, "stale": True}
         styles = writing_style.list_styles(channel)
         out.append({"channel": channel, "mode": writing_style.channel_mode(channel),
+                    "story_standard": writing_style.standard_on(channel),
                     "style_name": next((s["name"] for s in styles if s["active"]), "Default"),
                     "styles": len(styles),
                     "written": sum(1 for s in samples if s["kind"] == "written"),
@@ -168,6 +169,19 @@ def set_channel_mode(channel: str, body: ModeIn):
         writing_style.set_channel_mode(name, body.mode or "")
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
+    return writing_style.overview(name)
+
+
+class StandardIn(BaseModel):
+    on: bool
+
+
+@router.put("/{channel}/standard")
+def set_channel_standard(channel: str, body: StandardIn):
+    name = _channel(channel)
+    if not writing_style.has_standard(name):
+        raise HTTPException(status_code=400, detail=f"{name} has no story standard file.")
+    writing_style.set_standard(name, body.on)
     return writing_style.overview(name)
 
 

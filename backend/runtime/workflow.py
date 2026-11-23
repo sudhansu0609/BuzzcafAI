@@ -29,9 +29,12 @@ SCRIPT_OUTPUT_TYPES = {"outline", "script", "story", "script_final", "narration_
 # must be the whole script again, so it is checked against the input's length.
 SCRIPT_REWRITE_TYPES = {"script_final", "narration_optimized"}
 
+# Brands made by BuzzAnimate (animated screenplay), not BuzzEdit stills.
+ANIMATED_BRANDS = {"khayal3baje", "originals"}
+
 # Steps that write words the creator will say: they get his own writing style
 # (app/services/writing_style.py) and are checked against it.
-STYLE_OUTPUT_TYPES = SCRIPT_OUTPUT_TYPES - {"outline"}
+STYLE_OUTPUT_TYPES = (SCRIPT_OUTPUT_TYPES - {"outline"}) | {"voice_over"}
 
 SCRIPT_TEXT_INSTRUCTION = """
 ### Output format (strict)
@@ -244,6 +247,85 @@ def _parse_research(raw_output: str) -> Optional[Dict[str, Any]]:
 from core.workflow import workflow_registry
 
 
+def _condition_holds(project: Project, condition: str) -> bool:
+    """A step's `when`. Unknown conditions hold (the step runs)."""
+    name = (condition or "").strip().lower()
+    if name == "shorts_first":
+        from app.services import session_format
+        return session_format.is_shorts_first(project)
+    if name == "not_animated":
+        return (project.brand or "").strip().lower() not in ANIMATED_BRANDS
+    return True
+
+
+#: Why a `when` step was passed by, for the step log.
+_SKIP_REASONS = {
+    "not_animated": "this channel is animated by BuzzAnimate -- no BuzzEdit stills plan is needed.",
+    "shorts_first": "this project is recorded as the long video only (no Shorts first) -- "
+                    "turn on \"Shorts first\" for the project or the channel to write them.",
+}
+
+
+def _episode_format_direction(project: Project) -> str:
+    """The project's episode format, unless the creator's instructions
+    already carry it (the nightly run puts it there)."""
+    try:
+        from app.services.longform_nightly import format_direction
+        direction = format_direction(project.brand, project.metadata.get("episode_format"))
+    except Exception as exc:  # noqa: BLE001 - a missing format never fails a step
+        logger.warning(f"Could not read the episode format: {exc}")
+        return ""
+    if not direction or direction in str(project.metadata.get("creator_instructions") or ""):
+        return ""
+    return direction
+
+
+def _opening_directions(project: Project) -> str:
+    """How the long video opens: after its Shorts, on the greeting (a
+    session), and on the creator's face (face first)."""
+    try:
+        from app.services import session_format
+        return session_format.long_script_direction(project) + session_format.face_intro_direction(project)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Could not read the session / face layout: {exc}")
+        return ""
+
+
+def _refresh_recording_script(project: Project, history_step: Optional[StepExecution] = None) -> None:
+    """script/recording_script.md (the session's Shorts, then the long video)
+    after a long script or the Shorts changed. Never fails a step."""
+    try:
+        from app.services import session_format
+        rel = session_format.refresh_recording_script(project)
+        if rel and history_step is not None:
+            history_step.logs.append(f"Recording script updated: {rel} (Shorts first, then the long video).")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Could not update the recording script: {exc}")
+
+
+#: Steps the creator's own script makes unnecessary, and those a finished
+#: recording makes unnecessary (the SEO step stays in both).
+OWN_SCRIPT_SKIPPED = {"research", "script", "story", "outline", "vlog_plan", "script_final", "narration_optimized",
+                      "voice_over", "character_plan"}  # his script is final; an animated one goes to BuzzAnimate as written
+RECORDED_SKIPPED = OWN_SCRIPT_SKIPPED | {"shorts_set", "visual_plan", "sound_plan"}
+
+
+def _recording_text_for_seo(project: Project) -> str:
+    """What the SEO step reads when the project has no script: the kept
+    transcript of the recording if there is one, else the title and brief."""
+    try:
+        from app.services import writing_style
+        channel = writing_style.canonical_channel(project.brand)
+        path = writing_style._dir(channel, "recordings", f"{writing_style._slug(project.id, 120)}.md")
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return f.read()
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Could not read the recording transcript for SEO: {exc}")
+    brief = str(project.metadata.get("creative_brief") or "")
+    return f"Title: {project.name}\n\n{brief}".strip()
+
+
 def _duration_directive(project: Project, output_asset_type: str) -> str:
     """Target-length instruction for a script/outline step, or '' when unset.
 
@@ -296,6 +378,18 @@ class WorkflowEngine:
         manager when the step names a department (roadmap v9, E3)."""
         from core.agent import agent_registry
 
+        agent = self._resolve_agent_inner(agent_role)
+        # A step's agent runs without its memory log: other channels' old scripts
+        # in the prompt made it drift (the long-script path already works this way).
+        try:
+            agent.use_memory = False
+        except Exception:
+            pass
+        return agent
+
+    def _resolve_agent_inner(self, agent_role: str):
+        from core.agent import agent_registry
+
         if agent_role.lower().strip() in agent_registry.agents:
             return AgentFactory.get_agent(agent_role, self.llm_service)
         try:
@@ -332,7 +426,32 @@ class WorkflowEngine:
         """
         Executes the next step or re-runs the current step if feedback is provided.
         Returns the updated Project instance.
+
+        Every model call of the step follows its job's route on the Model
+        Routing window (research, script, shorts, SEO, ...: `llm.job_for_asset`).
         """
+        from integrations.llm import job_for_asset, llm_job
+        job, step = None, ""
+        try:
+            project = Project.load(project_id)
+            wf = self.get_workflow(project.workflow_name)
+            step_def = wf.get_step(project.current_step) if wf else None
+            if step_def is None and wf and wf.steps:
+                step_def = wf.steps[0]
+            if step_def:
+                job = job_for_asset(step_def.output_asset_type)
+                step = f"{project.workflow_name}/{step_def.name}/{project_id}"
+        except Exception:  # noqa: BLE001 - _execute_next reports a bad project itself
+            pass
+        with llm_job(job, step):
+            return self._execute_next(project_id, user_feedback, allow_all)
+
+    def _execute_next(
+        self,
+        project_id: str,
+        user_feedback: Optional[str] = None,
+        allow_all: Optional[bool] = None,
+    ) -> Project:
         project = Project.load(project_id)
         wf = self.get_workflow(project.workflow_name)
         if not wf:
@@ -356,6 +475,13 @@ class WorkflowEngine:
             logger.info(f"Project {project_id} is already completed.")
             return project
 
+        # The master pause (docs/STUDIO_DIRECTOR_PLAN.md Part 1): hold here,
+        # between steps, before this one starts. Covers the long-form
+        # nightly run, story adaptations and every Story Desk script, since
+        # they all drive the engine one `execute_next` call per step.
+        from app.services import master_control
+        master_control.wait_if_paused(f"workflow step '{project.current_step}' of project {project_id}")
+
         # Find current step details
         step_def = wf.get_step(project.current_step)
         if not step_def:
@@ -367,6 +493,10 @@ class WorkflowEngine:
                 project.status = "completed"
                 project.save()
                 return project
+
+        # A step for some projects only (`when`): the others pass it by.
+        if step_def.when and not _condition_holds(project, step_def.when):
+            return self._skip_step(project, wf, step_def)
 
         # Handle resume from approval pause
         history_step = None
@@ -425,6 +555,24 @@ class WorkflowEngine:
 
         project.save()
 
+        # A Human Touch step outside the adaptation runner (which writes its own,
+        # numbered reports) gets the machine-writing report of the current script,
+        # made here whenever it is missing or older than the script (2026-10-24).
+        if "ai_tells" in step_def.input_assets and project.assets.get("script"):
+            try:
+                from app.services import story_adapt
+                script_path = os.path.join(project.get_project_dir(), project.assets["script"])
+                tells_rel = project.assets.get("ai_tells")
+                tells_path = os.path.join(project.get_project_dir(), tells_rel) if tells_rel else ""
+                if not tells_path or not os.path.exists(tells_path) or (
+                        os.path.exists(script_path) and os.path.getmtime(tells_path) < os.path.getmtime(script_path)):
+                    report = story_adapt.write_tells(project, "script")
+                    history_step.logs.append(f"Machine-writing report: {report['score']}/100, "
+                                             f"{len(report['tells'])} kind(s) of tell.")
+                    project.save()
+            except Exception as e:  # noqa: BLE001 - the step still runs without it
+                logger.warning(f"Could not write the ai_tells report: {e}")
+
         # Gather inputs from dependencies
         context_data = ""
         input_texts: Dict[str, str] = {}
@@ -439,6 +587,15 @@ class WorkflowEngine:
                             context_data += f"\n\n### Input Asset ({input_asset}):\n" + input_texts[input_asset]
                     except Exception as e:
                         logger.error(f"Error reading asset file {full_path}: {e}")
+
+        # An already-recorded video has no script: the SEO step reads the
+        # transcript (or the title and brief) instead, and never fails for it.
+        if step_def.output_asset_type == "seo_package" and not any(
+                input_texts.get(k, "").strip() for k in ("narration_optimized", "script_final", "script")):
+            fallback = _recording_text_for_seo(project)
+            if fallback:
+                input_texts["script"] = fallback
+                context_data += "\n\n### Input Asset (recording transcript):\n" + fallback
 
         brand_guide = self._get_brand_guide(project.brand)
 
@@ -465,12 +622,39 @@ You are executing the step '{step_def.name}' for the media project '{project.nam
                 "\n\n### Creative Brief from the Channel Strategist\n"
                 f"{project.metadata['creative_brief']}\n"
             )
+        # The episode's format (Raat3Baje: rules / real encounter / story /
+        # black magic / tantra), unless the creator's instructions carry it.
+        episode_format = _episode_format_direction(project)
+        if episode_format:
+            agent_instruction += f"\n\n### This episode's format\n{episode_format}\n"
+        # The art style (real / explainer / stick figure / cartoon), so the
+        # writers, the storyboard and the thumbnail designer all picture the
+        # same medium (2026-10-21).
+        try:
+            from integrations import art_style as art_mod
+            from integrations.buzzedit_settings import art_style_of, settings_for_brand as _sfb_art
+            art_direction = art_mod.step_direction(art_style_of(_sfb_art(project.brand, None, project)))
+            if art_direction:
+                agent_instruction += f"\n\n{art_direction}\n"
+        except Exception as exc:
+            logger.warning(f"Could not add the art style to the step prompt: {exc}")
 
         # How the creator himself writes, learned from his own writing and
-        # recordings (app/services/writing_style.py): every script-writing step.
+        # recordings (app/services/writing_style.py): every script-writing step,
+        # and the session's Shorts (he says those too).
         format_override = ""
+        if step_def.output_asset_type == "shorts_set":
+            from app.services import writing_style
+            style = writing_style.style_section(project.brand, project)
+            if style:
+                agent_instruction += style
+                history_step.logs.append("The creator's own writing style was added to the prompt.")
         if step_def.output_asset_type in STYLE_OUTPUT_TYPES:
             from app.services import writing_style
+            standard = writing_style.standard_section(project.brand, project)
+            if standard:
+                agent_instruction += standard
+                history_step.logs.append("The channel's story standard was added to the prompt.")
             # A sample he added since the style guide was written must be what
             # the writer follows: rebuild the guide first when it is older.
             refreshed = writing_style.ensure_current(project.brand, project)
@@ -540,18 +724,23 @@ Please output the content matching the required output format (Markdown or JSON)
             # same characters throughout. This overrides the catalog above;
             # anything else is stripped before the render either way.
             try:
-                from integrations.buzzedit_settings import is_story_style, settings_for_brand as _sfb
-                from integrations import story_visuals
+                from integrations.buzzedit_settings import art_style_of, is_story_style, settings_for_brand as _sfb
+                from integrations import art_style as art_mod, story_visuals
                 brand_settings = _sfb(project.brand, None, project)
+                art = art_style_of(brand_settings)
                 if is_story_style(brand_settings):
                     agent_instruction += (
                         "\n\nIMPORTANT -- this channel overrides the Effect catalog above:\n"
                         + story_visuals.planner_section(
                             float(brand_settings.get("video_broll_share") or 0.0),
-                            story_visuals.load_cast_sheet(project))
+                            story_visuals.load_cast_sheet(project), art_style=art)
                         + "\nKeep a character's look identical in every image_prompt and "
                         "video_prompt they appear in.\n")
                     history_step.logs.append("Story visual style: pictures and videos only.")
+                elif art != "real":
+                    agent_instruction += "\n\n" + art_mod.planner_section(art) + "\n"
+                if art != "real":
+                    history_step.logs.append(f"Art style: {art}.")
             except Exception as exc:
                 logger.warning(f"Could not add story visual rules to visual plan prompt: {exc}")
             try:
@@ -573,12 +762,22 @@ Please output the content matching the required output format (Markdown or JSON)
                 history_step.logs.append(
                     f"Target runtime: {float(project.metadata['target_duration_minutes']):g} min injected into the {step_def.output_asset_type} prompt."
                 )
+            # A session's long video opens on the greeting; a face-first one is said to camera.
+            opening = _opening_directions(project)
+            if opening and step_def.output_asset_type != "outline":
+                agent_instruction += opening
+                history_step.logs.append("Opening direction added (recorded after its Shorts / face first).")
+
+        # The session's Shorts, recorded before the long video.
+        if step_def.output_asset_type == "shorts_set":
+            from app.services import session_format
+            agent_instruction += session_format.shorts_task(project)
 
         # Call worker Agent (a persona, or a department's manager)
         agent = self._resolve_agent(step_def.agent_role)
 
         # Check if output should be JSON (research dossiers, creative planning and SEO)
-        is_json = step_def.output_asset_type in ["research", "visual_plan", "seo_package"]
+        is_json = step_def.output_asset_type in ["research", "visual_plan", "seo_package", "shorts_set"]
 
         try:
             long_output = self._long_script_step(
@@ -588,6 +787,10 @@ Please output the content matching the required output format (Markdown or JSON)
                 agent_output = long_output
             elif step_def.output_asset_type == "research":
                 agent_output = self._research_step(project, step_def, agent, agent_instruction, history_step)
+            elif step_def.output_asset_type == "seo_package":
+                agent_output = self._seo_step(project, step_def, agent, agent_instruction, history_step)
+            elif step_def.output_asset_type == "screenplay":
+                agent_output = self._screenplay_step(project, input_texts, history_step)
             else:
                 agent_output = agent.execute(agent_instruction, require_json=is_json)
             if getattr(self.llm_service, "last_response_simulated", False):
@@ -722,7 +925,10 @@ Please output the content matching the required output format (Markdown or JSON)
 
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(agent_output)
-                
+                # The session's recording script follows the newest long script.
+                project.assets[step_def.output_asset_type] = file_name
+                _refresh_recording_script(project, history_step)
+
                 # Maintain the revision_log.md boilerplate
                 rev_log_path = os.path.join(script_dir, "revision_log.md")
                 if not os.path.exists(rev_log_path):
@@ -739,7 +945,7 @@ Please output the content matching the required output format (Markdown or JSON)
                         history_step.logs.append(f"Script length: {words:,} spoken words ~{est_min} min (target {float(target):g}).")
                     else:
                         history_step.logs.append(f"Script length: {words:,} spoken words ~{est_min} min.")
-            elif step_def.output_asset_type in ["scene_breakdown", "shot_list", "clip_plan", "image_plan", "assets_collected", "voice_over", "edit_plan", "review_report", "sound_plan", "thumbnail_plan", "vlog_plan", "character_plan"]:
+            elif step_def.output_asset_type in ["scene_breakdown", "shot_list", "clip_plan", "image_plan", "assets_collected", "voice_over", "edit_plan", "review_report", "sound_plan", "thumbnail_plan", "vlog_plan", "character_plan", "screenplay"]:
                 prod_dir = os.path.join(project.get_project_dir(), "production")
                 os.makedirs(prod_dir, exist_ok=True)
                 
@@ -755,15 +961,22 @@ Please output the content matching the required output format (Markdown or JSON)
                     "voice_over": "timeline.md",
                     "sound_plan": "timeline.md",
                     "edit_plan": "timeline.md",
-                    "review_report": "qa.md"
+                    "review_report": "qa.md",
+                    "screenplay": "screenplay.md",
                 }
                 fn = mapping.get(step_def.output_asset_type, "storyboard.md")
                 file_name = f"production/{fn}"
                 file_path = os.path.join(project.get_project_dir(), file_name)
-                
+
+                # Words he will say: scored (and rewritten once) toward his style;
+                # no greeting is forced into a voice-over asset.
+                if step_def.output_asset_type in STYLE_OUTPUT_TYPES:
+                    agent_output = self._match_creator_style(
+                        project, step_def, agent, agent_output, history_step, may_revise=True)
+
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(agent_output)
-                
+
                 # Initialize others if missing to satisfy the schema (scenes.json, storyboard.md, assets.csv, timeline.md)
                 defaults = {
                     "scenes.json": "[]",
@@ -830,6 +1043,34 @@ Please output the content matching the required output format (Markdown or JSON)
                 if not os.path.exists(tags_path):
                     with open(tags_path, "w", encoding="utf-8") as f:
                         f.write("buzzcaf, media, video, ai\n")
+            elif step_def.output_asset_type == "shorts_set":
+                # The session's Shorts: script/shorts.json (read by the
+                # recording split) and shorts.md, then the recording script.
+                from app.services import session_format
+                shorts = session_format.parse_shorts(agent_output)
+                if not shorts:
+                    # Keep what the writer said, so a failure can be read instead of guessed at.
+                    try:
+                        raw_path = os.path.join(project.get_project_dir(), "script", "shorts_failed_reply.txt")
+                        with open(raw_path, "w", encoding="utf-8") as f:
+                            f.write(str(agent_output))
+                    except OSError:
+                        pass
+                    raise ValueError(
+                        "The Shorts writer returned no usable Shorts (strict JSON with a \"shorts\" list was "
+                        "expected); nothing was saved. Re-run the step.")
+                wanted = session_format.shorts_count(project)
+                for s in shorts:
+                    s["script"] = session_format.strip_greeting(s["script"])
+                if len(shorts) != wanted:
+                    history_step.logs.append(f"Asked for {wanted} Shorts, got {len(shorts)}.")
+                shorts = shorts[:max(session_format.SHORTS_COUNTS)]
+                file_name = session_format.save_shorts(project, shorts)
+                project.assets["shorts_set"] = file_name
+                history_step.logs.append(
+                    "Shorts written: " + "; ".join(f"{s['title'] or 'untitled'} (~{s['estimated_seconds']} s)"
+                                                   for s in shorts))
+                _refresh_recording_script(project, history_step)
             else:
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write(agent_output)
@@ -923,6 +1164,99 @@ Please output the content matching the required output format (Markdown or JSON)
             logger.warning(f"Creator style check failed: {exc}")
             return script
 
+    def _skip_step(self, project: Project, wf: WorkflowDefinition, step_def: WorkflowStep) -> Project:
+        """Record a `when` step as passed by and move on."""
+        now = datetime.now().isoformat()
+        reason = _SKIP_REASONS.get((step_def.when or "").lower(), f"its condition '{step_def.when}' does not hold.")
+        project.steps_history = [h for h in project.steps_history if h.step_name != step_def.name]
+        project.steps_history.append(StepExecution(
+            step_name=step_def.name, agent_name=step_def.agent_role, status="completed",
+            started_at=now, completed_at=now, logs=[f"Skipped: {reason}"]))
+        next_step = wf.get_next_step(step_def.name)
+        if next_step:
+            project.current_step = next_step.name
+        else:
+            project.current_step = "Completed"
+            project.status = "completed"
+        project.save()
+        logger.info(f"Step '{step_def.name}' skipped for project '{project.name}': {reason}")
+        return project
+
+    def skip_steps(self, project: Project, wf: WorkflowDefinition, output_types: set, reason: str) -> Project:
+        """Record every not-yet-completed step whose output is one of
+        `output_types` as passed by, and move `current_step` to the first
+        step still to run (or "Completed")."""
+        now = datetime.now().isoformat()
+        done = {h.step_name for h in project.steps_history if h.status == "completed"}
+        for step_def in wf.steps:
+            if step_def.output_asset_type not in output_types or step_def.name in done:
+                continue
+            project.steps_history = [h for h in project.steps_history if h.step_name != step_def.name]
+            project.steps_history.append(StepExecution(
+                step_name=step_def.name, agent_name=step_def.agent_role, status="completed",
+                started_at=now, completed_at=now, logs=[f"Skipped: {reason}"]))
+            done.add(step_def.name)
+        remaining = next((s for s in wf.steps if s.name not in done), None)
+        if remaining:
+            project.current_step = remaining.name
+        else:
+            project.current_step = "Completed"
+            project.status = "completed"
+        project.save()
+        return project
+
+    def use_own_script(self, project_id: str, text: str) -> Project:
+        """The creator's own script: the Studio skips research and writing and
+        continues from the steps after it. His words are never rewritten."""
+        text = (text or "").strip()
+        if not text:
+            raise ValueError("The script is empty.")
+        project = Project.load(project_id)
+        wf = self.get_workflow(project.workflow_name)
+        if not wf:
+            raise ValueError(f"Workflow '{project.workflow_name}' not found for project {project_id}")
+        script_dir = os.path.join(project.get_project_dir(), "script")
+        os.makedirs(script_dir, exist_ok=True)
+        file_name = "script/draft.md"
+        with open(os.path.join(project.get_project_dir(), file_name), "w", encoding="utf-8") as f:
+            f.write(text + "\n")
+        for asset in ("script", "script_final", "narration_optimized"):
+            project.assets[asset] = file_name
+        project.metadata["script_source"] = "creator"
+        _refresh_recording_script(project)
+        return self.skip_steps(project, wf, OWN_SCRIPT_SKIPPED, "the creator gave his own script")
+
+    def _seo_step(self, project, step_def, agent, instruction: str, history_step) -> str:
+        """The SEO step as research (runtime/seo_research.py): YouTube
+        autocomplete, what ranks for the topic and how it performs, the web,
+        then the package -- the evidence is kept in it. Falls back to one call
+        when no model answers the chat."""
+        from runtime import seo_research
+
+        def log(msg: str) -> None:
+            logger.info(msg)
+            history_step.logs.append(msg)
+            project.save()
+
+        result = seo_research.run(agent, project, instruction, log)
+        if result.get("calls"):
+            history_step.logs.append(f"SEO research: {len(result['calls'])} lookup(s) in {result['turns']} turn(s).")
+        return str(result.get("raw") or "")
+
+    def _screenplay_step(self, project, input_texts: Dict[str, str], history_step) -> str:
+        """The screenplay step (ANIMATED_CHANNELS_PLAN ST2): the model extracts the
+        cast and labels the script; code copies his sentences into the screenplay
+        and verifies no spoken word changed. Fails the step with the difference."""
+        from app.services import animate_screenplay
+        script = next((input_texts[k] for k in ("narration_optimized", "script_final", "script")
+                       if input_texts.get(k, "").strip()), "")
+        if not script.strip():
+            raise ValueError("The screenplay step has no script to convert.")
+        cast_out = os.path.join(project.get_project_dir(), "production", "cast.json")
+        text = animate_screenplay.convert(script, project.brand, cast_out)
+        history_step.logs.append("Screenplay: spoken text verified identical to the script; cast in production/cast.json.")
+        return text
+
     def _research_step(self, project, step_def, agent, instruction: str, history_step) -> str:
         """The research step as a tool loop (runtime/research_loop.py): the
         researcher searches the live web, reads pages and searches again before
@@ -960,6 +1294,12 @@ Please output the content matching the required output format (Markdown or JSON)
             fixed, changed = writing_style.ensure_greeting(script, project.brand)
             if changed:
                 history_step.logs.append(f"Greeting set to the creator's fixed line: {writing_style.greeting(project.brand)}")
+            from app.services import session_format
+            if session_format.is_shorts_first(project):
+                # The session's recording is split at the greeting: it opens the long video.
+                fixed, moved = session_format.greeting_first(fixed, project.brand)
+                if moved:
+                    history_step.logs.append("Session: the greeting was moved to the first line (the recording is split there).")
             return fixed
         except Exception as exc:  # noqa: BLE001
             logger.warning(f"Could not check the greeting: {exc}")
@@ -1028,9 +1368,19 @@ Please output the content matching the required output format (Markdown or JSON)
             parts.append(f"### The Creator's Instructions for this channel (follow these)\n{project.metadata['creator_instructions']}")
         if project.metadata.get("creative_brief"):
             parts.append(f"### Creative Brief from the Channel Strategist\n{project.metadata['creative_brief']}")
+        episode_format = _episode_format_direction(project)
+        if episode_format:
+            parts.append(f"### This episode's format\n{episode_format}")
+        opening = _opening_directions(project)
+        if opening:
+            parts.append(opening.strip())
         format_override = ""
         if kind in STYLE_OUTPUT_TYPES:
             from app.services import writing_style
+            standard = writing_style.standard_section(project.brand, project)
+            if standard:
+                parts.append(standard.strip())
+                history_step.logs.append("The channel's story standard was added to the prompt.")
             style = writing_style.style_section(project.brand, project)
             if style:
                 parts.append(style.strip())

@@ -1,0 +1,58 @@
+{
+  "world": "October 2022 inside a small rural Kerala village house under police forensic investigation, lit by harsh investigation lighting with CCTV footage and evidence collection visible, muted desaturated palette of concrete grey, earth brown, institutional white and deep shadows, sparse traditional furnish",
+  "characters": [
+    {
+      "name": "Rosalie",
+      "aliases": [
+        "first victim",
+        "lottery ticket seller",
+        "missing woman"
+      ],
+      "look": "Indian woman in her mid-40s, medium build, wearing simple everyday clothing typical of a village woman selling lottery tickets",
+      "gender": "female"
+    },
+    {
+      "name": "Padman",
+      "aliases": [
+        "second victim",
+        "Tamil woman",
+        "lottery seller",
+        "missing woman"
+      ],
+      "look": "Tamil woman in her mid-40s, medium build, wearing simple everyday sari and clothing typical of a lottery ticket seller",
+      "gender": "female"
+    },
+    {
+      "name": "Muhammad Shafi",
+      "aliases": [
+        "Shafi",
+        "accused perpetrator",
+        "ritualist"
+      ],
+      "look": "Indian man in his 40s-50s, medium build, wearing simple village clothing",
+      "gender": "male"
+    },
+    {
+      "name": "Bhagaval Song",
+      "aliases": [
+        "Song",
+        "accused",
+        "traditional healer",
+        "house owner"
+      ],
+      "look": "Indian man in his 50s-60s, medium build, wearing simple traditional clothing, presented as a healer",
+      "gender": "male"
+    },
+    {
+      "name": "Laila",
+      "aliases": [
+        "Song's wife",
+        "accused",
+        "Bhagaval's wife"
+      ],
+      "look": "Indian woman in her 40s-50s, medium build, wearing simple everyday sari",
+      "gender": "female"
+    }
+  ],
+  "main_character": ""
+}

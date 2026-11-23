@@ -1,0 +1,1077 @@
+{
+    "id": "2026-11-23_Beyond3Baje_Emergency",
+    "name": "Emergency",
+    "brand": "Beyond3Baje",
+    "workflow_name": "beyond3baje_documentary",
+    "status": "active",
+    "current_step": "Scene Breakdown",
+    "created_at": "2026-11-23T15:31:54.494000",
+    "updated_at": "2026-11-23T20:39:04.567799",
+    "metadata": {
+        "video_settings": {
+            "art_style": "real",
+            "precut": true,
+            "allow_free_stock": true,
+            "target_coverage": 0.85,
+            "video_broll_share": 0.15,
+            "image_broll_share": 0.7,
+            "review_mode": "none",
+            "face_layout": "mixed",
+            "visual_style": "full"
+        },
+        "eye_contact": {
+            "enabled": true,
+            "mode": "auto",
+            "lens_marks": [
+                0.0,
+                1.0,
+                2.0,
+                3.0,
+                4.0,
+                6.0,
+                7.0,
+                8.0,
+                9.0,
+                10.0
+            ]
+        },
+        "script_source": "recording",
+        "recording_path": "B:/youtubeProjects/beyond3baje/ep13/emergencyTemp1.mp4",
+        "buzzedit_project_id": "5c29e7a6",
+        "eye_contact_applied": {
+            "buzzedit_project_id": "5c29e7a6",
+            "media_id": "media_ed2f6f61",
+            "setup": {
+                "mode": "auto",
+                "lens_marks": [
+                    0.0,
+                    1.0,
+                    2.0,
+                    3.0,
+                    4.0,
+                    6.0,
+                    7.0,
+                    8.0,
+                    9.0,
+                    10.0
+                ]
+            },
+            "report": {
+                "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\5c29e7a6_source_eyecontact.mp4",
+                "frames": 17439,
+                "face_found_pct": 100.0,
+                "corrected_pct": 72.5,
+                "camera_look_pct": 35.4,
+                "lens_separation_deg": 11.1,
+                "prompter_offset_deg": -11.1,
+                "symmetry_offset_deg": -7.9,
+                "reading_sweep_deg": 5.2,
+                "head_pitch_deg": 2.6,
+                "eyes_raised_deg": 3.4,
+                "median_shift_px": 4.56,
+                "median_shift_px_per_eye": {
+                    "R": 4.3,
+                    "L": 4.72
+                },
+                "lens_per_eye": {
+                    "R": -0.091,
+                    "rest_R": -0.123,
+                    "L": 0.09,
+                    "rest_L": 0.051,
+                    "lens": -0.001,
+                    "rest": -0.036,
+                    "t_lens": -0.083,
+                    "t_rest": -0.059,
+                    "lens_c": 0.02,
+                    "rest_c": -0.049,
+                    "tc_lens": -0.064,
+                    "tc_rest": -0.045,
+                    "yaw_lens": 2.358,
+                    "pitch_lens": 3.48,
+                    "head_raise_deg": -1.016,
+                    "from_marks": 1.0
+                },
+                "mode": "auto",
+                "auto_measured": true,
+                "measured_shift_deg": 11.2,
+                "lens_source": "marks",
+                "camera_look_candidates": [
+                    69.1,
+                    126.9,
+                    175.3
+                ],
+                "side_check": "video looks mirrored",
+                "contact_sheet": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\5c29e7a6_source_eyecontact_eyes.jpg",
+                "settings": {
+                    "mode": "auto",
+                    "prompter_side": "left",
+                    "angle_deg": 0.0,
+                    "prompter_cm": 16.0,
+                    "camera_cm": 110.0,
+                    "steadiness": 0.95,
+                    "aim_deg": 0.0,
+                    "pitch_deg": 0.0,
+                    "auto_pitch": true,
+                    "max_shift": 0.14,
+                    "past_lens_deg": 12.0,
+                    "away_lo": 0.07,
+                    "away_hi": 0.12,
+                    "baseline_s": 20.0,
+                    "tv_lambda": 0.006,
+                    "head_depth": 0.12,
+                    "lens_marks": [
+                        0.0,
+                        1.0,
+                        2.0,
+                        3.0,
+                        4.0,
+                        6.0,
+                        7.0,
+                        8.0,
+                        9.0,
+                        10.0
+                    ]
+                },
+                "quality": "high",
+                "seconds": 316.0,
+                "track_seconds": 197.2
+            },
+            "at": "2026-11-23T15:37:25"
+        },
+        "script_deviation": {
+            "script_spoken_share": 0.0,
+            "adlib_share": 1.0,
+            "beats_placed": 153,
+            "beats_dropped": 0,
+            "skipped_paragraphs": 0
+        },
+        "precut": true,
+        "buzzedit_job_id": "job_ba2d14b6",
+        "buzzedit_report": {
+            "project_id": "5c29e7a6",
+            "started_at": "2026-11-23T19:41:10.386536",
+            "finished_at": "2026-11-23T20:39:00.151128",
+            "settings": {
+                "broll": true,
+                "broll_video": true,
+                "character_consistency": true,
+                "main_character": null,
+                "art_style": "real",
+                "popups": true,
+                "graphics": false,
+                "motion_graphics": true,
+                "motion_concurrency": 4,
+                "parallax_share": 0.3,
+                "face_zoom": true,
+                "captions": true,
+                "caption_preset": "karaoke_pop",
+                "title": true,
+                "title_preset": "overlay_hook",
+                "atmosphere": "auto",
+                "thumbnail": true,
+                "render": true,
+                "verify": true,
+                "shorts_clips": 3,
+                "shorts_full": false,
+                "cards": true,
+                "location_cards": true,
+                "character_cards": true,
+                "stat_callouts": true,
+                "source_cards": true,
+                "definition_cards": true,
+                "quote_cards": true,
+                "chapter_titles": true,
+                "end_screen": true,
+                "end_screen_text": "SUBSCRIBE",
+                "progress_bar": false,
+                "progress_bar_style": "auto",
+                "maps": true,
+                "split_screens": true,
+                "newspapers": true,
+                "case_files": true,
+                "recreations": true,
+                "map_style": "auto",
+                "structure": true,
+                "cold_open": true,
+                "metadata": true,
+                "moods": true,
+                "mood_strength": 1.0,
+                "mood_hits": true,
+                "grade": "auto",
+                "topic_transitions": true,
+                "topic_transition": "auto",
+                "music": true,
+                "music_volume": 0.08,
+                "music_duck": 0.85,
+                "music_synth_fallback": true,
+                "music_by_act": true,
+                "music_brief": "",
+                "music_cues": true,
+                "music_engine": "ace_step",
+                "music_tracks": [],
+                "music_tracks_mode": "together",
+                "caption_emphasis": true,
+                "captions_bilingual": "auto",
+                "pip": "auto",
+                "pip_min_seconds": 4.0,
+                "freeze_on_stats": true,
+                "style_profile": null,
+                "sfx": true,
+                "sfx_volume": 0.45,
+                "sfx_diegetic": true,
+                "sfx_diegetic_volume": 0.35,
+                "sfx_library_dirs": [],
+                "ambience": true,
+                "ambience_kind": "auto",
+                "ambience_volume": 0.05,
+                "voice_preset": "broadcast",
+                "loudness_lufs": -14.0,
+                "voice_enhance": "auto",
+                "voice_fx": [],
+                "sfx_source": "auto",
+                "music_source": "auto",
+                "fade_in_s": 0.5,
+                "fade_out_s": 1.5,
+                "target_coverage": 0.85,
+                "face_intro_s": 0.0,
+                "face_on_camera_looks": true,
+                "face_max_share": 0.2,
+                "look_min_s": 0.8,
+                "min_oncamera_gap_s": 0.8,
+                "broll_seconds_min": 3.0,
+                "broll_seconds_max": 5.0,
+                "video_broll_share": 0.176,
+                "max_broll_per_minute": null,
+                "popup_preset": "youtube_pop",
+                "zoom_depth": 0.12,
+                "base_zoom": 1.0,
+                "seed": null,
+                "genre": "documentary",
+                "genre_secondary": "mystery",
+                "density": "busy",
+                "punch_rate_per_minute": 2.5,
+                "text_fx_per_minute": 3.0,
+                "allow_free_stock": true,
+                "llm_provider": "auto",
+                "llm_base_url": "",
+                "llm_model": "",
+                "text_fx": true,
+                "text_fx_styles": null,
+                "ai_label": false,
+                "person_matte": "auto",
+                "emoji_reactions": "auto",
+                "emoji_density": 1.0,
+                "emoji_style": "pop"
+            },
+            "settings_sources": {
+                "genre": "studio",
+                "genre_secondary": "studio",
+                "density": "studio",
+                "target_coverage": "studio",
+                "video_broll_share": "studio",
+                "broll_seconds_min": "studio",
+                "broll_seconds_max": "studio",
+                "min_oncamera_gap_s": "studio",
+                "zoom_depth": "studio",
+                "punch_rate_per_minute": "studio",
+                "text_fx_per_minute": "studio",
+                "voice_preset": "studio",
+                "voice_enhance": "studio",
+                "sfx_source": "studio",
+                "music_source": "studio",
+                "allow_free_stock": "studio"
+            },
+            "live_overrides": {
+                "settings": {
+                    "target_coverage": 0.85,
+                    "video_broll_share": 0.176,
+                    "image_broll_share": 0.7,
+                    "broll_seconds_min": 3.0,
+                    "broll_seconds_max": 5.0
+                },
+                "coverage": {
+                    "from": 0.85,
+                    "to": 0.85
+                },
+                "video_share": {
+                    "from": 0.176,
+                    "to": 0.176
+                },
+                "beats_dropped": 0,
+                "clips_kept": 11
+            },
+            "program": {
+                "duration_s": 726.62,
+                "word_count": 2095,
+                "segment_count": 1,
+                "has_energy": true
+            },
+            "beats_planned": 85,
+            "beats_dropped": [
+                {
+                    "topic": "Aapki shadi ho gayi hai? Aapki age kya hai? Kya aapke *bachc",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Indian Parliament building in New Delhi, 1975, official gove",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1975 India government health campaign posters and propaganda",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Democracy's *checks* and *balances* shattered | style=slam",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Indian Parliament building at dawn 1977, politicians returni",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "book | Government Archives (1975) | Population Control Targe",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Family planning, population control, and *urban reform* were",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Government archives and records from 1975-76, official Censu",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1975 Indian government ministry files and sterilization prog",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1976-77 government circular or official notice typewritten o",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Municipal office clerk at desk with government forms and num",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1976 era Maharashtra municipal office, typewriters and gover",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Elderly Indian man and young unmarried woman, vulnerable and",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1970s India sterilization procedure medical records and docu",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1977 Indian election results boards and newsprint showing Co",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "SHAH COMMISSION | MANDATE=Investigate actions during Emergen",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1970s government office archive with historical inquiry file",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Did Congress accept responsibility? *Yes and No* | style=rev",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "1970s India 1975-1976 street scene of public unrest, people ",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "Government archive storage with thousands of sterilization p",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "jab *accountability* ke bina - history ki power kya?",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                },
+                {
+                    "topic": "The Emergency Era History",
+                    "reason": "too close to another cutaway"
+                }
+            ],
+            "plan_source": "llm",
+            "genre": "documentary",
+            "genre_secondary": "mystery",
+            "assets_generated": 54,
+            "assets_cached": 0,
+            "assets_failed": [],
+            "stock_used": [],
+            "broll_placed": 81,
+            "popups_placed": 0,
+            "graphics_placed": 0,
+            "cards_placed": {
+                "character_card": 1,
+                "end_screen": 1
+            },
+            "entities_found": 9,
+            "maps_placed": 0,
+            "newspapers_placed": 0,
+            "case_files_placed": 0,
+            "recreations_placed": 0,
+            "splits_placed": 0,
+            "pip_placed": 0,
+            "freezes_placed": 0,
+            "caption_emphasis": 37,
+            "caption_translations": 582,
+            "style_profile_applied": "",
+            "beats_placement_rejected": [
+                {
+                    "beat": "b34",
+                    "topic": "26 lakh",
+                    "reason": "would overlap or crowd the previous cutaway"
+                },
+                {
+                    "beat": "b50",
+                    "topic": "548complaints filed",
+                    "reason": "would overlap or crowd the previous cutaway"
+                }
+            ],
+            "coverage_target": 0.85,
+            "coverage_achieved": 0.443,
+            "jump_cuts_total": 0,
+            "jump_cuts_covered": 0,
+            "comfyui_online": true,
+            "zooms_segment": 0,
+            "zooms_windowed": 2,
+            "zooms_punch_in": 1,
+            "zooms_punch_out": 1,
+            "zooms_suppressed_by_broll": 17,
+            "base_zoom": 1.0,
+            "faces_detected_pct": 100.0,
+            "captions": 582,
+            "caption_script": "native",
+            "title_text": "Population Control Program",
+            "atmosphere_applied": "grain",
+            "progress_bar": null,
+            "grade_applied": "cinematic",
+            "topic_transitions": 0,
+            "acts": [
+                "hook"
+            ],
+            "cold_open": null,
+            "metadata_written": true,
+            "moods": [
+                "build"
+            ],
+            "mood_layers": 1,
+            "mood_hits": 0,
+            "script_aligned_words": 2095,
+            "script_spelling_fixed": 0,
+            "script_directives": 153,
+            "music_used": "custom_ace_step15_152932135.wav [cue] \u2192 custom_ace_step15_461184466.wav [cue] \u2192 custom_ace_step15_810375766.wav [cue] \u2192 custom_ace_step15_498422854.wav [cue] \u2192 custom_ace_step15_1149164883.wav [cue] \u2192 custom_ace_step15_1601095358.wav [cue] \u2192 dramatic_ace_step15_778448031.wav [cue] \u2192 custom_ace_step15_911263232.wav [cue] \u2192 custom_ace_step15_1747131965.wav [cue] \u2192 custom_ace_step15_1435973076.wav [cue] \u2192 custom_ace_step15_65321687.wav [cue] \u2192 custom_ace_step15_1165262993.wav [cue] \u2192 custom_ace_step15_396780280.wav [cue] \u2192 custom_ace_step15_2134961529.wav [cue]",
+            "sfx_placed": 23,
+            "ambience_used": "",
+            "voice_preset": "broadcast",
+            "voice_enhance_used": "rnnoise",
+            "sfx_source_used": {
+                "generated": 23
+            },
+            "music_source_used": "library",
+            "diegetic_placed": 38,
+            "diegetic_sources": {
+                "library": 21,
+                "generated": 17,
+                "none": 3
+            },
+            "diegetic_unresolved": [
+                "metal tray clatter",
+                "metal tray clatter",
+                "distant typewriter clack"
+            ],
+            "thumbnail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\5c29e7a6\\thumbnail.jpg",
+            "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5c29e7a6_presented.mp4",
+            "verification": [
+                {
+                    "name": "speaker_on_screen",
+                    "ok": true,
+                    "detail": "cutaways cover 38% of the programme (target 85%)",
+                    "value": 0.384
+                },
+                {
+                    "name": "text_clear_of_face",
+                    "ok": true,
+                    "detail": "618 text items checked against 1 face boxes",
+                    "value": 0.0
+                },
+                {
+                    "name": "text_not_stacked",
+                    "ok": true,
+                    "detail": "618 text items",
+                    "value": 0.0
+                },
+                {
+                    "name": "music_under_voice",
+                    "ok": true,
+                    "detail": "77 mix items",
+                    "value": 0.0
+                },
+                {
+                    "name": "assets_present",
+                    "ok": true,
+                    "detail": "all cutaway files exist",
+                    "value": 0.0
+                },
+                {
+                    "name": "render_exists",
+                    "ok": true,
+                    "detail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5c29e7a6_presented.mp4",
+                    "value": null
+                },
+                {
+                    "name": "loudness",
+                    "ok": true,
+                    "detail": "-14.0 LUFS against -14.0 target, peak -1.1 dBFS",
+                    "value": -14.0
+                },
+                {
+                    "name": "av_length",
+                    "ok": true,
+                    "detail": "picture 726.54s, sound 726.70s",
+                    "value": -0.164
+                },
+                {
+                    "name": "length_matches_timeline",
+                    "ok": true,
+                    "detail": "rendered 726.54s, timeline 726.62s",
+                    "value": -0.089
+                },
+                {
+                    "name": "frozen_clip_frames",
+                    "ok": false,
+                    "detail": "b02 @ 26.4s for 0.75s; b03 @ 33.2s for 0.50s; b06 @ 61.1s for 0.50s; b06 @ 63.9s for 0.50s; b15 @ 143.1s for 1.00s; b15 @ 144.6s for 0.50s",
+                    "value": 42.0
+                }
+            ],
+            "shorts": [
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5c29e7a6_short1.mp4",
+                    "topic": "The Emergency Era History",
+                    "from_s": 682.98,
+                    "seconds": 43.64
+                }
+            ],
+            "text_fx_placed": {
+                "typewriter": 24,
+                "glitch": 9,
+                "behind_head": 3
+            },
+            "person_matte_used": "torchvision",
+            "text_fx_skipped": [],
+            "emoji_reactions": 0,
+            "designed_graphics": {
+                "speaker_slots": 4,
+                "statement_card": 3,
+                "source_quote": 4,
+                "document": 4,
+                "timeline": 7,
+                "canvas_card": 1
+            },
+            "ai_labels": 0,
+            "degraded": [
+                "video_broll: video share set to 18% during the run; 3 planned clip(s) kept as stills",
+                "prompt_drift: 'institutional' is in 74% of the prompts; check the world/look line",
+                "check:frozen_clip_frames"
+            ],
+            "generation": {
+                "image_phase": {
+                    "phase": "images",
+                    "need_vram_mb": 9000.0,
+                    "need_ram_mb": 4000.0,
+                    "ready": true,
+                    "reason": "",
+                    "free_vram_mb": 15053,
+                    "available_ram_mb": 22052
+                },
+                "video_phase": {
+                    "planned": 10,
+                    "made": 7,
+                    "kept_still": 3,
+                    "skipped_reason": "video share set to 18% during the run; 3 planned clip(s) kept as stills",
+                    "handover": {
+                        "phase": "video",
+                        "need_vram_mb": 11000.0,
+                        "need_ram_mb": 10000.0,
+                        "ready": true,
+                        "reason": "",
+                        "free_vram_mb": 15365,
+                        "available_ram_mb": 23424
+                    },
+                    "budget_s": 3600,
+                    "live": {
+                        "video_broll_share": 0.176,
+                        "quota_s": 32,
+                        "made_s_when_applied": 0
+                    }
+                },
+                "prompt_drift": {
+                    "institutional": 0.74,
+                    "government": 0.7
+                },
+                "parallax": {
+                    "candidates": 56,
+                    "selected": 17,
+                    "rendered": 11,
+                    "skipped_contrast": 6,
+                    "failed": 0
+                }
+            },
+            "prompt_drift": {
+                "institutional": 0.74,
+                "government": 0.7
+            },
+            "timings": [
+                {
+                    "stage": "script",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shotplan",
+                    "seconds": 31.63,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail_title",
+                    "seconds": 5.16,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "moods",
+                    "seconds": 5.75,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "entities",
+                    "seconds": 9.03,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "translate",
+                    "seconds": 63.61,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata",
+                    "seconds": 5.14,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "eject_llm",
+                    "seconds": 1.36,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "assets",
+                    "seconds": 2098.95,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "maps_charts",
+                    "seconds": 166.73,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "parallax",
+                    "seconds": 125.52,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_broll",
+                    "seconds": 0.03,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_popups",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "face_detect",
+                    "seconds": 26.21,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "layout_speakers",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "overlays",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_cards",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "pip",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "freezes",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "base_zoom",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "plan_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "captions",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_emphasis",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "caption_translations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "title",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "atmosphere",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "script_fx",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "cold_open",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "progress_bar",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_moods",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "grade",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "recreations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "topic_transitions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_generation",
+                    "seconds": 409.56,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_design",
+                    "seconds": 91.71,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_effects_generation",
+                    "seconds": 109.11,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound",
+                    "seconds": 8.9,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "voice_master",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "text_fx",
+                    "seconds": 12.92,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "emoji_reactions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "camera_looks",
+                    "seconds": 0.6,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail",
+                    "seconds": 22.22,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "render",
+                    "seconds": 207.51,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shorts",
+                    "seconds": 49.33,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_timeline",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_render",
+                    "seconds": 28.12,
+                    "ok": true,
+                    "note": ""
+                }
+            ]
+        },
+        "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\5c29e7a6_presented.mp4",
+        "broll_check": {
+            "beats_planned": 85,
+            "broll_placed": 81,
+            "assets_generated": 54,
+            "assets_cached": 0,
+            "coverage_low": false,
+            "should_fail": false,
+            "warning": null,
+            "message": null
+        },
+        "final_output_path": "B:/youtubeProjects/beyond3baje/ep13\\emergencyTemp1_final.mp4"
+    },
+    "steps_history": [
+        {
+            "step_name": "Research",
+            "agent_name": "ResearchAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T15:32:04.922136",
+            "completed_at": "2026-11-23T15:32:04.922136",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Scripting",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T15:32:04.922136",
+            "completed_at": "2026-11-23T15:32:04.922136",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Visual Plan",
+            "agent_name": "PromptEngineer",
+            "status": "completed",
+            "started_at": "2026-11-23T15:32:04.922136",
+            "completed_at": "2026-11-23T15:32:04.922136",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Voice Recording",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T15:32:04.922136",
+            "completed_at": "2026-11-23T15:32:04.922136",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "visual_plan_take": "production/visual_plan_take.json",
+        "visual_plan": "production/visual_plan_take.json",
+        "script_deviation": "production/script_deviation.json",
+        "buzzedit_script": "script/buzzedit_script.md"
+    }
+}

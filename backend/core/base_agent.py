@@ -22,6 +22,8 @@ class BaseAgent(ABC):
     def __init__(self, agent_name: str, llm_service: Optional[LLMService] = None):
         self.agent_name = agent_name
         self.llm_service = llm_service or LLMService()
+        # Workflow steps switch this off: another channel's old results in the prompt cause drift.
+        self.use_memory = True
         self.model_tier, self.temperature = self._load_model_settings()
         self.system_prompt = self._load_system_prompt()
 
@@ -63,7 +65,7 @@ class BaseAgent(ABC):
         # If this is a Channel Strategist or Lead Agent, append the full workforce
         # directory. Counts come from the registry: hard-coded ones went stale the
         # moment a persona was added or merged (roadmap v9, A4).
-        if "strategist" in self.agent_name.lower() or self.agent_name in ["CEO", "COO", "CreativeDirectorAgent"]:
+        if "strategist" in self.agent_name.lower() or self.agent_name in ["CEO", "COO", "CreativeDirectorAgent", "StudioDirector"]:
             try:
                 from core.agent import agent_registry
                 dept_map = {}
@@ -111,7 +113,7 @@ class BaseAgent(ABC):
         # titles, hooks and scripts). The Studio Assistant chat passes
         # hinglish=False and answers in the creator's own language instead.
         if not hinglish:
-            return base_prompt
+            return base_prompt + self._role_fence()
 
         hinglish_directive = (
             "\n\n### MANDATORY STUDIO LANGUAGE & SCRIPT DIRECTIVE (HINGLISH ENFORCEMENT):\n"
@@ -126,7 +128,27 @@ class BaseAgent(ABC):
         )
         base_prompt += hinglish_directive
 
-        return base_prompt
+        return base_prompt + self._role_fence()
+
+    def _role_fence(self) -> str:
+        """A short 'stay in your role' block built from the registry definition."""
+        try:
+            from core.agent import agent_registry
+            definition = agent_registry.get(self.agent_name)
+        except Exception:
+            definition = None
+        role = " ".join(str(getattr(definition, "role", "") or "").split())
+        outputs = getattr(definition, "outputs", None) or []
+        who = f"You are {self.agent_name}" + (f": {role}" if role else ".")
+        lines = ["\n\n### Stay in your role", who.rstrip() if who.endswith(".") else who + "."]
+        if outputs:
+            lines.append(f"Your outputs: {', '.join(str(o) for o in outputs)}.")
+        lines.append(
+            "Do only this role's work. If the task asks for something outside it, do the part that is yours "
+            "and say in one line what you left for another agent. Write exactly the output format the task "
+            "asks for -- no preamble, no notes, no commentary before or after it. The channel guide, the "
+            "channel's story standard and the creator's own writing style (when given) override your generic habits.")
+        return "\n".join(lines) + "\n"
 
     _TOOL_TAG_RE = re.compile(r"\[(?:WEB_SEARCH|SEARCH|WEB_FETCH|BOOK_SEARCH|NEWS_SEARCH|ARCHIVE_SEARCH):", re.I)
     _TOOL_SPAN_RE = re.compile(
@@ -195,11 +217,13 @@ class BaseAgent(ABC):
         return self._research_pass(system_prompt, ask(system_prompt), ask, require_json)
 
     def execute(self, task: Any, require_json: bool = False) -> Any:
-        try:
-            from memory.memory import memory_system
-            agent_memories = memory_system.retrieve(scope="agent", owner=self.agent_name, limit=6)
-        except Exception:
-            agent_memories = []
+        agent_memories = []
+        if getattr(self, "use_memory", True):
+            try:
+                from memory.memory import memory_system
+                agent_memories = memory_system.retrieve(scope="agent", owner=self.agent_name, limit=6)
+            except Exception:
+                agent_memories = []
 
         memory_prompt_addon = ""
         if agent_memories:

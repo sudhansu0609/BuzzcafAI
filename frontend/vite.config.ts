@@ -15,7 +15,7 @@ export default defineConfig({
   base: './',
   build: {
     outDir: '../backend/app/static',
-    emptyOutDir: true,
+    emptyOutDir: false,
   },
   server: {
     // The desktop shell picks a free port (5173 is often another project's

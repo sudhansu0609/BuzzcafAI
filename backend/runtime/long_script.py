@@ -550,6 +550,12 @@ class LongScriptWriter:
             if cached and cached.get("text"):
                 written.append(cached)
                 continue
+            # Master pause (docs/STUDIO_DIRECTOR_PLAN.md Part 1): between
+            # sections, before the next one starts -- each finished section
+            # is already checkpointed to disk, so holding here never loses
+            # one, and a restart (or a resume) picks up at the same `name`.
+            from app.services import master_control
+            master_control.wait_if_paused(f"long_script: section {i + 1}/{n}", self.log)
             part = self._section(context, plan, i, written)
             self._save(name, json.dumps(part, ensure_ascii=False))
             written.append(part)

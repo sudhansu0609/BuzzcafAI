@@ -1,0 +1,114 @@
+[
+  {
+    "id": "9a96e823-b892-4656-a118-08464b5cd338",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"pick_auto_stories\", \"count_per_channel\": {\"Raat3Baje\": 2, \"Life3Baje\": 1, \"TheTallStoryteller\": 2}, \"formats\": {\"Raat3Baje\": [\"rules_horror\", \"ghost_story\", \"anomaly_file\", \"folklore_entity\"], \"Life3Baje\": [\"mood_reel\"], \"TheTallStoryteller\": [\"comedy\"]}, \"recent\": [{\"brand\": \"Beyond3Baje\", \"format\": null, \"name\": \"MOTHMAN\", \"state\": \"failed\"}, {\"brand\": \"Beyond3Baje\", \"format\": null, \"name\": \"B3B-042: 15 Saal Se Band Station Par Har Raat Ek Train Aati Hai | Anomaly Files\", \"state\": \"failed\"}, {\"brand\": \"Beyond3Baje\", \"format\": null, \"name\": \"What If Aapke CCTV Mein Aap Khud Kal Raat",
+      "result_snippet": "```json\n{\n  \"picks\": [\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"ghost_story\",\n      \"topic_hint\": \"An Indian haunted location or local urban legend (e.g., a haunted haveli or abandoned village).\",\n      \"why\": \"Rotating away from rules_horror; selecting ghost_story for variety.\"\n    },\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"folklore_entity\",\n      \"topic_hint\": \"A specific Indian folklore entity (e.g., Yakshini, Chudail, or a regional spirit).\",\n      \"why\": \"Ensuring no consecutive same formats and utilizing a different style of horror.\"\n    },\n    {\n      \"channel\": \"Life3Baje\",\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"A peaceful scene with Urdu/Hindi poetry about nature or solitude.\",\n      \"why\": \"Standard mood_reel format for this channel.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"A relatable situational comedy sketch (e.g., 'Desi parents and technology').\",\n      \"why\": \"Switching from long_story to the available comedy format.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"A humorous take on a common daily struggle (e.g., 'Corporate life in India').\",\n      \"why\": \"Note: Only one comedy format available, but requested count is 2; providing two distinct comedy prompts.\"\n    }\n  ],\n  \"note\": \"Raat3Baje is rotating through ghost stories and folklore tonight. TheTallStoryteller is moving into a comedy-focused run.\"\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T07:56:37.146366",
+    "updated": "2026-10-28T07:56:37.146370"
+  },
+  {
+    "id": "3224dd6d-5fb1-4047-9d44-a1691818bf49",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"pick_auto_stories\", \"count_per_channel\": {\"Raat3Baje\": 2, \"Life3Baje\": 1, \"TheTallStoryteller\": 2}, \"formats\": {\"Raat3Baje\": [\"rules_horror\", \"ghost_story\", \"anomaly_file\", \"folklore_entity\"], \"Life3Baje\": [\"mood_reel\"], \"TheTallStoryteller\": [\"comedy\"]}, \"recent\": [{\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0915\u094c\u0928 \u0935\u0915\u093c\u094d\u0924 \u0910 \u0935\u093e\u090f \u0917\u0941\u091c\u093c\u0930\u093e \u091c\u0940 \u0915\u094b \u0918\u092c\u0930\u093e\u0924\u0947 \u0939\u0941\u090f\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u091c\u093c\u093f\u0902\u0926\u0917\u0940 \u0905\u092a\u0928\u0940 \u091c\u092c \u0907\u0938 \u0936\u0915\u094d\u0932 \u0938\u0947 \u0917\u0941\u091c\u093c\u0930\u0940\", \"state\": \"failed\"}, {\"brand\": \"Beyond3Baje\", \"format\": null, \"name\": \"MOTHMAN\", \"state\": \"failed\"}, {\"brand\": \"Beyo",
+      "result_snippet": "{\n  \"picks\": [\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"ghost_story\",\n      \"topic_hint\": \"Agrasen Ki Baoli Ka Wo Kuwan Jisme Se Raat Ko Aawazein Aati Hain\",\n      \"why\": \"Rotating away from rules_horror; picks longest unused format for Indian haunted locations in Hinglish.\"\n    },\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"folklore_entity\",\n      \"topic_hint\": \"Brahmarakshas: Peepal Ke Ped Par Rehne Wala Wo Shaapit Pandit\",\n      \"why\": \"Rotating to folklore_entity to prevent consecutive ghost_story picks; explores classical Indian folklore entity.\"\n    },\n    {\n      \"channel\": \"Life3Baje\",\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"Barish Mein Chai Ki Dukan Aur Purani Yaadein\",\n      \"why\": \"Only mood_reel format available; fresh peaceful aesthetic scene with relatable Hinglish poetic mood.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Jab Rishtedaar Ghar Aakar Free Ki Career Advice Dene Lagte Hain\",\n      \"why\": \"Rotating away from recent long_story to the designated comedy format.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Bangalore Mein Auto Walon Ke Nakhre Aur Techies Ka Rona\",\n      \"why\": \"Second requested pick for channel; distinct comedy premise with everyday relatable desi humour.\"\n    }\n  ],\n  \"note\": \"Tonight's pipeline is producing horror rotations for Raat3Baje, calm vibes for Life3Baje, and relatable comedy for TheTallStoryteller.\\nNote for creator: TheTallStoryteller only has one format configured ('comedy') while requiring 2 picks, so two distinct premises were scheduled under the same format.\"\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T03:29:56.423775",
+    "updated": "2026-10-29T03:29:56.423778"
+  },
+  {
+    "id": "4ddd9f31-c606-42a3-92d7-bcd0b1c914c9",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by Life3BajeStrategist to perform the following task:\n\nCreate a 3-act structure for a 20-minute documentary-style video about the creator's dilemma of choosing between his career, YouTube, and Buzzcaf. Focus on the \"internal conflict\" and \"the cost of ambition.\"",
+      "result_snippet": "Since this is for the **Life3Baje** ecosystem, even though the content is a personal documentary about your journey, we will maintain the signature aesthetic: deep, reflective, and emotionally resonant. The narrative will move from the external \"noise\" of choices to the internal \"silence\" of finding purpose.\n\nHere is the 3-act structure for the 20-minute documentary: **\"The Cost of Ambition: Ek Adhoori Kahani ya Ek Nayi Shuruat?\"**\n\n---\n\n### **Act 1: The Trinity of Conflict (0:00 - 7:00)**\n*Focus: Establishing the three worlds and the friction between them.*\n\n*   **Opening Visuals:** A montage of high-contrast shots\u2014the sterile lights of a corporate office, the glowing screen of a YouTube studio at 3 AM, and the raw, creative energy behind Buzzcaf.\n*   **Narrative Hook (Hinglish):** \"Ek insaan ke paas do haath hote hain, par kabhi-kabhi sapne teen hote hain. Career ki stability, YouTube ka platform, aur Buzzcaf ka vision. Teeno ko ek saath pakadne ki koshish mein, aksar hum khud ko kho dete hain.\"\n*   **Key Scenes:**\n    1.  **The Corporate Mask:** Show the \"Day Job\" reality\u2014the routine, the paycheck, and the safety it provides. \n    2.  **The Digital Dream:** Transition to the YouTube world\u2014the dopamine of a notification, the craft of storytelling, and the desire for connection.\n    3.  **The Visionary's Burden:** Introduce Buzzcaf as the ultimate goal\u2014building something bigger than just a channel; building an ecosystem.\n*   **The Conflict:** The realization that time is finite. You cannot give 100% to three different lives simultaneously without paying a price.\n\n### **Act 2: The Weight of Ambition (7:00 - 14:00)**\n*Focus: The \"Internal Conflict\" and the psychological cost.*\n\n*   **The Core Theme:** This section explores the *internal* dialogue. It\u2019s not just about time management; it\u2019s about identity.\n*   **Narrative Hook (Hinglish):** \"Jab aap ek cheez ko choose karte ho, toh dusri cheez ko peeche chhodna padta hai. Par jab aap teeno ko ek saath jeena chahte ho, "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T08:34:37.390510",
+    "updated": "2026-10-29T08:34:37.390522"
+  },
+  {
+    "id": "c161c798-0d15-48d3-8597-38d1aac81e89",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"pick_auto_stories\", \"count_per_channel\": {\"Raat3Baje\": 2, \"Life3Baje\": 1, \"TheTallStoryteller\": 2}, \"formats\": {\"Raat3Baje\": [\"rules_horror\", \"ghost_story\", \"anomaly_file\", \"folklore_entity\"], \"Life3Baje\": [\"mood_reel\"], \"TheTallStoryteller\": [\"comedy\"]}, \"recent\": [{\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0909\u092e\u094d\u0930 \u092d\u0930 \u0939\u092e \u0930\u0939\u0947 \u0936\u0930\u093e\u092c\u0940 \u0938\u0947\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u091c\u093c\u093f\u0902\u0926\u0917\u0940 \u0905\u092a\u0928\u0940 \u091c\u092c \u0907\u0938 \u0936\u0915\u094d\u0932 \u0938\u0947 \u0917\u0941\u091c\u093c\u0930\u0940\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0915\u094c\u0928 \u0935\u0915\u093c\u094d\u0924 \u0910 \u0935\u093e\u090f \u0917\u0941\u091c\u093c\u0930\u093e \u091c\u0940 \u0915\u094b \u0918\u092c\u0930\u093e\u0924\u0947 \u0939\u0941\u090f\", \"state\": \"fail",
+      "result_snippet": "```json\n{\n  \"picks\": [\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"ghost_story\",\n      \"topic_hint\": \"Ek purani haveli ka raaz ya koi local haunted location jahan log raat ko rukne se darte hain.\",\n      \"why\": \"Rotating away from 'rules_horror' to a traditional ghost story format.\"\n    },\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"folklore_entity\",\n      \"topic_hint\": \"Ek mardana ya aurat ki rooh jo kisi khaas lokkatha (folk tale) se judi ho, jaise Yakshini ya Chudail.\",\n      \"why\": \"Ensuring variety by moving to folklore entities after the ghost story.\"\n    },\n    {\n      \"channel\": \"Life3Baje\",\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"Baarish ki boondein aur ek purani kitab, slow-mo shots ke saath sukoon bhari poetry.\",\n      \"why\": \"Standard mood reel format for this channel's aesthetic.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Desi parents aur unka 'tech support' ka drama jab bacche phone chalana sikhate hain.\",\n      \"why\": \"Moving from long_story to the comedy format.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Corporate office mein Monday morning ki susti aur chai ka nasha.\",\n      \"why\": \"Second comedy pick for this channel using a different relatable scenario.\"\n    }\n  ],\n  \"note\": \"Raat3Baje is rotating through ghost stories and folklore. TheTallStoryteller is moving to comedy with two distinct premises.\"\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T03:10:32.411832",
+    "updated": "2026-10-30T03:10:32.411836"
+  },
+  {
+    "id": "e952b380-5a08-4c5f-984b-e48d6766fd98",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by Life3BajeStrategist to perform the following task:\n\nCreate a structured narrative arc for a 20-minute video based on [vault:topic_e7abe99b]. The story should move from \"The Hype of Launch\" to \"The Reality of Operations,\" followed by \"The Numbers (Success/Failure),\" and ending with \"The Reflection on the Balance.\"",
+      "result_snippet": "```json\n{\n  \"picks\": [\n    {\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"Vault e7abe99b: 'Hype of Launch' se 'Reality of Operations' tak ka safar, followed by 'The Numbers' aur 'Reflection on the Balance'.\",\n      \"why\": \"Selected vault item for Life3Baje; narrative arc construction left to ScriptWriter.\"\n    }\n  ],\n  \"note\": \"Story selected from vault e7abe99b. Narrative structure and script development left for ScriptWriter agent.\"\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T12:55:33.250815",
+    "updated": "2026-10-30T12:55:33.250821"
+  },
+  {
+    "id": "0f051b97-392a-402c-82a3-d2c8cd18c880",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"pick_auto_stories\", \"count_per_channel\": {\"Raat3Baje\": 2, \"Life3Baje\": 1, \"TheTallStoryteller\": 2}, \"formats\": {\"Raat3Baje\": [\"rules_horror\", \"ghost_story\", \"anomaly_file\", \"folklore_entity\"], \"Life3Baje\": [\"mood_reel\"], \"TheTallStoryteller\": [\"comedy\"]}, \"recent\": [{\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0915\u093f\u0938\u0940 \u092c\u0947-\u0915\u0938 \u0915\u094b \u0910 \u092c\u0947-\u0926\u093e\u0926 \u0917\u0930 \u092e\u093e\u0930\u093e \u0924\u094b \u0915\u094d\u092f\u093e \u092e\u093e\u0930\u093e\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0915\u094c\u0928 \u0935\u0915\u093c\u094d\u0924 \u0910 \u0935\u093e\u090f \u0917\u0941\u091c\u093c\u0930\u093e \u091c\u0940 \u0915\u094b \u0918\u092c\u0930\u093e\u0924\u0947 \u0939\u0941\u090f\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0909\u092e\u094d\u0930 \u092d\u0930 \u0939\u092e \u0930\u0939\u0947 \u0936\u0930\u093e\u092c\u0940 \u0938\u0947\", \"sta",
+      "result_snippet": "```json\n{\n  \"picks\": [\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"ghost_story\",\n      \"topic_hint\": \"Ek purani haveli ya abandoned hospital jahan local log ka maanna hai ki koi rooh ab bhi bhatakti hai.\",\n      \"why\": \"Rotating away from 'rules_horror' to a traditional ghost story format.\"\n    },\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"folklore_entity\",\n      \"topic_hint\": \"Ek purani lokkatha (folk tale) se judi entity, jaise ki ek 'Yakshini' ya koi regional spirit.\",\n      \"why\": \"Ensuring variety by moving to folklore entities after the ghost story.\"\n    },\n    {\n      \"channel\": \"Life3Baje\",\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"Shaam ki chai aur baarish ki boondein, sukoon bhari poetry ke saath.\",\n      \"why\": \"Standard mood_reel format for this channel's aesthetic.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Desi parents aur unka 'tech support' ka drama jab bacche phone chalana sikhate hain.\",\n      \"why\": \"Moving from long_story to the comedy format.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Corporate office mein Monday morning ki susti aur chai ka nasha.\",\n      \"why\": \"Second comedy pick for this channel using a different relatable scenario.\"\n    }\n  ],\n  \"note\": \"Raat3Baje is rotating through ghost stories and folklore. TheTallStoryteller is moving to comedy with two distinct premises.\"\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T10:35:28.622048",
+    "updated": "2026-10-31T10:35:28.622052"
+  },
+  {
+    "id": "a3413559-c01b-43db-aec0-25866b9fd152",
+    "scope": "agent",
+    "owner": "StoryProducer",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"pick_auto_stories\", \"count_per_channel\": {\"Raat3Baje\": 2, \"Life3Baje\": 1, \"TheTallStoryteller\": 2}, \"formats\": {\"Raat3Baje\": [\"rules_horror\", \"ghost_story\", \"anomaly_file\", \"folklore_entity\"], \"Life3Baje\": [\"mood_reel\"], \"TheTallStoryteller\": [\"comedy\"]}, \"recent\": [{\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0924\u0941\u092e \u0905\u092a\u0928\u0947 \u0936\u093f\u0915\u0935\u0947 \u0915\u0940 \u092c\u093e\u0924\u0947\u0902 \u0928 \u0916\u094b\u0926 \u0916\u094b\u0926 \u0915\u0947 \u092a\u0942\u091b\u094b\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0939\u091c\u093c\u093e\u0930\u094b\u0902 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936\u0947\u0902 \u0910\u0938\u0940 \u0915\u093f, \u0939\u0930 \u0916\u093c\u094d\u0935\u093e\u0939\u093f\u0936 \u092a\u0947 \u0926\u092e \u0928\u093f\u0915\u0932\u0947\", \"state\": \"failed\"}, {\"brand\": \"Life3Baje\", \"format\": \"mood_reel\", \"name\": \"\u0915\u093f\u0938\u0940 \u092c\u0947-\u0915\u0938 \u0915\u094b \u0910 \u092c\u0947-\u0926\u093e",
+      "result_snippet": "{\n  \"picks\": [\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"ghost_story\",\n      \"topic_hint\": \"Dumas Beach Ka Wo Rahasya Jisme Raat Ko Kali Rait Par Cheekhein Sunai Deti Hain\",\n      \"why\": \"Rotating away from recent rules_horror to ghost_story; highlights an infamous haunted Indian location in Hinglish.\"\n    },\n    {\n      \"channel\": \"Raat3Baje\",\n      \"format\": \"folklore_entity\",\n      \"topic_hint\": \"Nishi Dak: Bengal Ki Wo Entity Jo Apno Ki Aawaz Mein Raat Ko Bulaati Hai\",\n      \"why\": \"Rotating to folklore_entity to prevent back-to-back formats; covers a documented Indian folkloric entity.\"\n    },\n    {\n      \"channel\": \"Life3Baje\",\n      \"format\": \"mood_reel\",\n      \"topic_hint\": \"Bheegi Sadkein Aur Ek Garam Chai Ka Glass: Khamoshi Aur Yaadon Ka Sukoon\",\n      \"why\": \"Only mood_reel format available; fresh calm visual concept with evocative Hinglish poetry theme.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Desi Mohalle Ke Uncle Jab Shaadi Mein Bina Bulaye 'Management' Sambhalne Lagte Hain\",\n      \"why\": \"Rotating away from previous long_story to designated comedy format; relatable Indian wedding observational humor.\"\n    },\n    {\n      \"channel\": \"TheTallStoryteller\",\n      \"format\": \"comedy\",\n      \"topic_hint\": \"Gym Ka Pehla Din Aur Trainer Ke Saamne Fake Confidence Ka Tamasha\",\n      \"why\": \"Second required pick for channel with single format; completely distinct situational comedy premise.\"\n    }\n  ],\n  \"note\": \"Tonight's auto run picks ghost stories and folklore for Raat3Baje, a peaceful reflective reel for Life3Baje, and two distinct relatable comedy premises for TheTallStoryteller.\\nCreator note: TheTallStoryteller has only 'comedy' configured for 2 picks, so two separate everyday situational themes were scheduled.\"\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T03:34:29.644991",
+    "updated": "2026-11-01T03:34:29.644995"
+  }
+]

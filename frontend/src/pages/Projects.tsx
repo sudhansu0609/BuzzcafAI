@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode }
 import { createPortal } from 'react-dom';
 import {
   AlertCircle,
+  Archive,
+  ArchiveRestore,
   Check,
   CheckCheck,
   CheckCircle2,
@@ -33,17 +35,24 @@ import {
   X,
 } from 'lucide-react';
 import { useStudio } from '../state/studio';
+import AnimateProduce from '../components/AnimateProduce';
 import { getJson, postJson, putJson, deleteJson, describeError, ApiError } from '../services/api';
 import Markdown from '../components/Markdown';
+import ArchiveCleanup from '../components/ArchiveCleanup';
 import EyeContactSettings from '../components/EyeContactSettings';
 import MusicSettings, { type PickedTrack } from '../components/MusicSettings';
 import ProductionQueue from '../components/ProductionQueue';
 import Teleprompter from '../components/Teleprompter';
 import YouTubePublish from '../components/YouTubePublish';
 import ProductionEstimate from '../components/ProductionEstimate';
+import OwnFootage from '../components/OwnFootage';
 import ScriptEditor from '../components/ScriptEditor';
+import NewFromOwnScript from '../components/NewFromOwnScript';
 import type {
+  ChannelFormatsState,
   Project,
+  SessionParent,
+  SessionSplit,
   StepRecord,
   WorkflowStepInfo,
   ProduceQueue,
@@ -54,6 +63,7 @@ import type {
   VisualPlanTake,
 } from '../lib/types';
 import { GENRES, DENSITIES, VOICE_PRESETS } from '../lib/types';
+import { ART_STYLES } from '../lib/artStyles';
 
 // The story's characters and their voices (GET /api/projects/{id}/cast and
 // GET /api/produce/voices, app/api/produce_api.py; BuzzEdit
@@ -116,6 +126,12 @@ function stepState(p: Project, step: WorkflowStepInfo): 'done' | 'current' | 'fa
   if (record?.status === 'failed') return 'failed';
   if (record?.status === 'paused_for_approval') return 'waiting';
   if (record?.status === 'completed') return 'done';
+  // Voice Recording is his own step: it only blinks while the cloned voice is
+  // actually being made (Auto Story's "narration"); otherwise it waits for him.
+  if (/voice recording/i.test(step.name) && p.current_step === step.name) {
+    return (p.metadata as { auto_story?: { state?: string } } | undefined)?.auto_story?.state === 'narration'
+      ? 'current' : 'waiting';
+  }
   if (p.current_step === step.name) return 'current';
   return record ? 'current' : 'pending';
 }
@@ -201,6 +217,7 @@ function CopyButton({ text, label = 'Copy project ID' }: { text: string; label?:
       type="button"
       onClick={copy}
       title={copied ? 'Copied to clipboard!' : label}
+      aria-label={copied ? 'Copied to clipboard!' : label}
       style={{
         background: 'none',
         border: 'none',
@@ -223,6 +240,8 @@ function CopyButton({ text, label = 'Copy project ID' }: { text: string; label?:
 // from (it carries the writer's (pause) / (slow) cues), then the annotated
 // one BuzzEdit rebuilds from what was actually said after production.
 const TELEPROMPTER_SOURCES: [string, string][] = [
+  // A Shorts-first session: the Shorts, then the long video, in recording order.
+  ['recording_script', 'Recording session (Shorts first, then the long video)'],
   ['script_final', 'Final script'],
   ['narration_optimized', 'Narration (optimised)'],
   ['script', 'Script draft'],
@@ -255,6 +274,27 @@ export default function Projects() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [log, setLog] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<Record<string, string>>({});
+  // "Use my own script": the project whose box is open, and the pasted text.
+  const [ownScriptFor, setOwnScriptFor] = useState<string | null>(null);
+  const [ownScriptText, setOwnScriptText] = useState('');
+  const [ownScriptBusy, setOwnScriptBusy] = useState(false);
+  // "New from my script": a project created straight from his own script.
+  const [showOwnScriptNew, setShowOwnScriptNew] = useState(false);
+  const submitOwnScript = async (projectId: string) => {
+    if (!ownScriptText.trim() || ownScriptBusy) return;
+    setOwnScriptBusy(true);
+    try {
+      await postJson(`/api/projects/${encodeURIComponent(projectId)}/own_script`, { text: ownScriptText });
+      toast('Your script is in. Research and writing are skipped.', 'success');
+      setOwnScriptFor(null);
+      setOwnScriptText('');
+      await refreshProjects();
+    } catch (err) {
+      toast(`Could not use your script: ${describeError(err)}`, 'error');
+    } finally {
+      setOwnScriptBusy(false);
+    }
+  };
   // Per project: the step "Regenerate" restarts from ('' = everything).
   const [regenFrom, setRegenFrom] = useState<Record<string, string>>({});
   // The Scheduler Desk leaves a project id here when a task there is clicked.
@@ -298,7 +338,26 @@ export default function Projects() {
       // Private window: the tab just isn't remembered.
     }
   };
-  const [filterTab, setFilterTab] = useState<'all' | 'active' | 'waiting' | 'completed'>('all');
+  const [filterTab, setFilterTab] = useState<'all' | 'active' | 'waiting' | 'completed' | 'archived'>('all');
+  // The "Waiting for you" pop-up's Open button (components/NeedsYou.tsx): this
+  // page stays mounted, so the sessionStorage hand-off above only works once.
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail;
+      const p = allProjects.find((x) => x.id === id);
+      if (!id || !p) return;
+      chooseKind(isShort(p) ? 'shorts' : 'long');
+      setFilterTab('all');
+      setOpenId(id);
+      window.setTimeout(() => {
+        document.querySelector(`[data-project-id="${CSS.escape(id)}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    };
+    window.addEventListener('buzzcaf:open-project', onOpen);
+    return () => window.removeEventListener('buzzcaf:open-project', onOpen);
+  }, [allProjects]);
+  const [cleanupOpen, setCleanupOpen] = useState(false);
+  const [archivingId, setArchivingId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   // Collapse the project list to just the open project (or nothing), so the
   // queue and the open project's panel are not pushed down by every card.
@@ -337,6 +396,13 @@ export default function Projects() {
       .then((r) => setStyleModes(Object.fromEntries(r.channels.map((c) => [c.channel, c.mode ?? 'mine']))))
       .catch(() => undefined);
   }, []);
+  // Each session channel's defaults (Shorts first, how many, the face layout)
+  // and its episode formats -- set on the Scheduler Desk's Long form tab.
+  const [channelFormats, setChannelFormats] = useState<ChannelFormatsState | null>(null);
+  useEffect(() => {
+    getJson<ChannelFormatsState>('/api/channel_formats').then(setChannelFormats).catch(() => undefined);
+  }, []);
+  const [splitDraft, setSplitDraft] = useState<Record<string, string>>({});
   // How BuzzEdit generates clips (Studio setting `clip_generation_mode`, sent to
   // BuzzEdit before every production): "classic" or "hq".
   const [clipGenMode, setClipGenMode] = useState<'classic' | 'hq'>('classic');
@@ -447,6 +513,14 @@ export default function Projects() {
   // density -> channel profile -> project) the dropdowns actually display.
   const [videoSettings, setVideoSettings] = useState<Record<string, VideoSettingsResponse>>({});
   const [advancedOpen, setAdvancedOpen] = useState<Record<string, boolean>>({});
+  // The eye-contact panel is tall; minimised or not is remembered per browser.
+  const [eyeContactOpen, setEyeContactOpen] = useState<boolean>(() => {
+    try { return localStorage.getItem('studio.eyeContactOpen') !== '0'; } catch { return true; }
+  });
+  const toggleEyeContact = () => setEyeContactOpen((open) => {
+    try { localStorage.setItem('studio.eyeContactOpen', open ? '0' : '1'); } catch { /* private mode */ }
+    return !open;
+  });
   const videoSettingsSaveTimers = useRef<Record<string, number>>({});
   const videoSettingsPending = useRef<Record<string, Record<string, unknown>>>({});
   const [produceStatus, setProduceStatus] = useState<Record<string, ProduceVideoStatus>>({});
@@ -740,6 +814,17 @@ export default function Projects() {
     }
   };
 
+  // The project's recording session, Shorts count, split point or episode format.
+  const saveSession = async (proj: Project, patch: Record<string, unknown>, done?: string) => {
+    try {
+      await putJson(`/api/projects/${encodeURIComponent(proj.id)}/session`, patch);
+      if (done) toast(done, 'success');
+      await refreshProjects();
+    } catch (err) {
+      toast(`Could not save the session settings: ${describeError(err)}`, 'error');
+    }
+  };
+
   const saveDuration = async (proj: Project) => {
     const raw = durationDraft[proj.id];
     const minutes = raw == null || Number.isNaN(raw) || raw <= 0 ? null : raw;
@@ -752,6 +837,25 @@ export default function Projects() {
       toast(`Could not update target length: ${describeError(err)}`, 'error');
     } finally {
       setSavingDuration(null);
+    }
+  };
+
+  // Archive / bring back (2026-10-22): the project keeps its files and moves
+  // to the Archived tab; the nightly sweep does the same to anything
+  // untouched for two weeks that is not in the queue.
+  const handleArchiveProject = async (proj: Project, archived: boolean, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (archivingId || runningId === proj.id) return;
+    setArchivingId(proj.id);
+    try {
+      await postJson(`/api/projects/${encodeURIComponent(proj.id)}/archive`, { archived });
+      toast(archived ? `"${proj.name}" archived.` : `"${proj.name}" is back.`, 'success');
+      if (archived && openId === proj.id) setOpenId(null);
+      await refreshProjects();
+    } catch (err) {
+      toast(describeError(err), 'error');
+    } finally {
+      setArchivingId(null);
     }
   };
 
@@ -1183,9 +1287,12 @@ export default function Projects() {
     let waiting = 0;
     let completed = 0;
     let active = 0;
+    let archived = 0;
     for (const p of kindProjects) {
       const step = lastStep(p);
-      if (step?.status === 'paused_for_approval') {
+      if (p.status === 'archived') {
+        archived++;
+      } else if (step?.status === 'paused_for_approval') {
         waiting++;
       } else if (p.status === 'completed') {
         completed++;
@@ -1193,7 +1300,7 @@ export default function Projects() {
         active++;
       }
     }
-    return { all: kindProjects.length, active, waiting, completed };
+    return { all: kindProjects.length - archived, active, waiting, completed, archived };
   }, [kindProjects]);
 
   const filteredProjects = useMemo(() => {
@@ -1201,7 +1308,11 @@ export default function Projects() {
       const step = lastStep(p);
       const isWaiting = step?.status === 'paused_for_approval';
       const isCompleted = p.status === 'completed';
+      const isArchived = p.status === 'archived';
 
+      // Archived projects live only on their own tab (2026-10-22).
+      if (filterTab === 'archived') return isArchived;
+      if (isArchived) return false;
       if (filterTab === 'active' && (isCompleted || isWaiting)) return false;
       if (filterTab === 'waiting' && !isWaiting) return false;
       if (filterTab === 'completed' && !isCompleted) return false;
@@ -1229,12 +1340,18 @@ export default function Projects() {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button type="button" className="btn" onClick={() => setShowOwnScriptNew((v) => !v)}>
+            <PenLine size={15} />
+            <span>New from my script</span>
+          </button>
           <button type="button" className="btn btn-outline" onClick={() => refreshProjects()}>
             <RotateCw size={15} />
             <span>Refresh</span>
           </button>
         </div>
       </div>
+
+      {showOwnScriptNew && <NewFromOwnScript onClose={() => setShowOwnScriptNew(false)} />}
 
       <ProductionQueue
         refreshKey={queueKey}
@@ -1302,6 +1419,21 @@ export default function Projects() {
           <span>Completed</span>
           <span className="tab-count">{counts.completed}</span>
         </button>
+        <button
+          type="button"
+          className={`project-filter-tab ${filterTab === 'archived' ? 'active' : ''}`}
+          onClick={() => setFilterTab('archived')}
+          title="Projects put away by hand or by the nightly archive rules. Nothing is deleted; one click brings one back."
+        >
+          <Archive size={14} />
+          <span>Archived</span>
+          <span className="tab-count">{counts.archived}</span>
+        </button>
+        <button type="button" className="btn btn-outline btn-compact" onClick={() => setCleanupOpen(true)}
+          title="Archive what the rules say is finished with: stale, failed, duplicates, old ready scripts">
+          Clean up
+        </button>
+        <ArchiveCleanup open={cleanupOpen} onClose={() => setCleanupOpen(false)} />
 
         {/* Search input */}
         <div className="project-search-container">
@@ -1310,6 +1442,7 @@ export default function Projects() {
             type="text"
             className="form-control project-search-input"
             placeholder="Search projects, channels..."
+            aria-label="Search projects, channels"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
@@ -1326,6 +1459,7 @@ export default function Projects() {
             <button
               type="button"
               onClick={() => setSearchQuery('')}
+              aria-label="Clear search"
               style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', marginLeft: -26, zIndex: 2 }}
             >
               <X size={13} />
@@ -1424,6 +1558,7 @@ export default function Projects() {
                           onClick={() => setCardExpanded((prev) => ({ ...prev, [proj.id]: compact }))}
                           aria-expanded={!compact}
                           title={compact ? 'Expand this project' : 'Collapse this project to its steps'}
+                          aria-label={compact ? 'Expand this project' : 'Collapse this project to its steps'}
                           style={{ background: 'none', border: 'none', padding: '2px 4px 0 0', flexShrink: 0, cursor: 'pointer', color: 'var(--accent-primary)', display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }}
                         >
                           {compact ? <ChevronRight size={16} /> : <ChevronDown size={16} />}
@@ -1465,6 +1600,21 @@ export default function Projects() {
                         {/* Brand Badge */}
                         <span className="brand-badge">{proj.brand}</span>
 
+                        {/* Genre / episode format badge */}
+                        {(() => {
+                          const key = (proj.metadata?.episode_format as string | undefined) || '';
+                          if (!key) return null;
+                          const all = channelFormats?.episode_formats ?? {};
+                          const label = all[styleChannel(proj.brand)]?.find((f) => f.key === key)?.label
+                            ?? Object.values(all).flat().find((f) => f.key === key)?.label
+                            ?? ({ horror_tale: 'Horror', classic_retold: 'Classic retold' } as Record<string, string>)[key]
+                            ?? key;
+                          return (
+                            <span className="brand-badge" title="Episode format (genre)"
+                              style={{ backgroundColor: 'var(--bg-pill)', color: 'var(--accent-primary)' }}>{label}</span>
+                          );
+                        })()}
+
                         {/* Allow All Toggle Badge */}
                         <button
                           type="button"
@@ -1491,6 +1641,20 @@ export default function Projects() {
 
                     {/* Actions Group on Top Right */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginLeft: 'auto' }}>
+                      {/* Always reachable once a script exists: recording comes
+                          before the visual plan, so it cannot wait for that panel. */}
+                      {teleprompterSourcesFor(proj).length > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-outline btn-sm"
+                          onClick={(e) => { e.stopPropagation(); openTeleprompter(proj); }}
+                          style={{ padding: '3px 10px', fontSize: '0.74rem' }}
+                          title="Read the script full screen, paced by its (pause) / (slow) cues"
+                        >
+                          <Maximize2 size={12} />
+                          <span>Teleprompter</span>
+                        </button>
+                      )}
                       {waiting ? (
                         <>
                           <button
@@ -1565,6 +1729,7 @@ export default function Projects() {
                               disabled={!!runningId}
                               onChange={(e) => setRegenFrom((prev) => ({ ...prev, [proj.id]: e.target.value }))}
                               title="Where to start regenerating from"
+                              aria-label={`Regenerate from step for ${proj.name}`}
                               style={{ padding: '5px 6px', fontSize: '0.78rem', maxWidth: 170 }}
                             >
                               <option value="">Everything</option>
@@ -1608,6 +1773,19 @@ export default function Projects() {
                         {isOpen ? <X size={12} /> : <ChevronRight size={12} />}
                       </button>
 
+                      {/* Archive / bring back */}
+                      <button
+                        type="button"
+                        className="btn btn-outline btn-sm"
+                        onClick={(e) => handleArchiveProject(proj, proj.status !== 'archived', e)}
+                        disabled={archivingId === proj.id || runningId === proj.id}
+                        title={proj.status === 'archived' ? `Bring "${proj.name}" back` : `Archive "${proj.name}" (keeps its files)`}
+                        aria-label={proj.status === 'archived' ? `Bring back "${proj.name}"` : `Archive "${proj.name}"`}
+                        style={{ padding: '6px 9px', fontSize: '0.78rem', background: 'transparent', color: 'var(--text-secondary)' }}
+                      >
+                        {proj.status === 'archived' ? <ArchiveRestore size={13} /> : <Archive size={13} />}
+                      </button>
+
                       {/* Delete Project Button */}
                       <button
                         type="button"
@@ -1615,6 +1793,7 @@ export default function Projects() {
                         onClick={(e) => handleDeleteProject(proj, e)}
                         disabled={deletingId === proj.id || runningId === proj.id}
                         title={`Delete project "${proj.name}"`}
+                        aria-label={`Delete project "${proj.name}"`}
                         style={{
                           padding: '6px 9px',
                           fontSize: '0.78rem',
@@ -1659,6 +1838,7 @@ export default function Projects() {
                         placeholder="min"
                         value={durationDraft[proj.id] ?? (typeof proj.metadata?.target_duration_minutes === 'number' ? proj.metadata.target_duration_minutes : '')}
                         onChange={(e) => setDurationDraft((prev) => ({ ...prev, [proj.id]: Number(e.target.value) }))}
+                        aria-label={`Target length for ${proj.name}`}
                         style={{ width: 64, padding: '2px 6px', fontSize: '0.78rem', height: 26 }}
                       />
                       <button
@@ -1682,10 +1862,77 @@ export default function Projects() {
                           Writing:
                           <select className="form-control" value={own === 'mine' || own === 'agent' ? own : ''}
                             onChange={(e) => saveWritingStyle(proj, e.target.value)}
+                            aria-label={`Writing style for ${proj.name}`}
                             style={{ width: 'auto', padding: '2px 6px', fontSize: '0.78rem', height: 26 }}>
                             <option value="">Channel default ({label(channelMode)})</option>
                             <option value="mine">My style</option>
                             <option value="agent">Agent style</option>
+                          </select>
+                        </span>
+                      );
+                    })()}
+                    {(() => {
+                      // A Short cut out of a session recording: where it came from.
+                      const parent = proj.metadata?.session_parent as SessionParent | undefined;
+                      if (!parent) return null;
+                      return (
+                        <span title="This Short was recorded at the start of a long video's session and cut out of that recording.">
+                          Short {parent.index} of {parent.count} from{' '}
+                          <button type="button" onClick={() => setOpenId(parent.project_id)}
+                            style={{ background: 'none', border: 'none', padding: 0, color: 'var(--accent-primary)', textDecoration: 'underline', cursor: 'pointer', font: 'inherit' }}>
+                            {parent.name}
+                          </button>
+                        </span>
+                      );
+                    })()}
+                    {(() => {
+                      // The recording session: the Shorts first, then the long video.
+                      const channel = styleChannel(proj.brand);
+                      const defaults = channelFormats?.channels[channel];
+                      if (!defaults || proj.workflow_name === 'shorts_ready' || proj.metadata?.session_parent) return null;
+                      const own = proj.metadata?.session_format as string | undefined;
+                      const count = proj.metadata?.session_shorts_count as number | undefined;
+                      const value = own === 'long_only' ? 'long_only' : own === 'shorts_first' ? `shorts_${count ?? defaults.shorts_count}` : '';
+                      const channelDefault = defaults.shorts_first ? `${defaults.shorts_count} Shorts first` : 'long video only';
+                      return (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                          title="Shorts first: you record 3-4 Shorts at the start of the session, then the long video. The Shorts Scripts step writes them, the teleprompter shows them first, and production splits the recording at your greeting -- each Short becomes its own project.">
+                          Session:
+                          <select className="form-control" value={value}
+                            aria-label={`Session format for ${proj.name}`}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              saveSession(proj, v === '' ? { session_format: null, shorts_count: null }
+                                : v === 'long_only' ? { session_format: 'long_only' }
+                                : { session_format: 'shorts_first', shorts_count: Number(v.split('_')[1]) },
+                              v === 'long_only' ? `"${proj.name}" is recorded as the long video only.`
+                                : `"${proj.name}": session settings saved.`);
+                            }}
+                            style={{ width: 'auto', padding: '2px 6px', fontSize: '0.78rem', height: 26 }}>
+                            <option value="">Channel default ({channelDefault})</option>
+                            <option value="shorts_3">3 Shorts first, then the long video</option>
+                            <option value="shorts_4">4 Shorts first, then the long video</option>
+                            <option value="long_only">Long video only</option>
+                          </select>
+                        </span>
+                      );
+                    })()}
+                    {(() => {
+                      // Raat3Baje's episode formats (rules, real encounter, story, black magic, tantra).
+                      const formats = channelFormats?.episode_formats[styleChannel(proj.brand)];
+                      if (!formats?.length || proj.workflow_name === 'shorts_ready' || proj.metadata?.session_parent) return null;
+                      const own = (proj.metadata?.episode_format as string | undefined) || '';
+                      return (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                          title="The episode's story format. The researcher and the writer follow its section of the channel guide. Applies to the next step you run.">
+                          Format:
+                          <select className="form-control" value={own}
+                            aria-label={`Episode format for ${proj.name}`}
+                            onChange={(e) => saveSession(proj, { episode_format: e.target.value || null },
+                              e.target.value ? `Format set: ${formats.find((f) => f.key === e.target.value)?.label}.` : 'Format cleared.')}
+                            style={{ width: 'auto', padding: '2px 6px', fontSize: '0.78rem', height: 26 }}>
+                            <option value="">Not set (channel rules)</option>
+                            {formats.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
                           </select>
                         </span>
                       );
@@ -1715,7 +1962,9 @@ export default function Projects() {
                         </span>
                         {currentStepItem && (
                           <span style={{ color: currentStepItem.state === 'waiting' ? '#c4b5fd' : '#fbbf24', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                            <span className="stage-pulse-beacon" style={{ backgroundColor: currentStepItem.state === 'waiting' ? '#a78bfa' : '#f59e0b' }} />
+                            {currentStepItem.state === 'waiting'
+                              ? <Clock size={12} style={{ color: '#c4b5fd' }} />
+                              : <span className="stage-pulse-beacon" />}
                             <span>
                               Active: <strong>{currentStepItem.index}. {currentStepItem.step.name}</strong> ({currentStepItem.step.agent_role})
                             </span>
@@ -1822,6 +2071,7 @@ export default function Projects() {
                         type="text"
                         className="form-control"
                         placeholder={`Revision notes for ${step?.step_name || 'this step'} (optional)`}
+                        aria-label={`Revision notes for ${proj.name}`}
                         value={feedback[proj.id] || ''}
                         onChange={(e) => setFeedback((prev) => ({ ...prev, [proj.id]: e.target.value }))}
                       />
@@ -1837,6 +2087,42 @@ export default function Projects() {
                     </div>
                   )}
 
+                  {/* His own script (or a recorded video): research and writing are skipped. */}
+                  {(proj.metadata?.script_source === 'creator' || proj.metadata?.script_source === 'recording') && (
+                    <span className="badge" style={{ fontSize: '0.75rem' }}>
+                      {proj.metadata?.script_source === 'creator' ? 'Your script' : 'Recorded video'}
+                    </span>
+                  )}
+                  {!busy && !proj.assets?.script && !proj.assets?.script_final && proj.status !== 'completed' && (
+                    <div style={{ width: '100%' }}>
+                      {ownScriptFor === proj.id ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                          <textarea
+                            className="form-control"
+                            rows={8}
+                            aria-label={`Own script for ${proj.name}`}
+                            placeholder="Paste your script here"
+                            value={ownScriptText}
+                            onChange={(e) => setOwnScriptText(e.target.value)}
+                          />
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            <button type="button" className="btn" disabled={ownScriptBusy || !ownScriptText.trim()}
+                              onClick={() => submitOwnScript(proj.id)}>
+                              <span>{ownScriptBusy ? 'Saving…' : 'Use this script'}</span>
+                            </button>
+                            <button type="button" className="btn btn-outline" onClick={() => { setOwnScriptFor(null); setOwnScriptText(''); }}>
+                              <span>Cancel</span>
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button type="button" className="btn btn-outline" onClick={() => { setOwnScriptFor(proj.id); setOwnScriptText(''); }}>
+                          <span>Use my own script</span>
+                        </button>
+                      )}
+                    </div>
+                  )}
+
                   {/* Busy live log viewer */}
                   {busy && (
                     <div style={{ width: '100%' }}>
@@ -1846,11 +2132,18 @@ export default function Projects() {
                     </div>
                   )}
 
+                  {proj.assets?.screenplay && ['khayal3baje', 'originals'].includes(String(proj.brand || '').toLowerCase()) && (
+                    <AnimateProduce projectId={proj.id} />
+                  )}
+
                   {/* ===================================================
                       PRODUCE VIDEO: the BuzzcafAI -> BuzzEdit bridge.
-                      Needs a finished script AND the structured visual plan.
+                      Script-first needs a finished script AND the visual plan;
+                      a project with no script yet is produced record-first
+                      from a video he already has (visuals planned from it).
                       =================================================== */}
-                  {Boolean(proj.assets?.script) && (Boolean(proj.assets?.visual_plan) || Boolean(proj.metadata?.short_format)) && (() => {
+                  {(!proj.assets?.script || Boolean(proj.metadata?.recording_path)
+                    || Boolean(proj.assets?.visual_plan) || Boolean(proj.metadata?.short_format)) && (() => {
                     const status = produceStatus[proj.id];
                     // A render BuzzEdit may still be working on: the run failed
                     // (often just BuzzEdit too busy to answer) or the Studio
@@ -1930,18 +2223,6 @@ export default function Projects() {
                             )}
                           </div>
 
-                          {teleprompterSourcesFor(proj).length > 0 && (
-                            <button
-                              type="button"
-                              className="btn btn-outline btn-sm"
-                              onClick={() => openTeleprompter(proj)}
-                              style={{ marginLeft: 'auto', padding: '3px 10px', fontSize: '0.74rem' }}
-                              title="Read the script full screen, paced by its (pause) / (slow) cues"
-                            >
-                              <Maximize2 size={12} />
-                              <span>Teleprompter</span>
-                            </button>
-                          )}
                         </div>
 
                         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -1973,6 +2254,7 @@ export default function Projects() {
                                 type="text"
                                 className="form-control"
                                 placeholder={isDragging ? 'Drop video file here…' : 'Drag video here or click Browse (e.g. C:\\Recordings\\take1.mp4)'}
+                                aria-label={`Recording path for ${proj.name}`}
                                 value={recordingPath[proj.id] || ''}
                                 onChange={(e) => setRecordingPath((prev) => ({ ...prev, [proj.id]: e.target.value }))}
                                 disabled={producing}
@@ -2040,6 +2322,7 @@ export default function Projects() {
                                     className="form-control vs-select"
                                     value={genreVal}
                                     onChange={(e) => patchVideoSettings(proj.id, { genre: e.target.value })}
+                                    aria-label={`Genre for ${proj.name}`}
                                     disabled={producing}
                                     style={{ width: 150 }}
                                   >
@@ -2053,6 +2336,7 @@ export default function Projects() {
                                     className="form-control vs-select"
                                     value={genreSecondaryVal}
                                     onChange={(e) => patchVideoSettings(proj.id, { genre_secondary: e.target.value || null })}
+                                    aria-label={`Secondary genre for ${proj.name}`}
                                     disabled={producing}
                                     style={{ width: 150 }}
                                   >
@@ -2067,6 +2351,7 @@ export default function Projects() {
                                     className="form-control vs-select"
                                     value={densityVal}
                                     onChange={(e) => patchVideoSettings(proj.id, { density: e.target.value })}
+                                    aria-label={`Visual density for ${proj.name}`}
                                     disabled={producing}
                                     style={{ width: 120 }}
                                   >
@@ -2075,11 +2360,56 @@ export default function Projects() {
                                     ))}
                                   </select>
                                 ))}
+                                {field('Face', 'How your face is used. Mixed: your face comes back between the pictures all through (the Video / Images sliders). Face first: only your face for the opening, then pictures and clips only, to the end.', (() => {
+                                  const layout = (overridesFor.face_layout ?? effective.face_layout ?? 'mixed') as string;
+                                  const secs = Number(overridesFor.face_intro_seconds ?? effective.face_intro_seconds ?? 90);
+                                  const own = Boolean(overridesFor.face_layout);
+                                  const pick = (value: 'mixed' | 'face_intro') => (
+                                    <button type="button" className={`btn btn-sm${layout === value ? '' : ' btn-outline'}`}
+                                      onClick={() => patchVideoSettings(proj.id, { face_layout: value })}
+                                      disabled={producing}
+                                      style={{ padding: '2px 8px', fontSize: '0.74rem', height: 26, borderRadius: 0 }}>
+                                      {value === 'mixed' ? 'Mixed' : 'Face first'}
+                                    </button>
+                                  );
+                                  return (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                                      <span style={{ display: 'inline-flex', borderRadius: 6, overflow: 'hidden' }}>
+                                        {pick('mixed')}{pick('face_intro')}
+                                      </span>
+                                      {layout === 'face_intro' && (
+                                        <span style={{ fontSize: '0.74rem', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                          first
+                                          <select className="form-control vs-select" value={secs}
+                                            onChange={(e) => patchVideoSettings(proj.id, { face_intro_seconds: Number(e.target.value) })}
+                                            aria-label={`Face intro seconds for ${proj.name}`}
+                                            disabled={producing}
+                                            style={{ width: 'auto', padding: '2px 6px', fontSize: '0.76rem', height: 24 }}>
+                                            {[30, 45, 60, 75, 90, 105, 120, 150, 180].map((s) => (
+                                              <option key={s} value={s}>{s < 60 ? `${s} s` : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} min`}</option>
+                                            ))}
+                                          </select>
+                                          then pictures only
+                                        </span>
+                                      )}
+                                      {own ? (
+                                        <button type="button" onClick={() => patchVideoSettings(proj.id, { face_layout: null, face_intro_seconds: null })}
+                                          disabled={producing}
+                                          style={{ background: 'none', border: 'none', padding: 0, color: 'var(--accent-primary)', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.72rem' }}>
+                                          channel default
+                                        </button>
+                                      ) : (
+                                        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>(channel default)</span>
+                                      )}
+                                    </div>
+                                  );
+                                })())}
                                 {field('Voice sound', 'How your voice is cleaned and EQ-ed in the final mix', (
                                   <select
                                     className="form-control vs-select"
                                     value={voicePresetVal}
                                     onChange={(e) => patchVideoSettings(proj.id, { voice_preset: e.target.value })}
+                                    aria-label={`Voice sound for ${proj.name}`}
                                     disabled={producing}
                                     style={{ width: 140 }}
                                   >
@@ -2097,6 +2427,7 @@ export default function Projects() {
                                         onChange={(e) => patchVideoSettings(proj.id, {
                                           review_mode: e.target.checked ? 'none' : (reviewCuts ? 'cuts_and_plan' : 'plan'),
                                         })}
+                                        aria-label={`Auto-proceed (no plan review) for ${proj.name}`}
                                         disabled={producing}
                                       />
                                       Auto-proceed (no plan review)
@@ -2108,6 +2439,7 @@ export default function Projects() {
                                         onChange={(e) => patchVideoSettings(proj.id, {
                                           review_mode: e.target.checked ? 'cuts_and_plan' : 'plan',
                                         })}
+                                        aria-label={`Review cuts first for ${proj.name}`}
                                         disabled={producing || autoProceed}
                                       />
                                       Review cuts first
@@ -2117,20 +2449,55 @@ export default function Projects() {
                                         type="checkbox"
                                         checked={Boolean(overridesFor.effects_review)}
                                         onChange={(e) => patchVideoSettings(proj.id, { effects_review: e.target.checked })}
+                                        aria-label={`Review effects first for ${proj.name}`}
                                         disabled={producing}
                                       />
                                       Review effects first (20 s sample)
+                                    </label>
+                                    <label className="vs-check" title="Animated maps, charts, kinetic text, stick figures, collages, flow diagrams, callouts and shape transitions. Off: each is drawn as its still card instead.">
+                                      <input
+                                        type="checkbox"
+                                        checked={(overridesFor.motion_graphics ?? effective.motion_graphics) !== false}
+                                        onChange={(e) => patchVideoSettings(proj.id, { motion_graphics: e.target.checked ? null : false })}
+                                        aria-label={`Motion graphics for ${proj.name}`}
+                                        disabled={producing}
+                                      />
+                                      Motion graphics
+                                    </label>
+                                    <label className="vs-check" title="About 3 in 10 stills with real depth get a slow 2.5D camera move (parallax) instead of a flat zoom. Every channel, story channels included.">
+                                      <input
+                                        type="checkbox"
+                                        checked={Number(overridesFor.parallax_share ?? effective.parallax_share ?? 0.3) > 0}
+                                        onChange={(e) => patchVideoSettings(proj.id, { parallax_share: e.target.checked ? null : 0 })}
+                                        aria-label={`2.5D depth on stills for ${proj.name}`}
+                                        disabled={producing}
+                                      />
+                                      2.5D depth on stills
                                     </label>
                                     <label className="vs-check" title="Pictures and videos only: no captions, headings, cards, newspaper cutaways, text effects, zoom punches, whooshes or flash/shake hits. Same characters in every shot. On by default for Raat3Baje, Khayal3Baje and Beyond3Baje.">
                                       <input
                                         type="checkbox"
                                         checked={(overridesFor.visual_style ?? effective.visual_style) === 'story'}
                                         onChange={(e) => patchVideoSettings(proj.id, { visual_style: e.target.checked ? 'story' : 'full' })}
+                                        aria-label={`Story visuals only for ${proj.name}`}
                                         disabled={producing}
                                       />
                                       Story visuals only (pictures + videos)
                                     </label>
                                   </div>
+                                ))}
+                                {field('Art style', 'The medium every picture, clip, thumbnail scene and text card is made in. Explainer and stick figure put short text (numbers, names) back on a story channel; cartoon is pictures only.', (
+                                  <select
+                                    className="form-control vs-select"
+                                    value={(overridesFor.art_style ?? effective.art_style ?? 'real') as string}
+                                    onChange={(e) => patchVideoSettings(proj.id, { art_style: e.target.value })}
+                                    aria-label={`Art style for ${proj.name}`}
+                                    disabled={producing}
+                                  >
+                                    {ART_STYLES.map((s) => (
+                                      <option key={s.id} value={s.id} title={s.hint}>{s.label}</option>
+                                    ))}
+                                  </select>
                                 ))}
                                 {field('Editing', 'What BuzzEdit does with the raw take', (
                                   <div className="vs-checks">
@@ -2139,6 +2506,7 @@ export default function Projects() {
                                         type="checkbox"
                                         checked={autoCutChecked}
                                         onChange={(e) => patchVideoSettings(proj.id, { precut: !e.target.checked })}
+                                        aria-label={`Auto-cut fumbles for ${proj.name}`}
                                         disabled={producing}
                                       />
                                       Auto-cut fumbles
@@ -2148,6 +2516,7 @@ export default function Projects() {
                                         type="checkbox"
                                         checked={allowFreeStockChecked}
                                         onChange={(e) => patchVideoSettings(proj.id, { allow_free_stock: e.target.checked })}
+                                        aria-label={`Free stock fallback for ${proj.name}`}
                                         disabled={producing}
                                       />
                                       Free stock fallback (Pixabay)
@@ -2168,12 +2537,26 @@ export default function Projects() {
                                   />
                                 ))}
                                 {field('Eye contact', 'Teleprompter gaze correction, done in BuzzEdit: prompter side, angle, aim and steadiness', (
-                                  <EyeContactSettings
-                                    projectId={proj.id}
-                                    hasRecording={Boolean(proj.metadata?.buzzedit_project_id)}
-                                    disabled={producing}
-                                    onToast={toast}
-                                  />
+                                  <div>
+                                    <button
+                                      type="button"
+                                      className="btn btn-outline btn-sm"
+                                      onClick={toggleEyeContact}
+                                      aria-expanded={eyeContactOpen}
+                                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '2px 8px', fontSize: '0.72rem', marginBottom: eyeContactOpen ? 6 : 0 }}
+                                    >
+                                      {eyeContactOpen ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+                                      {eyeContactOpen ? 'Minimise' : 'Show eye contact settings'}
+                                    </button>
+                                    {eyeContactOpen && (
+                                      <EyeContactSettings
+                                        projectId={proj.id}
+                                        hasRecording={Boolean(proj.metadata?.buzzedit_project_id)}
+                                        disabled={producing}
+                                        onToast={toast}
+                                      />
+                                    )}
+                                  </div>
                                 ))}
                                 <button
                                   type="button"
@@ -2215,6 +2598,80 @@ export default function Projects() {
                           })()}
                         </div>
 
+                        {(() => {
+                          // A Shorts-first session: where the long video starts, and the Shorts cut out of it.
+                          const defaults = channelFormats?.channels[styleChannel(proj.brand)];
+                          const own = proj.metadata?.session_format as string | undefined;
+                          // A session is split only when it was planned as one: its Shorts were
+                          // written, or it was set to Shorts first (or given a split point) by hand.
+                          const planned = own === 'shorts_first' || Boolean(proj.assets?.shorts_json)
+                            || typeof proj.metadata?.session_split_s === 'number';
+                          const isSession = proj.workflow_name !== 'shorts_ready' && !proj.metadata?.session_parent
+                            && (own ? own === 'shorts_first' : Boolean(defaults?.shorts_first)) && planned;
+                          if (!isSession) return null;
+                          const split = proj.metadata?.session_split as SessionSplit | undefined;
+                          const savedAt = proj.metadata?.session_split_s as number | undefined;
+                          const draft = splitDraft[proj.id] ?? (typeof savedAt === 'number' ? String(savedAt) : '');
+                          const commitSplit = () => {
+                            const raw = (splitDraft[proj.id] ?? '').trim();
+                            if (splitDraft[proj.id] === undefined) return;
+                            const value = raw === '' ? null : Number(raw);
+                            if (value !== null && (Number.isNaN(value) || value < 0)) {
+                              toast('Enter the seconds into the recording where your greeting starts, or leave it empty.', 'error');
+                              return;
+                            }
+                            saveSession(proj, { split_at_s: value },
+                              value === null ? 'The long video will start at your greeting (found automatically).'
+                                : `The long video starts ${value} s into the recording.`);
+                            setSplitDraft((prev) => { const next = { ...prev }; delete next[proj.id]; return next; });
+                          };
+                          const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+                          return (
+                            <div style={{ marginTop: 10, padding: '8px 10px', border: '1px solid var(--border-color, rgba(255,255,255,0.1))', borderRadius: 6, fontSize: '0.78rem', display: 'grid', gap: 6 }}>
+                              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                                <strong>Recording session</strong>
+                                <span style={{ color: 'var(--text-secondary)' }}>
+                                  Record the Shorts first (the teleprompter's "Recording session" shows them in order), then your greeting and the long video, in one recording. Production splits it at your greeting.
+                                </span>
+                                <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+                                  title="Only if the greeting was not found (or you changed it): the seconds into the recording where the long video starts. Empty = find your greeting automatically.">
+                                  Long video starts at
+                                  <input type="number" className="form-control" min={0} step={0.5} placeholder="auto"
+                                    aria-label={`Long video start time for ${proj.name}`}
+                                    value={draft}
+                                    onChange={(e) => setSplitDraft((prev) => ({ ...prev, [proj.id]: e.target.value }))}
+                                    onBlur={commitSplit}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') commitSplit(); }}
+                                    style={{ width: 76, padding: '2px 6px', fontSize: '0.76rem', height: 24 }} />
+                                  s
+                                </label>
+                              </div>
+                              {split && (
+                                <div style={{ display: 'grid', gap: 4 }}>
+                                  <span>
+                                    The long video starts at <b>{fmt(split.boundary_s)}</b> ({split.how === 'manual' ? 'set by you' : 'your greeting'})
+                                    {split.programme_cut_s ? ` -- ${split.programme_cut_s.toFixed(0)} s of Shorts cut off it.` : '.'}
+                                  </span>
+                                  {split.shorts.map((s) => (
+                                    <span key={s.index} style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                                      <span style={{ color: 'var(--text-muted)' }}>Short {s.index}</span>
+                                      {s.project_id ? (
+                                        <button type="button" onClick={() => setOpenId(s.project_id as string)}
+                                          style={{ background: 'none', border: 'none', padding: 0, color: 'var(--accent-primary)', textDecoration: 'underline', cursor: 'pointer', font: 'inherit' }}>
+                                          {s.title}
+                                        </button>
+                                      ) : <span>{s.title}</span>}
+                                      <span style={{ color: 'var(--text-secondary)' }}>{fmt(s.from_s)}-{fmt(s.to_s)}{s.queued ? ' · queued' : ''}</span>
+                                      {s.error && <span style={{ color: '#f87171' }}>{s.error}</span>}
+                                    </span>
+                                  ))}
+                                  {split.warning && <span style={{ color: '#fbbf24' }}>{split.warning}</span>}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })()}
+
                         {Boolean(advancedOpen[proj.id]) && (() => {
                           const vs = videoSettings[proj.id];
                           const overridesFor = vs?.video_settings || {};
@@ -2233,6 +2690,7 @@ export default function Projects() {
                                 step={toPct ? step * 100 : step}
                                 value={toPct ? Math.round(num(key, fallback) * 100) : num(key, fallback)}
                                 onChange={(e) => patchVideoSettings(proj.id, { [key]: toPct ? Number(e.target.value) / 100 : Number(e.target.value) })}
+                                aria-label={`${label} for ${proj.name}`}
                                 disabled={producing}
                                 style={{ width: 90 }}
                               />
@@ -2265,6 +2723,7 @@ export default function Projects() {
                                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }} title={hint}>
                                     <span style={{ fontSize: '0.72rem', color, whiteSpace: 'nowrap', fontWeight: 600 }}>{label}</span>
                                     <input type="range" min={0} max={100} step={2} value={Math.round(value * 100)}
+                                      aria-label={`${label} for ${proj.name}`}
                                       onChange={(e) => onChange(Number(e.target.value) / 100)}
                                       onPointerUp={commitMix} onKeyUp={commitMix} onBlur={commitMix}
                                       style={{ width: 120 }} />
@@ -2277,11 +2736,25 @@ export default function Projects() {
                                       'Share of the whole running time that is generated video clips (up to 100%). It comes first: images and your face share what is left.', '#a78bfa')}
                                     {slider('Images', mix.images, (i) => setMix(mix.video, i),
                                       'Share of the whole running time that is still images, after the video (up to whatever video leaves).', '#38bdf8')}
-                                    <span style={{ fontSize: '0.72rem', whiteSpace: 'nowrap' }}
-                                      title="Your face gets whatever video and images leave. Set video + images to 100% for no face at all.">
-                                      <b style={{ color: '#34d399' }}>Face</b> <span style={{ color: 'var(--text-secondary)' }}>{Math.round(mix.face * 100)}%</span>
-                                    </span>
+                                    {((overridesFor.face_layout ?? effective.face_layout) === 'face_intro') ? (
+                                      <span style={{ fontSize: '0.72rem', whiteSpace: 'nowrap' }}
+                                        title="Face first: only your face for the opening, then pictures only. Video and Images here only split those pictures between clips and stills, in this proportion.">
+                                        <b style={{ color: '#34d399' }}>Face</b>{' '}
+                                        <span style={{ color: 'var(--text-secondary)' }}>
+                                          first {Number(overridesFor.face_intro_seconds ?? effective.face_intro_seconds ?? 90)} s only
+                                          {mix.video + mix.images > 0 ? ` · clips ${Math.round((100 * mix.video) / (mix.video + mix.images))}% of the pictures` : ''}
+                                        </span>
+                                      </span>
+                                    ) : (
+                                      <span style={{ fontSize: '0.72rem', whiteSpace: 'nowrap' }}
+                                        title="Your face gets whatever video and images leave. Set video + images to 100% for no face at all.">
+                                        <b style={{ color: '#34d399' }}>Face</b> <span style={{ color: 'var(--text-secondary)' }}>{Math.round(mix.face * 100)}%</span>
+                                      </span>
+                                    )}
                                     <ProductionEstimate projectId={proj.id} video={mix.video} images={mix.images} />
+                                    <OwnFootage projectId={proj.id} onToast={toast}
+                                      planned={Array.isArray((status as { planning?: { unused_clips?: string[] } } | undefined)?.planning?.unused_clips)}
+                                      unusedClips={(status as { planning?: { unused_clips?: string[] } } | undefined)?.planning?.unused_clips} />
                                     {producing && (
                                       <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}
                                         title="A change made while BuzzEdit is generating reaches the running render: it stops making clips once the new video share is met and trims the pictures to the new coverage before placing them. Nothing restarts.">
@@ -2301,6 +2774,7 @@ export default function Projects() {
                                 <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>Clip generation</span>
                                 <select className="form-control" value={clipGenMode}
                                   onChange={(e) => void saveClipGenMode(e.target.value === 'hq' ? 'hq' : 'classic')}
+                                  aria-label="Clip generation"
                                   style={{ width: 'auto', padding: '2px 6px', fontSize: '0.72rem', height: 24 }}>
                                   <option value="classic">Classic (832×480, fast)</option>
                                   <option value="hq">HQ (1024×576 → 1080p, slower)</option>
@@ -2317,6 +2791,7 @@ export default function Projects() {
                                     <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>Audio rack</span>
                                     <select className="form-control" value={current}
                                       onChange={(e) => void saveAudioRack(proj.brand, e.target.value)}
+                                      aria-label={`Audio rack for ${proj.brand}`}
                                       style={{ width: 'auto', padding: '2px 6px', fontSize: '0.72rem', height: 24 }}>
                                       <option value="">None (the edit's own rack)</option>
                                       {options.map((n) => <option key={n} value={n}>{n}</option>)}
@@ -2332,6 +2807,7 @@ export default function Projects() {
                                   <input
                                     type="range" min={1} max={8} step={0.5} value={value}
                                     onChange={(e) => onChange(Number(e.target.value))}
+                                    aria-label={`${title} for ${proj.name}`}
                                     disabled={producing} style={{ width: 80 }} title={title}
                                   />
                                 );
@@ -2411,6 +2887,7 @@ export default function Projects() {
                                           title={`The voice ${c.name}'s labelled lines (${c.name.toUpperCase()}: or ${c.name.toUpperCase()} (V.O.)) are converted to before the render.`}>
                                           <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Voice</span>
                                           <select className="form-control" value={current}
+                                            aria-label={`Voice for ${c.name}`}
                                             disabled={busy || producing || !voiceLibrary?.available}
                                             onChange={(e) => void setCharacterVoice(proj.id, c.name, e.target.value)}
                                             style={{ width: 'auto', padding: '2px 6px', fontSize: '0.72rem', height: 24 }}>
@@ -2736,6 +3213,7 @@ export default function Projects() {
                                             type="text"
                                             className="form-control"
                                             value={beat.prompt || ''}
+                                            aria-label={`Prompt for the ${beat.kind} beat`}
                                             disabled={!!beat.deleted}
                                             onChange={(e) => updatePlanBeat(proj.id, idx, { prompt: e.target.value })}
                                             style={{ flex: 1, fontSize: '0.76rem', height: 26 }}
@@ -2782,12 +3260,37 @@ export default function Projects() {
                               </div>
                             )}
 
-                            {status.state === 'ready' && status.output_path && (
-                              <div style={{ fontSize: '0.76rem', color: 'var(--text-primary)', marginTop: 6, wordBreak: 'break-all' }}>
-                                Rendered file (on BuzzEdit's machine): <code>{status.output_path}</code>
-                                <CopyButton text={status.output_path} label="Copy output path" />
-                              </div>
-                            )}
+                            {(() => {
+                              // The live run's file, else the one the last run saved on the
+                              // project -- so the final video stays listed after a restart.
+                              const live = status.state === 'ready' ? (status.final_output_path || status.output_path) : null;
+                              const finalPath = String(live || proj.metadata?.final_output_path || '');
+                              if (!finalPath || status.state === 'running') return null;
+                              return (
+                                <div style={{ fontSize: '0.76rem', color: 'var(--text-primary)', marginTop: 6, wordBreak: 'break-all' }}>
+                                  <div>
+                                    Final video: <strong>{finalPath.split(/[\\/]/).pop()}</strong>{' '}
+                                    <code style={{ color: 'var(--text-muted)' }}>{finalPath}</code>
+                                    <CopyButton text={finalPath} label="Copy path" />
+                                    <button
+                                      type="button"
+                                      className="btn btn-sm"
+                                      style={{ marginLeft: 8 }}
+                                      onClick={() => postJson(`/api/projects/${proj.id}/produce_video/reveal`, {})
+                                        .then(() => toast('Opened the folder with the final video.'))
+                                        .catch((err) => toast(describeError(err), 'error'))}
+                                    >
+                                      Open in Explorer
+                                    </button>
+                                  </div>
+                                  {live && status.final_output_path && status.output_path && status.final_output_path !== status.output_path && (
+                                    <div style={{ color: 'var(--text-muted)', marginTop: 2 }}>
+                                      BuzzEdit's render: <code>{status.output_path}</code>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()}
                             {(() => {
                               // Which music the edit used, from BuzzEdit's report.
                               const report = (status.report || proj.metadata?.buzzedit_report) as
@@ -2881,6 +3384,17 @@ export default function Projects() {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm"
+                  onClick={(e) => handleArchiveProject(open, open.status !== 'archived', e)}
+                  disabled={archivingId === open.id || runningId === open.id}
+                  title={open.status === 'archived' ? 'Bring this project back' : 'Archive this project (keeps its files)'}
+                  style={{ padding: '4px 8px', fontSize: '0.75rem', background: 'transparent', color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                >
+                  {open.status === 'archived' ? <ArchiveRestore size={13} /> : <Archive size={13} />}
+                  <span>{open.status === 'archived' ? 'Bring back' : 'Archive'}</span>
+                </button>
                 <button
                   type="button"
                   className="btn btn-outline btn-sm"
@@ -3207,6 +3721,7 @@ export default function Projects() {
                     value={teleprompterSource}
                     onChange={(e) => openTeleprompter(proj, e.target.value)}
                     title="Which script to read"
+                    aria-label="Which script to read"
                     style={{ background: 'transparent', color: '#e5e7eb', border: '1px solid rgba(255,255,255,0.3)', borderRadius: 6, padding: '4px 8px', fontSize: '0.8rem' }}
                   >
                     {sources.map(([k, label]) => <option key={k} value={k} style={{ color: '#111' }}>{label}</option>)}

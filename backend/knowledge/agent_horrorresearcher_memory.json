@@ -1,0 +1,18 @@
+[
+  {
+    "id": "3d964ac6-e268-49eb-ac1b-411a15cc04b3",
+    "scope": "agent",
+    "owner": "HorrorResearcher",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by AfterDarkStrategist to perform the following task:\n\nFor the three identified accounts, extract the core sensory details (smell of burning hair/flowers, temperature drops, specific visual distortions) to ensure the scriptwriter can build a high-tension atmosphere without needing \"investigation\" segments. [/INVBSCRIBE_AGENT]\n\n[INVOKE_AGENT: TitleGenerator] Provide 5 Hinglish title options for a video featuring multiple real highway encounter stories (e.g., \"Raat Ka Safar Aur Woh Anjaan Chehra\", \"Highway Ki Woh Adhuri Kahani\"). Also, provide a description of the visual sc",
+      "result_snippet": "### **RESEARCH_PACKAGE: THE HIGHWAY PHANTOMS**\n**Date:** 29 October 2026\n**Status:** Classified / High-Tension Prep\n**Subject:** Urban Legends & Eyewitness Accounts of Highway Encounters\n\n---\n\n#### **I. CORE SENSORY DATA EXTRACTION**\n*To be used by the scriptwriter to build atmosphere without explicit \"investigation\" dialogue.*\n\n**1. The \"Girl in White\" (Folklore / Eyewitness)**\n*   **Scent:** A heavy, cloying smell of **decaying jasmine flowers** mixed with damp earth.\n*   **Temperature:** A sudden, localized drop in temperature inside the vehicle\u2014as if a pane of glass was shattered by freezing air.\n*   **Visual Distortions:** The figure appears \"grainy\" or out of focus against the headlights; her hair seems to move independently of the wind, and her facial features appear blurred until she is within 10 feet of the car.\n\n**2. The \"Midnight Hitchhiker\" (Historical Account)**\n*   **Scent:** A sharp, acrid smell of **burning hair and scorched rubber**, often triggered just before the figure appears or vanishes.\n*   **Temperature:** Sudden frost forming on the interior edges of the windshield despite a warm exterior climate.\n*   **Visual Distortions:** The car's headlights flicker or \"pulse\" when passing her; she may appear to be standing still, but her shadow is cast in a direction inconsistent with the light source.\n\n**3. The \"Vanishing Passenger\" (Eyewitness)**\n*   **Scent:** A metallic, **ozone-like smell** (similar to an electrical short) preceding a sudden silence from the car's radio/engine.\n*   **Temperature:** A localized \"dead zone\" of heat\u2014the cabin feels stiflingly hot for a second before turning ice-cold.\n*   **Visual Distortions:** Reflections in the rearview mirror do not match the actual scene; her face may appear to \"glitch\" or change expression rapidly when glimpsed in the side mirrors.\n\n---\n\n#### **II. ATMOSPHERIC CUES & LOCAL TERMS**\n*   **Keywords for Sound Design:** *Sannata* (Dead silence), *Dardnak Cheekh* (Piercing scream), *Hawa ka Shor* (Wind"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T08:35:40.452305",
+    "updated": "2026-10-29T08:35:40.452309"
+  }
+]

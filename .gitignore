@@ -38,6 +38,7 @@ Thumbs.db
 
 # desktop shell runtime state
 backend/config/window.json
+backend/config/master_control.json
 backend/logs/
 .buzzcode/
 *.exe
@@ -46,6 +47,15 @@ scripts/claude_switcher/
 # YouTube OAuth client and channel sign-ins
 backend/config/youtube/
 
+# Instagram Graph API tokens, per channel
+backend/config/instagram/
+
 # crash dumps / TypeScript build cache
 *.stackdump
 *.tsbuildinfo
+
+# backups of config files carry API keys (2026-11-23)
+.env.bak*
+*.bak
+*.bak-*
+*.bak_*

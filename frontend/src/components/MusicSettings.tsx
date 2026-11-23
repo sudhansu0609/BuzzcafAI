@@ -152,18 +152,18 @@ export default function MusicSettings({ music, musicCues, engine, brief, tracks,
       <div className="vs-checks">
         <label className="vs-check" title="Off: the video gets no background music at all.">
           <input type="checkbox" checked={music} disabled={disabled}
-            onChange={(e) => onPatch({ music: e.target.checked })} />
+            onChange={(e) => onPatch({ music: e.target.checked })} aria-label="Add background music" />
           Add background music
         </label>
         <label className="vs-check" title="Follow the [music: ...] cues the planner writes into the script -- the music changes at each one.">
           <input type="checkbox" checked={musicCues} disabled={autoOff}
-            onChange={(e) => onPatch({ music_cues: e.target.checked })} />
+            onChange={(e) => onPatch({ music_cues: e.target.checked })} aria-label="Follow music cues in the script" />
           Follow music cues in the script
         </label>
         <label className="vs-check" title="The model new tracks are generated with. Stable Audio Open makes loops up to 47 s, looped under longer sections.">
           Engine
           <select className="form-control" value={engine} disabled={autoOff}
-            onChange={(e) => onPatch({ music_engine: e.target.value })} style={{ width: 170, marginLeft: 6 }}>
+            onChange={(e) => onPatch({ music_engine: e.target.value })} aria-label="Engine" style={{ width: 170, marginLeft: 6 }}>
             {engines.map((e) => <option key={e.name} value={e.name}>{e.label}</option>)}
           </select>
         </label>
@@ -172,27 +172,27 @@ export default function MusicSettings({ music, musicCues, engine, brief, tracks,
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', opacity: autoOff ? 0.55 : 1 }}
         title="Music for the whole video. Leave empty to let the planner's cues and the channel's taste decide.">
         <select className="form-control" value={draft.style} disabled={autoOff} style={{ width: 170 }}
-          onChange={(e) => save({ ...draft, style: e.target.value })}>
+          onChange={(e) => save({ ...draft, style: e.target.value })} aria-label="Music style">
           <option value="">Preset: auto</option>
           {catalog?.styles.map((s) => <option key={s.name} value={s.name}>{s.label}</option>)}
         </select>
         <select className="form-control" value="" disabled={autoOff} style={{ width: 160 }}
           onChange={(e) => e.target.value && !draft.instruments.includes(e.target.value)
-            && save({ ...draft, instruments: [...draft.instruments, e.target.value] })}>
+            && save({ ...draft, instruments: [...draft.instruments, e.target.value] })} aria-label="Add instrument">
           <option value="">+ Instrument</option>
           {instruments.map((i) => <option key={i} value={i}>{i}</option>)}
         </select>
         <select className="form-control" value={draft.mood} disabled={autoOff} style={{ width: 130 }}
-          onChange={(e) => save({ ...draft, mood: e.target.value })}>
+          onChange={(e) => save({ ...draft, mood: e.target.value })} aria-label="Mood">
           <option value="">Mood: auto</option>
           {Object.keys(catalog?.moods ?? {}).map((m) => <option key={m} value={m}>{m}</option>)}
         </select>
         <input className="form-control" type="number" min={50} max={180} placeholder="bpm" value={draft.bpm} disabled={autoOff}
           style={{ width: 80 }} onChange={(e) => setDraft({ ...draft, bpm: e.target.value })}
-          onBlur={() => save(draft)} />
+          onBlur={() => save(draft)} aria-label="BPM" />
         <input className="form-control" placeholder="Extra words, e.g. rain, monsoon" value={draft.text} disabled={autoOff}
           style={{ flex: 1, minWidth: 160 }} onChange={(e) => setDraft({ ...draft, text: e.target.value })}
-          onBlur={() => save(draft)} />
+          onBlur={() => save(draft)} aria-label="Extra words" />
         {hasBrief && (
           <button type="button" className="btn btn-outline btn-sm" disabled={autoOff}
             onClick={() => save({ style: '', instruments: [], mood: '', bpm: '', text: '' })}>Clear</button>
@@ -225,7 +225,8 @@ export default function MusicSettings({ music, musicCues, engine, brief, tracks,
           <strong style={{ fontSize: '0.85rem' }}>Your tracks</strong>
           <select className="form-control" value="" disabled={off || !addable.length} style={{ width: 230 }}
             title="Pick tracks from the music library. Only tracks with a licence on record are listed."
-            onChange={(e) => e.target.value && savePicked([...picked, { file: e.target.value, volume_db: DEFAULT_DB, duck: false }])}>
+            onChange={(e) => e.target.value && savePicked([...picked, { file: e.target.value, volume_db: DEFAULT_DB, duck: false }])}
+            aria-label="Add track from library">
             <option value="">{library === null ? 'Loading library…' : addable.length ? '+ Add from library' : 'No more library tracks'}</option>
             {addable.map((t) => (
               <option key={t.file} value={t.file}>
@@ -236,6 +237,7 @@ export default function MusicSettings({ music, musicCues, engine, brief, tracks,
           {picked.length > 1 && (
             <select className="form-control" value={tracksMode === 'sequence' ? 'sequence' : 'together'} disabled={off}
               style={{ width: 210 }} onChange={(e) => onPatch({ music_tracks_mode: e.target.value })}
+              aria-label="Track play order"
               title="Together: every track plays under the whole video, layered. One after another: each plays once, crossfading into the next, and the list repeats.">
               <option value="together">Play together (layered)</option>
               <option value="sequence">One after another (repeat)</option>
@@ -263,15 +265,17 @@ export default function MusicSettings({ music, musicCues, engine, brief, tracks,
               <input type="range" min={DB_MIN} max={DB_MAX} step={1} value={Math.max(DB_MIN, t.volume_db)} disabled={off}
                 onChange={(e) => setLevel(t.file, Number(e.target.value))}
                 onPointerUp={() => savePicked(picked)} onKeyUp={() => savePicked(picked)}
+                aria-label={`Volume for ${labelOf(t.file)}`}
                 style={{ width: 130 }} />
               <input className="form-control" type="number" min={-60} max={DB_MAX} step={1} value={t.volume_db} disabled={off}
                 onChange={(e) => setLevel(t.file, Math.max(-60, Math.min(DB_MAX, Number(e.target.value) || 0)))}
-                onBlur={() => savePicked(picked)} style={{ width: 80 }} />
+                onBlur={() => savePicked(picked)} aria-label={`Volume for ${labelOf(t.file)}`} style={{ width: 80 }} />
               dB
             </label>
             <label className="vs-check" title="Push this track down while you speak and back up in the pauses. Off: it stays at exactly the level you set.">
               <input type="checkbox" checked={t.duck} disabled={off}
-                onChange={(e) => savePicked(picked.map((p) => (p.file === t.file ? { ...p, duck: e.target.checked } : p)))} />
+                onChange={(e) => savePicked(picked.map((p) => (p.file === t.file ? { ...p, duck: e.target.checked } : p)))}
+                aria-label={`Duck ${labelOf(t.file)} under voice`} />
               Duck under voice
             </label>
             <button type="button" disabled={off} aria-label={`Remove ${labelOf(t.file)}`} title="Remove from this video"

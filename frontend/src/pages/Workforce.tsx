@@ -49,7 +49,7 @@ export default function Workforce() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <Search size={16} style={{ color: '#94a3b8' }} />
-          <input type="text" className="form-control" placeholder="Filter by name or department…" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '6px 12px', fontSize: '0.85rem', width: 240 }} />
+          <input type="text" className="form-control" aria-label="Filter by name or department" placeholder="Filter by name or department…" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ padding: '6px 12px', fontSize: '0.85rem', width: 240 }} />
         </div>
       </div>
 

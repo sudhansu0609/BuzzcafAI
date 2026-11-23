@@ -20,7 +20,8 @@ from integrations.llm import DEFAULT_TIERS, LLMService
 
 def _service(**overrides) -> LLMService:
     """An LLMService with a fixed config, so no test reads the real one."""
-    service = LLMService()
+    purpose = overrides.pop("purpose", "agents")
+    service = LLMService(purpose=purpose)
     service.reload_config = MagicMock()
     config = {
         "gemini_api_key": "",
@@ -204,19 +205,28 @@ def test_gpu_providers_go_last_while_a_render_owns_the_card(monkeypatch):
 
 def test_thinking_defaults_on_for_agents_and_off_for_production():
     agents, production = LLMService(), LLMService(purpose="production")
-    agents.config = production.config = {}
+    chat = LLMService(purpose="director_chat")
+    agents.config = production.config = chat.config = {}
     assert agents._local_reasoning_effort("lm_studio") is None  # model thinks as usual
     assert agents._local_timeout() == 600
     assert production._local_reasoning_effort("lm_studio") == "none"
     assert production._local_timeout() == 180
     assert production._local_reasoning_effort("ollama") is None
+    assert chat._local_reasoning_effort("lm_studio") == "none"
+    assert chat._local_timeout() == 180
 
 
 def test_thinking_switches_follow_settings():
     agents, production = LLMService(), LLMService(purpose="production")
-    agents.config = production.config = {"thinking_agents": False, "thinking_production": True}
+    chat = LLMService(purpose="chat")
+    agents.config = production.config = chat.config = {
+        "thinking_agents": False,
+        "thinking_production": True,
+        "thinking_chat": True,
+    }
     assert agents._local_reasoning_effort("lm_studio") == "none"
     assert production._local_reasoning_effort("lm_studio") is None
+    assert chat._local_reasoning_effort("lm_studio") is None
 
 
 # --- LM Studio context length -------------------------------------------------
@@ -276,3 +286,181 @@ def test_a_model_that_is_not_in_memory_is_loaded_by_the_studio_not_by_lm_studios
     monkeypatch.setattr(llm.LLMService, "_call_local", lambda self, *a, **kw: "ok")
     assert service.generate_text("system", "hello") == "ok"
     assert loads == [("lm_studio", "google/gemma-4-12b")]
+
+
+# --- JSON mode on local servers --------------------------------------------------------
+
+def test_local_json_mode_is_asked_for_and_dropped_when_the_server_refuses_it():
+    calls = []
+
+    def call(json_mode):
+        calls.append(json_mode)
+        if json_mode:
+            raise Exception("http://127.0.0.1:11434/v1/chat/completions returned code 400: response_format")
+        return "{}"
+
+    assert LLMService._with_local_json_mode(True, call) == "{}"
+    assert calls == [True, False]
+
+
+def test_local_json_mode_does_not_hide_a_real_failure():
+    def call(json_mode):
+        raise Exception("http://127.0.0.1:11434/v1/chat/completions returned code 500: boom")
+
+    with pytest.raises(Exception, match="code 500"):
+        LLMService._with_local_json_mode(True, call)
+
+
+def test_local_json_mode_is_not_used_when_json_is_not_required():
+    assert LLMService._with_local_json_mode(False, lambda json_mode: json_mode) is False
+
+
+def test_call_local_sends_response_format_only_when_json_is_required():
+    svc = LLMService.__new__(LLMService)
+    seen = {}
+
+    class _Resp:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"choices": [{"message": {"content": "{\"ok\": true}"}}]}
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        seen.update(json)
+        return _Resp()
+
+    with patch("integrations.llm.requests.post", side_effect=fake_post):
+        LLMService._call_local(svc, "http://x/v1", "m", "sys", "user", require_json=True)
+        assert seen["response_format"] == {"type": "json_object"}
+        seen.clear()
+        LLMService._call_local(svc, "http://x/v1", "m", "sys", "user")
+        assert "response_format" not in seen
+
+
+def test_gemini_harness_routing_and_execution():
+    from integrations.llm import LLMService
+    service = _service(selected_provider="gemini", gemini_url="http://127.0.0.1:8001", gemini_model="flash")
+    seen = {}
+
+    class _HarnessResp:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {
+                "model": "gemini-3.8-flash",
+                "output": {
+                    "status": "SUCCESS",
+                    "response": "Hello from Gemini local harness!"
+                }
+            }
+
+    def fake_post(url, json=None, timeout=None):
+        seen["url"] = url
+        seen["payload"] = json
+        return _HarnessResp()
+
+    with patch("integrations.llm.requests.post", side_effect=fake_post):
+        reply = service.generate_text("Be helpful", "Who are you?")
+        assert reply == "Hello from Gemini local harness!"
+        assert "127.0.0.1:8001/api/gemini" in seen["url"]
+        assert seen["payload"]["model"] == "flash"
+        assert "Who are you?" in seen["payload"]["input"]
+
+
+def test_gemini_harness_allowed_in_local_only():
+    from integrations.llm import LLMService, is_local_gemini
+    cfg = {"gemini_url": "http://127.0.0.1:8001", "local_only": True}
+    assert is_local_gemini(cfg) is True
+
+    service = _service(selected_provider="gemini", gemini_url="http://127.0.0.1:8001", local_only=True)
+    order = service._provider_order()
+    assert "gemini" in order
+
+
+def test_gemini_probe_endpoint(tmp_path, monkeypatch):
+    import integrations.llm as llm_module
+    monkeypatch.setattr(llm_module, "CONFIG_PATH", str(tmp_path / "config.json"))
+
+    class _OpenApiResp:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {"info": {"title": "Gemini Antigravity CLI Harness API"}}
+
+    with patch("integrations.llm.requests.get", return_value=_OpenApiResp()):
+        client = TestClient(app)
+        res = client.get("/api/gemini/status")
+        assert res.status_code == 200
+        data = res.json()
+        assert data["online"] is True
+        assert data["is_local"] is True
+        assert "Gemini harness online" in data["message"]
+        assert data["thinking_level"] == "high"
+        assert "max" in data["thinking_levels"]
+
+
+def test_gemini_effort_level_controls_and_payload():
+    from integrations.llm import LLMService
+
+    seen_payloads = []
+
+    class _HarnessResp:
+        status_code = 200
+
+        @staticmethod
+        def json():
+            return {
+                "model": "gemini-3.8-flash",
+                "output": {
+                    "status": "SUCCESS",
+                    "response": "Thought carefully."
+                }
+            }
+
+    def fake_post(url, json=None, timeout=None):
+        seen_payloads.append(json)
+        return _HarnessResp()
+
+    # 1. Configured thinking level in config
+    service = _service(selected_provider="gemini", gemini_url="http://127.0.0.1:8001", gemini_thinking_level="medium")
+    assert service.gemini_effort_level() == "medium"
+
+    with patch("integrations.llm.requests.post", side_effect=fake_post):
+        service.generate_text("System", "User prompt")
+        assert seen_payloads[-1]["thinking_level"] == "medium"
+
+        # 2. Dynamic override passed to call
+        service.generate_text("System", "User prompt", effort="max")
+        assert seen_payloads[-1]["thinking_level"] == "max"
+
+        service.generate_chat("System", [{"role": "user", "content": "Chat prompt"}], effort="low")
+        assert seen_payloads[-1]["thinking_level"] == "low"
+
+    # 3. Purpose with thinking disabled scales back to low by default
+    prod_service = _service(selected_provider="gemini", gemini_url="http://127.0.0.1:8001", purpose="production", thinking_production=False)
+    assert prod_service.gemini_effort_level() == "low"
+    # But explicit override still works even in production:
+    assert prod_service.gemini_effort_level(override="high") == "high"
+
+
+def test_gemini_effort_level_settings_roundtrip():
+    client = TestClient(app)
+    res = client.post("/api/settings", json={"gemini_thinking_level": "max"})
+    assert res.status_code == 200
+    cfg = client.get("/api/settings").json()
+    assert cfg["gemini_thinking_level"] == "max"
+
+
+
+def test_writing_jobs_never_fall_back_to_claude_unless_routed_to_it():
+    from integrations.llm import llm_job
+    service = _service(local_only=False, claude_api_key="sk-local-x")
+    service.config["job_routes"] = {"script": {"provider": "lm_studio", "fallback": "claude"}}
+    with llm_job("script"):
+        assert "claude" not in service._provider_order("strong")
+    service.config["job_routes"] = {"script": {"provider": "claude"}}
+    with llm_job("script"):
+        assert service._provider_order("strong")[0] == "claude"

@@ -23,8 +23,10 @@ import os
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
+from app.services import chat_progress
 from app.services.events import bus
 from core.agent import AgentFactory
+from integrations.llm import LLMService
 from core.paths import PROMPTS_DIR
 
 logger = logging.getLogger("buzzcaf_ai.studio_chat")
@@ -59,6 +61,11 @@ _STRATEGISTS = {
     "khayal3baje": "Khayal3BajeStrategist",
     "khayal 3 baje": "Khayal3BajeStrategist",
     "khayal": "Khayal3BajeStrategist",
+    # TheTallStoryteller
+    "thetallstoryteller": "TheTallStorytellerStrategist",
+    "the tall storyteller": "TheTallStorytellerStrategist",
+    "tall storyteller": "TheTallStorytellerStrategist",
+    "storyteller": "TheTallStorytellerStrategist",
 }
 _INVOKE_RE = re.compile(r"\[INVOKE_AGENT:\s*([a-zA-Z0-9_]+)\](.*?)\[/INVOKE_AGENT\]", re.DOTALL)
 _SEARCH_RE = re.compile(r"\[(?:WEB_SEARCH|SEARCH):\s*(.*?)\](?:\[/(?:WEB_SEARCH|SEARCH)\])?", re.IGNORECASE)
@@ -82,8 +89,11 @@ _SWITCH_MODEL_RE = re.compile(r"\[SWITCH_MODEL:\s*(.*?)\](?:\[/SWITCH_MODEL\])?"
 _NAVIGATE_TAB_RE = re.compile(r"\[NAVIGATE_TAB:\s*(.*?)\](?:\[/NAVIGATE_TAB\])?", re.I)
 
 
-def process_web_research_tags(text: str) -> str:
-    """Resolve [WEB_SEARCH: query] and [WEB_FETCH: url] tags into live web intelligence."""
+def process_web_research_tags(text: str, max_results: int = 3, fetch_chars: int = 1200,
+                              per_source: int = 3) -> str:
+    """Resolve [WEB_SEARCH: query] and [WEB_FETCH: url] tags into live web intelligence.
+    The chat keeps its replies short (the defaults); the research loops ask
+    for more results and longer page text."""
     from app.services.web_research import web_research_service
 
     def _replace_search(match):
@@ -91,7 +101,9 @@ def process_web_research_tags(text: str) -> str:
         if not query:
             return ""
         logger.info("Resolving live web search tag: '%s'", query)
-        results = web_research_service.search(query, max_results=3)
+        with chat_progress.step("web_search", "Searching the web", query) as s:
+            results = web_research_service.search(query, max_results=max_results)
+            s["note"] = f"{len(results or [])} results"
         if not results:
             return f"\n*🔍 [Web Search for '{query}': No verified results found.]*\n"
         items = []
@@ -108,7 +120,9 @@ def process_web_research_tags(text: str) -> str:
         if not url:
             return ""
         logger.info("Resolving web fetch tag: '%s'", url)
-        content = web_research_service.fetch(url, max_chars=1200)
+        with chat_progress.step("web_fetch", "Reading a page", url) as s:
+            content = web_research_service.fetch(url, max_chars=fetch_chars)
+            s["note"] = f"{len(content or '')} characters"
         return f"\n\n📄 **[Extracted Web Content: {url}]**\n{content}\n\n"
 
     def _replace_deep_research(kinds, label, emoji):
@@ -117,13 +131,16 @@ def process_web_research_tags(text: str) -> str:
             if not query:
                 return ""
             logger.info("Resolving %s tag: '%s'", label, query)
+            index = chat_progress.begin("lookup", label, query)
             try:
                 from app.services.deep_research import deep_research
 
-                data = deep_research(query, kinds=kinds, per_source=3)
+                data = deep_research(query, kinds=kinds, per_source=per_source)
                 results = (data or {}).get("results") or []
+                chat_progress.end(index, "done", f"{len(results)} results")
             except Exception as exc:
                 logger.warning("%s lookup failed for '%s': %s", label, query, exc)
+                chat_progress.end(index, "failed", str(exc))
                 return f"\n*{emoji} [{label} for '{query}': No results]*\n"
             if not results:
                 return f"\n*{emoji} [{label} for '{query}': No results]*\n"
@@ -171,14 +188,17 @@ def process_vault_tags(text: str, default_channel: str) -> str:
         channel = parts[1].strip() if len(parts) > 1 and parts[1].strip() else default_channel
         notes = parts[2].strip() if len(parts) > 2 else ""
         logger.info("Saving topic to vault via tag: '%s' (%s)", title, channel)
+        index = chat_progress.begin("vault", "Saving a topic to the vault", f"{title} -> {channel}")
         try:
             topic_store.add_topic(
                 {"topic": title, "channel": channel, "notes": notes, "category": "General"},
                 added_by="strategist",
                 stage="potential",
             )
+            chat_progress.end(index)
         except Exception as exc:
             logger.warning("SAVE_TOPIC failed for '%s': %s", title, exc)
+            chat_progress.end(index, "failed", str(exc))
             return f"\n*⚠️ Could not save \"{title}\" to the vault: {exc}*\n"
         return f"\n\n✅ **Saved to vault** (\"{title}\" → {channel}, stage: potential)\n\n"
 
@@ -225,9 +245,11 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
         if not raw:
             return ""
         logger.info("Resolving live video analysis tag: '%s'", raw)
+        index = chat_progress.begin("video_intel", "Analysing a video", raw)
         try:
             from app.services.video_intel import analyze_video
             data = analyze_video(raw, channel=default_channel)
+            chat_progress.end(index)
             video = data.get("video") or {}
             title = video.get("title") or raw
             views = video.get("view_count") or video.get("views") or "N/A"
@@ -242,6 +264,7 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
             )
         except Exception as exc:
             logger.warning("Video analysis failed for '%s': %s", raw, exc)
+            chat_progress.end(index, "failed", str(exc))
             return f"\n*📊 [Video Analysis for '{raw}': {exc}]*\n"
 
     def _replace_analyze_channel(match):
@@ -287,9 +310,11 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
             return ""
         wf_name = parts[1] if len(parts) > 1 and parts[1] else "beyond3baje_documentary"
         ch = parts[2] if len(parts) > 2 and parts[2] else default_channel
+        index = chat_progress.begin("project", "Creating a project", f"{title} ({wf_name}, {ch})")
         try:
             from executive.project import project_manager
             proj = project_manager.create_project(name=title, brand=ch, workflow_name=wf_name)
+            chat_progress.end(index, "done", proj.id)
             return (
                 f"\n\n🚀 **[Project Created Successfully]**\n"
                 f"- **Title**: {proj.name}\n"
@@ -298,6 +323,7 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
                 f"- **Project ID**: `{proj.id}`\n\n"
             )
         except Exception as exc:
+            chat_progress.end(index, "failed", str(exc))
             return f"\n*⚠️ Could not create project '{title}': {exc}*\n"
 
     def _replace_project_status(match):
@@ -351,6 +377,7 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
         target = match.group(1).strip()
         if not target:
             return ""
+        index = chat_progress.begin("model", "Switching the local model", target)
         try:
             from integrations.llm import load_config, save_config, ensure_local_model_loaded
             cfg = load_config()
@@ -359,8 +386,10 @@ def process_studio_tools_tags(text: str, default_channel: str) -> str:
             save_config(cfg)
             res = ensure_local_model_loaded("lm_studio", target)
             loaded_note = " (already loaded in memory)" if res.get("already_loaded") else (" and loaded into memory" if res.get("loaded") else "")
+            chat_progress.end(index, "done", loaded_note.strip(" ()"))
             return f"\n\n🔄 **[Model Switched]**: Active model updated to `{target}`{loaded_note}.\n\n"
         except Exception as exc:
+            chat_progress.end(index, "failed", str(exc))
             return f"\n*⚠️ Could not switch model to '{target}': {exc}*\n"
 
     def _replace_navigate_tab(match):
@@ -420,6 +449,8 @@ def channel_guide(channel: str, full: bool = False) -> str:
         canonical = "Originals"
     elif "beyond" in lower:
         canonical = "Beyond3Baje"
+    elif "storyteller" in lower or "tallstoryteller" in lower:
+        canonical = "TheTallStoryteller"
     else:
         canonical = re.sub(r"[^A-Za-z0-9]", "", channel)
 
@@ -592,6 +623,7 @@ def process_agent_invocations(
                 target, caller, MAX_INVOCATIONS,
             )
             records.append({"agent": target, "task": task, "output": "", "simulated": False, "skipped": True})
+            chat_progress.note(f"{target} not run: at most {MAX_INVOCATIONS} delegations per reply", "skipped")
             final_text = final_text.replace(
                 full_tag,
                 f"\n*`{target}` was not run: at most {MAX_INVOCATIONS} delegations per reply.*\n",
@@ -600,6 +632,9 @@ def process_agent_invocations(
 
         logger.info("%s delegated to %s", caller, target)
         simulated = False
+        step = chat_progress.begin(
+            "delegation", f"{target} is working on it", task,
+        )
         try:
             agent = AgentFactory.get_agent(target, llm_service)
             output = str(agent.execute(
@@ -612,20 +647,25 @@ def process_agent_invocations(
                 f"\n\n---\n🤖 **[Delegated to `{target}`]**\n> *Task*: {task}\n\n{output}\n---\n\n"
             )
             records.append({"agent": target, "task": task, "output": output, "simulated": simulated})
+            chat_progress.end(
+                step, "done",
+                "simulated: no model answered" if simulated else f"{len(output.split())} words back",
+            )
         except Exception as exc:
             logger.error("Delegated agent %s failed: %s", target, exc)
             replacement = f"\n*⚠️ `{target}` could not complete the delegated task: {exc}*\n"
             records.append({"agent": target, "task": task, "output": "", "simulated": False, "error": str(exc)})
+            chat_progress.end(step, "failed", str(exc))
         final_text = final_text.replace(full_tag, replacement)
-
-    for record in records:
-        if record.get("skipped"):
-            continue
+        # Published as each one finishes (it used to wait for the whole
+        # reply), so Dexter and the events feed see the hand-off in time.
         try:
             bus.publish("agent_invoked", {
-                "agent": record["agent"],
-                "task_preview": record["task"][:200],
-                "simulated": record["simulated"],
+                "agent": records[-1]["agent"],
+                "task_preview": records[-1]["task"][:200],
+                "simulated": records[-1]["simulated"],
+                "error": records[-1].get("error"),
+                "turn_id": chat_progress.current(),
             })
         except Exception as exc:  # the bus must never take a chat turn down
             logger.warning("could not publish agent_invoked: %s", exc)
@@ -639,24 +679,58 @@ def run_chat(
     agent_name: Optional[str] = None,
     history: Optional[List[Dict[str, str]]] = None,
     context_topic: Optional[Dict[str, Any]] = None,
+    turn_id: Optional[str] = None,
+    effort: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """One Studio Assistant turn. Raises on provider failure; the route maps that to 502."""
+    """One Studio Assistant turn. Raises on provider failure; the route maps that to 502.
+
+    `turn_id` (made up by the page) makes the turn's progress readable at
+    `GET /api/studio/chat_progress/{turn_id}` while this call is still running:
+    the strategist's own call, every delegation, lookup and tool, with times.
+    """
     channel = (channel or "").strip() or "Beyond3Baje"
     agent_name = (agent_name or "").strip() or strategist_for(channel)
     message = (message or "").strip()
     if not message:
         raise ValueError("message is empty")
 
+    turn = chat_progress.start(turn_id, agent_name, channel)
     try:
-        agent = AgentFactory.get_agent(agent_name)
+        from integrations.llm import llm_job
+        with llm_job("assistant"):
+            result = _run_turn(message, channel, agent_name, history, context_topic, effort=effort)
+    except Exception as exc:
+        chat_progress.finish(turn, "failed", str(exc))
+        raise
+    chat_progress.finish(turn, "done")
+    result["turn_id"] = turn
+    result["progress"] = chat_progress.steps_of(turn)
+    return result
+
+
+def _run_turn(
+    message: str,
+    channel: str,
+    agent_name: str,
+    history: Optional[List[Dict[str, str]]],
+    context_topic: Optional[Dict[str, Any]],
+    effort: Optional[str] = None,
+) -> Dict[str, Any]:
+    llm = LLMService(purpose="chat", effort=effort)
+    try:
+        agent = AgentFactory.get_agent(agent_name, llm)
     except Exception:
-        agent = AgentFactory.get_agent("TopicVaultManager")
+        agent = AgentFactory.get_agent("TopicVaultManager", llm)
 
     system_extra = build_system_extra(agent_name, channel, message, context_topic)
     messages = build_messages(history, message)
 
-    reply_text = str(agent.execute_messages(messages, system_extra=system_extra))
-    simulated = bool(getattr(agent.llm_service, "last_response_simulated", False))
+    with chat_progress.step("thinking", f"{agent_name} is writing the reply") as s:
+        reply_text = str(agent.execute_messages(messages, system_extra=system_extra))
+        simulated = bool(getattr(agent.llm_service, "last_response_simulated", False))
+        asked = len(_INVOKE_RE.findall(reply_text))
+        s["note"] = ("simulated: no model answered" if simulated
+                     else f"{len(reply_text.split())} words" + (f", {asked} delegation{'s' if asked != 1 else ''} asked for" if asked else ""))
     reply_text, invocations = process_agent_invocations(
         reply_text, llm_service=agent.llm_service, caller=agent_name
     )

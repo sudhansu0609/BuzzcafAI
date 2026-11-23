@@ -1,141 +1,651 @@
 {
   "state": "done",
   "trigger": "nightly",
-  "started_at": "2026-10-01T03:09:03",
-  "updated_at": "2026-10-01T05:45:27",
-  "finished_at": "2026-10-01T05:45:27",
+  "started_at": "2026-11-01T03:02:17",
+  "updated_at": "2026-11-01T13:32:42",
+  "finished_at": "2026-11-01T13:32:42",
   "error": null,
   "tasks": [
     {
       "channel": "Raat3Baje",
       "slot": 1,
+      "stage": "failed",
+      "topic": "Hawa Ke Bina Bajti Ghanti (The Bell That Rings Without Wind)",
+      "project_id": null,
+      "detail": "No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again.",
+      "minutes": 25.0
+    },
+    {
+      "channel": "Raat3Baje",
+      "slot": 2,
       "stage": "done",
-      "topic": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
-      "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
-      "detail": "waiting at Visual Plan"
+      "topic": "Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje",
+      "project_id": "2026-11-01_Raat3Baje_GaonKiSadakParUltaChalneWalaAadmiRaat3Baje",
+      "detail": "waiting at Completed",
+      "minutes": 25.0
     },
     {
       "channel": "Beyond3Baje",
       "slot": 1,
       "stage": "done",
-      "topic": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
-      "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
-      "detail": "waiting at Visual Plan"
+      "topic": "Maut Ka Call / DON'T ANSWER",
+      "project_id": "2026-11-01_Beyond3Baje_MautKaCallDontAnswer",
+      "detail": "waiting at Voice Recording",
+      "minutes": 20.0
+    },
+    {
+      "channel": "Beyond3Baje",
+      "slot": 2,
+      "stage": "done",
+      "topic": "THE ENDLESS ROAD (B3B-404)",
+      "project_id": "2026-11-01_Beyond3Baje_TheEndlessRoadb3b404",
+      "detail": "waiting at Voice Recording",
+      "minutes": 20.0
     },
     {
       "channel": "Life3Baje",
       "slot": 1,
       "stage": "done",
-      "topic": "When does a YouTube channel become an 'Actual Business'?",
-      "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
-      "detail": "waiting at Visual Plan"
+      "topic": "Can My Side Projects Pay All My Monthly Expenses?",
+      "project_id": "2026-11-01_Life3Baje_CanMySideProjectsPayAllMyMonthlyExpenses",
+      "detail": "waiting at Completed",
+      "minutes": 20.0
+    },
+    {
+      "channel": "Life3Baje",
+      "slot": 2,
+      "stage": "done",
+      "topic": "I’m Building Multiple Income Sources — Here’s What Is Actually Working",
+      "project_id": "2026-11-01_Life3Baje_ImBuildingMultipleIncomeSourcesHeresWhatIsActuallyWorking",
+      "detail": "waiting at Completed",
+      "minutes": 20.0
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "slot": 1,
+      "stage": "skipped",
+      "topic": null,
+      "project_id": null,
+      "detail": "no topic in the vault or the Idea Dump",
+      "minutes": 20.0
+    },
+    {
+      "channel": "TheTallStoryteller",
+      "slot": 2,
+      "stage": "done",
+      "topic": "Sone ka Dhokha (The Gold Deception)",
+      "project_id": "2026-11-01_TheTallStoryteller_SoneKaDhokhatheGoldDeception",
+      "detail": "waiting at Completed",
+      "minutes": 20.0
     }
   ],
   "log": [
     {
-      "at": "03:09:04",
+      "at": "03:02:19",
+      "channel": "run",
+      "text": "forecast: 8 video(s) ≈ 8 h 33 min (up to 14 h 51 min on a slow night); all finish by 11:32; 2 at risk on a slow night"
+    },
+    {
+      "at": "03:02:22",
+      "channel": "run",
+      "text": "pre-flight warn: Fits the night: 8 video(s) ≈ 8 h 33 min (up to 14 h 51 min on a slow night); all finish by 11:32; 2 at risk on a slow night"
+    },
+    {
+      "at": "03:02:22",
       "channel": "Raat3Baje",
       "text": "AfterDarkStrategist thinking (turn 1)"
     },
     {
-      "at": "03:11:52",
-      "channel": "Raat3Baje",
-      "text": "AfterDarkStrategist thinking (turn 2)"
-    },
-    {
-      "at": "03:14:09",
+      "at": "03:05:35",
       "channel": "Raat3Baje",
       "text": "AfterDarkStrategist wrote the plan"
     },
     {
-      "at": "03:14:32",
+      "at": "03:05:35",
       "channel": "Raat3Baje",
-      "text": "plan: Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass (0 tool calls)"
+      "text": "plan: Hawa Ke Bina Bajti Ghanti (The Bell That Rings Without Wind) (0 tool calls)"
     },
     {
-      "at": "03:14:58",
+      "at": "03:05:35",
       "channel": "Raat3Baje",
       "text": "step: Research"
     },
     {
-      "at": "03:16:30",
+      "at": "03:34:28",
       "channel": "Raat3Baje",
       "text": "step: Script Writing"
     },
     {
-      "at": "03:23:36",
+      "at": "04:17:14",
       "channel": "Raat3Baje",
-      "text": "done: project ready at Visual Plan"
+      "text": "step: Visual Plan"
     },
     {
-      "at": "03:23:36",
+      "at": "04:19:59",
+      "channel": "Raat3Baje",
+      "text": "step: Sound Design Plan"
+    },
+    {
+      "at": "04:22:49",
+      "channel": "Raat3Baje",
+      "text": "step: Narration Check"
+    },
+    {
+      "at": "05:37:12",
+      "channel": "Raat3Baje",
+      "text": "step: SEO & Thumbnail"
+    },
+    {
+      "at": "07:02:47",
+      "channel": "Raat3Baje",
+      "text": "failed: No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again."
+    },
+    {
+      "at": "07:02:47",
+      "channel": "Raat3Baje",
+      "text": "AfterDarkStrategist thinking (turn 1)"
+    },
+    {
+      "at": "07:04:12",
+      "channel": "Raat3Baje",
+      "text": "AfterDarkStrategist wrote the plan"
+    },
+    {
+      "at": "07:04:12",
+      "channel": "Raat3Baje",
+      "text": "plan: Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje (0 tool calls)"
+    },
+    {
+      "at": "07:04:12",
+      "channel": "Raat3Baje",
+      "text": "step: Research"
+    },
+    {
+      "at": "08:22:22",
+      "channel": "Raat3Baje",
+      "text": "step: Script Writing"
+    },
+    {
+      "at": "09:22:51",
+      "channel": "Raat3Baje",
+      "text": "step: Visual Plan"
+    },
+    {
+      "at": "09:24:26",
+      "channel": "Raat3Baje",
+      "text": "step: Sound Design Plan"
+    },
+    {
+      "at": "09:25:25",
+      "channel": "Raat3Baje",
+      "text": "step: Narration Check"
+    },
+    {
+      "at": "09:59:51",
+      "channel": "Raat3Baje",
+      "text": "step: SEO & Thumbnail"
+    },
+    {
+      "at": "10:02:07",
+      "channel": "Raat3Baje",
+      "text": "done: project ready at Completed"
+    },
+    {
+      "at": "10:02:07",
       "channel": "Beyond3Baje",
       "text": "Beyond3BajeStrategist thinking (turn 1)"
     },
     {
-      "at": "03:25:47",
+      "at": "10:03:47",
       "channel": "Beyond3Baje",
       "text": "Beyond3BajeStrategist wrote the plan"
     },
     {
-      "at": "03:25:47",
+      "at": "10:03:47",
       "channel": "Beyond3Baje",
-      "text": "plan: Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?) (0 tool calls)"
+      "text": "plan: Maut Ka Call / DON'T ANSWER (0 tool calls)"
     },
     {
-      "at": "03:25:47",
+      "at": "10:03:47",
       "channel": "Beyond3Baje",
       "text": "step: Research"
     },
     {
-      "at": "03:27:50",
+      "at": "10:08:21",
       "channel": "Beyond3Baje",
       "text": "step: Scripting"
     },
     {
-      "at": "05:39:57",
+      "at": "10:33:12",
       "channel": "Beyond3Baje",
-      "text": "done: project ready at Visual Plan"
+      "text": "step: Visual Plan"
     },
     {
-      "at": "05:39:58",
+      "at": "10:34:54",
+      "channel": "Beyond3Baje",
+      "text": "step: Scene Breakdown"
+    },
+    {
+      "at": "10:35:58",
+      "channel": "Beyond3Baje",
+      "text": "step: Shot List"
+    },
+    {
+      "at": "10:37:08",
+      "channel": "Beyond3Baje",
+      "text": "step: Clip Planning"
+    },
+    {
+      "at": "10:38:20",
+      "channel": "Beyond3Baje",
+      "text": "step: AI Image Planning"
+    },
+    {
+      "at": "10:40:05",
+      "channel": "Beyond3Baje",
+      "text": "step: Asset Collection"
+    },
+    {
+      "at": "10:41:56",
+      "channel": "Beyond3Baje",
+      "text": "done: project ready at Voice Recording"
+    },
+    {
+      "at": "10:41:56",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist thinking (turn 1)"
+    },
+    {
+      "at": "10:43:58",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist thinking (turn 2)"
+    },
+    {
+      "at": "10:45:27",
+      "channel": "Beyond3Baje",
+      "text": "analyze video: \"https://www.youtube.com/results?search_query=paranormal+india+highway\""
+    },
+    {
+      "at": "10:45:34",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist thinking (turn 3)"
+    },
+    {
+      "at": "10:46:32",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist thinking (turn 4)"
+    },
+    {
+      "at": "10:47:30",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist thinking (turn 5)"
+    },
+    {
+      "at": "10:48:29",
+      "channel": "Beyond3Baje",
+      "text": "Beyond3BajeStrategist wrote the plan"
+    },
+    {
+      "at": "10:48:29",
+      "channel": "Beyond3Baje",
+      "text": "plan: THE ENDLESS ROAD (B3B-404) (1 tool calls)"
+    },
+    {
+      "at": "10:48:29",
+      "channel": "Beyond3Baje",
+      "text": "step: Research"
+    },
+    {
+      "at": "10:53:49",
+      "channel": "Beyond3Baje",
+      "text": "step: Scripting"
+    },
+    {
+      "at": "11:18:07",
+      "channel": "Beyond3Baje",
+      "text": "step: Visual Plan"
+    },
+    {
+      "at": "11:19:32",
+      "channel": "Beyond3Baje",
+      "text": "step: Scene Breakdown"
+    },
+    {
+      "at": "11:20:48",
+      "channel": "Beyond3Baje",
+      "text": "step: Shot List"
+    },
+    {
+      "at": "11:21:54",
+      "channel": "Beyond3Baje",
+      "text": "step: Clip Planning"
+    },
+    {
+      "at": "11:24:16",
+      "channel": "Beyond3Baje",
+      "text": "step: AI Image Planning"
+    },
+    {
+      "at": "11:26:23",
+      "channel": "Beyond3Baje",
+      "text": "step: Asset Collection"
+    },
+    {
+      "at": "11:27:48",
+      "channel": "Beyond3Baje",
+      "text": "done: project ready at Voice Recording"
+    },
+    {
+      "at": "11:27:48",
       "channel": "Life3Baje",
       "text": "Life3BajeStrategist thinking (turn 1)"
     },
     {
-      "at": "05:41:05",
+      "at": "11:28:15",
       "channel": "Life3Baje",
       "text": "list projects"
     },
     {
-      "at": "05:41:07",
+      "at": "11:28:15",
       "channel": "Life3Baje",
       "text": "Life3BajeStrategist thinking (turn 2)"
     },
     {
-      "at": "05:42:31",
+      "at": "11:30:29",
       "channel": "Life3Baje",
       "text": "Life3BajeStrategist wrote the plan"
     },
     {
-      "at": "05:42:31",
+      "at": "11:30:29",
       "channel": "Life3Baje",
-      "text": "plan: When does a YouTube channel become an 'Actual Business'? (1 tool calls)"
+      "text": "plan: Can My Side Projects Pay All My Monthly Expenses? (1 tool calls)"
     },
     {
-      "at": "05:42:31",
+      "at": "11:30:29",
       "channel": "Life3Baje",
       "text": "step: Research"
     },
     {
-      "at": "05:43:40",
+      "at": "11:31:33",
       "channel": "Life3Baje",
       "text": "step: Vlog Script & Prompts"
     },
     {
-      "at": "05:45:27",
+      "at": "11:51:15",
       "channel": "Life3Baje",
-      "text": "done: project ready at Visual Plan"
+      "text": "step: Visual Plan"
+    },
+    {
+      "at": "11:52:37",
+      "channel": "Life3Baje",
+      "text": "step: Thumbnail Layout"
+    },
+    {
+      "at": "11:53:39",
+      "channel": "Life3Baje",
+      "text": "step: SEO & Publishing Tags"
+    },
+    {
+      "at": "11:55:45",
+      "channel": "Life3Baje",
+      "text": "done: project ready at Completed"
+    },
+    {
+      "at": "11:55:45",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 1)"
+    },
+    {
+      "at": "11:59:12",
+      "channel": "Life3Baje",
+      "text": "list projects"
+    },
+    {
+      "at": "11:59:13",
+      "channel": "Life3Baje",
+      "text": "analyze channel: Life3Baje"
+    },
+    {
+      "at": "11:59:13",
+      "channel": "Life3Baje",
+      "text": "list projects"
+    },
+    {
+      "at": "11:59:13",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 2)"
+    },
+    {
+      "at": "12:01:28",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 3)"
+    },
+    {
+      "at": "12:02:34",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 4)"
+    },
+    {
+      "at": "12:03:21",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 5)"
+    },
+    {
+      "at": "12:04:14",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 6)"
+    },
+    {
+      "at": "12:05:02",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 7)"
+    },
+    {
+      "at": "12:05:45",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 8)"
+    },
+    {
+      "at": "12:06:36",
+      "channel": "Life3Baje",
+      "text": "Life3BajeStrategist thinking (turn 9)"
+    },
+    {
+      "at": "12:07:21",
+      "channel": "Life3Baje",
+      "text": "strategist could not plan (Life3BajeStrategist did not produce a plan in 8 turns); using the top vault / Idea Dump topic"
+    },
+    {
+      "at": "12:07:21",
+      "channel": "Life3Baje",
+      "text": "step: Research"
+    },
+    {
+      "at": "12:10:31",
+      "channel": "Life3Baje",
+      "text": "step: Vlog Script & Prompts"
+    },
+    {
+      "at": "12:38:23",
+      "channel": "Life3Baje",
+      "text": "step: Visual Plan"
+    },
+    {
+      "at": "12:40:28",
+      "channel": "Life3Baje",
+      "text": "step: Thumbnail Layout"
+    },
+    {
+      "at": "12:41:23",
+      "channel": "Life3Baje",
+      "text": "step: SEO & Publishing Tags"
+    },
+    {
+      "at": "12:43:15",
+      "channel": "Life3Baje",
+      "text": "done: project ready at Completed"
+    },
+    {
+      "at": "12:43:15",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 1)"
+    },
+    {
+      "at": "12:44:12",
+      "channel": "TheTallStoryteller",
+      "text": "list projects"
+    },
+    {
+      "at": "12:44:12",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 2)"
+    },
+    {
+      "at": "12:45:45",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 3)"
+    },
+    {
+      "at": "12:46:56",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 4)"
+    },
+    {
+      "at": "12:47:58",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 5)"
+    },
+    {
+      "at": "12:48:55",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 6)"
+    },
+    {
+      "at": "12:49:45",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 7)"
+    },
+    {
+      "at": "12:50:32",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 8)"
+    },
+    {
+      "at": "12:51:28",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 9)"
+    },
+    {
+      "at": "12:52:10",
+      "channel": "TheTallStoryteller",
+      "text": "strategist could not plan (TheTallStorytellerStrategist did not produce a plan in 8 turns); using the top vault / Idea Dump topic"
+    },
+    {
+      "at": "12:52:10",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist thinking (turn 1)"
+    },
+    {
+      "at": "12:53:36",
+      "channel": "TheTallStoryteller",
+      "text": "TheTallStorytellerStrategist wrote the plan"
+    },
+    {
+      "at": "12:53:36",
+      "channel": "TheTallStoryteller",
+      "text": "plan: Sone ka Dhokha (The Gold Deception) (0 tool calls)"
+    },
+    {
+      "at": "12:53:36",
+      "channel": "TheTallStoryteller",
+      "text": "step: Research"
+    },
+    {
+      "at": "12:57:25",
+      "channel": "TheTallStoryteller",
+      "text": "step: Script Writing"
+    },
+    {
+      "at": "13:16:30",
+      "channel": "TheTallStoryteller",
+      "text": "step: Human Touch"
+    },
+    {
+      "at": "13:27:05",
+      "channel": "TheTallStoryteller",
+      "text": "step: Visual Plan"
+    },
+    {
+      "at": "13:30:32",
+      "channel": "TheTallStoryteller",
+      "text": "step: SEO & Publishing Pack"
+    },
+    {
+      "at": "13:32:42",
+      "channel": "TheTallStoryteller",
+      "text": "done: project ready at Completed"
     }
-  ]
+  ],
+  "forecast": {
+    "verdict": "8 video(s) ≈ 8 h 33 min (up to 14 h 51 min on a slow night); all finish by 11:32; 2 at risk on a slow night",
+    "deadline": "2026-11-02T15:00",
+    "slots": [
+      {
+        "channel": "Raat3Baje",
+        "slot": 1,
+        "est_min": 116.5,
+        "end": "2026-11-02T04:56",
+        "fits": true
+      },
+      {
+        "channel": "Raat3Baje",
+        "slot": 2,
+        "est_min": 116.5,
+        "end": "2026-11-02T06:53",
+        "fits": true
+      },
+      {
+        "channel": "Beyond3Baje",
+        "slot": 1,
+        "est_min": 43.0,
+        "end": "2026-11-02T07:36",
+        "fits": true
+      },
+      {
+        "channel": "Beyond3Baje",
+        "slot": 2,
+        "est_min": 43.0,
+        "end": "2026-11-02T08:19",
+        "fits": true
+      },
+      {
+        "channel": "Life3Baje",
+        "slot": 1,
+        "est_min": 39.8,
+        "end": "2026-11-02T08:58",
+        "fits": true
+      },
+      {
+        "channel": "Life3Baje",
+        "slot": 2,
+        "est_min": 39.8,
+        "end": "2026-11-02T09:38",
+        "fits": true
+      },
+      {
+        "channel": "TheTallStoryteller",
+        "slot": 1,
+        "est_min": 57.1,
+        "end": "2026-11-02T10:35",
+        "fits": true
+      },
+      {
+        "channel": "TheTallStoryteller",
+        "slot": 2,
+        "est_min": 57.1,
+        "end": "2026-11-02T11:32",
+        "fits": true
+      }
+    ]
+  }
 }

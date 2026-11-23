@@ -31,6 +31,8 @@ foolish enough to wander the lonely roads after midnight without any protection 
 @pytest.fixture(autouse=True)
 def _store(tmp_path, monkeypatch):
     monkeypatch.setattr(W, "STYLE_DIR", str(tmp_path / "style"))
+    # No story standard unless a test makes one (the real Raat3Baje one is on by default).
+    monkeypatch.setattr(W, "STANDARDS_DIR", str(tmp_path / "no_standards"))
 
 
 def test_no_samples_means_no_section_and_no_check():
@@ -349,3 +351,39 @@ def test_a_repeated_greeting_and_copied_sample_lines_score_down():
     # The guide and the rewrite task say the greeting is said once.
     assert "ONCE" in W.style_section("Raat3Baje")
     assert "do not add the\ngreeting" in W.revise_task("Raat3Baje", own, {"fixes": []})
+
+
+def test_a_channel_with_no_style_of_its_own_borrows_one_but_greets_as_itself(tmp_path, monkeypatch):
+    from app.services import writing_style as w
+    monkeypatch.setattr(w, "STYLE_DIR", str(tmp_path))
+    sample = tmp_path / "Raat3Baje" / "samples"
+    sample.mkdir(parents=True)
+    (sample / "one.md").write_text("Main us raat akela tha. " * 40, encoding="utf-8")
+    assert w.style_source("TheTallStoryteller") == "Raat3Baje"
+    section = w.style_section("TheTallStoryteller")
+    assert "The Tall Storyteller" in section and "no samples of his own yet" in section
+    own = tmp_path / "TheTallStoryteller" / "samples"
+    own.mkdir(parents=True)
+    (own / "mine.md").write_text("Ek baar ki baat hai. " * 40, encoding="utf-8")
+    assert w.style_source("TheTallStoryteller") == "TheTallStoryteller"
+
+
+def test_the_story_standard_follows_its_switch(tmp_path, monkeypatch):
+    std = tmp_path / "standards"
+    std.mkdir()
+    (std / "Raat3Baje.md").write_text("<!-- note -->\nWrite the brief.", encoding="utf-8")
+    monkeypatch.setattr(W, "STANDARDS_DIR", str(std))
+    assert "Write the brief." in W.standard_section("Raat3Baje") and "note" not in W.standard_section("Raat3Baje")
+    W.set_standard("Raat3Baje", False)
+    assert W.standard_section("Raat3Baje") == ""
+
+
+def test_devanagari_is_expected_when_the_standard_is_on(tmp_path, monkeypatch):
+    std = tmp_path / "standards"
+    std.mkdir()
+    (std / "Raat3Baje.md").write_text("Brief.", encoding="utf-8")
+    monkeypatch.setattr(W, "STANDARDS_DIR", str(std))
+    W.add_sample("Raat3Baje", "Ulte pair", HIS)
+    dev = "रात के तीन बजे गाँव की गली खाली थी। रमेश अकेला था। " * 12
+    res = W.check(dev, "Raat3Baje", originality=False)
+    assert res is not None and not any("Roman letters" in f for f in res["fixes"])

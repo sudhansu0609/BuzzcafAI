@@ -1,71 +1,193 @@
 {
-  "paused": true,
+  "paused": false,
   "items": [
     {
-      "id": "b89600fa1807",
-      "project_id": "2026-09-28_Raat3Baje_EkForestOfficerKoJungleMeinApnaHiVoiceNoteSunaiDiya",
+      "id": "1b2633535183",
+      "project_id": "2026-11-23_Raat3Baje_Elanthoor",
       "brand": "Raat3Baje",
-      "title": "Ek Forest Officer Ko Jungle Mein Apna Hi Voice Note Sunai Diya",
-      "recording_path": "B:\\youtubeProjects\\Raat3Baje\\ep2\\ep2Temp2.mp4",
+      "title": "Elanthoor",
+      "recording_path": "B:/youtubeProjects/Raat3Baje/elanthoor/elanthoor-videos/elanthoorTemp1.mp4",
       "settings_override": null,
-      "mode": "script_first",
-      "precut": false,
-      "status": "running",
+      "mode": "record_first",
+      "precut": true,
+      "status": "done",
       "resume_from": "render",
+      "checkpoint": "render",
+      "pause_requested": false,
+      "cancel_requested": false,
+      "attempts": 3,
+      "error": null,
+      "created_at": "2026-11-23T12:06:12",
+      "updated_at": "2026-11-23T15:51:21",
+      "started_at": "2026-11-23T15:40:46",
+      "finished_at": "2026-11-23T15:51:21",
+      "stage_times": [
+        {
+          "stage": "start",
+          "started_at": "2026-11-23T12:06:13",
+          "finished_at": "2026-11-23T12:06:13",
+          "seconds": 0,
+          "outcome": "done"
+        },
+        {
+          "stage": "transcribe",
+          "started_at": "2026-11-23T12:06:13",
+          "finished_at": "2026-11-23T12:12:08",
+          "seconds": 355,
+          "outcome": "done"
+        },
+        {
+          "stage": "plan",
+          "started_at": "2026-11-23T12:12:08",
+          "finished_at": "2026-11-23T12:18:06",
+          "seconds": 358,
+          "outcome": "awaiting_review"
+        },
+        {
+          "stage": "finalize",
+          "started_at": "2026-11-23T12:25:57",
+          "finished_at": "2026-11-23T12:25:58",
+          "seconds": 1,
+          "outcome": "done"
+        },
+        {
+          "stage": "render",
+          "started_at": "2026-11-23T12:25:58",
+          "finished_at": "2026-11-23T13:49:14",
+          "seconds": 4996,
+          "outcome": "done"
+        },
+        {
+          "stage": "render",
+          "started_at": "2026-11-23T15:40:46",
+          "finished_at": "2026-11-23T15:40:48",
+          "seconds": 2,
+          "outcome": "done"
+        },
+        {
+          "stage": "render",
+          "started_at": "2026-11-23T15:40:48",
+          "finished_at": "2026-11-23T15:51:21",
+          "seconds": 633,
+          "outcome": "done"
+        }
+      ]
+    },
+    {
+      "id": "ce6fa4a312cb",
+      "project_id": "2026-11-13_Beyond3Baje_Sita",
+      "brand": "Beyond3Baje",
+      "title": "Sita",
+      "recording_path": "B:\\youtubeProjects\\beyond3baje\\ep12\\sitaTemp1.mp4",
+      "settings_override": null,
+      "mode": "record_first",
+      "precut": true,
+      "status": "done",
+      "resume_from": "finalize",
       "checkpoint": "render",
       "pause_requested": false,
       "cancel_requested": false,
       "attempts": 2,
       "error": null,
-      "created_at": "2026-10-08T01:09:29",
-      "updated_at": "2026-10-08T22:46:49",
-      "started_at": "2026-10-08T22:46:41",
-      "finished_at": null,
+      "created_at": "2026-11-13T18:34:52",
+      "updated_at": "2026-11-13T20:34:06",
+      "started_at": "2026-11-13T18:49:22",
+      "finished_at": "2026-11-13T20:34:06",
       "stage_times": [
         {
+          "stage": "start",
+          "started_at": "2026-11-13T18:34:52",
+          "finished_at": "2026-11-13T18:35:17",
+          "seconds": 25,
+          "outcome": "done"
+        },
+        {
           "stage": "transcribe",
-          "started_at": "2026-10-08T22:22:30",
-          "finished_at": "2026-10-08T22:28:51",
-          "seconds": 381,
+          "started_at": "2026-11-13T18:35:17",
+          "finished_at": "2026-11-13T18:41:35",
+          "seconds": 378,
           "outcome": "done"
         },
         {
           "stage": "plan",
-          "started_at": "2026-10-08T22:28:51",
-          "finished_at": "2026-10-08T22:30:30",
-          "seconds": 99,
+          "started_at": "2026-11-13T18:41:35",
+          "finished_at": "2026-11-13T18:47:32",
+          "seconds": 357,
+          "outcome": "awaiting_review"
+        },
+        {
+          "stage": "finalize",
+          "started_at": "2026-11-13T18:49:22",
+          "finished_at": "2026-11-13T18:49:23",
+          "seconds": 1,
+          "outcome": "done"
+        },
+        {
+          "stage": "render",
+          "started_at": "2026-11-13T18:49:23",
+          "finished_at": "2026-11-13T20:34:06",
+          "seconds": 6283,
+          "outcome": "done"
+        }
+      ]
+    },
+    {
+      "id": "5ef79dea7fbc",
+      "project_id": "2026-11-23_Beyond3Baje_Emergency",
+      "brand": "Beyond3Baje",
+      "title": "Emergency",
+      "recording_path": "B:/youtubeProjects/beyond3baje/ep13/emergencyTemp1.mp4",
+      "settings_override": null,
+      "mode": "record_first",
+      "precut": true,
+      "status": "done",
+      "resume_from": "plan",
+      "checkpoint": "render",
+      "pause_requested": false,
+      "cancel_requested": false,
+      "attempts": 2,
+      "error": null,
+      "created_at": "2026-11-23T15:32:04",
+      "updated_at": "2026-11-23T20:39:04",
+      "started_at": "2026-11-23T19:36:00",
+      "finished_at": "2026-11-23T20:39:04",
+      "stage_times": [
+        {
+          "stage": "start",
+          "started_at": "2026-11-23T15:32:04",
+          "finished_at": "2026-11-23T15:32:05",
+          "seconds": 1,
+          "outcome": "done"
+        },
+        {
+          "stage": "transcribe",
+          "started_at": "2026-11-23T15:32:05",
+          "finished_at": "2026-11-23T15:40:46",
+          "seconds": 521,
+          "outcome": "done"
+        },
+        {
+          "stage": "plan",
+          "started_at": "2026-11-23T19:36:00",
+          "finished_at": "2026-11-23T19:41:07",
+          "seconds": 307,
           "outcome": "done"
         },
         {
           "stage": "finalize",
-          "started_at": "2026-10-08T22:30:30",
-          "finished_at": "2026-10-08T22:30:36",
-          "seconds": 6,
+          "started_at": "2026-11-23T19:41:07",
+          "finished_at": "2026-11-23T19:41:09",
+          "seconds": 2,
           "outcome": "done"
         },
         {
           "stage": "render",
-          "started_at": "2026-10-08T22:30:36",
-          "finished_at": "2026-10-08T22:40:28",
-          "seconds": 592,
-          "outcome": "cancelled"
-        },
-        {
-          "stage": "render",
-          "started_at": "2026-10-08T22:46:41",
-          "finished_at": "2026-10-08T22:46:49",
-          "seconds": 8,
+          "started_at": "2026-11-23T19:41:09",
+          "finished_at": "2026-11-23T20:39:04",
+          "seconds": 3475,
           "outcome": "done"
-        },
-        {
-          "stage": "render",
-          "started_at": "2026-10-08T22:46:49",
-          "finished_at": null,
-          "seconds": null,
-          "outcome": null
         }
-      ],
-      "recut": false
+      ]
     }
   ]
 }

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowUp,
+  FolderOpen,
   ListVideo,
   Pause,
   Plus,
@@ -34,7 +35,7 @@ const STATUS_STYLE: Record<ProduceQueueItem['status'], { label: string; color: s
 
 const STAGE_LABEL: Record<string, string> = {
   start: 'import',
-  transcribe: 'transcription',
+  transcribe: 'transcription & cut',
   plan: 'visual planning',
   finalize: 'render hand-off',
   render: 'render',
@@ -263,6 +264,7 @@ export default function ProductionQueue({
         void act(item, action, body);
       }}
       title={title}
+      aria-label={label ? undefined : title}
       style={{ padding: '2px 8px', fontSize: '0.72rem' }}
     >
       <Icon size={11} />
@@ -387,6 +389,23 @@ export default function ProductionQueue({
                     )}
                     {(item.status === 'paused' || (running && item.pause_requested))
                       && btn(item, 'resume', 'Resume', Play, running ? 'Keep going instead of pausing.' : 'Put it back in the queue.')}
+                    {item.status === 'awaiting_review' && !(item.stage_state && !item.stage_state.startsWith('awaiting')) && (
+                      <button
+                        type="button"
+                        className="btn btn-sm"
+                        title="Open this project at the step waiting for your review."
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: 'rgba(245, 158, 11, 0.18)', fontWeight: 600 }}
+                        onClick={() => {
+                          onOpenProject?.(item.project_id);
+                          window.setTimeout(() => {
+                            document.querySelector(`[data-project-id="${item.project_id}"]`)
+                              ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }, 200);
+                        }}
+                      >
+                        <Play size={12} /> Review
+                      </button>
+                    )}
                     {item.status === 'failed' && btn(item, 'retry', 'Retry', RotateCcw,
                       `Retry from the last safe point (${STAGE_LABEL[item.checkpoint || 'start'] || 'import'}).`)}
                     {(item.status === 'cancelled') && btn(item, 'retry', 'Retry', RotateCcw,
@@ -417,6 +436,21 @@ export default function ProductionQueue({
                 {detail && (
                   <div style={{ fontSize: '0.74rem', marginTop: 4, color: item.status === 'failed' ? '#f87171' : 'var(--text-secondary)', overflowWrap: 'anywhere' }}>
                     {detail}
+                  </div>
+                )}
+                {item.status === 'done' && item.final_output_path && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4, fontSize: '0.74rem', color: 'var(--text-secondary)', overflowWrap: 'anywhere' }}>
+                    <span>Final video: <strong style={{ color: 'var(--text-primary)' }}>{item.final_output_path.split(/[\\/]/).pop()}</strong></span>
+                    <button
+                      type="button"
+                      className="btn btn-sm"
+                      title={item.final_output_path}
+                      onClick={() => postJson(`/api/projects/${encodeURIComponent(item.project_id)}/produce_video/reveal`, {})
+                        .catch((err) => toast(describeError(err), 'error'))}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                    >
+                      <FolderOpen size={12} /> Open in Explorer
+                    </button>
                   </div>
                 )}
                 {!!item.stage_times?.length && <StageTimes entries={item.stage_times} />}

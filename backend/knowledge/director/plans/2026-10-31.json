@@ -1,0 +1,69 @@
+{
+  "horizon": "day",
+  "generated_at": "2026-10-31T11:10:45",
+  "turns": 2,
+  "items": [
+    {
+      "channel": null,
+      "action": "fix_start_buzzedit",
+      "params": {},
+      "when": "tonight",
+      "why": "BuzzEdit is unreachable on the shared port ledger, blocking voice synthesis and vibe reels",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+      "needs_approval": false
+    },
+    {
+      "channel": null,
+      "action": "fix_restart_gemini_harness",
+      "params": {},
+      "when": "tonight",
+      "why": "Nightly self-check reported Gemini harness ping failed at 11:06:57",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "longform_run_slot",
+      "params": {
+        "format": "real_encounter"
+      },
+      "when": "tonight",
+      "why": "Runs first in the night order: pure LLM research/writing cost zero GPU hours",
+      "goal": "Long-form scripts first, then the reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Raat3Baje",
+      "action": "auto_story_make",
+      "params": {
+        "format": "rules_horror"
+      },
+      "when": "tonight",
+      "why": "Produces next weekly horror reel (~2h render) following proven rules_horror format",
+      "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Beyond3Baje",
+      "action": "retry_step",
+      "params": {
+        "project_id": "2026-10-26_Beyond3Baje_B3b04215SaalSeBandStationParHarRaatEkTrainAatiHaiAnomalyFiles"
+      },
+      "when": "tonight",
+      "why": "Resumes Anomaly Files story reel after studio restart failure once BuzzEdit is online (~1.5h render)",
+      "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+      "needs_approval": false
+    },
+    {
+      "channel": "Life3Baje",
+      "action": "auto_story_make_mood_reel",
+      "params": {
+        "theme": "village_evening"
+      },
+      "when": "tonight",
+      "why": "Cheap 25-minute mood reel for @khayal3bajefeels scheduled last in the GPU queue",
+      "goal": "Life3Baje: vlog + motivational. Vibe reels are hyper-real AI clips with 2-4 ghazal lines, no voice.",
+      "needs_approval": false
+    }
+  ]
+}

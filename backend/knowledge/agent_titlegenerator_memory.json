@@ -1,0 +1,70 @@
+[
+  {
+    "id": "80d3a64f-514b-415b-839d-73f73866c6eb",
+    "scope": "agent",
+    "owner": "TitleGenerator",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by Beyond3BajeStrategist to perform the following task:\n\nGenerate 3 high-impact, curiosity-driven title options for the \"Harrison Okene air pocket\" case in a Hinglish (Roman script) mix.",
+      "result_snippet": "Here are 3 high-impact, curiosity-driven titles for the Harrison Okene air pocket case in Hinglish:\n\n1. **Maut Ke Neeche 10 Din! Kaise Zinda Raha Harrison Okene?**\n2. **Ek 'Air Pocket' Ka Chamatkar: Jab Maut Ke Kareeb Bhi Wo Zinda Bach Gaya!**\n3. **Zind Daaf Hone Ke Baad Saans Kaise Li? Harrison Okene Ki Hairan Kar Dene Wali Kahani.**"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T21:42:30.345088",
+    "updated": "2026-10-22T21:42:30.345093"
+  },
+  {
+    "id": "7e89785f-8fa2-4020-bdcd-eb347873c109",
+    "scope": "agent",
+    "owner": "TitleGenerator",
+    "tags": [
+      "delegated",
+      "Beyond3BajeStrategist",
+      "Beyond3Baje"
+    ],
+    "content": {
+      "user": "Generate 3 high-impact, curiosity-driven title options for the \"Harrison Okene air pocket\" case in a Hinglish (Roman script) mix.",
+      "reply": "Here are 3 high-impact, curiosity-driven titles for the Harrison Okene air pocket case in Hinglish:\n\n1. **Maut Ke Neeche 10 Din! Kaise Zinda Raha Harrison Okene?**\n2. **Ek 'Air Pocket' Ka Chamatkar: Jab Maut Ke Kareeb Bhi Wo Zinda Bach Gaya!**\n3. **Zind Daaf Hone Ke Baad Saans Kaise Li? Harrison Okene Ki Hairan Kar Dene Wali Kahani.**",
+      "agent": "TitleGenerator",
+      "channel": "Beyond3Baje"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T21:42:30.376501",
+    "updated": "2026-10-22T21:42:30.376506"
+  },
+  {
+    "id": "8f1b3ea0-edf9-4e80-931b-76122067ede5",
+    "scope": "agent",
+    "owner": "TitleGenerator",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by Life3BajeStrategist to perform the following task:\n\nCreate 5 title options for a video about the internal conflict of balancing a software career, building a YouTube media company, and launching a coffee brand (Buzzcaf). The tone should be honest, personal, and not \"clickbaity\" in a generic way. Use Hinglish-friendly phrasing where possible.",
+      "result_snippet": "Here are 5 title options for your video, crafted to be honest, relatable, and grounded in the reality of juggling multiple passions while maintaining a professional career.\n\nAll titles are in **Hinglish** as per studio guidelines:\n\n1. **Software Job, YouTube aur Buzzcaf: Kya Sab Kuch Manage Karna Possible Hai?**\n   *(Focuses on the practical struggle of balancing three major pillars.)*\n\n2. **Coding se Coffee tak: Meri Real Life Struggle aur Hustle.**\n   *(A more personal, narrative-driven title that highlights the journey.)*\n\n3. **Ek Software Engineer Kyun Banaye ek Coffee Brand? My Honest Journey.**\n   *(Focuses on your identity and the \"why\" behind starting Buzzcaf while in tech.)*\n\n4. **Job, Content Creation aur Buzzcaf: Balance Kaise Rakha?**\n   *(A direct approach that speaks to other creators/entrepreneurs trying to do the same.)*\n\n5. **Reality Check: Ek Career aur 2 Sapno ko Saath Kaise Nibhaun?**\n   *(An emotional and honest take on the internal conflict of multi-tasking your passions.)*"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T08:32:22.379355",
+    "updated": "2026-10-29T08:32:22.379358"
+  },
+  {
+    "id": "f0f307a8-63d6-4543-962c-70be398788ba",
+    "scope": "agent",
+    "owner": "TitleGenerator",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "You have been invoked by Life3BajeStrategist to perform the following task:\n\nCreate 5 title options for [vault:topic_e7abe99b] in a mix of English and Hinglish (Roman script). The titles should feel like a personal documentary, not clickbait. They must focus on the reality of the first 30 days of Buzzcaf (revenue, orders, mistakes) while maintaining the \"Life3Baje\" brand voice.",
+      "result_snippet": "1. **Buzzcaf ke Pehle 30 Din: Ek Honest Reality Check**\n2. **Zero se Shuruat: Buzzcaf ki Galtiyan aur Seekh (First 30 Days)**\n3. **Orders, Revenue aur Realities: Buzzcaf ka Pehla Mahina**\n4. **Ek Software Engineer ka Coffee Brand Safar: First 30 Days**\n5. **Buzzcaf Diary: Pehle 30 Din mein kya seekha?**"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T12:52:42.622917",
+    "updated": "2026-10-30T12:52:42.622920"
+  }
+]

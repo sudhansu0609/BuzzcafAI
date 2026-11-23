@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Moon, Play, RotateCw, Save } from 'lucide-react';
 import { useStudio } from '../state/studio';
-import { getJson, postJson, describeError } from '../services/api';
+import { getJson, postJson, putJson, describeError } from '../services/api';
+import type { ChannelFormatDefaults, ChannelFormatsState } from '../lib/types';
 import NightlyControls, { type NightlyState } from './NightlyControls';
 
 // The long-form half of the nightly run (backend app/services/longform_nightly.py).
@@ -12,7 +13,7 @@ import NightlyControls, { type NightlyState } from './NightlyControls';
 // Lives on the Scheduler Desk's Long form tab, with its own wake time, hibernate
 // and idle settings (its own Windows task; the Shorts tab has another).
 
-type Task = { channel: string; slot: number; stage: string; topic: string | null; project_id: string | null; detail: string };
+type Task = { channel: string; slot: number; stage: string; topic: string | null; project_id: string | null; detail: string; minutes?: number | null };
 type LogLine = { at: string; channel: string; text: string };
 type RunStatus = {
   state: 'idle' | 'running' | 'done' | 'failed'; trigger?: 'nightly' | 'manual';
@@ -40,6 +41,22 @@ function stageColor(stage: string): string {
   return '#60a5fa'; // planning or a workflow step: in progress
 }
 
+function estimateTaskRemaining(stage: string, minutes?: number | null): string | null {
+  if (stage === 'done' || stage === 'failed' || stage === 'queued' || stage === 'skipped') return null;
+  const s = stage.toLowerCase();
+  if (s.includes('plan') || s.includes('strat')) return '~1-2 min';
+  if (s.includes('research')) return '~3-5 min';
+  if (s.includes('script') || s.includes('story')) {
+    const mins = minutes || 20;
+    return `~${Math.max(5, Math.round(mins * 0.7))} min`;
+  }
+  if (s.includes('visual')) return '~2-3 min';
+  if (s.includes('narration') || s.includes('human')) return '~4-7 min';
+  if (s.includes('seo')) return '~3-5 min';
+  if (s.includes('render')) return '~5-10 min';
+  return '~2-4 min';
+}
+
 export default function LongformScheduler({ onOpenProject }: { onOpenProject: (id: string) => void }) {
   const { toast, refreshProjects, channelFilter } = useStudio();
   const [state, setState] = useState<LongformState | null>(null);
@@ -48,10 +65,23 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
   const [showRules, setShowRules] = useState<string | null>(null);
   const logRef = useRef<HTMLDivElement>(null);
 
+  // Every long video of a channel: Shorts first or not, how many, the face
+  // layout, and (Raat3Baje) the next episode's format.
+  const [formats, setFormats] = useState<ChannelFormatsState | null>(null);
+
   const load = useCallback(() => {
     getJson<LongformState>('/api/longform/nightly').then(setState).catch(() => undefined);
+    getJson<ChannelFormatsState>('/api/channel_formats').then(setFormats).catch(() => undefined);
   }, []);
   useEffect(load, [load]);
+
+  const saveFormat = async (channel: string, patch: Partial<ChannelFormatDefaults> & { next_format?: string | null; lock_format?: string | null }) => {
+    try {
+      setFormats(await putJson<ChannelFormatsState>(`/api/channel_formats/${encodeURIComponent(channel)}`, patch));
+    } catch (e) {
+      toast(describeError(e), 'error');
+    }
+  };
 
   // While a run is going (Run now here, or the nightly process), poll the live
   // status; refresh the project list when it finishes.
@@ -129,7 +159,7 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
         <label style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
           <input type="number" className="form-control" min={1} max={5} value={state.per_channel}
-            onChange={(e) => save({ per_channel: Math.max(1, Math.min(5, Number(e.target.value) || 1)) })} style={{ width: 60 }} />
+            onChange={(e) => save({ per_channel: Math.max(1, Math.min(5, Number(e.target.value) || 1)) })} aria-label="Per channel" style={{ width: 60 }} />
           per channel
         </label>
       </div>
@@ -142,7 +172,7 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
             <div key={ch} style={{ border: '1px solid var(--border-subtle)', borderTop: `3px solid ${CHANNEL_COLORS[ch]}`, borderRadius: 8, padding: 10 }}>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
                 <label style={{ display: 'flex', gap: 6, alignItems: 'center', cursor: 'pointer' }}>
-                  <input type="checkbox" checked={state.channels.includes(ch)} onChange={(e) => toggleChannel(ch, e.target.checked)} style={{ width: 16, height: 16 }} />
+                  <input type="checkbox" checked={state.channels.includes(ch)} onChange={(e) => toggleChannel(ch, e.target.checked)} aria-label={`${ch} enabled`} style={{ width: 16, height: 16 }} />
                   <span style={{ color: CHANNEL_COLORS[ch], fontWeight: 700 }}>{ch}</span>
                 </label>
                 <span style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
@@ -153,6 +183,83 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
                   <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem' }}>min</span>
                 </span>
               </div>
+              {(() => {
+                const d = formats?.channels[ch];
+                if (!d) return null;
+                const episodeFormats = formats?.episode_formats[ch];
+                const nextKey = formats?.next_format[ch];
+                const pinned = formats?.pinned_format[ch] || '';
+                const locked = formats?.locked_format?.[ch] || '';
+                const faceButton = (value: 'mixed' | 'face_intro', label: string) => (
+                  <button type="button" className={`btn btn-sm${d.face_layout === value ? '' : ' btn-outline'}`}
+                    onClick={() => saveFormat(ch, { face_layout: value })}
+                    style={{ padding: '1px 8px', fontSize: '0.74rem', height: 24, borderRadius: 0 }}>
+                    {label}
+                  </button>
+                );
+                return (
+                  <div style={{ display: 'grid', gap: 6, margin: '8px 0', fontSize: '0.8rem' }}>
+                    <span style={{ fontWeight: 600 }}>Every long video</span>
+                    <label style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap', cursor: 'pointer' }}
+                      title="You record the Shorts at the start of the session, then the long video. The Shorts Scripts step writes them; production splits the recording at your greeting and makes each Short its own project. A project can still choose otherwise.">
+                      <input type="checkbox" checked={d.shorts_first} onChange={(e) => saveFormat(ch, { shorts_first: e.target.checked })}
+                        aria-label={`${ch} record Shorts first`}
+                        style={{ width: 16, height: 16 }} />
+                      Record
+                      <select className="form-control" value={d.shorts_count} disabled={!d.shorts_first}
+                        onChange={(e) => saveFormat(ch, { shorts_count: Number(e.target.value) })}
+                        aria-label={`${ch} Shorts count`}
+                        style={{ width: 'auto', padding: '1px 6px', height: 24, fontSize: '0.78rem' }}>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                      </select>
+                      Shorts first, then the long video
+                    </label>
+                    <span style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}
+                      title="Mixed: your face comes back between the pictures all through. Face first: only your face for the opening, then pictures and clips only. A project can still choose otherwise.">
+                      Face:
+                      <span style={{ display: 'inline-flex', borderRadius: 6, overflow: 'hidden' }}>
+                        {faceButton('mixed', 'Mixed')}{faceButton('face_intro', 'Face first')}
+                      </span>
+                      {d.face_layout === 'face_intro' && (
+                        <>
+                          <select className="form-control" value={d.face_intro_seconds}
+                            onChange={(e) => saveFormat(ch, { face_intro_seconds: Number(e.target.value) })}
+                            aria-label={`${ch} face intro length`}
+                            style={{ width: 'auto', padding: '1px 6px', height: 24, fontSize: '0.78rem' }}>
+                            {[30, 45, 60, 75, 90, 105, 120, 150, 180].map((s) => (
+                              <option key={s} value={s}>{s < 60 ? `${s} s` : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')} min`}</option>
+                            ))}
+                          </select>
+                          then pictures only
+                        </>
+                      )}
+                    </span>
+                    {episodeFormats && episodeFormats.length > 0 && (
+                      <label style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}
+                        title="The story format of the next nightly episode. Picking one here uses it once, then the channel's rotation carries on from it. Tick Every episode to lock the chosen format for all of them.">
+                        Next episode:
+                        <select className="form-control" value={locked || pinned}
+                          onChange={(e) => (locked
+                            ? saveFormat(ch, { lock_format: e.target.value || null })
+                            : saveFormat(ch, { next_format: e.target.value || null }))}
+                          aria-label={`${ch} next episode format`}
+                          style={{ width: 'auto', padding: '1px 6px', height: 24, fontSize: '0.78rem' }}>
+                          <option value="">In turn ({episodeFormats.find((f) => f.key === (pinned ? null : nextKey))?.label ?? 'rotation'})</option>
+                          {episodeFormats.map((f) => <option key={f.key} value={f.key}>{f.label}</option>)}
+                        </select>
+                        <label style={{ display: 'inline-flex', gap: 4, alignItems: 'center', cursor: 'pointer' }}>
+                          <input type="checkbox" checked={!!locked}
+                            onChange={(e) => saveFormat(ch, { lock_format: e.target.checked ? (pinned || nextKey || null) : null })}
+                            aria-label={`${ch} lock format for every episode`}
+                            style={{ width: 16, height: 16 }} />
+                          Every episode
+                        </label>
+                      </label>
+                    )}
+                  </div>
+                );
+              })()}
               <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', margin: '4px 0 6px' }}>
                 Planned by {state.strategists[ch]} · always follows the{' '}
                 <button type="button" style={LINK} onClick={() => setShowRules(showRules === ch ? null : ch)}>
@@ -171,6 +278,7 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
                 value={text}
                 placeholder={`Anything extra for the next ${ch} runs: a topic or season to focus on, a format to use, something to avoid. Wins over the channel rules.`}
                 onChange={(e) => setDrafts((d) => ({ ...d, [ch]: e.target.value }))}
+                aria-label={`${ch} instructions`}
                 style={{ width: '100%', resize: 'vertical', fontSize: '0.84rem' }}
               />
               {draft !== undefined && draft !== (state.instructions[ch] ?? '') && (
@@ -209,6 +317,22 @@ export default function LongformScheduler({ onOpenProject }: { onOpenProject: (i
                 <span style={{ color: stageColor(t.stage), border: `1px solid ${stageColor(t.stage)}`, borderRadius: 999, padding: '1px 8px', fontSize: '0.76rem', whiteSpace: 'nowrap' }}>
                   {t.stage}
                 </span>
+                {typeof t.minutes === 'number' && (
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.78rem' }}>{t.minutes} min</span>
+                )}
+                {estimateTaskRemaining(t.stage, t.minutes) && (
+                  <span style={{
+                    color: '#c084fc',
+                    background: 'rgba(192, 132, 252, 0.12)',
+                    border: '1px solid rgba(192, 132, 252, 0.28)',
+                    borderRadius: 4,
+                    padding: '1px 6px',
+                    fontSize: '0.74rem',
+                    fontWeight: 600,
+                  }}>
+                    ⏳ {estimateTaskRemaining(t.stage, t.minutes)} remaining
+                  </span>
+                )}
                 {t.project_id
                   ? <button type="button" style={LINK} onClick={() => onOpenProject(t.project_id as string)}>{t.topic}</button>
                   : <span>{t.topic || ''}</span>}

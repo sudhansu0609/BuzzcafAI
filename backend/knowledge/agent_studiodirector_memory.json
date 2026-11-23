@@ -1,0 +1,21 @@
+[
+  {
+    "id": "932c546c-da39-424d-80d5-0233d639dea3",
+    "scope": "agent",
+    "owner": "StudioDirector",
+    "tags": [
+      "chat",
+      "Raat3Baje"
+    ],
+    "content": {
+      "user": "Say hello in 5 words",
+      "reply": "Hello, I am StudioDirector.",
+      "agent": "StudioDirector",
+      "channel": "Raat3Baje"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T08:30:00.549342",
+    "updated": "2026-10-25T08:30:00.549577"
+  }
+]

@@ -145,3 +145,37 @@ Formulate 3 thumbnail variants specifying visual focal points, emotional trigger
 
 ## 28. Version History
 - **v1.0.0**: Initial 29-part standard release.
+
+## 9. The Raat3Baje thumbnail (the creator's reference, 2026-10-21)
+
+Every Raat3Baje thumbnail is composed by BuzzEdit in one fixed layout, so your
+concept supplies the parts, not the layout:
+
+- **Left two thirds:** one AI picture of the story's key moment -- a specific
+  place and thing from the story (the jungle watchtower, the empty cane chair,
+  room 209), night or low light, cinematic, one clear subject, no text in the
+  picture, never a camera in the scene.
+- **Right third:** the creator's own picture (his fixed base photo), expressive,
+  behind a torn-paper edge with a light border. Never describe or replace him.
+- **The words on the picture:** 2-4 words in Devanagari, blood red with a dark
+  3D depth, cracks and drips (e.g. जंगल का रेंजर, कमरा 209, दादी की खाली कुर्सी).
+  The thing or place the story turns on; concrete, never a sentence, never the
+  words "horror" or "story".
+- **Corner label:** a two-word English label in capitals, e.g. HORROR STORY,
+  REAL ENCOUNTER, KALA JADU, TANTRA KATHA.
+- **Colours:** dark blue/teal or green night scene, red title, warm skin on the
+  creator; vignette and grain are added automatically.
+
+So for Raat3Baje deliver, per concept: `thumb_words` (Devanagari, 2-4 words),
+`scene_prompt` (one sentence, English, no text, no camera), `label` (two
+English words). Three concepts still, but all in this layout; vary the moment
+shown and the words, not the design.
+
+## 10. The art style
+
+When the task names an art style other than "real" (explainer, stick figure,
+cartoon), the scene picture is made in that medium by the editor: write
+`scene_prompt` as that kind of drawing (a flat vector cutaway of the ship, a
+stick figure on a raft in black marker with one red wave, a cartoon frame of
+the airport bench), never as a photograph or film still. The layout, the
+creator's own picture, the title words and the label stay exactly as above.

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-01",
+  "started_at": "2026-11-01T03:00:06",
+  "finished_at": "2026-11-01T08:25:10",
+  "headline": "6 videos written, 1 problem, 325 min",
+  "markdown": "# Last night: 2026-11-01\n\n## Problems\n\n- auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\nStarted 03:00, took 325 min (shorts).\n\n## Shorts (30 min)\n\n- Life3Baje: **Apni Kamiyon Se Ladna Seekho 🎻** (score 82) -> `2026-11-01_Life3Baje_ShortApniKaamiyonSeLadnaSeekho`\n- Life3Baje: **Khayale-Taamir: Nayi Shuruat 🏗️** (score 78) -> `2026-11-01_Life3Baje_ShortKhayaleTaamirNayiShuruat`\n- Raat3Baje: **Kerala Ka Khaufnak Shaitan: Chaathan Ka Sach** (score 74) -> `2026-11-01_Raat3Baje_ShortKeralaKaKhaufnakShaitanChaathan`\n- Beyond3Baje: **Travis Walton: Arizona ka Alien Abduction** (score 76) -> `2026-11-01_Beyond3Baje_ShortTravisWaltonArizonaAlienAbduction`\n- TheTallStoryteller: **8 Crore Loot Aur Surrender Ka Twist** (score 72) -> `2026-11-01_TheTallStoryteller_Short8CroreLootAurSurrender`\n- TheTallStoryteller: **Jewel Thief Ka Aakhiri Trap** (score 70) -> `2026-11-01_TheTallStoryteller_ShortJewelThiefKaAakhiriTrap`\n\n## Made by itself (84 min)\n\n- Nothing made.\n- Life3Baje (mood_reel): failed, BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\n## Archived\n\n- None: Do Bailon ki Katha: Azadi ka Junoon (untouched None days)\n- None: The Pit & Pendulum: Ek Khaufnaak Raat (untouched None days)\n\n## Waiting for you\n\n- Raat3Baje: Hawa Ke Bina Bajti Ghanti (The Bell That Rings Without Wind) -- No model answered for 'SEO & Thumbnail'; a simulated reply is not a usable seo_package. Check the model/provider and run the step again.\n- TheTallStoryteller: None -- no topic in the vault or the Idea Dump\n\n## Afterwards\n\n- Stayed awake: someone used the PC 5.8 min ago (needs 10 min idle)\n",
+  "items": [
+    {
+      "task": "shorts_daily",
+      "state": "done",
+      "built": 6,
+      "skipped": 0,
+      "seconds": 1776
+    },
+    {
+      "task": "auto_story",
+      "state": "done",
+      "made": 0,
+      "failed": 1,
+      "seconds": 5013
+    },
+    {
+      "task": "director",
+      "state": "done"
+    },
+    {
+      "task": "archive",
+      "state": "done",
+      "archived": 2
+    }
+  ],
+  "problems": [
+    "auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes."
+  ]
+}

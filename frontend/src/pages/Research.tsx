@@ -132,6 +132,7 @@ export default function Research() {
             type="text"
             className="form-control"
             style={{ flex: 1, minWidth: 240 }}
+            aria-label="Search a topic, person, or event"
             placeholder="Search a topic, person, or event…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

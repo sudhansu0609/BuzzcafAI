@@ -28,6 +28,14 @@
             "output_asset_type": "script_final"
         },
         {
+            "name": "Animation Screenplay",
+            "agent_role": "WriterAgent",
+            "description": "Converted by code (app/services/animate_screenplay.py): the model only extracts the cast and labels scenes, speakers and tags; his sentences are copied verbatim and checked word for word.",
+            "requires_approval": false,
+            "input_assets": ["script_final"],
+            "output_asset_type": "screenplay"
+        },
+        {
             "name": "SEO & Publishing Setup",
             "agent_role": "SEOManagerAgent",
             "description": "Generate descriptions, tags, and titles tailored for blog platforms, ebooks, or audiobooks.",

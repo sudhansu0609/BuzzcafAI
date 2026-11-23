@@ -176,27 +176,27 @@ export default function BulkEdit() {
       <b style={{ textTransform: 'capitalize' }}>{side}</b>
       <div className="form-group" style={{ minWidth: 0, flex: '0 0 auto' }}>
         <label>Remove <span style={hint}>(one per line; /regex/i also works)</span></label>
-        <textarea className="form-control" style={area} value={form[side].remove}
+        <textarea className="form-control" style={area} value={form[side].remove} aria-label={`Remove (${side})`}
           placeholder={side === 'title' ? 'clickbait\nSHOCKING' : ''} onChange={(e) => setField(side, 'remove', e.target.value)} />
       </div>
       <div className="form-group" style={{ minWidth: 0, flex: '0 0 auto' }}>
         <label>Replace <span style={hint}>(find =&gt; replacement, one per line)</span></label>
-        <textarea className="form-control" style={area} value={form[side].replace}
+        <textarea className="form-control" style={area} value={form[side].replace} aria-label={`Replace (${side})`}
           placeholder={side === 'title' ? 'Ep. => Episode' : '@old_handle => @new_handle'} onChange={(e) => setField(side, 'replace', e.target.value)} />
       </div>
       <div className="form-group" style={{ minWidth: 0, flex: '0 0 auto' }}>
         <label>Add to start</label>
-        <input className="form-control" style={input} value={form[side].prepend} onChange={(e) => setField(side, 'prepend', e.target.value)} />
+        <input className="form-control" style={input} aria-label={`Add to start (${side})`} value={form[side].prepend} onChange={(e) => setField(side, 'prepend', e.target.value)} />
       </div>
       <div className="form-group" style={{ minWidth: 0, flex: '0 0 auto' }}>
         <label>Add to end</label>
-        <input className="form-control" style={input} value={form[side].append}
+        <input className="form-control" style={input} value={form[side].append} aria-label={`Add to end (${side})`}
           placeholder={side === 'title' ? '| Raat3Baje' : 'Follow us: https://…'} onChange={(e) => setField(side, 'append', e.target.value)} />
       </div>
       {side === 'description' && (
         <div className="form-group" style={{ minWidth: 0, flex: '0 0 auto' }}>
           <label>Added text goes</label>
-          <select className="form-control" style={input} value={form.separator} onChange={(e) => setForm((f) => ({ ...f, separator: e.target.value }))}>
+          <select className="form-control" style={input} aria-label="Added text goes" value={form.separator} onChange={(e) => setForm((f) => ({ ...f, separator: e.target.value }))}>
             <option value={'\n\n'}>after a blank line</option>
             <option value={'\n'}>on a new line</option>
             <option value=" ">on the same line</option>
@@ -217,7 +217,7 @@ export default function BulkEdit() {
         <h3 className="panel-title"><PenLine size={20} /> Bulk edit titles &amp; descriptions</h3>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
           <span style={muted}>Channel</span>
-          <select className="form-control" style={{ ...input, width: 'auto', minWidth: 220 }} value={channel} disabled={running || !!busy}
+          <select className="form-control" style={{ ...input, width: 'auto', minWidth: 220 }} aria-label="Channel" value={channel} disabled={running || !!busy}
             onChange={(e) => setChannel(e.target.value)}>
             {!signedIn.length && <option value="">— connect a channel above —</option>}
             {signedIn.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
@@ -234,7 +234,7 @@ export default function BulkEdit() {
           <span style={muted}>Only videos that are:</span>
           {['public', 'unlisted', 'private'].map((p) => (
             <label key={p} style={{ ...muted, display: 'inline-flex', gap: 4 }}>
-              <input type="checkbox" checked={form.privacy.includes(p)}
+              <input type="checkbox" aria-label={p} checked={form.privacy.includes(p)}
                 onChange={(e) => setForm((f) => ({ ...f, privacy: e.target.checked ? [...f.privacy, p] : f.privacy.filter((x) => x !== p) }))} />
               {p}
             </label>
@@ -268,7 +268,7 @@ export default function BulkEdit() {
             {preview.items.map((i) => (
               <div key={i.id} style={{ padding: 8, borderRadius: 6, border: '1px solid var(--border-color, #333)', fontSize: '0.8rem', opacity: i.problems.length ? 0.7 : 1 }}>
                 <label style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                  <input type="checkbox" disabled={!!i.problems.length} checked={selected.has(i.id)}
+                  <input type="checkbox" aria-label={`Select ${i.title || i.id}`} disabled={!!i.problems.length} checked={selected.has(i.id)}
                     onChange={(e) => setSelected((s) => { const n = new Set(s); if (e.target.checked) n.add(i.id); else n.delete(i.id); return n; })} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={muted}>{i.privacy} · {i.published_at.slice(0, 10)} · <a href={`https://youtu.be/${i.id}`} target="_blank" rel="noreferrer">{i.id}</a></div>
@@ -306,7 +306,7 @@ export default function BulkEdit() {
       <div className="panel-card">
         <b>Restore from a backup</b>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginTop: 8 }}>
-          <select className="form-control" style={{ ...input, flex: 1, width: 'auto', minWidth: 0 }} value={backup} onChange={(e) => setBackup(e.target.value)}>
+          <select className="form-control" style={{ ...input, flex: 1, width: 'auto', minWidth: 0 }} aria-label="Backup to restore" value={backup} onChange={(e) => setBackup(e.target.value)}>
             {!backups.length && <option value="">No backups for this channel yet</option>}
             {backups.map((b) => <option key={b.name} value={b.name}>{b.created_at.replace('T', ' ')} · {b.count} videos · {b.label}</option>)}
           </select>
@@ -323,7 +323,7 @@ export default function BulkEdit() {
             <p style={muted}>{confirm.note}</p>
             <div className="form-group">
               <label>Type <b>{confirm.count}</b> to confirm</label>
-              <input className="form-control" style={input} autoFocus inputMode="numeric" value={typed} onChange={(e) => setTyped(e.target.value)} />
+              <input className="form-control" style={input} aria-label={`Type ${confirm.count} to confirm`} autoFocus inputMode="numeric" value={typed} onChange={(e) => setTyped(e.target.value)} />
             </div>
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 10 }}>
               <button type="button" className="btn btn-outline" onClick={() => { setConfirm(null); setTyped(''); }}>Cancel</button>

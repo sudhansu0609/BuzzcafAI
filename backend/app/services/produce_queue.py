@@ -25,6 +25,7 @@ import json
 import logging
 import os
 import threading
+import time
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional
@@ -43,6 +44,24 @@ RESUME_POINTS = ("start", "transcribe", "plan", "finalize", "render")
 #: the continue endpoint moves it back to `queued`.
 ACTIVE_STATES = ("queued", "running", "paused", "awaiting_review")
 FINISHED_STATES = ("done", "failed", "cancelled")
+
+#: An item that fails is put back in line by itself, from its last checkpoint,
+#: until it has run this many times in all; only then does it stay failed for
+#: the creator to look at. Every stage reuses what the earlier attempts made
+#: (the imported recording, the eye-contact file, BuzzEdit's transcription
+#: checkpoints, the visual plan, the generated pictures and clips), so a
+#: retry costs the failed stage only. 2026-10-20: a transcription lost to a
+#: BuzzEdit restart stayed "failed" overnight with nothing to do but retry.
+AUTO_RETRY_ATTEMPTS = 4
+#: Breathing room before a retry, so a BuzzEdit that crashed can come back
+#: and a model that was unloaded is not reloaded in the same second.
+AUTO_RETRY_DELAY_S = 60.0
+
+#: How long the queue waits, before an item, for a BuzzEdit that has announced
+#: it will restart itself onto changed code (its `/api/health` says
+#: `reload_pending`). Its own reload needs an idle moment, and a queue that
+#: starts the next item the instant the last one ends never gives it one.
+RELOAD_WAIT_S = 300.0
 
 _lock = threading.RLock()
 _state: Optional[Dict[str, Any]] = None
@@ -108,8 +127,23 @@ def _load() -> Dict[str, Any]:
         if item.get("status") == "running":
             # When it really stopped is unknown; the last write is the best guess.
             _close_stage(item, "interrupted", at=item.get("updated_at"))
-            item.update(status="failed", finished_at=_now(), pause_requested=False, cancel_requested=False,
-                        error="Interrupted: the Studio stopped mid-run. Retry picks up from the last checkpoint.")
+            attempts = int(item.get("attempts") or 0)
+            resume_from = item.get("checkpoint") or "start"
+            if resume_from not in RESUME_POINTS:
+                resume_from = "start"
+            if attempts < AUTO_RETRY_ATTEMPTS and not item.get("cancel_requested"):
+                # Back in line by itself: the Studio restarting (or crashing)
+                # mid-run is no reason for the creator to press Retry in the
+                # morning. Picks up from the last checkpoint once the queue is
+                # kicked at startup.
+                item.update(status="queued", resume_from=resume_from, finished_at=None,
+                            checkpoint=None if resume_from == "start" else resume_from,
+                            pause_requested=False, cancel_requested=False, auto_retry=True,
+                            error=(f"Interrupted: the Studio stopped mid-run (attempt {attempts}). "
+                                   f"Resuming from the '{resume_from}' stage."))
+            else:
+                item.update(status="failed", finished_at=_now(), pause_requested=False, cancel_requested=False,
+                            error="Interrupted: the Studio stopped mid-run. Retry picks up from the last checkpoint.")
     _state = state
     return state
 
@@ -401,6 +435,15 @@ def checkpoint(project_id: str, resume_from: str) -> None:
             raise ProducePaused(resume_from)
         _open_stage(item, resume_from)
         _save()
+    if resume_from != "render":
+        # The master pause (docs/STUDIO_DIRECTOR_PLAN.md Part 1): held here,
+        # between this item's own stages, on the worker thread -- never
+        # inside `_lock`, so a snapshot or a cancel request is never blocked
+        # by it. The render stage is not held here: BuzzEdit cannot suspend
+        # a render mid-way (see the module docstring); a running render is
+        # left to finish, same as the per-item pause already does.
+        from app.services import master_control
+        master_control.wait_if_paused(f"produce_queue: project {project_id} -> {resume_from}")
 
 
 def cancel_requested(project_id: str) -> bool:
@@ -420,6 +463,11 @@ def _next_runnable() -> Optional[Dict[str, Any]]:
         if item.get("status") == "running":
             return None  # one at a time
         if item.get("status") == "queued":
+            # One video at a time (2026-10-26): another project's voice being
+            # made holds the slot; its release kicks the worker again.
+            from app.services import video_slot
+            if video_slot.other_holder(item.get("project_id")):
+                return None
             return item
     return None
 
@@ -434,10 +482,39 @@ def kick() -> None:
     threading.Thread(target=_drain, name="produce-queue", daemon=True).start()
 
 
+def _await_buzzedit_reload() -> None:
+    """Wait for a BuzzEdit restart that is pending on new code, so the next item
+    runs on the code as it is now (the fixed editor, not the one that failed).
+    A new pid answering, or the flag gone, ends the wait; RELOAD_WAIT_S ends it
+    regardless. BuzzEdit down or not asked is not a reason to wait."""
+    try:
+        from integrations.buzzedit_client import BuzzEditClient
+        client = BuzzEditClient()
+        health = client.health()
+        if not health or not health.get("reload_pending"):
+            return
+        old_pid = health.get("pid")
+        logger.info("produce_queue: BuzzEdit has new code pending; waiting for it to restart "
+                    "before the next item (up to %.0f s).", RELOAD_WAIT_S)
+        deadline = time.time() + RELOAD_WAIT_S
+        while time.time() < deadline:
+            time.sleep(5.0)
+            health = client.health()
+            if health and (health.get("pid") != old_pid or not health.get("reload_pending")):
+                logger.info("produce_queue: BuzzEdit is back on its new code (pid %s).", health.get("pid"))
+                return
+        logger.warning("produce_queue: BuzzEdit did not restart within %.0f s; going on with the one running.",
+                       RELOAD_WAIT_S)
+    except Exception as exc:  # noqa: BLE001 - a courtesy wait, never a reason not to run
+        logger.debug("produce_queue: reload wait skipped (%s)", exc)
+
+
 def _drain() -> None:
     global _worker_active
     try:
         while True:
+            if _next_runnable() is not None:
+                _await_buzzedit_reload()
             with _lock:
                 item = _next_runnable()
                 if item is None:
@@ -447,7 +524,11 @@ def _drain() -> None:
                 _update(item["id"], status="running", started_at=_now(), error=None,
                         attempts=int(item.get("attempts") or 0) + 1)
                 item = dict(item)
-            _run(item)
+            retrying = _run(item)
+            from app.services import video_slot
+            video_slot.notify()
+            if retrying and AUTO_RETRY_DELAY_S > 0:
+                time.sleep(AUTO_RETRY_DELAY_S)
     except Exception:  # noqa: BLE001 - the worker must never wedge the flag on
         logger.exception("produce_queue: worker crashed")
         with _lock:
@@ -455,11 +536,16 @@ def _drain() -> None:
 
 
 def _run(item: Dict[str, Any]) -> None:
-    from integrations import idle_offload
+    from integrations import idle_offload, keep_awake
 
+    # Windows must not sleep under a production: an idle-timer sleep mid-render
+    # took ComfyUI's GPU context with it (2026-10-17). Held for this thread
+    # until the item ends, whatever way it ends.
+    keep_awake.hold(f"production item {item.get('id')}")
     try:
-        _run_item(item)
+        return _run_item(item)
     finally:
+        keep_awake.release()
         # GPU policy: once a production task ends (done, failed, paused or
         # cancelled), every model it loaded is offloaded straight away.
         try:
@@ -468,7 +554,9 @@ def _run(item: Dict[str, Any]) -> None:
             logger.warning("offload after production item failed: %s", exc)
 
 
-def _run_item(item: Dict[str, Any]) -> None:
+def _run_item(item: Dict[str, Any]) -> bool:
+    """Run one item. True when it failed and was put back in line to retry
+    by itself (the worker then waits `AUTO_RETRY_DELAY_S` before going on)."""
     from app.api import produce_api
 
     from integrations import idle_offload
@@ -482,21 +570,47 @@ def _run_item(item: Dict[str, Any]) -> None:
         with _lock:
             _close_stage(_find(item_id), "paused")
             _update(item_id, status="paused", resume_from=paused.resume_from, pause_requested=False)
-        return
+        return False
     except ProduceCancelled:
         with _lock:
             _close_stage(_find(item_id), "cancelled")
             _update(item_id, status="cancelled", finished_at=_now(), cancel_requested=False)
-        return
+        return False
     except Exception as exc:  # noqa: BLE001 - recorded on the item, surfaced in the UI
         with _lock:
-            _close_stage(_find(item_id), "failed")
+            current = _find(item_id)
+            _close_stage(current, "failed")
+            attempts = int(current.get("attempts") or 0)
+            # An error that says the creator must act first (`retryable =
+            # False` on the exception, e.g. a session whose greeting was not
+            # found) is final at once: another run would find the same thing.
+            retryable = getattr(exc, "retryable", True) is not False
+            if retryable and attempts < AUTO_RETRY_ATTEMPTS and not current.get("cancel_requested"):
+                resume_from = current.get("checkpoint") or "start"
+                if resume_from not in RESUME_POINTS:
+                    resume_from = "start"
+                note = (f"Attempt {attempts} of {AUTO_RETRY_ATTEMPTS} failed at the '{resume_from}' stage "
+                        f"({str(exc)[:300]}); retrying from there in {int(AUTO_RETRY_DELAY_S)}s.")
+                logger.warning("produce_queue: item %s (%s) %s", item_id, current.get("project_id"), note)
+                _update(item_id, status="queued", resume_from=resume_from, error=note,
+                        checkpoint=None if resume_from == "start" else resume_from,
+                        pause_requested=False, finished_at=None, auto_retry=True)
+                items = _load()["items"]
+                items.remove(current)
+                items.insert(_front_index(items), current)
+                _save()
+                try:
+                    produce_api._set_status(current["project_id"], state="queued", message=note)
+                except Exception:  # noqa: BLE001 - the status line is a courtesy
+                    pass
+                return True
             _update(item_id, status="failed", error=str(exc), finished_at=_now(),
-                    pause_requested=False, cancel_requested=False)
-        return
+                    pause_requested=False, cancel_requested=False, auto_retry=False)
+        return False
     with _lock:
         _close_stage(_find(item_id), "awaiting_review" if outcome == "awaiting_review" else "done")
         if outcome == "awaiting_review":
             _update(item_id, status="awaiting_review", pause_requested=False)
         else:
             _update(item_id, status="done", finished_at=_now(), pause_requested=False, cancel_requested=False)
+    return False

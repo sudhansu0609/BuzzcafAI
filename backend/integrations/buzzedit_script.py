@@ -31,6 +31,7 @@ _DIRECTIVES = (
     "fx", "atmos", "grade",
     # designed graphics (integrations/effect_catalog.py)
     "statement", "canvas", "pills", "point", "name", "source_quote", "document", "timeline",
+    "kinetic", "stick", "collage", "flow", "icons", "ui", "callout",
 )
 _DIRECTIVE_RE = re.compile(r"\[\s*(" + "|".join(_DIRECTIVES) + r")\s*:\s*[^\]]+?\s*\]", re.IGNORECASE)
 _HEADING_RE = re.compile(r"^\s*#{1,6}\s+.+$", re.MULTILINE)
@@ -160,12 +161,20 @@ def _face_option(beat: Dict[str, Any]) -> str:
     return face_option(beat)
 
 
+def _art_option(beat: Dict[str, Any]) -> str:
+    from integrations.effect_catalog import art_option
+    return art_option(beat)
+
+
 # plan `kind` -> a formatter producing the `[kind: arg]` string (source plan's
 # "Interchange schema" mapping table). `chapter`/`heading` are handled
 # separately below since they are a block insert, not a bracket directive.
 _DIRECTIVE_KIND = {
     "broll_image": lambda b: f"[broll: {_clean_arg(b.get('image_prompt'))}]",
-    "broll_video": lambda b: f"[video: {_clean_arg(b.get('video_prompt'))}{_face_option(b)}]",
+    "broll_video": lambda b: f"[video: {_clean_arg(b.get('video_prompt'))}{_face_option(b)}{_art_option(b)}]",
+    # One of the creator's own clips (app/services/footage.py): BuzzEdit trims `in`..`in`+`seconds`.
+    "own_clip": lambda b: (f"[video: {_clean_arg(b.get('video_prompt')).replace('|', '/')} | own={_clean_arg(b.get('path'))}"
+                           f" | in={float(b.get('in') or 0):g} | seconds={float(b.get('seconds') or 5):g}]"),
     "map": lambda b: f"[map: {_clean_arg(b.get('place'))}]",
     "chart": lambda b: f"[chart: {_chart_arg(b)}]",
     "newspaper": lambda b: f"[newspaper: {_newspaper_arg(b)}]",

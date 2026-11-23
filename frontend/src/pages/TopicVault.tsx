@@ -4,6 +4,7 @@ import { useStudio } from '../state/studio';
 import { getJson, postJson, describeError } from '../services/api';
 import { CHANNEL_META, metaFor, workflowFor } from '../lib/channels';
 import type { Topic, TopicValidation } from '../lib/types';
+import { ART_STYLES } from '../lib/artStyles';
 import { CHAT_TOPIC_KEY } from './StudioChat';
 
 type SubTab = 'discovered' | 'saved' | 'dump';
@@ -233,6 +234,20 @@ export default function TopicVault() {
     }
   };
 
+  // The art style for a saved story (real / explainer / stick figure /
+  // cartoon). '' means the channel's own; saved on the row and carried
+  // into the project when it is started (here or by the nightly run).
+  const setArtStyle = async (item: Topic, artStyle: string) => {
+    if (!item.id) return;
+    setSaved((prev) => prev.map((t) => (t.id === item.id ? { ...t, art_style: artStyle || null } : t)));
+    try {
+      await postJson('/api/topics/update', { id: item.id, art_style: artStyle });
+    } catch (err) {
+      toast(describeError(err), 'error');
+      loadSaved();
+    }
+  };
+
   const remove = async (item: Topic) => {
     const yes = await confirm({ title: 'Delete this saved topic?', body: item.topic, confirmLabel: 'Delete', danger: true });
     if (!yes) return;
@@ -292,6 +307,9 @@ export default function TopicVault() {
         brand,
         workflow_name: workflowFor(brand),
         target_duration_minutes: durationMin,
+        // The medium picked on the card travels with the project.
+        art_style: item.art_style || undefined,
+        topic_id: item.id || undefined,
       });
       toast(`Created a ${brand} project for "${item.topic.slice(0, 40)}".`, 'success');
       await refreshProjects();
@@ -426,11 +444,38 @@ export default function TopicVault() {
               <span style={{ fontSize: '0.8rem', color: '#4ade80', backgroundColor: '#0b261d', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>Viral score {item.viral_potential}/10</span>
             )}
             {item.country && <span style={{ fontSize: '0.8rem', color: '#38bdf8', backgroundColor: '#0c2233', padding: '2px 8px', borderRadius: 4 }}>{item.country}</span>}
+            {typeof item.rank === 'number' && (
+              <span style={{ fontSize: '0.8rem', color: '#fbbf24', backgroundColor: '#2a2008', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }} title={item.scores ? `Potential ${item.scores.potential ?? '-'} / Virality ${item.scores.virality ?? '-'}` : undefined}>#{item.rank}</span>
+            )}
             {sourceBadge(item.added_by)}
+            {item.source_type === 'viewer_requests' && item.evidence && (
+              <span
+                style={{ fontSize: '0.8rem', color: '#f472b6', backgroundColor: '#2a0f1f', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}
+                title={(item.evidence.quotes || []).map((q) => `"${q}"`).join('\n')}
+              >
+                {item.evidence.mentions ?? '?'} viewers asked
+                {item.evidence.videos && item.evidence.videos.length > 1 ? ` · ${item.evidence.videos.length} videos` : ''}
+              </span>
+            )}
           </div>
           <h4 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff' }}>{item.topic}</h4>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {kind === 'saved' && item.id && (
+            <select
+              className="form-control"
+              style={{ padding: '6px 10px', fontSize: '0.85rem', width: 'auto' }}
+              value={item.art_style || ''}
+              onChange={(e) => setArtStyle(item, e.target.value)}
+              aria-label={`Art style for ${item.topic}`}
+              title="The medium this story's pictures, clips, thumbnail and text are made in when it becomes a project"
+            >
+              <option value="">Art style: channel's own</option>
+              {ART_STYLES.map((s) => (
+                <option key={s.id} value={s.id}>{s.label}</option>
+              ))}
+            </select>
+          )}
           {kind === 'discovered' && (
             <button type="button" className="btn btn-outline" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => save(item)}>
               <Bookmark size={15} style={{ color: '#f59e0b' }} />
@@ -520,6 +565,7 @@ export default function TopicVault() {
                   max={180}
                   step={1}
                   className="form-control"
+                  aria-label="New project length (min)"
                   value={durationMin}
                   onChange={(e) => setDurationMin(Math.max(1, Math.min(180, Number(e.target.value) || 1)))}
                   style={{ width: 80, padding: '6px 10px', fontSize: '0.85rem' }}
@@ -559,7 +605,7 @@ export default function TopicVault() {
               <h3 className="panel-title" style={{ margin: 0, border: 'none', padding: 0 }}><Star size={22} style={{ color: '#f59e0b' }} /> Saved topics</h3>
               <p style={{ color: '#94a3b8', margin: '6px 0 0 0' }}>Bookmarked ideas across all channels.</p>
             </div>
-            <select className="form-control" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <select className="form-control" aria-label="Filter by channel" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={filter} onChange={(e) => setFilter(e.target.value)}>
               <option value="all">All channels ({saved.length})</option>
               {channels.map((ch) => <option key={ch.id} value={ch.id}>{ch.id}</option>)}
             </select>
@@ -588,6 +634,7 @@ export default function TopicVault() {
               <textarea
                 className="form-control"
                 rows={5}
+                aria-label="Ideas (one per line)"
                 placeholder={'One idea per line — dump a single thought or a whole list:\n• The last letter found in a 1940s railway station\n• Why every village has one well nobody will explain\n• The night the lighthouse went dark'}
                 value={dumpTitle}
                 onChange={(e) => setDumpTitle(e.target.value)}
@@ -595,12 +642,13 @@ export default function TopicVault() {
               <textarea
                 className="form-control"
                 rows={3}
+                aria-label="Optional notes"
                 placeholder="Optional notes: angle, why it hits, references…"
                 value={dumpNotes}
                 onChange={(e) => setDumpNotes(e.target.value)}
               />
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-                <select className="form-control" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={dumpChannel} onChange={(e) => setDumpChannel(e.target.value)}>
+                <select className="form-control" aria-label="New idea channel" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={dumpChannel} onChange={(e) => setDumpChannel(e.target.value)}>
                   {channels.map((ch) => <option key={ch.id} value={ch.id}>{ch.id}</option>)}
                 </select>
                 <button type="button" className="btn" style={{ padding: '8px 16px', fontSize: '0.85rem' }} onClick={addDumpIdeas} disabled={!dumpTitle.trim()}>
@@ -613,7 +661,7 @@ export default function TopicVault() {
 
           <div className="panel-card" style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
             <p style={{ color: '#94a3b8', margin: 0 }}>Your dumped ideas ({dump.length}).</p>
-            <select className="form-control" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={dumpFilter} onChange={(e) => setDumpFilter(e.target.value)}>
+            <select className="form-control" aria-label="Filter idea dump by channel" style={{ width: 'auto', padding: '8px 14px', fontSize: '0.85rem' }} value={dumpFilter} onChange={(e) => setDumpFilter(e.target.value)}>
               <option value="all">All channels ({dump.length})</option>
               {channels.map((ch) => (
                 <option key={ch.id} value={ch.id}>{ch.id}</option>

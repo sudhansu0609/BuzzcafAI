@@ -14,7 +14,8 @@ class ExecutiveDepartment(Department):
                 "CTO",
                 "CFO",
                 "ChiefKnowledgeOfficer",
-                "ExecutiveAssistant"
+                "ExecutiveAssistant",
+                "StudioDirector"
             ],
             llm_service=llm_service
         )

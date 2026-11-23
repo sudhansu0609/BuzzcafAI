@@ -15,10 +15,12 @@ import MusicUpload from '../components/MusicUpload';
 
 type Style = { name: string; label: string; tags: string; genres: string[]; moods: string[] };
 type Engine = { name: string; label: string; model: string; license: string; note: string; max_seconds: number; ready: boolean };
+type Raga = { name: string; label: string; time: string; description: string; keyscale: string; bpm: number };
 type StylesResponse = {
   styles: Style[]; model_ready: boolean; max_seconds: number; max_variations: number;
   default_engine?: string; engines?: Engine[];
   music_genres?: string[]; instruments?: Record<string, string[]>; moods?: Record<string, string>;
+  ragas?: { morning: Raga[]; evening: Raga[] };
   bpm_range?: [number, number]; video_genres?: string[];
   buzzedit_online?: boolean; buzzedit_starting?: boolean; buzzedit_error?: string; builder_supported?: boolean;
 };
@@ -26,6 +28,7 @@ type Track = {
   file: string; genre: string; style: string; label: string; moods: string[];
   license: string; license_ok: boolean; source: string; seed?: number; seconds?: number; created: string;
   engine?: string; bpm?: number | null; instruments?: string[]; timings?: Record<string, number>;
+  measured_bpm?: number | null; onset_rate?: number | null; attempts?: number; passed?: boolean;
 };
 type Stage = {
   key: string; label: string; group: string; state: 'pending' | 'running' | 'done' | 'failed' | 'skipped';
@@ -35,7 +38,14 @@ type Job = {
   job_id: string; state: 'queued' | 'running' | 'done' | 'failed'; style: string; made: string[]; errors: string[];
   tags?: string; stages?: Stage[]; progress?: number; elapsed?: number;
 };
-type Preview = { tags: string; dropped: string[] };
+type Preview = { tags: string; dropped: string[]; bpm?: number | null; keyscale?: string | null; engine?: string; caption?: string };
+
+function tempoWord(v: number): string {
+  if (v <= 66) return 'very slow';
+  if (v <= 85) return 'slow';
+  if (v <= 110) return 'medium';
+  return 'fast';
+}
 
 function fmtSeconds(s: number | null | undefined): string {
   if (s == null) return '—';
@@ -148,11 +158,16 @@ export default function Music() {
   const [styles, setStyles] = useState<StylesResponse | null>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loadError, setLoadError] = useState('');
-  const [engine, setEngine] = useState('ace_step');
+  // Empty until the styles arrive: the server names the default engine. Only an
+  // engine the creator picked by hand survives a reload -- starting on 'ace_step'
+  // kept every session on ACE-Step v1, which has no real tempo control.
+  const [engine, setEngine] = useState('');
+  const engineChosen = useRef(false);
   const [style, setStyle] = useState('');
   const [musicGenres, setMusicGenres] = useState<string[]>([]);
   const [instruments, setInstruments] = useState<string[]>([]);
   const [moods, setMoods] = useState<string[]>([]);
+  const [raga, setRaga] = useState<string | null>(null);
   const [bpm, setBpm] = useState<number | null>(null);
   const [variations, setVariations] = useState(2);
   const [seconds, setSeconds] = useState(120);
@@ -171,7 +186,8 @@ export default function Music() {
       ]);
       setStyles(s);
       setTracks(lib.tracks || []);
-      if (s.default_engine) setEngine((cur) => (s.engines?.some((e) => e.name === cur) ? cur : s.default_engine!));
+      if (s.default_engine) setEngine((cur) => (engineChosen.current && s.engines?.some((e) => e.name === cur)
+        ? cur : s.default_engine!));
       setLoadError('');
     } catch (err) {
       setLoadError(describeError(err));
@@ -195,7 +211,10 @@ export default function Music() {
   const lengthSeconds = Math.min(seconds, maxSeconds);
   const engineReady = currentEngine ? currentEngine.ready : !!styles?.model_ready;
   const [bpmMin, bpmMax] = styles?.bpm_range ?? [50, 180];
-  const hasRecipe = !!style || musicGenres.length + instruments.length + moods.length > 0 || !!extraTags.trim();
+  const ragaMorning = styles?.ragas?.morning ?? [];
+  const ragaEvening = styles?.ragas?.evening ?? [];
+  const selectedRaga = [...ragaMorning, ...ragaEvening].find((r) => r.name === raga);
+  const hasRecipe = !!style || !!raga || musicGenres.length + instruments.length + moods.length > 0 || !!extraTags.trim();
 
   // BuzzEdit composes the prompt; ask it, so the preview is exactly what runs.
   useEffect(() => {
@@ -203,12 +222,13 @@ export default function Music() {
     const t = window.setTimeout(async () => {
       try {
         setPreview(await postJson<Preview>('/api/music/preview', {
-          engine, style: style || null, music_genres: musicGenres, instruments, moods, bpm, extra_tags: extraTags,
+          engine: engine || undefined, style: style || null, music_genres: musicGenres, instruments, moods, bpm, extra_tags: extraTags,
+          raga: raga || null,
         }));
       } catch { setPreview(null); }
     }, 300);
     return () => window.clearTimeout(t);
-  }, [hasRecipe, offline, engine, style, musicGenres, instruments, moods, bpm, extraTags]);
+  }, [hasRecipe, offline, engine, style, musicGenres, instruments, moods, bpm, extraTags, raga]);
 
   const removeTrack = async (t: Track) => {
     if (!window.confirm(`Delete "${t.label}" (${t.file}) from the music library? This cannot be undone.`)) return;
@@ -221,13 +241,14 @@ export default function Music() {
     }
   };
 
-  const reset = () => { setStyle(''); setMusicGenres([]); setInstruments([]); setMoods([]); setBpm(null); setExtraTags(''); };
+  const reset = () => { setStyle(''); setMusicGenres([]); setInstruments([]); setMoods([]); setRaga(null); setBpm(null); setExtraTags(''); };
 
   const generate = async () => {
     try {
       const started = await postJson<Job>('/api/music/generate', {
-        engine, style: style || null, music_genres: musicGenres, instruments, moods, bpm,
+        engine: engine || undefined, style: style || null, music_genres: musicGenres, instruments, moods, bpm,
         variations, seconds: lengthSeconds, extra_tags: extraTags, genre: forGenre || null,
+        raga: raga || null,
       });
       setJob(started);
       if (pollRef.current) window.clearInterval(pollRef.current);
@@ -289,7 +310,7 @@ export default function Music() {
             <div role="radiogroup" style={{ display: 'inline-flex', border: '1px solid var(--border-card, rgba(255,255,255,0.12))', borderRadius: 10, overflow: 'hidden' }}>
               {engines.map((e) => (
                 <button key={e.name} type="button" role="radio" aria-checked={engine === e.name}
-                  onClick={() => setEngine(e.name)} title={`${e.model} · ${e.license}`}
+                  onClick={() => { engineChosen.current = true; setEngine(e.name); }} title={`${e.model} · ${e.license}`}
                   style={{
                     padding: '8px 16px', cursor: 'pointer', border: 'none', fontSize: '0.86rem', fontWeight: 600,
                     background: engine === e.name ? 'var(--active-menu-bg, rgba(167,139,250,0.22))' : 'transparent',
@@ -321,7 +342,15 @@ export default function Music() {
             <button
               key={s.name}
               type="button"
-              onClick={() => setStyle((cur) => (cur === s.name ? '' : s.name))}
+              onClick={() => {
+                const next = style === s.name ? '' : s.name;
+                setStyle(next);
+                const m = next ? /^(morning|evening)_raga_/.exec(next) : null;
+                if (m) {
+                  const group = m[1] === 'morning' ? ragaMorning : ragaEvening;
+                  if (group[0]) setRaga(group[0].name);
+                }
+              }}
               title={s.tags}
               style={{
                 textAlign: 'left', padding: '10px 12px', borderRadius: 8, cursor: 'pointer',
@@ -342,6 +371,17 @@ export default function Music() {
             <div style={chipRow}>
               {styles.music_genres.map((g) => (
                 <Chip key={g} on={musicGenres.includes(g)} onClick={() => setMusicGenres((l) => toggle(l, g))}>{g}</Chip>
+              ))}
+            </div>
+          </>
+        )}
+
+        {styles?.instruments && (
+          <>
+            <div style={sectionLabel}>Classical <span style={{ textTransform: 'none', fontWeight: 400 }}>(quick pick)</span></div>
+            <div style={chipRow}>
+              {['bansuri flute', 'violin', 'sitar'].map((i) => (
+                <Chip key={`classical-${i}`} on={instruments.includes(i)} onClick={() => setInstruments((l) => toggle(l, i))}>{i}</Chip>
               ))}
             </div>
           </>
@@ -377,38 +417,73 @@ export default function Music() {
           </>
         )}
 
+        {(ragaMorning.length > 0 || ragaEvening.length > 0) && (
+          <>
+            <div style={sectionLabel}>Raga <span style={{ textTransform: 'none', fontWeight: 400 }}>(optional — click again to clear)</span></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {ragaMorning.length > 0 && (
+                <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)', width: 92, flexShrink: 0 }}>Morning</span>
+                  <div style={{ ...chipRow, flex: 1 }}>
+                    {ragaMorning.map((r) => (
+                      <Chip key={r.name} on={raga === r.name} onClick={() => setRaga((cur) => (cur === r.name ? null : r.name))}
+                        title={`${r.description} (default ~${r.bpm} bpm, ${r.keyscale})`}>{r.label}</Chip>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {ragaEvening.length > 0 && (
+                <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)', width: 92, flexShrink: 0 }}>Evening</span>
+                  <div style={{ ...chipRow, flex: 1 }}>
+                    {ragaEvening.map((r) => (
+                      <Chip key={r.name} on={raga === r.name} onClick={() => setRaga((cur) => (cur === r.name ? null : r.name))}
+                        title={`${r.description} (default ~${r.bpm} bpm, ${r.keyscale})`}>{r.label}</Chip>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
         <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center', marginTop: 16 }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}>
-            <input type="checkbox" checked={bpm !== null} onChange={(e) => setBpm(e.target.checked ? 90 : null)} />
-            Tempo
-            <input type="range" min={bpmMin} max={bpmMax} step={1} value={bpm ?? 90} disabled={bpm === null}
+            <input type="checkbox" aria-label="Tempo (speed)" checked={bpm !== null}
+              onChange={(e) => setBpm(e.target.checked ? (selectedRaga?.bpm ?? 90) : null)} />
+            Tempo (speed)
+            <input type="range" aria-label="Tempo (bpm)" min={bpmMin} max={bpmMax} step={1} value={bpm ?? (selectedRaga?.bpm ?? 90)} disabled={bpm === null}
               onChange={(e) => setBpm(Number(e.target.value))} />
-            <span style={{ width: 64, color: bpm === null ? 'var(--text-muted)' : undefined }}>{bpm === null ? 'auto' : `${bpm} bpm`}</span>
+            <span style={{ minWidth: 64, color: bpm === null ? 'var(--text-muted)' : undefined }}>
+              {bpm === null
+                ? (selectedRaga ? `auto (raga ~${selectedRaga.bpm} bpm)` : 'auto')
+                : `${bpm} bpm · ${tempoWord(bpm)}`}
+            </span>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}>
             Length
-            <input type="range" min={minSeconds} max={maxSeconds} step={maxSeconds <= 60 ? 1 : 10} value={lengthSeconds}
+            <input type="range" aria-label="Length" min={minSeconds} max={maxSeconds} step={maxSeconds <= 60 ? 1 : 10} value={lengthSeconds}
               onChange={(e) => setSeconds(Number(e.target.value))} />
             <span style={{ width: 44 }}>{lengthSeconds}s</span>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}
             title="Which videos' library folder the track goes in -- the edit looks there first, by act mood.">
             For videos of
-            <select className="form-control" value={forGenre} onChange={(e) => setForGenre(e.target.value)} style={{ width: 170 }}>
+            <select className="form-control" aria-label="For videos of" value={forGenre} onChange={(e) => setForGenre(e.target.value)} style={{ width: 170 }}>
               <option value="">{style ? "Preset's genres" : 'General (any video)'}</option>
               {(styles?.video_genres ?? []).map((g) => <option key={g} value={g}>{g.replace(/_/g, ' ')}</option>)}
             </select>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}>
             Variations
-            <input type="number" className="form-control" min={1} max={styles?.max_variations ?? 6} value={variations}
+            <input type="number" className="form-control" aria-label="Variations" min={1} max={styles?.max_variations ?? 6} value={variations}
               onChange={(e) => setVariations(Math.max(1, Math.min(styles?.max_variations ?? 6, Number(e.target.value) || 1)))}
               style={{ width: 70 }} />
           </label>
         </div>
 
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginTop: 14 }}>
-          <input className="form-control" placeholder="Extra tags (optional), e.g. rain, monsoon, slow build"
+          <input className="form-control" aria-label="Extra tags" placeholder="Extra tags (optional), e.g. rain, monsoon, slow build"
             value={extraTags} onChange={(e) => setExtraTags(e.target.value)} style={{ flex: 1, minWidth: 220 }} />
           <button type="button" className="btn" disabled={!hasRecipe || busy || (!offline && !engineReady)} onClick={generate}
             style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
@@ -419,11 +494,19 @@ export default function Music() {
 
         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 12 }}>
           <strong style={{ color: 'var(--text-secondary)' }}>Prompt:</strong>{' '}
-          {!hasRecipe ? 'pick a preset, or at least one genre, instrument or mood.'
+          {!hasRecipe ? 'pick a preset, a raga, or at least one genre, instrument or mood.'
             : preview ? preview.tags : offline ? 'shown once BuzzEdit is up.' : '…'}
           {preview && preview.dropped.length > 0 && (
             <div style={{ marginTop: 4 }}>
               <strong style={{ color: 'var(--text-secondary)' }}>Left out of the preset</strong> (your picks override them): {preview.dropped.join(', ')}
+            </div>
+          )}
+          {preview?.caption && <div style={{ marginTop: 4 }}>{preview.caption}</div>}
+          {preview && (preview.bpm != null || preview.keyscale) && (
+            <div style={{ marginTop: 4 }}>
+              {preview.bpm != null && <>Tempo: <strong>{preview.bpm} bpm</strong> · {tempoWord(preview.bpm)}</>}
+              {preview.bpm != null && preview.keyscale ? ' · ' : ''}
+              {preview.keyscale && <>Key: <strong>{preview.keyscale}</strong></>}
             </div>
           )}
         </div>
@@ -435,13 +518,13 @@ export default function Music() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
           <h3 className="panel-title" style={{ margin: 0 }}>Music library ({shown.length})</h3>
           <div style={{ display: 'flex', gap: 8 }}>
-            <select className="form-control" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ width: 200 }}>
+            <select className="form-control" aria-label="Filter tracks" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ width: 200 }}>
               <option value="">All styles & genres</option>
               {styles?.styles.map((s) => <option key={s.name} value={s.name}>{s.label}</option>)}
               {[...new Set(tracks.map((t) => t.genre).filter(Boolean))].map((g) => <option key={`g-${g}`} value={g}>Genre: {g}</option>)}
               {engines.map((e) => <option key={`e-${e.name}`} value={e.name}>Engine: {e.label}</option>)}
             </select>
-            <button type="button" className="btn btn-outline" onClick={load} title="Refresh"><RefreshCw size={15} /></button>
+            <button type="button" className="btn btn-outline" onClick={load} title="Refresh" aria-label="Refresh"><RefreshCw size={15} /></button>
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 12 }}>
@@ -455,13 +538,30 @@ export default function Music() {
           <div style={{ color: 'var(--text-muted)', padding: 20, textAlign: 'center' }}>No tracks yet — generate some above, or add your own.</div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {shown.map((t) => (
+            {shown.map((t) => {
+              const bpmText = t.bpm == null ? '' : (t.measured_bpm != null
+                ? `asked ${t.bpm} bpm, came out ${Math.round(t.measured_bpm)} bpm`
+                : `${t.bpm} bpm`);
+              const tempoBadge = t.attempts == null ? '' : (t.passed
+                ? 'matched'
+                : `closest of ${t.attempts} ${t.attempts === 1 ? 'try' : 'tries'}`);
+              return (
               <div key={t.file} style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', padding: '10px 12px', border: '1px solid var(--border-subtle, rgba(255,255,255,0.08))', borderRadius: 8 }}>
                 <div style={{ minWidth: 200, flex: 1 }}>
-                  <div style={{ fontWeight: 600 }}>{t.label}{t.seed ? <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}> · seed {t.seed}</span> : null}</div>
+                  <div style={{ fontWeight: 600 }}>
+                    {t.label}{t.seed ? <span style={{ color: 'var(--text-muted)', fontWeight: 400 }}> · seed {t.seed}</span> : null}
+                    {tempoBadge && (
+                      <span title={t.attempts != null ? `${t.attempts} take(s) tried to match the asked tempo` : undefined}
+                        style={{
+                          marginLeft: 8, display: 'inline-flex', alignItems: 'center', fontSize: '0.68rem', padding: '1px 7px',
+                          borderRadius: 999, color: t.passed ? '#34d399' : '#fbbf24',
+                          border: `1px solid ${t.passed ? 'rgba(52,211,153,0.4)' : 'rgba(251,191,36,0.4)'}`,
+                        }}>{tempoBadge}</span>
+                    )}
+                  </div>
                   <div style={{ color: 'var(--text-muted)', fontSize: '0.76rem' }}>
                     {t.genre || 'library'} · {t.moods.join(', ') || 'no mood tags'}{t.seconds ? ` · ${Math.round(t.seconds)}s` : ''}
-                    {t.bpm ? ` · ${t.bpm} bpm` : ''}
+                    {bpmText ? ` · ${bpmText}` : ''}
                     {t.engine ? ` · ${engines.find((e) => e.name === t.engine)?.label ?? t.engine}` : ''}
                     {t.instruments?.length ? ` · ${t.instruments.join(', ')}` : ''}
                   </div>
@@ -496,7 +596,8 @@ export default function Music() {
                   <Trash2 size={14} /> Delete
                 </button>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

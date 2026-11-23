@@ -1,8 +1,8 @@
 # ☕ Buzzcaf AI Studio
 
-A local, single-user multi-agent studio for producing YouTube content across five
+A local, single-user multi-agent studio for producing YouTube content across six
 channel brands (**Originals**, **Raat3Baje**, **Beyond3Baje**,
-**Life3Baje**, **Khayal3Baje**).
+**Life3Baje**, **Khayal3Baje**, **TheTallStoryteller**).
 
 105 agent personas across 13 departments are defined as Markdown files with YAML
 frontmatter and discovered at startup; workflows are JSON step definitions with
@@ -22,7 +22,8 @@ the writing stays on the strong one.
 Requires Python 3.10+ (with WebView2, present on Windows 11) and, for
 development, Node 18+.
 
-**Use it:** double-click `Buzzcaf Studio.vbs`. It runs `pythonw backend/desktop_app.py`:
+**Use it:** double-click `Buzzcaf Studio.exe` (or run `installer\Buzzcaf Studio Setup.exe`
+once to get a Desktop and Start Menu shortcut to it). It runs `pythonw backend/desktop_app.py`:
 preflight, FastAPI on `127.0.0.1:8099` in-process, and a native window with no
 console. Closing the window ends the process. Dexter can also launch it
 ("open the studio"). If 8099 is taken by another app the Studio steps to the
@@ -34,7 +35,7 @@ launch attaches to the running Studio instead of starting another.
 ```bash
 pip install -r requirements.txt
 cd frontend && npm install && npm run build      # writes backend/app/static
-start_buzzcafai.bat --dev                        # one console: backend + our Vite (5173, or the next free port)
+scripts\start_buzzcafai.bat --dev                # one console: backend + our Vite (5173, or the next free port)
 ```
 
 - API docs: <http://127.0.0.1:8099/docs>
@@ -47,12 +48,12 @@ responds, but every reply is labelled **⚠ SIMULATED** — see
 
 ### macOS / Linux
 
-One file, like `Buzzcaf Studio.vbs` on Windows (needs Python 3.10+; Node 18+
+One file, like `Buzzcaf Studio.exe` on Windows (needs Python 3.10+; Node 18+
 only for `--dev`, e.g. `brew install python node`):
 
 ```bash
-./start_buzzcafai.sh            # first run creates .venv and installs deps, then opens the window
-./start_buzzcafai.sh --dev      # developer mode: Vite dev server with hot reload
+scripts/start_buzzcafai.sh      # first run creates .venv and installs deps, then opens the window
+scripts/start_buzzcafai.sh --dev  # developer mode: Vite dev server with hot reload
 ```
 
 The built UI is committed in `backend/app/static`, so normal mode runs without
@@ -116,6 +117,19 @@ Every persona is one click away, and you can see who did what.
   research or SEO package in the window.
 - **Dashboard** — the chosen workflow's steps are listed before you create the
   project, so you can see what it will do.
+
+## Master pause
+
+A Dashboard button (and header badge) holds every automated job -- the
+production queue, the long-form nightly run, Story Desk scripts, the
+Shorts/Audience/Instagram schedulers, the nightly Windows task, and
+BuzzEdit's scheduler and vibe-reel renderer -- at its nearest safe point and
+releases every local model, so you can hand the GPU to another tool and get
+everything back exactly where it was. `POST /api/master/pause {mode:
+"soft"|"now", reason?, by?}`, `POST /api/master/resume`, `GET
+/api/master/state`; BuzzEdit mirrors the same three paths. Nothing
+auto-resumes it. See `docs/STUDIO_DIRECTOR_PLAN.md` Part 1 and AGENTS.md's
+"Master pause / resume" for what each app holds and releases.
 
 ## Configuration
 
@@ -227,9 +241,34 @@ Stated plainly so nobody builds on it:
 3. **Beyond3Baje 🔍** — fact-grounded documentaries, true crime, dark history.
 4. **Life3Baje 🌿** — reflective personal essays and atmospheric video essays.
 5. **Khayal3Baje 👁️** — fictional horror and speculative narrative.
+6. **TheTallStoryteller 📖** — narrated stories of every genre (folk tales,
+   mystery, thriller, history, mythology, adventure, drama, romance, comedy,
+   classics retold, occasional horror), no face, told in the creator's own
+   cloned voice.
 
 Content is authored in Hinglish (conversational Hindi in Roman script) — the
 channel guides under `backend/prompts/channels/` define each brand's voice.
+
+## ComfyUI workflows and the other apps' installers
+
+- Every ComfyUI graph the Studio's productions use lives in `../BuzzEdit/workflows/` (its
+  `README.md` lists each file, its models and custom nodes); `docs/COMFYUI_WORKFLOWS.md` maps the
+  Studio's features onto them.
+- `scripts/app_installer/` is the in-place setup wizard the sibling apps ship (BuzzEdit,
+  BuzzAnimate, MastGaane, VrDeep, SmartCleaner, BuzzViolin, buzzBooks: `<app>\installer\<App> Setup.exe`).
+  It rebuilds an app's environment, makes its shortcuts and registers it, and the marker it writes
+  keeps SmartCleaner from cleaning that app's environments.
+- **App-environment self-repair (2026-10-24).** Each of those apps' `installer\app.json` now
+  carries a `health_paths` list -- the files that must exist for it to run (a venv's
+  `python.exe`, `node_modules\electron\dist\electron.exe`, a build's `index.html`...).
+  `app/services/app_envs.py` checks them straight off disk; a Health page row for an app with
+  anything missing starts that app's own idempotent `installer\setup_env.ps1` automatically (at
+  most once an hour per app, single-flight via a PID lock, and shown as "repair running" while it
+  is), and the row's own Repair button runs it on demand (`POST
+  /api/health/app_envs/{app}/repair`, `GET /api/health/app_envs`). `nightly_run.py` repairs
+  BuzzEdit first if it is not ready before the batch starts, and
+  `produce_api.ensure_buzzedit_running` repairs it before launching rather than timing out against
+  a broken environment -- the foolproof rule: a missing environment is fixed, not just reported.
 
 ## License
 

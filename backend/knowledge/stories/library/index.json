@@ -1,0 +1,68 @@
+[
+  {
+    "id": "bram-stoker-the-judge-s-house-b3d1a731",
+    "title": "The Judge's House",
+    "author": "Bram Stoker",
+    "language": "en",
+    "source": "wikisource",
+    "source_url": "https://en.wikisource.org/wiki/The_Judge%27s_House",
+    "fetched_at": "2026-10-23T23:35:56",
+    "words": 7847,
+    "rights": "public_domain"
+  },
+  {
+    "id": "w-w-jacobs-the-monkey-s-paw-by-w-w-jacobs-project-g-9ec014fe",
+    "title": "The Monkey's Paw by W. W. Jacobs - Project Gutenberg",
+    "author": "W. W. Jacobs",
+    "language": "en",
+    "source": "gutenberg",
+    "source_url": "https://www.gutenberg.org/ebooks/12122",
+    "fetched_at": "2026-10-23T23:33:52",
+    "words": 3954,
+    "rights": "public_domain"
+  },
+  {
+    "id": "tagore-rabindranath-1861-1941-the-hungry-stones-and-other-st-a9b0ba11",
+    "title": "The hungry stones, and other stories",
+    "author": "Tagore, Rabindranath, 1861-1941",
+    "language": "eng",
+    "source": "archive",
+    "source_url": "https://archive.org/details/bub_gb_uxg3AQAAMAAJ",
+    "fetched_at": "2026-10-23T23:31:39",
+    "words": 52781,
+    "rights": "unknown"
+  },
+  {
+    "id": "the-signal-man-8b2a5758",
+    "title": "The Signal-Man",
+    "author": "",
+    "language": "en",
+    "source": "wikisource",
+    "source_url": "https://en.wikisource.org/wiki/The_Signal-Man",
+    "fetched_at": "2026-10-23T23:14:36",
+    "words": 5110,
+    "rights": "unknown"
+  },
+  {
+    "id": "crawford-f-marion-1854-1909-the-upper-berth-308e7bef",
+    "title": "The upper berth",
+    "author": "Crawford, F. Marion, 1854-1909",
+    "language": "eng",
+    "source": "archive",
+    "source_url": "https://archive.org/details/upperberth01crawgoog",
+    "fetched_at": "2026-10-23T23:13:42",
+    "words": 20628,
+    "rights": "unknown"
+  },
+  {
+    "id": "m-r-james-ghost-stories-of-an-antiquary-5a4d4796",
+    "title": "Ghost Stories of an Antiquary",
+    "author": "M. R. James",
+    "language": "en",
+    "source": "gutenberg",
+    "source_url": "https://www.gutenberg.org/ebooks/8486",
+    "fetched_at": "2026-10-23T01:13:09",
+    "words": 45404,
+    "rights": "public_domain"
+  }
+]

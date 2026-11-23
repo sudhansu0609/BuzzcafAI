@@ -214,6 +214,7 @@ export default function AgentsGroupChat({
       <form onSubmit={handleSendMessage} style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
         <input
           type="text"
+          aria-label="Message to the agents"
           placeholder="Ask the group agents a question or give them a task..."
           value={inputMessage}
           onChange={e => setInputMessage(e.target.value)}

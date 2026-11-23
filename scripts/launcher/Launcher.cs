@@ -124,7 +124,7 @@ namespace BuzzcafStudio.Launcher
             }
 
             // Ghost Process Guard: If port 8099 is locked by a dead/unresponsive process, clear it.
-            CheckAndCleanOrphanPort(8099);
+            CheckAndCleanOrphanPort(8099, backendScript);
 
             // Forward user arguments (e.g. --dev, --devtools)
             StringBuilder argBuilder = new StringBuilder();
@@ -320,7 +320,7 @@ namespace BuzzcafStudio.Launcher
             return null;
         }
 
-        private static void CheckAndCleanOrphanPort(int port)
+        private static void CheckAndCleanOrphanPort(int port, string backendScript)
         {
             try
             {
@@ -332,71 +332,162 @@ namespace BuzzcafStudio.Launcher
                     if (!connected) return; // Port is free!
                 }
 
-                // Port is connected: verify if an active Buzzcaf Studio WebView is open
-                bool hasActiveStudioWindow = false;
-                foreach (Process p in Process.GetProcesses())
+                int pid = FindListeningPid(port);
+                if (pid <= 0) return;
+
+                // Only ever act on a process that is this Studio's own backend.
+                // A sibling app (BuzzEdit) can land on the same port while the
+                // Studio is closed; it must never be touched by this guard.
+                string commandLine = GetProcessCommandLine(pid);
+                if (string.IsNullOrEmpty(commandLine) ||
+                    commandLine.IndexOf(backendScript, StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    return;
+                }
+
+                // It is a Studio backend. If it already answers as the Studio
+                // and a Studio window is visible, this is the live Studio --
+                // leave it alone (existing behaviour).
+                bool healthy = ProbeStudioHealth(port, 2000);
+                bool hasActiveStudioWindow = HasActiveStudioWindow();
+
+                if (healthy && hasActiveStudioWindow)
+                {
+                    return;
+                }
+
+                // No active Studio window: this is an orphaned Studio backend
+                // from a previous, already-closed run. Kill it, as before.
+                if (!hasActiveStudioWindow)
                 {
                     try
                     {
-                        if (p.MainWindowHandle != IntPtr.Zero &&
-                            (p.MainWindowTitle.Contains("Buzzcaf Studio") || p.ProcessName.ToLower().Contains("buzzcaf")))
+                        Process orphan = Process.GetProcessById(pid);
+                        // Only kill if python / pythonw / node
+                        string pName = orphan.ProcessName.ToLower();
+                        if (pName.Contains("python") || pName.Contains("node"))
                         {
-                            hasActiveStudioWindow = true;
-                            break;
+                            orphan.Kill();
                         }
                     }
                     catch { }
                 }
+            }
+            catch { }
+        }
 
-                // If no active Studio window is visible, this is an orphaned zombie backend process holding the port.
-                if (!hasActiveStudioWindow)
+        private static int FindListeningPid(int port)
+        {
+            try
+            {
+                Process netstat = new Process
                 {
-                    // Find process holding port via netstat and kill it
-                    Process netstat = new Process
+                    StartInfo = new ProcessStartInfo
                     {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "netstat.exe",
-                            Arguments = "-ano -p tcp",
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            CreateNoWindow = true
-                        }
-                    };
-                    netstat.Start();
-                    string output = netstat.StandardOutput.ReadToEnd();
-                    netstat.WaitForExit();
+                        FileName = "netstat.exe",
+                        Arguments = "-ano -p tcp",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+                netstat.Start();
+                string output = netstat.StandardOutput.ReadToEnd();
+                netstat.WaitForExit();
 
-                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string line in lines)
+                string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string line in lines)
+                {
+                    if (line.Contains(":" + port) && line.ToUpper().Contains("LISTENING"))
                     {
-                        if (line.Contains(":" + port) && line.ToUpper().Contains("LISTENING"))
+                        string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length >= 5)
                         {
-                            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            if (parts.Length >= 5)
+                            string pidStr = parts[parts.Length - 1];
+                            int pid;
+                            if (int.TryParse(pidStr, out pid) && pid > 0)
                             {
-                                string pidStr = parts[parts.Length - 1];
-                                int pid;
-                                if (int.TryParse(pidStr, out pid) && pid > 0)
-                                {
-                                    try
-                                    {
-                                        Process orphan = Process.GetProcessById(pid);
-                                        // Only kill if python / pythonw / node
-                                        string pName = orphan.ProcessName.ToLower();
-                                        if (pName.Contains("python") || pName.Contains("node"))
-                                        {
-                                            orphan.Kill();
-                                        }
-                                    }
-                                    catch { }
-                                }
+                                return pid;
                             }
                         }
                     }
                 }
             }
             catch { }
+            return -1;
+        }
+
+        private static bool HasActiveStudioWindow()
+        {
+            foreach (Process p in Process.GetProcesses())
+            {
+                try
+                {
+                    if (p.MainWindowHandle != IntPtr.Zero &&
+                        (p.MainWindowTitle.Contains("Buzzcaf Studio") || p.ProcessName.ToLower().Contains("buzzcaf")))
+                    {
+                        return true;
+                    }
+                }
+                catch { }
+            }
+            return false;
+        }
+
+        // No System.Management reference is passed to csc for this project (see
+        // build_windows_app.py), so the command line of another process is read
+        // by shelling out to PowerShell's CIM cmdlet instead of WMI directly --
+        // the same "run a tool, parse its output" approach already used for
+        // netstat above.
+        private static string GetProcessCommandLine(int pid)
+        {
+            try
+            {
+                Process ps = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "powershell.exe",
+                        Arguments = "-NoProfile -NonInteractive -Command \"(Get-CimInstance Win32_Process -Filter 'ProcessId=" + pid + "').CommandLine\"",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        CreateNoWindow = true
+                    }
+                };
+                ps.Start();
+                string output = ps.StandardOutput.ReadToEnd();
+                if (!ps.WaitForExit(3000))
+                {
+                    try { ps.Kill(); } catch { }
+                    return "";
+                }
+                return output == null ? "" : output.Trim();
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        private static bool ProbeStudioHealth(int port, int timeoutMs)
+        {
+            try
+            {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:" + port + "/health");
+                req.Timeout = timeoutMs;
+                req.Method = "GET";
+                using (HttpWebResponse resp = (HttpWebResponse)req.GetResponse())
+                using (StreamReader reader = new StreamReader(resp.GetResponseStream()))
+                {
+                    string body = reader.ReadToEnd().Replace(" ", "");
+                    return body.IndexOf("\"app\":\"buzzcaf\"", StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

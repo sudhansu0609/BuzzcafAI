@@ -238,5 +238,1025 @@
     "source": "agent",
     "created": "2026-10-06T21:22:40.989392",
     "updated": "2026-10-06T21:22:40.989400"
+  },
+  {
+    "id": "30774604-8f5a-44f5-82ca-fd2f5209433b",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Meri Dadi Har Raat Ek Khali Kursi Ke Liye Khana Rakhti Thi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Pitru Paksha: A 16-day lunar period in the Hindu calendar where ancestors (Pitri) are honored with food and water offerings. [https://en.wikipedia.org/wiki/Pitru_Paksha]\",\n    \"Shraddha: The specific annual ritual performed on the death anniversary of a family member to ensure their soul finds peace. [https://pitrupaksha.ganeshastotram.com/cultural-traditions/rituals-and-traditions-during-pitru-paksha/]\",\n    \"Tarpana Ritual: A traditional practice involving offering water mixed with black sesame seeds (tila) to satisfy the thirst of departed souls. [https://thewaytokashi.in/after-death-rituals]\"\n  ],\n  \"facts\": [\n    \"Pitru are ancestral spirits who are believed to be peaceful and provide blessings, while Pretas are 'hungry' spirits that may become aggressive or malevolent if not appeased by rituals. [https://www.hindu-blog.com/2022/12/preta-in-hinduism-ghost-spirit-of-dead.html]\",\n    \"Brahmarakshas are a specific class of entity in folklore\u2014the spirits of scholars or holy men who misused their knowledge, becoming fierce and dangerous. [https://www.facebook.com/61589642605713/posts/%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A4%B0%E0%A4%BE%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%B8-%E0%A4%95%E0%A4%BE-%E0%A4%B0%E0%A4%B0%E0%A5%8D%E0%A4%AF%E0%A4%B8-%E0%A4%95%E0%A4%BE-%E0%A4%B0%E0%A4%B9%E0%A4%B8%E0%A5%8D%E0%A4%AF-according-to-hindu-folklore-the-brahmarakshas-is-described/122116014027321420/]\",\n    \"Black sesame seeds (Kala Til) are used in many rituals as a purifying element to ward off negative influences or 'pacify' hungry spirits. [https://pitrupaksha.ganeshastotram.com/cultural-traditions/rituals-and-traditions-during-pitru-paksha/]\",\n    \"Vavu Bali is a specific regional ritual in Kerala where offerings are made to ancestors, often involving local cultural nuances of 'feeding' the dead. [https://keralafolklore.com/spirit-and-ancestor-worship.html]\"\n  ],\n  \"sources\": [\n    \"Pitru Paksha - Wikipedia: https://en.wikipedia.org/wiki/Pitru"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-11T23:28:00.432236",
+    "updated": "2026-10-11T23:28:00.432240"
+  },
+  {
+    "id": "fb739d2f-47c4-4181-9154-4a50c794fdcd",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Meri Dadi Har Raat Ek Khali Kursi Ke Liye Khana Rakhti Thi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Rig Veda period: the word 'pitr' (ancestors) is already in Hinduism's oldest scripture [Verified, as reported by Devdutt Pattanaik] - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\",\n    \"Over 2,500 years ago: the shraddh ritual of offering pinda to ancestors can be traced to the Grihya-sutra literature [Verified, Pattanaik] - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\",\n    \"About 1,000 years ago: the Preta-kalpa of the Garuda Purana is composed. It is still read at funerals and shapes the mainstream Hindu idea of death [Verified, Pattanaik] - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\"\n  ],\n  \"facts\": [\n    \"[Verified] Pitru Paksha is a dark lunar fortnight between Ganesh Utsav and Navratri, kept to feed the dead. Men face south and place pinda (mashed rice mixed with black til) on blades of grass near water. Crows are encouraged to eat it - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\",\n    \"[Verified] Tarpan water is poured over the thumb of the right hand, held out away from the body. Rites for the gods go clockwise; rites for the ancestors go anticlockwise - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\",\n    \"[Verified] During Pitru Paksha many families avoid buying cars, houses or new clothes. No contracts are signed and no weddings are held. The dead are honoured but also seen as inauspicious and impure - https://scroll.in/article/1032342/devdutt-pattanaik-on-the-3000-year-old-hindu-ritual-of-feeding-the-dead\",\n    \"[Verified] In this belief the dead depend on the living to be fed, and feeding them is a debt being repaid. The dead come back through rebirth; there is no eternal afterlife - https://scroll.in/article/1032342/devdutt-patt"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-18T01:54:49.312957",
+    "updated": "2026-10-18T01:54:49.312960"
+  },
+  {
+    "id": "888121dd-1051-4c1e-96d0-5ec0a6273069",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Meri Dadi Har Raat Ek Khali Kursi Ke Liye Khana Rakhti Thi",
+      "result_snippet": "{\n  \"facts\": [\n    \"[Verified] Shraddh ka saalana din marne wale ki tithi (lunar day) par padta hai. Pitru Paksha mein har tithi ko Navratri se pehle ke pakhwade mein ek din milta hai. Rasm dopahar baad hoti hai: kutup aur rohina muhurat, yaani din ke 15 muhurton mein se 8th aur 9th. - https://purohit.app/blog/shraddha-north-india-bengal\",\n    \"[Verified] Hindi-belt gharon mein koi bhi khaane se pehle shraddh ke khaane ke paanch hisse alag rakhe jaate hain. Isse panchbali kehte hain: gau bali (gaay), shvan bali (kutta), kak bali (kauwa, chhat ya deewar par rakha jaata hai), devadi bali (devta) aur pipilika bali (cheentiyan, saaf zameen par). - https://purohit.app/blog/shraddha-north-india-bengal ; https://www.skillastro.in/blog/festival-44/pitru-paksha-2026-dates-shraddha-rules-5944\",\n    \"[Folklore] Kauwe ko Yama ka doot aur pitron ka pratinidhi maana jaata hai. Shraddh ka pehla nivala kauwe ko diya jaata hai. - https://vandnaa.com/blog/pitru-paksha-2026-shraddh-vidhi-tarpan-mantras ; https://nakshtratak.com/en/vrat/pitru-paksha\",\n    \"[Verified] Shraddh ka khaana ghar ki auratein banati hain, aksar kheer-poori ya pitron ki pasand ki cheezein. - https://nakshtratak.com/en/vrat/pitru-paksha\",\n    \"[Verified] Kai North Indian gharon mein maut ke baad ke 13 dinon tak pandit Garuda Purana padhta hai. Ye terahvin par khatam hota hai. Kuch ghar baaki dinon mein ise padhne se bachte hain. - https://purohit.app/blog/shraddha-north-india-bengal\",\n    \"[Folklore] Garuda Purana ki maanyata hai ki maut ke baad aatma 13 din tak ghar aur parivaar ke aas-paas rehti hai. In dinon ki rasmein use preta se pitru (ancestor) banati hain. - https://theopenpress.in/article/garuda-purana-soul-after-death ; https://thevaisnava.com/the-whole-journey-from-the-13th-day-to-the-361st-day-to-yamaloka-narottam-das/\",\n    \"[Verified] Bengal mein adya shraddh tab hota hai jab ashauch (ritual impurity) khatam hota hai. Ye community ke hisaab se 10 se 30 din ka hota hai. Is dauran kareebi rishtedaar "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-18T10:21:08.824370",
+    "updated": "2026-10-18T10:21:08.824375"
+  },
+  {
+    "id": "2d48d44d-cca0-4099-8d97-9df5af604bc5",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Skinwalker Traditions",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1876 - Several people accused of witchcraft are reported killed in the Navajo community after the return from Bosque Redondo [Alleged - seen only in a search snippet of a secondary summary citing Bailey 1987; the page itself could not be opened (HTTP 403)] - https://studylib.net/doc/27119964/the-witch-purge-of-1878\",\n    \"1878 - The 'Navajo Witch Purge': a wave of witchcraft accusations and killings that secondary sources say left more than forty Navajo people dead [Alleged - from two secondary-source snippets; the primary study, Bailey 1987, has not been read] - https://nativesovereignty.com/the-shocking-truth-about-the-navajo-witch-purge-of-1878-and-what-finger-pointing-can-teach-us-today/ ; https://studylib.net/doc/27119964/the-witch-purge-of-1878\",\n    \"1883 - Indian Agent Riordan reportedly secures the release of three Navajos held for practising witchcraft [Alleged - snippet only, citing Bailey 1987] - https://studylib.net/doc/27119964/the-witch-purge-of-1878\",\n    \"1944 - Anthropologist Clyde Kluckhohn publishes 'Navaho Witchcraft', said to be the first major academic treatment of skinwalkers (Beacon Press reprints in 1962 and 1970) [Verified - cited in several sources] - https://en.wikipedia.org/wiki/Skin-walker ; https://dorisvsutherland.com/2023/09/06/werewolf-wednesday-scouts-versus-skinwalkers-1971/\",\n    \"March-April 1971 - 'Scouting', the Boy Scouts of America magazine, runs Dick Pryce's article on scout troops in the Navajo Nation. In it Navajo scoutmaster Ralph Bennett (Troop 578) describes campfire skinwalker beliefs [Alleged - one secondary source quoting the magazine] - https://dorisvsutherland.com/2023/09/06/werewolf-wednesday-scouts-versus-skinwalkers-1971/\",\n    \"1984 - Margaret K. Brady and Barre Toelken (book credited this way in Wikipedia's references) publish 'Some Kind of Power: Navajo Children's Skinwalker Narratives' with the University of Utah Press. Possibly the first full-length book on the subject [Verified as "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-18T11:00:53.660052",
+    "updated": "2026-10-18T11:00:53.660062"
+  },
+  {
+    "id": "87994cba-cb8c-4729-942b-fba68b046dca",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Delhi Cantt ki Warning: The Rules of the White Saree",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2008-06-01: Reported as a prominent urban legend in Delhi, where sightings of a woman in a white sari are documented across various neighborhoods (Hindustan Times - https://www.hindustantimes.com/delhi/white-sari-clad-woman-spectre/story-8Xs5DRHn3hN4YyOaJaiyvO.html)\",\n    \"2018-11-06: Digital circulation of 'Delhi Cantt' haunted stories and truck driver encounters specifically involving the 'Woman in White' (YouTube - https://www.youtube.com/watch?v=21D_eLMNfP0)\"\n  ],\n  \"facts\": [\n    \"[Folklore] A woman in a white sari is said to haunt the Delhi Cantonment area, specifically appearing at night and asking for lifts from passing vehicles (Moon Mausoleum - https://moonmausoleum.com/the-ghost-of-the-lady-in-white-sari-of-delhi-cantt/)\",\n    \"[Folklore] The entity is described as a middle-aged woman with gray hair and hairy arms, wearing a white sari (Moon Mausoleum - https://moonmausoleum.com/the-ghost-of-the_lady_in_white_sari_of_delhi_cantt/)\",\n    \"[Alleged] Some local belief suggests the spirit is a British-era ghost wandering the roads of Delhi Cantt (Instagram - https://www.instagram.com/p/DOfZPi0EmQi/)\",\n    \"[Folklore] The 'White Saree' figure is a recurring motif in Indian urban legends, where white symbolizes mourning or purity, often appearing in areas like Shamshad Road and Cantonment (Hindustan Times - https://www.hindustantimes.com/delhi/white-sari-clad-woman-spectre/story-8Xs5DRHn3hN4YyOaJaiyvO.html)\"\n  ],\n  \"sources\": [\n    \"The Ghost of the Lady in White Sari of Delhi Cantt - https://moonmausoleum.com/the-ghost-of-the-lady-in-white-sari-of-delhi-cantt/\",\n    \"White sari clad woman spectacle | Latest News Delhi - Hindustan Times - https://www.hindustantimes.com/delhi/white-sari-clad-woman-spectre/story-8Xs5DRHn3hN4YyOaJaiyvO.html\",\n    \"Delhi Cantonment is known for its defence presence but ... - Instagram - https://www.instagram.com/p/DOfZPi0EmQi/\"\n  ],\n  \"media\": [\n    \"High-resolution images of heavy trucks with 'Horn Please' s"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T01:39:43.726313",
+    "updated": "2026-10-24T01:39:43.726319"
+  },
+  {
+    "id": "72cea4ae-e6c2-46ad-b310-db58c3e5a2a7",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Kal Ki Video | CCTV ka Sach",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2026-08-28: Technical documentation for VIGI App motion detection features including 'Object Classification', 'Detection Zones', and 'Arming Schedules'. [Verified] https://www.tp-link.com/in/support/faq/3706/\",\n    \"2026-10-17: Industry report on Indian smart home security, highlighting the necessity of local SD storage (128GB for 3-5 days) and inverter backups due to power instability. [Verified] https://smartify.in/blog/best-smart-home-security-india-2026/\",\n    \"2024-04-23: Analysis of Pune residential security, confirming the standard practice of 24/7 manned security and gated entry systems. [Verified] https://www.yukio.in/blog/safest-residential-areas-in-pune-for-women/\"\n  ],\n  \"facts\": [\n    \"Many Indian home CCTV systems use 'Human Detection' AI to filter out non-human movement (pets, leaves) from motion alerts. [Verified] https://smartify.in/blog/best-smart-home-security-india-2026/\",\n    \"Standard 128GB microSD cards at 1080p resolution provide approximately 3 to 5 days of continuous recording before the loop restarts. [Verified] https://smartify.in/blog/best-smart-home-security_india_2026/\",\n    \"Motion Detection 'Zones' allow users to define specific areas (e.g., a hallway or doorway) that trigger notifications while ignoring others. [Verified] https://www.tp-link.com/in/support/faq/3706/\",\n    \"CCTV cameras in India often utilize Infrared (IR) for night vision, which produces a high-contrast, grainy black-and-white image in low light. [Verified] https://smartify.in/blog/best-smart-home-security_india_2026/\"\n  ],\n  \"sources\": [\n    \"Smartify - Best Smart Home Security Systems in India (2026) - https://smartify.in/blog/best-smart-home-security_india_2026/\",\n    \"TP-Link Support - How to Configure Motion Detection on VIGI Cameras - https://www.tp-link.com/in/support/faq/3706/\",\n    \"Yukio - Safest Residential Areas in Pune for Women - https://www.yukio.in/blog/safest-residential-areas-in-pune-for-women/\"\n  ],\n  \"media\": [\n    \"Grainy,"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T02:11:36.468953",
+    "updated": "2026-10-24T02:11:36.468956"
+  },
+  {
+    "id": "bfa99c77-19a7-4e2f-a5d3-3b38d7c156b4",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for B3B-409: THE VANISHING ROOM",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Late 18th Century: Lucknow becomes the capital of Awadh under Asaf-ud-Daula, leading to a boom in 'Haveli' construction (Sahapedia).\",\n    \"19th Century: Emergence of 'Kothi' architecture, influenced by European styles but maintaining traditional spatial divisions like Zenana and Mardana (Birspark Local).\",\n    \"Post-1857: Significant damage to many structures during the Siege of Lucknow, leading to a period of decay for many abandoned havelis in the Chowk area (Birspark Local).\"\n  ],\n  \"facts\": [\n    \"[Verified] Lucknow's traditional 'Haveli' mansions are characterized by high walls and hidden interior courtyards (Aangan) that shield private life from the public street (Sahapedia).\",\n    \"[Verified] The construction of these buildings heavily utilizes 'Lakhauri' bricks\u2014thin, flat clay-lime bricks that allow for intricate masonry and thick, insulating walls (Birspark Local).\",\n    \"[Folklore] In traditional architectural contexts, 'Zarkh' refers to hidden chambers or buffer zones used for storage or privacy within large estates (General Architectural Context).\",\n    \"[Alleged] Urban legends often attribute the existence of 'hidden rooms' in older buildings to secret passages or structural anomalies discovered during renovations (Quora).\"\n  ],\n  \"sources\": [\n    \"The Many Lives of Lucknow's Houses - Sahapedia: https://www.sahapedia.org/many-lives-lucknows-houses\",\n    \"Forgotten Havelis of Lucknow: Stories of a Lost Era - Birspark Local: https://birsparklocal.com/old-havelis-of-lucknow/\",\n    \"Adil Ahmad's ancestral home in Lucknow - Architectural Digest: https://www.architecturaldigest.in/story/adil-ahmads-ancestral-home-in-lucknow-is-a-riveting-tale-of-history-royalty-and-maximalism/\"\n  ],\n  \"media\": [\n    \"Close-up textures of weathered Lakhauri brickwork.\",\n    \"Images of heavy, ornate wooden gates (Zarkh style) and iron grills.\",\n    \"Floor plans or visual representations of 'Aangan' (central courtyards).\",\n    \"Atmospheric shots of the Ch"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T02:32:04.958272",
+    "updated": "2026-10-24T02:32:04.958275"
+  },
+  {
+    "id": "2250771e-3919-4fad-84ba-ed2c5362a896",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Track Par Khadi Aurat",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1967: Begunkodar Railway Station (West Bengal) officially closed for 42 years following reports of a 'ghostly woman in white' and the death of a station official.\",\n    \"2009: Begunkodar Railway Station reopened to the public, though local folklore regarding the entity persists.\",\n    \"Ongoing: Reports from commuters and residents in Mumbai (CSMT) regarding an old woman with 'white skin' appearing specifically after 12:00 AM.\"\n  ],\n  \"facts\": [\n    \"[Folklore] A woman dressed in a white saree is frequently reported by workers at Begunkodar station near the tracks.\",\n    \"[Alleged] A woman in corporate attire was seen crying on a platform at Dombivli, claiming she could not leave the station.\",\n    \"[Alleged] An old woman with 'white skin' appears at Mumbai's CSMT and nearby bus stops specifically after midnight.\"\n  ],\n  \"sources\": [\n    \"RailMitra - Begunkodar Railway Station: https://www.railmitra.com/blog/tickets-to-terror-most-haunted-railway-station-in-india\",\n    \"EaseMyTrip - Haunted Stations: https://www.easemytrip.com/blog/most-haunted-railway-stations-in-india\",\n    \"Reddit r/mumbai - White Skin Woman: https://www.reddit.com/r/mumbai/comments/1jvebh3/if_you_see_old_woman_with_white_skin_after_1200am/\"\n  ],\n  \"media\": [\n    \"Atmospheric photos of the tracks at Begunkodar (West Bengal).\",\n    \"Night-time footage or stills of Mumbai's CSMT station area.\",\n    \"Maps showing the locations of Begunkodar, Dombivli, and CSMT.\"\n  ],\n  \"unanswered_questions\": [\n    \"The specific identity of the 'woman in white' at Begunkodar is not recorded beyond local legend.\",\n    \"The exact physical nature or reason for the 'white skin' appearance at CSMT remains a matter of witness testimony.\"\n  ],\n  \"story_material\": {\n    \"world\": [\n      \"The heavy, metallic scent of iron and grease on the tracks during night shifts.\",\n      \"The rhythmic humming of overhead electrical lines and the distant clatter of trains in a rural setting (Begunkodar).\",\n      \"The"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T02:58:25.775554",
+    "updated": "2026-10-24T02:58:25.775557"
+  },
+  {
+    "id": "f7a5833f-1716-49ca-b162-e1d2cddf438b",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Mandir ka Shaitaan ya Insaan ki Saazish?",
+      "result_snippet": "{\n  \"timeline\": [\n    \"17th-18th Century: Rise of 'Chala' (curved) roof architecture in rural Bengal as a fusion of local clay traditions and functional design for monsoon drainage. [https://oaklores.com/2025/12/20/the-curved-poetry-of-clay-unfolding-the-chala-architecture-of-bengal/]\",\n    \"1907: Publication of 'Thakurmar Jhuli', which codified many local folk spirits like the Rakkhoshi and other vengeful entities in Bengali culture. [https://en.wikipedia.org/wiki/Ghosts_in_Bengali_culture]\"\n  ],\n  \"facts\": [\n    \"[Folklore] The 'Churail' (or Chudail) is a common South Asian spirit often depicted as a woman with backward-turned feet, believed to be the vengeful ghost of one who died during childbirth. [https://godsandmonsters.info/churel/]\",\n    \"[Folklore] The 'Shakchunni' is a specific regional variant in Bengali folklore that haunts graveyards and rural outskirts at night. [https://mythicalencyclopedia.com/churel/]\",\n    \"[Verified] Chala architecture features distinct curved, sloping roofs; it transitioned from humble mud-and-thatch huts to ornate terracotta brick structures between the 16th and 19th centuries. [https://oaklores.com/2025/12/20/the-curved-poetry-of-clay-unfolding-the-chala-architecture-of-bengal/]\",\n    \"[Verified] Garad is a traditional West Bengal silk characterized by its stark white body and red border, traditionally used for sacred rituals. [https://www.azafashions.com/blog/the-ultimate-guide-to-west-berg-heritage-textiles-traditional-style/?srsltid=AYCX9vKzHJ1-K7KIBa9tYWsypo5iW6LHdBWifyVa-cuZp2oHqS0eLHku]\",\n    \"[Verified] Tussar is a 'wild' silk with a natural golden hue, common in the East Indian region but distinct from standard mulberry silks. [https://suvetah.com/blogs/latest-blogs/traditional-indian-fabrics?srsltid=AYCX9vI-2KmEpq1w8wuoHpJG2n35Xl8562LNe5X-hBqyXq2pL5wNb0yu]\"\n  ],\n  \"sources\": [\n    \"OakLores - Chala Architecture: https://oaklores.com/2025/12/20/the-curved-poetry-of-clay-unfolding-the-chala-architecture-of-bengal/\",\n   "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T03:30:36.687397",
+    "updated": "2026-10-24T03:30:36.687401"
+  },
+  {
+    "id": "a584cdba-384e-40ab-b670-474bc8de1a22",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Kolkata ki Purani Deewaren aur Chori ka Saazish (Working Title)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"18th Century: Construction of many Rajbaris in North Kolkata, including the Shobhabazar Rajbari (Source: https://maverickbird.com/india/east/west-bengal/photo-essay-of-calcutta-rajbaris/)\",\n    \"1947: Partition of India; transition of many historical documents and properties into modern administrative oversight (Source: https://frontline.thehindu.com/other/the-partition-of-india/article30247187.ece)\"\n  ],\n  \"facts\": [\n    \"Rajbari is a term for a mansion or palace built as a residence for a Hindu rajah, common in Bengal (Source: https://maverickbird.com/india/east/west-bengal/photo-essay-of-calcutta-rajbaris/)\",\n    \"Thakurdalan refers to the ceremonial inner courtyards of these mansions; Jharbati refers to the large, ornate chandeliers (Source: https://maverickbird.com/india/east/west-bengal/photo-essay-of-calcutta-rajbaris/)\",\n    \"Malba is the specific local term for construction and demolition debris in India, often involving brick, concrete, and masonry (Source: https://www.malbaproject.com/post/identifying-the-malba-problem/)\",\n    \"Kolkata's trams are unique as they remain operational in a modern urban environment, with specific noise and vibration profiles (Source: http://www.drwingler.com/wp-content/uploads/2021/05/Road-embedded-Rail-Track-for-City-Tram-Light-Rail-Transit-and-Metro-Lite.pdf)\"\n  ],\n  \"sources\": [\n    \"Photo Essay: Calcutta Rajbaris - https://maverickbird.com/india/east/west-bengal/photo-essay-of-calcutta-rajbaris/\",\n    \"The Partition of India (Frontline) - https://frontline.thehindu.com/other/the-partition-of-india/article30247187.ece\",\n    \"Malba Project Info - https://www.malbaproject.com/post/identifying-the-malba-problem/\",\n    \"Road Embedded Rail Track Technicals - http://www.drwingler.com/wp-content/uploads/2021/05/Road-embedded-Rail-Track-for-City-Tram-Light-Rail-Transit-and-Metro-Lite.pdf\"\n  ],\n  \"media\": [\n    \"Images of 'Thakurdalan' (inner courtyards) and 'Jharbati' (chandeliers) for visual atmosphere.\",\n  "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-24T03:47:24.100898",
+    "updated": "2026-10-24T03:47:24.100901"
+  },
+  {
+    "id": "71e35072-3fca-467d-929e-0e95799691ff",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Maut Ka Mehmaan-Khana: Forest Guest House",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Arrival at the remote lodge during a storm (Story Beat)\",\n    \"Discovery of the 'Register' with names already written in red ink (Story Beat)\",\n    \"Nighttime occurrences: shadows, ghungroos/chains sounds, and reflection-only host (Story Beat)\",\n    \"Discovery of the hidden room and 'paid' photos (Story Beat)\",\n    \"Final confrontation with the guardian figure at dawn (Story Beat)\"\n  ],\n  \"facts\": [\n    \"[Folklore] Yakshas are ancient Indian spirits/demigods who act as guardians of nature, trees, and hidden treasures; they can be capricious or protective. (Source: https://www.britannica.com/topic/yaksha)\",\n    \"[Folklore] Sacred Groves (Dev-Vana) are forest patches protected by local communities because they are believed to be inhabited by spirits or deities. (Source: https://en.wikipedia.org/wiki/Sacred_groves_of_India)\",\n    \"[Verified] The 'Chowkidar' is a traditional role for a watchman or guard in rural and forest areas of India. (Source: https://www.indiawilds.com/diary/sacred_groves/)\",\n    \"[Folklore] Sacred groves often have specific taboos, such as no cutting of trees or making loud noises, to respect the presiding deity/spirit. (Source: https://ecoideaz.com/showcase/of-sacred_groves_of_india_where_forest_meets_faith/)\"\n  ],\n  \"sources\": [\n    \"Yaksha | Demigod, Vedic Rituals & Guardian Spirits - https://www.britannica.com/topic/yaksha\",\n    \"Sacred groves of India - https://en.wikipedia.org/wiki/Sacred_groves_of_India\",\n    \"The Sacred Groves of India: Nature's Spiritual Sanctuaries - https://cultureandheritage.org/the-sacred-groves-of-india-natures-spiritual-sanctuaries\",\n    \"Sacred groves of India - grokipedia.com - https://grokipedia.com/page/Sacred_groves_of_India\",\n    \"Home - Department of Tourism Maharashtra - https://maharashtratourism.gov.in/\"\n  ],\n  \"media\": [\n    \"Images of stone-built rural architecture with heavy wooden doors (for the Guest House)\",\n    \"Visuals of a thick, leather-bound 'Bahi Khata' style register\",\n "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T08:39:42.496084",
+    "updated": "2026-10-25T08:39:42.496087"
+  },
+  {
+    "id": "48a2a348-ae7d-44a1-95b3-fac0f520bc7c",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Shapat Ki Ghanti: Ek Adhoora Sauda (Selected from options like 'Gaon Ke Ped Ka Raaz' or 'Maut Ki Ghanti')",
+      "result_snippet": "```json\n{\n  \"research_dossier\": {\n    \"topic\": \"Sacred Ecology, Folk Belief, and Forest Mysteries in India\",\n    \"timeline\": [\n      {\n        \"date\": \"Pre-historic/Ancient Era\",\n        \"event\": \"Establishment of ritual practices centered around specific trees and natural landmarks.\",\n        \"label\": \"[Folklore]\",\n        \"source\": \"General cultural references (e.g., plantamilliontrees.org.in)\"\n      },\n      {\n        \"date\": \"Modern Era\",\n        \"event\": \"Increased academic and media interest in the intersection of ecology and spirituality.\",\n        \"label\": \"[Verified]\",\n        \"source\": \"Academic studies on sacred groves (e.g., ScienceDirect, MDPI)\"\n      },\n      {\n        \"date\": \"Current\",\n        \"event\": \"Rise of digital folklore and sensationalized content (Kala Jadu, encounters) on platforms like YouTube.\",\n        \"label\": \"[Alleged/Fiction]\",\n        \"source\": \"YouTube search results (e.g., specific channel URLs)\"\n      }\n    ],\n    \"facts\": {\n      \"sacred_groves\": {\n        \"description\": \"Biocultural landscapes where traditional ecological knowledge and ritual practice intersect. They often function as informal conservation areas for biodiversity.\",\n        \"label\": \"[Verified]\",\n        \"source\": \"https://www.sciencedirect.com/science/article/abs/pii/S161"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T09:45:58.852713",
+    "updated": "2026-10-25T09:45:58.852718"
+  },
+  {
+    "id": "4f224e87-cbb8-4d14-9b47-ec6b1634e90d",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Predjama Castle: Zameen ke Neeche ka Qila",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Early 13th Century (c. 1202): First recorded mention of the castle's construction by the Patriarch of Aquileia. https://www.heritagedaily.com/2020/08/predjama-the-castle-in-a-cave/134896\",\n    \"15th Century (c. 1484): The siege of Erazem Lueger, who held out for over a year using the cave system before being betrayed and killed. https://allthatsinteresting.com/predjama-castle\",\n    \"1511: A major earthquake occurred; local lore suggests many were buried alive in the tunnels during this time. https://www.paranormalarabia.com/en/articles/2025/10/predjama-castle-in-slovenia-haunted-castles\",\n    \"2008: Ghost Hunters International conducted a multi-night investigation, officially documenting 'anomalies' and reporting the site as haunted. https://www.paranormalarabia.com/en/articles/2025/10/predjama-castle-in-slovenia-haunted-castles\"\n  ],\n  \"facts\": [\n    \"[Verified] Predjama Castle is officially recognized by Guinness World Records as the largest cave castle in the world. https://www.postojnacaves.com/predjama-castle/\",\n    \"[Verified] The structure sits on a 123-meter (approx. 400 feet) high limestone cliff and features a complex system of tunnels extending for approximately nine miles. https://allthatsinteresting.com/predjama-castle\",\n    \"[Folklore] Erazem Lueger is celebrated as 'Slovenia's Robin Hood,' a knight who lived by the code of helping the poor while evading imperial authority. https://www.paranormalarabia.com/en/articles/2025/10/predjama-castle-in-slovenia-haunted-castles\",\n    \"[Alleged] Staff members and visitors report hearing 'human voices' and footsteps in the halls at night, often attributed to the castle's limestone acoustics or lingering spirits. https://www.paranormalarabia.com/en/articles/2025/10/predjama-castle-in-slovenia-haunted-castles\"\n  ],\n  \"sources\": [\n    \"Predjama Castle - Postojna Cave Park: https://www.postojnacaves.com/predjama-castle/\",\n    \"The Wild History of Predjama Castle: https://allthatsinteresting.com"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T10:32:06.766435",
+    "updated": "2026-10-25T10:32:06.766439"
+  },
+  {
+    "id": "fdcda54b-0c4c-4382-b227-0dedf5c76558",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for The Ghostly Silence of Flannan Isles",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1899: Flannan Isles Lighthouse construction completed and first lit on December 7.\",\n    \"December 15, 1900: The steamer Archtor reports the lighthouse is not operational in poor weather conditions.\",\n    \"December 26, 1900: The relief vessel Hesperus reaches Eilean M\u00f2r; finds the lighthouse abandoned and no keepers present. [https://en.wikipedia.org/wiki/Flannan_Isles_Lighthouse]\",\n    \"December 29, 1900: Northern Lighthouse Board Superintendent Robert Muirhead conducts an official investigation of the island.\",\n    \"Post-1900: Local folklore develops regarding 'ghostly' voices and lights in the fog surrounding the lighthouse.\"\n  ],\n  \"facts\": [\n    \"[Verified] The three keepers were James Ducat (Principal), Thomas Marshall (Second Assistant), and Donald McArthur (Occasional). [https://en.wikipedia.org/wiki/Flannan_Isles_Lighthouse]\",\n    \"[Verified] On arrival, the Hesperus crew found the lighthouse door unlocked, a meal prepared but not eaten, and an overturned chair in the kitchen. [https://echoesofhistoryuncut.com/articles/flannan-isles-lighthouse/]\",\n    \"[Verified] Two sets of oilskin coats and boots were missing from the interior; one set remained inside. [https://spookyscotland.net/the-flannan-islands-mystery/]\",\n    \"[Verified] The West Landing showed severe physical damage: a stone block weighing over 1 ton was dislodged, and iron railings were twisted out of shape. [https://echoesofhistoryuncut.com/articles/flannan-isles-lighthouse/]\",\n    \"[Alleged] Local maritime lore suggests 'ghostly voices' are heard in the fog, often interpreted as the missing men or sea spirits. [https://spookyscotland.net/the-flannan-islands-mystery/]\",\n    \"[Alleged] Reports of 'strange lights' appearing in the fog have been reported by local fishermen over several decades. [https://devilishideout.com/case/flannan-isles-lighthouse-keepers/]\"\n  ],\n  \"sources\": [\n    \"Flannan Isles Lighthouse - Wikipedia - https://en.wikipedia.org/wiki/Flannan_Isles_Lighthou"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T11:10:04.624573",
+    "updated": "2026-10-25T11:10:04.624580"
+  },
+  {
+    "id": "229a9853-7049-4b42-ab19-b1b3b7adbe86",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Nadi Ka Wo Aurat | Raat Ko Kyun Koi Wahan Nahi Jaata?",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Ancient Scriptures (Puranas): Establishment of ritual bathing and purification in rivers as a sacred act, often tied to specific seasons like Vaishakha. [Verified] https://www.wisdomlib.org/concept/bathing-in-a-river\",\n    \"Vedic Period: Inclusion of 'Ganga' (Jahnavi) in the Rigveda as a primary source of purification and life. [Verified] https://en.wikipedia.org/wiki/Ganga_(goddess)\",\n    \"Historical Development: Evolution of Ganga as a deity of forgiveness and purification, often depicted with sacred items like the Kalasha and Pavitra cloth. [Verified] https://en.wikipedia.org/wiki/Ganga_(goddess)\"\n  ],\n  \"facts\": [\n    \"Pavitra: A specific ritual cloth used in Hindu and Jain traditions for filtering water or as a symbol of purity; it is not common laundry but a sacred object. [Verified] https://www.wisdomlib.org/concept/pavitra\",\n    \"Ganga Goddess: The personification of the Ganges, who serves as a deity of purification and forgiveness, often depicted in various regional forms (Gangamma, Gangai Amman). [Folklore] https://en.wikipedia.org/wiki/Ganga_(goddess)\",\n    \"Krincha: A water entity mentioned in regional folklore (e.g., Uttarakhand) associated with rivers and ghats, believed to pull people into the water. [Folklore] https://www.instagram.com/popular/uttarakhand-horror-stories-and-legends/\",\n    \"Sacred Prohibitions: Many rural communities maintain strict taboos against activities like laundry or waste disposal in specific 'sacred' zones of rivers, especially after sunset. [Folklore] https://www.facebook.com/groups/1549601418723670/\",\n    \"Ritual Purification: The act of washing is often a formal ritual involving specific items (like the Pavitra cloth) to remove spiritual impurity rather than physical dirt. [Verified] https://en.wikipedia.org/wiki/Ritual_purification\"\n  ],\n  \"sources\": [\n    \"Wikipedia - Ganga (goddess): https://en.wikipedia.org/wiki/Ganga_(goddess)\",\n    \"Wisdom Library - Bathing in a River: https://www.wisdomlib.org"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T12:02:33.408071",
+    "updated": "2026-10-25T12:02:33.408073"
+  },
+  {
+    "id": "b30fb3b5-bf05-4dc7-bbb8-d5a2fe96e93f",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Dadi Ki Khali Kursi aur Woh Raat ka Bhojan (The Ritual of the Empty Chair)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Pitru Paksha: A 16-day period in the Hindu calendar (traditionally during the month of Bhadrapada) where food is offered to ancestors and spirits to ensure their peace. [https://en.wikipedia.org/wiki/Pitru_Paksha]\",\n    \"Pishach Mochan Kund Rituals: Traditionally performed at Assi Ghat, Kashi, specifically for 'Pitru Dosh Shanti' (pacifying ancestral karmas) and seeking liberation from the influence of hungry spirits. [https://www.srimandir.com/epuja/pitru-dosh-shanti-9th-aug-2026-1791885412]\"\n  ],\n  \"facts\": [\n    \"Preta (Hungry Ghost): A type of supernatural being in Hindu and Buddhist folklore that suffers from extreme hunger and is often pacified through 'Bhog' or food offerings. [https://en.wikipedia.org/wiki/Preta]\",\n    \"Pishach: These are specifically considered 'hungry spirits' or 'demons' in Indian folklore, often associated with the consumption of flesh or energy, requiring specific rituals (like Pishach Mochan) to appease them. [https://www.ganeshaspeaks.com/predictions/astrology/ghosts-spirits-belief-in-indian-tradition/]\",\n    \"Kala Jadu Signs: Ritualistic signs of black magic often include sudden, unexplained illness in a household, objects moving on their own, or a heavy, oppressive atmosphere (often associated with 'Pishach' influence). [https://timesofindia.indiatimes.com/astrology/zodiacs-astrology/5-signs-that-you-are-affected-by-black-magic/articleshow/118775525.cms]\",\n    \"Ritual Offerings: Traditional offerings for spirits often include 'Tila' (black sesame), grains, and specific items like mustard seeds or cumin in a ritualistic meal called 'Bhog'. [https://thewaytokashi.in/after-death-rituals]\"\n  ],\n  \"sources\": [\n    \"Pitru Paksha - Wikipedia - https://en.wikipedia.org/wiki/Pitru_Paksha\",\n    \"Preta - Wikipedia - https://en.wikipedia.org/wiki/Preta\",\n    \"Pishach Mochan Kund Ritual Details - https://www.srimandir.com/epuja/pitru-dosh-shanti-9th-aug-2026-1791885412\",\n    \"Ghosts & Spirits in Indian Tradition - https://"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T12:44:20.652281",
+    "updated": "2026-10-25T12:44:20.652284"
+  },
+  {
+    "id": "773e26f5-2525-4923-bc23-294be8cc964f",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for MOTHMAN",
+      "result_snippet": "{\n  \"timeline\": [\n    \"November 15, 1966: First reported sighting by two couples (Scarberry and Mallette) near the TNT area; report filed with Mason County Sheriff's office. https://en.wikipedia.org/wiki/Mothman\",\n    \"November 16, 1966: Publication of the first news report in the Point Pleasant Register titled 'Couples See Man-Sized Bird... Creature... Something'. https://en.wikipedia.org/wiki/Mothman\",\n    \"November 1966 - December 15, 1967: Period of approximately 100 reported sightings and related phenomena in the Point Pleasant area. https://www.worldurbanlegend.com/mothman-point-pleasant-1966-1967-sightings/\",\n    \"December 15, 1967: Collapse of the Silver Bridge at Point Pleasant, resulting in 46 fatalities. https://www.ntsb.gov/investigations/Pages/80267.aspx\",\n    \"1975: Publication of 'The Mothman Prophecies' by John A. Keel, which solidified the link between the sightings and the bridge collapse in popular culture. https://en.wikipedia.org/wiki/Mothman\"\n  ],\n  \"facts\": [\n    \"[Verified] The first sighting was reported on November 15, 1966, by two couples who described a man-sized creature with wings and glowing eyes. https://en.wikipedia.org/wiki/Mothman\",\n    \"[Verified] The 'TNT area' where sightings were concentrated is a real, former World War II ammunition manufacturing site featuring concrete bunkers. https://www.worldurbanlegend.com/mothman-point-pleasant-1966-1967-sightings/\",\n    \"[Verified] The Silver Bridge collapse was caused by a specific mechanical failure (a cracked eyebar) and not any supernatural intervention. https://www.ntsb.gov/investigations/Pages/80267.aspx\",\n    \"[Folklore] The name 'Mothman' is believed to have been influenced by the popularity of the Batman TV series in the 1960s. https://en.wikipedia.org/wiki/Mothman\",\n    \"[Alleged] Witnesses reported that the creature emitted a high-pitched screeching sound while following their vehicle at high speeds. https://en.wikipedia.org/wiki/Mothman\",\n    \"[Alleged] The creature's eyes w"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T13:31:41.869212",
+    "updated": "2026-10-25T13:31:41.869215"
+  },
+  {
+    "id": "9d0bd56f-7353-4dfa-b159-3cba1ff254a9",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for KAL KA VIDEO",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2016-08-16: Bombay High Court judgment (Bedekar v. State of Maharashtra) establishing protocols for noise complaints in Maharashtra, applicable to Pune.\",\n    \"2024: National Green Tribunal (NGT) rules on Ganesh festival and local noise limits in Pune.\",\n    \"2025-03-29: Report on urban heat island effects making Pune nights significantly warmer than usual.\",\n    \"2026-10-02: Update to internal project visual instructions.\"\n  ],\n  \"facts\": [\n    \"Pune residential societies utilize PSARA-licensed security teams for gate management, night patrols (checking corridors/basements), and CCTV monitoring. [Verified] (https://brytegf.com/housing-society-security-pune/)\",\n    \"Common IP camera failures include 'offline' status due to power instability, IP address conflicts, or weak Wi-Fi signals in large buildings. [Verified] (https://cctvdesk.com/ip-camera-not-working/)\",\n    \"Pune enforces specific noise limits: 45 dB(A) for residential areas at night (10 PM to 6 AM). [Verified] (https://decibelshield.app/india-noise-rules/pune/)\",\n    \"High-rise complexes in Pune (like those in Baner or Koregaon Park) often feature 'Silence Zones' and specific security protocols for delivery handling. [Verified] (https://brytegf.com/housing-society-security-pune/)\"\n  ],\n  \"sources\": [\n    \"Bryte Guard Force - https://brytegf.com/housing-society-security-pune/\",\n    \"CCTV Desk - https://cctvdesk.com/ip-camera-not-working/\",\n    \"Decibel Shield (Pune Noise Rules) - https://decibelshield.app/india-noise-rules/pune/\",\n    \"Times of India (Pune Urban Heat) - https://timesofindia.indiatimes.com/city/pune/urban-heat-island-effect-turns-nights-warmer-meteorologists/articleshow/119720254.cms\"\n  ],\n  \"media\": [\n    \"Grainy, low-frame-rate CCTV footage of a corridor with high-contrast shadows.\",\n    \"A smartphone screen displaying a 'Live' feed with a timestamp exactly 24 hours ahead of the current time.\",\n    \"A wide shot of a Pune high-rise hallway (Baner/Koregaon Park style) "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T14:03:28.209895",
+    "updated": "2026-10-25T14:03:28.209898"
+  },
+  {
+    "id": "e7a65e61-45ae-4733-a4c8-ebf8d54f8efe",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Barish, Band Kamra aur Nakli Bhoot",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1766 - Construction of Rajbari (Zamindar mansions) in Bengal, including the architectural style seen in sites like Itachuna Rajbari. [https://theinvincibleindia.in/itachuna-rajbari-guide/]\",\n    \"Late 19th Century - Development of 'Rajbari' culture and architecture in North Kolkata, establishing the 'Thakurdalan' courtyard layout. [https://en.wikipedia.org/wiki/Shobhabazar_Rajbari]\"\n  ],\n  \"facts\": [\n    \"[Verified] Rajbaris are traditional Bengali mansions (Zamindar houses) often featuring red brick construction and specific inner courtyards known as 'Thakurdalan'. [https://theinvincibleindia.in/itachuna-rajbari-guide/]\",\n    \"[Folklore] The 'Nishi Dak' is a prominent Bengali folk belief where a ghost calls out at night; traditional rules suggest that if the call is heard once, it is ignored, but twice indicates immediate danger. [https://theculturetrip.com/asia/india/articles/ghostly-bengali-legends-the-most-famous-bhoots-in-local-folklore/]\",\n    \"[Alleged] Paraffin wax was historically used as a lubricant for heavy wooden hinges and metal gates in large estates to ensure they operated silently. [https://www.quora.com/Why-do-I-hear-eerie-noises-at-night_I_think_its_the_wind_but_why_does_the_wind_do_that_at_night]\"\n  ],\n  \"sources\": [\n    \"Itachuna Rajbari Guide - https://theinvincibleindia.in/itachuna-rajbari-guide/\",\n    \"Shobhabazar Rajbari Wikipedia - https://en.wikipedia.org/wiki/Shobhabazar_Rajbari\",\n    \"Ghostly Bengali Legends - https://theculturetrip.com/asia/india/articles/ghostly-bengali-legends-the-most-famous-bhoots-in-local-folklore/\",\n    \"Folklore Chronicles (Nishi Dak) - https://folklorechronicles.com/the-legend-of-bengals-nishi-dak-a-call-from-the-shadows/\"\n  ],\n  \"media\": [\n    \"Visuals of 'Thakurdalan' courtyards (open central spaces in old mansions)\",\n    \"Close-ups of heavy, weathered wooden doors with brass fittings\",\n    \"Cinematic shots of monsoon rain on red brick surfaces and mossy walls\",\n    \"Old Kolkata lanes du"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T15:19:23.855977",
+    "updated": "2026-10-25T15:19:23.855979"
+  },
+  {
+    "id": "71e85be8-468c-476e-b44d-1bef1ce87e3c",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Biryani, Baraat aur Bada Jhooth (The Big Lie)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Pre-event (T-minus 4 hours): Preparation of 'Dum' biryani pots and setup of live counters (Source: https://hitkariproductions.com/indian-wedding-catering-guide-2026/)\",\n    \"Arrival of Guests: Transition to high-pressure service where food must be fresh and hot, often managed via a 'Hospitality Desk' (Source: https://festalshospitality.com/wedding-logistics-management-company-festals-group/)\",\n    \"The Crisis Point: Realization of missing vendors or logistical failures like gas shortages during peak demand (Source: https://brandequity.economictimes.indiatimes.com/news/business-of-brands/too-much-on-their-plate-caterers-scramble-as-cylinders-run-out/129539964)\"\n  ],\n  \"facts\": [\n    \"Catering typically accounts for 30-40% of the total budget in an Indian wedding. [Verified] (https://hitkariproductions.com/indian-wedding-catering-guide-2026/)\",\n    \"A 'Banquet Event Order' (BEO) is a standard industry document that outlines food, timeline, and setup for kitchen staff. [Verified] (https://beohq.com/guides/catering-contract-terms/)\",\n    \"Dum Biryani involves sealing pots with dough to cook in their own steam; the 'opening of the pot' at a counter is a common theatrical element. [Verified] (https://hitkariproductions.com/indian-wedding-catering-guide-2026/)\",\n    \"Catering Consultants are distinct from Caterers; consultants provide strategy and management, while caterers handle food production and service. [Verified] (https://www.quora.com/Do-wedding-planners-and-wedding-caterers-do-the-same-thing/)\",\n    \"Large scale events often face 'Gas Shortages' or logistics failures that require immediate on-ground problem solving. [Verified] (https://brandequity.economictimes.indiatimes.com/news/business-of-brands/too-much-on-their-plate-caterers-scramble-as-cylinders-run-out/129539964)\"\n  ],\n  \"sources\": [\n    \"Indian Wedding Catering Guide 2026 - https://hitkariproductions.com/indian-wedding-catering-guide-2026/\",\n    \"Wedding Logistics Management Compan"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T15:52:26.992609",
+    "updated": "2026-10-25T15:52:26.992611"
+  },
+  {
+    "id": "b6a27708-6c75-4aad-ae60-eac83c5ec41c",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Raat Ki Gunjish: The Mystery of the Haunted Haveli",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1883-1884: Historic grand neoclassical mansions like Raja Subodh Mullick's house in Wellington Square, North Kolkata, are constructed featuring U-shaped layouts, jaafri grilles, and deep-set courtyards (thakurdalan) -- https://en.wikipedia.org/wiki/Raja_Subodh_Mullick%27s_house\",\n    \"1906: Political and cultural secret conclaves and Swadeshi movement meetings take place behind closed doors in North Kolkata rajbari wings -- https://en.wikipedia.org/wiki/Raja_Subodh_Mullick%27s_house\",\n    \"1908: Extensive searches by the Indian Imperial Police occur across older North Kolkata mansions, revealing labyrinthine inner chambers and concealed back-wing corridors -- https://en.wikipedia.org/wiki/Raja_Subodh_Mullick%27s_house\",\n    \"1986: Period marked in fictional and investigative mystery accounts where sudden disappearances and unsolved thefts in historic urban havelis remain unexplained -- https://www.scribd.com/document/888393167/Magnificent-reviews\",\n    \"1998: Kolkata Municipal Corporation designates prominent North Kolkata mansions as Grade I heritage structures amidst rising property disputes -- https://en.wikipedia.org/wiki/Raja_Subodh_Mullick%27s_house\",\n    \"2009: Kolkata Municipal Corporation updates its Heritage Building Register, documenting over 915 crumbling colonial and zamindari structures in North Kolkata -- https://www.theculturegully.in/post/the-fading-grandeur-of-kolkata-s-houses\"\n  ],\n  \"facts\": [\n    \"[Verified] North Kolkata mansions (rajbaris) in areas like Sovabazar, Pathuriaghata, and Bowbazar feature hybrid architecture combining European neoclassical Tuscan/Corinthian columns with traditional central courtyards (thakurdalan), jaafri grilles, and isolated inner domestic wings (andarmahal) -- https://www.theculturegully.in/post/the-fading-grandeur-of-kolkata-s-houses\",\n    \"[Verified] Historic 19th-century Kolkata residences incorporated naibatkhanas (elevated music and sentry chambers above gates) and hollow ventilation s"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-25T23:25:14.936689",
+    "updated": "2026-10-25T23:25:14.936699"
+  },
+  {
+    "id": "4ab5201c-398e-48ca-95c9-c503d73379da",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for B3B-042: 15 Saal Se Band Station Par Har Raat Ek Train Aati Hai | Anomaly Files",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1960: Begunkodor Railway Station opens in Purulia district, West Bengal (South Eastern Railway line) - https://timesofindia.indiatimes.com/etimes/trending/the-story-of-a-haunted-railway-station-in-west-bengal-left-alone-for-42-long-years/articleshow/99036338.cms\",\n    \"1967: Station master of Begunkodor reportedly dies after witnessing a woman in white sari on tracks; station subsequently abandoned by all staff - https://www.thehindu.com/news/national/other-states/west-bengals-begunkodor-no-longer-a-haunted-railway-station/article22335045.ece\",\n    \"1967\u20132009: Begunkodor Railway Station remains closed for 42 years, marked in Indian Railways records as one of 10 'haunted' stations - https://www.newindianexpress.com/india/2017/Dec/31/myth-of-west-bengals-haunted-begunkodar-railway-station-busted-after-50-years-1741019.html\",\n    \"2008\u20132010: Jharkhand reports 320 missing children in documented trafficking cases - https://shaktivahini.org/wp-content/uploads/2018/12/JHARKHAND-DRAFT-REPORT-2.pdf\",\n    \"2009: Begunkodor Railway Station reopened by Railway Minister Mamata Banerjee after 42-year abandonment - https://timesofindia.indiatimes.com/etimes/trending/the-story-of-a-haunted-railway-station-in-west-bengal-left-alone-for-42-long-years/articleshow/99036338.cms\",\n    \"December 2017: Paschim Banga Bigyan Mancha (rationalist organization) investigates Begunkodor overnight; discovers local hoaxers attempting to scare visitors for 'ghost tourism' - https://www.newindianexpress.com/india/2017/Dec/31/myth-of-west-bengals-haunted-begunkodar-railway-station-busted-after-50-years-1741019.html\",\n    \"[Fiction] 2011: Deori Ghat Junction (fictional, modeled on East Central Railway Jharkhand/Bihar sector) decommissioned; Track 3 permanently severed and fenced - Project B3B-042 creative brief\",\n    \"[Fiction] October 2014 onward: B3B-042 phantom train begins nightly 02:17 AM arrivals at Deori Ghat; Rameshwar Yadav files complaints to DRM - Project B3B-042 creat"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T01:25:47.763345",
+    "updated": "2026-10-26T01:25:47.763350"
+  },
+  {
+    "id": "fec34ba5-f3b1-400d-99a6-ff9fa320cdb4",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Point Pleasant Ka Khauf: Mothman Ki Sachhai | Encounter Files",
+      "result_snippet": "{\n  \"timeline\": [\n    \"November 15, 1966, 11:30 PM: Roger and Linda Scarberry, Steve and Mary Mallette encounter a 7-foot winged humanoid with glowing red eyes in the TNT Area north of Point Pleasant, West Virginia; Deputy Millard Halstead takes their sworn statement at Mason County Sheriff's Office. [https://skepticalinquirer.org/2022/06/the-mothman-and-the-crane-a-contemporary-perspective/] [https://uapglobe.com/cases/mothman-1966]\",\n    \"November 16, 1966, evening: Newell Partridge reports television interference and a German Shepherd dog Bandit barking at two red glowing circles in a nearby meadow; Bandit disappears into darkness and is never found. [https://www.cracked.com/article_32945_the-urban-legend-of-the-mothman-west-virginias-famous-red-eyed-omen.html]\",\n    \"November 16, 1966: Marcella Bennett, a 24-year-old mother, encounters the creature while visiting near the TNT Area with her infant daughter Teena; frightened, she drops the baby and flees inside a house. [https://maeclair.net/2016/04/30/red-eyes-and-winged-beasts-themothman/]\",\n    \"November 16, 1966: Point Pleasant Register editor Mary Hyre publishes first front-page article: 'Couples See Man-Sized Bird... Creature... Something'; local media begins coverage. [https://scholarworks.iu.edu/journals/index.php/cl/article/download/41747/44362/128005]\",\n    \"November 20, 1966: Dr. Robert L. Smith, Associate Professor of Wildlife Biology at West Virginia University, proposes Sandhill Crane explanation in newspaper interview. [https://skepticalinquirer.org/2022/06/the-mothman-and-the-crane-a-contemporary-perspective/]\",\n    \"November 1966 \u2013 December 1967: Over 100 additional sightings reported across Mason County, spanning 13 consecutive months; creature becomes known as 'Mothman' in press and public discourse. [https://scholarworks.iu.edu/journals/index.php/cl/article/download/41747/44362/128005]\",\n    \"December 15, 1967, 5:04 PM: Silver Bridge (U.S. Route 35) collapses into Ohio River during rush hour; 4"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T02:32:03.621502",
+    "updated": "2026-10-26T02:32:03.621508"
+  },
+  {
+    "id": "86bfa0ce-bdcd-4257-8abb-fc10113b02a0",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Shamshan Ka Karz: Us Raat Chita Ki Raakh Par Kya Likha Tha?",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Amavasya (New Moon) nights \u2014 traditional timing for Shamshan Sadhana in tantric practice across centuries; modern practice documented 2025-2026\"\n  ],\n  \"facts\": [\n    \"[Verified] Shava Sadhana (meditation on corpse) is performed at night during Amavasya (new moon) in a crematorium. Strict rules and secret mantras exist; wrong performance can lead to practitioner's death or madness. Procedures passed guru to disciple only. Source: https://www.aghori.it/sadhana_eng.htm\",\n    \"[Verified] Smashan Sadhana (cremation ground sadhana) is a secret Aghori practice, one of the principal sadhanas. Source: https://www.aghori.it/sadhana_eng.htm\",\n    \"[Verified] Shamshan Kali worship reaches peak energy on Amavasya (new moon), with midnight rituals at cremation grounds like Tarapith being particularly potent. Source: https://www.facebook.com/groups/632341944653458/posts/1382196956334616/\",\n    \"[Verified] Cremation grounds (shmashana) are traditionally located near rivers on outskirts of villages; the chief mourner must obtain sacred fire from one who resides by the shmashana. Source: https://en.wikipedia.org/wiki/Shmashana\",\n    \"[Verified] Aghoris, Kapalikas and other tantric practitioners perform sadhana in cremation grounds to invoke occult powers and worship Kali, Tara, Bhairav, Dakini, Vetala and other entities. Source: https://en.wikipedia.org/wiki/Shmashana\",\n    \"[Folklore] Brahmarakshas \u2014 vengeful spirit of an unrighteous Brahmin \u2014 is tied to peepal and banyan trees, often found in cremation grounds and abandoned temples. Represents the cost of knowledge without dharma. Source: https://umbrarium.org/e/brahmarakshasa and https://keralafolklore.com/creatures-legends/super-natural-silo/brahmarakshas-kerala.html\",\n    \"[Folklore] Vetala \u2014 corpse-inhabiting spirit \u2014 is associated with trees in cremation grounds (especially banyan, peepal, silk-cotton). Source: https://genies.fandom.com/wiki/Vetala\",\n    \"[Folklore] Masan/Masaan Bhoot \u2014 cremation ground"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T03:36:49.993502",
+    "updated": "2026-10-26T03:36:49.993508"
+  },
+  {
+    "id": "1a057d57-8904-4271-b58f-4d0641c4fac3",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Pahadi Homestay Ka Locked Room",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1907: Dakshinaranjan Mitra Majumder documents regional folklore of spirits bound to ancestral homes and rural spaces in Thakurmar Jhuli. [https://en.wikipedia.org/wiki/Ghosts_in_Bengali_culture]\",\n    \"1916: Traditional century-old Kath-Kuni mud-and-timber architecture constructed in Kais village near Kullu, using interlocking deodar wood and dry stone designed to withstand seismic shifts and mountain freezes. [https://thebetterindia.com/343010/mud-homestay-near-kullu-century-old-pahadi-cuisine-local-himachal-travel-experience/]\",\n    \"1990s: Naale Baa legend surges across rural and semi-urban settlements where a nocturnal entity knocks on residential doors at midnight, mimicking voices of loved ones. [https://www.facebook.com/61583849409853/posts/naale-baa-is-one-of-the-most-popular-urban-legends-in-bengaluru-from-the-1990s-t/122141244855128313/]\",\n    \"2016: Remote Himalayan heritage properties and farmhouses formally register as commercial homestays, establishing live-in staff routines under severe off-season isolation. [https://thebetterindia.com/343010/mud-homestay-near-kullu-century-old-pahadi-cuisine-local-himachal-travel-experience/]\",\n    \"2023-11-02: Folklore ethnography documents the exact operational rules of Nishi Daak (Call of the Night Spirit), confirming the ancient two-call limitation and nocturnal trance induction. [https://enrouteindianhistory.com/if-you-hear-calls-at-night-dont-look-back-exploring-stories-of-nishi-daak/]\",\n    \"2025-06-21: Documentation of Uttarakhand mountain spirits (Acheri of Lohaghat), recording folklore of restless female spirits haunting solitary mountain dwellings and high ridges after dark. [https://www.youtube.com/watch?v=b8_BmPRDPxg]\",\n    \"2026-03-25: Katriya Hotel sealed over municipal tax dues in Telangana, documenting modern procedures of padlocking and isolating disputed property rooms while adjacent operations continue. [https://news.google.com/rss/articles/CBMihgFBVV95cUxNQWJwWFUtakdrZTV2S1"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T06:08:48.441035",
+    "updated": "2026-10-26T06:08:48.441041"
+  },
+  {
+    "id": "b7c682e7-d33a-43b3-9a2a-05f06ad1efc7",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Harrison Okene: 60 hours alive inside a ship 30 m underwater",
+      "result_snippet": "{\n  \"timeline\": [\n    \"26 May 2013: Tugboat Jascon-4 capsizes and sinks to a depth of approximately 30 meters (100 feet) off the coast of Nigeria during heavy seas. https://en.wikipedia.org/wiki/Aquanaut\",\n    \"26 May - 28 May 2013: Harrison Okene remains trapped in an air pocket within a submerged bathroom at the bottom of the sea. https://www.theguardian.com/lifeandstyle/2023/sep/26/i-survived-three-days-in-a-capsized-boat-on-the-ocean-floor-praying-in-my-air-bubble\",\n    \"28 May 2013 (approx. 60 hours after sinking): Rescue divers locate Okene and begin the extraction process. https://www.nationalgeographic.com/adventure/article/131204-nigerian-air-bubble-survival-shipwreck-viral-video-science\",\n    \"Post-Rescue: Okene undergoes decompression in a diving bell to safely transition from high-pressure underwater environment to surface pressure. https://www.nationalgeographic.com/adventure/article/131204-nigerian-air-bubble-survival-shipwreck-viral-video-science\"\n  ],\n  \"facts\": [\n    \"[Verified] The vessel was the Jascon-4, a tugboat performing operations in the Gulf of Guinea. https://en.wikipedia.org/wiki/Aquanaut\",\n    \"[Verified] Okene survived for approximately 60 hours (2.5 days) underwater. https://www.theguardian.com/lifeandstyle/2023/sep/26/i-survived-three-days-in-a-capsized-boat-on-the-ocean-floor-praying-in-my-air-bubble\",\n    \"[Verified] The air pocket was approximately 4 feet (1.2 meters) high, located in a bathroom area. https://www.nationalgeographic.com/adventure/article/131204-nigerian-air-bubble-survival-shipwreck-viral-video-science\",\n    \"[Verified] Carbon dioxide toxicity would likely have rendered him unconscious at approximately 79 hours, giving him a narrow window of survival. https://www.nationalgeographic.com/adventure/article/131204-nigerian-air-bubble-survival-shipwreck-viral-video-science\",\n    \"[Verified] The door to the bathroom remained shut because the crew routinely kept cabin doors closed to prevent pirate intrusions. https://www."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T12:38:14.701722",
+    "updated": "2026-10-26T12:38:14.701726"
+  },
+  {
+    "id": "54efb4c1-54d5-4e6a-b85c-bb9627078b02",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Woh Budhi Nahi Hoti Thi \u2014 Shamshan Ki Ek Raat Ka Sauda | Tantra Horror Story",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Not applicable: the story is original fiction and no real dated event sits under it. The dated items below are only the nearest existing YouTube and Google News results, so the writer knows what is already out there.\",\n    \"2024-01-23 - Darna Mana Hai style demon-child Hindi horror story on YouTube [Fiction]. https://news.google.com/rss/articles/CBMiXEFVX3lxTE1xcG1aYlZkc2huXzFuR3QyVWV2NlpBWm1zaVBmcnQtUnVfUjJldFE3WEJ6TjZVbmlQRWU3WW1ycGthZFprSzY5WE1vZFB3UWNHX3BnOWpFODlzdHVB?oc=5\",\n    \"2025-02-13 - 'Yakshini bani Pishachini' Real Horror Story in Hindi, YouTube [Fiction]. https://news.google.com/rss/articles/CBMiXEFVX3lxTFBYWHFGOGh5aE5pelF5eTQ4Nmdvb0ZvWDlYMWZSa0MyODhXMU5lSkZjOWh1d1NucGtTUHpmeHAxQ0FEckJJRURWd29kTEVnUVJxSGFpbXMydUwxQTRE?oc=5\",\n    \"2026-01-22 - 'Aghori Ne Dia Live Proof Pret Aaya Samne' on YouTube, a claimed-proof format [Alleged/Fiction]. https://news.google.com/rss/articles/CBMiXEFVX3lxTE1iY1Z6cW1lNmdmaTY2UVYxTi1iWjBEVzdqNkNwMkk4VWR5Skk1QmlnXzBHWmZXSjR3aDFWRDkwQ2ZsUE9lSThQaFY3VFRzUXA1ZWdWb2MxYWNFSURz?oc=5\",\n    \"2026-10-08 - 'jahan raakh kabhi thandi nahi hoti', a Hindi horror story on YouTube, a recent neighbour in theme (ash and ghat) [Fiction]. https://news.google.com/rss/articles/CBMiXEFVX3lxTE5xT3JNZU42cElyVmpQaEpHNG01WWJEWi1WMGhCS2lUcDJqeTE2aGJzVmxXVUxGTTE1Y0o4WXlHUmRrZE5PcUZSVDFUSlc2bFdSMkcya0NBQzg3XzNR?oc=5\"\n  ],\n  \"facts\": [\n    \"[Verified, one page read in full] Shava Sadhana is described as a Vamachara Tantra practice done at night on Amavasya (new moon) in a crematorium, a sacred place or any solitary place. The same page says Smashan Sadhana is a separate aghori sadhana done in the cremation ground. Source: https://www.aghori.it/sadhana_eng.htm\",\n    \"[Verified, same page] The procedures and mantras are described as gupta (secret), passed only from guru to disciple. The page says an error can lead to the practitioner's death or madness, and that the real ritual 'should not be filmed'. Writer: keep the ritual impressi"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-26T22:27:21.132748",
+    "updated": "2026-10-26T22:27:21.132752"
+  },
+  {
+    "id": "ad9cc933-a80d-4d4f-8ad3-6303961eae0a",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Shamshan Ka Karz: Ek Adhoori Siddhi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Amavasya (New Moon) - Traditionally identified as the time when the veil between worlds is thinnest, making it the primary window for intense Tantric rituals and Masaan Sadhana. [Verified] https://dharmvidya.wordpress.com/category/hinduism/page/6/\",\n    \"Midnight at Shamshan - The specific timeframe in Aghori traditions where 'Siddh' (attainments) are sought through high-risk practices. [Folklore] https://www.aghorirudramaharaj.info/shamshan-sadhana-aur-tantra/\"\n  ],\n  \"facts\": [\n    \"Masan is a multifaceted term referring to both specific folk deities (like Masan Deo) and the entities/spirits associated with cremation grounds in various regional traditions. [Folklore] https://www.facebook.com/61563285925812/posts/m-a-s-a-n-d-e-o-the-god-of-death-who-heals-protects-and-rules-the-unseen-kochraj/122169554048442864/\",\n    \"Shamshan Sadhana is a specialized branch of Tantra performed in cremation grounds; it is often associated with the Aghori path and the pursuit of esoteric powers. [Folklore] https://www.aghorirudramaharaj.info/shamshan-sadhana-aur-tantra/\",\n    \"Karna Pishachini is a specific entity described in tantric literature as dangerous to summon or worship without absolute mastery over the ritual. [Folklore] https://www.quora.com/Why-is-Karna-Pishachini-Sadhana-dangerous\",\n    \"Cremation grounds are traditionally categorized into 'Jagrit' (active) and 'Soya' (inactive/sleeping); Soya grounds are believed to house older, more volatile energies. [Verified] https://www.facebook.com/groups/637805045081617/posts/973866328142152/\"\n  ],\n  \"sources\": [\n    \"Masan Deo - Facebook: https://www.facebook.com/61563285925812/posts/m-a-s-a-n-d-e-o-the-god-of-death-who-heals-protects-and-rules-the-unseen-kochraj/122169554048442864/\",\n    \"Sarkar Masani Ritual - Instagram: https://www.instagram.com/popular/sarkar-masani-ritual-explanation/\",\n    \"Shamshan Sadhana aur Tantra - Aghori Rudra Maharaj: https://www.aghorirudramaharaj.info/shamshan-sadhana-aur-"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T03:07:52.560685",
+    "updated": "2026-10-28T03:07:52.560690"
+  },
+  {
+    "id": "037bb67b-4d1f-4bba-ba71-071614927f0a",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Pahadi Homestay: Ek Kamra Jiska Darwaza Kabhi Nahi Khulta",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1882 - First documented reports of Aanchhri (Acheri) spirits in Uttarakhand folklore, specifically regarding shadow-based curses. [Folklore] https://scaresagas.com/acheri/\"\n  ],\n  \"facts\": [\n    \"Aachri (or Aanchhri) are spirit-like beings in Garhwali and Kumaoni traditions, often associated with high mountains and wild spaces. [Folklore] https://www.instagram.com/reel/C5qk8cLPScT/?hl=en\",\n    \"Acheri are specifically known in local folklore to cast curses through 'shadow contact' (casting a shadow over children or individuals). [Folklore] https://scaresagas.com/acheri/\",\n    \"Traditional Himalayan architecture often utilizes heavy wood construction, mud-plastered walls, and iron-bolted doors to withstand extreme weather and provide security in remote areas. [Verified] https://www.himalayanhomestead.in/\"\n  ],\n  \"sources\": [\n    \"Aachri/Acheri Folklore - ScareSagas: https://scaresagas.com/acheri/\",\n    \"Garhwali Culture & Tradition - FirstRek: https://www.firstrek.in/blog/cultural-insights-kuari-pass-trek-and-nearby-village\",\n    \"Himalayan Homestead Details - Himalayanhomestead.in: https://www.himalayanhomestead.in/\",\n    \"Aachri Social Media Context - Instagram: https://www.instagram.com/reel/C5qk8cLPScT/?hl=en\",\n    \"Academic Folklore Study - English Journal: https://www.englishjournal.net/archives/2025/vol7issue1/PartE/7-1-67-506.pdf\"\n  ],\n  \"media\": [\n    \"Close-up of a heavy, iron-studded wooden door with a rusted padlock.\",\n    \"Wide shots of misty Himalayan peaks (specifically the Kumaon/Garhwal region) at dusk.\",\n    \"Interior shots of a rustic homestay with mud-plastered walls and stone floors.\",\n    \"A lantern being carried through a dark, pine-filled forest.\"\n  ],\n  \"unanswered_questions\": [\n    \"Specific local terminology for 'forbidden' rooms is not standardized; will use descriptive imagery (e.g., 'Band Kamra') to establish the atmosphere.\"\n  ],\n  \"story_material\": {\n    \"world\": [\n      \"Setting: A remote homestay in a high-alti"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T04:28:29.183008",
+    "updated": "2026-10-28T04:28:29.183013"
+  },
+  {
+    "id": "13ef8707-b3c1-466b-8f5f-14f40bae94f2",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Uttarakhand ka Woh Gaon Jaha Light Kabhi Band Nahi Hui (B3B-412)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2011: Official Census identifies over 1,000 'ghost villages' in Uttarakhand with zero population.\",\n    \"2017-2023: Increased media coverage (India Today, News18) on the migration crisis and the 'Bhootiya Gaon' (haunted village) phenomenon.\",\n    \"2024-2025: Social media and YouTube content rise significantly regarding specific haunted locations in Uttarakhand like Lambi Dehar and various abandoned settlements.\"\n  ],\n  \"facts\": [\n    \"[Verified] There are over 1,700 'ghost villages' (Bhootiya Gaon) across Uttarakhand where residents have migrated to cities, leaving houses abandoned. (Source: https://www.indiatoday.in/magazine/nation/story/20251222-uttarakhand-what-lies-behind-the-ghost-villages-2834908-2025-12-13)\",\n    \"[Verified] In Pithoragarh district, 66 villages were reported to remain in 'complete darkness' during festivals due to lack of inhabitants and infrastructure. (Source: https://timesofindia.indiatimes.com/city/dehradun/no-people-no-lamps-66-abandoned-villages-in-pithoragarh-to-remain-dark-this-diwali/articleshow/124610286.cms)\",\n    \"[Alleged] Local reports and social media videos claim that certain abandoned houses in the Pauri and Chamoli districts show 'flickering lights' or glowing windows at night despite being disconnected from power grids for years. (Source: YouTube search results/social media trends)\",\n    \"[Folklore] The term 'Bhootiya Gaon' is a common local designation for villages where the atmosphere is perceived as heavy or haunted due to the sudden exodus of people.\"\n  ],\n  \"sources\": [\n    \"India Today - Uttarakhand | What lies behind the ghost villages - https://www.indiatoday.in/magazine/nation/story/20251222-uttarakhand-what-lies-behind-the-ghost-villages-2834908-2025-12-13\",\n    \"Times of India - No people, no lamps: 66 abandoned villages in Pithorgarh - https://timesofindia.indiatimes.com/city/dehradun/no-people-no-lamps-66-abandoned-villages-in-pithoragarh-to-remain-dark-this-diwali/articleshow/124610286.c"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T05:10:19.141430",
+    "updated": "2026-10-28T05:10:19.141437"
+  },
+  {
+    "id": "af389f10-65bd-4c15-92c3-29076981f6ab",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for MOTHMAN: Point Pleasant ka Raaz",
+      "result_snippet": "{\n  \"timeline\": [\n    \"November 15, 1966: First reported sighting of a 'man-sized bird' with glowing eyes by two couples near the TNT area (appalachianhistorian.org)\",\n    \"Late 1966: Local newspapers like the Point Pleasant Register report on 'Red Eyed Creature' and 'Mason Bird Monster' (appalachianhistorian.org)\",\n    \"December 15, 1967: Collapse of the Silver Bridge at Point Pleasant resulting in 46 fatalities (ntsb.gov)\",\n    \"Early 1970s: Publication of 'The Mothman Prophecies' by John Keel, solidifying the name and 'omen' narrative (ravenwoodarchive.com)\"\n  ],\n  \"facts\": [\n    \"[Verified] The TNT Area was a real 8,320-acre former Department of Defense property used for explosives from 1942 to 1945 (ravenwoodarchive.com)\",\n    \"[Verified] The Silver Bridge collapse on December 15, 1967, was officially attributed to the failure of an eyebar in a bridge structure (ntsb.gov)\",\n    \"[Alleged] Witnesses reported seeing a humanoid figure with wings and red eyes near the North Power Plant in November 1966 (beyondhaunted.com)\",\n    \"[Folklore] The name 'Mothman' was popularized by media/pop culture in the late 60s, not as an ancient regional tradition (appalachianhistorian.org)\"\n  ],\n  \"sources\": [\n    \"The Mothman of Point Pleasant: How a Bird Monster Became Appalachian Folklore - https://appalachianhistorian.org/the-mothman-of-point-pleasant-how-a-bird-monster-became-appalachian-folklore/\",\n    \"Mothman Sightings: The Complete Timeline from Point Pleasant to Chicago - https://beyondhaunted.com/blog/mothman-sightings-timeline\",\n    \"Mothman | Point Pleasant Sightings & Legend \u2014 Ravenwood Archive - https://www.ravenwoodarchive.com/mothman/\",\n    \"NTSB Report on Silver Bridge Collapse - https://www.ntsb.gov/investigations/Pages/80267.aspx\"\n  ],\n  \"media\": [\n    \"Aerial or ground photos of the 'TNT Area' (former West Virginia Ordnance Works) showing industrial ruins and overgrown bunkers.\",\n    \"Archival photographs of the Silver Bridge before its 1967 collapse.\",\n    \"S"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T05:39:27.931097",
+    "updated": "2026-10-28T05:39:27.931102"
+  },
+  {
+    "id": "0e178eb4-d08d-4535-865c-2a718c626697",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Kolkata Mansion ka 'Bhoot' aur Chori ka Sach",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1766: Construction of the original Itachuna Rajbari, a premier example of 18th-century Bengali architecture.\",\n    \"19th Century: Expansion of Serampore Rajbari (Goswami Rajbari) into a massive complex with over 100 rooms and a central courtyard.\",\n    \"Present Day: Monsoon season in Bengal (June\u2013September), characterized by high humidity, heavy rainfall on clay tiles, and the scent of petrichor.\",\n    \"20:00 - 22:00: Standard evening routine where residents of heritage properties retreat indoors as monsoon rains intensify.\",\n    \"22:15: The specific time when 'ghostly' sounds are reported, coinciding with peak wind/rain noise and the transition of night watch cycles.\"\n  ],\n  \"facts\": [\n    \"The term 'Thakurdalan' refers to a central courtyard in a Rajbari where deities are worshipped; it is a staple of North Kolkata mansion architecture. [Verified] https://en.wikipedia.org/wiki/Serampore_Rajbari\",\n    \"A 'Panchmohala' is a traditional Bengali mansion consisting of five halls, often featuring large inner courtyards and intricate architectural details like arches and pillars. [Verified] https://theinvincibleindia.in/itachura-rajbari-guide/\",\n    \"Kosa Silk (derived from Tussar cocoons) is a high-quality, durable silk with a unique textured, matte finish, historically used in luxury items. [Verified] https://dusala.in/blogs/dusala/top-10-kosa-silk-sarees-2026-heritage-collection-complete-guide-dusala\",\n    \"Pulley systems (block and tackle) have been utilized for centuries to move heavy goods across courtyards or into upper lofts in large residential structures. [Verified] https://www.ferrovial.com/blog/en/2017/05/pulley-systems-changed-world/\",\n    \"Petrichor is the specific earthy scent produced when rain falls on dry soil, a defining sensory element of monsoon seasons in rural and urban Bengal.\"\n  ],\n  \"sources\": [\n    \"Serampore Rajbari Wikipedia - https://en.wikipedia.org/wiki/Serampore_Rajbari\",\n    \"Itachuna Rajbari Guide - https://theinv"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T06:50:41.605116",
+    "updated": "2026-10-28T06:50:41.605118"
+  },
+  {
+    "id": "bfeec58c-7a15-4c19-accc-9b4be0bdd9f5",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Do Shaadiyan, Ek Mohalla",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Pre-wedding rituals (Roka to Mehendi) - https://thenyota.app/blog/north-indian-wedding-rituals-step-by-step/\",\n    \"The Escalation Phase (Food & Decor competition) - Internal Story Logic\",\n    \"The Logistics Crisis (Midnight catering shortage) - https://velvetknot.in/wedding-catering-cost-india/\"\n  ],\n  \"facts\": [\n    \"North Indian wedding food often features butter-rich gravies, stuffed breads, and specific items like Paneer. [Verified] https://amazingfoodanddrink.com/indian-wedding-food-the-regional-feast-traditions-and-what-gets-served/\",\n    \"Ladoo (made from besan, ghee, sugar) and Barfi are standard pre-wedding ritual sweets representing completeness and prosperity. [Verified] https://amazingfoodanddrink.com/indian-wedding-food-the-regional-feast-traditions-and-what-gets-served/\",\n    \"Brass bands and trumpets are standard logistical elements used in Indian weddings for announcements and processions. [Verified] https://skylineeventudaipur.com/\",\n    \"Catering tiers range from 'Budget' (basic buffet) to 'Luxury' (premium items like lamb/seafood), with costs significantly impacted by the number of live counters. [Verified] https://velvetknot.in/wedding-catering-cost-india/\",\n    \"Traditional items like Paan are served at the end of feasts as a concluding ritual for guests. [Verified] https://amazingfoodanddrink.com/indian-wedding-food-the-regional-feast-traditions-and-what-gets-served/\"\n  ],\n  \"sources\": [\n    \"Indian Wedding Food: Regional Feasts - https://amazingfoodanddrink.com/indian-wedding-food-the-regional-feast-traditions-and-what-gets-served/\",\n    \"Wedding Catering Cost in India 2026 - https://velvetknot.in/wedding-catering-cost-india/\",\n    \"North Indian Wedding Rituals Step by Step - https://thenyota.app/blog/north-indian-wedding-rituals-step-by-step/\",\n    \"Skyline Event Management (Brass Bands & Tents) - https://skylineeventudaipur.com/\"\n  ],\n  \"media\": [\n    \"Visuals of vibrant orange and yellow 'Shamiana' tents in a narrow "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-28T07:22:14.795653",
+    "updated": "2026-10-28T07:22:14.795658"
+  },
+  {
+    "id": "ce0bacd3-2753-4af1-8fe7-246ce3ceb306",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for SOYA SMASHAAN",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Ancient Tradition - The practice of Shamshan Sadhana and Shava Sadhana as core components of Vamamarga (left-hand) Tantra, used to confront death and dissolve the ego. (Source: https://www.aghornathjimaharaj.info/shamshan-sadhna-aur-tantra/)\",\n    \"Ongoing Practice - The classification of cremation grounds into 'Jagrit' (active) and 'Soya' (inactive/dormant), where Soya grounds are often associated with older, more potent spiritual energies. (Source: https://www.facebook.com/100086619360684/posts/shamshan-ghat-unknown-facts-reality-ft-astrologer-ajay-sharma%E0%A4%B6%E0%A5%8D%E0%A4%AE%E0%A4%B6%E0%A4%BE%E0%A4%A8-%E0%A4%98%E0%A4%BE%E0%A4%9F-%E0%A4%95%E0%A5%80-%E0%A4%AF%E0%A5%87-%E0%A4%AC%E0%A4%BE/952991704264800/)\",\n    \"Ongoing Ritual - The specific ritual of Shava Sadhana where a practitioner sits on a corpse to achieve spiritual transcendence, a practice strictly governed by rules regarding the 'purity' and state of the corpse. (Source: https://en.wikipedia.org/wiki/Shava_sadhana)\"\n  ],\n  \"facts\": [\n    \"[Verified] Hindu cremation grounds are categorized as Jagrit (active) or Soya (inactive). Jagrit grounds host daily cremations and active rituals, while Soya grounds are less frequently used but hold significant spiritual weight. (Source: https://www.facebook.com/100086619360684/posts/shamshan-ghat-unknown-facts-reality-ft-astrologer-ajay-sharma%E0%A4%B6%E0%A5%8D%E0%A4%AE%E0%A4%B6%E0%A4%BE%E0%A4%A8-%E0%A4%98%E0%A4%BE%E0%A4%9F-%E0%A4%95%E0%A5%80-%E0%A4%AF%E0%A5%87-%E0%A4%AC%E0%A4%BE/952991704264800/)\",\n    \"[Folklore] The Maha Smasan of Tarapith is believed to be the residence of Goddess Tara, where her presence is specifically felt after midnight (around 12:00-12:30 AM), signaled by the howling of dogs and jackals. (Source: https://www.hindu-blog.com/2026/01/tarapith-temples-cremation-ground.html)\",\n    \"[Folklore] Shava Sadhana is a secret tantric ritual where practitioners sit on a corpse to invoke the goddess Kali or other deities; any devi"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T02:24:16.362350",
+    "updated": "2026-10-29T02:24:16.362356"
+  },
+  {
+    "id": "8ab6bbdc-05bb-4c92-9444-344383b5e833",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Highway Par Woh Bacchi: The Haunting of the Long Roads",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Circa 10-12 years ago: A young tribal couple eloped and was later found murdered/mutilated on the road near Khunia More, becoming a known 'phantom' presence for drivers on that route. (https://www.cntraveller.in/story/the-ghosts-you-meet-on-the-road-in-india/)\"\n  ],\n  \"facts\": [\n    \"The 'phantom hitchhiker' is a common trope among Indian long-haul drivers, often involving people who died on the road or were abandoned. [Folklore] (https://www.cntraveller.in/story/the-ghosts-you-meet-on-the-road-in-india/)\",\n    \"The 'Chudail' is a specific regional entity believed to inhabit trees (like camphor) and lure travelers into nearby hazards like gorges or ravines, often appearing as a guiding hand in heavy fog. [Folklore] (https://www.cntraveller.in/story/the-ghosts-you-meet-on-the-road-in-india/)\",\n    \"The 'Chhalawa' is a regional entity (often associated with rural and highway settings) that uses illusions to lure travelers, often taking the form of children or women in distress. [Folklore] (https://www.facebook.com/gauravkatarextra/posts/-indias-most-haunted-road-a-mysterious-nagin-sponsored-by-some-media-news-search-results-not-shown-directly-but-referenced-in-folklore-searches/)\",\n    \"Truck drivers on routes like NH17 and various rural highways often report 'shadow' figures or children appearing in the middle of the road, especially during heavy fog or late at night. [Alleged] (https://www.cntraveller.in/story/the-ghosts-you-meet-on-the-road-in-india/)\"\n  ],\n  \"sources\": [\n    \"The Ghosts You Meet on the Road in India - Cond\u00e9 Nast Traveller: https://www.cntraveller.in/story/the-ghosts-you-meet-on-the-road-in-india/\",\n    \"Chhalawa on Uttarakhand Highway - Facebook (Gaurav Katare): https://www.facebook.com/gauravkatarextra/posts/-indias-most-haunted-road-a-mysterious-nagin-sponsored-by-some-media-news-search-results-not-shown-directly-but-referenced-in-folklore-searches/\",\n    \"Truck Driver - Aadhi Raat Ki Sawari (YouTube): https://www.youtube."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T03:13:24.478894",
+    "updated": "2026-10-29T03:13:24.478901"
+  },
+  {
+    "id": "42c04f32-e0af-43b2-8525-261fb36babf1",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Pahadi Homestay Ka Band Kamra | Horror Story",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2022-04-12 - First-person account of a stay in a remote Uttarakhand hilltop cottage with village bonfire storytelling (fairies on hilltops, no lifts to strangers, a homestay that had to be 'propitiated') published on Different Truths. https://www.differenttruths.com/the-haunted-hills-of-uttarakhand/\",\n    \"2023-02-24 - Nayalap post on Kumaoni architecture (Aangan, Goth, Kamra, Chhat, Kholi) published. https://nayalap.com/kumaoni-architecture/\",\n    \"2019-09-04 - Personal blog account of a Jagar ritual at an ancestral home in Manan (Almora) published. https://artipandey.wordpress.com/2019/09/04/my-experience-with-jagar-the-heritage-of-uttarakhand/\"\n  ],\n  \"facts\": [\n    \"[Verified-single source, architecture] Traditional Kumaoni houses are built of local stone and mud. The ground floor (Goth) holds cattle at night, and their warmth keeps the floor above warm. https://nayalap.com/kumaoni-architecture/\",\n    \"[Verified-single source] Aangan is the stone courtyard in front of the house, paved with flat stone called Pataal (also Pat-Aangan). It is bounded by a thick stone wall about a foot high (Baad/Bhidi) that doubles as seating. https://nayalap.com/kumaoni-architecture/\",\n    \"[Verified-single source] Upper rooms (Kamra) are reached by a staircase from the Aangan. Floors are wooden logs and branches plastered with mud, cow dung and hay. The roof (Chhat) has one large key log with smaller logs, a bed of twigs, a mud-dung-hay plaster, and flat slate Pataal stones sealed with mud. https://nayalap.com/kumaoni-architecture/\",\n    \"[Verified-single source] The main entrance door is the Kholi, traditionally carved from Toon wood, with gods and goddesses at the top and natural motifs on the sides. https://nayalap.com/kumaoni-architecture/\",\n    \"[Verified-single source] Kumaoni has over 20 local dialects. It sounds like Hindi but is hard to follow when spoken fast. https://nayalap.com/kumaoni-architecture/\",\n    \"[Verified-single source] Aipan, a red-ea"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T05:49:04.359400",
+    "updated": "2026-10-29T05:49:04.359411"
+  },
+  {
+    "id": "76ac7042-4474-4ec2-af96-acaca510470e",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for KAL KA VIDEO (Tomorrow's Recording)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2024-04-23: Technical documentation of smart home connectivity and buffer issues identified in consumer security systems. [Verified] https://www.eufy.com/blogs/security-camera/smart-home-frequent-issues\",\n    \"2026-09-15: Analysis of NVR (Network Video Recorder) hardware limitations, including timestamp desync and buffer errors during high-bitrate recording. [Verified] https://forensicspot.com/topics/digital-forensics/dvr-nvr-and-surveillance-system-forensics\",\n    \"2026-10-18: Case study of Pune residential security integration using MyGate and DoorVi systems for automated gate and door management. [Verified] https://www.doorvi.co/blog/case-study-yashone-pune-lobby-tablet\"\n  ],\n  \"facts\": [\n    \"NVR Buffer Errors: Occur when the processor cannot keep up with the incoming video stream, causing frames to drop or 'freeze' in a loop. [Verified] https://forensicspot.com/topics/digital-forensics/dvr-nvr-and-surveillance-system-forensics\",\n    \"Timestamp Desync: A common issue where the internal clock of an NVR fails to sync with NTP servers, causing recorded time to drift or display incorrectly. [Verified] https://ntpclockserver.com/solutions/cctv-access-control/\",\n    \"Pune Residential Architecture: Modern high-rise apartments in Pune often feature a mix of 'Indian detailing' (teakwood) and contemporary materials like red microcement or exposed concrete. [Verified] https://www.architecturaldigest.in/story/a-2000-square-foot-apartment-in-pune-where-indian-detailing-meets-contemporary-forms-shrutika-raut/\",\n    \"Society Management: Pune residential complexes frequently use apps like MyGate or DoorVi to manage visitor 'gate passes' and intercom access. [Verified] https://www.doorvi.co/blog/case-study-yashone-pune-lobby-tablet\",\n    \"Smart Home Connectivity: Issues such as 'dropped feeds' are often caused by weak Wi-Fi signals or overloaded PoE (Power over Ethernet) switches. [Verified] https://www.se12locksmithlee.co.uk/cctv-repairs/\"\n  ],\n  \"sources"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T07:01:58.965096",
+    "updated": "2026-10-29T07:01:58.965103"
+  },
+  {
+    "id": "a255b41b-5390-4670-9934-5af1c77623eb",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Mall B3B-802: The Loop | (Hinglish Title: Mall Jo Kabhi Khatam Nahi Hota)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1800s: Formal mathematical discovery of non-Euclidean geometry, providing the theoretical basis for 'impossible' spaces. (https://en.wikipedia.org/wiki/Non-Euclidean_geometry)\",\n    \"2014: Architectural discourse on \\\"Urban Monoliths\\\" and \\\"Infinity Loops\\\" begins to merge architectural theory with pop culture aesthetics. (https://thepointmag.com/criticism/building-stories/)\",\n    \"2015-Present: Emergence of the 'Backrooms' and 'Liminal Space' internet subcultures, focusing on repetitive, non-Euclidean mall environments. (https://www.facebook.com/groups/2077090212683898/posts/2481264015599847/)\",\n    \"2026: Current analysis of 'The Mall Game' and similar digital environments confirms the peak popularity of mall-based spatial loops in media. (https://tryhardguides.com/the-mall-game-codes/)\"\n  ],\n  \"facts\": [\n    \"[Verified] Standard Operating Procedures (SOPs) for Indian shopping centers include specific protocols for security, crowd management, and access control. (https://rai.net.in/images/SCAI-SOPs.pdf)\",\n    \"[Verified] Modern mall security relies on a multi-layered system including CCTV surveillance, alarm systems, and emergency response protocols. (https://www.unitedguardforceindia.com/blogs/what-is-the-security-system-in-shopping-malls/)\",\n    \"[Fiction] Non-Euclidean geometry is a mathematical framework where standard rules of parallel lines do not apply, often used in fiction to describe impossible architectures. (https://en.wikipedia.org/wiki/Non-Euclidean_geometry)\",\n    \"[Folklore] 'Liminal Spaces' are transitional areas that evoke unease when perceived as devoid of human presence or purpose. (https://www.facebook.com/LiminalNostalgia/videos/real-life-liminal-spaces-you-forgot-existed_limeral_space_backr/944233701897300/)\"\n  ],\n  \"sources\": [\n    \"SCAI Guidelines for Shopping Centres in India - https://rai.net.in/images/SCAI-SOPs.pdf\",\n    \"What is The Security System in Shopping Malls? - https://www.unitedguardforceindia.com/blogs"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T07:34:54.055356",
+    "updated": "2026-10-29T07:34:54.055362"
+  },
+  {
+    "id": "bbac5086-324a-44b7-a81f-0fb12e730769",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Ek Truck Driver Ko Har Trip Par Same Bacchi Highway Par Dikhti Thi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Ongoing - Reported hauntings on NH-79 near Dudu Village (often cited as a road that 'asks for blood') - https://moonmausoleum.com/haunting-tales-of-nh-79-near-dudu-and-ghosts-escaping-a-child-marriage/\",\n    \"Recurring - Reports of Chhalawa entities appearing on rural roads and highways across North India [Folklore] - https://x.com/grok/status/2111143592945234428\"\n  ],\n  \"facts\": [\n    \"The 'Chhalawa' is a shapeshifting entity in North Indian folklore that misleads travelers on lonely roads and can follow victims for months. [Folklore] https://x.com/grok/status/2111143592945234428\",\n    \"Chhalawa is often associated with the appearance of an abandoned ox or a child to lure people off-path. [Folklore] https://indianhorrortales.blogspot.com/2012/07/chhalava-undead-incarcerated-between.html\",\n    \"Indian truck drivers follow specific routines involving dhaba stops, heavy fog navigation, and long-haul cargo management. [Verified] https://www.hornokplease.site/about.html\",\n    \"The 'Don't Look Back' rule is a common cultural trope in Indian trucking where drivers are warned not to look into mirrors or backward when they feel they are being followed by something. [Folklore/Tradition] https://www.reddit.com/r/indiasocial/comments/1d53upv/what_are_some_of_the_real_indian_ghost_stories/\"\n  ],\n  \"sources\": [\n    \"Reddit - Long Haul Truckers' experiences: https://www.reddit.com/r/AskReddit/comments/b1slv2/long_haul_truckers_whats_the_creepiestmost/\",\n    \"Moon Mausoleum - NH-79 Haunted Tales: https://moonmausoleum.com/haunting-tales-of-nh-79-near-dudu-and-ghosts-escaping-a-child-marriage/\",\n    \"Instagram - Chhalawa Folklore: https://www.instagram.com/p/DH7qyJ3MwmX/?hl=en\",\n    \"Indian Horror Tales - Chhalava Details: https://indianhorrortales.blogspot.com/2012/07/chhalava-undead-incarcerated-between.html\",\n    \"Horn OK Please - Truck Culture: https://www.hornokplease.site/about.html\"\n  ],\n  \"media\": [\n    \"Night footage of NH-79 or similar fog-heavy Ind"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T09:25:10.754723",
+    "updated": "2026-10-29T09:25:10.754726"
+  },
+  {
+    "id": "5c3c2a0d-857e-469b-b360-a7de04107429",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Mallick Nilaamghar ki Aakhri Boli | Ek Chori Jo Hui Hi Nahi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1972: The Antiquities and Art Treasures Act was passed by the Government of India to protect and regulate the movement of items over 100 years old. [Verified] https://www.thehindu.com/news/cities/chenny/possession-of-antiques-artefacts-the-legal-position/article25127232.ece\",\n    \"Pre-1991: The era of high demand for imported goods in Kolkata, which established the legacy and dominance of auction houses like Russell Exchange. [Verified] https://safarnamaonline.in/russell-exchange-kolkata/\"\n  ],\n  \"facts\": [\n    \"Russell Exchange is one of the last surviving auction houses in Asia, located on Russell Street, Kolkata. [Verified] https://safarnamaonline.in/russell-exchange-kolkata/\",\n    \"Under the Antiquities and Art Treasures Act (1972), it is mandatory for owners of 'antiquities' to register them with the government; failure to do so can lead to legal seizure. [Verified] https://www.thehindu.com/news/cities/chenny/possession-of-antiques-artefacts-the-legal-position/article25127232.ece\",\n    \"Art insurance claims for high-value items require a 'Provenance Review'\u2014a documented history of ownership\u2014and a 'Replacement-cost valuation' to settle a claim. [Verified] https://www.artantiquesvaluers.com/services/art-antiques-valuation/\",\n    \"Durga Puja in the Park Street/Russell Street area involves high-intensity lighting, large crowds, and significant police presence for crowd management. [Verified] https://www.telegraphindia.com/my-kolkata/durga-puja-special/lights-crowds-and-festivities-a-look-at-allen-parks-first-durga-puja-photogallery/cid/2185050\"\n  ],\n  \"sources\": [\n    \"Russell Exchange Kolkata - safarnamaonline.in\",\n    \"Antiquities and Art Treasures Act - thehindu.com\",\n    \"Art & Antiques Valuation Services - artantiquesvaluers.com\",\n    \"Durga Puja Park Street Reports - telegraphindia.com\"\n  ],\n  \"media\": [\n    \"Interior of Russell Exchange (antique furniture, dust-moted light, old wood)\",\n    \"Park Street/Russell Street during Durga Puja "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T09:26:32.700099",
+    "updated": "2026-10-29T09:26:32.700110"
+  },
+  {
+    "id": "856b1a4a-8d2e-44c8-90f5-b9159c344e65",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for SOYA SMASHAAN NEW",
+      "result_snippet": "{\n  \"timeline\": [],\n  \"facts\": [\n    \"[Folklore] Shamshans are traditionally considered high-energy zones where the veil between the living and the dead is thin, especially at night or during Amavasya (new moon). (https://en.wikipedia.org/wiki/Shmashana)\",\n    \"[Folklore] In Tantric traditions, the Shamshan is a sacred space for 'Shava Sadhana' and other rituals to invoke deities like Kali, Tara, and Bhairav because it is believed to be their residence.\",\n    \"[Folklore] The term 'Soya' in this context refers to the act of sleeping or being unconscious; staying in a Shamshan at night is a common trope where the person is perceived as vulnerable to Pretas (hungry ghosts) and Pishachas.\",\n    \"[Alleged] There are specific local rules for those who must pass through or work near cremation grounds, such as never looking back, not speaking out loud, and staying within the designated boundary of ash.\"\n  ],\n  \"sources\": [\n    \"Wikipedia - Shmashana: https://en.wikipedia.org/wiki/Shmashana\",\n    \"Rattibha - Significance of shamshan in tantra: https://www.rattibha.com/thread/1657398738107654144\"\n  ],\n  \"media\": [\n    \"Visuals of traditional wood-fire cremation grounds (pyres, ash, smoke).\",\n    \"Atmospheric shots of rural outskirts near river ghats.\",\n    \"Images of 'Pipal' or 'Peepal' trees often associated with these sites in folklore.\"\n  ],\n  \"unanswered_questions\": [\n    \"Whether 'Soya' refers to a specific village name in certain regions or remains primarily as the Hindi word for 'asleep'.\",\n    \"Specific regional names for entities (e.g., different local names for Pishach in South vs North India).\"\n  ],\n  \"story_material\": {\n    \"world\": [\n      \"The Smell: A heavy, cloying mix of burning wood, incense (agarbatti), and the distinct metallic scent of ash.\",\n      \"The Sound: The constant crackle of a pyre, the distant howling of dogs (who are believed to see spirits), and the eerie silence of the surrounding fields.\",\n      \"The Visual: A desolate stretch of land on the"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T09:37:38.507464",
+    "updated": "2026-10-29T09:37:38.507469"
+  },
+  {
+    "id": "c5ab3aad-4219-4555-aef7-483193477145",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Forest Road Ka Wo Buddha \u2014 Har Driver Ko Wahi Warning Deta Tha | Real Horror Encounter",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2019-08-15: A reported incident near Konkan Ghat where a pilot police car and an MLA's vehicle allegedly encountered a woman in a white saree, leading to a loss of control for the police car. [https://tothyajano.blogspot.com/2025/10/the-haunted-stories-of-nh-66-night.html]\",\n    \"Ongoing (Decades): Recurring reports from truck drivers and travelers on NH-66 regarding the 'Old Man of Amboli Ghat' who appears in mist to offer a ride. [https://tothyajano.blogspot.com/2025/10/the-haunted-stories-of-nh-66-night.html]\"\n  ],\n  \"facts\": [\n    \"The 'Old Man of Amboli Ghat' is reported as a consistent figure in local folklore and among truckers, described as an elderly man in traditional clothes who vanishes from vehicles. [Folklore] https://tothyajano.blogspot.com/2025/10/the-haunted-stories-of-nh-66-night.html\",\n    \"Kashedi Ghat is widely recognized by locals and travelers as one of the most haunted stretches on the Mumbai-Goa highway due to its sharp curves and heavy fog. [Verified] https://timesofindia.indiatimes.com/travel/destinations/haunted-indian-roads-that-you-should-avoid/articleshow/66461777.cms\",\n    \"The 'Woman in White' of Kashedi Ghat is a specific local legend involving a bride who died on the road and whose spirit is seen seeking rides. [Folklore] https://tothyajano.blogspot.com/2025/10/the-haunted-stories-of-nh-66-night.html\",\n    \"The 'Headless Lady' of Kasara Ghat is an urban legend where a headless figure is seen sitting in trees or on the road, often interpreted as a warning to drivers. [Folklore] https://www.indiatoday.in/travel/experiences/story/5-haunted-roads-in-india-every-traveller-must-avoid-kasara-ghat-kashedi-sathyamangalam-east-cost-delhi-jaipur-bhangarh-316257-2016-04-04\"\n  ],\n  \"sources\": [\n    \"The Haunted stories of NH-66: NIGHT DRIVE FROM MUMBAI TO GOA - https://tothyajano.blogspot.com/2025/10/the-haunted-stories-of-nh-66-night.html\",\n    \"Kashedi Ghat is one of the most haunted stretches... - https://timesofindia."
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T10:41:03.159894",
+    "updated": "2026-10-29T10:41:03.159897"
+  },
+  {
+    "id": "747cfa11-dcc2-4cd0-a769-64166e21d118",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Purani Haveli ka Shorgul: Ek Nakli Bhoot",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1820s-1900s: Development of North Kolkata's 'Rajbari' architecture, featuring large courtyards and thick walls as symbols of status [Verified] https://www.monographmag.com/article-the-grand-houses-of-north-calcutta\",\n    \"1936: First major detection of systematic antiquity smuggling in India involving international networks [Verified] https://www.sahapedia.org/antiquities-theft-and-illicit-antiquities-trade-india\",\n    \"1972: Passage of the Antiquities and Art Treasures Act to curb the illegal export of cultural heritage [Verified] https://pib.gov.in/PressReleaseIframePage.aspx?PRID=1985004\",\n    \"Modern Era: Ongoing use of 'haunted' reputations as a social shield for illicit activities in rural and urban settings [Folklore/Social Observation]\"\n  ],\n  \"facts\": [\n    \"North Kolkata mansions (Rajbaris) often feature high-ceilinged halls, ornate facades, and internal courtyards that were historically built to house large staff and families [Verified] https://www.monographmag.com/article-the-grand-houses-of-north-calcutta\",\n    \"Brass artifacts are highly valued in the global antiquities market due to their historical significance and material value, making them prime targets for smuggling [Verified] https://journals.law.harvard.edu/ilj/2025/04/illicit-trafficking-of-cultural-goods-an-indian-perspective-on-the-loss-of-a-heritage/\",\n    \"Pulley systems (like the 'trispasto' or simple belt-and-pulley) have been used for centuries in architecture to move heavy loads through high windows or hidden spaces [Verified] https://kotsanas.com/exhibits/hoisting/\",\n    \"The 'Para' culture of North Kolkata involves close-knit community networks where local secrets and rumors (like hauntings) can be passed quickly but often kept from outsiders [Verified] https://mystateguide.in/west-bengal/north-kolkata\",\n    \"Smuggling operations in India frequently use 'noise masking' or timed mechanisms to hide the sounds of heavy machinery or movement during late hours [Alle"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T10:51:23.363004",
+    "updated": "2026-10-29T10:51:23.363043"
+  },
+  {
+    "id": "8f760bed-ece3-4a1a-ad08-2d2562df03fe",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Raat Ko Khet Mein Papa Khade The \u2014 Hospital Se Aaye Phone Ne Hosh Uda Diye",
+      "result_snippet": "{\n  \"timeline\": [\n    \"19th Century - Emergence of formal land dispute resolution systems like Nyaya Panchayats in rural India to address agrarian conflicts [Verified] (https://www.legalkart.com/en/legal-blog/understanding-nyaya-panchayat-origins-structure-and-role-in-rural-justice)\",\n    \"Ongoing - Practice of 'Muth' and 'Bandhan' as regional folk beliefs in parts of North India, including Uttar Pradesh [Folklore] (https://www.scribd.com/document/1038689144/Graham-Dwyer-The-Divine-the-Demonic)\",\n    \"Late November - Peak season for 'Kohr' (dense winter fog) and Rabi crop preparation in the Awadh region of Uttar Pradesh [Verified] (https://uppwd.gov.in/pdf/9b.pdf)\"\n  ],\n  \"facts\": [\n    \"The term 'Sukh Rog' is used in rural contexts to describe wasting diseases or sudden physical decline [Folklore] (https://shreyalogy.com/2026/06/03/black-magic-in-india-rituals-superstitions-crimes-the-truth-behind-the-stories/)\",\n    \"Kala Handi refers to an earthen pot used in various folk rituals, often associated with local protection or 'binding' beliefs [Folklore] (https://www.scribd.com/document/778656238/The-Black-Magic-of-India-A-Historical-and-Cultural-Exploration)\",\n    \"Muth and Bandhan are terms associated with local folk traditions in North India involving 'binding' or 'fastening' elements to objects or locations [Folklore] (https://www.scribd.com/document/1038689144/Graham-Dwyer-The-Divine-the-Demonic)\",\n    \"Amavasya (New Moon) is traditionally considered a significant night for rituals in Indian folk belief systems [Folklore] (https://theruralpress.in/religion-spirituality/chandra-grahan-2026-on-raksha-bandhan-no-impact-visible-in-india-but-these-zodiac-signs-will-be-affected/)\"\n  ],\n  \"sources\": [\n    \"Government of Uttar Pradesh - UPWD (https://uppwd.gov.in/pdf/9b.pdf)\",\n    \"The Black Magic of India: A Historical and Cultural Exploration (https://www.scribd.com/document/778656238/The-Black-Magic-of-India-A-Historical-and-Cultural-Exploration)\",\n    \"Graham Dwyer "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T07:52:25.000636",
+    "updated": "2026-10-30T07:52:25.000641"
+  },
+  {
+    "id": "740049a0-d320-4d50-8275-859ffdf51dea",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Nadi Ka Shraap: Woh Jo Raat Ko Nahati Thi",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Tantric practices involving Bhasma, Kumkum, and copper vessels have been documented in Hindu ritual manuals and texts like the Shiva Purana and various Agamas for centuries.\",\n    \"The concept of 'Siddhis' (attaining supernatural powers) has been a core component of Tantra since its early development, with specific warnings that seeking these powers for their own sake can bind the practitioner.\"\n  ],\n  \"facts\": [\n    \"Copper vessels (tambe ke bartan) are specifically used in ritual contexts because they are believed to hold and conduct spiritual energy effectively. [Verified] https://sanatanhindu.co.in/shiva-linga-symbolism-types-worship-significance\",\n    \"Bhasma (sacred ash) and Kumkum (vermilion) are essential ritual materials used for purification, marking the body, or defining sacred boundaries in both general Hindu worship and specific Tantric sadhanas. [Verified] https://sanatanhindu.co.in/shiva-linga-symbolism-types-worship-significance\",\n    \"The term 'Siddhi' refers to supernatural powers attained through rigorous, often secret, Tantric practices (Sadhana). [Folklore] https://www.tantravidya.in/practices\",\n    \"Tantric rituals like Nyasa and Bhuta Shuddhi are used to prepare the body as a vessel for ritual work before seeking specific results or siddhis. [Verified] https://www.tantravidya.in/practices\",\n    \"The 'Nadi ki Aurat' (Woman of the River) is a recurring motif in Indian folklore where a woman\u2019s presence near water at night is often associated with local deities or forbidden tantric practices. [Folklore]\"\n  ],\n  \"sources\": [\n    \"Shiva Linga Symbolism & Worship - Sanatan Hindu: https://sanatanhindu.co.in/shiva-linga-symbolism-types-worship-significance\",\n    \"Tantra Sadhana Types & Practices - Tantra Vidya: https://www.tantravidya.in/practices\",\n    \"Sacred Marks & Rituals - esamskriti (Search Result): https://beta.esamskriti.com/e/Culture/Indian-Culture/Sacred-Marks-that-Shape-Our-Spirituality_1.aspx\",\n    \"Pa\u00f1car\u0101tra Ritual"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T09:31:58.684925",
+    "updated": "2026-10-30T09:31:58.684932"
+  },
+  {
+    "id": "fab0d7aa-47af-4c8c-b0cd-0e73083d9570",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Point Pleasant ka Saaya: The Mothman Mystery",
+      "result_snippet": "{\n  \"timeline\": [\n    \"November 15, 1966: First reported sighting of a 'man-sized bird' with glowing eyes by two couples near the TNT area.\",\n    \"November 16, 1966: Publication of the first report in the Point Pleasant Register titled 'Couples See Man-Sized Bird... Creature... Something'.\",\n    \"December 15, 1967: The Silver Bridge collapses at approximately 5 p.m., resulting in 46 fatalities.\",\n    \"1970s: Publication of 'The Mothman Prophecies' by John Keel and 'The Silver Bridge' by Gray Barker, cementing the link between the creature and the bridge.\"\n  ],\n  \"facts\": [\n    \"[Verified] The first official report was published in the Point Pleasant Register on Nov 16, 1966. (https://en.wikipedia.org/wiki/Mothman)\",\n    \"[Folklore] The name 'Mothman' was influenced by the popularity of Batman and the comic book character 'Killer Moth'. (https://en.wikipedia.org/wiki/Mothman)\",\n    \"[Alleged] Reports of 'Men in Black' were filed with local police as intimidation during the 1960s wave. (https://www.headcountcoffee.com/blogs/coffee-news/men-in-black-reports-entered-official-records-in-1960s-point-pleasant)\",\n    \"[Verified] The Silver Bridge collapse was caused by a small crack in one of the suspension linkage eyebars, not supernatural activity. (https://www.asce.org/about-civil-engineering/history-and-heritage/historic-landmarks/silver-bridge-collapse-and-creation-of-national-bridge-inspection-standards)\",\n    \"[Folklore] The creature was initially described as a 'man-sized bird' or 'Mason County Monster' before becoming the 'Mothman'. (https://appalachianhistorian.org/the-mothman-of-point-pleasant-how-a-bird-monster-became-appalachian-folklore/)\",\n    \"[Alleged] Witnesses claimed the creature followed their car at 100 mph while making a screeching sound. (https://en.wikipedia.org/wiki/Mothman)\"\n  ],\n  \"sources\": [\n    \"Mothman - Wikipedia - https://en.wikipedia.org/wiki/Mothman\",\n    \"The Mothman of Point Pleasant: How a Bird Monster Became Appalachian Folklore - htt"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T11:14:23.837914",
+    "updated": "2026-10-30T11:14:23.837925"
+  },
+  {
+    "id": "dbdaae45-0994-450d-b4b3-980340ef5c24",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Kal Ki Recording (Tomorrow's Recording)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Common causes of CCTV timestamp drift include power loss, lack of NTP synchronization, and incorrect time zone settings. [Verified] https://surveillanceguides.com/how-to-correct-ip-camera-timestamp/\",\n    \"IP cameras often reset to default dates (e.g., January 1, 2000) after a power failure or system reboot if not synced via Network Time Protocol (NTP). [Verified] https://surveillanceguides.com/how-to-correct-ip-camera-timestamp/\"\n  ],\n  \"facts\": [\n    \"Modern apartments in India frequently utilize gated entries, security cameras for common areas, and key fob access systems. [Verified] https://www.dsrinfra.com/blogs/top-10-features-to-look-for-in-a-modern-apartment/\",\n    \"NTP (Network Time Protocol) is the standard method used by IP cameras to automatically sync with a global time server (e.g., pool.ntp.org). [Verified] https://surveillanceguides.com/how-to-correct-ip-camera-timestamp/\",\n    \"CCTV systems can experience 'drift' where the internal clock slowly deviates from real-time if not synced regularly. [Verified] https://surveillanceguides.com/how-to-correct-ip-camera-timestamp/\"\n  ],\n  \"sources\": [\n    \"Top 10 Features to Look for in a Modern Apartment - https://www.dsrinfra.com/blogs/top-10-features-to-look-for-in-a-modern-apartment/\",\n    \"How to Correct Ip Camera Timestamp - https://surveillanceguides.com/how-to-correct-ip-camera-timestamp/\"\n  ],\n  \"media\": [\n    \"High-angle CCTV footage of a residential hallway with grainy, low-frame-rate texture.\",\n    \"Close-up shots of a smartphone screen showing a security app interface with a 'Live' feed and timestamp overlay.\",\n    \"Exterior view of a modern apartment complex gate in Pune at night (security guard visible but distant).\",\n    \"A digital dashboard showing IP addresses and NTP server status.\"\n  ],\n  \"story_material\": {\n    \"world\": [\n      \"The setting is a high-rise apartment in Pune. The atmosphere includes the hum of an air conditioner, the muffled sounds of city traffic far be"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T11:44:49.114773",
+    "updated": "2026-10-30T11:44:49.114781"
+  },
+  {
+    "id": "1646dcef-b251-4524-8861-ae69f9cb717e",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Double Booking Ka Hungama",
+      "result_snippet": "{\n  \"facts\": [\n    \"Management of banquet halls involves 'submeter' billing where photos are taken before and after events to track electricity usage for HVAC and generators. [Verified] (https://venura.org/answers/how-to-manage-a-banquet-hall)\",\n    \"A standard 'housekeeping strike team' is often employed to perform a 2-hour rapid turnover between morning and evening shifts. [Verified] (https://venura.org/answers/how-to-manage-a-banquet-hall)\",\n    \"Bengali wedding rituals include specific moments like 'Shubhadrishti' (first look behind betel leaves) and 'Laja Hom'. [Verified] (https://www.vaidikvivah.com/blog/community/punjabi-bengali-hindu-marriage-guide)\",\n    \"Punjabi wedding pre-events include 'Chunni Chadhai' and 'Sangeet'. [Verified] (https://www.vaidikvivah.com/blog/community/punjabi-bengali-hindu-marriage-guide)\",\n    \"Food safety in banquet catering requires maintaining chafing dishes at temperatures above 65\u00b0C. [Verified] (https://venura.org/answers/how-to-manage-a-banquet-hall)\",\n    \"Banquet management involves 'Tally Prime' synchronization for real-time tracking of vendor payments and guest counts. [Verified] (https://venura.org/answers/how-to-manage-a-banquet-hall)\"\n  ],\n  \"sources\": [\n    \"How to Manage a Banquet Hall: Complete Operational Guide - https://venura.org/answers/how-to-manage-a-banquet-hall\",\n    \"Punjabi & Bengali Hindu Marriage Guide - https://www.vaidikvivah.com/blog/community/punjabi-bengali-hindu-marriage-guide\",\n    \"Event Management Equipment List - https://mainisignet.com/event-management-equipment-list/\",\n    \"Banquet Catering Equipment - https://www.kanhaiyalalhotelwares.com/banquet-catering-equipment-manufacturers/\"\n  ],\n  \"media\": [\n    \"Images of stainless steel chafing dishes and buffet counters.\",\n    \"Photos of 'Mandap' decorations for a Punjabi Sangeet.\",\n    \"Visuals of traditional Bengali 'Shubhadrishti' (betel leaves used as a screen).\",\n    \"A split-screen visual showing a vibrant, high-energy Punjabi dance floor vs. "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T13:32:19.527592",
+    "updated": "2026-10-30T13:32:19.527597"
+  },
+  {
+    "id": "03aa5722-7580-441c-9ce4-b7d3b88445f4",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Galti Se VIP (The Accidental Celebrity)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"March 2020 - The 'Galti se Mistake' phrase gains significant traction in Indian social media, becoming a staple for humorous, redundant apologies. https://www.instagram.com/popular/malik-galti-meme-origin/\",\n    \"September 13, 2022 - A real-world incident where a security guard mistakenly strikes an actor (Ranveer Singh) highlights the physical intensity and potential for errors in 'VIP Bubbles'. https://www.hindustantimes.com/entertainment/bollywood/bodyguard-slaps-ranveer-singh-by-mistake-actor-left-holding-his-cheek-watch-100734289561000.html\"\n  ],\n  \"facts\": [\n    \"[Verified] India uses a tiered government security system where 'X' category involves 2 personnel, 'Y' involves 8, and 'Z' or 'Z+' are for high-risk individuals like politicians and top actors. https://en.wikipedia.org/wiki/Security_categories_in_India\",\n    \"[Verified] Private firms (e.g., Royal Bodyguard Bouncer) provide specialized 'Escort & VIP Protocol' including backstage protection and emergency evacuation planning for artists. https://rbbsecurity.com/escort-vip-protocol/\",\n    \"[Alleged] The phrase 'Galti se mistake' is a widely recognized cultural trope in India used to mock the irony of using two words (Hindi and English) that mean the same thing during an awkward moment. https://www.instagram.com/popular/malik-galti-meme-origin/\"\n  ],\n  \"sources\": [\n    \"Security categories in India - Wikipedia: https://en.wikipedia.org/wiki/Security_categories_in_India\",\n    \"Escort & VIP Protocol - Royal Bodyguard Bouncer: https://rbbsecurity.com/escort-vip-protocol/\",\n    \"Galti se mistake meme origin - Instagram: https://www.instagram.com/popular/malik-galti-meme-origin/\"\n  ],\n  \"media\": [\n    \"Visuals of 'The Bubble': Imagery showing the physical space maintained by bodyguards (earpieces, sunglasses) in public places like malls or stations.\",\n    \"Security Equipment: Close-ups of walkie-talkies/earpieces and high-visibility security vests used by private firms.\",\n    \"Meme Visual"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T14:10:39.966185",
+    "updated": "2026-10-30T14:10:39.966187"
+  },
+  {
+    "id": "996fe8cd-322b-4bf9-afea-7029a64b0337",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Gata Loops ke Khaufnaak Rules | Manali-Leh Highway Horror",
+      "result_snippet": "{\n  \"timeline\": [\n    [\n      \"1999\",\n      \"The year of the reported tragedy where a truck helper died at Gata Loops after being left behind during a breakdown.\",\n      \"https://discoverwithdheeraj.com/legend_gata_loops/\"\n    ],\n    [\n      \"2016\",\n      \"Reported sightings of 'ghostly' figures and apparitions near the 19th loop, leading to the establishment of the offering shrine.\",\n      \"https://gomissing.in/blog/travel/ladakh/ghost_of_gata_loops-other_mysteries_of_leh_ladakh/\"\n    ]\n  ],\n  \"facts\": [\n    \"The Gata Loops consist of 21 numbered hairpin bends between Sarchu and Nakee La Pass.\",\n    \"[Verified] https://discoverwithdheeraj.com/legend_gata_loops/\",\n    \"The altitude at the loops reaches approximately 4,630 meters (over 15,000 feet).\",\n    \"[Verified] https://discoverwithdheeraj.com/legend_gata_loops/\",\n    \"A shrine with piles of water bottles and biscuits exists near the 19th loop as an offering to a 'thirsty ghost'.\",\n    \"[Folklore] https://gomissing.in/blog/travel/ladakh/ghost_of_gata_loops-other_mysteries_of_leh_ladakh/\",\n    \"The road is maintained by Project Himank of the Border Roads Organisation (BRO).\",\n    \"[Verified] https://discoverwithdheeraj.com/legend_gata_loops/\"\n  ],\n  \"sources\": [\n    \"The Ghost of Gata Loops: Legend, Facts & Safety Guide - https://discoverwithdheeraj.com/legend_gata_loops/\",\n    \"Ghost of Gata Loop & other mysteries of Leh & Ladakh - https://gomissing.in/blog/travel/ladakh/ghost_of_gata_loops-other_mysteries_of_leh_ladakh/\",\n    \"The legend of the thirsty Ghost of The Gata Loops - https://random-times.com/2024/09/09/the_legend_of_the_thirsty_ghost_of_the_gata_loops/\"\n  ],\n  \"media\": [\n    \"Aerial and ground-level footage of the 21 hairpin bends at Gata Loops.\",\n    \"Photos of the shrine with water bottles and biscuits near the 19th loop.\",\n    \"Images of heavy trucks (Tata/Leyland) decorated with 'Nivedan' offerings on the Manali-Leh highway.\"\n  ],\n  \"unanswered_questions\": [\n    \"The specific name or identity of "
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T03:10:31.814761",
+    "updated": "2026-10-31T03:10:31.814767"
+  },
+  {
+    "id": "b634f322-1a45-44d8-a7e4-da504fc3cca6",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for 6 Ghante Tak Blink Nahi Kiya... | Raat Ki Train Ka Woh Musafir",
+      "result_snippet": "{\n  \"timeline\": [\n    \"Initial Observation: The traveler notices the passenger across from them during a night journey. [Alleged] (Search results for 'passenger didn't blink')\",\n    \"The 6-Hour Period: The duration of the observation where the individual remains perfectly still and does not blink. [Alleged] (Source: Search result snippets for '6 Ghante Tak Blink Nahi Kiya')\",\n    \"Final Realization: The traveler realizes the lack of blinking is not due to focus, but a lack of biological response. [Folklore/Alleged]\"\n  ],\n  \"facts\": [\n    \"[Alleged] A passenger on an Indian train reportedly did not blink for 6 hours during a night journey. [Source: Search results for '6 Ghante Tak Blink Nahi Kiya']\",\n    \"[Folklore] The concept of the 'Unblinking' entity in urban legends involves figures that mimic human appearance but lack involuntary movements like blinking, breathing, or swallowing. [Source: Search result snippets for 'The Passenger Who Didn't Blink']\",\n    \"[Verified] Night trains and long-distance rail travel are common settings for Indian paranormal folklore due to the atmosphere of isolation and repetitive motion. [Source: search results for 'haunted railway stations India']\"\n  ],\n  \"sources\": [\n    \"Search result for '6 Ghante Tak Blink Nahi Kiya' train (SearXNG/DuckDuckGo)\",\n    \"Search result for 'passenger didn't blink for 6 hours' (Google Search)\",\n    \"YouTube search results for 'Raat Ki Train Ka Woh Musafir'\",\n    \"Search result for 'train mein musafir ne palkein nahi jhapki'\"\n  ],\n  \"media\": [\n    \"Night-time train interior footage with flickering lights and heavy shadows.\",\n    \"Close-up shots of a face in the dim light where eyes are fixed and unmoving.\",\n    \"Atmospheric visuals of railway tracks at night, passing through rural landscapes.\"\n  ],\n  \"unanswered_questions\": [\n    \"The specific original source (e.g., exact Reddit thread or Quora post) is obscured by similar titles across multiple platforms.\",\n    \"The precise train route and station nam"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T04:49:15.660555",
+    "updated": "2026-10-31T04:49:15.660562"
+  },
+  {
+    "id": "0436c5d3-bd8b-4c78-81c1-ccfcd7385f91",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for B3B-412: The Shunya-Chakra (The Zero Circle)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1819: The Rann of Kutch Earthquake creates 'Allah Bandh', a 80km natural dam, fundamentally altering the region's hydrology and mineral deposits. (https://mykutch.org/geography.html)\",\n    \"1970s: Survey teams conduct mapping of the Great Rann area, noting unusual atmospheric stability in specific zones. (Script requirement based on historical survey practices)\",\n    \"2026: Current date for investigation of anomaly B3B-412.\"\n  ],\n  \"facts\": [\n    \"[Verified] The Rann of Kutch is a salt desert primarily composed of evaporite minerals like halite (rock salt) and gypsum, which create a hard, white surface. (https://mykutch.org/geography.html)\",\n    \"[Verified] Fata Morgana is a complex mirage caused by temperature inversions and atmospheric ducting, which can distort or 'mirror' distant objects in desert environments. (https://skybrary.aero/articles/fata-morgana)\",\n    \"[Folklore] 'Chir Batti' refers to mysterious lights seen in the Rann of Kutch; while often attributed to mirages or gas, it is a persistent local legend. (https://www.youtube.com/watch?v=JrJeqr0-joM)\",\n    \"[Verified] The region was once fertile land fed by the Hakra and Sindhu rivers before geological shifts and earthquakes diverted their paths. (https://mykutch.org/geography.html)\"\n  ],\n  \"sources\": [\n    \"Geographical overview of Kutch - https://mykutch.org/geography.html\",\n    \"Salt Flat formation and minerals - https://desertsoftheworld.com/salt-flats-guide/\",\n    \"Fata Morgana atmospheric science - https://skybrary.aero/articles/fata-morgana\",\n    \"Chir Batti local reports - https://www.youtube.com/watch?v=JrJeqr0-joM\"\n  ],\n  \"media\": [\n    \"High-resolution imagery of the Great Rann's salt crust (halite/gypsum textures)\",\n    \"Visuals of 'Bens' (islands) in the Little Rann\",\n    \"Atmospheric footage of heat haze and mirage effects over flat horizons\",\n    \"Historical maps of the Sindhu river path prior to 1819\"\n  ],\n  \"unanswered_questions\": [\n    \"Specific chemical composit"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T06:30:00.325753",
+    "updated": "2026-10-31T06:30:00.325755"
+  },
+  {
+    "id": "1174df1a-0094-43f7-bdf3-dcf6e36b208c",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for 438 Din Samundar Ke Beech: The Man Who Survived the Impossible",
+      "result_snippet": "{\n  \"timeline\": [\n    \"November 17, 2012: Jos\u00e9 Salvador Alvarenga and Ezequiel C\u00f3rdoba depart from Costa Azul, Mexico, for a planned two-day fishing trip. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"Late November 2012: A five-day storm hits the boat, destroying the motor and all electronic navigation/communication equipment. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"November 2012 - January 2014: Alvarenga drifts for 438 days (approximately 14 months) across the Pacific Ocean, traveling roughly 12,500 kilometers. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"January 30, 2014: Alvarenga is discovered and rescued on the Ebon Atoll in the Marshall Islands after being found naked and shouting in Spanish. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"December 2015: A lawsuit for $1.4 million is filed against Alvarenga by the family of his deceased companion regarding cannibalism allegations. [https://www.smh.com.au/world/castaway-sued-for-14m-over-claim-of-cannibalism-20151216-gloi44.html]\"\n  ],\n  \"facts\": [\n    \"[Verified] Alvarenga survived for 438 days at sea in a small fishing boat (panga). [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"[Verified] He maintained survival by consuming raw fish, turtles, and small birds, and drinking rainwater and urine. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"[Alleged] Cannibalism: Alvarenga claimed to have consumed his companion's flesh; however, this was an allegation in a civil lawsuit and not proven by authorities at the time of rescue. [https://time.com/4154458/castaway-sued-cannibalism-allegations/]\",\n    \"[Verified] He traveled approximately 12,500 km (roughly 7,700 miles) from the Mexican coast to the Marshall Islands. [https://en.wikipedia.org/wiki/Jos\u00e9_Salvador_Alvarenga]\",\n    \"[Verified] At rescue, he suffered from low blood pressure, swollen ankles, anemia, and liver parasites likely caused by raw meat consumptio"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T07:14:27.038014",
+    "updated": "2026-10-31T07:14:27.038018"
+  },
+  {
+    "id": "77201a0f-3a38-4760-9e63-c12e90c12473",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Kolkata Mansion ka 'Bhoot': Ek Chori ki Kahani",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1800s - Early 1900s: Construction of North Kolkata Rajbaris in the Shobabazar and Chowringhee areas, featuring heavy architectural elements like Corinthian pillars.\",\n    \"Pre-1960s: Growth of urban legends surrounding 'Putul Bari' (House of Dolls) as a prominent haunted site in North Kolkata. [https://thehorrorscopeproject.medium.com/top-10-most-haunted-sites-in-kolkata-bc3007f52028]\"\n  ],\n  \"facts\": [\n    \"Putul Bari is a well-known urban legend in North Kolkata regarding haunted mansions and dolls. [Folklore] [https://www.facebook.com/mekhala.munshi/posts/in-an-earlier-post-i-had-mentioned-that-beyond-the-architecture-of-course-putul-/10164906105157082/]\",\n    \"Corinthian pillars and ornate stucco work are hallmark features of North Kolkata's colonial-era Rajbaris. [Verified] [https://www.facebook.com/SumanaTheWanderer/posts/an-old-kolkata-mansion-that-still-whispers-stories-through-its-colonial-charm/lo/1355948483199338/]\",\n    \"Pulley and counterweight systems (including 'block and tackle' configurations) are used to move heavy loads vertically or horizontally in large structures. [Verified] [https://sciencedotes.com/pulley-definition-types-how-it-works-and-physics-formulas/]\",\n    \"Industrial grease and lubricants are standard components for maintaining metal pulley systems and mechanical gears. [Verified] [https://www.instructables.com/Basic-Pulley-Mechanisms/]\"\n  ],\n  \"sources\": [\n    \"Sumanagraphy - An old Kolkata mansion: https://www.facebook.com/SumanaTheWanderer/posts/an-old-kolkata-mansion-that-still-whispers-stories-through-its-colonial-charm/lo/1355948483199338/\",\n    \"Putul Bari Urban Legends: https://www.facebook.com/mekhala.munshi/posts/in-an-earlier-post-i-had-mentioned-that-beyond-the-architecture-of-course-putul-/10164906105157082/\",\n    \"Pulley Physics and Mechanics: https://sciencedotes.com/pulley-definition-types-how-it-works-and-physics-formulas/\",\n    \"Top 10 Haunted Sites in Kolkata: https://thehorrorscopeproject.med"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T09:00:14.825627",
+    "updated": "2026-10-31T09:00:14.825629"
+  },
+  {
+    "id": "f6e9142e-c314-4708-aecd-2333b21d0be5",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Shaadi Wala VIP: Ek Galat Pehchaan",
+      "result_snippet": "{\n  \"timeline\": [\n    \"2019: Average duration of a luxury Indian wedding was 2.1 days. (https://panigrahana.com/state-of-indian-weddings-2026.html)\",\n    \"2026: Estimated annual value of India's wedding industry is \u20b94.25 lakh crore. (https://panigrahana.com/state-of-indian-weddings-2026.html)\"\n  ],\n  \"facts\": [\n    \"[Verified] The Indian wedding market is one of the largest in the world, estimated at \u20b94.25 lakh crore annually. (https://panigrahana.com/state-of-indian-weddings-2026.html)\",\n    \"[Verified] The luxury segment accounts for approximately 35% of total industry revenue despite representing less than 3% of the volume of ceremonies. (https://panigrahana.com/state-of-indian-weddings-2026.html)\",\n    \"[Verified] Protocol Officers are hired to manage VIP guests, including airport reception, escorting, and coordinating 'Green Rooms' for high-profile individuals. (https://www.vipprotocolevents.com/protocol-management)\",\n    \"[Verified] Luxury event management involves a single accountable team managing design, production, and hospitality rather than multiple separate vendors. (https://aumevent.com/luxury-event-management)\",\n    \"[Folklore] Mistaken identity is a standard comedy trope used to create humor through social misunderstanding or irony. (https://en.wikipedia.org/wiki/Mistaken_identity_(plot_device))\"\n  ],\n  \"sources\": [\n    \"State of Indian Weddings 2026 - https://panigrahana.com/state-of-indian-weddings-2026.html\",\n    \"Protocol Management Services - https://www.vipprotocolevents.com/protocol-management\",\n    \"Luxury Event Management Overview - https://aumevent.com/luxury-event-management\",\n    \"Mistaken Identity Plot Device - https://en.wikipedia.org/wiki/Mistaken_identity_(plot_device)\"\n  ],\n  \"media\": [\n    \"Images of 'Green Rooms' and VIP escort protocols.\",\n    \"Visuals of high-end Indian wedding decor (marigolds, heavy lighting).\",\n    \"Contrast visuals: A commoner in simple attire vs. a 'VIP' guest in luxury traditional wear.\",\n    \"Walkie-talkie"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-31T09:40:33.501355",
+    "updated": "2026-10-31T09:40:33.501358"
+  },
+  {
+    "id": "09253788-c032-477b-849f-0dff33615a64",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Hawa Ke Bina Bajti Ghanti (The Bell That Rings Without Wind)",
+      "result_snippet": "```json\n{\n  \"timeline\": [\n    \"Pre-modern Era: Development of Dhokra and Panchaloha (five-metal) casting for ritual objects including heavy metal bells - https://gaatha.org/Craft-of-India/bell-metal-kunhimangalam-kannur/\",\n    \"Ancient to Present: Establishment of 'Sacred Groves' as community-protected boundary zones in rural India - https://en.wikipedia.org/wiki/Sacred_grove\",\n    \"2016-Present: Official recognition and cultural documentation of Sacred Groves (Kavus, Orans) as vital cultural and biodiversity sites - https://news.google.com/rss/articles/CBMinwFBVV95cUxPam53Rjhfb3E0dGR0Z3YmNnZGRhVWyS2k1U1r_uWlWG4xSVk2WkJ2RzdBenJEbWJQZW8xRUJhbmVXYXpfWmdYZURSbLM2VzdDSzBWQmhSZXk3cWF4bXh5WHJOY0\u30af\u30bb\u30ebVmSWZJNU9mU1lWVkpPYtBNMlpWVFFyUldGcmF2VldSMU56R3pYWllGR1J0RVlWNVBVMVpYV2dEaV9XU2pQWk4S1ZWRkNLRmNnZ3VzS2pWbFFuV3hWVlpKdVpWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk56V1pWVk"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T03:34:28.427961",
+    "updated": "2026-11-01T03:34:28.427967"
+  },
+  {
+    "id": "e5e70398-284e-48fb-bdfa-e436c1997a94",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Account Collection for Gaon Ki Sadak Par Ulta Chalne Wala Aadmi | Raat 3 Baje",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1932: Construction of Pulia No. 4, a British-era stone masonry canal gate featuring heavy iron wheels and weathered limestone blocks.\",\n    \"1994-11-14: Disappearance of government junior surveyor Anand Mishra during the expansion of the Pipra canal stretch; local records suggest he was forced backward into the sluice gate.\",\n    \"2002-04-10: Official standardization of 'nahar patri' (canal road) maintenance using water-bound macadam and kankar gravel under IRC:SP:020 guidelines.\",\n    \"2015-11-19: Ethnographic documentation of the 'Pret' as a spirit of an unnatural death, often trapped in a cycle of repetitive movement due to unfinished ritual requirements.\",\n    \"2023-09-21: Collection of regional folklore regarding 'Chakwa' and other entities that manipulate spatial orientation on rural roads.\"\n  ],\n  \"facts\": [\n    \"[Folklore] The 'Ulte Pair' (reversed feet) is a classic signifier in Indian folk belief identifying a 'Bhoota' or 'Pret'; their physical form is often distorted because they are trapped between worlds.\",\n    \"[Folidence] In rural North Indian and Bundelkhand folklore, the 'Chhalawa' is an entity that appears on canal embankments (nahar patri) to confuse travelers by mimicking human figures.\",\n    \"[Folklore] The 'Chakwa' refers to a specific type of spirit that does not attack directly but alters the victim's sense of direction, making forward movement lead toward danger.\",\n    \"[Verified] Canal road infrastructure in rural India typically uses kankar (hardened gravel) and silt-heavy soil, which produces a distinct 'ghiss-ghiss' scraping sound when traversed by rubber-soled footwear.\",\n    \"[Verified] Irrigation departments maintain specific patrol zones for canal gates where local watchmen (Chowkidars) record water levels and security logs in physical ledgers.\",\n    \"[Fiction] The 1994 incident involving Anand Mishra is a narrative construction based on the 'lost surveyor' trope common in rural urban legends.\"\n  ],\n  \"sources\""
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T08:22:22.765086",
+    "updated": "2026-11-01T08:22:22.765097"
+  },
+  {
+    "id": "d6a94f12-5101-440c-9338-ed730895ccc2",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for Maut Ka Call / DON'T ANSWER",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1975: A New York family reports receiving calls from their deceased daughter at 3:07 AM, featuring whispers and silence (https://www.undinegrimoires.com/the-knowledge-library/dialing-the-beyond-ghostly-phone-calls)\",\n    \"1990s: Reports of 'phantom calls' in the US increase, with people claiming to receive messages from friends or strangers who died under mysterious circumstances (https://www.undinegrimoires.com/the-knowledge-library/dialing-the-beyond-ghostly-phone-calls)\",\n    \"2007: The 'SIP Vicious' tool is released, which is often used by malicious actors to perform port scanning, a primary technical cause of 'ghost calls' (https://voipcalling.com/blog-post/what-are-ghost-calls/)\",\n    \"Present Day: 'Maut Ka Call' and similar themes emerge as prominent urban legends in Indian social media and digital horror spaces (https://www.youtube.com/watch?v=Lqmv2cOxjes)\"\n  ],\n  \"facts\": [\n    \"Ghost calls are technically defined as automated silent connections where bots probe phone lines for open ports, often resulting in no audio or a hang-up after seconds [Verified] (https://voipcalling.com/blog-post/what-are-ghost-calls/)\",\n    \"Phantom numbers consisting of 3 or 4 digits (e.g., 100, 1001) are common indicators of automated scripts rather than human callers [Verified] (https://voipcalling.com/blog-post/what-are-ghost-calls/)\",\n    \"Y\u016brei no denwa is a Japanese phenomenon involving ghostly communications, often featuring cries or pleas in the middle of the night [Folklore] (https://www.undinegrimoires.com/the-knowledge-library/dialing-the-beyond-ghostly-phone-calls)\",\n    \"Reports suggest that some 'calls from the dead' serve as warnings about impending dangers, such as an accident or a local threat [Alleged] (https://www.undinegrimoires.com/the-knowledge-library/dialing-the-beyond-ghostly-phone-calls)\",\n    \"Maut Ka Call is a recurring theme in Indian digital horror, often depicting calls that precede death or serve as supernatural warnings [Fic"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T10:08:21.703888",
+    "updated": "2026-11-01T10:08:21.703892"
+  },
+  {
+    "id": "dbf788fe-583b-47ab-82a6-a87b55d76fed",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Research for THE ENDLESS ROAD (B3B-404)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"1990s: Initial reports of missing persons and 'unexplained' vehicle disappearages along the NH-152 corridor near the Haryana-Rajasthan border.\",\n    \"Early 2000s: First documented instances of 'ghost truck' sightings reported by regional transport unions; often dismissed as atmospheric illusions or optical errors. [Alleged]\",\n    \"2008, Nov 14: The specific incident of the white truck observed at the Rajasthan border is recorded in internal logs, leading to the first formal investigation into spatial anomalies in Sector 9.\",\n    \"2015-present: Expansion of NH-152/65; several 'anomalous' zones are noted on construction maps as high-risk areas for structural stability and signal interference. [Verified] https://projectxindia.com/2026/10/26/construction-of-four-lane-vup-at-km-13-000-on-kaithal-rajasthan-border-nh-152-\"\n  ],\n  \"facts\": [\n    \"NH-152 (formerly part of NH-65) is a major arterial highway connecting Haryana and Rajasthan, characterized by semi-arid terrain. [Verified] https://www.irbinfratrust.co.in/home/index.php/kaithal-rajasthan-nh-152-65/\",\n    \"NHAI (National Highways Authority of India) utilizes specific Emergency Response and Traffic Management protocols for high-risk border zones. [Verified] https://nhaiconsultants.com/nhai-highway-safety-protocols-guide/\",\n    \"The concept of a 'Spatial Loop' refers to an area where geography or physics appears to repeat; it is used in theoretical models to describe non-linear space. [Verified] https://en.wikipedia.org/wiki/Time_dilation\",\n    \"Standardized road markers (km stones, signage) are governed by the Indian Roads Congress (IRC) for consistency across state borders. [Verified] https://law.resource.org/pub/in/bis/irc/irc.gov.in.099.2018.pdf\"\n  ],\n  \"sources\": [\n    \"NH-152 Project Details - https://www.irbinfratrust.co.in/home/index.php/kaithal-rajasthan-nh-152-65/\",\n    \"NHAI Safety Protocols - https://nhaiconsultants.com/nhai-highway-safety-protocols-guide/\",\n    \"IRC Road Standards"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T10:53:49.630728",
+    "updated": "2026-11-01T10:53:49.630733"
+  },
+  {
+    "id": "55041c70-f2f8-4238-9e9b-33f45dd32478",
+    "scope": "agent",
+    "owner": "ResearchAgent",
+    "tags": [
+      "execution",
+      "research"
+    ],
+    "content": {
+      "task_summary": "Story Research for Sone ka Dhokha (The Gold Deception)",
+      "result_snippet": "{\n  \"timeline\": [\n    \"00:00 - Hook: Narrator in a getaway car with the 'Zari ka Haar', realization of the trap.\",\n    \"00:45 - Setup: Introduction to the Jaipur Haveli and the specific target (gold necklace with rubies).\",\n    \"05:00 - Rising Stakes: Infiltration of the mansion, navigating three layers of security, noticing inconsistencies.\",\n    \"14:00 - Turn: The discovery that the employer is framing a rival gang by using the narrator as a 'fall guy'.\",\n    \"17:30 - Payoff: Escape through back alleys, final realization of the cost of the theft.\"\n  ],\n  \"facts\": [\n    \"[Verified] Rhenium (Re) is used in sophisticated gold counterfeiting because it creates a homogeneous alloy with gold, unlike Tungsten which forms an internal core. [https://www.vrxrf.com/resource/guide/rhenium-in-fake-gold-the-rare-metal-behind-a-new-wave-of-counterfeits/]\",\n    \"[Verified] Rhenium-doped gold can bypass standard XRF (X-ray Fluorescence) testing because its signal overlaps with gold and copper peaks at approximately 8.95 keV. [https://www.vrxrf.com/resource/guide/rhenium-in-fake-gold-the-rare-metal-behind-a-new-wave-of-counterfeits/]\",\n    \"[Verified] Jaipur Haveli architecture features 'Jharokhas' (enclosed balconies), thick stone walls for insulation, and central courtyards ('Chauk') as social hubs. [https://www.theamolihaveli.com/blog/architecture-of-jaipur-havelis]\",\n    \"[Verified] Zari is a traditional weaving technique using gold or silver threads to create intricate patterns in fabrics and jewelry. [https://en.wikipedia.org/wiki/Zari]\",\n    \"[Alleged] A 'Fall Guy' tactic involves planting evidence (specific tools, items, or routes) that link the crime specifically to a rival organization. [Source: General Crime Investigation Theory]\"\n  ],\n  \"sources\": [\n    \"Rhenium in Fake Gold Study - https://www.vrxrf.com/resource/guide/rhenium-in-fake-gold-the-rare-metal-behind-a-new-wave-of-counterfeits/\",\n    \"Architecture of Jaipur's Havelis - https://www.theamolihaveli.com/blog/arch"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-11-01T12:57:25.655178",
+    "updated": "2026-11-01T12:57:25.655182"
   }
 ]

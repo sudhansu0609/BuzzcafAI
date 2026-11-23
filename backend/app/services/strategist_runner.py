@@ -42,6 +42,21 @@ BLOCKED_READS = {"settings_get", "diagnostics", "searxng_test"}
 ALLOWED_WRITES = {"topic_save", "topic_update", "topic_research_and_save", "department_execute", "video_analyze",
                   "apply_audio_rack_preset", "set_character_voice"}
 
+#: The studio actions the Director's chat may call to answer a question (all read-only).
+DIRECTOR_CHAT_ACTIONS = ('docs_index', 'read_doc', 'health_report', 'log_digest', 'llm_status', 'persona_roster',
+                         'settings_summary', 'agents_all', 'workflows', 'brands', 'project_list', 'project_get',
+                         'produce_status', 'local_models', 'topic_list', 'department_list',
+                         'failed_records', 'incidents_search', 'tickets_list')
+
+_TAG_NEUTRAL_RE = re.compile(
+    r"\[(/?)(FIX|GOAL|PROMISE|DONE|TICKET|RULE|DIAGNOSIS|FINAL_PLAN|STUDIO_ACTION|INVOKE_AGENT)\b", re.I)
+
+
+def neutralise_tags(text: str) -> str:
+    """Tool output must never carry a live control tag back to the model."""
+    return _TAG_NEUTRAL_RE.sub(lambda m: "(" + m.group(1) + m.group(2), str(text or ""))
+
+
 _FINAL_RE = re.compile(r"\[FINAL_PLAN\](.*?)\[/FINAL_PLAN\]", re.DOTALL | re.I)
 _IDEA_DUMP_RE = re.compile(r"\[IDEA_DUMP:\s*(.*?)\](?:\[/IDEA_DUMP\])?", re.I)
 _STUDIO_ACTION_RE = re.compile(r"\[STUDIO_ACTION:\s*([a-z_]+)\s*(?:\|\s*(\{.*?\}))?\s*\](?:\[/STUDIO_ACTION\])?",
@@ -114,7 +129,7 @@ def _studio_action(name: str, raw_params: Optional[str]) -> str:
     return json.dumps(out.get("result") if out.get("status") == "success" else out, ensure_ascii=False, default=str)
 
 
-def _collect(reply: str, channel: str, llm: Any, caller: str) -> List[tuple]:
+def _collect(reply: str, channel: str, llm: Any, caller: str, invoke_llm: Any = None) -> List[tuple]:
     from app.services import studio_chat as sc
     found: List[tuple] = []
 
@@ -123,7 +138,8 @@ def _collect(reply: str, channel: str, llm: Any, caller: str) -> List[tuple]:
             found.append((m.start(), label(m), (lambda m=m: run_fn(m))))
 
     def agent(m):
-        text, records = sc.process_agent_invocations(m.group(0), llm_service=llm, caller=caller)
+        text, records = sc.process_agent_invocations(
+            m.group(0), llm_service=invoke_llm if invoke_llm is not None else llm, caller=caller)
         return text
     add(sc._INVOKE_RE, lambda m: f"agent {m.group(1).strip()}: {m.group(2).strip()[:120]}", agent)
     for regex, name in ((sc._SEARCH_RE, "web search"), (sc._FETCH_RE, "fetch"), (sc._BOOK_RE, "book search"),
@@ -165,12 +181,19 @@ def _parse_final(reply: str) -> Optional[Dict[str, Any]]:
     return data if isinstance(data, dict) else None
 
 
-def run(agent_name: str, channel: str, task: str, *, system_extra: str = "",
-        on_event: Optional[Callable[[str], None]] = None, llm: Any = None,
-        max_turns: int = MAX_TURNS) -> Dict[str, Any]:
-    """Loop the strategist over its tools until it writes FINAL_PLAN.
-    Returns {"plan": dict, "turns": n, "calls": [labels]}; raises RuntimeError
-    when no model answers or no plan comes back."""
+def run(agent_name: str, channel: str, task: str, **kwargs: Any) -> Dict[str, Any]:
+    """Loop the strategist over its tools until it writes FINAL_PLAN, on the
+    "strategist" route of the Model Routing window. Returns {"plan": dict,
+    "turns": n, "calls": [labels]}; raises RuntimeError when no model answers
+    or no plan comes back."""
+    from integrations.llm import llm_job
+    with llm_job("strategist"):
+        return _run(agent_name, channel, task, **kwargs)
+
+
+def _run(agent_name: str, channel: str, task: str, *, system_extra: str = "",
+         on_event: Optional[Callable[[str], None]] = None, llm: Any = None,
+         max_turns: int = MAX_TURNS) -> Dict[str, Any]:
     from core.agent import AgentFactory
     from integrations.llm import LLMService
     say = on_event or (lambda m: None)
@@ -214,7 +237,101 @@ def run(agent_name: str, channel: str, task: str, *, system_extra: str = "",
             except Exception as exc:  # noqa: BLE001 - reported back to the strategist
                 logger.warning("strategist tool '%s' failed: %s", label, exc)
                 out = f"failed: {exc}"
-            results.append(f"### {label}\n{out[:RESULT_CHARS]}")
+            results.append(f"### {label}\n{neutralise_tags(out[:RESULT_CHARS])}")
         messages.append({"role": "user", "content": "## Tool results\n\n" + "\n\n".join(results)
                          + "\n\nContinue: more tools if you still need them, otherwise the [FINAL_PLAN]."})
     raise RuntimeError(f"{agent_name} did not produce a plan in {max_turns} turns")
+
+
+
+def chat_tool_guide() -> str:
+    allowed = {a["name"]: a["params"] for a in allowed_actions()}
+    actions = "\n".join(f"  - {n} {json.dumps(allowed[n], ensure_ascii=False)}"
+                        for n in DIRECTOR_CHAT_ACTIONS if n in allowed)
+    return (
+        "\n\n## Tools (results come back to you in the next message)\n"
+        f"Write `[STUDIO_ACTION: name | {{\"param\": \"value\"}}]`; up to {MAX_CALLS_PER_TURN} per reply. "
+        "When you have what you need, answer in plain text with no tool tags. Available:\n"
+        f"{actions}\n"
+        "Delegate content work with `[INVOKE_AGENT: AgentName] the task [/INVOKE_AGENT]` (max 3 per reply); "
+        "that persona runs on its own model.\n"
+    )
+
+
+def chat(agent_name: str, channel: str, message: str, **kwargs: Any) -> Dict[str, Any]:
+    """A short tool loop for a conversational answer (the Director's chat), on
+    the "assistant" route: the first reply without tool calls is the answer.
+    Never raises; a simulated reply is flagged."""
+    from integrations.llm import llm_job
+    with llm_job("assistant"):
+        return _chat(agent_name, channel, message, **kwargs)
+
+
+def _chat(agent_name: str, channel: str, message: str, *, system_extra: str = "", llm: Any = None,
+          max_turns: int = 4, on_event: Optional[Callable[[str], None]] = None,
+          history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
+    from core.agent import AgentFactory
+    from integrations.llm import LLMService
+    say = on_event or (lambda m: None)
+    agent = AgentFactory.get_agent(agent_name, llm or LLMService())
+    extra = system_extra + chat_tool_guide()
+    allowed = set(DIRECTOR_CHAT_ACTIONS)
+    messages: List[Dict[str, str]] = [
+        {"role": h["role"], "content": h["content"]} for h in (history or [])
+        if isinstance(h, dict) and h.get("role") in ("user", "assistant") and h.get("content")]
+    messages.append({"role": "user", "content": message})
+    calls_made: List[str] = []
+    reply, turns = "", 0
+
+    def provider() -> Optional[str]:
+        return getattr(agent.llm_service, "last_provider", None)
+
+    for turn in range(1, max_turns + 1):
+        turns = turn
+        say(f"{agent_name} thinking (turn {turn})")
+        try:
+            reply = str(agent.execute_messages(messages, system_extra=extra))
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("director chat turn failed: %s", exc)
+            return {"reply": f"(no model answered: {str(exc)[:160]})", "turns": turn, "calls": calls_made,
+                    "provider": provider(), "simulated": True}
+        if getattr(agent.llm_service, "last_response_simulated", False):
+            return {"reply": reply, "turns": turn, "calls": calls_made, "provider": provider(), "simulated": True}
+        calls = _collect(reply, channel, agent.llm_service, agent_name, invoke_llm=LLMService())
+        if not calls:
+            return {"reply": reply, "turns": turn, "calls": calls_made, "provider": provider(), "simulated": False}
+        messages.append({"role": "assistant", "content": reply})
+        results = []
+        delegations = 0
+        for i, (_, label, fn) in enumerate(calls):
+            if i >= MAX_CALLS_PER_TURN:
+                results.append(f"### {label}\nNot run: at most {MAX_CALLS_PER_TURN} tool calls per reply.")
+                continue
+            if label.startswith("agent "):
+                delegations += 1
+                if delegations > 3:
+                    results.append(f"### {label}\nNot run: at most 3 delegations per reply")
+                    continue
+                say(label)
+                calls_made.append(label)
+                try:
+                    out = str(fn()).strip()
+                except Exception as exc:  # noqa: BLE001
+                    out = f"failed: {exc}"
+                results.append(f"### {label}\n{neutralise_tags(out[:RESULT_CHARS])}")
+                continue
+            m = re.match(r"studio action (\w+)", label)
+            if not m or m.group(1).lower() not in allowed:
+                results.append(f"### {label}\nNot available in chat; use only the listed tools.")
+                continue
+            say(label)
+            calls_made.append(label)
+            try:
+                out = str(fn()).strip()
+            except Exception as exc:  # noqa: BLE001
+                out = f"failed: {exc}"
+            results.append(f"### {label}\n{neutralise_tags(out[:RESULT_CHARS])}")
+        tail = ("\n\nAnswer now from what you have; no more tools." if turn + 1 >= max_turns
+                else "\n\nContinue: another tool if you need it, otherwise answer.")
+        messages.append({"role": "user", "content": "## Tool results\n\n" + "\n\n".join(results) + tail})
+    return {"reply": reply, "turns": turns, "calls": calls_made, "provider": provider(), "simulated": False}

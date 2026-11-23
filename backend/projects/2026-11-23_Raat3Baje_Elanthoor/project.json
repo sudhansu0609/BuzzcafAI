@@ -1,0 +1,1135 @@
+{
+    "id": "2026-11-23_Raat3Baje_Elanthoor",
+    "name": "Elanthoor",
+    "brand": "Raat3Baje",
+    "workflow_name": "after_dark_narration",
+    "status": "active",
+    "current_step": "SEO & Thumbnail",
+    "created_at": "2026-11-23T12:05:55.174703",
+    "updated_at": "2026-11-23T15:51:21.257422",
+    "metadata": {
+        "video_settings": {
+            "art_style": "real",
+            "precut": true,
+            "allow_free_stock": true,
+            "video_broll_share": 0.15,
+            "image_broll_share": 0.65,
+            "review_mode": "plan",
+            "face_layout": "mixed",
+            "target_coverage": 0.8
+        },
+        "eye_contact": {
+            "enabled": true,
+            "mode": "auto",
+            "lens_marks": [
+                0.0,
+                2.0,
+                3.0,
+                4.0,
+                5.0,
+                6.0,
+                8.0,
+                9.0,
+                11.0
+            ]
+        },
+        "script_source": "recording",
+        "recording_path": "B:/youtubeProjects/Raat3Baje/elanthoor/elanthoor-videos/elanthoorTemp1.mp4",
+        "buzzedit_project_id": "b7cc3e30",
+        "eye_contact_applied": {
+            "buzzedit_project_id": "b7cc3e30",
+            "media_id": "media_2da4f369",
+            "setup": {
+                "mode": "auto",
+                "lens_marks": [
+                    0.0,
+                    2.0,
+                    3.0,
+                    4.0,
+                    5.0,
+                    6.0,
+                    8.0,
+                    9.0,
+                    11.0
+                ]
+            },
+            "report": {
+                "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\b7cc3e30_source_eyecontact.mp4",
+                "frames": 16325,
+                "face_found_pct": 100.0,
+                "corrected_pct": 67.6,
+                "camera_look_pct": 38.5,
+                "lens_separation_deg": 11.1,
+                "prompter_offset_deg": -11.1,
+                "symmetry_offset_deg": -8.8,
+                "reading_sweep_deg": 5.3,
+                "head_pitch_deg": 3.4,
+                "eyes_raised_deg": 1.6,
+                "median_shift_px": 4.69,
+                "median_shift_px_per_eye": {
+                    "R": 5.14,
+                    "L": 4.19
+                },
+                "lens_per_eye": {
+                    "R": -0.074,
+                    "rest_R": -0.12,
+                    "L": 0.087,
+                    "rest_L": 0.054,
+                    "lens": 0.006,
+                    "rest": -0.033,
+                    "t_lens": -0.088,
+                    "t_rest": -0.062,
+                    "lens_c": 0.014,
+                    "rest_c": -0.053,
+                    "tc_lens": -0.05,
+                    "tc_rest": -0.041,
+                    "yaw_lens": 1.666,
+                    "pitch_lens": 5.583,
+                    "head_raise_deg": -2.087,
+                    "from_marks": 1.0
+                },
+                "mode": "auto",
+                "auto_measured": true,
+                "measured_shift_deg": 11.0,
+                "lens_source": "marks",
+                "camera_look_candidates": [
+                    488.4,
+                    574.2,
+                    597.5
+                ],
+                "side_check": "video looks mirrored",
+                "contact_sheet": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\b7cc3e30_source_eyecontact_eyes.jpg",
+                "settings": {
+                    "mode": "auto",
+                    "prompter_side": "left",
+                    "angle_deg": 0.0,
+                    "prompter_cm": 16.0,
+                    "camera_cm": 110.0,
+                    "steadiness": 0.95,
+                    "aim_deg": 0.0,
+                    "pitch_deg": 0.0,
+                    "auto_pitch": true,
+                    "max_shift": 0.14,
+                    "past_lens_deg": 12.0,
+                    "away_lo": 0.07,
+                    "away_hi": 0.12,
+                    "baseline_s": 20.0,
+                    "tv_lambda": 0.006,
+                    "head_depth": 0.12,
+                    "lens_marks": [
+                        0.0,
+                        2.0,
+                        3.0,
+                        4.0,
+                        5.0,
+                        6.0,
+                        8.0,
+                        9.0,
+                        11.0
+                    ]
+                },
+                "quality": "high",
+                "seconds": 126.3,
+                "track_seconds": 79.6
+            },
+            "at": "2026-11-23T12:08:21"
+        },
+        "script_deviation": {
+            "script_spoken_share": 0.0,
+            "adlib_share": 1.0,
+            "beats_placed": 111,
+            "beats_dropped": 0,
+            "skipped_paragraphs": 0
+        },
+        "precut": true,
+        "buzzedit_job_id": "job_708576e3",
+        "buzzedit_report": {
+            "project_id": "b7cc3e30",
+            "started_at": "2026-11-23T15:40:49.125392",
+            "finished_at": "2026-11-23T15:51:17.722279",
+            "settings": {
+                "broll": true,
+                "broll_video": true,
+                "character_consistency": true,
+                "main_character": {},
+                "art_style": "real",
+                "popups": false,
+                "graphics": false,
+                "motion_graphics": true,
+                "motion_concurrency": 4,
+                "parallax_share": 0.3,
+                "face_zoom": true,
+                "captions": false,
+                "caption_preset": "karaoke_pop",
+                "title": false,
+                "title_preset": "overlay_hook",
+                "atmosphere": "off",
+                "thumbnail": true,
+                "render": true,
+                "verify": true,
+                "shorts_clips": 3,
+                "shorts_full": false,
+                "cards": false,
+                "location_cards": false,
+                "character_cards": false,
+                "stat_callouts": false,
+                "source_cards": false,
+                "definition_cards": false,
+                "quote_cards": false,
+                "chapter_titles": false,
+                "end_screen": false,
+                "end_screen_text": "SUBSCRIBE",
+                "progress_bar": false,
+                "progress_bar_style": "auto",
+                "maps": false,
+                "split_screens": false,
+                "newspapers": false,
+                "case_files": false,
+                "recreations": true,
+                "map_style": "auto",
+                "structure": true,
+                "cold_open": true,
+                "metadata": true,
+                "moods": true,
+                "mood_strength": 1.0,
+                "mood_hits": false,
+                "grade": "auto",
+                "topic_transitions": true,
+                "topic_transition": "auto",
+                "music": true,
+                "music_volume": 0.08,
+                "music_duck": 0.85,
+                "music_synth_fallback": true,
+                "music_by_act": true,
+                "music_brief": "",
+                "music_cues": true,
+                "music_engine": "ace_step",
+                "music_tracks": [],
+                "music_tracks_mode": "together",
+                "caption_emphasis": true,
+                "captions_bilingual": "auto",
+                "pip": "off",
+                "pip_min_seconds": 4.0,
+                "freeze_on_stats": false,
+                "style_profile": null,
+                "sfx": false,
+                "sfx_volume": 0.45,
+                "sfx_diegetic": true,
+                "sfx_diegetic_volume": 0.35,
+                "sfx_library_dirs": [],
+                "ambience": false,
+                "ambience_kind": "auto",
+                "ambience_volume": 0.05,
+                "voice_preset": "horror_intimate",
+                "loudness_lufs": -14.0,
+                "voice_enhance": "auto",
+                "voice_fx": [],
+                "sfx_source": "auto",
+                "music_source": "auto",
+                "fade_in_s": 0.5,
+                "fade_out_s": 1.5,
+                "target_coverage": 0.8,
+                "face_intro_s": 0.0,
+                "face_on_camera_looks": true,
+                "face_max_share": 0.2,
+                "look_min_s": 0.8,
+                "min_oncamera_gap_s": 0.8,
+                "broll_seconds_min": 5.0,
+                "broll_seconds_max": 8.0,
+                "video_broll_share": 0.187,
+                "max_broll_per_minute": null,
+                "popup_preset": "youtube_pop",
+                "zoom_depth": 0.14,
+                "base_zoom": 1.0,
+                "seed": null,
+                "genre": "horror",
+                "genre_secondary": "mystery",
+                "density": "busy",
+                "punch_rate_per_minute": 1.0,
+                "text_fx_per_minute": 0.0,
+                "allow_free_stock": true,
+                "llm_provider": "auto",
+                "llm_base_url": "",
+                "llm_model": "",
+                "text_fx": false,
+                "text_fx_styles": null,
+                "ai_label": false,
+                "person_matte": "auto",
+                "emoji_reactions": "auto",
+                "emoji_density": 1.0,
+                "emoji_style": "pop"
+            },
+            "settings_sources": {
+                "genre": "studio",
+                "genre_secondary": "studio",
+                "density": "studio",
+                "target_coverage": "studio",
+                "video_broll_share": "studio",
+                "broll_seconds_min": "studio",
+                "broll_seconds_max": "studio",
+                "min_oncamera_gap_s": "studio",
+                "zoom_depth": "studio",
+                "punch_rate_per_minute": "studio",
+                "text_fx_per_minute": "studio",
+                "voice_preset": "studio",
+                "voice_enhance": "studio",
+                "sfx_source": "studio",
+                "music_source": "studio",
+                "allow_free_stock": "studio"
+            },
+            "live_overrides": {
+                "settings": {
+                    "target_coverage": 0.8,
+                    "video_broll_share": 0.187,
+                    "image_broll_share": 0.65,
+                    "broll_seconds_min": 5.0,
+                    "broll_seconds_max": 8.0
+                },
+                "coverage": {
+                    "from": 0.8,
+                    "to": 0.8
+                },
+                "video_share": {
+                    "from": 0.187,
+                    "to": 0.187
+                },
+                "beats_dropped": 0,
+                "clips_kept": 14
+            },
+            "program": {
+                "duration_s": 680.21,
+                "word_count": 1954,
+                "segment_count": 1,
+                "has_energy": true
+            },
+            "beats_planned": 61,
+            "beats_dropped": [
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Police Investigation in Kerala",
+                    "reason": "over the coverage budget"
+                },
+                {
+                    "topic": "Deep shadow and mist filling the interior room of the house,",
+                    "reason": "twin of b03"
+                },
+                {
+                    "topic": "Deep shadow and mist filling the interior room of the house,",
+                    "reason": "twin of b03"
+                },
+                {
+                    "topic": "Deep shadow and mist filling the interior room of the house,",
+                    "reason": "twin of b03"
+                },
+                {
+                    "topic": "Composite still showing the three figures from investigation",
+                    "reason": "twin of b07"
+                },
+                {
+                    "topic": "Inside sparse traditional Kerala village house, harsh forens",
+                    "reason": "twin of b09"
+                },
+                {
+                    "topic": "Rural Pathanamiththa district Kerala village, sparse earth-b",
+                    "reason": "twin of b11"
+                },
+                {
+                    "topic": "Inside sparse home: Indian man in his 50s-60s in simple trad",
+                    "reason": "twin of b13"
+                },
+                {
+                    "topic": "Indian man in his 40s-50s in simple village clothing standin",
+                    "reason": "twin of b16"
+                },
+                {
+                    "topic": "Inside sparse home interior, mystical or supernatural atmosp",
+                    "reason": "twin of b18"
+                },
+                {
+                    "topic": "Inside sparse home interior, mystical or supernatural atmosp",
+                    "reason": "twin of b18"
+                },
+                {
+                    "topic": "Woman in simple everyday sari being offered false hope and p",
+                    "reason": "twin of b26"
+                },
+                {
+                    "topic": "Woman in simple everyday sari being offered false hope and p",
+                    "reason": "twin of b26"
+                },
+                {
+                    "topic": "Police desk with case files and incident reports spread out,",
+                    "reason": "twin of b31"
+                },
+                {
+                    "topic": "Family members inside a Kerala home, concerned expressions, ",
+                    "reason": "twin of b34"
+                },
+                {
+                    "topic": "Family members inside a Kerala home, concerned expressions, ",
+                    "reason": "twin of b34"
+                },
+                {
+                    "topic": "A simple concrete house in rural Kerala marked with police i",
+                    "reason": "twin of b41"
+                },
+                {
+                    "topic": "Police surveillance operation: unmarked vehicles positioned ",
+                    "reason": "twin of b43"
+                },
+                {
+                    "topic": "Inside the house during police interrogation: Bhagaval Song,",
+                    "reason": "twin of b45"
+                },
+                {
+                    "topic": "Inside the house during police interrogation: Bhagaval Song,",
+                    "reason": "twin of b45"
+                },
+                {
+                    "topic": "Rural Kerala house in October 2022 under forensic investigat",
+                    "reason": "twin of b48"
+                },
+                {
+                    "topic": "Same Kerala house at grey afternoon light, investigation mar",
+                    "reason": "twin of b50"
+                },
+                {
+                    "topic": "Kerala investigation house site, protective-suited investiga",
+                    "reason": "twin of b52"
+                },
+                {
+                    "topic": "Forensic investigation at the house grounds, trained search ",
+                    "reason": "twin of b54"
+                },
+                {
+                    "topic": "Forensic investigation at the house grounds, trained search ",
+                    "reason": "twin of b54"
+                },
+                {
+                    "topic": "Forensic examination concludes \u2013 investigation site interior",
+                    "reason": "twin of b57"
+                },
+                {
+                    "topic": "Single rural Kerala village house, exterior in grey-brown we",
+                    "reason": "twin of b60"
+                },
+                {
+                    "topic": "Rural village corner at twilight, Indian man in his 40s-50s,",
+                    "reason": "twin of b62"
+                },
+                {
+                    "topic": "Rural village corner at twilight, Indian man in his 40s-50s,",
+                    "reason": "twin of b62"
+                },
+                {
+                    "topic": "Rural Kerala village path at dusk, shadowed figure walking s",
+                    "reason": "twin of b65"
+                },
+                {
+                    "topic": "House interior under police forensic investigation, harsh wh",
+                    "reason": "twin of b67"
+                },
+                {
+                    "topic": "Official chargesheet documents and evidence inventory lists ",
+                    "reason": "twin of b70"
+                },
+                {
+                    "topic": "Investigation room with open case files, forensic collection",
+                    "reason": "twin of b74"
+                },
+                {
+                    "topic": "Silent investigation room at twilight, single fluorescent li",
+                    "reason": "twin of b76"
+                },
+                {
+                    "topic": "Silent investigation room at twilight, single fluorescent li",
+                    "reason": "twin of b76"
+                },
+                {
+                    "topic": "Police investigation files and official records spread acros",
+                    "reason": "twin of b79"
+                },
+                {
+                    "topic": "Empty forensic examination laboratory or police investigatio",
+                    "reason": "twin of b81"
+                },
+                {
+                    "topic": "Empty forensic examination laboratory or police investigatio",
+                    "reason": "twin of b81"
+                },
+                {
+                    "topic": "Empty forensic examination laboratory or police investigatio",
+                    "reason": "twin of b81"
+                },
+                {
+                    "topic": "Police investigation case files for Elantur incident spread ",
+                    "reason": "twin of b88"
+                },
+                {
+                    "topic": "Ernakulam Additional Sessions Court interior, empty courtroo",
+                    "reason": "twin of b91"
+                },
+                {
+                    "topic": "Official police charge sheet for Elantur case, names of accu",
+                    "reason": "twin of b93"
+                },
+                {
+                    "topic": "Police investigation desk with two missing persons case file",
+                    "reason": "twin of b98"
+                },
+                {
+                    "topic": "Investigation documents, witness statements and case notes s",
+                    "reason": "twin of b100"
+                },
+                {
+                    "topic": "The Kerala house interior now empty and silent after investi",
+                    "reason": "twin of b102"
+                }
+            ],
+            "plan_source": "llm",
+            "genre": "horror",
+            "genre_secondary": "mystery",
+            "assets_generated": 0,
+            "assets_cached": 61,
+            "assets_failed": [],
+            "stock_used": [],
+            "broll_placed": 61,
+            "popups_placed": 0,
+            "graphics_placed": 0,
+            "cards_placed": {},
+            "entities_found": 0,
+            "maps_placed": 0,
+            "newspapers_placed": 0,
+            "case_files_placed": 0,
+            "recreations_placed": 47,
+            "splits_placed": 0,
+            "pip_placed": 0,
+            "freezes_placed": 0,
+            "caption_emphasis": 0,
+            "caption_translations": 0,
+            "style_profile_applied": "",
+            "beats_placement_rejected": [],
+            "coverage_target": 0.8,
+            "coverage_achieved": 0.44,
+            "jump_cuts_total": 0,
+            "jump_cuts_covered": 0,
+            "comfyui_online": true,
+            "zooms_segment": 0,
+            "zooms_windowed": 1,
+            "zooms_punch_in": 1,
+            "zooms_punch_out": 0,
+            "zooms_suppressed_by_broll": 6,
+            "base_zoom": 1.0,
+            "faces_detected_pct": 100.0,
+            "captions": 0,
+            "caption_script": "",
+            "title_text": "",
+            "atmosphere_applied": "",
+            "progress_bar": null,
+            "grade_applied": "moody",
+            "topic_transitions": 0,
+            "acts": [
+                "hook"
+            ],
+            "cold_open": null,
+            "metadata_written": true,
+            "moods": [
+                "build"
+            ],
+            "mood_layers": 1,
+            "mood_hits": 0,
+            "script_aligned_words": 1954,
+            "script_spelling_fixed": 0,
+            "script_directives": 152,
+            "music_used": "custom_ace_step15_49048922.wav [cue] \u2192 custom_ace_step15_2127494467.wav [cue] \u2192 dramatic_ace_step15_1046027121.wav [cue] \u2192 custom_ace_step15_758746483.wav [cue] \u2192 custom_ace_step15_1357915787.wav [cue] \u2192 custom_ace_step15_1243159078.wav [cue] \u2192 custom_ace_step15_330509234.wav [cue] \u2192 custom_ace_step15_984782101.wav [cue] \u2192 custom_ace_step15_1140327532.wav [cue] \u2192 custom_ace_step15_1139656769.wav [cue]",
+            "sfx_placed": 0,
+            "ambience_used": "",
+            "voice_preset": "horror_intimate",
+            "voice_enhance_used": "rnnoise",
+            "sfx_source_used": {},
+            "music_source_used": "library",
+            "diegetic_placed": 64,
+            "diegetic_sources": {
+                "library": 40,
+                "generated": 24,
+                "none": 3
+            },
+            "diegetic_unresolved": [
+                "papers rustling and evidence bags shifting",
+                "paper rustling on metal desk",
+                "scratching of a pen on paper"
+            ],
+            "thumbnail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\projects\\b7cc3e30\\thumbnail.jpg",
+            "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\b7cc3e30_presented.mp4",
+            "verification": [
+                {
+                    "name": "speaker_on_screen",
+                    "ok": true,
+                    "detail": "cutaways cover 36% of the programme (target 80%)",
+                    "value": 0.36
+                },
+                {
+                    "name": "text_clear_of_face",
+                    "ok": true,
+                    "detail": "0 text items checked against 1 face boxes",
+                    "value": 0.0
+                },
+                {
+                    "name": "text_not_stacked",
+                    "ok": true,
+                    "detail": "0 text items",
+                    "value": 0.0
+                },
+                {
+                    "name": "music_under_voice",
+                    "ok": true,
+                    "detail": "78 mix items",
+                    "value": 0.0
+                },
+                {
+                    "name": "assets_present",
+                    "ok": true,
+                    "detail": "all cutaway files exist",
+                    "value": 0.0
+                },
+                {
+                    "name": "render_exists",
+                    "ok": true,
+                    "detail": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\b7cc3e30_presented.mp4",
+                    "value": null
+                },
+                {
+                    "name": "loudness",
+                    "ok": true,
+                    "detail": "-14.0 LUFS against -14.0 target, peak -1.2 dBFS",
+                    "value": -14.0
+                },
+                {
+                    "name": "av_length",
+                    "ok": true,
+                    "detail": "picture 680.17s, sound 680.30s",
+                    "value": -0.135
+                },
+                {
+                    "name": "length_matches_timeline",
+                    "ok": true,
+                    "detail": "rendered 680.17s, timeline 680.21s",
+                    "value": -0.043
+                },
+                {
+                    "name": "frozen_clip_frames",
+                    "ok": false,
+                    "detail": "b09 @ 62.0s for 4.25s; b13 @ 88.2s for 3.00s; b15 @ 99.0s for 2.50s; b15 @ 101.8s for 2.00s; b18 @ 116.3s for 3.75s; b31 @ 193.0s for 5.00s",
+                    "value": 28.0
+                }
+            ],
+            "shorts": [
+                {
+                    "kind": "short",
+                    "path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\b7cc3e30_short1.mp4",
+                    "topic": "Police Investigation in Kerala",
+                    "from_s": 626.65,
+                    "seconds": 53.48
+                }
+            ],
+            "text_fx_placed": {},
+            "person_matte_used": "",
+            "text_fx_skipped": [],
+            "emoji_reactions": 0,
+            "designed_graphics": {},
+            "ai_labels": 0,
+            "degraded": [
+                "video_broll: video share set to 19% during the run; 9 planned clip(s) kept as stills",
+                "prompt_drift: 'investigation' is in 87% of the prompts; check the world/look line",
+                "check:frozen_clip_frames"
+            ],
+            "generation": {
+                "image_phase": {
+                    "phase": "images",
+                    "need_vram_mb": 9000.0,
+                    "need_ram_mb": 4000.0,
+                    "ready": true,
+                    "reason": "",
+                    "free_vram_mb": 14639,
+                    "available_ram_mb": 19447
+                },
+                "video_phase": {
+                    "planned": 24,
+                    "made": 15,
+                    "kept_still": 9,
+                    "skipped_reason": "video share set to 19% during the run; 9 planned clip(s) kept as stills",
+                    "cached": 15,
+                    "handover": {
+                        "phase": "video",
+                        "need_vram_mb": 11000.0,
+                        "need_ram_mb": 10000.0,
+                        "ready": true,
+                        "reason": "",
+                        "free_vram_mb": 14649,
+                        "available_ram_mb": 19404
+                    },
+                    "budget_s": 3240,
+                    "live": {
+                        "video_broll_share": 0.187,
+                        "quota_s": 56,
+                        "made_s_when_applied": 58
+                    }
+                },
+                "prompt_drift": {
+                    "investigation": 0.87,
+                    "kerala": 0.87,
+                    "october": 0.87,
+                    "forensic": 0.79,
+                    "harsh": 0.79,
+                    "house": 0.79,
+                    "inside": 0.79,
+                    "police": 0.79,
+                    "small": 0.79,
+                    "rural": 0.77,
+                    "institutional": 0.74,
+                    "village": 0.74,
+                    "grey": 0.69,
+                    "lighting": 0.69,
+                    "evidence": 0.64
+                },
+                "parallax": {
+                    "candidates": 46,
+                    "selected": 14,
+                    "rendered": 14,
+                    "skipped_contrast": 0,
+                    "failed": 0
+                }
+            },
+            "prompt_drift": {
+                "investigation": 0.87,
+                "kerala": 0.87,
+                "october": 0.87,
+                "forensic": 0.79,
+                "harsh": 0.79,
+                "house": 0.79,
+                "inside": 0.79,
+                "police": 0.79,
+                "small": 0.79,
+                "rural": 0.77,
+                "institutional": 0.74,
+                "village": 0.74,
+                "grey": 0.69,
+                "lighting": 0.69,
+                "evidence": 0.64
+            },
+            "timings": [
+                {
+                    "stage": "script",
+                    "seconds": 0.02,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shotplan",
+                    "seconds": 28.25,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail_title",
+                    "seconds": 2.72,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "moods",
+                    "seconds": 2.96,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "metadata",
+                    "seconds": 5.15,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "eject_llm",
+                    "seconds": 1.38,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "assets",
+                    "seconds": 13.39,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "parallax",
+                    "seconds": 96.23,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "place_broll",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "face_detect",
+                    "seconds": 24.88,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "layout_speakers",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "overlays",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "base_zoom",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "plan_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_zooms",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "progress_bar",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "apply_moods",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "grade",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "recreations",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "topic_transitions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_generation",
+                    "seconds": 3.5,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_design",
+                    "seconds": 56.66,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound_effects_generation",
+                    "seconds": 75.66,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "sound",
+                    "seconds": 6.67,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "voice_master",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "emoji_reactions",
+                    "seconds": 0.0,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "camera_looks",
+                    "seconds": 0.06,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "thumbnail",
+                    "seconds": 22.31,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "render",
+                    "seconds": 207.97,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "shorts",
+                    "seconds": 58.95,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_timeline",
+                    "seconds": 0.01,
+                    "ok": true,
+                    "note": ""
+                },
+                {
+                    "stage": "verify_render",
+                    "seconds": 15.52,
+                    "ok": true,
+                    "note": ""
+                }
+            ]
+        },
+        "output_path": "B:\\youtubeProjects\\Buzzcaf_Media\\BuzzEdit\\data\\output\\b7cc3e30_presented.mp4",
+        "broll_check": {
+            "beats_planned": 61,
+            "broll_placed": 61,
+            "assets_generated": 0,
+            "assets_cached": 61,
+            "coverage_low": false,
+            "should_fail": false,
+            "warning": null,
+            "message": null
+        },
+        "final_output_path": "B:/youtubeProjects/Raat3Baje/elanthoor/elanthoor-videos\\elanthoorTemp1_final.mp4",
+        "voice_report": {
+            "voice_map": {},
+            "voice_conversions": [],
+            "failed_spans": [],
+            "note": "script has no character lines",
+            "warnings": [],
+            "proposed": {}
+        }
+    },
+    "steps_history": [
+        {
+            "step_name": "Account Collection",
+            "agent_name": "ResearchAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T12:06:12.722290",
+            "completed_at": "2026-11-23T12:06:12.722290",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Script Writing",
+            "agent_name": "WriterAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T12:06:12.722290",
+            "completed_at": "2026-11-23T12:06:12.722290",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Visual Plan",
+            "agent_name": "PromptEngineer",
+            "status": "completed",
+            "started_at": "2026-11-23T12:06:12.722290",
+            "completed_at": "2026-11-23T12:06:12.722290",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Sound Design Plan",
+            "agent_name": "CreativeDirectorAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T12:06:12.722290",
+            "completed_at": "2026-11-23T12:06:12.722290",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        },
+        {
+            "step_name": "Narration Check",
+            "agent_name": "EditorAgent",
+            "status": "completed",
+            "started_at": "2026-11-23T12:06:12.722290",
+            "completed_at": "2026-11-23T12:06:12.722290",
+            "output_files": {},
+            "logs": [
+                "Skipped: the video is already recorded"
+            ],
+            "human_feedback": null,
+            "simulated_sections": [],
+            "delegations": [],
+            "simulated": false
+        }
+    ],
+    "assets": {
+        "cast_sheet": "production/cast_sheet.json",
+        "visual_plan_take": "production/visual_plan_take.json",
+        "visual_plan": "production/visual_plan_take.json",
+        "script_deviation": "production/script_deviation.json",
+        "buzzedit_script": "script/buzzedit_script.md"
+    }
+}

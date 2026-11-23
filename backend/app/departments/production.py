@@ -20,7 +20,10 @@ class ProductionDepartment(Department):
                 "AnimationPlanner",
                 "ClipFinder",
                 "FilmoraTimeline",
-                "SoundDesigner"
+                "SoundDesigner",
+                "MoodReelPlanner",
+                "StoryReelPlanner",
+                "StoryProducer"
             ],
             llm_service=llm_service
         )

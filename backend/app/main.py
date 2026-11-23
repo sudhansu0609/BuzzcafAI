@@ -33,7 +33,9 @@ from app.api.shorts_api import router as shorts_router
 from app.api.longform_api import router as longform_router
 from app.api.bulk_edit_api import router as bulk_edit_router
 from app.api.writing_style_api import router as writing_style_router
+from app.api.forecast_api import router as forecast_router
 from app.api.youtube_api import router as youtube_router
+from app.api.session_api import router as session_router
 from app.services.events import bus as event_bus
 app.include_router(agents_router)
 app.include_router(studio_router)
@@ -45,12 +47,33 @@ app.include_router(eye_contact_router)
 app.include_router(music_router)
 app.include_router(shorts_router)
 app.include_router(longform_router)
+app.include_router(forecast_router)
 app.include_router(bulk_edit_router)
 app.include_router(writing_style_router)
 app.include_router(youtube_router)
+app.include_router(session_router)
 # Studio -> BuzzAnimate (BuzzAnimate docs/ECOSYSTEM_BRIDGE_PLAN.md step E5).
 from app.api.buzzanimate_api import router as buzzanimate_router
 app.include_router(buzzanimate_router)
+from app.api.audience_api import router as audience_router
+app.include_router(audience_router)
+from app.api.competitor_api import router as competitor_router
+app.include_router(competitor_router)
+from app.api.nightly_api import router as nightly_router
+app.include_router(nightly_router)
+from app.api.auto_story_api import router as auto_story_router
+app.include_router(auto_story_router)
+from app.api.needs_you_api import router as needs_you_router
+app.include_router(needs_you_router)
+from app.api.instagram_api import router as instagram_router
+app.include_router(instagram_router)
+from app.api.story_library_api import router as story_library_router; app.include_router(story_library_router)  # noqa: E702
+from app.api.story_adapt_api import router as story_adapt_router; app.include_router(story_adapt_router)  # noqa: E702
+from app.api.master_api import router as master_router; app.include_router(master_router)  # noqa: E702
+from app.api.director_api import router as director_router; app.include_router(director_router)  # noqa: E702
+from app.api.motion_gallery_api import router as motion_gallery_router; app.include_router(motion_gallery_router)  # noqa: E702
+from app.api.footage_api import router as footage_router; app.include_router(footage_router)  # noqa: E702
+from app.api.animate_bridge_api import router as animate_bridge_router; app.include_router(animate_bridge_router)  # noqa: E702
 
 
 @app.on_event("startup")
@@ -77,6 +100,41 @@ async def _start_shorts_daily():
 
 
 @app.on_event("startup")
+async def _resume_auto_story_watchers():
+    """Auto stories left mid-production by a restart get their watcher back
+    (app/services/auto_story.resume_watchers), so they still publish."""
+    # On its own thread: it reads every record and asks BuzzEdit about reel
+    # jobs, and nothing in it may keep the backend from answering /health.
+    import threading
+
+    def resume() -> None:
+        try:
+            from app.services import auto_story
+            auto_story.resume_watchers()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("auto_story watchers not resumed: %s", exc)
+
+    threading.Thread(target=resume, name="auto-story-resume", daemon=True).start()
+
+
+@app.on_event("startup")
+async def _start_instagram_scheduler():
+    """Posts a packaged reel at each channel's own post times
+    (app/services/auto_story.start_instagram_scheduler); nothing posts for a
+    channel until its Instagram settings turn it on (REELS_DESK_PLAN.md R7)."""
+    from app.services import auto_story
+    auto_story.start_instagram_scheduler()
+
+
+@app.on_event("startup")
+async def _start_llm_proxies():
+    """Start the Claude proxy and the Gemini harness when they are not up, and
+    keep them up (integrations/llm_proxies.py); both run in the background."""
+    from integrations import llm_proxies
+    llm_proxies.start()
+
+
+@app.on_event("startup")
 async def _start_buzzedit_keepalive():
     """Keep BuzzEdit running in the background when the creator turned that on
     (app/services/buzzedit_keepalive.py); idle otherwise."""
@@ -94,6 +152,64 @@ async def _resume_produce_queue():
         produce_queue.kick()
     except Exception as exc:  # noqa: BLE001 - a bad queue file must not block startup
         print(f"[buzzcaf] could not resume the production queue: {exc}", flush=True)
+
+
+@app.on_event("startup")
+async def _resume_interrupted_processes():
+    """Carry on with workflow steps or long-form nightly runs that were
+    interrupted by a restart, so no work is lost."""
+    import threading
+
+    def _worker():
+        import time
+        time.sleep(3)  # Wait for startup and routes to be fully ready
+
+        # 1. Check for active projects with an interrupted step
+        try:
+            from core.paths import PROJECTS_DIR
+            from core.models.project import Project
+            from runtime.workflow import WorkflowEngine
+
+            if os.path.isdir(str(PROJECTS_DIR)):
+                for pid in os.listdir(str(PROJECTS_DIR)):
+                    p_dir = os.path.join(str(PROJECTS_DIR), pid)
+                    if not os.path.isdir(p_dir):
+                        continue
+                    try:
+                        p = Project.load(pid)
+                        if p.status in ("completed", "archived"):
+                            continue
+                        history = p.steps_history or []
+                        running_step = next((h for h in history if getattr(h, "status", None) == "running" or (isinstance(h, dict) and h.get("status") == "running")), None)
+                        if running_step:
+                            step_name = getattr(running_step, "step_name", None) or (running_step.get("step_name") if isinstance(running_step, dict) else "unknown")
+                            print(f"[buzzcaf] Resuming interrupted step '{step_name}' on project '{p.id}'...", flush=True)
+                            p.steps_history = [h for h in history if (getattr(h, "status", None) != "running" and (not isinstance(h, dict) or h.get("status") != "running"))]
+                            p.save()
+                            WorkflowEngine().execute_next(p.id)
+                    except Exception as e:
+                        logger.warning(f"Error checking project '{pid}' for interrupted step: {e}")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"Could not scan projects for resume: {exc}")
+
+        # 2. Check for interrupted long-form nightly run
+        try:
+            from app.services import longform_nightly
+            st = longform_nightly.read_status()
+            if st.get("state") == "running":
+                tasks = st.get("tasks", [])
+                has_unfinished = any(t.get("stage") not in ("done", "completed", "failed", "skipped") for t in tasks)
+                if has_unfinished:
+                    print("[buzzcaf] Resuming interrupted long-form nightly batch after restart...", flush=True)
+                    try:
+                        longform_nightly.start_now()
+                    except Exception as exc:
+                        logger.warning(f"Could not auto-resume longform nightly: {exc}")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"Could not resume longform nightly: {exc}")
+
+    threading.Thread(target=_worker, name="resume-interrupted-operations", daemon=True).start()
+
 
 
 #: Set by `serve_headless()` when this process published its own ledger entry.
@@ -148,6 +264,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Open requests are counted so the desktop Studio knows when it is idle enough
+# to restart itself onto changed code (app/services/code_reload.py).
+from app.services.code_reload import InflightMiddleware  # noqa: E402
+
+app.add_middleware(InflightMiddleware)
+
 engine = WorkflowEngine()
 asset_service = AssetService()
 
@@ -197,10 +319,22 @@ class ProjectCreateSchema(BaseModel):
     # Target video runtime in minutes; the Script/Outline steps write to this
     # length. Optional -- omitted means "no target, write to natural length".
     target_duration_minutes: Optional[float] = None
+    # The medium of the pictures (real / explainer / stick_figure / cartoon):
+    # stored as the project's `video_settings.art_style` override.
+    art_style: Optional[str] = None
+    # The vault row this project was started from, so the Studio can mark it.
+    topic_id: Optional[str] = None
+    # The creator's own script: the Studio skips research and writing.
+    own_script: Optional[str] = None
+
+class OwnScriptSchema(BaseModel):
+    text: str
 
 class SettingsSchema(BaseModel):
+    gemini_url: Optional[str] = "http://127.0.0.1:8001"
     gemini_api_key: Optional[str] = ""
-    gemini_model: Optional[str] = "gemini-1.5-flash"
+    gemini_model: Optional[str] = "flash"
+    gemini_thinking_level: Optional[str] = "high"
     openai_api_key: Optional[str] = ""
     openai_model: Optional[str] = "gpt-4o-mini"
     lm_studio_url: Optional[str] = "http://localhost:1234/v1"
@@ -217,6 +351,12 @@ class SettingsSchema(BaseModel):
     claude_api_key: Optional[str] = None
     claude_model: Optional[str] = None
     produce_llm_provider: Optional[str] = None
+    # Where the finished video goes (app/api/produce_api.py `_deliver_output`):
+    # "beside_recording" (default), "folder" (+ produce_output_dir) or
+    # "buzzedit" (left where BuzzEdit wrote it); and whether Explorer opens on it.
+    produce_output_mode: Optional[str] = None
+    produce_output_dir: Optional[str] = None
+    produce_reveal_output: Optional[bool] = None
     # Thinking (reasoning) for local thinking models, LM Studio only: on for
     # agents/chat/writing, off for video production's planning by default.
     thinking_agents: Optional[bool] = None
@@ -367,8 +507,14 @@ def health(blocking: bool = False):
                 model_status["active_model"] = model_name
         except Exception:
             model_status["connected"] = False
-    elif selected_p in ("gemini", "openai"):
-        key_name = f"{selected_p}_api_key"
+    elif selected_p == "gemini":
+        from integrations.llm import probe_gemini
+        gem_probe = probe_gemini(config, timeout=0.8)
+        model_status["connected"] = gem_probe["online"]
+        model_status["loaded"] = gem_probe["online"]
+        model_status["active_model"] = gem_probe.get("model") or model_name
+    elif selected_p == "openai":
+        key_name = "openai_api_key"
         has_key = bool(config.get(key_name) or os.environ.get(key_name.upper()))
         model_status["connected"] = has_key
         model_status["loaded"] = has_key
@@ -391,7 +537,7 @@ def projects():
 def get_brands():
     # One canonical spelling per channel, so the frontend and every stored
     # topic can be compared by slug without variant confusion.
-    return ["Beyond3Baje", "Khayal3Baje", "Originals", "Raat3Baje", "Life3Baje"]
+    return ["Beyond3Baje", "Khayal3Baje", "Originals", "Raat3Baje", "Life3Baje", "TheTallStoryteller"]
 
 @app.get("/api/assets")
 def get_assets(type: Optional[str] = None, tag: Optional[str] = None, query: Optional[str] = None):
@@ -485,8 +631,10 @@ def reset_settings():
         pass
 
     default_config = {
+        "gemini_url": "http://127.0.0.1:8001",
         "gemini_api_key": "",
-        "gemini_model": "gemini-1.5-flash",
+        "gemini_model": "flash",
+        "gemini_thinking_level": "high",
         "openai_api_key": "",
         "openai_model": "gpt-4o-mini",
         "lm_studio_url": "http://localhost:1234/v1",
@@ -612,6 +760,12 @@ def get_local_models():
     detected["llamacpp"] = sorted(list(ll_set), key=lambda x: x.lower())
 
     return detected
+
+@app.get("/api/gemini/status")
+def get_gemini_status():
+    """Probe status of the Gemini harness server (http://127.0.0.1:8001) or Cloud API."""
+    from integrations.llm import probe_gemini
+    return probe_gemini()
 
 @app.get("/api/research/search")
 def run_research_search(q: str = Query(..., description="Query to search"), limit: int = 5):
@@ -757,14 +911,45 @@ def create_project(payload: ProjectCreateSchema):
         if minutes:
             project.metadata["target_duration_minutes"] = minutes
             dirty = True
+        if payload.art_style:
+            from integrations.art_style import ART_STYLES
+            if payload.art_style not in ART_STYLES:
+                raise HTTPException(status_code=400,
+                                    detail=f"Unknown art_style: {payload.art_style!r}. Must be one of {', '.join(ART_STYLES)}.")
+            video_settings = dict(project.metadata.get("video_settings") or {})
+            video_settings["art_style"] = payload.art_style
+            project.metadata["video_settings"] = video_settings
+            dirty = True
+        if payload.topic_id:
+            project.metadata["topic_id"] = payload.topic_id
+            dirty = True
+        if str(payload.brand).replace(" ", "").lower() == "life3baje":
+            # Life3Baje is cut from his own clips (docs/OWN_FOOTAGE_PLAN.md).
+            project.metadata["footage_mode"] = "own"
+            dirty = True
         if dirty:
             project.save()
+        if (payload.own_script or "").strip():
+            project = engine.use_own_script(project.id, payload.own_script)
         data = project.to_dict()
         event_bus.publish("project_created", {
             "project_id": data.get("id"), "name": data.get("name"), "brand": data.get("brand"),
             "workflow_name": data.get("workflow_name"), "current_step": data.get("current_step"),
         })
         return data
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/projects/{project_id}/own_script")
+def set_own_script(project_id: str, payload: OwnScriptSchema):
+    """Use the creator's own script: research and writing are skipped."""
+    if not (payload.text or "").strip():
+        raise HTTPException(status_code=400, detail="The script is empty.")
+    try:
+        return engine.use_own_script(project_id, payload.text).to_dict()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Project not found")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -1566,7 +1751,8 @@ def discover_channel_topics(payload: TopicDiscoverSchema):
         "spilledcoffeeafterdark": "AfterDarkStrategist",
         "beyond3baje": "Beyond3BajeStrategist",
         "life3baje": "Life3BajeStrategist",
-        "khayal3baje": "Khayal3BajeStrategist"
+        "khayal3baje": "Khayal3BajeStrategist",
+        "thetallstoryteller": "TheTallStorytellerStrategist"
     }
     target_agent_name = agent_map.get(_channel_slug(channel), "TopicVaultManager")
 
@@ -1774,6 +1960,11 @@ class AgentChatSchema(BaseModel):
     message: str
     context_topic: Optional[Dict[str, Any]] = None
     chat_history: Optional[List[Dict[str, str]]] = None
+    # 2026-10-22: the page's id for this turn; its progress (the strategist
+    # writing, each delegation and lookup) is readable meanwhile at
+    # GET /api/studio/chat_progress/{turn_id}.
+    turn_id: Optional[str] = None
+    effort: Optional[str] = None
 
 @app.get("/api/memory")
 def get_memory_logs(scope: Optional[str] = "agent", owner: Optional[str] = "Beyond3BajeStrategist", limit: int = 10):
@@ -1826,6 +2017,8 @@ def agent_chat(payload: AgentChatSchema):
             agent_name=agent_name or None,
             history=payload.chat_history,
             context_topic=payload.context_topic,
+            turn_id=payload.turn_id,
+            effort=payload.effort,
         )
     except Exception as e:
         logger.error(f"Studio chat failed for {agent_name or payload.channel}: {e}", exc_info=True)
@@ -1883,6 +2076,53 @@ from core.diagnostics import Diagnostics
 @app.get("/api/diagnostics")
 def get_diagnostics():
     return Diagnostics.get_report()
+
+
+@app.get("/api/health/checks")
+def get_health_checks():
+    """Every watchdog's real state with its last error (2026-10-22): the
+    self-restart, the idle offload, BuzzEdit and ComfyUI, LM Studio's loaded
+    context, the queue, the nightly tasks, disks, recent errors. The Health
+    page shows them; a FAIL row is a silent failure made loud."""
+    from app.services import health_checks
+    return health_checks.run_all()
+
+
+@app.get("/api/busy")
+def get_busy():
+    """Whether the Studio is in the middle of work (a job, a model call, a
+    production, a render). The nightly script asks this before it sleeps the PC."""
+    from integrations import idle_offload
+    in_flight = int(idle_offload.status().get("in_flight") or 0)
+    try:
+        other = idle_offload._other_work_running()
+    except Exception:  # noqa: BLE001
+        other = False
+    return {"busy": bool(in_flight or other), "in_flight": in_flight, "other_work": other}
+
+
+@app.get("/api/health/app_envs")
+def get_health_app_envs():
+    """Every sibling app's environment status on its own (2026-10-24):
+    `{apps: [{app, installed, missing, ok, repairing}, ...]}`, independent of
+    a full `/api/health/checks` pass. What the Health page's app-env rows and
+    its Repair button read and act on."""
+    from app.services import app_envs
+    return {"apps": [app_envs.status(a) for a in app_envs.discover_apps()]}
+
+
+@app.post("/api/health/app_envs/{app}/repair")
+def post_health_app_env_repair(app: str):
+    """Starts the named sibling app's `installer/setup_env.ps1` repair in the
+    background and returns immediately; poll `GET /api/health/app_envs` or
+    `/api/health/checks` for the outcome."""
+    import threading
+
+    from app.services import app_envs
+    if app not in app_envs.discover_apps():
+        raise HTTPException(status_code=404, detail=f"No sibling app named {app!r}.")
+    threading.Thread(target=app_envs.repair, args=(app,), kwargs={"wait": False}, daemon=True).start()
+    return {"app": app, "status": "started"}
 
 
 

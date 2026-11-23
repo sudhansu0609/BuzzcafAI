@@ -29,6 +29,10 @@ EVENT_TYPES = (
     # v9: one agent handing work to another, and a department answering.
     "agent_invoked",
     "department_task",
+    # 2026-10-22: a Studio Assistant turn's live progress (the strategist
+    # writing, each delegation, lookup and tool, with times); the same
+    # snapshot GET /api/studio/chat_progress/{turn_id} returns.
+    "chat_progress",
     # BuzzEdit video-production bridge (app/api/produce_api.py): a
     # produce_video run's progress, success, and failure.
     "video_progress",

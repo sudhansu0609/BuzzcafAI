@@ -313,6 +313,7 @@ export default function Logs() {
             <select
               value={sourceFilter}
               onChange={(e) => setSourceFilter(e.target.value as 'all' | 'app' | 'studio')}
+              aria-label="Source"
               style={{
                 fontSize: 12,
                 padding: '4px 8px',
@@ -335,6 +336,7 @@ export default function Logs() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              aria-label="Search in message, logger name, or stack trace"
               placeholder="Search in message, logger name, or stack trace..."
               style={{
                 width: '100%',
@@ -373,6 +375,7 @@ export default function Logs() {
             <select
               value={limit}
               onChange={(e) => setLimit(Number(e.target.value))}
+              aria-label="Limit"
               style={{
                 fontSize: 12,
                 padding: '4px 8px',
@@ -570,6 +573,7 @@ export default function Logs() {
                           alignItems: 'center',
                         }}
                         title="Copy entry"
+                        aria-label="Copy entry"
                       >
                         {copiedId === String(idx) ? (
                           <CheckCircle2 size={13} style={{ color: '#4ade80' }} />

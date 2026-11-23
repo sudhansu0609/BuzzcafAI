@@ -1,5 +1,3741 @@
 [
   {
+    "topic": "Sone ka Dhokha (The Gold Deception)",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A high-stakes heist of a family heirloom from an old mansion, where the narrator realizes they are being played by their own employer.",
+    "updated_at": "2026-11-01T12:53:36.862255",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_fa6e1ed1",
+    "saved_at": "2026-11-01T12:53:36.844852"
+  },
+  {
+    "topic": "Shaadi Wala VIP: Ek Galat Pehchaan",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A man at a large Indian wedding is mistaken for a famous influencer, and the escalating lies he tells to keep his 'VIP status' lead to a hilarious chain of events.",
+    "updated_at": "2026-10-31T09:35:37.589990",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_a6368ffd",
+    "saved_at": "2026-10-31T09:35:37.568934"
+  },
+  {
+    "topic": "Kolkata Mansion ka 'Bhoot': Ek Chori ki Kahani",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A haunting mystery in a crumbling North Kolkata mansion is revealed to be a sophisticated mechanical heist.",
+    "updated_at": "2026-10-31T08:56:37.362475",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_46c8be11",
+    "saved_at": "2026-10-31T08:56:37.337244"
+  },
+  {
+    "topic": "Can My Side Projects Pay All My Monthly Expenses? (The Reality Check)",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A raw, honest audit of the creator's current income streams (YouTube + Buzzcaf) against his actual cost of living to see how close he is to 'freedom'.",
+    "updated_at": "2026-10-31T08:21:35.276556",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_f650fe02",
+    "saved_at": "2026-10-31T08:21:35.223255"
+  },
+  {
+    "topic": "30 Days of Buzzcaf: The Real Numbers, Mistakes & Reality",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A transparent 'no-filter' look at the first 30 days of launching a physical product brand while juggling multiple digital assets and a full-time job.",
+    "updated_at": "2026-10-31T07:52:50.280035",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_a4eaf56f",
+    "saved_at": "2026-10-31T07:52:50.248434"
+  },
+  {
+    "topic": "438 Din Samundar Ke Beech: The Man Who Survived the Impossible",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "An investigation into the haunting, borderline-anomalous survival of José Salvador Alvarenga, focusing on the gap between his physical reality and the myths created by his ordeal.",
+    "updated_at": "2026-10-31T07:09:51.204570",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_7050a896",
+    "saved_at": "2026-10-31T07:09:51.176012"
+  },
+  {
+    "topic": "B3B-412: The Shunya-Chakra (The Zero Circle)",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A haunting investigation of a containment report regarding a geographic anomaly in the Kutch desert where the sky reflects a different era.",
+    "updated_at": "2026-10-31T06:26:52.844300",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_89f9e819",
+    "saved_at": "2026-10-31T06:26:52.823973"
+  },
+  {
+    "topic": "Gata Loops Par Paani Chhodna Band Kar Do To Kya Hota Hai? — Truckers Ki Purani Warning",
+    "channel": "Raat3Baje",
+    "notes": "",
+    "category": "General",
+    "source_type": "idea_dump",
+    "idea_dump_id": "dump-1790103123035-19-6tvd8",
+    "updated_at": "2026-10-31T03:07:11.632378",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_8bfc187b",
+    "saved_at": "2026-10-31T03:07:11.603506"
+  },
+  {
+    "topic": "Galti Se VIP (The Accidental Celebrity)",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A man mistakenly invited as 'VIP' for catering staff ends up being treated like a celebrity at a high-profile wedding, and he has to play along to avoid embarrassment.",
+    "updated_at": "2026-10-30T14:06:17.827991",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_abfad0c6",
+    "saved_at": "2026-10-30T14:06:17.801442"
+  },
+  {
+    "topic": "Double Booking Ka Hungama",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A comedy of errors where two different wedding parties are forced to share one hall due to a booking error, and the coordinators must secretly 'merge' them to keep the peace.",
+    "updated_at": "2026-10-30T13:29:36.319336",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_c5ea2347",
+    "saved_at": "2026-10-30T13:29:36.300185"
+  },
+  {
+    "topic": "Buzzcaf ke Pehle 30 Din: Ek Honest Reality Check",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "Moving from the excitement of a launch to the gritty reality of logistics, revenue math, and the realization that building a brand is much harder than just 'having an idea'.",
+    "updated_at": "2026-10-30T12:56:43.484965",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_1ec6535e",
+    "saved_at": "2026-10-30T12:56:43.461642"
+  },
+  {
+    "topic": "Point Pleasant ka Saaya: The Mothman Mystery",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A deep dive into the 1960s Point Pleasant sightings, separating the genuine historical reports from the modern-day urban legend.",
+    "updated_at": "2026-10-30T11:10:29.947871",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_5198bba2",
+    "saved_at": "2026-10-30T11:10:29.923463"
+  },
+  {
+    "topic": "Himalaya ki jheel mein saikdon kankaal — aur DNA ne kahani badal di (Roopkund)",
+    "channel": "Beyond3Baje",
+    "format": "mystery",
+    "priority": 1,
+    "notes": "Beyond3Baje plan #1 (week 1). mystery. Angle: 2019 DNA study (Nature Communications): groups who died ~1,000 years apart; myth vs science. YouTube evidence 2026-10-29: best Hindi 5.9M (travel vlog), 3 big.",
+    "updated_at": "2026-10-29T14:21:45.233242",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_5f2dcfe5",
+    "saved_at": "2026-10-29T14:21:45.233242"
+  },
+  {
+    "topic": "Kongka La: UFO base ya 1959 ki asli kahani?",
+    "channel": "Beyond3Baje",
+    "format": "mystery",
+    "priority": 2,
+    "notes": "Beyond3Baje plan #2 (week 2). mystery. Angle: UFO rumours vs the real 21 Oct 1959 border clash (Police Commemoration Day). YouTube evidence 2026-10-29: best 1.4M Bengali only -> Hindi gap.",
+    "updated_at": "2026-10-29T14:21:45.224635",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_ca8529f8",
+    "saved_at": "2026-10-29T14:21:45.224635"
+  },
+  {
+    "topic": "Assam ka woh gaon jahan chidiya 'aatmahatya' karti hain — Jatinga",
+    "channel": "Beyond3Baje",
+    "format": "mystery",
+    "priority": 3,
+    "notes": "Beyond3Baje plan #3 (week 3). mystery. Angle: Birds drawn to lights on foggy nights, Sept-Nov: myth vs science. YouTube evidence 2026-10-29: best 1.6M, 1 big -> gap.",
+    "updated_at": "2026-10-29T14:21:45.216413",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_525dd1d3",
+    "saved_at": "2026-10-29T14:21:45.216413"
+  },
+  {
+    "topic": "Angrezon ne India ke beech 1,800 km lambi kaanton ki deewar kyun banayi?",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 4,
+    "notes": "Beyond3Baje plan #4 (week 4). history. Angle: The Great Hedge / Inland Customs Line for the salt tax; >1,100 miles by 1878 (Halsey), A.O. Hume. YouTube evidence 2026-10-29: best 560K, 1 big -> gap.",
+    "updated_at": "2026-10-29T14:21:45.207333",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_eb054986",
+    "saved_at": "2026-10-29T14:21:45.207333"
+  },
+  {
+    "topic": "'Sher ki sawaari': Ek letter ne ₹7,000 crore ka jhooth khol diya — Satyam",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 5,
+    "notes": "Beyond3Baje plan #5 (week 5). case study. Angle: Ramalinga Raju's 7 Jan 2009 confession letter as the thriller opening. YouTube evidence 2026-10-29: best 2.9M, 3 big.",
+    "updated_at": "2026-10-29T14:21:45.199503",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_d987b687",
+    "saved_at": "2026-10-29T14:21:45.199503"
+  },
+  {
+    "topic": "Jab Delhi mein jashn tha, Madras bhookh se mar raha tha — 1877 ka sach",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 6,
+    "notes": "Beyond3Baje plan #6 (week 6). history. Angle: 1 Jan 1877 Delhi Durbar vs the 1876-78 famine (est. 5.5-10 million deaths). YouTube evidence 2026-10-29: Hindi search best 60K; a famine video did 3.8M elsewhere -> gap.",
+    "updated_at": "2026-10-29T14:21:45.188887",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_76f70199",
+    "saved_at": "2026-10-29T14:21:45.188887"
+  },
+  {
+    "topic": "₹5 ki coffee se ₹7,000 crore ke karz tak — Café Coffee Day",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 7,
+    "notes": "Beyond3Baje plan #7 (week 7). case study. Angle: Brigade Road 1996 -> 2019 crisis -> Malavika Hegde's turnaround; treat 2019 with respect. YouTube evidence 2026-10-29: best 2.5M, 2 big.",
+    "updated_at": "2026-10-29T14:21:45.179003",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_31c5cb50",
+    "saved_at": "2026-10-29T14:21:45.179003"
+  },
+  {
+    "topic": "Bhaale vs Machine Gun: Haifa 1918 mein Indian ghudsawaron ka charge",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 8,
+    "notes": "Beyond3Baje plan #8 (week 8). history. Angle: 23 Sept 1918, Jodhpur and Mysore Lancers charge machine guns with lances. YouTube evidence 2026-10-29: best 1.1M, 1 big -> gap.",
+    "updated_at": "2026-10-29T14:21:45.171305",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_b6e99bf9",
+    "saved_at": "2026-10-29T14:21:45.171305"
+  },
+  {
+    "topic": "5 June 2015: Jab Bharat ne Maggi ban kar di",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 9,
+    "notes": "Beyond3Baje plan #9 (week 9). case study. Angle: Food regulator ban, stock destroyed, comeback in Nov 2015: crisis management. YouTube evidence 2026-10-29: best 1.8M, 2 big.",
+    "updated_at": "2026-10-29T14:21:45.162664",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_a3c4b185",
+    "saved_at": "2026-10-29T14:21:45.162664"
+  },
+  {
+    "topic": "Plague, Angrez aur Chapekar bhai — 1897 ki woh goli",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 10,
+    "notes": "Beyond3Baje plan #10 (week 10). history. Angle: Bombay plague 1896 spreads to Pune; Rand's house searches; assassination 22 June 1897. YouTube evidence 2026-10-29: best 510K, 1 big -> gap.",
+    "updated_at": "2026-10-29T14:21:45.153485",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_8efe8d81",
+    "saved_at": "2026-10-29T14:21:45.153485"
+  },
+  {
+    "topic": "'King of Good Times' ki airline kaise doobi — Kingfisher",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 11,
+    "notes": "Beyond3Baje plan #11 (week 11). case study. Angle: Launched 2005, grounded Oct 2012; a story-told case study, not a podcast. YouTube evidence 2026-10-29: best 31M (podcast), 2 big.",
+    "updated_at": "2026-10-29T14:21:45.141089",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_f9eb6669",
+    "saved_at": "2026-10-29T14:21:45.141089"
+  },
+  {
+    "topic": "Duniya ka sabse ameer aadmi jo 185-carat ka heera paperweight banata tha (Nizam)",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 12,
+    "notes": "Beyond3Baje plan #12 (week 12). history. Angle: TIME cover 1937; the Jacob diamond as a paperweight; his frugal life. YouTube evidence 2026-10-29: best 3.3M, 4 big.",
+    "updated_at": "2026-10-29T14:21:45.132095",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_10c9b7f3",
+    "saved_at": "2026-10-29T14:21:45.132095"
+  },
+  {
+    "topic": "Har sarkari daftar ki car kaise gayab ho gayi — Ambassador ki kahani",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 13,
+    "notes": "Beyond3Baje plan #13 (week 13). case study. Angle: Hindustan Motors, Uttarpara plant stops 2014, brand sold 2017. YouTube evidence 2026-10-29: best 1.9M, 4 big.",
+    "updated_at": "2026-10-29T14:21:45.123283",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_04287b50",
+    "saved_at": "2026-10-29T14:21:45.123283"
+  },
+  {
+    "topic": "Muziris: Bharat ka woh shahar jahan Rome ka sona aata tha — phir gayab ho gaya",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 14,
+    "notes": "Beyond3Baje plan #14 (week 14). history. Angle: Roman trade port of Kerala, traditionally lost in the 1341 Periyar flood; Pattanam digs. YouTube evidence 2026-10-29: best 510K English -> Hindi gap.",
+    "updated_at": "2026-10-29T14:21:45.114866",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_1c19d2d8",
+    "saved_at": "2026-10-29T14:21:45.114866"
+  },
+  {
+    "topic": "17 April 2019: Jet Airways ki aakhri udaan",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 15,
+    "notes": "Beyond3Baje plan #15 (week 15). case study. Angle: 26 years of an airline that ended in one week. YouTube evidence 2026-10-29: best 2.0M, 2 big.",
+    "updated_at": "2026-10-29T14:21:45.103999",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_9cf9af16",
+    "saved_at": "2026-10-29T14:21:45.103999"
+  },
+  {
+    "topic": "Jab ek Bharatiya raja ki navy ne samundar paar karke Southeast Asia jeeta (Chola)",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 16,
+    "notes": "Beyond3Baje plan #16 (week 16). history. Angle: Rajendra Chola's 1025 CE campaign vs Srivijaya; angle: ships, trade routes, logistics. YouTube evidence 2026-10-29: best 8.9M (Dhruv Rathee), 2 big.",
+    "updated_at": "2026-10-29T14:21:45.094882",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_b3c4c2b5",
+    "saved_at": "2026-10-29T14:21:45.094882"
+  },
+  {
+    "topic": "Har ghar mein tha Nokia 1100… phir Chennai factory band kyun hui?",
+    "channel": "Beyond3Baje",
+    "format": "case study",
+    "priority": 17,
+    "notes": "Beyond3Baje plan #17 (week 17). case study. Angle: The India story: Sriperumbudur plant closed 1 Nov 2014, tax dispute. YouTube evidence 2026-10-29: best 13M (Vivek Bindra), 5 big -> crowded.",
+    "updated_at": "2026-10-29T14:21:45.087342",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_670b369f",
+    "saved_at": "2026-10-29T14:21:45.087342"
+  },
+  {
+    "topic": "1943: Jab Bengal mein chawal tha, phir bhi 30 lakh log mare",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 18,
+    "notes": "Beyond3Baje plan #18 (week 18). history. Angle: 1943 Bengal famine: wartime policy, prices, hoarding; human history, no blame framing. YouTube evidence 2026-10-29: best 220K -> moderate.",
+    "updated_at": "2026-10-29T14:21:45.078594",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_cd2a29c6",
+    "saved_at": "2026-10-29T14:21:45.078594"
+  },
+  {
+    "topic": "London se Kolkata tak bus chalti thi — 50 din ka safar",
+    "channel": "Beyond3Baje",
+    "format": "history",
+    "priority": 19,
+    "notes": "Beyond3Baje plan #19 (week 19). history. Angle: Overland London-Calcutta bus (1957-1970s); VERIFY dates before scripting. YouTube evidence 2026-10-29: not measured yet.",
+    "updated_at": "2026-10-29T14:21:45.070034",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_8b8904e7",
+    "saved_at": "2026-10-29T14:21:45.070034"
+  },
+  {
+    "topic": "Agar 1857 ki kranti jeet jaati? (3-part Shorts)",
+    "channel": "Beyond3Baje",
+    "format": "what-if Shorts",
+    "priority": 20,
+    "notes": "Beyond3Baje plan #20 (Shorts, weeks 4-6). what-if Shorts. Angle: Part 1 the map, part 2 language and railways, part 3 India today; runs alongside videos 4-6. YouTube evidence 2026-10-29: 1857 topic 7.1M (Khan Sir); Hindi what-ifs nearly empty.",
+    "updated_at": "2026-10-29T14:21:45.062931",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_dd1fa10d",
+    "saved_at": "2026-10-29T14:21:45.062931"
+  },
+  {
+    "topic": "I Spent 30 Days Trying to Change My Life",
+    "channel": "Life3Baje",
+    "notes": "Life3Baje launch series (2026-10-29), after Episode 01.",
+    "updated_at": "2026-10-29T12:33:10.737708",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_bf2f6589",
+    "saved_at": "2026-10-29T12:33:10.737708"
+  },
+  {
+    "topic": "I Want to Write, Create Videos and Learn Music. Why Am I Doing Everything?",
+    "channel": "Life3Baje",
+    "notes": "Life3Baje launch series (2026-10-29), after Episode 01.",
+    "updated_at": "2026-10-29T12:33:10.729507",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_fab0bf12",
+    "saved_at": "2026-10-29T12:33:10.729507"
+  },
+  {
+    "topic": "Can I Turn My Old Duster Into a Mini Camper?",
+    "channel": "Life3Baje",
+    "notes": "Life3Baje launch series (2026-10-29), after Episode 01.",
+    "updated_at": "2026-10-29T12:33:10.721598",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_4a619aee",
+    "saved_at": "2026-10-29T12:33:10.721598"
+  },
+  {
+    "topic": "I'm 33 and Starting to Learn Violin From Zero",
+    "channel": "Life3Baje",
+    "notes": "Life3Baje launch series (2026-10-29), after Episode 01.",
+    "updated_at": "2026-10-29T12:33:10.713541",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_4fb73b44",
+    "saved_at": "2026-10-29T12:33:10.713541"
+  },
+  {
+    "topic": "The Reality of Running Multiple YouTube Channels",
+    "channel": "Life3Baje",
+    "notes": "Life3Baje launch series (2026-10-29), after Episode 01.",
+    "updated_at": "2026-10-29T12:33:10.709283",
+    "added_by": "creator",
+    "stage": "backlog",
+    "id": "topic_e6052176",
+    "saved_at": "2026-10-29T12:33:10.709283"
+  },
+  {
+    "topic": "Purani Haveli ka Shorgul: Ek Nakli Bhoot",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A mystery where a 'haunted' mansion in North Kolkata hides a sophisticated smuggling ring using a mechanical trick as cover.",
+    "updated_at": "2026-10-29T10:42:39.628740",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_a538b22f",
+    "saved_at": "2026-10-29T10:42:39.589183"
+  },
+  {
+    "topic": "Mallick Nilaamghar ki Aakhri Boli | Ek Chori Jo Hui Hi Nahi",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "Ek budhha auction-house clerk apni purani company bachane ke liye heist plan karta hai, aur ek bhi crew member ko nahi pata ki asli chori kiski thi.",
+    "updated_at": "2026-10-29T09:20:44.844661",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_24ab9545",
+    "saved_at": "2026-10-29T09:20:44.814013"
+  },
+  {
+    "topic": "The First 30 Days of Buzzcaf: Revenue, Mistakes & Reality",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A raw, honest look at the first month of running a coffee business while working full-time—moving past the 'hype' into the actual numbers and operational hurdles.",
+    "updated_at": "2026-10-29T07:58:05.551212",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_e810959d",
+    "saved_at": "2026-10-29T07:58:05.521445"
+  },
+  {
+    "topic": "KAL KA VIDEO (Tomorrow's Recording)",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A man discovers his home's CCTV is recording events that haven't happened yet, and as he tries to change the 'future,' the footage adapts in real-time.",
+    "updated_at": "2026-10-29T06:58:43.078538",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_510d9a18",
+    "saved_at": "2026-10-29T06:58:43.058618"
+  },
+  {
+    "topic": "Highway Par Woh Bacchi: The Haunting of the Long Roads",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A chilling exploration of the recurring 'Girl on the Highway' phenomenon, told through three distinct, real-life accounts from truck drivers across India.",
+    "updated_at": "2026-10-29T03:09:51.032382",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_65a02429",
+    "saved_at": "2026-10-29T03:09:51.004920"
+  },
+  {
+    "topic": "Do Shaadiyan, Ek Mohalla",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A comedy of escalating egos between two neighbors whose competitive 'wedding-prep' turns into a full-blown community spectacle.",
+    "updated_at": "2026-10-28T07:19:03.319210",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_04126811",
+    "saved_at": "2026-10-28T07:19:03.294941"
+  },
+  {
+    "topic": "Kolkata Mansion ka 'Bhoot' aur Chori ka Sach",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A masterfully paced mystery where a haunting is revealed to be a clever mechanical heist in a North Kolkata Rajbari.",
+    "updated_at": "2026-10-28T06:46:15.871275",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_69013c61",
+    "saved_at": "2026-10-28T06:46:15.843061"
+  },
+  {
+    "topic": "How Much Money Do I Need to Quit My Job? (The Honest Math)",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A transparent, data-driven look at the creator's personal 'Freedom Number'—calculating exactly what it takes to move from a 9-5 software career to full-time creator/entrepreneur.",
+    "updated_at": "2026-10-28T06:20:56.608357",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_49eac15a",
+    "saved_at": "2026-10-28T06:20:56.584195"
+  },
+  {
+    "topic": "30 Days of Building Buzzcaf — Revenue, Orders and Mistakes",
+    "channel": "Life3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A raw, unfiltered look at the first month of a physical product business, showing the gap between 'the dream' and 'the reality'.",
+    "updated_at": "2026-10-28T06:02:56.048634",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_14cdb02b",
+    "saved_at": "2026-10-28T06:02:56.030286"
+  },
+  {
+    "topic": "MOTHMAN: Point Pleasant ka Raaz",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A deep dive into the 1960s sightings of a winged entity in West Virginia, separating local reports from modern myth.",
+    "updated_at": "2026-10-28T05:36:20.106670",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_161c3d22",
+    "saved_at": "2026-10-28T05:36:20.079713"
+  },
+  {
+    "topic": "Pahadi Homestay: Ek Kamra Jiska Darwaza Kabhi Nahi Khulta",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A claustrophobic 'Rules' horror story set in a remote Himalayan homestay where the protagonist must navigate a night of escalating supernatural occurrences by following a list of strict, unsettling instructions.",
+    "updated_at": "2026-10-28T04:24:38.488033",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_79d12e0a",
+    "saved_at": "2026-10-28T04:24:38.436429"
+  },
+  {
+    "topic": "Shamshan Ka Karz: Ek Adhoori Siddhi",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A chilling tale of a man who sought immortality through forbidden Masaan Sadhana, only to find that some doors, once opened, can never be closed.",
+    "updated_at": "2026-10-28T03:04:10.638218",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_b80de218",
+    "saved_at": "2026-10-28T03:04:10.604136"
+  },
+  {
+    "topic": "Pahadi Homestay Ka Locked Room",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A young woman working a season at a mountain homestay discovers an old rule: one room is always locked. When she asks why, the owner gives her a warning. The nights that follow test that warning.",
+    "updated_at": "2026-10-26T05:36:51.069237",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_6028c53b",
+    "saved_at": "2026-10-26T05:36:51.037466"
+  },
+  {
+    "topic": "Shamshan Ka Karz: Us Raat Chita Ki Raakh Par Kya Likha Tha?",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "Ek laachaar bete ne apne beemar pita ke purane karz se chhutkara paane ke liye Ganga kinare ke ek sunsaan shamshan mein tantrik se sauda kiya — par siddhi aur aashirwad ke badle chukayi gayi keemat ne use ek aisi raat mein baandh diya jahan se lautna namumkin tha.",
+    "updated_at": "2026-10-26T03:06:28.070820",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_835fdf4c",
+    "saved_at": "2026-10-26T03:06:28.045301"
+  },
+  {
+    "topic": "Point Pleasant Ka Khauf: Mothman Ki Sachhai | Encounter Files",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "100 se zyada documented eyewitnesses, ek abandoned WWII TNT plant, aur ek collapsing bridge: kya Mothman sach mein koi supernatural harbinger tha ya 1966 America ki sabse badi psychological chain-reaction?",
+    "updated_at": "2026-10-26T02:19:41.673319",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_9aa2aa4e",
+    "saved_at": "2026-10-26T02:19:41.655056"
+  },
+  {
+    "topic": "Raat Ki Gunjish: The Mystery of the Haunted Haveli",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A haunting mystery set in a North Kolkata mansion where 'ghostly' sounds are revealed to be a complex mechanical trick used for a heist.",
+    "updated_at": "2026-10-25T23:19:55.785403",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_c0859c59",
+    "saved_at": "2026-10-25T23:19:55.766842"
+  },
+  {
+    "topic": "Biryani, Baraat aur Bada Jhooth (The Big Lie)",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "Two friends pretend to be 'Specialized Catering Consultants' at a high-profile wedding and have to navigate a series of escalating lies when they realize the actual caterer never showed up.",
+    "updated_at": "2026-10-25T15:49:10.322099",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_89e5ee6c",
+    "saved_at": "2026-10-25T15:49:10.309834"
+  },
+  {
+    "topic": "Barish, Band Kamra aur Nakli Bhoot",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A sophisticated theft in an old Kolkata mansion where a 'haunting' was used as a tactical distraction.",
+    "updated_at": "2026-10-25T15:16:12.507264",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_67359783",
+    "saved_at": "2026-10-25T15:16:12.494896"
+  },
+  {
+    "topic": "KAL KA VIDEO",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A psychological horror journey where your own home becomes a trap of predicted actions.",
+    "updated_at": "2026-10-25T13:59:26.992026",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_42e9c56c",
+    "saved_at": "2026-10-25T13:59:26.979216"
+  },
+  {
+    "topic": "MOTHMAN",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "Investigating whether the 1960s sightings in Point Pleasant were a precursor to tragedy or a burgeoning urban legend.",
+    "updated_at": "2026-10-25T13:28:50.838439",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_1c5bd34b",
+    "saved_at": "2026-10-25T13:28:50.825098"
+  },
+  {
+    "topic": "Nadi Ka Wo Aurat | Raat Ko Kyun Koi Wahan Nahi Jaata?",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A haunting, atmospheric journey into the legend of the 'River Washer'—a tale where the boundary between reality and folklore blurs in the mist.",
+    "updated_at": "2026-10-25T11:57:43.927437",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_a3095ea5",
+    "saved_at": "2026-10-25T11:57:43.911825"
+  },
+  {
+    "topic": "The Ghostly Silence of Flannan Isles",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A deep dive into the 1900 disappearance of three lighthouse keepers who vanished during a storm, leaving behind a haunting scene and a mystery that still lingers in the fog.",
+    "updated_at": "2026-10-25T11:06:05.723474",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_37ec6cef",
+    "saved_at": "2026-10-25T11:06:05.693742"
+  },
+  {
+    "topic": "Shapat Ki Ghanti: Ek Adhoora Sauda (Selected from options like 'Gaon Ke Ped Ka Raaz' or 'Maut Ki Ghanti')",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A slow-burn, atmospheric exploration of a ritualistic object that became a trap for those who heard its toll.",
+    "updated_at": "2026-10-25T09:36:15.729329",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_f5c75555",
+    "saved_at": "2026-10-25T09:36:15.709804"
+  },
+  {
+    "topic": "Kolkata ki Purani Deewaren aur Chori ka Saazish (Working Title)",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "An original mystery introducing Abhi Sen, a detective who finds logic in the echoes of old Kolkata.",
+    "updated_at": "2026-10-24T03:43:50.650121",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_33304c66",
+    "saved_at": "2026-10-24T03:43:50.629133"
+  },
+  {
+    "topic": "Mandir ka Shaitaan ya Insaan ki Saazish?",
+    "channel": "TheTallStoryteller",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A village haunted by a 'spirit' that steals gold from its temple, but our detective discovers it’s a clever man using the myth to hide his crimes.",
+    "updated_at": "2026-10-24T03:25:03.176669",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_1aba7c11",
+    "saved_at": "2026-10-24T03:25:03.158516"
+  },
+  {
+    "topic": "Track Par Khadi Aurat",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A haunting, multi-layered narrative of the 'Railway Track Woman'—weaving three distinct real accounts into one continuous atmosphere of dread.",
+    "updated_at": "2026-10-24T02:50:40.357461",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_a44132d3",
+    "saved_at": "2026-10-24T02:50:40.335879"
+  },
+  {
+    "topic": "Kal Ki Video | CCTV ka Sach",
+    "channel": "Beyond3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A chilling psychological 'What If' scenario where a man discovers his own house's security footage is showing him doing something terrifying tomorrow.",
+    "updated_at": "2026-10-24T02:06:40.310555",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_666b45c9",
+    "saved_at": "2026-10-24T02:06:40.286465"
+  },
+  {
+    "topic": "Delhi Cantt ki Warning: The Rules of the White Saree",
+    "channel": "Raat3Baje",
+    "category": "General",
+    "source_type": "strategist",
+    "notes": "A high-tension 'Rules' story about a truck driver navigating the outskirts of Delhi, where survival depends on following specific instructions to avoid 'The Woman in White'.",
+    "updated_at": "2026-10-24T01:35:39.952885",
+    "added_by": "nightly",
+    "stage": "in_progress",
+    "id": "topic_5c3fcddd",
+    "saved_at": "2026-10-24T01:35:39.932361"
+  },
+  {
+    "topic": "The Village Where Nobody Is Allowed to Die at Home",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #7 (Strong central mystery and reveal potential). Every dying villager is carried to an abandoned house outside the village. When a young man investigates, he finds the house full of people who are still alive. These have the strongest combination of a clear thumbnail, an immediate question, escalating supernatural events, and a potential payoff. The important distinction: don't make these 20-minute collections of spooky incidents. Make each video one complete story: an intriguing opening, a rule the protagonist discovers, increasingly dangerous consequences, a failed attempt to escape, and a final revelation that changes the meaning of what happened. Present them as fictional supernatural horror stories, not alleged real incidents.",
+    "rank": 50,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "High-concept supernatural mysteries"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 7,
+    "updated_at": "2026-10-23T00:29:19.725308",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_f1f500e6",
+    "saved_at": "2026-10-23T00:27:22.415422"
+  },
+  {
+    "topic": "Every Locked Door Opens Into the Same Room",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A family discovers that every locked door in their house leads to one identical room. Inside it, a calendar shows a date that has not arrived yet.",
+    "rank": 49,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "High-concept supernatural mysteries"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": null,
+    "updated_at": "2026-10-23T00:29:19.715115",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_13b7e53e",
+    "saved_at": "2026-10-23T00:27:22.405343"
+  },
+  {
+    "topic": "The Reflection That Refuses to Copy You",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man's reflection starts performing different actions. At first it seems to be warning him, until it begins living a better life than he does.",
+    "rank": 48,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "High-concept supernatural mysteries"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.704263",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0c9dc6a2",
+    "saved_at": "2026-10-23T00:27:22.395292",
+    "pilot": null
+  },
+  {
+    "topic": "The Market That Opens Only for the Dead",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #6 (Original supernatural world with a meaningful cost). A shopkeeper finds a bustling market on a deserted street at midnight. Everyone there pays with memories—and he accidentally sells the memory of his own daughter.",
+    "rank": 47,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "High-concept supernatural mysteries"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 6,
+    "updated_at": "2026-10-23T00:29:19.693730",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_7d5314a7",
+    "saved_at": "2026-10-23T00:27:22.383529"
+  },
+  {
+    "topic": "Every Night, Someone's Name Appears on the Wall",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Names appear in wet red letters inside a locked room. Those whose names appear begin hearing knocking from beneath their beds.",
+    "rank": 46,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "High-concept supernatural mysteries"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.681701",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_5ef9ea12",
+    "saved_at": "2026-10-23T00:27:22.373411",
+    "pilot": null
+  },
+  {
+    "topic": "A Door Appears in the Middle of an Empty Field",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Anyone who opens it sees the same room, with a different version of themselves inside. One day, the version inside opens the door first. [Borley Rectory Messages Appeared Without Entry – Headcount Coffee](https://images.openai.com/static-rsc-4/9dIbv-sQ_JicxGmUKmPYYxYiSMOl7GTpQnobGDyeErdx-QF6AeYTy9Vf5-W2dZsgMrK95tNzPartoGgrrUxHNn9aHBqM7JHLgEvgBovn6VwsVaBTAKQiwSMT8HKZdwOBV5uPUpxvSILWRnwY7XnPo_qszco2Zux8mVr6HsC4g8Q?purpose=inline)",
+    "rank": 45,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Cosmic and reality-bending supernatural horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": null,
+    "updated_at": "2026-10-23T00:29:19.670765",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_6f94d184",
+    "saved_at": "2026-10-23T00:27:22.362783"
+  },
+  {
+    "topic": "The Road That Gets Longer Every Time You Return",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man takes the same shortcut home daily, but the road grows longer each time. Eventually, he reaches his own village—hundreds of years before he was born.",
+    "rank": 44,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Cosmic and reality-bending supernatural horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.659818",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_617e200a",
+    "saved_at": "2026-10-23T00:27:22.353490",
+    "pilot": null
+  },
+  {
+    "topic": "The Fog That Knows Your Name",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A strange fog covers a village and whispers each person's name. Anyone who answers vanishes, leaving behind a perfect copy of their voice.",
+    "rank": 43,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Cosmic and reality-bending supernatural horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.648267",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_ea715b95",
+    "saved_at": "2026-10-23T00:27:22.343738",
+    "pilot": null
+  },
+  {
+    "topic": "The Night the Stars Began Watching Back",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Every star above a village turns into a blinking eye. The villagers discover the sky is reacting to something buried beneath the village.",
+    "rank": 42,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Cosmic and reality-bending supernatural horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.636963",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_8741ae6d",
+    "saved_at": "2026-10-23T00:27:22.333562",
+    "pilot": null
+  },
+  {
+    "topic": "The Moon Appears Inside Every Well",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A second moon appears only in water. People who see their reflection beneath it begin dreaming of a place they have never visited.",
+    "rank": 41,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Cosmic and reality-bending supernatural horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.625509",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_bef61381",
+    "saved_at": "2026-10-23T00:27:22.323397",
+    "pilot": null
+  },
+  {
+    "topic": "The House Where the Dead Come Home for One Night",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Once a year, the dead return to their old homes. One family hears a knock from a relative who died that very afternoon.",
+    "rank": 40,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Death, afterlife and the supernatural"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.612534",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_305a15c5",
+    "saved_at": "2026-10-23T00:27:22.315161",
+    "pilot": null
+  },
+  {
+    "topic": "The Hearse That Arrives Before the Accident",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A hearse appears outside a different home every night. By dawn, an accident has occurred—but the hearse's driver begins making mistakes.",
+    "rank": 39,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Death, afterlife and the supernatural"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.599840",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_09ae037a",
+    "saved_at": "2026-10-23T00:27:22.305428",
+    "pilot": null
+  },
+  {
+    "topic": "The Priest Who Performs the Same Last Rites Every Night",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A young priest discovers that the nightly ritual is not for the dead. It is keeping something alive from crossing into the village.",
+    "rank": 38,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Death, afterlife and the supernatural"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.589243",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_3aabb7e0",
+    "saved_at": "2026-10-23T00:27:22.296264",
+    "pilot": null
+  },
+  {
+    "topic": "The Funeral That Happens Before Anyone Dies",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A family finds a funeral procession outside their home. The covered body is still breathing—and the mourners know every family secret.",
+    "rank": 37,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Death, afterlife and the supernatural"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.578125",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_c215f3dc",
+    "saved_at": "2026-10-23T00:27:22.288064",
+    "pilot": null
+  },
+  {
+    "topic": "The Cremation Ground Where One Pyre Never Burns Out",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A pyre has been burning for decades, but nobody knows who is on it. Whenever someone approaches, a voice from the flames asks for a name.",
+    "rank": 36,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Death, afterlife and the supernatural"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.566041",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_cf899a62",
+    "saved_at": "2026-10-23T00:27:22.277773",
+    "pilot": null
+  },
+  {
+    "topic": "The Figure That Moves Only When You Blink",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A figure appears at the end of a lane and moves closer every time a villager blinks. The villagers devise a system to watch it continuously—until all their eyes begin watering at once.",
+    "rank": 35,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Entities, voices and unseen presences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.554715",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_6951aeee",
+    "saved_at": "2026-10-23T00:27:22.268552",
+    "pilot": null
+  },
+  {
+    "topic": "The Face Outside Every Window",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Every window in a house shows the same face outside, no matter which direction it faces. The family boards them all up—then sees the face inside a mirror.",
+    "rank": 34,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Entities, voices and unseen presences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.544337",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_2cbc01da",
+    "saved_at": "2026-10-23T00:27:22.258913",
+    "pilot": null
+  },
+  {
+    "topic": "The Telephone Rings From a Disconnected Line",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An abandoned house has no electricity or phone connection, yet the telephone rings nightly. The caller asks why the family left him buried in the courtyard.",
+    "rank": 33,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Entities, voices and unseen presences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.533749",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_482218cf",
+    "saved_at": "2026-10-23T00:27:22.248355",
+    "pilot": null
+  },
+  {
+    "topic": "The Footsteps That Follow You Indoors",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A woman hears footsteps behind her wherever she walks inside her house. When she stops, they take one final step closer.",
+    "rank": 32,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Entities, voices and unseen presences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": null,
+    "updated_at": "2026-10-23T00:29:19.522997",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_eb02843a",
+    "saved_at": "2026-10-23T00:27:22.237850"
+  },
+  {
+    "topic": "Someone Sits on the Empty Charpai Every Night",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An old man sees the rope bed sag under an invisible weight. His dog refuses to approach it—and one night, the empty bed begins rocking.",
+    "rank": 31,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Entities, voices and unseen presences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.511539",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0d47eed6",
+    "saved_at": "2026-10-23T00:27:22.227504",
+    "pilot": null
+  },
+  {
+    "topic": "The Watch That Counts Down to Someone Else's Death",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man finds a watch counting down to zero. Whenever he gives it away, the countdown transfers to someone he loves.",
+    "rank": 30,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Objects that should never have been found"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.502094",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_ed5aadc7",
+    "saved_at": "2026-10-23T00:27:22.217378",
+    "pilot": null
+  },
+  {
+    "topic": "The Photograph That Loses One Person Each Night",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A family portrait slowly loses its people. The missing relatives are still alive—but they no longer recognise anyone in the photograph.",
+    "rank": 29,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Objects that should never have been found"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.490818",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_f95f2033",
+    "saved_at": "2026-10-23T00:27:22.208743",
+    "pilot": null
+  },
+  {
+    "topic": "The Doll That Changes Its Owner",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A family throws away a doll, but it keeps returning. Eventually, they discover it is not returning to the house—it is returning to a particular person.",
+    "rank": 28,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Objects that should never have been found"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.480025",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_78a8e666",
+    "saved_at": "2026-10-23T00:27:22.199288",
+    "pilot": null
+  },
+  {
+    "topic": "The Radio That Broadcasts From the Dead",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #2 (Familiar Indian setting with escalating revelations). An old radio picks up a voice announcing tomorrow's deaths. One night, it broadcasts a conversation taking place in the room around it.",
+    "rank": 27,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Objects that should never have been found"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 2,
+    "updated_at": "2026-10-23T00:29:19.469739",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_2d0315f6",
+    "saved_at": "2026-10-23T00:27:22.189269"
+  },
+  {
+    "topic": "The Trunk That Gets Heavier Every Night",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An inherited trunk grows heavier even when empty. Inside, the family begins finding objects belonging to people who have not died yet.",
+    "rank": 26,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Objects that should never have been found"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.459243",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_693e240e",
+    "saved_at": "2026-10-23T00:27:22.180055",
+    "pilot": null
+  },
+  {
+    "topic": "The Wedding Procession With No Faces",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Villagers hear wedding music passing their homes after midnight. Anyone who looks outside sees a procession of faceless guests carrying a photograph of someone from that house.",
+    "rank": 25,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Indian village and folklore-style horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.448775",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_fc321e76",
+    "saved_at": "2026-10-23T00:27:22.170891",
+    "pilot": null
+  },
+  {
+    "topic": "The Pond That Reflects a Different Village",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "The water reflects a village that burned down decades ago. Every night, one reflected villager looks up and tries to communicate.",
+    "rank": 24,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Indian village and folklore-style horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.438539",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_bc373671",
+    "saved_at": "2026-10-23T00:27:22.162577",
+    "pilot": null
+  },
+  {
+    "topic": "Attendance Is Taken in an Abandoned School",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Every night, a watchman hears a teacher call out names in an empty school. One evening, the teacher calls the watchman's name—and waits for his answer.",
+    "rank": 23,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Indian village and folklore-style horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.428404",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0f23412a",
+    "saved_at": "2026-10-23T00:27:22.153677",
+    "pilot": null
+  },
+  {
+    "topic": "The Banyan Tree With a New Shadow",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A village tree casts one extra human shadow every night. One morning, a villager finds that his own shadow is missing.",
+    "rank": 22,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Indian village and folklore-style horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.417572",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0749c43a",
+    "saved_at": "2026-10-23T00:27:22.144842",
+    "pilot": null
+  },
+  {
+    "topic": "The Village That Disappears at Sunrise",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A bus driver stops in a village to ask for directions. By morning, the village is gone—and the passengers insist they have never stopped anywhere.",
+    "rank": 21,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Indian village and folklore-style horror"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.407187",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_883ad417",
+    "saved_at": "2026-10-23T00:27:22.135522",
+    "pilot": null
+  },
+  {
+    "topic": "The Day That Was Erased From Every Calendar",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An entire village remembers a terrible event that supposedly happened yesterday. But every calendar, newspaper and photograph says yesterday never existed.",
+    "rank": 20,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Time, dreams and impossible experiences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.397118",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_44654016",
+    "saved_at": "2026-10-23T00:27:22.127762",
+    "pilot": null
+  },
+  {
+    "topic": "The Mirror Shows Tomorrow's Funeral",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A woman sees a funeral in her mirror every night. Each night, the person inside the coffin becomes easier to recognise.",
+    "rank": 19,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Time, dreams and impossible experiences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.386183",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0c1e582b",
+    "saved_at": "2026-10-23T00:27:22.117021",
+    "pilot": null
+  },
+  {
+    "topic": "The Night That Lasted Seven Years",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man takes shelter from rain in a railway waiting room. When he walks out, the station is abandoned and everyone he knows is old or dead.",
+    "rank": 18,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Time, dreams and impossible experiences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.374506",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_3a93e958",
+    "saved_at": "2026-10-23T00:27:22.108308",
+    "pilot": null
+  },
+  {
+    "topic": "The Dream That Leaves Physical Evidence",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man repeatedly dreams of being buried beneath a neem tree. Each morning, fresh soil appears under his fingernails.",
+    "rank": 17,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Time, dreams and impossible experiences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.364378",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_add5a6d6",
+    "saved_at": "2026-10-23T00:27:22.100358",
+    "pilot": null
+  },
+  {
+    "topic": "The Village Where It Is Always 2:17 AM",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #3 (Strong mystery with a larger hidden truth). A traveller enters a village where every clock stops at the same time. Nobody grows older, but every night a house becomes empty.",
+    "rank": 16,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Time, dreams and impossible experiences"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 3,
+    "updated_at": "2026-10-23T00:29:19.354142",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_3b6ee90f",
+    "saved_at": "2026-10-23T00:27:22.091181"
+  },
+  {
+    "topic": "The Bell That Must Never Ring Thirteen Times",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An abandoned temple bell rings by itself every night. On the thirteenth ring, something walks out of the temple and follows the sound home.",
+    "rank": 15,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Curses, rituals and forbidden rules"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.343730",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_94ae4bc7",
+    "saved_at": "2026-10-23T00:27:22.081408",
+    "pilot": null
+  },
+  {
+    "topic": "Never Answer When Someone Calls You From Outside",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "During a storm, a family hears the father's voice calling from the courtyard—even though he is sitting inside with them.",
+    "rank": 14,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Curses, rituals and forbidden rules"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.333104",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_4bae4502",
+    "saved_at": "2026-10-23T00:27:22.073246",
+    "pilot": null
+  },
+  {
+    "topic": "The Thread Nobody Must Untie",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A red thread tied around an ancient tree protects a village. When a child unties it, every locked door in the village begins opening by itself.",
+    "rank": 13,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Curses, rituals and forbidden rules"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.322199",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_038f1db5",
+    "saved_at": "2026-10-23T00:27:22.063446",
+    "pilot": null
+  },
+  {
+    "topic": "The Well That Answers in Your Voice",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Anyone who calls into an abandoned well hears their own voice answer from below, saying something they have never said.",
+    "rank": 12,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Curses, rituals and forbidden rules"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.311635",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_8eb0fec7",
+    "saved_at": "2026-10-23T00:27:22.056514",
+    "pilot": null
+  },
+  {
+    "topic": "Never Leave Food Outside After Midnight",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A grandmother's strange rule seems meaningless—until the family forgets it one night and hears someone eating in the courtyard.",
+    "rank": 11,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Curses, rituals and forbidden rules"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.300354",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_a2a9d83a",
+    "saved_at": "2026-10-23T00:27:22.049157",
+    "pilot": null
+  },
+  {
+    "topic": "The Old Man Who Visits Every House Once",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "An old man visits every home in a village, asks for a glass of water, and leaves. The next morning, each household discovers one person missing.",
+    "rank": 10,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "People who should not exist"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.289189",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_103c4f2a",
+    "saved_at": "2026-10-23T00:27:22.038596",
+    "pilot": null
+  },
+  {
+    "topic": "The Dead Man in Every Family Photograph",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A stranger appears in every photograph taken by one family, across generations. In each new picture, he stands closer.",
+    "rank": 9,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "People who should not exist"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.277397",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_91e77b21",
+    "saved_at": "2026-10-23T00:27:22.029513",
+    "pilot": null
+  },
+  {
+    "topic": "The Woman Who Comes Home Before Her Husband",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man sees his wife return home every evening—then discovers she has not left the hospital where she is unconscious.",
+    "rank": 8,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "People who should not exist"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.267418",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_a9a474cd",
+    "saved_at": "2026-10-23T00:27:22.020418",
+    "pilot": null
+  },
+  {
+    "topic": "The Stranger Who Knows Everyone's Childhood Name",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A stranger arrives in a village and calls every adult by a name only their dead mothers used.",
+    "rank": 7,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "People who should not exist"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.255780",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_8e51a9af",
+    "saved_at": "2026-10-23T00:27:22.010841",
+    "pilot": null
+  },
+  {
+    "topic": "The Family Member Nobody Remembers",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #4 (Personal stakes and emotional horror). An old photograph shows a sixth family member. Everyone insists there were always five—until someone begins sleeping in the missing person's bed.",
+    "rank": 6,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "People who should not exist"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 4,
+    "updated_at": "2026-10-23T00:29:19.245055",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0416bf4a",
+    "saved_at": "2026-10-23T00:27:22.000706"
+  },
+  {
+    "topic": "The House That Has One More Floor Every Morning",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "Each sunrise, another floor appears above a small village house. The family hears footsteps from the newest floor—but nobody can climb up to it.",
+    "rank": 5,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Rooms, houses and impossible places"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.233455",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_7338cb1a",
+    "saved_at": "2026-10-23T00:27:21.992198",
+    "pilot": null
+  },
+  {
+    "topic": "The Wall That Breathes at Midnight",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A family hears breathing behind a newly plastered wall. When they break it open, the room behind it is larger than their entire house.",
+    "rank": 4,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Rooms, houses and impossible places"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.222495",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_feca98de",
+    "saved_at": "2026-10-23T00:27:21.982609",
+    "pilot": null
+  },
+  {
+    "topic": "The Staircase With One Extra Step",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "A man counts 17 steps every day. One night, there are 18—and the extra step leads somewhere beneath his house that should not exist.",
+    "rank": 3,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Rooms, houses and impossible places"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.211215",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_cb65d0bb",
+    "saved_at": "2026-10-23T00:27:21.974099",
+    "pilot": null
+  },
+  {
+    "topic": "The Door at the End of the Corridor",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #5 (Excellent recurring visual and suspense). Every night, a new door appears in a family's corridor. Behind it, they hear their own voices begging to be let out.",
+    "rank": 2,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Rooms, houses and impossible places"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 5,
+    "updated_at": "2026-10-23T00:29:19.200085",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_4b4ff07c",
+    "saved_at": "2026-10-23T00:27:21.964636"
+  },
+  {
+    "topic": "The Room That Appears When Nobody Looks",
+    "channel": "Beyond3Baje",
+    "category": "Supernatural horror premise",
+    "source_type": "creator_notion",
+    "notes": "PILOT #1 (Simple, visual, deeply unsettling mystery). A locked house has one extra room that appears only when everyone turns away. Inside, someone has been waiting for the family for decades. Hook: What happens if you keep your eyes on the door?",
+    "rank": 1,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Rooms, houses and impossible places"
+    ],
+    "scores": {
+      "potential": null,
+      "virality": null
+    },
+    "viral_potential": 7,
+    "idea_list": "35 supernatural horror premises by category (2026-10-23)",
+    "pilot": 1,
+    "updated_at": "2026-10-23T00:29:19.189662",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_9a6596f6",
+    "saved_at": "2026-10-23T00:27:21.953667"
+  },
+  {
+    "topic": "What If You Found a Staircase With No End?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "A trekker finds a staircase on a remote mountain. Every landing has an object from a different year of his life. The higher he climbs, the harder it becomes to remember why he started.",
+    "rank": 20,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.0,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.179250",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_1fdf5be3",
+    "saved_at": "2026-10-23T00:27:21.944534",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Secret in India Became Public for One Day?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "One inexplicable event reveals everyone's private messages and hidden truths. Follow one family, one politician and one ordinary worker as the consequences collide.",
+    "rank": 19,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.1,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.166698",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_6ec25da9",
+    "saved_at": "2026-10-23T00:27:21.936839",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Checked Into a Hotel Where Every Guest Was You?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "Different versions of the same person occupy every room. Each claims to have made the correct life choices. One room is locked from the inside.",
+    "rank": 18,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.2,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.156681",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_1f6df90a",
+    "saved_at": "2026-10-23T00:27:21.927193",
+    "pilot": null
+  },
+  {
+    "topic": "What If Everyone Forgot You Overnight?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "Your family, friends and digital accounts no longer recognize you. You try to prove your identity, then discover that one stranger remembers you perfectly.",
+    "rank": 17,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.3,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.145957",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_dd64fd27",
+    "saved_at": "2026-10-23T00:27:21.917606",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Well Showed You the Last Person Who Would Ever Visit It?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "A village boy sees strangers in the water, each appearing years apart. The final reflection shows someone who has not yet arrived.",
+    "rank": 16,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.4,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.134380",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_abba2527",
+    "saved_at": "2026-10-23T00:27:21.906691",
+    "pilot": null
+  },
+  {
+    "topic": "What If the Sun Didn't Rise for Seven Days?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "The story follows one Indian family through the first morning, the collapse of routine, the breakdown of power and supply systems, and the decisions they must make to survive. Treat it as speculative fiction, not a literal scientific forecast.",
+    "rank": 15,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.5,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.123758",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_ea3c0f22",
+    "saved_at": "2026-10-23T00:27:21.898631",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Received Letters From People Who Hadn't Been Born Yet?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "A rural postman receives letters dated decades in the future. One contains a warning about a child born in his village the following week.",
+    "rank": 14,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.5,
+      "virality": null
+    },
+    "viral_potential": 8,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.113324",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_69aa0a0f",
+    "saved_at": "2026-10-23T00:27:21.889644",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Could See Every Decision You Didn't Make?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "A man starts seeing alternate versions of his life: the career he rejected, the person he didn't marry, the city he never moved to. One version begins trying to replace him.",
+    "rank": 13,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.6,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.102879",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_d00a0c72",
+    "saved_at": "2026-10-23T00:27:21.880652",
+    "pilot": null
+  },
+  {
+    "topic": "What If Your Apartment Building Had One Extra Floor Every Morning?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "Residents begin discovering floors that aren't on the building plans. The people living there claim the building has always been that way.",
+    "rank": 12,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.7,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.091551",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_e21af939",
+    "saved_at": "2026-10-23T00:27:21.871894",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Photo You Took Showed Tomorrow?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "A photographer discovers that new pictures show events 24 hours before they happen. He prevents a small accident, then sees a photograph of his own death.",
+    "rank": 11,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.8,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.081226",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_7cac7dfa",
+    "saved_at": "2026-10-23T00:27:21.862336",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Found a Door Under Your House That Nobody Could Open?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20–22 min Hook: During renovation, workers uncover a metal door beneath the floor. From the other side comes the sound of someone knocking. Story: Engineers cannot identify the room. The knocking follows a pattern. Old property documents contain a floor plan that shouldn't exist. Central problem: Opening the door may reveal the truth, but each attempt makes the knocking more urgent. Ending: The sound stops the moment the protagonist decides to leave it closed.",
+    "rank": 10,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 8.9,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.070556",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_2ef8e7b8",
+    "saved_at": "2026-10-23T00:27:21.852751",
+    "pilot": null
+  },
+  {
+    "topic": "What If Your Family Remembered a Brother You Never Had?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20 min Hook: Your mother asks why you haven't called your brother. You are an only child. Story: Family albums contain him. Neighbours remember him. His room is untouched. But official records say you never had a sibling. Central problem: Everyone insists you are the one who has forgotten. Ending: You discover a letter written in your own handwriting, begging your family never to tell you about him.",
+    "rank": 9,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.0,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.060006",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_ba250d64",
+    "saved_at": "2026-10-23T00:27:21.844364",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Train Arrived at Your Station That Wasn't on Any Timetable?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20 min Hook: The train has no number. The driver is missing. Every passenger claims to have boarded at a different time. Story: A station employee boards to investigate, only to find that the train's route passes through places that no longer exist. Central problem: Every stop reveals a different piece of the protagonist's own past. Ending: The last station has his name on it.",
+    "rank": 8,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.1,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.049799",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_71745651",
+    "saved_at": "2026-10-23T00:27:21.834628",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Night at 12 AM, the World Reset to the Previous Morning?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20–22 min Hook: You remember yesterday. Everyone else has forgotten it. Then midnight comes again. Story: The protagonist uses repeated days to solve a mystery, repair relationships and prevent a disaster. Central problem: Each reset destroys the evidence and the progress he made. Ending: One other person starts remembering too.",
+    "rank": 7,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.2,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.038827",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_9d5096b3",
+    "saved_at": "2026-10-23T00:27:21.826164",
+    "pilot": null
+  },
+  {
+    "topic": "What If ₹100 Crore Suddenly Appeared in Your Bank Account?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20 min Hook: Your banking app shows ₹100 crore. The bank confirms the balance. Nobody knows where it came from. Story: You try to secure your future, but every transaction creates new questions. Authorities investigate, strangers approach you, and someone claims the money belongs to them. Central problem: Can you prove ownership of money nobody can explain? Ending: The transfer is connected to an event that hasn't happened yet.",
+    "rank": 6,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.3,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.027433",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_66c10844",
+    "saved_at": "2026-10-23T00:27:21.817050",
+    "pilot": null
+  },
+  {
+    "topic": "What If Your Village Appeared on No Map, and Nobody Outside Had Heard of It?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "22 min Hook: A young man leaves his village for the city. Google Maps shows the road, but not the village. Nobody recognizes its name. Story: Records disappear, relatives deny knowing him, and old photographs show a different version of the same place. Central problem: Is the village being deliberately erased, or is the protagonist remembering something incorrectly? Ending: He finds evidence that someone has been trying to leave the village for generations.",
+    "rank": 5,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.4,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.017697",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_137da105",
+    "saved_at": "2026-10-23T00:27:21.806933",
+    "pilot": null
+  },
+  {
+    "topic": "What If Time Stopped for Everyone Except You?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20 min Hook: A bird freezes in midair. Rain hangs motionless. Every human being stops moving. Story: The protagonist explores the frozen city, tests what still works and tries to understand the rules. Central problem: Food, electricity, moving vehicles and even the physics of the frozen world don't behave as expected. Twist: Something else is moving, and it appears to be following him. [कहानी एक पुराने गाँव \"कालीपुर\" से शुरू होती है। रात को कोई भी घर से बाहर नहीं न - SeaArt AI](https://images.openai.com/static-rsc-4/ezFKkcuY2gTSdx32-1nTz9jsQc5dgL0MSND4d_Kz05MldFFqjT8fLHeApfnYf3eWEYWIORsc4BqLaKzQDThGRke5WpEFVpT6zKiwyT1AG0Dr8KUcsZFSfVzPJ72YPmkDzOxwheUr1wAPJnFOskerR8CrYipOGrg9UxCm33QXtVA?purpose=inline)",
+    "rank": 4,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.5,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:19.006770",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0bd44002",
+    "saved_at": "2026-10-23T00:27:21.798714",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Were Trapped in a Town Where Nobody Could Lie?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20–22 min Hook: A stranger looks at you and says, “I know who killed your father.” Everyone in the town suddenly tells the truth. Story: At first, crime seems impossible. Then secrets destroy marriages, businesses, families and political power. Central problem: Truth eliminates deception, but it doesn't eliminate cruelty. Ending: The protagonist discovers the town's one rule has an exception.",
+    "rank": 3,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.6,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.995444",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0dc4b6fb",
+    "saved_at": "2026-10-23T00:27:21.789491",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Received a Message From Yourself 10 Years in the Future?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20 min Hook: A message arrives from your own number: “Whatever happens tomorrow, don't go to work.” Story: The sender knows private details. You follow the warning, avoid one disaster, and then receive increasingly disturbing instructions. Central problem: If the future version of you is telling the truth, why does he refuse to explain what happened? Ending: The final message reveals that your attempts to avoid the future may be causing it.",
+    "rank": 2,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.7,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.984101",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_d811ddd5",
+    "saved_at": "2026-10-23T00:27:21.780561",
+    "pilot": null
+  },
+  {
+    "topic": "What If Everyone on Earth Disappeared Except You?",
+    "channel": "Beyond3Baje",
+    "category": "What If (ranked)",
+    "source_type": "creator_notion",
+    "notes": "20–22 min Hook: You wake up at 7 AM. No traffic, no phone calls, no people. Every city is empty. Story: You initially enjoy unlimited freedom. Then food distribution stops, electricity becomes unreliable, hospitals are useless, and you realize the world was built around people who no longer exist. Central question: Can you build a sustainable life alone, or will your own decisions destroy you? Ending: You discover a radio signal that shouldn't exist.",
+    "rank": 1,
+    "format": "what_if",
+    "tags": [
+      "what_if"
+    ],
+    "scores": {
+      "potential": 9.8,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "20 Beyond3baje video ideas, ranked (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.973192",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_ea52e7ba",
+    "saved_at": "2026-10-23T00:27:21.770381",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Could Restart Your Life at Age 18 but Keep Every Memory?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A 35-year-old gets a chance to return to his eighteenth birthday with all his memories intact. He avoids old mistakes, makes money and repairs relationships, but discovers that every improvement erases someone he loved from his future.",
+    "rank": 35,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 7.8,
+      "virality": 8.2
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.963251",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_66c39cd2",
+    "saved_at": "2026-10-23T00:27:21.761670",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Package Arrived at Your Door Every Birthday, but You Were Forbidden to Open It Until You Turned 80?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A man inherits a box from his grandfather and is told never to open it before his eightieth birthday. At every birthday, the box seems to change. A family crisis forces him to decide whether to break the rule.",
+    "rank": 34,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 7.8,
+      "virality": 8.2
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.950860",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_752ea009",
+    "saved_at": "2026-10-23T00:27:21.752108",
+    "pilot": null
+  },
+  {
+    "topic": "What If Another Version of Your City Existed on the Other Side of Every Mirror?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A child notices people in mirrors behaving differently. The differences become deliberate messages, then warnings. Eventually, the mirrored city asks for help crossing over.",
+    "rank": 33,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 7.9,
+      "virality": 8.3
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.940471",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_47b252bd",
+    "saved_at": "2026-10-23T00:27:21.742638",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Person Who Left Your Village Returned as a Stranger?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "People who migrated years ago return with the same faces but no memories of their families. A local teacher discovers that the returned villagers all remember the same impossible journey.",
+    "rank": 32,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.0,
+      "virality": 8.3
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.929878",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_efcf013e",
+    "saved_at": "2026-10-23T00:27:21.732679",
+    "pilot": null
+  },
+  {
+    "topic": "What If One Lamp in Your House Could Show You What Would Happen If You Made a Different Choice?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A family discovers a lamp that reveals alternate outcomes. They use it to make better decisions until they become unable to act without consulting it. One day, every possible future shows the same disaster.",
+    "rank": 31,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.0,
+      "virality": 8.4
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.918929",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_7edf30c4",
+    "saved_at": "2026-10-23T00:27:21.724207",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Human Being Had to Leave Earth in 30 Days, but Nobody Knew Why?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A global evacuation order arrives without explanation. Governments argue, families refuse to leave, and a bus driver must decide whether to take strangers to a launch site or return for his missing son.",
+    "rank": 30,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.1,
+      "virality": 8.4
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.908197",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_1f7fbd3d",
+    "saved_at": "2026-10-23T00:27:21.715972",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Child in India Dreamed About the Same Unknown Man?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Parents share drawings of an unfamiliar face. A schoolteacher recognizes the face from a photograph taken decades earlier. The investigation leads to a forgotten experiment and a person who may still be alive.",
+    "rank": 29,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.1,
+      "virality": 8.5
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.898029",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_8239dc0f",
+    "saved_at": "2026-10-23T00:27:21.706764",
+    "pilot": null
+  },
+  {
+    "topic": "What If Stars Started Going Dark Whenever Someone on Earth Lied?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "The night sky gradually darkens. Scientists look for a cosmic explanation, while a small-town teacher realizes the changes match a series of local secrets. The question becomes whether humanity can survive complete honesty.",
+    "rank": 28,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.2,
+      "virality": 8.4
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.886881",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_2dba1604",
+    "saved_at": "2026-10-23T00:27:21.698652",
+    "pilot": null
+  },
+  {
+    "topic": "What If One Public Telephone Could Connect You to Any Person in History?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A student calls a famous historical figure to verify a family legend. The conversation reveals a detail absent from every historical record, and someone begins trying to stop the next call.",
+    "rank": 27,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.2,
+      "virality": 8.5
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.874712",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_15eb0ee2",
+    "saved_at": "2026-10-23T00:27:21.690047",
+    "pilot": null
+  },
+  {
+    "topic": "What If There Were a Shop That Sold Things You Had Lost in Life?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A shop sells forgotten friendships, lost confidence and memories of people who have died. Each item has a price, but paying for it means losing something else.",
+    "rank": 26,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.3,
+      "virality": 8.6
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.864265",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_15198ca9",
+    "saved_at": "2026-10-23T00:27:21.682082",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Schoolchild Solved a Mathematical Problem That Changed Reality?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A child writes an equation that predicts small events. A teacher tries to understand it. Each correction changes something in the real world, until they discover the equation describes a rule nobody should alter.",
+    "rank": 25,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.3,
+      "virality": 8.5
+    },
+    "viral_potential": 8,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.853224",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_cafe068f",
+    "saved_at": "2026-10-23T00:27:21.673076",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Government Office Had a File on Every Person Who Would Ever Be Born?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A junior clerk discovers a file for a child whose parents haven't met. The records accurately predict life events, but one file contains a future that would destroy the clerk's family.",
+    "rank": 24,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.4,
+      "virality": 8.6
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.839862",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_e96471de",
+    "saved_at": "2026-10-23T00:27:21.665494",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Could Hear Every Thought Your Family Had About You for One Day?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A man discovers the ability during a family gathering. Small misunderstandings turn into confrontations, but the most damaging thought belongs to someone who has always defended him.",
+    "rank": 23,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.4,
+      "virality": 8.6
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.827581",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_a40e3fa2",
+    "saved_at": "2026-10-23T00:27:21.656313",
+    "pilot": null
+  },
+  {
+    "topic": "What If the Moon Disappeared for One Night and Came Back Different?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "The disappearance causes panic, but the real mystery starts when the Moon returns with unfamiliar markings. An amateur astronomer discovers that the markings correspond to a map of Earth.",
+    "rank": 22,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.5,
+      "virality": 8.8
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.816245",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_dbb76d66",
+    "saved_at": "2026-10-23T00:27:21.646457",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Could Buy Five More Years of Your Life?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A mysterious service lets people exchange money, memories or years of someone else's life for extra time. A poor father buys five years for his daughter, then discovers the cost is being taken from someone close to him.",
+    "rank": 21,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 3"
+    ],
+    "scores": {
+      "potential": 8.6,
+      "virality": 8.7
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.805192",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_5f1513c3",
+    "saved_at": "2026-10-23T00:27:21.637808",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Person Had a Countdown Above Their Head Showing the Last Time They Would See You?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A man sees countdowns above people. At first he uses them to repair relationships. Then a stranger's countdown reads zero, even though they have never met. Ideas 21–35 provide variety beyond eerie houses and mysterious messages.",
+    "rank": 20,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.5,
+      "virality": 8.8
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.793716",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_298629c9",
+    "saved_at": "2026-10-23T00:27:21.628644",
+    "pilot": null
+  },
+  {
+    "topic": "What If Everyone at Your Wedding Knew How Your Marriage Would End?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Guests receive anonymous predictions before the ceremony. Some refuse to attend. The bride and groom investigate the sender, and each discovery reveals a secret that could destroy the wedding before it begins.",
+    "rank": 19,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.5,
+      "virality": 8.7
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.782413",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_b13d81e3",
+    "saved_at": "2026-10-23T00:27:21.619872",
+    "pilot": null
+  },
+  {
+    "topic": "What If the Sea Returned Everything It Had Ever Taken?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Objects begin washing ashore: decades-old boats, lost jewellery and messages in bottles. Then a fishing boat returns with its crew apparently unchanged, despite having disappeared 40 years earlier.",
+    "rank": 18,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.6,
+      "virality": 8.9
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.770861",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_43d7678a",
+    "saved_at": "2026-10-23T00:27:21.610598",
+    "pilot": null
+  },
+  {
+    "topic": "What If Your Neighbours Were Living the Exact Same Day as You?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A man notices that his neighbours repeat the same conversations every morning. Their homes contain subtle differences, and each family seems to be stuck in a different version of the same day.",
+    "rank": 17,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.7,
+      "virality": 8.8
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.760595",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_50042959",
+    "saved_at": "2026-10-23T00:27:21.601824",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Could Meet One Person From Your Past for Exactly Ten Minutes?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A strange machine allows a man one meeting with anyone from his past. He chooses his deceased mother, but learns that each meeting erases a different memory. He must decide which memory is worth keeping.",
+    "rank": 16,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.7,
+      "virality": 8.9
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.749024",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_157f28f1",
+    "saved_at": "2026-10-23T00:27:21.594399",
+    "pilot": null
+  },
+  {
+    "topic": "What If Everyone in Your Town Lost One Hour of Their Memory Every Day?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Shopkeepers find unexplained sales, families discover new injuries and a schoolteacher notices the same hour missing from every student's day. A hidden pattern links the missing hour to one abandoned building.",
+    "rank": 15,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.8,
+      "virality": 8.8
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.739114",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_cab47969",
+    "saved_at": "2026-10-23T00:27:21.586619",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Were Paid ₹1 Lakh Every Day to Do Nothing?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "PILOT #5 (Moral dilemma, relatable desire and escalating consequences). A stranger offers a man an enormous salary, on one condition: he must remain inside his apartment and follow no instructions from anyone. The money arrives reliably, but every attempt to leave threatens someone else's life. [Scene 1: The Village in Fear Prompt: A small, rustic Indian village at night un - SeaArt AI](https://images.openai.com/static-rsc-4/HQ9bp1rODbRf2umgBwZcmetlULcOWCqcQmJF7V-MEf5ntZofPgMeirBaUeweLS-X9S4L9w8n25AgZFtBb_Jqed6ouztH8cjB-r9gMZIpP2N469RXlXjr8rnYUfCskSiK5Z921w0uXviY7qUSnYEJyCWm-ZjL1O7AdnKF0ocrA2Q?purpose=inline)",
+    "rank": 14,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.8,
+      "virality": 8.9
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "pilot": 5,
+    "updated_at": "2026-10-23T00:29:18.728334",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_0a966561",
+    "saved_at": "2026-10-23T00:27:21.577084"
+  },
+  {
+    "topic": "What If You Bought a Train Ticket to a City That Didn't Exist?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "A cheap ticket takes a student to an unlisted station. The city looks ordinary, except everyone remembers a different version of his childhood. He must find the station before the last train departs.",
+    "rank": 13,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.9,
+      "virality": 9.0
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.717119",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_593704a1",
+    "saved_at": "2026-10-23T00:27:21.568482",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Village Well Started Returning Things Lost 100 Years Ago?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Jewellery, letters and photographs begin emerging from a well. Families recover lost heirlooms until a sealed metal box surfaces, containing evidence of a crime that shaped the village.",
+    "rank": 12,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 8.9,
+      "virality": 9.1
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.706308",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_623d645c",
+    "saved_at": "2026-10-23T00:27:21.559420",
+    "pilot": null
+  },
+  {
+    "topic": "What If Different Rooms in Your House Were in Different Years?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Your kitchen is in 2026, your bedroom in 2010, and the locked storeroom in 2040. A family tries to use the time differences to prevent a tragedy, only to discover that changing one room changes all the others.",
+    "rank": 11,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 2"
+    ],
+    "scores": {
+      "potential": 9.0,
+      "virality": 9.0
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.695204",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_b704b8a5",
+    "saved_at": "2026-10-23T00:27:21.550127",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Woke Up Inside a Shopping Mall That Had No Exit?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.2 Setting: Modern Indian mall · 20–22 min Hook: A security guard finishes his night shift. Every exit opens back into the same mall corridor. Escalation: Elevators return to the same floor. CCTV shows him entering rooms he has not visited. The food court slowly fills with people who claim they have been trapped for months. Major twist: The mall changes according to what each trapped person is trying to escape. Ending: The guard discovers a functioning exit, but it leads to a place he has spent years trying to forget. Ideas 11–20 explore stranger premises, moral dilemmas and reality-bending situations.",
+    "rank": 10,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.0,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-29T07:31:01.109777",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_80be0d1e",
+    "saved_at": "2026-10-23T00:27:21.541418",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Driver on One Highway Passed the Same Truck, No Matter How Fast They Drove?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.3 Setting: Highway between Jaipur and Delhi · 20 min Hook: A truck driver overtakes the same white truck three times in 40 minutes. The truck has no registration plate, and the driver never turns his head. Escalation: Other motorists report the same encounter. Police set up a checkpoint. Dashcam footage shows the truck appearing miles ahead without passing anyone. Major twist: The truck seems to be travelling toward a location that no longer exists. Ending: The protagonist realizes the truck is following the route of an accident he survived years earlier.",
+    "rank": 9,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.1,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-11-01T10:48:29.326227",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_5d207464",
+    "saved_at": "2026-10-23T00:27:21.533373",
+    "pilot": null
+  },
+  {
+    "topic": "What If You Were the Only Person Who Remembered Yesterday?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.2 Setting: Delhi · 20 min Hook: Everyone remembers waking up this morning, but nobody remembers yesterday. You remember everything. Escalation: You use your memories to prevent accidents, predict decisions and expose a crime. The next morning, the same thing happens again. Major twist: The memories are not being erased randomly. Someone is selectively removing a particular day's events. Ending: You learn that the only person who can stop the cycle is someone whose existence you had forgotten.",
+    "rank": 8,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.2,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.661346",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_92e4c11d",
+    "saved_at": "2026-10-23T00:27:21.523486",
+    "pilot": null
+  },
+  {
+    "topic": "What If Your House Had a Room That Appeared Only When Nobody Was Looking?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "PILOT #4 (Supernatural-style mystery without claiming a real haunting). Virality 9.5 Setting: Old Lucknow house · 20 min Hook: A family renovating their ancestral house discovers a room on a floor plan. It appears in photographs, but vanishes when they walk toward it. Escalation: They mark the walls, install cameras and consult an architect. The room appears in a different part of the house each night. Major twist: Every appearance contains an object belonging to a different family member's childhood. Ending: The youngest child walks into the room while everyone is watching.",
+    "rank": 7,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.3,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-24T02:28:06.377095",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_3f1b2d08",
+    "saved_at": "2026-10-23T00:27:21.515821",
+    "pilot": 4
+  },
+  {
+    "topic": "What If an Entire Himalayan Village Disappeared Overnight, but Its Lights Stayed On?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.5 Setting: Uttarakhand · 22 min Hook: A rescue team reaches a remote village after a landslide. Every house is intact. Food is still warm. But not one person remains. Escalation: Footprints stop abruptly, phone recordings contain unexplained gaps, and the village's electricity meter shows consumption from houses that appear empty. Major twist: One rescue worker discovers evidence that the villagers had prepared for the disappearance months in advance. Ending: A distress call arrives from a village that officially no longer exists.",
+    "rank": 6,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.4,
+      "virality": null
+    },
+    "viral_potential": 9,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-28T05:06:42.680333",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_0abf9aba",
+    "saved_at": "2026-10-23T00:27:21.506430",
+    "pilot": null
+  },
+  {
+    "topic": "What If Every Person in Your Village Received a Letter Predicting Their Death Date?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.5 Setting: Bihar village · 20–22 min Hook: Every household receives a sealed letter. Each contains one resident's name and an exact date. Escalation: One prediction comes true by coincidence. People change their routines, hide from family members and accuse a local postman. Major twist: The dates change whenever someone attempts to avoid their predicted fate. Ending: The protagonist finds a letter addressed to a child who has not yet been born.",
+    "rank": 5,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.5,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-10-23T00:29:18.629524",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_d5b478d8",
+    "saved_at": "2026-10-23T00:27:21.495605",
+    "pilot": null
+  },
+  {
+    "topic": "What If Mumbai Received a Warning That the Entire City Would Flood in 48 Hours?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "PILOT #3 (Large-scale disaster and survival). Virality 9.5 Setting: Mumbai · 22 min Hook: Every phone in Mumbai receives the same message: “Leave the city before Thursday at 6 PM.” No agency claims responsibility. Escalation: Traffic locks up, people raid shops, trains stop, and authorities dismiss the warning. A local engineer discovers that several independent systems point toward a catastrophic flood. Major twist: The warning is genuine, but the predicted cause is wrong. Ending: The protagonist must decide whether to save his family or stay behind to open a floodgate that could save thousands. This is speculative fiction, not a real forecast.",
+    "rank": 4,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.6,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "pilot": 3,
+    "updated_at": "2026-10-23T00:29:18.619064",
+    "added_by": "user",
+    "stage": "potential",
+    "id": "topic_79e0743e",
+    "saved_at": "2026-10-23T00:27:21.486870"
+  },
+  {
+    "topic": "What If Your Phone Started Receiving Calls From People Who Died Years Ago?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "Virality 9.6 Setting: Indian family home · 20 min Hook: At midnight, a man receives a call from his dead father. His father says only one sentence: “Don't let your mother open the cupboard.” Escalation: Other dead relatives begin calling. Each gives a warning that seems unrelated. The family starts suspecting one another. Major twist: All the callers are connected to a single event that the family deliberately concealed. Ending: The final call comes from the protagonist himself, dated 20 years in the future.",
+    "rank": 3,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.6,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "updated_at": "2026-11-01T10:03:47.299124",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_9db3888d",
+    "saved_at": "2026-10-23T00:27:21.478511",
+    "pilot": null
+  },
+  {
+    "topic": "What If a Train Arrived at an Indian Station Every Night Carrying the Same Missing Passengers?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "PILOT #2 (Indian setting, mystery and emotional stakes). Virality 9.7 Setting: Small-town India · 20–22 min Hook: At 2:17 AM, a train arrives at a station that has been closed for 15 years. Every passenger is someone who disappeared in the surrounding district. Escalation: The stationmaster recognizes a missing schoolteacher. Police refuse to believe him. One night, he sees his own daughter among the passengers. Major twist: The train is arriving from a date that hasn't happened yet. Ending: He has one night to prevent the disappearance that will put his daughter aboard.",
+    "rank": 2,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.7,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "pilot": 2,
+    "updated_at": "2026-10-26T01:00:40.876405",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_229990e4",
+    "saved_at": "2026-10-23T00:27:21.470212"
+  },
+  {
+    "topic": "What If Your CCTV Showed Someone Entering Your House Tomorrow?",
+    "channel": "Beyond3Baje",
+    "category": "What If (long story)",
+    "source_type": "creator_notion",
+    "notes": "PILOT #1 (Suspense and a near-future premise). Virality 9.8 Setting: Pune apartment · 20–22 min Hook: A man checks his CCTV footage and sees himself entering his house tomorrow night. But in the recording, he is carrying a bloodstained bag. Escalation: He stays home the next night, changes the locks, and asks a friend to watch him. The footage keeps changing as the predicted time approaches. Major twist: The footage wasn't predicting what he would do. It was showing what someone else was going to make him do. Ending: He finds a second camera recording a different version of the same night.",
+    "rank": 1,
+    "format": "what_if",
+    "tags": [
+      "what_if",
+      "Tier 1"
+    ],
+    "scores": {
+      "potential": 9.8,
+      "virality": null
+    },
+    "viral_potential": 10,
+    "idea_list": "35 new Beyond3baje video ideas (2026-10-23)",
+    "pilot": 1,
+    "updated_at": "2026-10-30T11:41:37.116815",
+    "added_by": "user",
+    "stage": "in_progress",
+    "id": "topic_c166008c",
+    "saved_at": "2026-10-23T00:27:21.468076"
+  },
+  {
+    "topic": "The chain of failures and improvisations that saved Apollo 13",
+    "channel": "Beyond3Baje",
+    "category": "History",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.3,
+    "rank": 20,
+    "scores": {
+      "potential": 8.4,
+      "virality": 8.3
+    },
+    "notes": "Creator's ranked list (2026-10-21) #20: potential 8.4/10, virality 8.3/10. Overlaps with #10 (the explosion): a different angle on the same mission. Do not produce both close together.",
+    "id": "topic_4e03dda5",
+    "saved_at": "2026-10-21T23:54:05.343375",
+    "updated_at": "2026-10-21T23:54:05.343375",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Jadav Payeng: one man spends decades turning a sandbar into a forest",
+    "channel": "Beyond3Baje",
+    "category": "Endurance",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.3,
+    "rank": 19,
+    "scores": {
+      "potential": 8.5,
+      "virality": 8.3
+    },
+    "notes": "Creator's ranked list (2026-10-21) #19: potential 8.5/10, virality 8.3/10.",
+    "id": "topic_16f381c5",
+    "saved_at": "2026-10-21T23:54:05.337008",
+    "updated_at": "2026-10-21T23:54:05.337008",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Predjama Castle: the siege defeated by a secret cave, until a toilet betrayed its owner",
+    "channel": "Beyond3Baje",
+    "category": "History",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.0,
+    "rank": 18,
+    "scores": {
+      "potential": 8.6,
+      "virality": 9.0
+    },
+    "notes": "Creator's ranked list (2026-10-21) #18: potential 8.6/10, virality 9.0/10.",
+    "id": "topic_40242c6e",
+    "saved_at": "2026-10-21T23:54:05.330290",
+    "updated_at": "2026-10-25T10:28:14.536681",
+    "added_by": "user",
+    "stage": "in_progress"
+  },
+  {
+    "topic": "Ernest Shackleton's 800-mile open-boat journey",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.6,
+    "rank": 17,
+    "scores": {
+      "potential": 8.7,
+      "virality": 8.6
+    },
+    "notes": "Creator's ranked list (2026-10-21) #17: potential 8.7/10, virality 8.6/10. Overlaps with #7 (the Endurance): a different angle on the same expedition. Do not produce both close together.",
+    "id": "topic_8e496c44",
+    "saved_at": "2026-10-21T23:54:05.323028",
+    "updated_at": "2026-10-21T23:54:05.323028",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Steven Callahan: 76 days alone in a leaking life raft",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.5,
+    "rank": 16,
+    "scores": {
+      "potential": 8.7,
+      "virality": 8.5
+    },
+    "notes": "Creator's ranked list (2026-10-21) #16: potential 8.7/10, virality 8.5/10.",
+    "id": "topic_5b2d059f",
+    "saved_at": "2026-10-21T23:54:05.315486",
+    "updated_at": "2026-10-21T23:54:05.315486",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Mauro Prosperi: lost during a race and gone into the Sahara for nine days",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.0,
+    "rank": 15,
+    "scores": {
+      "potential": 8.8,
+      "virality": 9.0
+    },
+    "notes": "Creator's ranked list (2026-10-21) #15: potential 8.8/10, virality 9.0/10.",
+    "id": "topic_6bf8e43c",
+    "saved_at": "2026-10-21T23:54:05.308303",
+    "updated_at": "2026-10-21T23:54:05.308303",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Chilean miners: 33 men, 69 days, 700 m underground",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.7,
+    "rank": 14,
+    "scores": {
+      "potential": 8.9,
+      "virality": 8.7
+    },
+    "notes": "Creator's ranked list (2026-10-21) #14: potential 8.9/10, virality 8.7/10.",
+    "id": "topic_467dff97",
+    "saved_at": "2026-10-21T23:54:05.300383",
+    "updated_at": "2026-10-21T23:54:05.300383",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Dashrath Manjhi: 22 years cutting through a mountain by hand",
+    "channel": "Beyond3Baje",
+    "category": "Endurance",
+    "source_type": "creator_ranked",
+    "viral_potential": 8.6,
+    "rank": 13,
+    "scores": {
+      "potential": 8.9,
+      "virality": 8.6
+    },
+    "notes": "Creator's ranked list (2026-10-21) #13: potential 8.9/10, virality 8.6/10.",
+    "id": "topic_cf48425b",
+    "saved_at": "2026-10-21T23:54:05.294733",
+    "updated_at": "2026-10-21T23:54:05.294733",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Hiroo Onoda: WWII ended in 1945; his war ended in 1974",
+    "channel": "Beyond3Baje",
+    "category": "Endurance",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.3,
+    "rank": 12,
+    "scores": {
+      "potential": 9.0,
+      "virality": 9.3
+    },
+    "notes": "Creator's ranked list (2026-10-21) #12: potential 9.0/10, virality 9.3/10.",
+    "id": "topic_1bb8bb36",
+    "saved_at": "2026-10-21T23:54:05.285893",
+    "updated_at": "2026-10-21T23:54:05.285893",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Mehran Nasseri: the man who lived inside an airport for 18 years",
+    "channel": "Beyond3Baje",
+    "category": "Endurance",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.4,
+    "rank": 11,
+    "scores": {
+      "potential": 9.0,
+      "virality": 9.4
+    },
+    "notes": "Creator's ranked list (2026-10-21) #11: potential 9.0/10, virality 9.4/10.",
+    "id": "topic_b55c7dd1",
+    "saved_at": "2026-10-21T23:54:05.278421",
+    "updated_at": "2026-10-21T23:54:05.278421",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Apollo 13: an explosion 200,000 miles from Earth",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.0,
+    "rank": 10,
+    "scores": {
+      "potential": 9.1,
+      "virality": 9.0
+    },
+    "notes": "Creator's ranked list (2026-10-21) #10: potential 9.1/10, virality 9.0/10. Overlaps with #20 (the chain of failures): a different angle on the same mission. Do not produce both close together.",
+    "id": "topic_24464846",
+    "saved_at": "2026-10-21T23:54:05.270751",
+    "updated_at": "2026-10-21T23:54:05.270751",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Poon Lim: 133 days alone on an 8-foot raft",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.3,
+    "rank": 9,
+    "scores": {
+      "potential": 9.2,
+      "virality": 9.3
+    },
+    "notes": "Creator's ranked list (2026-10-21) #9: potential 9.2/10, virality 9.3/10.",
+    "id": "topic_4c30f173",
+    "saved_at": "2026-10-21T23:54:05.264573",
+    "updated_at": "2026-10-21T23:54:05.264573",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Ada Blackjack: an Inuit seamstress left almost alone on an Arctic island",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.2,
+    "rank": 8,
+    "scores": {
+      "potential": 9.2,
+      "virality": 9.2
+    },
+    "notes": "Creator's ranked list (2026-10-21) #8: potential 9.2/10, virality 9.2/10.",
+    "id": "topic_1e428bf1",
+    "saved_at": "2026-10-21T23:54:05.258778",
+    "updated_at": "2026-10-21T23:54:05.258778",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Shackleton's Endurance: 28 men stranded in Antarctica, all survive",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.0,
+    "rank": 7,
+    "scores": {
+      "potential": 9.3,
+      "virality": 9.0
+    },
+    "notes": "Creator's ranked list (2026-10-21) #7: potential 9.3/10, virality 9.0/10. Overlaps with #17 (the open-boat journey): a different angle on the same expedition. Do not produce both close together.",
+    "id": "topic_914d32d5",
+    "saved_at": "2026-10-21T23:54:05.250977",
+    "updated_at": "2026-10-21T23:54:05.250977",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Vesna Vulović: the woman who fell 10,160 metres without a parachute",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.7,
+    "rank": 6,
+    "scores": {
+      "potential": 9.5,
+      "virality": 9.7
+    },
+    "notes": "Creator's ranked list (2026-10-21) #6: potential 9.5/10, virality 9.7/10.",
+    "id": "topic_03f446ef",
+    "saved_at": "2026-10-21T23:54:05.243256",
+    "updated_at": "2026-10-21T23:54:05.243256",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Thai Cave Rescue: 12 children trapped behind kilometres of flooded cave",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.5,
+    "rank": 5,
+    "scores": {
+      "potential": 9.5,
+      "virality": 9.5
+    },
+    "notes": "Creator's ranked list (2026-10-21) #5: potential 9.5/10, virality 9.5/10.",
+    "id": "topic_26005be0",
+    "saved_at": "2026-10-21T23:54:05.237162",
+    "updated_at": "2026-10-21T23:54:05.237162",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Andes Flight 571: 72 days after a plane disappears into the Andes",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.6,
+    "rank": 4,
+    "scores": {
+      "potential": 9.6,
+      "virality": 9.6
+    },
+    "notes": "Creator's ranked list (2026-10-21) #4: potential 9.6/10, virality 9.6/10.",
+    "id": "topic_11ec7c99",
+    "saved_at": "2026-10-21T23:54:05.229863",
+    "updated_at": "2026-10-21T23:54:05.229863",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Juliane Koepcke: 17-year-old survives a plane breaking apart and walks out of the Amazon",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.7,
+    "rank": 3,
+    "scores": {
+      "potential": 9.7,
+      "virality": 9.7
+    },
+    "notes": "Creator's ranked list (2026-10-21) #3: potential 9.7/10, virality 9.7/10.",
+    "id": "topic_df71f7eb",
+    "saved_at": "2026-10-21T23:54:05.222159",
+    "updated_at": "2026-10-21T23:54:05.222159",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "José Salvador Alvarenga: 438 days drifting across the Pacific",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 9.8,
+    "rank": 2,
+    "scores": {
+      "potential": 9.8,
+      "virality": 9.8
+    },
+    "notes": "Creator's ranked list (2026-10-21) #2: potential 9.8/10, virality 9.8/10.",
+    "id": "topic_73852d4c",
+    "saved_at": "2026-10-21T23:54:05.214752",
+    "updated_at": "2026-10-21T23:54:05.214752",
+    "added_by": "user",
+    "stage": "potential"
+  },
+  {
+    "topic": "Harrison Okene: 60 hours alive inside a ship 30 m underwater",
+    "channel": "Beyond3Baje",
+    "category": "Survival",
+    "source_type": "creator_ranked",
+    "viral_potential": 10.0,
+    "rank": 1,
+    "scores": {
+      "potential": 9.8,
+      "virality": 10.0
+    },
+    "notes": "Creator's ranked list (2026-10-21) #1: potential 9.8/10, virality 10.0/10.",
+    "id": "topic_cc9f7a51",
+    "saved_at": "2026-10-21T23:54:05.212199",
+    "updated_at": "2026-10-26T12:35:28.659367",
+    "added_by": "user",
+    "stage": "in_progress"
+  },
+  {
     "topic": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
     "channel": "Raat3Baje",
     "category": "General",
@@ -743,11 +4479,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:48:18.823504",
-    "updated_at": "2026-09-23T00:48:18.823504"
+    "updated_at": "2026-10-29T08:40:10.254027"
   },
   {
     "id": "topic_f41af97b",
@@ -869,11 +4605,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:50.842767",
-    "updated_at": "2026-09-23T00:47:50.842767"
+    "updated_at": "2026-10-25T14:34:48.876726"
   },
   {
     "id": "topic_dc8bca24",
@@ -900,16 +4636,16 @@
     "channel": "Life3Baje",
     "viral_potential": 0,
     "country": "",
-    "source_type": "idea_dump",
+    "source_type": "strategist",
     "sources_used": [],
     "visual_requirements": [],
     "exclusion_audit": "",
-    "notes": "",
-    "stage": "backlog",
-    "added_by": "user",
+    "notes": "A raw, honest look at the math behind the dream—calculating exactly how much his YouTube channels and Buzzcaf need to generate to replace his software salary.",
+    "stage": "in_progress",
+    "added_by": "nightly",
     "tags": [],
     "saved_at": "2026-09-23T00:47:44.577089",
-    "updated_at": "2026-09-23T00:47:44.577089"
+    "updated_at": "2026-11-01T11:30:29.951512"
   },
   {
     "id": "topic_05089b24",
@@ -923,11 +4659,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:39.192662",
-    "updated_at": "2026-09-23T00:47:39.192662"
+    "updated_at": "2026-11-01T12:07:21.339333"
   },
   {
     "id": "topic_30da5041",
@@ -936,16 +4672,16 @@
     "channel": "Life3Baje",
     "viral_potential": 0,
     "country": "",
-    "source_type": "idea_dump",
+    "source_type": "strategist",
     "sources_used": [],
     "visual_requirements": [],
     "exclusion_audit": "",
-    "notes": "",
-    "stage": "backlog",
-    "added_by": "user",
+    "notes": "A brutally honest audit of the current ecosystem (Buzzcaf + YouTube Channels) to decide where to double down and what to let go of.",
+    "stage": "in_progress",
+    "added_by": "nightly",
     "tags": [],
     "saved_at": "2026-09-23T00:47:33.345450",
-    "updated_at": "2026-09-23T00:47:33.345450"
+    "updated_at": "2026-10-25T11:32:14.297147"
   },
   {
     "id": "topic_fab3c631",
@@ -959,11 +4695,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:29.431317",
-    "updated_at": "2026-09-23T00:47:29.431317"
+    "updated_at": "2026-10-30T12:26:53.351500"
   },
   {
     "id": "topic_54cbf18b",
@@ -995,11 +4731,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:47:20.352084",
-    "updated_at": "2026-09-23T00:47:20.352084"
+    "updated_at": "2026-10-25T14:53:33.501859"
   },
   {
     "id": "topic_8b19f583",
@@ -1085,11 +4821,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:43:29.725616",
-    "updated_at": "2026-09-23T00:43:29.725616"
+    "updated_at": "2026-10-25T12:41:02.923955"
   },
   {
     "id": "topic_87b437e3",
@@ -1121,11 +4857,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:43:07.488433",
-    "updated_at": "2026-09-23T00:43:07.488433"
+    "updated_at": "2026-11-01T07:04:12.858004"
   },
   {
     "id": "topic_e7c27a68",
@@ -1139,11 +4875,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:57.785699",
-    "updated_at": "2026-09-23T00:42:57.785699"
+    "updated_at": "2026-10-25T08:36:01.446414"
   },
   {
     "id": "topic_93b50c1d",
@@ -1157,11 +4893,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:53.354913",
-    "updated_at": "2026-09-23T00:42:53.354913"
+    "updated_at": "2026-10-26T22:21:31.249644"
   },
   {
     "id": "topic_62ec48a5",
@@ -1193,11 +4929,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:35.189287",
-    "updated_at": "2026-09-23T00:42:35.189287"
+    "updated_at": "2026-10-29T05:47:14.326459"
   },
   {
     "id": "topic_95cc2571",
@@ -1211,11 +4947,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:32.363314",
-    "updated_at": "2026-09-23T00:42:32.363314"
+    "updated_at": "2026-10-31T04:44:41.262409"
   },
   {
     "id": "topic_d5dc5128",
@@ -1229,11 +4965,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:24.796755",
-    "updated_at": "2026-09-23T00:42:24.796755"
+    "updated_at": "2026-11-01T03:05:35.395149"
   },
   {
     "id": "topic_1ef5a12d",
@@ -1265,11 +5001,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:42:13.643326",
-    "updated_at": "2026-09-23T00:42:13.643326"
+    "updated_at": "2026-10-30T07:36:33.950787"
   },
   {
     "id": "topic_e4d17488",
@@ -1283,11 +5019,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:41:51.607165",
-    "updated_at": "2026-09-23T00:41:51.607165"
+    "updated_at": "2026-10-29T09:40:41.956998"
   },
   {
     "id": "topic_61b03651",
@@ -1301,11 +5037,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:41:43.023332",
-    "updated_at": "2026-09-23T00:41:43.023332"
+    "updated_at": "2026-10-30T09:27:47.948972"
   },
   {
     "id": "topic_a082733b",
@@ -1319,11 +5055,11 @@
     "visual_requirements": [],
     "exclusion_audit": "",
     "notes": "",
-    "stage": "backlog",
+    "stage": "in_progress",
     "added_by": "user",
     "tags": [],
     "saved_at": "2026-09-23T00:41:26.407748",
-    "updated_at": "2026-09-23T00:41:26.407748"
+    "updated_at": "2026-10-29T08:59:02.227198"
   },
   {
     "id": "topic_4ec49428",

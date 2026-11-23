@@ -165,6 +165,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
               <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Agent Full Name</label>
               <input
                 type="text"
+                aria-label="Agent Full Name"
                 placeholder="e.g. Marcus Cole"
                 value={name}
                 onChange={e => setName(e.target.value)}
@@ -177,6 +178,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
               <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Role / Specialty Title</label>
               <input
                 type="text"
+                aria-label="Role / Specialty Title"
                 placeholder="e.g. Master Horror Scriptwriter"
                 value={role}
                 onChange={e => setRole(e.target.value)}
@@ -222,6 +224,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
               </div>
               <textarea
                 rows={4}
+                aria-label="System prompt"
                 value={systemPrompt}
                 onChange={e => setSystemPrompt(e.target.value)}
                 placeholder="Define instructions, tone of voice, domain expertise, and behavioral boundaries..."
@@ -234,6 +237,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Local LLM Provider</label>
                 <select
                   value={modelProvider}
+                  aria-label="Local LLM Provider"
                   onChange={e => setModelProvider(e.target.value)}
                   style={{ width: '100%', padding: '10px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                 >
@@ -246,6 +250,7 @@ export default function AgentCreatorStudio({ onLaunchGroupChat }: { onLaunchGrou
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Assigned Local Model</label>
                 <select
                   value={modelName}
+                  aria-label="Assigned Local Model"
                   onChange={e => setModelName(e.target.value)}
                   style={{ width: '100%', padding: '10px', background: 'var(--bg-input)', border: '1px solid var(--border-card)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.85rem' }}
                 >

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "a006bc5e-780e-46a0-997e-c434cb8124ed",
+    "scope": "agent",
+    "owner": "WhatIfWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Raat3Baje\", \"format\": \"Anomaly file (SCP-style report)\", \"kind\": \"fiction\", \"format_key\": \"anomaly_file\", \"channel_guide\": \"# Brand Style Guide: Raat3Baje\\n\\n## Essence (read first)\\nFace-led INDIAN horror investigation and folklore channel (evolved from the Case13B concept). The creator is the recognisable on-camera host. \\\"Khayal3Baje tells animated horror stories. Raat3Baje investigates the story behind the story.\\\" It must never become a face-camera Khayal3Baje.\\n- **Universe:** Indian regional horror folklore; rare and obscure entities (Munja, Hadal, Jakhin, Nishi Daak, Chhal",
+      "result_snippet": "```json\n{\n  \"title\": \"What If Science Ke Rules Todne Wala Ek Anomaly Mil Jaye?\",\n  \"title_en\": \"Science Ko Challenge Karne Wala Anomaly\",\n  \"hook_line\": \"Yeh koi jaanwar nahi hai, ye ek 'anomaly' hai jo science ke rules todti hai.\",\n  \"thumbnail_text\": \"SCIENCE KO CHALLENGE KARTA ANOMALY\",\n  \"core_rule\": \"An object or entity that physically ignores the laws of physics (spatial folding, temporal stasis).\",\n  \"script\": \"Yeh koi jaanwar nahi hai, ye ek 'anomaly' hai jo science ke rules todti hai. \\n\\nJab humne pehli baar is cheez ko dekha, toh hamara dimaag ise samajh hi nahi pa raha tha. Yeh ek aisi cheez thi jo physical laws ko ignore kar rahi thi. \\n\\nHumne ise ek band kamre mein rakha aur monitor kiya. Par kuch hi der mein, us cheez ne space ko fold karna shuru kar diya. Mere saamne ki diwaar dhire-dhire gayab hone lagi aur wahan ek dusra kamra dikhne laga jo asliyat mein hona namumkin tha. \\n\\nHumne sensors lagaye aur radiation check kiya, par saare instruments zero dikha rahe the jaise wo cheez wahan exist hi nahi karti. Jab maine uske kareeb jane ki koshish ki, toh mere haath us diwaar ke andar chale gaye jaise wo koi thos cheez ho hi nahi rahi thi. \\n\\nTechnical team ne bataya ki iska vibration frequency humari duniya se match nahi kar raha. Yeh ek aisi jagah se aa raha tha jahan ka physics hamare logic se bilkul alag hai. \\n\\nLekin sabse darawni baat tab hui jab us cheez ne meri awaaz ko copy kiya. Usne bilkul mere tone mein kaha, 'Tumhe yahan nahi hona chahiye tha.' \\n\\nUss pal mujhe samajh aa gaya ki ye koi galti nahi, balki ek jaan-bujhkar banaya gaya trap hai.\",\n  \"caption\": \"Kya science har cheez ka jawab de sakti hai? Ya kuch aisi cheezein hain jo hamare samajh se bahar hain? #Anomaly #Mystery #ScienceFiction\",\n  \"hashtags\": [\"#Raat3Baje\", \"#Anomalies\", \"#ScienceHorror\", \"#Unexplained\", \"#HindiHorror\"],\n  \"on_screen_text\": \"SCIENCE KO CHALLENGE KARTA ANOMALY\",\n  \"estimated_seconds\": 75\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T03:12:01.837546",
+    "updated": "2026-10-29T03:12:01.837550"
+  },
+  {
+    "id": "74e9d835-b717-4e75-b8a6-6debfa98d55c",
+    "scope": "agent",
+    "owner": "WhatIfWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"What If... (second-person horror)\", \"kind\": \"fiction\", \"format_key\": \"what_if\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Austral",
+      "result_snippet": "```json\n{\n  \"title\": \"What If Jungle Ke Beech Ek Akeli Seedhi Aapko Bulaye?\",\n  \"title_en\": \"Jungle Mein Woh Akeli Seedhi\",\n  \"hook_line\": \"Kya aapne kabhi jungle ke beech ek akela, purana seedhi (staircase) dekha hai?\",\n  \"thumbnail_text\": \"JUNGLE MEIN SEEDHI\",\n  \"core_rule\": \"The staircase leads to a space that shouldn't exist physically.\",\n  \"script\": \"Kya aapne kabhi jungle ke beech ek akela, purana seedhi dekha hai? \\n\\nRaat ka waqt hai aur aap ek ghane forest ke beechon-beech khade hain. Charo taraf sannata hai, lekin saamne ek lakdi ki purani seedhi (staircase) dikhayi deti hai.\\n\\nYeh kisi building se nahi judi hai. Yeh bas hawa mein, mitti par khadi hai. \\n\\nAapka dimaag kehta hai ki ye koi prank ya art installation hai. Aap iske paas jaate hain aur ise touch karte hain.\\n\\nSannata toot-ta hai. Jab aap upar dekhte hain, toh seedhiyan khatam nahi hoti\u2014woh ek purane mansion ke corridor mein jaati hain jo dhund (fog) se dhaka hua hai.\\n\\nAap andar kadam rakhte hain aur peeche mudte hain. Peeche ab jungle nahi, balki wahi seedhiyan hain jo kisi aur duniya ki taraf ja rahi hain.\\n\\nTabhi aapko apne kaan ke paas ek awaaz sunayi deti hai: \\\"Tumne pehle bhi yahan aana tha.\\\" \\n\\n(pause)\\n\\nAur phir, aapko ehsas hota hai ki aapke kadmon ki aahat do nahi, balki teen hain.\",\n  \"caption\": \"Kya ye sirf ek bhram hai ya kisi aur duniya ka rasta? Kya aap upar chadhenge? #Shorts #Horror #Mystery\",\n  \"hashtags\": [\"#Raat3Baje\", \"#Beyond3Baje\", \"#UrbanLegends\", \"#Paranormal\", \"#HindiHorror\"],\n  \"on_screen_text\": \"JUNGLE MEIN SEEDHI\",\n  \"estimated_seconds\": 74\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-29T03:16:29.176979",
+    "updated": "2026-10-29T03:16:29.176983"
+  },
+  {
+    "id": "5aa3cde3-5301-494d-8268-47a83d07c56c",
+    "scope": "agent",
+    "owner": "WhatIfWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Anomaly file (SCP-style report)\", \"kind\": \"fiction\", \"format_key\": \"anomaly_file\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Aust",
+      "result_snippet": "```json\n{\n  \"title\": \"What If Pentagon ki Files se UAP Sach Samne Aaye?\",\n  \"title_en\": \"Pentagon ki Secret Files: UAP Reality\",\n  \"hook_line\": \"Pentagon ne haal hi mein kuch aise documents release kiye hain jo humein 'unidentified anomalous phenomena' ke baare mein batate hain.\",\n  \"thumbnail_text\": \"PENTAGON KI SECRET FILES\",\n  \"core_rule\": \"Objects that defy known physics, like instant acceleration and silent hovering.\",\n  \"script\": \"Pentagon ne haal hi mein kuch aise documents release kiye hain jo humein 'unidentified anomalous phenomena' ke baare mein batate hain.\\n\\nYeh sirf koi purani UFO stories nahi hain. In files mein pichle kai dashakon ka data hai, jismein astronauts aur pilots ne aisi cheezein dekhi hain jo hamare physics ke rules ko challenge karti hain.\\n\\nIn documents mein ek specific pattern dikhta hai: objects jo bina kisi engine ke noise ke extreme speeds par travel karte hain. Ye sirf 'flying' nahi kar rahe, balki space ko manipulate karte hue lagte hain.\\n\\nSawaal ye nahi ki wo kya hain, balki sawal ye hai ki agar humne unhe pehchaan liya, toh uska matlab kya hoga? \\n\\nResearch se pata chalta hai ki ye objects 'instantaneous acceleration' dikhate hain\u2014ek second mein rukna aur agle hi pal hawa mein gayab ho jana.\\n\\nYe koi technical error nahi, balki ek physical impossibility hai jo ab officially record ki gayi hai. \\n\\nKya hum sach mein akele hain, ya kuch aur hamare beech se guzarta raha hai aur humein pata hi nahi chala? \\n\\n(pause)\\n\\nAb sawal ye hai: agar wo humein dekh rahe hain, toh kya hum unhe dekhenge?\",\n  \"caption\": \"Pentagon ne ab officially accept kar liya hai ki kuch aisi cheezein hain jo hamari samajh se bahar hain. Kya aapne kabhi koi aisi 'anomalous' cheez dekhi hai? #UAP #PentagonFiles #Mystery\",\n  \"hashtags\": [\"#Beyond3Baje\", \"#UAP\", \"#PentagonFiles\", \"#Unexplained\", \"#Anomaly\", \"#SpaceMystery\"],\n  \"on_screen_text\": \"PENTAGON KI SECRET FILES\",\n  \"estimated_seconds\": 72\n}\n```"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T03:07:53.665088",
+    "updated": "2026-10-30T03:07:53.665091"
+  },
+  {
+    "id": "f614caf2-9e46-4d02-8898-7e55ecf65f57",
+    "scope": "agent",
+    "owner": "WhatIfWriter",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"channel\": \"Beyond3Baje\", \"format\": \"Anomaly file (SCP-style report)\", \"kind\": \"fiction\", \"format_key\": \"anomaly_file\", \"channel_guide\": \"# Brand Style Guide: Beyond3Baje\\n\\n## Essence (read first)\\nFace-led Hinglish channel investigating INTERNATIONAL paranormal phenomena. Vibe: \\\"Raat ko baithkar ek dost tumhe duniya ke kisi kone ki strange story investigate karke suna raha hai.\\\"\\n- **Geography rule:** subjects OUTSIDE INDIA only (US, Canada, Mexico, Latin America, Japan, South Korea, China, Southeast Asia, Europe, UK, Ireland, Scandinavia, Eastern Europe, Russia, Middle East, Africa, Aust",
+      "result_snippet": "```json\n{\n  \"title\": \"What If Reality ka Script hi Badalne Lage? (Narrative Anomaly)\",\n  \"title_en\": \"Reality ke Rules Todne Wali Cheez\",\n  \"hook_line\": \"Kya ho agar koi anomaly sirf ek 'narrative' ho? Ek aisi cheez jo reality ke rules ko follow hi nahi karti.\",\n  \"thumbnail_text\": \"REALITY BREAK DOWN\",\n  \"core_rule\": \"The anomaly consumes the narrative logic of its surroundings, making events occur as if following an impossible script.\",\n  \"script\": \"Kya ho agar koi anomaly sirf ek 'narrative' ho? Ek aisi cheez jo reality ke rules ko follow hi nahi karti.\\n\\nImagine kijiye ek aisa zone jahan physics ya logic kaam nahi karte, balki wahan ki cheezein kisi script par chalti hain. Isko hum ek 'Narrative Anomaly' kehte hain.\\n\\n[SFX: Distant, distorted glitch sound]\\n\\nIs anomaly ke andar, waqt aur space stable nahi rehte. Agar koi insaan is zone mein enter karta hai, toh uske actions random nahi hote, balki wo ek fixed 'storyline' ka hissa ban jaate hain.\\n\\n[Beat: Logic check]\\n\\nAap koshish karte hain ki normal tareeke se bahar niklein, lekin aapka har move pehle se decide hota hai. Aap jo bolna chahte hain, woh words nahi balki ek scripted dialogue ban kar nikalta hai.\\n\\n[SFX: High-pitched digital distortion]\\n\\nYe koi dimaagi bimari ya hallucination nahi hai; ye reality ka fabric hi phat raha hai. Is area mein physics ki jagah 'plot points' ne le li hai.\\n\\nLekin sabse darawni baat tab pata chalti hai jab aap notice karte hain ki aapke peeche ke log, aur shayad aapka apna aks, bhi usi script ko follow kar rahe hain.\\n\\n[Pause]\\n\\nAur phir, ek pal aisa aata hai jab script 'glitch' karti hai. Aapko ehsas hota hai ki agar aapne is moment mein koi galat move kiya, toh story end ho jayegi... aur aapka wajood us kahani se hamesha ke liye mita diya jayega.\\n\\n(pause)\\n\\n\"What if the narrator realizes they are being watched by someone who is rewriting your script right now?\"\",\n  \"caption\": \"Kya hum apni marzi se jee rahe hain, ya hum sirf ek likhi hui kahani ka hissa hain"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-30T03:08:16.861709",
+    "updated": "2026-10-30T03:08:16.861711"
+  }
+]

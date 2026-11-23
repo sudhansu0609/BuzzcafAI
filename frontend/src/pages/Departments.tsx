@@ -97,6 +97,7 @@ export default function Departments() {
                   type="text"
                   className="form-control"
                   style={{ flex: 1, minWidth: 260 }}
+                  aria-label={`Ask ${dept.name}`}
                   placeholder={`Ask ${dept.name}…`}
                   value={task[dept.name] || ''}
                   onChange={(e) => setTask((prev) => ({ ...prev, [dept.name]: e.target.value }))}
@@ -105,6 +106,7 @@ export default function Departments() {
                 <select
                   className="form-control"
                   style={{ width: 'auto' }}
+                  aria-label={`Role for ${dept.name}`}
                   value={role[dept.name] || ''}
                   onChange={(e) => setRole((prev) => ({ ...prev, [dept.name]: e.target.value }))}
                 >

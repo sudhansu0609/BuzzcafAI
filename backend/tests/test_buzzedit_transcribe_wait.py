@@ -117,3 +117,51 @@ def test_an_immediate_answer_still_works(client, monkeypatch):
     monkeypatch.setattr(client, "_post", lambda path, body=None, timeout=None: _Resp(500, {"detail": "boom"}))
     with pytest.raises(BuzzEditJobFailed, match="boom"):
         client.transcribe("p1")
+
+
+def test_a_busy_buzzedit_does_not_count_as_gone(client, monkeypatch):
+    """2026-10-20: BuzzEdit answered its status polls late (an ffmpeg join on
+    the event loop) and the Studio counted the read timeouts towards the
+    unreachable grace. A timeout means busy: the wait goes on until the job
+    moves, bounded only by the stall ceiling."""
+    polls = iter([
+        BuzzEditTimeout("read timed out"),
+        BuzzEditTimeout("read timed out"),
+        BuzzEditTimeout("read timed out"),
+        {"status": "running", "stage": "verifying the cut"},
+        BuzzEditTimeout("read timed out"),
+        {"status": "completed", "stage": "saving the transcript"},
+    ])
+
+    def get(path, timeout=None):
+        nxt = next(polls)
+        if isinstance(nxt, Exception):
+            raise nxt
+        return _Resp(200, nxt)
+
+    monkeypatch.setattr(client, "_get", get)
+    monkeypatch.setattr(buzzedit_client, "UNREACHABLE_GRACE_SECONDS", 0)  # would end it at once if counted
+    result = client.wait_for_transcription("p1", stall_seconds=3600, max_seconds=7200)
+    assert result["status"] == "completed"
+
+
+def test_a_refused_connection_still_ends_the_wait_after_the_grace(client, monkeypatch):
+    def get(path, timeout=None):
+        raise BuzzEditUnavailable("refused")
+
+    monkeypatch.setattr(client, "_get", get)
+    monkeypatch.setattr(buzzedit_client, "UNREACHABLE_GRACE_SECONDS", -1)
+    with pytest.raises(BuzzEditUnavailable):
+        client.wait_for_transcription("p1")
+
+
+def test_every_answer_is_remembered(monkeypatch):
+    """`seconds_since_answer` is what the watchdogs read to tell busy from hung."""
+    monkeypatch.setattr(buzzedit_client, "base_url", lambda: "http://buzzedit.test")
+    monkeypatch.setattr(buzzedit_client, "_last_answer_at", None)
+    assert buzzedit_client.seconds_since_answer() is None
+    monkeypatch.setattr(requests, "request", lambda *a, **k: _Resp(200, {"ok": True}))
+    BuzzEditClient()._get("/api/health", timeout=(1, 1))
+    assert buzzedit_client.answered_within(5)
+    monkeypatch.setattr(buzzedit_client, "_last_answer_at", buzzedit_client.time.monotonic() - 100)
+    assert not buzzedit_client.answered_within(5)

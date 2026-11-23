@@ -1,89 +1,222 @@
 {
-  "started_at": "2026-10-01T03:00:21",
-  "scope": "all",
+  "started_at": "2026-11-01T03:00:06",
+  "scope": "shorts",
   "tasks": [
     {
       "task": "shorts_daily",
-      "seconds": 519,
+      "seconds": 1776,
       "built": [
         {
           "channel": "Life3Baje",
-          "format": "poem",
-          "project_id": "2026-10-01_Life3Baje_ShortDheereDheereBadhtiTamanna",
-          "title": "Dheere Dheere Badhti Tamanna ⏳",
-          "score": 75
+          "format": "shayari",
+          "project_id": "2026-11-01_Life3Baje_ShortApniKaamiyonSeLadnaSeekho",
+          "title": "Apni Kamiyon Se Ladna Seekho 🎻",
+          "score": 82
         },
         {
           "channel": "Life3Baje",
-          "format": "poem",
-          "project_id": "2026-10-01_Life3Baje_ShortAsliBrandVsFakeMarketing",
-          "title": "Asli Brand vs Fake Marketing 🎭",
-          "score": 72
-        },
-        {
-          "channel": "Raat3Baje",
-          "format": "ghost_story",
-          "project_id": "2026-10-01_Raat3Baje_ShortGuligaAggressiveSpirit",
-          "title": "Guliga: Ek Khatarnak Shaitaan 🔥",
-          "score": 85
-        },
-        {
-          "channel": "Raat3Baje",
-          "format": "ghost_story",
-          "project_id": "2026-10-01_Raat3Baje_ShortShraapWalaGaonTimeStop",
-          "title": "Shraap Wala Gaon: Jahan Waqt Ruk Gaya ⏳",
-          "score": 75
-        },
-        {
-          "channel": "Beyond3Baje",
-          "format": "urban_legend",
-          "project_id": "2026-10-01_Beyond3Baje_ShortWestVirginiaMothmanMystery",
-          "title": "West Virginia ka Khauf: The Mothman 👁️",
+          "format": "shayari",
+          "project_id": "2026-11-01_Life3Baje_ShortKhayaleTaamirNayiShuruat",
+          "title": "Khayale-Taamir: Nayi Shuruat 🏗️",
           "score": 78
         },
         {
+          "channel": "Raat3Baje",
+          "format": "folklore_entity",
+          "project_id": "2026-11-01_Raat3Baje_ShortKeralaKaKhaufnakShaitanChaathan",
+          "title": "Kerala Ka Khaufnak Shaitan: Chaathan Ka Sach",
+          "score": 74
+        },
+        {
           "channel": "Beyond3Baje",
-          "format": "urban_legend",
-          "project_id": "2026-10-01_Beyond3Baje_ShortUrbanMythTruthOrFiction",
-          "title": "Urban Legends: Sach ya Sirf Kahani? 🎭",
-          "score": 65
+          "format": "encounter",
+          "project_id": "2026-11-01_Beyond3Baje_ShortTravisWaltonArizonaAlienAbduction",
+          "title": "Travis Walton: Arizona ka Alien Abduction",
+          "score": 76
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "format": "crime",
+          "project_id": "2026-11-01_TheTallStoryteller_Short8CroreLootAurSurrender",
+          "title": "8 Crore Loot Aur Surrender Ka Twist",
+          "score": 72
+        },
+        {
+          "channel": "TheTallStoryteller",
+          "format": "crime",
+          "project_id": "2026-11-01_TheTallStoryteller_ShortJewelThiefKaAakhiriTrap",
+          "title": "Jewel Thief Ka Aakhiri Trap",
+          "score": 70
         }
       ],
       "skipped": []
     },
     {
-      "task": "longform",
-      "seconds": 9384,
-      "built": [
-        {
-          "channel": "Raat3Baje",
-          "project_id": "2026-10-01_Raat3Baje_GataLoopsKerulesRaatKoJoMautKoRokteHainTheSurvivalRulesOfTheHighPass",
-          "title": "Gata Loops ke 'Rules': Raat ko jo maut ko rokte hain | The Survival Rules of the High Pass",
-          "current_step": "Visual Plan"
-        },
-        {
-          "channel": "Beyond3Baje",
-          "project_id": "2026-10-01_Beyond3Baje_DyatlovPass1959KaWohRaazwhyTheyRan",
-          "title": "Dyatlov Pass: 1959 ka Woh Raaz (Why They Ran?)",
-          "current_step": "Visual Plan"
-        },
+      "task": "auto_story",
+      "seconds": 5013,
+      "made": [],
+      "failed": [
         {
           "channel": "Life3Baje",
-          "project_id": "2026-10-01_Life3Baje_WhenDoesAYoutubeChannelBecomeAnactualBusiness",
-          "title": "When does a YouTube channel become an 'Actual Business'?",
-          "current_step": "Visual Plan"
+          "format": "mood_reel",
+          "error": "BuzzEdit's vibe reel has shown no progress for 75 minutes."
         }
-      ],
-      "skipped": []
+      ]
+    },
+    {
+      "task": "director",
+      "seconds": 12590,
+      "plan_items": 8,
+      "act": {
+        "at": "2026-11-01T08:24:28",
+        "results": [
+          {
+            "item": {
+              "channel": null,
+              "action": "fix_restart_gemini_harness",
+              "params": {},
+              "when": "tonight",
+              "why": "Self-check detected Gemini harness ping failed at 04:55:01; restarting service",
+              "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+              "needs_approval": false
+            },
+            "status": "fix",
+            "result": {
+              "refused": "cooldown: 'fix_restart_gemini_harness:' ran 89s ago"
+            }
+          },
+          {
+            "item": {
+              "channel": null,
+              "action": "fix_start_buzzedit",
+              "params": {},
+              "when": "tonight",
+              "why": "BuzzEdit unreachable on shared port ledger causing Life3Baje vibe reel render failures",
+              "goal": "Nothing fails silently: restart, repair, retry; never deliver a degraded video.",
+              "needs_approval": false
+            },
+            "status": "fix",
+            "result": {
+              "refused": "BuzzEdit is already answering"
+            }
+          },
+          {
+            "item": {
+              "channel": "Raat3Baje",
+              "action": "longform_run_slot",
+              "params": {
+                "format": "real_encounter"
+              },
+              "when": "tonight",
+              "why": "Long-form script first (uses 0 GPU); advances Raat3Baje rotation to real encounter",
+              "goal": "A Raat3Baje long video is a pure story (no analysis), and the five formats take turns: rules, real encounter, fiction, black magic, tantra.",
+              "needs_approval": false
+            },
+            "status": "failed",
+            "error": "The cloned voice is paused -- record the narration yourself, or turn it back on (auto story setting voice_clone_paused)."
+          },
+          {
+            "item": {
+              "channel": "Beyond3Baje",
+              "action": "needs_intro",
+              "params": {
+                "project_id": "2026-10-23_Beyond3Baje_WhatIfAapkeCctvMeinAapKhudKalRaatGharMeinGhusteDikhowhatIfPilot1",
+                "title": "What If Aapke CCTV Mein Aap Khud Kal Raat Ghar Mein Ghuste Dikho (WHAT IF pilot 1)"
+              },
+              "when": "today",
+              "why": "Script complete; awaiting creator on-camera intro recording before production proceeds",
+              "goal": "Every long video opens with a few minutes I record fresh on camera; the rest is my cloned voice. Reels are fully cloned.",
+              "needs_approval": true
+            },
+            "status": "approval_requested",
+            "approval_id": "4da5cba35fc6"
+          },
+          {
+            "item": {
+              "channel": "Raat3Baje",
+              "action": "auto_story_make",
+              "params": {
+                "format": "rules_horror"
+              },
+              "when": "tonight",
+              "why": "First reel in night order; consumes ~2h of 6h GPU budget",
+              "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+              "needs_approval": false
+            },
+            "status": "failed",
+            "error": "The cloned voice is paused -- record the narration yourself, or turn it back on (auto story setting voice_clone_paused)."
+          },
+          {
+            "item": {
+              "channel": "Beyond3Baje",
+              "action": "auto_story_make",
+              "params": {
+                "format": "anomaly_files"
+              },
+              "when": "tonight",
+              "why": "Second reel in night order; consumes ~2h GPU render time",
+              "goal": "Run six channels steadily -- Raat3Baje, Beyond3Baje, Life3Baje, Khayal3Baje, The Tall Storyteller, Originals -- with long videos plus Shorts/reels.",
+              "needs_approval": false
+            },
+            "status": "failed",
+            "error": "The cloned voice is paused -- record the narration yourself, or turn it back on (auto story setting voice_clone_paused)."
+          },
+          {
+            "item": {
+              "channel": "Life3Baje",
+              "action": "auto_story_make_mood_reel",
+              "params": {},
+              "when": "tonight",
+              "why": "Mood reel scheduled last (~30m GPU); Khayal3Baje deferred to tomorrow to preserve GPU safety margin",
+              "goal": "Life3Baje: vlog + motivational. Vibe reels are hyper-real AI clips with 2-4 ghazal lines, no voice.",
+              "needs_approval": false
+            },
+            "status": "failed",
+            "error": "BuzzEdit stopped answering about the vibe reel job 6ebf798ad75f: BuzzEdit is not reachable (not running, or not discoverable on the shared port ledger)."
+          },
+          {
+            "item": {
+              "channel": "Raat3Baje",
+              "action": "step_approval",
+              "params": {
+                "title": "SOYA SMASHAAN NEW"
+              },
+              "when": "today",
+              "why": "Pending step approval on Dashboard waiting for creator decision",
+              "goal": "The Studio makes content by itself overnight; I review, and I approve every publish.",
+              "needs_approval": true
+            },
+            "status": "approval_requested",
+            "approval_id": "a2b67729092e"
+          }
+        ]
+      }
+    },
+    {
+      "task": "archive",
+      "archived": [
+        {
+          "id": "2026-10-24_TheTallStoryteller_ShortDoBailonKiKathaAzadi",
+          "name": "Do Bailon ki Katha: Azadi ka Junoon",
+          "reason": "untouched for 7 days"
+        },
+        {
+          "id": "2026-10-24_TheTallStoryteller_ShortThePitAndPendulumKhaufnaakRaat",
+          "name": "The Pit & Pendulum: Ek Khaufnaak Raat",
+          "reason": "untouched for 7 days"
+        }
+      ]
     }
   ],
   "network": true,
   "lm_studio": true,
-  "finished_at": "2026-10-01T05:46:04",
+  "finished_at": "2026-11-01T08:25:10",
   "hibernate": {
-    "hibernate": true,
-    "reasons": [],
-    "idle_minutes": 251.6,
-    "gpu_percent": 0.2
+    "hibernate": false,
+    "reasons": [
+      "someone used the PC 5.8 min ago (needs 10 min idle)"
+    ],
+    "idle_minutes": 5.8,
+    "gpu_percent": 0.0
   }
 }

@@ -1,0 +1,18 @@
+{"at": "2026-10-28T09:13:31", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-10-28T09:13:40", "action": "fix_kick_queue", "key": "fix_kick_queue:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"kicked\": true}"}
+{"at": "2026-10-28T10:11:28", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "plan", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-10-28T10:11:28", "action": "fix_kick_queue", "key": "fix_kick_queue:", "params": {}, "by": "plan", "ran": true, "ok": true, "result": "{\"kicked\": true}"}
+{"at": "2026-10-29T04:54:49", "action": "fix_restart_claude_proxy", "key": "fix_restart_claude_proxy:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"claude_proxy\": \"started\"}"}
+{"at": "2026-10-29T04:55:18", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-10-29T04:55:27", "action": "fix_kick_queue", "key": "fix_kick_queue:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"kicked\": true}"}
+{"at": "2026-10-29T04:57:49", "action": "fix_offload_models", "key": "fix_offload_models:", "params": {}, "by": "plan", "ran": true, "ok": true, "result": "{\"offloaded\": true}"}
+{"at": "2026-10-29T04:57:50", "action": "fix_restart_claude_proxy", "key": "fix_restart_claude_proxy:", "params": {}, "by": "plan", "ran": false, "refused": "cooldown: 'fix_restart_claude_proxy:' ran 181s ago"}
+{"at": "2026-10-29T04:57:50", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "plan", "ran": false, "refused": "cooldown: 'fix_restart_gemini_harness:' ran 152s ago"}
+{"at": "2026-10-29T04:57:50", "action": "fix_kick_queue", "key": "fix_kick_queue:", "params": {}, "by": "plan", "ran": false, "refused": "cooldown: 'fix_kick_queue:' ran 143s ago"}
+{"at": "2026-10-30T05:05:30", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-10-31T11:06:41", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-10-31T11:10:45", "action": "fix_start_buzzedit", "key": "fix_start_buzzedit:", "params": {}, "by": "plan", "ran": true, "ok": false, "error": "BuzzEdit was launched but did not answer health check within 75 seconds."}
+{"at": "2026-10-31T11:12:09", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "plan", "ran": false, "refused": "cooldown: 'fix_restart_gemini_harness:' ran 328s ago"}
+{"at": "2026-11-01T04:54:52", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "self_check", "ran": true, "ok": true, "result": "{\"gemini_harness\": \"running\"}"}
+{"at": "2026-11-01T04:56:21", "action": "fix_restart_gemini_harness", "key": "fix_restart_gemini_harness:", "params": {}, "by": "plan", "ran": false, "refused": "cooldown: 'fix_restart_gemini_harness:' ran 89s ago"}
+{"at": "2026-11-01T04:56:21", "action": "fix_start_buzzedit", "key": "fix_start_buzzedit:", "params": {}, "by": "plan", "ran": false, "refused": "BuzzEdit is already answering"}

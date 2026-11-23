@@ -39,7 +39,8 @@ class FakeBuzzEdit:
         return "job1"
 
     def eye_contact_status(self, job_id):
-        return {"status": "completed", "progress": 1.0, "stage": "Done", "result": {"frames": 10}}
+        return {"status": "completed", "progress": 1.0, "stage": "Done",
+                "result": {"frames": 10, "lens_source": "measured"}}
 
 
 def test_the_setup_is_saved_on_the_project_and_null_falls_back(project):
@@ -47,7 +48,9 @@ def test_the_setup_is_saved_on_the_project_and_null_falls_back(project):
     r = c.put(f"/api/projects/{PID}/eye_contact",
               json={"enabled": True, "prompter_side": "right", "angle_deg": 12.5, "aim_deg": -2})
     assert r.status_code == 200
-    assert r.json()["setup"] == {"enabled": True, "prompter_side": "right", "angle_deg": 12.5, "aim_deg": -2.0}
+    # Saving a nudge marks it as set since eye gaze v2, so auto mode sends it.
+    assert r.json()["setup"] == {"enabled": True, "prompter_side": "right", "angle_deg": 12.5, "aim_deg": -2.0,
+                                 "nudges_v2": True}
     r = c.put(f"/api/projects/{PID}/eye_contact", json={"angle_deg": None})
     assert "angle_deg" not in r.json()["setup"]
     assert c.put(f"/api/projects/{PID}/eye_contact", json={"angle_deg": 90}).status_code == 422
@@ -55,14 +58,14 @@ def test_the_setup_is_saved_on_the_project_and_null_falls_back(project):
 
 
 def test_correction_targets_the_recording_and_is_not_redone_on_resume(project):
-    project.metadata["eye_contact"] = {"enabled": True, "prompter_side": "left", "angle_deg": 10.0}
+    project.metadata["eye_contact"] = {"enabled": True, "mode": "manual", "prompter_side": "left", "angle_deg": 10.0}
     project.save()
     be = FakeBuzzEdit()
     stages = []
     result = eye_contact_api.correct_recording(PID, be, "be_1", lambda s, f: stages.append((s, f)))
-    # The Studio default aim (-10 deg, toward the viewer's left) goes along unless the project sets one.
-    assert be.started == [("be_1", "m_rec", {"aim_deg": -10.0, "prompter_side": "left", "angle_deg": 10.0})]
-    assert result["report"] == {"frames": 10} and stages
+    # Manual mode sends the geometry as saved; no Studio aim/angle defaults since eye gaze v2.
+    assert be.started == [("be_1", "m_rec", {"mode": "manual", "prompter_side": "left", "angle_deg": 10.0})]
+    assert result["report"]["frames"] == 10 and stages
     # A resumed production with the same setup skips the GPU job...
     eye_contact_api.correct_recording(PID, be, "be_1")
     assert len(be.started) == 1
@@ -151,6 +154,7 @@ def test_keep_alive_starts_buzzedit_only_when_enabled(monkeypatch):
     started = []
     monkeypatch.setattr(buzzedit_client.BuzzEditClient, "health", lambda self: None)
     monkeypatch.setattr(produce_api, "ensure_buzzedit_running", lambda **kw: started.append(1) or {})
+    monkeypatch.setattr(ka, "_buzzedit_alive", lambda: False)  # no real BuzzEdit process counts here
     monkeypatch.setattr(ka, "enabled", lambda: False)
     assert ka.check_once() is False and not started
     monkeypatch.setattr(ka, "enabled", lambda: True)
@@ -165,3 +169,31 @@ def test_the_up_down_aim_is_saved_and_sent_to_buzzedit(project):
     be = FakeBuzzEdit()
     eye_contact_api.correct_recording(PID, be, "be_1")
     assert be.started[0][2]["pitch_deg"] == 2.0
+
+
+def test_pre_v2_nudges_are_dropped_in_auto_and_a_pre_v2_result_is_redone(project):
+    # Saved before eye gaze v2 (dead in auto then; they would overshoot the measurement now).
+    project.metadata["eye_contact"] = {"enabled": True, "prompter_side": "auto", "angle_deg": 13.0,
+                                       "aim_deg": -11.5, "pitch_deg": -6.0}
+    project.metadata["eye_contact_applied"] = {"buzzedit_project_id": "be_1", "media_id": "m_rec",
+                                               "setup": {"mode": "auto", "prompter_side": "auto"},
+                                               "report": {"frames": 10}}   # pre-v2: no lens_source
+    project.save()
+    be = FakeBuzzEdit()
+    eye_contact_api.correct_recording(PID, be, "be_1")
+    assert be.started[0][2] == {"mode": "auto", "prompter_side": "auto"}
+    eye_contact_api.correct_recording(PID, be, "be_1")          # a v2 result with the same setup: skipped
+    assert len(be.started) == 1
+    # A nudge saved now counts; the other pre-v2 ones do not come back with it.
+    r = TestClient(app).put(f"/api/projects/{PID}/eye_contact", json={"aim_deg": 2})
+    assert r.json()["setup"] == {"enabled": True, "prompter_side": "auto", "aim_deg": 2.0, "nudges_v2": True}
+    assert eye_contact_api._overrides(r.json()["setup"]) == {"mode": "auto", "prompter_side": "auto", "aim_deg": 2.0}
+
+
+def test_lens_marks_are_saved_and_sent_to_buzzedit(project):
+    c = TestClient(app)
+    r = c.put(f"/api/projects/{PID}/eye_contact", json={"lens_marks": [104.5, 138.6]})
+    assert r.status_code == 200
+    assert eye_contact_api._overrides(r.json()["setup"])["lens_marks"] == [104.5, 138.6]
+    assert c.put(f"/api/projects/{PID}/eye_contact", json={"lens_marks": [-1.0]}).status_code == 422
+    assert c.put(f"/api/projects/{PID}/eye_contact", json={"lens_marks": [1.0] * 51}).status_code == 422

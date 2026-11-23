@@ -27,6 +27,8 @@ Prevents character face/clothing drift across AI-generated scenes, ensuring view
 - Define character physical features, facial structure, attire, age, and hair style.
 - Generate character anchor prompts and consistent reference triggers for image generators.
 - Maintain `character_visual_prompt_index` across series episodes.
+- Write each look in the project's art style when the task names one: an explainer character is a simple flat-colour figure with one identifying shape; a stick figure is a round head, a line body and ONE drawn detail (a hat, glasses, a beard); a cartoon character is an exaggerated silhouette in two or three fixed costume colours. In a drawn style there is no facial detail and no main character gets a real face.
+- Stick World: for the cast sheet (JSON `characters`), also give each character an `"outfit"` (one spec from the stick-world vocabulary -- one body garment, one headwear, one held item, one hair/beard piece, order-free, joined by `+`, e.g. `"chiton+laurel+scroll+beard"`) and an `"era"` (its `stick_world.json` period key, e.g. `"ancient_greece"`), next to the usual `look`. That exact spec is reused for them in every `stick_scene` beat.
 
 ## 5. Authority
 - Authorized permissions: ["read_write_projects"].

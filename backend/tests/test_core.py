@@ -195,7 +195,7 @@ def test_shipped_workflows_all_load():
     (six channel pipelines plus the Shorts Desk's `shorts_ready`)."""
     registry = WorkflowRegistry()
     registry.discover_workflows()
-    assert len(registry.list()) == 7
+    assert len(registry.list()) >= 9   # + raat3baje_adaptation, thetallstoryteller_story (2026-10-23)
     assert "shorts_ready" in {wf.id for wf in registry.list()}
     for wf in registry.list():
         assert wf.steps

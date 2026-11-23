@@ -54,7 +54,7 @@ def _start_buzzedit_in_background() -> None:
 
 class GenerateMusicSchema(BaseModel):
     style: Optional[str] = None
-    engine: str = "ace_step"
+    engine: str = "ace_step15"
     music_genres: List[str] = []
     instruments: List[str] = []
     moods: List[str] = []
@@ -63,6 +63,7 @@ class GenerateMusicSchema(BaseModel):
     seconds: float = 120.0
     extra_tags: str = ""
     genre: Optional[str] = None
+    raga: Optional[str] = None
 
 
 def _relay(resp):

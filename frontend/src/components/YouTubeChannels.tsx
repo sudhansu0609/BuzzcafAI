@@ -89,7 +89,7 @@ export default function YouTubeChannels({ onChange }: { onChange?: (status: YtSt
 
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
         <input ref={fileInput} type="file" accept=".json,application/json" style={{ display: 'none' }}
-          onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadClient(f); }} />
+          onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadClient(f); }} aria-label="Google client JSON file" />
         <button type="button" className="btn btn-outline btn-sm" disabled={busy}
           onClick={() => fileInput.current?.click()}>
           {status?.has_client ? 'Replace Google client JSON' : 'Add Google client JSON'}
@@ -132,7 +132,8 @@ export default function YouTubeChannels({ onChange }: { onChange?: (status: YtSt
                 <td style={{ padding: '8px 6px', verticalAlign: 'middle' }}>
                   <select className="form-control" style={{ padding: '3px 6px', fontSize: '0.82rem' }} value={c.brand || ''}
                     disabled={busy}
-                    onChange={(e) => act(() => postJson(`/api/youtube/channels/${c.id}/brand`, { brand: e.target.value }))}>
+                    onChange={(e) => act(() => postJson(`/api/youtube/channels/${c.id}/brand`, { brand: e.target.value }))}
+                    aria-label={`Publishes brand for ${c.title}`}>
                     <option value="">— none —</option>
                     {status.brands.map((b) => <option key={b} value={b}>{b}</option>)}
                   </select>

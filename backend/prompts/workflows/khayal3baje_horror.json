@@ -23,6 +23,7 @@
             "name": "Visual Plan",
             "agent_role": "PromptEngineer",
             "description": "Produce structured per-scene image/clip prompts (visual_plan.json) for BuzzEdit/ComfyUI.",
+            "when": "not_animated",
             "requires_approval": false,
             "input_assets": ["script"],
             "output_asset_type": "visual_plan"
@@ -42,6 +43,14 @@
             "requires_approval": false,
             "input_assets": ["script"],
             "output_asset_type": "voice_over"
+        },
+        {
+            "name": "Animation Screenplay",
+            "agent_role": "WriterAgent",
+            "description": "Converted by code (app/services/animate_screenplay.py): the model only extracts the cast and labels scenes, speakers and tags; his sentences are copied verbatim and checked word for word.",
+            "requires_approval": false,
+            "input_assets": ["script"],
+            "output_asset_type": "screenplay"
         },
         {
             "name": "Animation Editing Blueprint",

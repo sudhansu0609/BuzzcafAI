@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-28",
+  "started_at": "2026-10-28T07:47:41",
+  "finished_at": "2026-10-28T12:07:42",
+  "headline": "8 videos written, 1 problem, 260 min",
+  "markdown": "# Last night: 2026-10-28\n\n## Problems\n\n- auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\nStarted 07:47, took 260 min (shorts).\n\n## Shorts (8 min)\n\n- Life3Baje: **Jaden Kahin Jamti Nahi** (score 80) -> `2026-10-28_Life3Baje_ShortJadenKahinJamtiNahi`\n- Life3Baje: **Adhure Mujsamme: The Startup Cycle** (score 75) -> `2026-10-28_Life3Baje_ShortAdhureMujsammeTheStartupCycle`\n- Raat3Baje: **Kaala Jadu ki Bhayankar Keemat** (score 85) -> `2026-10-28_Raat3Baje_ShortKaalaJaduKiBhayankarKeemat`\n- Raat3Baje: **Mayong: Kaala Jadu ka Asli Adda** (score 80) -> `2026-10-28_Raat3Baje_ShortMayongKaalaJaduAdda`\n- Beyond3Baje: **Arctic ka Khaufnaak Raaz: Franklin Expedition** (score 80) -> `2026-10-28_Beyond3Baje_ShortArcticKhaufnaakRaazFranklin`\n- Beyond3Baje: **Flannan Isles: Vanishing Act** (score 75) -> `2026-10-28_Beyond3Baje_ShortFlannanIslesVanishingAct`\n- TheTallStoryteller: **Sundar ya Buddhu? The Ultimate Debate** (score 80) -> `2026-10-28_TheTallStoryteller_ShortSundarYaBuddhuDebate`\n- TheTallStoryteller: **Woh Sharaabi Aunty: Shaadi Ka Tadka** (score 75) -> `2026-10-28_TheTallStoryteller_ShortWohSharaabiAuntyShaadiKaTadka`\n\n## Made by itself (77 min)\n\n- Nothing made.\n- Life3Baje (mood_reel): failed, BuzzEdit's vibe reel has shown no progress for 75 minutes.\n\n## Archived\n\n- None: *Title:** \"The Art of Starting Small: Why I’m Building a Creative Life\" (untouched None days)\n- None: Night Guard ka Khaufnak Sach 🛡️ (untouched None days)\n- None: Business ke Zakhm: Ek Sach 🩹 (untouched None days)\n- None: Duniya ki Daulat vs. Apne Sapne 💎 (untouched None days)\n- None: Muhnochwa: Chehra Maangne Wali Dait 👺 (untouched None days)\n- None: Kerala ke Khaufnaak Chaathan (untouched None days)\n- None: Raynham Hall ki Mystery: The Brown Lady 👗 (untouched None days)\n- None: Arizona ka Haunted Hotel: Jerome Grand 🏔️ (untouched None days)\n- None: Akelapan ki Takat: Harivansh Rai Bachchan (untouched None days)\n- None: Abhi Rukna Nahi Hai! (untouched None days)\n- None: Shaniwarwada: Pune ka Khooni Sach 🩸 (untouched None days)\n- None: Dombivli Station ki Raat 🌑 (untouched None days)\n- None: Wendigo: Ek Bhayanak Shaitaan ❄️ (untouched None days)\n- None: Shava Sadhana: Ek Laash Jo Darwaza Ban Jati Hai (untouched None days)\n- None: Shamshan Mein 5 Raatein: Paanchva Niyam Khaali Tha (untouched None days)\n- None: Arctic Ka Wo Raaz Jo Barf Mein Dab Gaya: 128 Log, 2 Ships, Ek Note (untouched None days)\n- None: When does a YouTube channel become an 'Actual Business'? (untouched None days)\n- None: The Judge's House (untouched None days)\n- None: The Ghostly Silence of Flannan Isles (untouched None days)\n\n## Afterwards\n\n- Stayed awake: ComfyUI has queued work; GPU is busy (50% average)\n",
+  "items": [
+    {
+      "task": "shorts_daily",
+      "state": "done",
+      "built": 8,
+      "skipped": 0,
+      "seconds": 473
+    },
+    {
+      "task": "auto_story",
+      "state": "done",
+      "made": 0,
+      "failed": 1,
+      "seconds": 4617
+    },
+    {
+      "task": "director",
+      "state": "done"
+    },
+    {
+      "task": "archive",
+      "state": "done",
+      "archived": 19
+    }
+  ],
+  "problems": [
+    "auto story Life3Baje/mood_reel: BuzzEdit's vibe reel has shown no progress for 75 minutes."
+  ]
+}

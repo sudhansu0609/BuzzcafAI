@@ -1,0 +1,66 @@
+[
+  {
+    "id": "1785c383-204b-4726-9ac7-469c50cf8824",
+    "scope": "agent",
+    "owner": "AudienceResearcher",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Read these YouTube comments from the channel's niche and list what the viewers are asking for.\", \"brand\": \"Raat3Baje\", \"comments\": [{\"i\": 0, \"likes\": 53000, \"text\": \"I am from Manipur, and I am a student. Manipur has been facing many problems for a long time. It is not a full war, but even when normal days seem to return, there are sudden killings and firing again and again. Recently, two innocent children lost their lives in a bomb attack. They did not get justice, only a funeral. This is very painful for all of us. Please make a video about Manipur and let t\"}, {\"i\": 1, \"likes\": 18",
+      "result_snippet": "{\n  \"findings\": [\n    {\n      \"topic\": \"The ongoing crisis and situation in Manipur\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers want a video covering the humanitarian issues and lack of justice in Manipur.\",\n      \"comment_ids\": [0, 1, 7, 16, 20, 40],\n      \"quotes\": [\n        \"Please make a video about Manipur\",\n        \"Justice for manipur\",\n        \"Please don't forget about Manipur\"\n      ]\n    },\n    {\n      \"topic\": \"Mystery of Gaurav Tiwari's death and background\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers are asking for a deep dive into the mystery surrounding his passing.\",\n      \"comment_ids\": [13, 19, 55],\n      \"quotes\": [\n        \"Make a video behind mystery of Gaurav Tiwari's death\",\n        \"His death is so mystery...\",\n        \"gaurav tiwari pr bhi ek vdo pls\"\n      ]\n    },\n    {\n      \"topic\": \"The Clown Season 2 release and updates\",\n      \"kind\": \"question\",\n      \"why\": \"Viewers are repeatedly asking for the timeline of the next season.\",\n      \"comment_ids\": [11, 28, 54, 65, 66, 68],\n      \"quotes\": [\n        \"Can't wait for THE CLOWN SEASON 2\",\n        \"WHEN WILL THE CLOWN 2 SESSION RELEASE\",\n        \"waiting for clown- season 2\"\n      ]\n    },\n    {\n      \"topic\": \"Local experiences and myths of Bhangarh Fort\",\n      \"kind\": \"own_encounter\",\n      \"why\": \"Locals are sharing their firsthand experiences regarding the fort's atmosphere.\",\n      \"comment_ids\": [9, 18],\n      \"quotes\": [\n        \"main gate \u092c\u0928\u094d\u0926 \u0930\u0939\u0924\u093e \u0939\u0948 \u0932\u0947\u0915\u093f\u0928 \u0915\u093f\u0932\u0947 \u0915\u0947 \u0938\u093e\u0907\u0921 \u0915\u0940 \u0926\u0940\u0935\u093e\u0930\u0947\u0902 \u091f\u0942\u091f\u0940 \u0939\u0948\",\n        \"I have been inside many times at night\",\n        \"\u0915\u094b\u0908 \u092d\u0942\u0924 \u0928\u0939\u0940\u0902 \u0939\u0948 \u092f\u0939\u093e\u0901\"\n      ]\n    },\n    {\n      \"topic\": \"Documentary on the real stories behind Conjuring series\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers want a deep dive into the true cases of Ed and Lorraine Warren.\",\n      \"comment_ids\": [51],\n      \"quotes\": [\n        \"cover a documentary on the reality behind conjuring series\"\n      ]\n    },\n    {\n      \"topic\": \"Production quality, animation,"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T22:01:40.861781",
+    "updated": "2026-10-22T22:01:40.861785"
+  },
+  {
+    "id": "9403cbc9-7367-44b0-8278-d21d460931e7",
+    "scope": "agent",
+    "owner": "AudienceResearcher",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Read these YouTube comments from the channel's niche and list what the viewers are asking for.\", \"brand\": \"Raat3Baje\", \"comments\": [{\"i\": 70, \"likes\": 8, \"text\": \"\u200b@AhsanTariq-x4vstupid they are controlling mob do you even know why it triggered now in Manipur\"}, {\"i\": 71, \"likes\": 8, \"text\": \"Kon kon 2025 me dekh raha hai \ud83d\ude0a\ud83d\ude0a\ud83d\ude0a\ud83d\ude0a\ud83d\ude0a\u2764\u2764\u2764\u2764\u2764\ud83c\udf89\ud83c\udf89\ud83c\udf89\ud83c\udf89\ud83c\udf89\u2764\u2764\u2764\u2764\u2764\"}, {\"i\": 72, \"likes\": 8, \"text\": \"Old story second story was lal lahanga\ud83d\udc12\ud83d\udc12\ud83d\udc12\ud83e\udd10\ud83e\udd10\ud83e\udd10\ud83e\udd10\ud83e\udd10\"}, {\"i\": 73, \"likes\": 7, \"text\": \"Meri Sacche Dil se Yeh Manokaamna aur Bhagwaan se Behad Hi Praathna Hain ki Bhagwaan Manipur ke Incident ki Jald se Jald Poori Tar",
+      "result_snippet": "{\n  \"findings\": [\n    {\n      \"topic\": \"The mystery behind Gaurav Tiwari's death\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers are requesting a deep dive into the specific circumstances of his passing.\",\n      \"comment_ids\": [79],\n      \"quotes\": [\n        \"Make a video on Gaurav Tiwari's Mystery Death !\"\n      ]\n    },\n    {\n      \"topic\": \"Personal experiences and atmosphere at Bhangarh Fort\",\n      \"kind\": \"own_encounter\",\n      \"why\": \"Viewers are sharing their personal feelings of peace and sensory details at the fort.\",\n      \"comment_ids\": [74, 107],\n      \"quotes\": [\n        \"experienced a next level peace inside the fort\",\n        \"I actually loved the quiet and calming atmosphere\"\n      ]\n    },\n    {\n      \"topic\": \"Late night video uploads causing scares\",\n      \"kind\": \"complaint\",\n      \"why\": \"Viewers are complaining about videos being uploaded late at night when they are trying to sleep.\",\n      \"comment_ids\": [93, 94],\n      \"quotes\": [\n        \"Ye video raat me upload nhi karna tha bhai\",\n        \"Bhai, lekin ye raat me kyu upload Kiya. Main sone jaa rha tha\"\n      ]\n    },\n    {\n      \"topic\": \"Praise for voice quality and storytelling\",\n      \"kind\": \"praise\",\n      \"why\": \"Viewers are consistently complimenting the host's voice and the quality of horror stories.\",\n      \"comment_ids\": [80, 81, 82, 83, 86, 110, 113, 124, 131, 136, 137, 138],\n      \"quotes\": [\n        \"Sir Aapki voice bohot achi hai\",\n        \"Your voice is very nice\",\n        \"Bht.achi videos banate ho aap\"\n      ]\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T22:02:04.294243",
+    "updated": "2026-10-22T22:02:04.294248"
+  },
+  {
+    "id": "e305acc0-3e02-4860-9918-77e4302c2218",
+    "scope": "agent",
+    "owner": "AudienceResearcher",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"Read these YouTube comments from the channel's niche and list what the viewers are asking for.\", \"brand\": \"Raat3Baje\", \"comments\": [{\"i\": 140, \"likes\": 0, \"text\": \"Bhaiya mera channel family mesleading contant se Demonetize ho gya hai kaise sahi kare appeal bhi reject ho gya hai aage Kiya kare please suggest bhaiya \ud83d\ude4f\ud83d\ude4f\ud83d\ude4f Please bhaiya reply dijiye \ud83d\ude4f\"}, {\"i\": 141, \"likes\": 0, \"text\": \"Haunted factories\"}, {\"i\": 142, \"likes\": 0, \"text\": \"Haunted places in India\"}, {\"i\": 143, \"likes\": 0, \"text\": \"more to come\"}, {\"i\": 144, \"likes\": 0, \"text\": \"Has your channel @khayal3baje re-monetized ye",
+      "result_snippet": "{\n  \"findings\": [\n    {\n      \"topic\": \"Haunted factories and haunted places in India\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers are asking for specific locations like factories and Indian sites.\",\n      \"comment_ids\": [141, 142],\n      \"quotes\": [\n        \"Haunted factories\",\n        \"Haunted places in India\"\n      ]\n    },\n    {\n      \"topic\": \"Animated horror videos\",\n      \"kind\": \"story_request\",\n      \"why\": \"Viewers are requesting the inclusion of animation in the content.\",\n      \"comment_ids\": [146, 149],\n      \"quotes\": [\n        \"waiting for your upcoming animated horror videos\",\n        \"Bhai animation me bhi banao video\"\n      ]\n    },\n    {\n      \"topic\": \"Experience of feeling a presence when told\",\n      \"kind\": \"own_encounter\",\n      \"why\": \"A viewer shared their personal experience regarding sensing paranormal activity.\",\n      \"comment_ids\": [152],\n      \"quotes\": [\n        \"I have experienced such things. If any one say there is something then you will feel automatically that something is there\"\n      ]\n    },\n    {\n      \"topic\": \"Praise for visuals, sound design, and storytelling\",\n      \"kind\": \"praise\",\n      \"why\": \"Viewers are complimenting the production quality and the narrative style.\",\n      \"comment_ids\": [147, 148, 161, 165, 169, 170, 171, 173],\n      \"quotes\": [\n        \"\u0935\u093f\u091c\u0941\u0905\u0932\u094d\u0938 \u0914\u0930 \u0938\u093e\u0909\u0902\u0921 \u0921\u093f\u091c\u093c\u093e\u0907\u0928 \u092c\u0939\u0941\u0924 \u0915\u092e\u093e\u0932 \u0915\u093e \u0939\u0948\",\n        \"Nice story\",\n        \"So interesting and horror storytelling\"\n      ]\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T22:02:26.200822",
+    "updated": "2026-10-22T22:02:26.200831"
+  },
+  {
+    "id": "5fd5c9f5-6410-4f4c-99bf-76fe8f174d7c",
+    "scope": "agent",
+    "owner": "AudienceResearcher",
+    "tags": [
+      "execution"
+    ],
+    "content": {
+      "task_summary": "{\"task\": \"These findings came from different batches of comments. Merge the ones that mean the same thing.\", \"brand\": \"Raat3Baje\", \"findings\": [{\"id\": 0, \"topic\": \"The ongoing crisis and situation in Manipur\", \"kind\": \"story_request\", \"mentions\": 6}, {\"id\": 1, \"topic\": \"Mystery of Gaurav Tiwari's death and background\", \"kind\": \"story_request\", \"mentions\": 3}, {\"id\": 2, \"topic\": \"The Clown Season 2 release and updates\", \"kind\": \"question\", \"mentions\": 6}, {\"id\": 3, \"topic\": \"Local experiences and myths of Bhangarh Fort\", \"kind\": \"own_encounter\", \"mentions\": 2}, {\"id\": 4, \"topic\": \"Documentary o",
+      "result_snippet": "{\n  \"groups\": [\n    {\n      \"topic\": \"The ongoing crisis and situation in Manipur\",\n      \"kind\": \"story_request\",\n      \"members\": [0]\n    },\n    {\n      \"topic\": \"Mystery of Gaurav Tiwari's death and background\",\n      \"kind\": \"story_request\",\n      \"members\": [1, 8]\n    },\n    {\n      \"topic\": \"The Clown Season 2 release and updates\",\n      \"kind\": \"question\",\n      \"members\": [2]\n    },\n    {\n      \"topic\": \"Local experiences and myths of Bhangarh Fort\",\n      \"kind\": \"own_encounter\",\n      \"members\": [3, 9]\n    },\n    {\n      \"topic\": \"Documentary on the real stories behind Conjuring series\",\n      \"kind\": \"story_request\",\n      \"members\": [4]\n    },\n    {\n      \"topic\": \"Praise for production quality and storytelling\",\n      \"kind\": \"praise\",\n      \"members\": [5, 11, 15]\n    },\n    {\n      \"topic\": \"Audio clarity and volume improvements\",\n      \"kind\": \"complaint\",\n      \"members\": [6]\n    },\n    {\n      \"topic\": \"Specific requested topics: Raghav Chaddha and NEET reality\",\n      \"kind\": \"story_request\",\n      \"members\": [7]\n    },\n    {\n      \"topic\": \"Late night video uploads causing scares\",\n      \"kind\": \"complaint\",\n      \"members\": [10]\n    },\n    {\n      \"topic\": \"Haunted factories and haunted places in India\",\n      \"kind\": \"story_request\",\n      \"members\": [12]\n    },\n    {\n      \"topic\": \"Animated horror videos\",\n      \"kind\": \"story_request\",\n      \"members\": [13]\n    },\n    {\n      \"topic\": \"Experience of feeling a presence when told\",\n      \"kind\": \"own_encounter\",\n      \"members\": [14]\n    }\n  ]\n}"
+    },
+    "confidence": 1.0,
+    "source": "agent",
+    "created": "2026-10-22T22:02:49.938864",
+    "updated": "2026-10-22T22:02:49.938873"
+  }
+]

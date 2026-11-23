@@ -7,30 +7,35 @@
     "auto_edit": {
       "max_pause_seconds": 1.0,
       "pause_padding_seconds": 0.35
-    }
+    },
+    "target_coverage": 0.85
   },
   "raat3baje": {
     "genre": "horror",
     "genre_secondary": "mystery",
     "density": "busy",
-    "voice_preset": "horror_intimate"
+    "voice_preset": "horror_intimate",
+    "target_coverage": 0.85
   },
   "khayal3baje": {
     "genre": "horror",
     "genre_secondary": "mystery",
     "density": "busy",
-    "voice_preset": "horror_intimate"
+    "voice_preset": "horror_intimate",
+    "target_coverage": 0.85
   },
   "beyond3baje": {
     "genre": "documentary",
     "genre_secondary": "mystery",
     "density": "busy",
-    "voice_preset": "broadcast"
+    "voice_preset": "broadcast",
+    "target_coverage": 0.85
   },
   "originals": {
     "genre": "general",
     "genre_secondary": null,
     "density": "balanced",
-    "voice_preset": "studio_mic"
+    "voice_preset": "studio_mic",
+    "target_coverage": 0.85
   }
 }
